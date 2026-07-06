@@ -1,0 +1,22 @@
+{
+  "version": "3.13",
+  "status": "passed",
+  "patchedAudioElements": 1800,
+  "patchedSpeakElements": 14400,
+  "patchedAnswers": 4800,
+  "counts": {
+    "writing": 600,
+    "listening": 600,
+    "audio": 1800,
+    "answers": 4800,
+    "raw_text_a_audio": 0,
+    "raw_speak_a": 0,
+    "display_een": 0
+  },
+  "errors": [],
+  "notes": [
+    "Visible answer displays for letters remain literal values such as a.",
+    "TTS for letter/sound exercises must use speak/@ttsText or audio/@ttsText, never display text and never answer/@value.",
+    "If the app still shows een, it is translating answer displays or using cached v3.11/v3.12 content."
+  ]
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="poincareIconPack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="metadata" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="skillIcons" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="topicIcons" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="themeIcons" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="rewardIcons" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="contentTypeIcons" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="uiIcons" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="importNotes" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:anyAttribute processContents="lax"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

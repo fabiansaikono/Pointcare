@@ -1,0 +1,535 @@
+---------------------------- PROCESS ENDED (2599) for package be.saikono.poincare ----------------------------
+---------------------------- PROCESS STARTED (3125) for package be.saikono.poincare ----------------------------
+2026-07-01 19:30:56.485  3125-3125  nativeloader            be.saikono.poincare                  D  Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+2026-07-01 19:30:56.561  3125-3125  re-initialized>         be.saikono.poincare                  W  type=1400 audit(0.0:166): avc:  granted  { execute } for  path="/data/data/be.saikono.poincare/code_cache/startup_agents/c52d6b25-agent.so" dev="dm-55" ino=362329 scontext=u:r:untrusted_app:s0:c217,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c217,c256,c512,c768 tclass=file app=be.saikono.poincare
+2026-07-01 19:30:56.579  3125-3125  nativeloader            be.saikono.poincare                  D  Load /data/user/0/be.saikono.poincare/code_cache/startup_agents/c52d6b25-agent.so using system ns (caller=<unknown>): ok
+2026-07-01 19:30:56.592  3125-3125  aikono.poincare         be.saikono.poincare                  W  hiddenapi: DexFile /data/data/be.saikono.poincare/code_cache/.studio/instruments-9dbd448e.jar is in boot class path but is not in a known location
+2026-07-01 19:30:56.857  3125-3125  aikono.poincare         be.saikono.poincare                  W  Redefining intrinsic method java.lang.Thread java.lang.Thread.currentThread(). This may cause the unexpected use of the original definition of java.lang.Thread java.lang.Thread.currentThread()in methods that have already been compiled.
+2026-07-01 19:30:56.857  3125-3125  aikono.poincare         be.saikono.poincare                  W  Redefining intrinsic method boolean java.lang.Thread.interrupted(). This may cause the unexpected use of the original definition of boolean java.lang.Thread.interrupted()in methods that have already been compiled.
+2026-07-01 19:30:57.053  3125-3125  nativeloader            be.saikono.poincare                  D  Configuring clns-9 for other apk /data/app/~~4KSQXzLUlczwcPOsa8h3MA==/be.saikono.poincare-TxdczQn2MqJmbuKYeagTcQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~4KSQXzLUlczwcPOsa8h3MA==/be.saikono.poincare-TxdczQn2MqJmbuKYeagTcQ==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/be.saikono.poincare
+2026-07-01 19:30:57.059  3125-3125  CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 202956589; UID 10217; state: ENABLED
+2026-07-01 19:30:57.065  3125-3125  aikono.poincare         be.saikono.poincare                  I  AssetManager2(0x71e022a38b98) locale list changing from [] to [en-US]
+2026-07-01 19:30:57.070  3125-3125  aikono.poincare         be.saikono.poincare                  I  AssetManager2(0x71e022a3aad8) locale list changing from [] to [en-US]
+2026-07-01 19:30:57.082  3125-3125  GraphicsEnvironment     be.saikono.poincare                  V  Currently set values for:
+2026-07-01 19:30:57.082  3125-3125  GraphicsEnvironment     be.saikono.poincare                  V    angle_gl_driver_selection_pkgs=[]
+2026-07-01 19:30:57.082  3125-3125  GraphicsEnvironment     be.saikono.poincare                  V    angle_gl_driver_selection_values=[]
+2026-07-01 19:30:57.082  3125-3125  GraphicsEnvironment     be.saikono.poincare                  V  be.saikono.poincare is not listed in per-application setting
+2026-07-01 19:30:57.083  3125-3125  GraphicsEnvironment     be.saikono.poincare                  V  ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+2026-07-01 19:30:57.083  3125-3125  GraphicsEnvironment     be.saikono.poincare                  V  be.saikono.poincare is not listed in ANGLE allowlist or settings, returning default
+2026-07-01 19:30:57.083  3125-3125  GraphicsEnvironment     be.saikono.poincare                  V  Neither updatable production driver nor prerelease driver is supported.
+2026-07-01 19:30:57.166  3125-3125  CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 279646685; UID 10217; state: ENABLED
+2026-07-01 19:30:57.197  3125-3160  DisplayManager          be.saikono.poincare                  I  Choreographer implicitly registered for the refresh rate.
+2026-07-01 19:30:57.205  3125-3125  aikono.poincare         be.saikono.poincare                  I  AssetManager2(0x71e022a35fd8) locale list changing from [] to [en-US]
+2026-07-01 19:30:57.298  3125-3125  ashmem                  be.saikono.poincare                  E  Pinning is deprecated since Android Q. Please use trim or other methods.
+2026-07-01 19:30:57.318  3125-3160  EGL_emulation           be.saikono.poincare                  I  Opening libGLESv1_CM_emulation.so
+2026-07-01 19:30:57.322  3125-3160  EGL_emulation           be.saikono.poincare                  I  Opening libGLESv2_emulation.so
+2026-07-01 19:30:57.347  3125-3160  HWUI                    be.saikono.poincare                  W  Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+2026-07-01 19:30:57.348  3125-3160  HWUI                    be.saikono.poincare                  W  Failed to initialize 101010-2 format, error = EGL_SUCCESS
+2026-07-01 19:30:57.351  3125-3125  CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 309578419; UID 10217; state: ENABLED
+2026-07-01 19:30:57.356  3125-3125  DesktopModeFlags        be.saikono.poincare                  D  Toggle override initialized to: OVERRIDE_UNSET
+2026-07-01 19:30:57.605  3125-3125  aikono.poincare         be.saikono.poincare                  I  AssetManager2(0x71e022a43db8) locale list changing from [] to [en-US]
+2026-07-01 19:30:57.608  3125-3125  TextToSpeech            be.saikono.poincare                  I  Sucessfully bound to com.google.android.tts
+2026-07-01 19:30:57.610  3125-3125  AudioSystem             be.saikono.poincare                  D  onNewService: media.audio_policy service obtained 0x71dfc2ab15f0
+2026-07-01 19:30:57.617  3125-3125  AudioSystem             be.saikono.poincare                  D  getService: checking for service media.audio_policy: 0x71dfc2ab15f0
+2026-07-01 19:30:57.620  3125-3125  AudioSystem             be.saikono.poincare                  D  onNewServiceWithAdapter: media.audio_flinger service obtained 0x71df52a610b0
+2026-07-01 19:30:57.622  3125-3125  AudioSystem             be.saikono.poincare                  D  getService: checking for service media.audio_flinger: 0x71dfc2ab1c80
+2026-07-01 19:30:57.758  3125-3125  CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 352594277; UID 10217; state: ENABLED
+2026-07-01 19:30:57.772  3125-3125  CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 349153669; UID 10217; state: ENABLED
+2026-07-01 19:30:57.777  3125-3125  HWUI                    be.saikono.poincare                  W  Unknown dataspace 0
+2026-07-01 19:30:58.085  3125-3135  aikono.poincare         be.saikono.poincare                  I  Compiler allocated 5042KB to compile void android.view.ViewRootImpl.performTraversals()
+2026-07-01 19:30:58.167  3125-3142  TextToSpeech            be.saikono.poincare                  I  Connected to TTS engine
+2026-07-01 19:30:58.224  3125-3188  TextToSpeech            be.saikono.poincare                  I  Setting up the connection to TTS engine...
+2026-07-01 19:30:59.634  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 101 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:30:59.655  3125-3143  HWUI                    be.saikono.poincare                  I  Davey! duration=1823ms; Flags=1, FrameTimelineVsyncId=4034171, IntendedVsync=55618086650062, Vsync=55618086650062, InputEventId=0, HandleInputStart=55618090579780, AnimationStart=55618090693080, PerformTraversalsStart=55618090741880, DrawStart=55619763563480, FrameDeadline=55618103316728, FrameStartTime=55618090537780, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55619798993180, SyncStart=55619802293880, IssueDrawCommandsStart=55619802569880, SwapBuffers=55619876555780, FrameCompleted=55619913426480, DequeueBufferDuration=34500, QueueBufferDuration=33365400, GpuCompleted=55619913134380, SwapBuffersCompleted=55619913426480, DisplayPresentTime=0, CommandSubmissionCompleted=55619876555780, 
+2026-07-01 19:31:00.443  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 44 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:00.892  3125-3125  InsetsController        be.saikono.poincare                  D  hide(ime(), fromIme=false)
+2026-07-01 19:31:00.895  3125-3125  ImeTracker              be.saikono.poincare                  I  be.saikono.poincare:7a418d75: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+2026-07-01 19:31:02.324  3125-3217  ProfileInstaller        be.saikono.poincare                  D  Installing profile for be.saikono.poincare
+2026-07-01 19:31:03.299  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 13MB AllocSpace bytes, 0(0B) LOS objects, 19% free, 98MB/122MB, paused 2.888ms,3.095ms total 1.250s
+2026-07-01 19:31:03.469  3125-3125  WindowOnBackDispatcher  be.saikono.poincare                  W  OnBackInvokedCallback is not enabled for the application.
+                                                                                                    Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+2026-07-01 19:31:04.628  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 77 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:04.721  3125-3141  HWUI                    be.saikono.poincare                  I  Davey! duration=1971ms; Flags=0, FrameTimelineVsyncId=4036664, IntendedVsync=55622986649866, Vsync=55623069983196, InputEventId=34201340, HandleInputStart=55623074652080, AnimationStart=55623074729380, PerformTraversalsStart=55623751832380, DrawStart=55624736294380, FrameDeadline=55623003316532, FrameStartTime=55623074587080, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55624869720680, SyncStart=55624870558580, IssueDrawCommandsStart=55624871189980, SwapBuffers=55624951858080, FrameCompleted=55624959348480, DequeueBufferDuration=33600, QueueBufferDuration=5270500, GpuCompleted=55624958897480, SwapBuffersCompleted=55624959348480, DisplayPresentTime=0, CommandSubmissionCompleted=55624951858080, 
+2026-07-01 19:31:05.606  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 37 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:06.514  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 52 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:06.586  3125-3142  HWUI                    be.saikono.poincare                  I  Davey! duration=1456ms; Flags=0, FrameTimelineVsyncId=4037760, IntendedVsync=55625253316442, Vsync=55625869983084, InputEventId=0, HandleInputStart=55625891364680, AnimationStart=55625891395380, PerformTraversalsStart=55626466729180, DrawStart=55626467699580, FrameDeadline=55626703316384, FrameStartTime=55625883851380, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55626659266780, SyncStart=55626701290680, IssueDrawCommandsStart=55626715219180, SwapBuffers=55626730031280, FrameCompleted=55626751917080, DequeueBufferDuration=128700, QueueBufferDuration=15847100, GpuCompleted=55626749513680, SwapBuffersCompleted=55626751917080, DisplayPresentTime=0, CommandSubmissionCompleted=55626730031280, 
+2026-07-01 19:31:07.133  3125-3142  HWUI                    be.saikono.poincare                  I  Davey! duration=1426ms; Flags=0, FrameTimelineVsyncId=4037937, IntendedVsync=55625919983082, Vsync=55626786649714, InputEventId=0, HandleInputStart=55626818914580, AnimationStart=55626818963680, PerformTraversalsStart=55627139550080, DrawStart=55627147110580, FrameDeadline=55626769983048, FrameStartTime=55626795975080, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55627310220080, SyncStart=55627326887680, IssueDrawCommandsStart=55627327998680, SwapBuffers=55627351657880, FrameCompleted=55627363075480, DequeueBufferDuration=200000, QueueBufferDuration=655400, GpuCompleted=55627356897280, SwapBuffersCompleted=55627363075480, DisplayPresentTime=0, CommandSubmissionCompleted=55627351657880, 
+2026-07-01 19:31:07.528  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=850ms; Flags=0, FrameTimelineVsyncId=4038209, IntendedVsync=55626886649710, Vsync=55627353316358, InputEventId=0, HandleInputStart=55627371792580, AnimationStart=55627372114380, PerformTraversalsStart=55627520218180, DrawStart=55627531952680, FrameDeadline=55627386649690, FrameStartTime=55627363886180, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55627676573380, SyncStart=55627699363580, IssueDrawCommandsStart=55627699835780, SwapBuffers=55627737786380, FrameCompleted=55627759601880, DequeueBufferDuration=487900, QueueBufferDuration=12384500, GpuCompleted=55627755324780, SwapBuffersCompleted=55627759601880, DisplayPresentTime=0, CommandSubmissionCompleted=55627737786380, 
+2026-07-01 19:31:08.926  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=758ms; Flags=0, FrameTimelineVsyncId=4038886, IntendedVsync=55628386649650, Vsync=55628653316306, InputEventId=0, HandleInputStart=55628673257680, AnimationStart=55628673323180, PerformTraversalsStart=55628918605380, DrawStart=55628919590980, FrameDeadline=55628703316304, FrameStartTime=55628669700380, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55629095477580, SyncStart=55629098588380, IssueDrawCommandsStart=55629099505780, SwapBuffers=55629122033780, FrameCompleted=55629148356480, DequeueBufferDuration=3075900, QueueBufferDuration=12417500, GpuCompleted=55629141146480, SwapBuffersCompleted=55629148356480, DisplayPresentTime=0, CommandSubmissionCompleted=55629122033780, 
+2026-07-01 19:31:09.217  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=760ms; Flags=0, FrameTimelineVsyncId=4039027, IntendedVsync=55628686649638, Vsync=55629119982954, InputEventId=0, HandleInputStart=55629140551580, AnimationStart=55629147553080, PerformTraversalsStart=55629368262780, DrawStart=55629370523780, FrameDeadline=55629169982952, FrameStartTime=55629122985980, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55629411558480, SyncStart=55629418913680, IssueDrawCommandsStart=55629422260980, SwapBuffers=55629431804780, FrameCompleted=55629454922280, DequeueBufferDuration=47000, QueueBufferDuration=1636000, GpuCompleted=55629447641780, SwapBuffersCompleted=55629454922280, DisplayPresentTime=0, CommandSubmissionCompleted=55629431804780, 
+2026-07-01 19:31:10.857  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:10.860  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:10.895  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:10.896  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:10.896  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:11.243  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:12.275  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 46MB AllocSpace bytes, 6(124KB) LOS objects, 14% free, 145MB/169MB, paused 2.485ms,6.041ms total 6.178s
+2026-07-01 19:31:12.275  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.417s
+2026-07-01 19:31:12.276  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.415s
+2026-07-01 19:31:12.278  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.382s
+2026-07-01 19:31:12.280  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.383s
+2026-07-01 19:31:12.282  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.038s
+2026-07-01 19:31:12.285  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 1.409s
+2026-07-01 19:31:13.113  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 112 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:13.221  3125-3205  HWUI                    be.saikono.poincare                  I  Davey! duration=2048ms; Flags=0, FrameTimelineVsyncId=4039331, IntendedVsync=55631369982864, Vsync=55631486649526, InputEventId=0, HandleInputStart=55631502859580, AnimationStart=55631503572380, PerformTraversalsStart=55632911757380, DrawStart=55632914278980, FrameDeadline=55631519982858, FrameStartTime=55631495156780, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55633368470780, SyncStart=55633385539980, IssueDrawCommandsStart=55633386412580, SwapBuffers=55633392698380, FrameCompleted=55633435485280, DequeueBufferDuration=352900, QueueBufferDuration=30987000, GpuCompleted=55633431144480, SwapBuffersCompleted=55633435485280, DisplayPresentTime=0, CommandSubmissionCompleted=55633392698380, 
+2026-07-01 19:31:13.591  3125-3205  HWUI                    be.saikono.poincare                  I  Davey! duration=2199ms; Flags=0, FrameTimelineVsyncId=4039346, IntendedVsync=55631519982858, Vsync=55633386649450, InputEventId=0, HandleInputStart=55633399721880, AnimationStart=55633400690780, PerformTraversalsStart=55633627925080, DrawStart=55633628121280, FrameDeadline=55633453316114, FrameStartTime=55633394811380, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55633670668880, SyncStart=55633678124580, IssueDrawCommandsStart=55633678241180, SwapBuffers=55633681782680, FrameCompleted=55633727060480, DequeueBufferDuration=1426700, QueueBufferDuration=10507100, GpuCompleted=55633716216980, SwapBuffersCompleted=55633727060480, DisplayPresentTime=0, CommandSubmissionCompleted=55633681782680, 
+2026-07-01 19:31:13.947  3125-3205  HWUI                    be.saikono.poincare                  I  Davey! duration=731ms; Flags=0, FrameTimelineVsyncId=4039360, IntendedVsync=55633419982782, Vsync=55633703316104, InputEventId=0, HandleInputStart=55633726960680, AnimationStart=55633727093280, PerformTraversalsStart=55633900936380, DrawStart=55633909198280, FrameDeadline=55633736649436, FrameStartTime=55633719493280, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55634092076480, SyncStart=55634101648680, IssueDrawCommandsStart=55634105033180, SwapBuffers=55634127866380, FrameCompleted=55634160693480, DequeueBufferDuration=448400, QueueBufferDuration=8362200, GpuCompleted=55634160693480, SwapBuffersCompleted=55634147934580, DisplayPresentTime=0, CommandSubmissionCompleted=55634127866380, 
+2026-07-01 19:31:14.287  3125-3205  HWUI                    be.saikono.poincare                  I  Davey! duration=745ms; Flags=0, FrameTimelineVsyncId=4039376, IntendedVsync=55633736649436, Vsync=55634119982754, InputEventId=0, HandleInputStart=55634151592480, AnimationStart=55634163486580, PerformTraversalsStart=55634320125780, DrawStart=55634320485380, FrameDeadline=55634186649418, FrameStartTime=55634134427180, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55634393185680, SyncStart=55634415036580, IssueDrawCommandsStart=55634415892780, SwapBuffers=55634458040480, FrameCompleted=55634503515880, DequeueBufferDuration=420500, QueueBufferDuration=1727700, GpuCompleted=55634480189480, SwapBuffersCompleted=55634503515880, DisplayPresentTime=0, CommandSubmissionCompleted=55634458040480, 
+2026-07-01 19:31:14.493  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:14.498  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:14.501  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:14.513  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:14.514  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:14.619  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:14.831  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=906ms; Flags=0, FrameTimelineVsyncId=4039391, IntendedVsync=55634186649418, Vsync=55634503316072, InputEventId=440108738, HandleInputStart=55634531878880, AnimationStart=55634533504480, PerformTraversalsStart=55634726751680, DrawStart=55634726983080, FrameDeadline=55634503316072, FrameStartTime=55634513518880, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55634783673380, SyncStart=55634794770980, IssueDrawCommandsStart=55634797148980, SwapBuffers=55635094905380, FrameCompleted=55635104471480, DequeueBufferDuration=232800, QueueBufferDuration=1386900, GpuCompleted=55635104471480, SwapBuffersCompleted=55635099271680, DisplayPresentTime=0, CommandSubmissionCompleted=55635094905380, 
+2026-07-01 19:31:18.821  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 110MB AllocSpace bytes, 3(60KB) LOS objects, 22% free, 81MB/105MB, paused 22.184ms,38.355ms total 5.935s
+2026-07-01 19:31:18.828  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 4.334s
+2026-07-01 19:31:18.836  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 4.336s
+2026-07-01 19:31:18.897  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 4.393s
+2026-07-01 19:31:18.930  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 4.417s
+2026-07-01 19:31:18.933  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 4.418s
+2026-07-01 19:31:18.937  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 4.317s
+2026-07-01 19:31:19.036  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 285 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:22.366  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:22.377  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:22.381  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:22.383  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:22.385  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:22.446  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:22.936  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 67MB AllocSpace bytes, 3(60KB) LOS objects, 16% free, 124MB/148MB, paused 2.342ms,3.264ms total 2.565s
+2026-07-01 19:31:22.937  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 571.032ms
+2026-07-01 19:31:22.938  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 561.436ms
+2026-07-01 19:31:22.938  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 557.220ms
+2026-07-01 19:31:22.945  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 561.679ms
+2026-07-01 19:31:22.947  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 561.168ms
+2026-07-01 19:31:22.954  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 508.062ms
+2026-07-01 19:31:23.090  3125-3141  HWUI                    be.saikono.poincare                  I  Davey! duration=8776ms; Flags=0, FrameTimelineVsyncId=4039407, IntendedVsync=55634553316070, Vsync=55639303315880, InputEventId=680793526, HandleInputStart=55639367556980, AnimationStart=55639373452780, PerformTraversalsStart=55640208353180, DrawStart=55640212081980, FrameDeadline=55641619982454, FrameStartTime=55639317390480, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55643277731180, SyncStart=55643287857580, IssueDrawCommandsStart=55643295034480, SwapBuffers=55643315800780, FrameCompleted=55643339600080, DequeueBufferDuration=76400, QueueBufferDuration=913400, GpuCompleted=55643339600080, SwapBuffersCompleted=55643320975480, DisplayPresentTime=0, CommandSubmissionCompleted=55643315800780, 
+2026-07-01 19:31:23.278  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 249 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:23.945  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:23.952  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:23.952  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:23.953  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:23.956  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:24.019  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:24.702  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 72MB AllocSpace bytes, 4(80KB) LOS objects, 16% free, 119MB/143MB, paused 3.157ms,3.441ms total 1.349s
+2026-07-01 19:31:24.703  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 757.283ms
+2026-07-01 19:31:24.706  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 753.780ms
+2026-07-01 19:31:24.706  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 749.940ms
+2026-07-01 19:31:24.707  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 688.606ms
+2026-07-01 19:31:24.715  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 762.340ms
+2026-07-01 19:31:24.717  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 765.644ms
+2026-07-01 19:31:24.837  3125-3141  HWUI                    be.saikono.poincare                  I  Davey! duration=5672ms; Flags=0, FrameTimelineVsyncId=4039930, IntendedVsync=55639403315876, Vsync=55643553315710, InputEventId=747711339, HandleInputStart=55643571133180, AnimationStart=55643571511880, PerformTraversalsStart=55644258646480, DrawStart=55645015697180, FrameDeadline=55643469982380, FrameStartTime=55643560237080, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55645049057780, SyncStart=55645049688180, IssueDrawCommandsStart=55645049954480, SwapBuffers=55645050128780, FrameCompleted=55645076632080, DequeueBufferDuration=80900, QueueBufferDuration=684100, GpuCompleted=55645076632080, SwapBuffersCompleted=55645059916180, DisplayPresentTime=0, CommandSubmissionCompleted=55645050128780, 
+2026-07-01 19:31:24.854  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 92 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:25.369  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 30 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:25.428  3125-3141  HWUI                    be.saikono.poincare                  I  Davey! duration=2064ms; Flags=0, FrameTimelineVsyncId=4040313, IntendedVsync=55643586649042, Vsync=55645119982314, InputEventId=276441100, HandleInputStart=55645137201080, AnimationStart=55645137276480, PerformTraversalsStart=55645514344880, DrawStart=55645514561580, FrameDeadline=55645103315648, FrameStartTime=55645135663480, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55645613464480, SyncStart=55645625943280, IssueDrawCommandsStart=55645626804280, SwapBuffers=55645627034580, FrameCompleted=55645663390180, DequeueBufferDuration=3066500, QueueBufferDuration=932800, GpuCompleted=55645663390180, SwapBuffersCompleted=55645640166180, DisplayPresentTime=0, CommandSubmissionCompleted=55645627034580, 
+2026-07-01 19:31:25.792  3125-3141  HWUI                    be.saikono.poincare                  I  Davey! duration=880ms; Flags=0, FrameTimelineVsyncId=4040352, IntendedVsync=55645136648980, Vsync=55645636648960, InputEventId=0, HandleInputStart=55645664069680, AnimationStart=55645664604880, PerformTraversalsStart=55645954605480, DrawStart=55645956807280, FrameDeadline=55645686648958, FrameStartTime=55645650592880, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55645999581880, SyncStart=55646010404080, IssueDrawCommandsStart=55646010676980, SwapBuffers=55646015069380, FrameCompleted=55646028448480, DequeueBufferDuration=39200, QueueBufferDuration=1171400, GpuCompleted=55646028233680, SwapBuffersCompleted=55646028448480, DisplayPresentTime=0, CommandSubmissionCompleted=55646015069380, 
+2026-07-01 19:31:26.336  3125-3141  HWUI                    be.saikono.poincare                  I  Davey! duration=775ms; Flags=0, FrameTimelineVsyncId=4040486, IntendedVsync=55645769982288, Vsync=55646003315612, InputEventId=0, HandleInputStart=55646020707380, AnimationStart=55646020811580, PerformTraversalsStart=55646103232880, DrawStart=55646104362780, FrameDeadline=55646053315610, FrameStartTime=55646019669780, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55646135726680, SyncStart=55646152647280, IssueDrawCommandsStart=55646169732780, SwapBuffers=55646540727580, FrameCompleted=55646562633080, DequeueBufferDuration=314800, QueueBufferDuration=10616200, GpuCompleted=55646560745980, SwapBuffersCompleted=55646562633080, DisplayPresentTime=0, CommandSubmissionCompleted=55646540727580, 
+2026-07-01 19:31:26.414  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.437  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.442  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.445  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.466  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.497  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.498  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.506  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.594  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:26.722  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=752ms; Flags=0, FrameTimelineVsyncId=4040515, IntendedVsync=55646186648938, Vsync=55646569982256, InputEventId=0, HandleInputStart=55646581469780, AnimationStart=55646582569380, PerformTraversalsStart=55646772610480, DrawStart=55646779003980, FrameDeadline=55646636648920, FrameStartTime=55646571820180, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55646836882580, SyncStart=55646845150480, IssueDrawCommandsStart=55646861514280, SwapBuffers=55646888352880, FrameCompleted=55646947774880, DequeueBufferDuration=49000, QueueBufferDuration=1330300, GpuCompleted=55646947774880, SwapBuffersCompleted=55646908699480, DisplayPresentTime=0, CommandSubmissionCompleted=55646888352880, 
+2026-07-01 19:31:27.358  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 62MB AllocSpace bytes, 0(0B) LOS objects, 15% free, 129MB/153MB, paused 5.875ms,19.055ms total 2.094s
+2026-07-01 19:31:27.361  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 947.510ms
+2026-07-01 19:31:27.363  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 925.336ms
+2026-07-01 19:31:27.365  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 924.687ms
+2026-07-01 19:31:27.368  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 922.723ms
+2026-07-01 19:31:27.372  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 906.572ms
+2026-07-01 19:31:27.383  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 886.136ms
+2026-07-01 19:31:27.402  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 904.032ms
+2026-07-01 19:31:27.421  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 915.206ms
+2026-07-01 19:31:27.428  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 833.483ms
+2026-07-01 19:31:27.431  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 66 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:27.736  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=1292ms; Flags=0, FrameTimelineVsyncId=4040531, IntendedVsync=55646603315588, Vsync=55647703315544, InputEventId=0, HandleInputStart=55647722550780, AnimationStart=55647722760580, PerformTraversalsStart=55647826630680, DrawStart=55647827543680, FrameDeadline=55646969982240, FrameStartTime=55647712632880, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55647843263080, SyncStart=55647847485980, IssueDrawCommandsStart=55647847697180, SwapBuffers=55647868360180, FrameCompleted=55647899548480, DequeueBufferDuration=101100, QueueBufferDuration=13167500, GpuCompleted=55647893367380, SwapBuffersCompleted=55647899548480, DisplayPresentTime=0, CommandSubmissionCompleted=55647868360180, 
+2026-07-01 19:31:28.974  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:28.976  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:28.977  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:28.977  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:28.977  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:28.988  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:28.992  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:28.994  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:29.457  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.120  3125-3136  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 209MB to 192MB
+2026-07-01 19:31:30.121  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 6592KB AllocSpace bytes, 2(40KB) LOS objects, 3% free, 185MB/192MB, paused 1.763ms,3.068ms total 2.471s
+2026-07-01 19:31:30.125  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.148s
+2026-07-01 19:31:30.125  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.148s
+2026-07-01 19:31:30.125  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.147s
+2026-07-01 19:31:30.135  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.157s
+2026-07-01 19:31:30.135  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.161s
+2026-07-01 19:31:30.144  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.159s
+2026-07-01 19:31:30.152  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.159s
+2026-07-01 19:31:30.152  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.158s
+2026-07-01 19:31:30.160  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 702.419ms
+2026-07-01 19:31:30.166  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 41 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:30.168  3125-3193  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:30.191  3125-3210  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:30.196  3125-3232  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:30.208  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.208  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.210  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.211  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.212  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.234  3125-3160  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.235  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.235  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.239  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.943  3125-3136  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 213MB to 192MB
+2026-07-01 19:31:30.943  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 2560KB AllocSpace bytes, 4(80KB) LOS objects, 1% free, 189MB/192MB, paused 3.609ms,2.908ms total 774.516ms
+2026-07-01 19:31:30.944  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 775.819ms
+2026-07-01 19:31:30.946  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 737.107ms
+2026-07-01 19:31:30.948  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 738.330ms
+2026-07-01 19:31:30.954  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 742.638ms
+2026-07-01 19:31:30.954  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 742.380ms
+2026-07-01 19:31:30.954  3125-3210  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 56B allocation
+2026-07-01 19:31:30.962  3125-3160  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 728.346ms
+2026-07-01 19:31:30.964  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 728.542ms
+2026-07-01 19:31:30.971  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 732.282ms
+2026-07-01 19:31:30.982  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 747.541ms
+2026-07-01 19:31:30.991  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.992  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:30.997  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.000  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.010  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.010  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.038  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.061  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.065  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=779ms; Flags=0, FrameTimelineVsyncId=4040760, IntendedVsync=55649753315462, Vsync=55650436648768, InputEventId=0, HandleInputStart=55650468569280, AnimationStart=55650469104980, PerformTraversalsStart=55650475440280, DrawStart=55650475578080, FrameDeadline=55649803315460, FrameStartTime=55650447563180, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55650491870480, SyncStart=55651254416080, IssueDrawCommandsStart=55651254597180, SwapBuffers=55651269387180, FrameCompleted=55651295201880, DequeueBufferDuration=971000, QueueBufferDuration=511200, GpuCompleted=55651291940580, SwapBuffersCompleted=55651295201880, DisplayPresentTime=0, CommandSubmissionCompleted=55651269387180, 
+2026-07-01 19:31:31.674  3125-3210  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 205MB to 192MB
+2026-07-01 19:31:31.674  3125-3210  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 10MB AllocSpace bytes, 0(0B) LOS objects, 5% free, 181MB/192MB, paused 1.457ms,2.765ms total 719.596ms
+2026-07-01 19:31:31.676  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 684.563ms
+2026-07-01 19:31:31.677  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 684.920ms
+2026-07-01 19:31:31.679  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Background on Alloc for 686.305ms
+2026-07-01 19:31:31.680  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 682.822ms
+2026-07-01 19:31:31.683  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 673.623ms
+2026-07-01 19:31:31.686  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 88 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:31.700  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 679.865ms
+2026-07-01 19:31:31.710  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 671.163ms
+2026-07-01 19:31:31.720  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 714.126ms
+2026-07-01 19:31:31.726  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 663.350ms
+2026-07-01 19:31:31.787  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=1545ms; Flags=0, FrameTimelineVsyncId=4040775, IntendedVsync=55650486648766, Vsync=55651953315374, InputEventId=0, HandleInputStart=55651977755880, AnimationStart=55651977786480, PerformTraversalsStart=55651991365380, DrawStart=55651991536480, FrameDeadline=55651319982066, FrameStartTime=55651967436680, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55651998438880, SyncStart=55652012454980, IssueDrawCommandsStart=55652015268380, SwapBuffers=55652027694180, FrameCompleted=55652046555380, DequeueBufferDuration=33600, QueueBufferDuration=3697400, GpuCompleted=55652046555380, SwapBuffersCompleted=55652040867480, DisplayPresentTime=0, CommandSubmissionCompleted=55652027694180, 
+2026-07-01 19:31:31.897  3125-3208  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:31.897  3125-3210  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:31.898  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.898  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.902  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.905  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.957  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.983  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:31.990  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:32.799  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.370  3125-3208  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 215MB to 192MB
+2026-07-01 19:31:33.370  3125-3208  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 332KB AllocSpace bytes, 1(20KB) LOS objects, 0% free, 191MB/192MB, paused 1.899ms,2.836ms total 1.472s
+2026-07-01 19:31:33.371  3125-3208  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 72B allocation
+2026-07-01 19:31:33.372  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.473s
+2026-07-01 19:31:33.377  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.474s
+2026-07-01 19:31:33.377  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Background on Alloc for 1.475s
+2026-07-01 19:31:33.378  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.378  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.473s
+2026-07-01 19:31:33.378  3125-3191  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 72B allocation
+2026-07-01 19:31:33.378  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.379  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.423s
+2026-07-01 19:31:33.379  3125-3192  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 24B allocation
+2026-07-01 19:31:33.379  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 579.618ms
+2026-07-01 19:31:33.379  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.396s
+2026-07-01 19:31:33.379  3125-3125  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 48B allocation
+2026-07-01 19:31:33.379  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.379  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.380  3125-3193  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 72B allocation
+2026-07-01 19:31:33.381  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.381  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.381  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.391s
+2026-07-01 19:31:33.381  3125-3232  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 56B allocation
+2026-07-01 19:31:33.385  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.392  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:33.985  3125-3208  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 209MB to 192MB
+2026-07-01 19:31:33.985  3125-3208  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 6612KB AllocSpace bytes, 0(0B) LOS objects, 3% free, 185MB/192MB, paused 2.543ms,3.009ms total 614.222ms
+2026-07-01 19:31:33.986  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 607.821ms
+2026-07-01 19:31:33.989  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 610.957ms
+2026-07-01 19:31:33.993  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 613.625ms
+2026-07-01 19:31:33.997  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 615.596ms
+2026-07-01 19:31:33.998  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 617.683ms
+2026-07-01 19:31:33.998  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 73 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:34.004  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 622.514ms
+2026-07-01 19:31:34.005  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 620.485ms
+2026-07-01 19:31:34.006  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked HeapTrim on Alloc for 615.824ms
+2026-07-01 19:31:34.008  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 2.109s
+2026-07-01 19:31:34.118  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.120  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.126  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.127  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.131  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.132  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.173  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.174  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:34.176  3125-3205  HWUI                    be.saikono.poincare                  I  Davey! duration=1329ms; Flags=0, FrameTimelineVsyncId=4040926, IntendedVsync=55653053315330, Vsync=55654269981948, InputEventId=0, HandleInputStart=55654284783180, AnimationStart=55654285402580, PerformTraversalsStart=55654310845580, DrawStart=55654323030380, FrameDeadline=55653136648660, FrameStartTime=55654279771780, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55654339959180, SyncStart=55654346297880, IssueDrawCommandsStart=55654346481780, SwapBuffers=55654361882080, FrameCompleted=55654389485280, DequeueBufferDuration=478200, QueueBufferDuration=4399500, GpuCompleted=55654383816480, SwapBuffersCompleted=55654389485280, DisplayPresentTime=0, CommandSubmissionCompleted=55654361882080, 
+2026-07-01 19:31:35.121  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:35.966  3125-3136  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 213MB to 192MB
+2026-07-01 19:31:35.966  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 2568KB AllocSpace bytes, 1(20KB) LOS objects, 1% free, 189MB/192MB, paused 8.550ms,6.177ms total 1.838s
+2026-07-01 19:31:35.967  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.849s
+2026-07-01 19:31:35.968  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.847s
+2026-07-01 19:31:35.968  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.842s
+2026-07-01 19:31:35.992  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.859s
+2026-07-01 19:31:36.010  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.878s
+2026-07-01 19:31:36.014  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.882s
+2026-07-01 19:31:36.019  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.846s
+2026-07-01 19:31:36.024  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.851s
+2026-07-01 19:31:36.039  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 916.888ms
+2026-07-01 19:31:36.046  3125-3208  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:36.047  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.048  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.049  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 58 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:36.056  3125-3210  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:36.058  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.058  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.059  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.061  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.067  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.126  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.196  3125-3160  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.815  3125-3136  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 213MB to 192MB
+2026-07-01 19:31:36.815  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 2076KB AllocSpace bytes, 0(0B) LOS objects, 1% free, 189MB/192MB, paused 2.603ms,3.143ms total 757.047ms
+2026-07-01 19:31:36.816  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 769.299ms
+2026-07-01 19:31:36.817  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 768.951ms
+2026-07-01 19:31:36.820  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 767.954ms
+2026-07-01 19:31:36.825  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 767.074ms
+2026-07-01 19:31:36.827  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 768.269ms
+2026-07-01 19:31:36.827  3125-3210  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 24B allocation
+2026-07-01 19:31:36.828  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 767.600ms
+2026-07-01 19:31:36.836  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 768.813ms
+2026-07-01 19:31:36.836  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 710.627ms
+2026-07-01 19:31:36.838  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.841  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.844  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.845  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.845  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.846  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.848  3125-3160  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 651.624ms
+2026-07-01 19:31:36.850  3125-3160  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 16B allocation
+2026-07-01 19:31:36.853  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:36.853  3125-3160  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.412  3125-3210  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 212MB to 192MB
+2026-07-01 19:31:37.412  3125-3210  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 3640KB AllocSpace bytes, 0(0B) LOS objects, 1% free, 188MB/192MB, paused 1.464ms,3.887ms total 584.932ms
+2026-07-01 19:31:37.413  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 574.827ms
+2026-07-01 19:31:37.414  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 573.126ms
+2026-07-01 19:31:37.415  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 571.610ms
+2026-07-01 19:31:37.420  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Background on Alloc for 574.955ms
+2026-07-01 19:31:37.431  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 586.225ms
+2026-07-01 19:31:37.446  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 600.983ms
+2026-07-01 19:31:37.454  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 608.797ms
+2026-07-01 19:31:37.458  3125-3191  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:37.458  3125-3208  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:37.459  3125-3209  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:37.459  3125-3207  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:37.459  3125-3160  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.459  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 608.596ms
+2026-07-01 19:31:37.459  3125-3232  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 56B allocation
+2026-07-01 19:31:37.459  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.460  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.460  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.461  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.461  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.461  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.462  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.464  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.957  3125-3136  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 213MB to 192MB
+2026-07-01 19:31:37.957  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 2956KB AllocSpace bytes, 0(0B) LOS objects, 1% free, 189MB/192MB, paused 1.781ms,2.468ms total 499.147ms
+2026-07-01 19:31:37.958  3125-3160  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 1.104s
+2026-07-01 19:31:37.958  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 498.824ms
+2026-07-01 19:31:37.961  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 500.425ms
+2026-07-01 19:31:37.963  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 503.314ms
+2026-07-01 19:31:37.964  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 503.888ms
+2026-07-01 19:31:37.966  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 106 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:37.970  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 504.878ms
+2026-07-01 19:31:37.981  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 519.584ms
+2026-07-01 19:31:37.982  3125-3207  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 56B allocation
+2026-07-01 19:31:37.985  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:37.987  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 525.666ms
+2026-07-01 19:31:38.002  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:38.010  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:38.010  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:38.010  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:38.038  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:38.049  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:38.106  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=1866ms; Flags=0, FrameTimelineVsyncId=4041098, IntendedVsync=55656469981860, Vsync=55658236648456, InputEventId=0, HandleInputStart=55658252386680, AnimationStart=55658252490980, PerformTraversalsStart=55658264103780, DrawStart=55658264209280, FrameDeadline=55658286648454, FrameStartTime=55658247888880, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55658266454780, SyncStart=55658279043380, IssueDrawCommandsStart=55658279339180, SwapBuffers=55658299424180, FrameCompleted=55658349452580, DequeueBufferDuration=75800, QueueBufferDuration=6122400, GpuCompleted=55658349452580, SwapBuffersCompleted=55658314372380, DisplayPresentTime=0, CommandSubmissionCompleted=55658299424180, 
+2026-07-01 19:31:38.891  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.436  3125-3207  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 213MB to 192MB
+2026-07-01 19:31:39.436  3125-3207  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 2400KB AllocSpace bytes, 0(0B) LOS objects, 1% free, 189MB/192MB, paused 4.761ms,7.209ms total 1.453s
+2026-07-01 19:31:39.436  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.972s
+2026-07-01 19:31:39.437  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Background on Alloc for 1.433s
+2026-07-01 19:31:39.437  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.434s
+2026-07-01 19:31:39.438  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.427s
+2026-07-01 19:31:39.445  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.442s
+2026-07-01 19:31:39.446  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.435s
+2026-07-01 19:31:39.450  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.410s
+2026-07-01 19:31:39.451  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.401s
+2026-07-01 19:31:39.451  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 562.831ms
+2026-07-01 19:31:39.452  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 37 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:39.459  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.459  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.460  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.461  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.461  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.462  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.479  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.483  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:39.496  3125-3160  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.089  3125-3136  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 214MB to 192MB
+2026-07-01 19:31:40.090  3125-3136  aikono.poincare         be.saikono.poincare                  I  Background concurrent mark compact GC freed 1952KB AllocSpace bytes, 0(0B) LOS objects, 1% free, 190MB/192MB, paused 2.005ms,3.349ms total 632.872ms
+2026-07-01 19:31:40.091  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 631.885ms
+2026-07-01 19:31:40.091  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 632.391ms
+2026-07-01 19:31:40.094  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 633.989ms
+2026-07-01 19:31:40.098  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 636.916ms
+2026-07-01 19:31:40.102  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 640.158ms
+2026-07-01 19:31:40.106  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 644.446ms
+2026-07-01 19:31:40.111  3125-3191  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:40.111  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Background for 628.050ms
+2026-07-01 19:31:40.112  3125-3193  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 16B allocation
+2026-07-01 19:31:40.112  3125-3160  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 615.284ms
+2026-07-01 19:31:40.112  3125-3160  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 16B allocation
+2026-07-01 19:31:40.112  3125-3160  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.112  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.112  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.114  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 634.464ms
+2026-07-01 19:31:40.114  3125-3208  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 72B allocation
+2026-07-01 19:31:40.114  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.115  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.119  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.125  3125-3137  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.125  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.135  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.840  3125-3193  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 214MB to 192MB
+2026-07-01 19:31:40.840  3125-3193  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 1620KB AllocSpace bytes, 0(0B) LOS objects, 0% free, 190MB/192MB, paused 2.017ms,2.902ms total 728.300ms
+2026-07-01 19:31:40.840  3125-3160  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 728.786ms
+2026-07-01 19:31:40.841  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.841  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 728.990ms
+2026-07-01 19:31:40.842  3125-3208  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.842  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 726.276ms
+2026-07-01 19:31:40.842  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 723.633ms
+2026-07-01 19:31:40.844  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Background on Alloc for 731.538ms
+2026-07-01 19:31:40.844  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 718.955ms
+2026-07-01 19:31:40.846  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 710.936ms
+2026-07-01 19:31:40.871  3125-3137  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 745.916ms
+2026-07-01 19:31:40.882  3125-3193  aikono.poincare         be.saikono.poincare                  W  Throwing OutOfMemoryError "Failed to allocate a 16 byte allocation with 376448 free bytes and 367KB until OOM, target footprint 201326592, growth limit 201326592; giving up on allocation because <1% of heap free after GC." (VmSize 16524560 kB)
+2026-07-01 19:31:40.882  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.898  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.898  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.906  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.909  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:40.909  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.499  3125-3159  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC ProfileSaver
+2026-07-01 19:31:41.571  3125-3160  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 214MB to 192MB
+2026-07-01 19:31:41.571  3125-3160  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 1308KB AllocSpace bytes, 0(0B) LOS objects, 0% free, 190MB/192MB, paused 2.288ms,2.464ms total 730.391ms
+2026-07-01 19:31:41.572  3125-3160  aikono.poincare         be.saikono.poincare                  W  Throwing OutOfMemoryError "Failed to allocate a 16 byte allocation with 1355392 free bytes and 1323KB until OOM, target footprint 201326592, growth limit 201326592; giving up on allocation because <1% of heap free after GC." (VmSize 16524560 kB)
+2026-07-01 19:31:41.573  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.461s
+2026-07-01 19:31:41.574  3125-3191  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 24B allocation
+2026-07-01 19:31:41.574  3125-3208  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.459s
+2026-07-01 19:31:41.574  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 125 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:41.574  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 692.118ms
+2026-07-01 19:31:41.575  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Background on Alloc for 694.290ms
+2026-07-01 19:31:41.589  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 691.086ms
+2026-07-01 19:31:41.589  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 691.853ms
+2026-07-01 19:31:41.594  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.595  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 689.147ms
+2026-07-01 19:31:41.595  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.595  3125-3232  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 24B allocation
+2026-07-01 19:31:41.595  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.595  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.597  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 687.847ms
+2026-07-01 19:31:41.597  3125-3209  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 56B allocation
+2026-07-01 19:31:41.597  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.597  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 687.371ms
+2026-07-01 19:31:41.597  3125-3193  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 32B allocation
+2026-07-01 19:31:41.597  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.611  3125-3159  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked ProfileSaver on Alloc for 111.616ms
+2026-07-01 19:31:41.616  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:41.750  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=2155ms; Flags=0, FrameTimelineVsyncId=4041266, IntendedVsync=55659769981728, Vsync=55661853314978, InputEventId=0, HandleInputStart=55661857329480, AnimationStart=55661857357180, PerformTraversalsStart=55661859488880, DrawStart=55661859574180, FrameDeadline=55661919981642, FrameStartTime=55661855903180, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55661861679380, SyncStart=55661898496480, IssueDrawCommandsStart=55661898563280, SwapBuffers=55661901402780, FrameCompleted=55661962594080, DequeueBufferDuration=27355500, QueueBufferDuration=507400, GpuCompleted=55661962594080, SwapBuffersCompleted=55661930298080, DisplayPresentTime=0, CommandSubmissionCompleted=55661901402780, 
+2026-07-01 19:31:42.584  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:43.241  3125-3208  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 214MB to 192MB
+2026-07-01 19:31:43.241  3125-3208  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 1084KB AllocSpace bytes, 0(0B) LOS objects, 0% free, 190MB/192MB, paused 10.162ms,4.449ms total 1.666s
+2026-07-01 19:31:43.242  3125-3208  aikono.poincare         be.saikono.poincare                  W  Throwing OutOfMemoryError "Failed to allocate a 72 byte allocation with 1121920 free bytes and 1095KB until OOM, target footprint 201326592, growth limit 201326592; giving up on allocation because <1% of heap free after GC." (VmSize 16524700 kB)
+2026-07-01 19:31:43.248  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.650s
+2026-07-01 19:31:43.249  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.654s
+2026-07-01 19:31:43.255  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.659s
+2026-07-01 19:31:43.269  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:43.278  3125-3193  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:43.278  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 1.665s
+2026-07-01 19:31:43.286  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 702.121ms
+2026-07-01 19:31:43.292  3125-3125  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 48B allocation
+2026-07-01 19:31:43.295  3125-3210  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:43.296  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:43.297  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:43.297  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:43.298  3125-3207  aikono.poincare         be.saikono.poincare                  I  Forcing collection of SoftReferences for 24B allocation
+2026-07-01 19:31:43.298  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:44.143  3125-3232  aikono.poincare         be.saikono.poincare                  I  Clamp target GC heap from 196MB to 192MB
+2026-07-01 19:31:44.144  3125-3232  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 19MB AllocSpace bytes, 0(0B) LOS objects, 10% free, 172MB/192MB, paused 3.702ms,4.446ms total 873.759ms
+2026-07-01 19:31:44.146  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 877.141ms
+2026-07-01 19:31:44.147  3125-3193  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 2.550s
+2026-07-01 19:31:44.150  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked HeapTrim on Alloc for 2.533s
+2026-07-01 19:31:44.150  3125-3210  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 855.244ms
+2026-07-01 19:31:44.155  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 856.308ms
+2026-07-01 19:31:44.157  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 860.006ms
+2026-07-01 19:31:44.157  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 2.560s
+2026-07-01 19:31:44.162  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on HeapTrim for 2.566s
+2026-07-01 19:31:44.174  3125-3125  Choreographer           be.saikono.poincare                  I  Skipped 98 frames!  The application may be doing too much work on its main thread.
+2026-07-01 19:31:44.321  3125-3224  HWUI                    be.saikono.poincare                  I  Davey! duration=1704ms; Flags=0, FrameTimelineVsyncId=4041409, IntendedVsync=55662819981606, Vsync=55664453314874, InputEventId=0, HandleInputStart=55664462590480, AnimationStart=55664466217080, PerformTraversalsStart=55664475812780, DrawStart=55664476023680, FrameDeadline=55662936648268, FrameStartTime=55664453761780, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55664502268780, SyncStart=55664511278580, IssueDrawCommandsStart=55664511374680, SwapBuffers=55664520708180, FrameCompleted=55664533893480, DequeueBufferDuration=1520800, QueueBufferDuration=5055500, GpuCompleted=55664530918580, SwapBuffersCompleted=55664533893480, DisplayPresentTime=0, CommandSubmissionCompleted=55664520708180, 
+2026-07-01 19:31:44.405  3125-3191  PoincareContent         be.saikono.poincare                  I  Loaded 4 content packs and 3744 raw exercises from poincare-exercises-language.xml, poincare-exercises-logic-puzzles.xml, poincare-exercises-math.xml, poincare-exercises-world-themes.xml
+2026-07-01 19:31:44.458  3125-3210  PoincareContent         be.saikono.poincare                  I  Loaded 4 content packs and 3744 raw exercises from poincare-exercises-language.xml, poincare-exercises-logic-puzzles.xml, poincare-exercises-math.xml, poincare-exercises-world-themes.xml
+2026-07-01 19:31:44.462  3125-3210  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:44.466  3125-3232  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:44.466  3125-3232  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:44.468  3125-3192  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:44.469  3125-3209  aikono.poincare         be.saikono.poincare                  I  Starting a blocking GC Alloc
+2026-07-01 19:31:44.490  3125-3125  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:44.497  3125-3207  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:44.503  3125-3192  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:44.530  3125-3209  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:44.579  3125-3191  aikono.poincare         be.saikono.poincare                  I  Waiting for a blocking GC Alloc
+2026-07-01 19:31:45.215  3125-3210  aikono.poincare         be.saikono.poincare                  I  Alloc concurrent mark compact GC freed 77MB AllocSpace bytes, 0(0B) LOS objects, 17% free, 114MB/138MB, paused 2.106ms,3.634ms total 751.895ms
+2026-07-01 19:31:45.217  3125-3232  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 750.259ms
+2026-07-01 19:31:45.218  3125-3136  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Background on Alloc for 740.744ms
+2026-07-01 19:31:45.219  3125-3125  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 729.623ms
+2026-07-01 19:31:45.232  3125-3207  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 722.573ms
+2026-07-01 19:31:45.241  3125-3192  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 738.252ms
+2026-07-01 19:31:45.245  3125-3209  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 714.794ms
+2026-07-01 19:31:45.333  3125-3191  aikono.poincare         be.saikono.poincare                  I  WaitForGcToComplete blocked Alloc on Alloc for 753.714ms
+2026-07-01 19:31:45.441  3125-3192  PoincareContent         be.saikono.poincare                  I  Loaded 4 content packs and 3744 raw exercises from poincare-exercises-language.xml, poincare-exercises-logic-puzzles.xml, poincare-exercises-math.xml, poincare-exercises-world-themes.xml
+2026-07-01 19:31:45.531  3125-3125  AndroidRuntime          be.saikono.poincare                  E  FATAL EXCEPTION: main (Fix with AI)
+                                                                                                    Process: be.saikono.poincare, PID: 3125
+                                                                                                    java.lang.OutOfMemoryError: Failed to allocate a 72 byte allocation with 1121920 free bytes and 1095KB until OOM, target footprint 201326592, growth limit 201326592; giving up on allocation because <1% of heap free after GC.
+                                                                                                    	at java.util.Arrays.copyOf(Arrays.java:3754)
+                                                                                                    	at java.util.Arrays.copyOf(Arrays.java:3723)
+                                                                                                    	at java.util.ArrayList.grow(ArrayList.java:244)
+                                                                                                    	at java.util.ArrayList.grow(ArrayList.java:251)
+                                                                                                    	at java.util.ArrayList.add(ArrayList.java:490)
+                                                                                                    	at java.util.ArrayList.add(ArrayList.java:503)
+                                                                                                    	at org.apache.harmony.xml.dom.NodeListImpl.add(NodeListImpl.java:47)
+                                                                                                    	at org.apache.harmony.xml.dom.InnerNodeImpl.getChildNodes(InnerNodeImpl.java:59)
+                                                                                                    	at be.saikono.poincare.data.content.PoincareContentParserKt.children(PoincareContentParser.kt:153)
+                                                                                                    	at be.saikono.poincare.data.content.PoincareContentParserKt.children$default(PoincareContentParser.kt:152)
+                                                                                                    	at be.saikono.poincare.data.content.PoincareContentParserKt.directChild(PoincareContentParser.kt:148)
+                                                                                                    	at be.saikono.poincare.data.content.PoincareContentParserKt.access$directChild(PoincareContentParser.kt:1)
+                                                                                                    	at be.saikono.poincare.data.content.PoincareContentParser.parseTranslations(PoincareContentParser.kt:87)
+                                                                                                    	at be.saikono.poincare.data.content.PoincareContentParser.parseExercises(PoincareContentParser.kt:57)
+                                                                                                    	at be.saikono.poincare.data.content.PoincareContentParser.parse(PoincareContentParser.kt:24)
+                                                                                                    	at be.saikono.poincare.repository.AssetContentRepository.loadContentPacks(ContentRepository.kt:87)
+                                                                                                    	at be.saikono.poincare.repository.AssetContentRepository.loadXmlExercises(ContentRepository.kt:73)
+                                                                                                    	at be.saikono.poincare.repository.AssetContentRepository.access$loadXmlExercises(ContentRepository.kt:34)
+                                                                                                    	at be.saikono.poincare.repository.AssetContentRepository$getExercises$2.invokeSuspend(ContentRepository.kt:43)
+                                                                                                    	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+                                                                                                    	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+                                                                                                    	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:111)
+                                                                                                    	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:99)
+                                                                                                    	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:584)
+                                                                                                    	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:811)
+                                                                                                    	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:715)
+                                                                                                    	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:702)
+                                                                                                    	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@33b03fd, Dispatchers.Main.immediate]
+2026-07-01 19:31:46.039  3125-3125  Process                 be.saikono.poincare                  I  Sending signal. PID: 3125 SIG: 9
+---------------------------- PROCESS ENDED (3125) for package be.saikono.poincare ----------------------------

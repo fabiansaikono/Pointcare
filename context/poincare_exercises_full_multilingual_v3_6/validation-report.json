@@ -1,0 +1,24 @@
+{
+  "version": "3.6",
+  "totalExercises": 22200,
+  "uniqueIds": 22200,
+  "subcategories": 37,
+  "audioExercises": 4200,
+  "audioTranslationExercises": 3600,
+  "oldTranslationSubcategoryCounts": {
+    "translation": 0,
+    "translation_to_english": 0,
+    "translation_to_french": 0
+  },
+  "translationDirections": {
+    "translation_nl_to_en": 600,
+    "translation_nl_to_fr": 600,
+    "translation_en_to_nl": 600,
+    "translation_en_to_fr": 600,
+    "translation_fr_to_nl": 600,
+    "translation_fr_to_en": 600
+  },
+  "visibleThemePromptCount": 0,
+  "errors": [],
+  "errorCount": 0
+}

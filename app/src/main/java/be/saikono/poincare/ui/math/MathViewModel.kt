@@ -1,0 +1,265 @@
+package be.saikono.poincare.ui.math
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import be.saikono.poincare.data.settings.SettingsDataStore
+import be.saikono.poincare.data.sync.SyncManager
+import be.saikono.poincare.domain.adaptive.AdaptiveDifficultyEngine
+import be.saikono.poincare.domain.adaptive.AdaptiveRecommendation
+import be.saikono.poincare.model.*
+import be.saikono.poincare.repository.ContentRepository
+import be.saikono.poincare.repository.ProfileRepository
+import be.saikono.poincare.repository.ProgressRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import java.util.UUID
+
+data class MathUiState(
+    val currentExercise: ExerciseContent? = null,
+    val userInput: String = "",
+    val isCorrect: Boolean? = null,
+    val isWrong: Boolean = false,
+    val isFinished: Boolean = false,
+    val showFeedback: Boolean = false,
+    val isLoading: Boolean = true,
+    val currentProfileId: String? = null,
+    val exerciseLanguage: String = "nl-BE",
+    val recommendation: AdaptiveRecommendation? = null,
+    val reducedMotion: Boolean = false,
+    val hapticEnabled: Boolean = true
+)
+
+@OptIn(ExperimentalCoroutinesApi::class)
+class MathViewModel(
+    private val contentRepository: ContentRepository,
+    private val progressRepository: ProgressRepository,
+    private val settingsDataStore: SettingsDataStore,
+    private val syncManager: be.saikono.poincare.data.sync.SyncManager,
+    private val adaptiveEngine: AdaptiveDifficultyEngine,
+    private val audioService: be.saikono.poincare.data.audio.AudioService,
+    private val profileRepository: ProfileRepository
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(MathUiState())
+    val uiState: StateFlow<MathUiState> = _uiState.asStateFlow()
+
+    private var exercises: List<ExerciseContent> = emptyList()
+    private var currentIndex = 0
+    private var startTime = 0L
+    private var selectedSubcategoryId: String? = null
+    private var selectedDifficultyStars: Int? = null
+
+    init {
+        observeProfile()
+        observeSettings()
+    }
+
+    private fun observeSettings() {
+        viewModelScope.launch {
+            settingsDataStore.animationSettings.collect { settings ->
+                _uiState.update { it.copy(
+                    reducedMotion = settings.reducedMotionEnabled,
+                    hapticEnabled = settings.hapticFeedbackEnabled
+                ) }
+            }
+        }
+    }
+
+    private fun observeProfile() {
+        viewModelScope.launch {
+            settingsDataStore.selectedProfileId
+                .flatMapLatest { id ->
+                    if (id == null) flowOf(null)
+                    else profileRepository.getProfileById(id)
+                }
+                .collect { profile ->
+                    _uiState.update { it.copy(
+                        currentProfileId = profile?.id,
+                        exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE"
+                    ) }
+                    
+                    if (exercises.isEmpty() && profile != null) {
+                        loadContentForProfile(profile)
+                    }
+                }
+        }
+    }
+
+    private fun loadContentForProfile(profile: ChildProfile) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            val level = profile.mathLevel
+            val loadedExercises = level.toGrade()?.let { grade ->
+                val domainExercises = contentRepository.getExercises(LearningDomain.MATH, level)
+                selectedSubcategoryId?.let { subcategoryId ->
+                    contentRepository.getExercises(subcategoryId = subcategoryId, grade = grade, difficultyStars = selectedDifficultyStars)
+                }?.ifEmpty { domainExercises } ?: domainExercises
+            }.orEmpty()
+            
+            exercises = orderUnfinishedFirst(loadedExercises, profile.id)
+            
+            if (exercises.isNotEmpty()) {
+                startExercise(0)
+            } else {
+                _uiState.update { it.copy(isLoading = false) }
+            }
+        }
+    }
+
+    fun setSubcategoryId(subcategoryId: String?) {
+        selectedSubcategoryId = subcategoryId
+        viewModelScope.launch {
+            val profileId = _uiState.value.currentProfileId
+            val profile = profileId?.let { profileRepository.getProfileById(it).first() }
+            if (profile != null) loadContentForProfile(profile)
+        }
+    }
+
+    fun setDifficultyStars(stars: Int?) {
+        selectedDifficultyStars = stars?.coerceIn(1, 3)
+    }
+
+    private fun startExercise(index: Int) {
+        currentIndex = index
+        startTime = System.currentTimeMillis()
+        _uiState.update { 
+            it.copy(
+                currentExercise = exercises[index],
+                userInput = "",
+                isCorrect = null,
+                isWrong = false,
+                isFinished = false,
+                showFeedback = false,
+                isLoading = false
+            )
+        }
+    }
+
+    fun onNumberClick(number: String) {
+        if (_uiState.value.isCorrect == true) return
+        _uiState.update { it.copy(userInput = it.userInput + number) }
+    }
+
+    fun onDeleteClick() {
+        if (_uiState.value.isCorrect == true) return
+        _uiState.update { it.copy(userInput = it.userInput.dropLast(1)) }
+    }
+
+    fun onTextInputChanged(value: String) {
+        if (_uiState.value.isCorrect == true) return
+        _uiState.update { it.copy(userInput = value, isCorrect = null, isWrong = false, showFeedback = false) }
+    }
+
+    fun onChoiceSelected(value: String) {
+        if (_uiState.value.isCorrect == true) return
+        val state = _uiState.value
+        val exercise = state.currentExercise ?: return
+        if (value.isWholeInteger()) {
+            _uiState.update { it.copy(userInput = value, isCorrect = null, isWrong = false, showFeedback = false) }
+            checkAnswer(value)
+            return
+        }
+        if (state.userInput != value) {
+            _uiState.update { it.copy(userInput = value, isCorrect = null, isWrong = false, showFeedback = false) }
+            audioService.speak(exercise.localizedOptionSpeech(value, state.exerciseLanguage), exercise.optionSpeechLocale(state.exerciseLanguage))
+            return
+        }
+        checkAnswer(value)
+    }
+
+    fun onConfirmClick() {
+        checkAnswer(_uiState.value.userInput)
+    }
+
+    fun playCurrentQuestion() {
+        val state = _uiState.value
+        val exercise = state.currentExercise ?: return
+        audioService.speak(exercise.localizedPromptTts(state.exerciseLanguage), state.exerciseLanguage)
+    }
+
+    fun stopAudio() {
+        audioService.stopPlayback()
+    }
+
+    private fun checkAnswer(answer: String) {
+        val state = _uiState.value
+        val exercise = state.currentExercise ?: return
+        if (state.isCorrect == true) return
+
+        val isCorrect = normalizeAnswer(answer) == normalizeAnswer(exercise.localizedAnswer(state.exerciseLanguage))
+        val endTime = System.currentTimeMillis()
+        val duration = endTime - startTime
+
+        _uiState.update { it.copy(isCorrect = isCorrect, isWrong = !isCorrect, showFeedback = true) }
+
+        if (isCorrect) {
+            audioService.playSuccess()
+            saveProgress(exercise, duration, true)
+        } else {
+            audioService.playFailure()
+            saveProgress(exercise, duration, false)
+        }
+    }
+
+    private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
+
+    private fun String.isWholeInteger(): Boolean = trim().matches(Regex("-?\\d+"))
+
+    private fun ExerciseContent.optionSpeechLocale(defaultLocale: String): String = data["audioTargetLocale"] ?: defaultLocale
+
+    private suspend fun orderUnfinishedFirst(candidates: List<ExerciseContent>, profileId: String): List<ExerciseContent> {
+        val completedIds = progressRepository.getProgressByChild(profileId).first()
+            .filter { it.answerCorrect }
+            .map { it.exerciseId }
+            .toSet()
+        val unfinished = candidates.filter { it.id !in completedIds }
+        return (unfinished.ifEmpty { candidates }).shuffled()
+    }
+
+    private fun saveProgress(exercise: ExerciseContent, durationMs: Long, correct: Boolean) {
+        val profileId = _uiState.value.currentProfileId ?: return
+        viewModelScope.launch {
+            val event = ProgressEvent(
+                id = UUID.randomUUID().toString(),
+                childProfileId = profileId,
+                exerciseId = exercise.id,
+                domain = exercise.domain,
+                skill = exercise.skill,
+                timestamp = System.currentTimeMillis(),
+                answerCorrect = correct,
+                responseTimeMs = durationMs,
+                rewardStampsEarned = missionPointsFor(exercise, correct),
+                metadata = mapOf(
+                    "progressKey" to (exercise.data["progressKey"] ?: exercise.id),
+                    "subcategoryId" to (exercise.data["subcategoryId"] ?: ""),
+                    "grade" to (exercise.data["grade"] ?: (exercise.level.toGrade()?.toString() ?: "")),
+                    "progressState" to if (correct) "completed" else "retry_wrong"
+                )
+            )
+            progressRepository.addProgress(event)
+            syncManager.scheduleSync()
+        }
+    }
+
+    fun nextExercise() {
+        if (currentIndex + 1 < exercises.size) {
+            _uiState.update { it.copy(isLoading = true) }
+            startExercise(currentIndex + 1)
+        } else {
+            exercises = exercises.shuffled()
+            _uiState.update { it.copy(isLoading = true) }
+            startExercise(0)
+        }
+    }
+
+    private fun generateRecommendation() {
+        val profileId = _uiState.value.currentProfileId ?: return
+        viewModelScope.launch {
+            val events = progressRepository.getProgressByChild(profileId).first().takeLast(10)
+            val metrics = adaptiveEngine.analyzePerformance(events)
+            val recommendation = adaptiveEngine.getRecommendation(metrics, giftedMode = false) // TODO: Get from profile
+            _uiState.update { it.copy(recommendation = recommendation) }
+        }
+    }
+}

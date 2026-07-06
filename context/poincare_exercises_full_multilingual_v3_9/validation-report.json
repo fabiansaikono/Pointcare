@@ -1,0 +1,15 @@
+{
+  "version": "3.9",
+  "totalExercises": 22200,
+  "uniqueIds": 22200,
+  "errorCount": 0,
+  "errors": [],
+  "checks": [
+    "no visible choose-from prompts",
+    "no visible underscores",
+    "no missing-letter ellipsis",
+    "large number formatting pass",
+    "world-knowledge regeneration",
+    "localized answer displays unique"
+  ]
+}

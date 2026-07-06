@@ -1,0 +1,396 @@
+Please correct the Math Crossword implementation.
+
+The current generator still creates invalid math crossword structures such as:
+
+```text
+n + n = n / n = n
+n + n = n : n = n
+n - n = n + n = n
+```
+
+This is not allowed.
+
+A visible horizontal or vertical line may only be one valid equation, never two equations accidentally joined together.
+
+The implementation files are:
+
+* `MathCrosswordModels.kt`
+* `MathCrosswordGenerator.kt`
+* `MathCrosswordScreen.kt`
+
+Please update the implementation with the following rules.
+
+## 1. Use a real 17 x 17 logical grid
+
+The puzzle must always use:
+
+```kotlin
+rowCount = 17
+columnCount = 17
+```
+
+Do not use 14 x 14.
+
+Unused cells may exist logically, but the UI should not make them look like puzzle cells.
+
+## 2. Only allow valid equation patterns
+
+Every generated equation line must match one of these patterns:
+
+```text
+N OP N = N
+N OP N OP N = N
+N OP N OP N OP N = N
+```
+
+Where:
+
+```text
+N  = number cell
+OP = +, -, *, /
+=  = equal sign
+```
+
+Each equation must contain:
+
+* At least 3 number cells
+* Exactly one equal sign
+* Operators only between number cells
+* A number directly after the equal sign
+* No operator after the result
+* No second equal sign
+* No chained equation
+
+Allowed examples:
+
+```text
+4 + 5 = 9
+12 - 7 = 5
+3 * 6 = 18
+24 / 4 = 6
+8 + 7 - 3 = 12
+100 - 35 + 5 = 70
+```
+
+Forbidden examples:
+
+```text
+4 + 5 = 9 / 3 = 3
+4 + 5 = 9 + 2 = 11
+8 = 8
+4 + = 4
+4 + 5
+4 + 5 = 9 = 9
+```
+
+## 3. Prevent accidental equation chains
+
+Before placing a new equation, scan the full row or column that will contain it.
+
+Do not allow two equations to touch each other directly.
+
+There must be an unused empty cell before and after an equation, unless the equation starts or ends at the edge of the 17 x 17 grid.
+
+For example, this is forbidden because it creates one visible sequence:
+
+```text
+4 + 5 = 9 / 3 = 3
+```
+
+Instead, there must be a gap:
+
+```text
+4 + 5 = 9 · 9 / 3 = 3
+```
+
+In the real UI, the `·` cell is not rendered.
+
+Add a helper such as:
+
+```kotlin
+private fun hasBoundaryGap(
+    start: Pair<Int, Int>,
+    end: Pair<Int, Int>,
+    orientation: MathCrosswordOrientation,
+    cells: Map<Pair<Int, Int>, MathCrosswordCell>
+): Boolean
+```
+
+This function must verify that the cell immediately before the equation and the cell immediately after the equation are empty or outside the grid.
+
+## 4. Crossings are only allowed on number cells
+
+A crossword crossing is valid only when:
+
+* A horizontal equation and a vertical equation share the same number cell.
+* The shared number cell has exactly the same value in both equations.
+
+Never allow crossings on:
+
+* `+`
+* `-`
+* `*`
+* `/`
+* `=`
+
+Therefore:
+
+* A sign cell may never overlap with another sign cell.
+* A sign cell may never overlap with a number cell.
+* An equal sign may never overlap with anything.
+* Only number cells may overlap with number cells.
+
+Fix `placeEquation` so that sign and equal cells must always be empty before placement.
+
+For number cells:
+
+* If the number cell is empty, it may be written.
+* If the number cell already exists, it may only be reused if the generated equation requires the exact same value.
+* If the existing number value does not match, reject the placement.
+
+## 5. Add orientation to equations
+
+Do not infer equation structure only from `index % 2`.
+
+Update the model so each equation stores its orientation.
+
+Example:
+
+```kotlin
+enum class MathCrosswordOrientation {
+    HORIZONTAL,
+    VERTICAL
+}
+
+data class MathCrosswordEquation(
+    val cells: List<Pair<Int, Int>>,
+    val orientation: MathCrosswordOrientation
+) {
+    val numberCells: List<Pair<Int, Int>>
+        get() = cells.filterIndexed { index, _ -> index % 2 == 0 }
+}
+```
+
+This will make it easier to validate crossings, scan rows and columns, and prevent accidental chains.
+
+## 6. Add full structural validation after generation
+
+After generating a puzzle, run a strict validation step before returning it.
+
+Create a function such as:
+
+```kotlin
+private fun validateGeneratedPuzzle(puzzle: MathCrosswordPuzzle): Boolean
+```
+
+It must check all of the following:
+
+### Grid validation
+
+* `rowCount == 17`
+* `columnCount == 17`
+* Every visible cell is inside the grid.
+
+### Equation validation
+
+For every equation:
+
+* The equation cells are contiguous.
+* The equation direction matches its orientation.
+* The equation starts with a number.
+* The equation ends with a number.
+* It contains exactly one `=`.
+* It does not contain more than one `=`.
+* It does not contain an operator after the result.
+* It does not contain two signs next to each other.
+* It evaluates correctly.
+
+### Visible-line validation
+
+Scan every row and every column.
+
+For each contiguous visible sequence of cells:
+
+* If the sequence length is 1, ignore it.
+* If the sequence length is greater than 1, it must exactly match one registered equation.
+* It must not contain two equations accidentally connected.
+* It must not contain more than one equal sign.
+* It must not match patterns like:
+
+```text
+N OP N = N OP N = N
+N OP N = N / N = N
+N OP N = N : N = N
+```
+
+### Crossing validation
+
+* Only number cells may be shared between equations.
+* No sign or equal sign may be part of more than one equation.
+* A number cell may be part of one horizontal and one vertical equation.
+* A number cell may not be reused by two horizontal equations.
+* A number cell may not be reused by two vertical equations.
+
+## 7. Fix operation limits by difficulty
+
+Respect these limits:
+
+### Addition and subtraction
+
+The numbers used in addition and subtraction may go up to:
+
+```text
+1 star: 20
+2 stars: 100
+3 stars: 500
+```
+
+### Multiplication and division
+
+For multiplication and division, the operands used in the exercise may be:
+
+```text
+1 star: only 1, 2, 5, 10
+2 stars: 1 to 10
+3 stars: 1 to 20
+```
+
+The result may be larger than the operand limit.
+
+Examples:
+
+```text
+Level 1: 5 * 10 = 50
+Level 2: 8 * 9 = 72
+Level 3: 17 * 12 = 204
+```
+
+Division must always be exact:
+
+```text
+72 / 9 = 8
+240 / 12 = 20
+```
+
+Never generate:
+
+```text
+7 / 2 = 3.5
+7 / 2 = 3
+10 / 0 = error
+```
+
+## 8. Use `/` internally, optional `÷` visually
+
+Internally, the operator must be `/`.
+
+Do not use `:` as the division operator internally.
+
+The UI may display `/` or `÷`, but the model and evaluator should use `/`.
+
+## 9. Do not return invalid puzzles
+
+The generator must never return a puzzle that fails validation.
+
+Recommended approach:
+
+```kotlin
+repeat(maxAttempts) { attempt ->
+    val puzzle = tryGeneratePuzzle(stars, seed + attempt)
+    if (puzzle != null && validateGeneratedPuzzle(puzzle)) {
+        return puzzle
+    }
+}
+```
+
+If generation fails after many attempts, reduce density or retry with fewer target equations.
+
+Do not return a partially valid puzzle.
+
+## 10. Update completion logic
+
+Currently completion should not only check whether every missing cell matches the stored value.
+
+Completion must require:
+
+* Every missing number cell is filled.
+* Every registered equation is complete.
+* Every registered equation evaluates correctly.
+* The generated puzzle structure is valid.
+
+Use logic like:
+
+```kotlin
+val complete =
+    puzzle.missingNumberCells.all { entries[it] != null } &&
+    puzzle.equations.all { it.isComplete(puzzle, entries) && it.isCorrect(puzzle, entries) }
+```
+
+## 11. Add tests or debug assertions
+
+Add test/debug validation for generated puzzles.
+
+At minimum, verify seeds `0..500` for each difficulty level.
+
+For every generated puzzle assert:
+
+```kotlin
+puzzle.rowCount == 17
+puzzle.columnCount == 17
+validateGeneratedPuzzle(puzzle) == true
+```
+
+Also assert:
+
+* No row contains more than one `=`
+* No column contains more than one `=`
+* No contiguous visible sequence contains `N OP N = N OP N = N`
+* No contiguous visible sequence contains `N OP N = N / N = N`
+* No sign cell is shared by two equations
+* No equal sign cell is shared by two equations
+* Every equation evaluates correctly
+* Division is exact
+* Difficulty number limits are respected
+* Make the drag-and-drop buttons the same size as one cell on the grid
+
+## 12. Preserve the existing UI behaviour
+
+Keep the existing drag-and-drop behaviour:
+
+* Values appear below the puzzle.
+* Values can be dragged into empty number cells.
+* Placed values can be dragged again.
+* Placed values can be removed.
+* Correct completed lines become dark green.
+* Incorrect completed lines become dark red.
+* The timer remains in the upper right corner.
+* Completion triggers the existing `onComplete()` behaviour.
+* Do not show the next mission button during the game, only when the game is complete
+* Every grid cell is a perfect square
+
+Do not rewrite unrelated app styling.
+
+Focus mainly on fixing:
+
+* `MathCrosswordGenerator.kt`
+* `MathCrosswordModels.kt`
+* equation validation in `MathCrosswordScreen.kt`
+
+## Final acceptance criteria
+
+The fix is correct when:
+
+* The grid is maximum 17 x 17.
+* Every generated visible row/column sequence is either empty, a single isolated cell, or one valid equation.
+* The generator never creates `n + n = n / n = n`.
+* The generator never creates `n + n = n : n = n`.
+* The generator never creates two connected equations without an empty gap.
+* Crossings only happen on number cells.
+* Sign cells never overlap.
+* Equal sign cells never overlap.
+* Every equation has exactly one equal sign.
+* Every equation evaluates correctly.
+* Division is always exact.
+* Difficulty limits are respected.
+* The puzzle is only completed when all equation lines are correct.
+* Remove the header (because it is also visible in the go back text)

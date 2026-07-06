@@ -1,0 +1,38 @@
+{
+  "version": "3.9",
+  "generatedAt": "2026-07-03T00:00:00+02:00",
+  "totalExerciseCount": 22200,
+  "exercisesPerSubcategoryPerGrade": 100,
+  "excludedGeneratedSubcategories": [
+    "math_crossword",
+    "sudoku"
+  ],
+  "fixes": [
+    "Removed visible variant/numeric suffixes",
+    "Removed underscores from visible prompts",
+    "Regenerated Dutch article questions as natural definite-article questions with two options",
+    "Added prompt ttsText for math operators, so hyphen/minus is read correctly",
+    "Added shape answer speak metadata so buttons read the shape name only",
+    "Regenerated repeated world knowledge questions",
+    "Regenerated writing prompts without underscore blanks",
+    "Kept time, measurement, and geometry_shapes under Geometry"
+  ],
+  "files": [
+    "poincare-exercises-math-v3.xml",
+    "poincare-exercises-language-v3.xml",
+    "poincare-exercises-logic-puzzles-v3.xml",
+    "poincare-exercises-world-knowledge-v3.xml",
+    "poincare-exercises-geometry-v3.xml",
+    "poincare-exercises-index-v3.xml",
+    "poincare-content-pack-v3-full.xsd",
+    "manifest.json"
+  ],
+  "qualityFixes": [
+    "Removed visible Choose from / Kies uit / Choisis parmi option lists from prompts",
+    "Rewrote missing-letter prompts so they show the full word and a pronounceable bleep pattern instead of ellipsis",
+    "Formatted large visible numbers with spaces as thousands separators",
+    "Added/kept math ttsText so minus is read as min/minus/moins instead of a dash",
+    "Regenerated world knowledge prompts to avoid repeated adjacent questions such as thirsty/water",
+    "Kept answer values canonical and localized displays for UI rendering"
+  ]
+}

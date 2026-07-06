@@ -1,0 +1,526 @@
+{
+  "version": "3.6",
+  "generatedAt": "2026-07-03T00:00:00+02:00",
+  "totalExerciseCount": 22200,
+  "exercisesPerSubcategoryPerGrade": 100,
+  "excludedGeneratedSubcategories": [
+    "math_crossword",
+    "sudoku"
+  ],
+  "mainCategoryChanges": {
+    "world_knowledge": {
+      "nl-BE": "Wereldkennis",
+      "en-US": "World knowledge",
+      "fr-BE": "Le Monde"
+    },
+    "geometry": {
+      "nl-BE": "Meetkunde",
+      "en-US": "Geometry",
+      "fr-BE": "Géométrie"
+    },
+    "translationSplit": [
+      "translation_nl_to_en",
+      "translation_nl_to_fr",
+      "translation_en_to_nl",
+      "translation_en_to_fr",
+      "translation_fr_to_nl",
+      "translation_fr_to_en"
+    ]
+  },
+  "translationRoutingPolicy": "For translation subcategories, show only tiles where sourceLocale equals the current app language. This means en-US users see English-to-Dutch and English-to-French, not Dutch-to-French.",
+  "visiblePromptPolicy": "Visible exercise prompts must not show theme/category labels such as Theme, Thema or Thème.",
+  "audioPolicy": "Audio exercise play buttons use audioSources/audio attributes: audioId, text, locale, ttsLanguage. The prompt must not show the hidden source word when visibleText=false. audioId is never read aloud.",
+  "files": [
+    {
+      "mainCategory": "math",
+      "file": "poincare-exercises-math-v3.xml",
+      "exerciseCount": 6000,
+      "subcategories": [
+        {
+          "id": "addition",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "subtraction",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "multiplication",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "division",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "mixed_arithmetic",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "number_sequences",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "fractions",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "time",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "money",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "measurement",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        }
+      ]
+    },
+    {
+      "mainCategory": "language",
+      "file": "poincare-exercises-language-v3.xml",
+      "exerciseCount": 7800,
+      "subcategories": [
+        {
+          "id": "reading",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "writing",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "listening",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "spelling",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "vocabulary",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "grammar",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "sentence_order",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "translation_nl_to_en",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          },
+          "sourceLocale": "nl-BE",
+          "targetLocale": "en-US"
+        },
+        {
+          "id": "translation_nl_to_fr",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          },
+          "sourceLocale": "nl-BE",
+          "targetLocale": "fr-BE"
+        },
+        {
+          "id": "translation_en_to_nl",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          },
+          "sourceLocale": "en-US",
+          "targetLocale": "nl-BE"
+        },
+        {
+          "id": "translation_en_to_fr",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          },
+          "sourceLocale": "en-US",
+          "targetLocale": "fr-BE"
+        },
+        {
+          "id": "translation_fr_to_nl",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          },
+          "sourceLocale": "fr-BE",
+          "targetLocale": "nl-BE"
+        },
+        {
+          "id": "translation_fr_to_en",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          },
+          "sourceLocale": "fr-BE",
+          "targetLocale": "en-US"
+        }
+      ]
+    },
+    {
+      "mainCategory": "logic_puzzles",
+      "file": "poincare-exercises-logic-puzzles-v3.xml",
+      "exerciseCount": 4200,
+      "subcategories": [
+        {
+          "id": "pattern_sequences",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "odd_one_out",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "analogies",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "grid_logic",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "mazes",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "visual_reasoning",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "memory_rules",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        }
+      ]
+    },
+    {
+      "mainCategory": "world_knowledge",
+      "file": "poincare-exercises-world-knowledge-v3.xml",
+      "exerciseCount": 3600,
+      "subcategories": [
+        {
+          "id": "space",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "nature",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "geography",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "science",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "history",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        },
+        {
+          "id": "everyday_life",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        }
+      ]
+    },
+    {
+      "mainCategory": "geometry",
+      "file": "poincare-exercises-geometry-v3.xml",
+      "exerciseCount": 600,
+      "subcategories": [
+        {
+          "id": "geometry_shapes",
+          "exerciseCount": 600,
+          "perGrade": {
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "version": "3.13",
+  "generatedAt": "2026-07-03T00:00:00+02:00",
+  "totalExerciseCount": 21600,
+  "exercisesPerSubcategoryPerGrade": 100,
+  "excludedGeneratedSubcategories": [
+    "math_crossword",
+    "sudoku"
+  ],
+  "fixes": [
+    "Removed visible variant/numeric suffixes",
+    "Removed underscores from visible prompts",
+    "Regenerated Dutch article questions as natural definite-article questions with two options",
+    "Added prompt ttsText for math operators, so hyphen/minus is read correctly",
+    "Added shape answer speak metadata so buttons read the shape name only",
+    "Regenerated repeated world knowledge questions",
+    "Regenerated writing prompts without underscore blanks",
+    "Kept time, measurement, and geometry_shapes under Geometry",
+    "Reworked reading exercises as visual word recognition instead of revealing the word in the prompt",
+    "Added visualSources with emoji icons and localized alt labels for reading exercises",
+    "Changed reading exercise type to visual_word_choice so the app shows the icon below the prompt and answer buttons contain the words",
+    "Removed the separate vocabulary/woordenschat subcategory because vocabulary is covered in World knowledge",
+    "Regenerated reading exercises with curated, accurate object icons and reduced target duplication per grade",
+    "Regenerated writing exercises as Dutch missing-letter exercises with a yellow question-mark marker",
+    "Writing prompts no longer reveal ellipses or answer lists; they show patterns such as k ? t",
+    "Writing TTS reads the full Dutch word/letter sequence, not a blank or question mark",
+    "Writing answer values are the actual letter/letter group, not correct/wrong labels and not words such as een",
+    "Missing-letter prompt question marks are normal text; only the separate missing marker is yellow.",
+    "Writing exercises now render the word-to-complete as a separate line via missingLetterDisplay/@visibleLine.",
+    "Listening letter/sound exercises include audio/@phoneticText and audio/@ttsText for reliable pronunciation.",
+    "Writing answer options include speak metadata so letters/clusters like a, aa, ui and eu are read correctly."
+  ],
+  "files": [
+    "poincare-exercises-math-v3.xml",
+    "poincare-exercises-language-v3.xml",
+    "poincare-exercises-logic-puzzles-v3.xml",
+    "poincare-exercises-world-knowledge-v3.xml",
+    "poincare-exercises-geometry-v3.xml",
+    "poincare-exercises-index-v3.xml",
+    "poincare-content-pack-v3-full.xsd",
+    "manifest.json",
+    "validation-report.json"
+  ],
+  "qualityFixes": [
+    "Removed visible Choose from / Kies uit / Choisis parmi option lists from prompts",
+    "Rewrote missing-letter prompts so they show the full word and a pronounceable bleep pattern instead of ellipsis",
+    "Formatted large visible numbers with spaces as thousands separators",
+    "Added/kept math ttsText so minus is read as min/minus/moins instead of a dash",
+    "Regenerated world knowledge prompts to avoid repeated adjacent questions such as thirsty/water",
+    "Kept answer values canonical and localized displays for UI rendering",
+    "Reading visual_word_choice exercises use visualSources with accurate emoji icons and no visible word labels",
+    "Writing missing_letter_choice exercises include missingLetterDisplay markerColor #FFD700",
+    "Removed vocabulary subcategory from language XML and index",
+    "Removed the missingMarkerColor top-level attribute from writing exercises to avoid coloring the prompt question mark.",
+    "Added markerColor only to missingLetterDisplay metadata.",
+    "Added displayValueMustBeUsed=true to short letter/sound answers to prevent showing canonical or stale values such as een."
+  ],
+  "fixesInThisVersion": [
+    "Communicatie/Luisteren and Schrijven/Schrijven no longer use raw single-letter text for TTS.",
+    "Raw letter value a remains visible as a, but all TTS metadata uses phonetic Dutch/Flemish text such as de klank a zoals in kat.",
+    "Added do-not-translate metadata to answer displays to prevent a from becoming een.",
+    "audio/@text is now also safe phonetic text for these subcategories, with rawValue/targetValue preserving the literal answer value."
+  ]
+}

@@ -1,0 +1,1412 @@
+<?xml version='1.0' encoding='utf-8'?>
+<poincareContentPack version="1.1" packId="poincare-original-math-l4-starter-001" language="nl-BE" created="2026-07-01" iconPackRef="poincare-icons-math-l4-starter-001">
+  <metadata>
+    <title>Poincaré originele wiskunde-oefeningen - vierde leerjaar starterpack</title>
+    <description>Originele, zelf gegenereerde oefencontent voor Poincaré. Niet gebaseerd op of gekopieerd uit Junior Einstein.</description>
+    <author>Poincaré / ChatGPT-generated original content</author>
+    <license>internal-use-original</license>
+    <copyrightNote>Gebruik enkel content waarvoor je rechten hebt. Deze set bevat originele voorbeeldcontent en geen overgenomen content van derden.</copyrightNote>
+  </metadata>
+  <locales>
+    <locale code="nl-BE" default="true" />
+    <locale code="fr-BE" default="false" />
+    <locale code="en" default="false" />
+  </locales>
+  <skills>
+    <skill id="NUM-PLACE" iconRef="skill-num-place">
+      <name>Getalbegrip tot 10 000</name>
+      <description>Getallen lezen, schrijven, ordenen en afronden.</description>
+    </skill>
+    <skill id="ADD-SUB" iconRef="skill-add-sub">
+      <name>Optellen en aftrekken</name>
+      <description>Hoofdrekenen en cijferend rekenen.</description>
+    </skill>
+    <skill id="MUL-DIV" iconRef="skill-mul-div">
+      <name>Vermenigvuldigen en delen</name>
+      <description>Tafels, delingen en rest.</description>
+    </skill>
+    <skill id="FRAC" iconRef="skill-frac">
+      <name>Breuken</name>
+      <description>Breuken herkennen, vergelijken en aanvullen.</description>
+    </skill>
+    <skill id="TIME" iconRef="skill-time">
+      <name>Tijd</name>
+      <description>Kloklezen, duur en kalenderrekenen.</description>
+    </skill>
+    <skill id="MONEY" iconRef="skill-money">
+      <name>Geld</name>
+      <description>Bedragen optellen, wisselgeld en eenvoudige prijzen.</description>
+    </skill>
+    <skill id="MEASURE" iconRef="skill-measure">
+      <name>Meten</name>
+      <description>Lengte, massa en inhoud omzetten en vergelijken.</description>
+    </skill>
+    <skill id="WORD" iconRef="skill-word">
+      <name>Vraagstukken</name>
+      <description>Tekst begrijpen en de juiste bewerking kiezen.</description>
+    </skill>
+  </skills>
+  <articles>
+    <article id="art-delen-met-rest" subject="wiskunde" grade="4" skillRef="MUL-DIV" iconRef="skill-mul-div">
+      <title>Delen met rest</title>
+      <summary>Soms past een getal niet precies in gelijke groepjes. Wat overblijft, noemen we de rest.</summary>
+      <body>
+        <paragraph>Soms past een getal niet precies in gelijke groepjes. Wat overblijft, noemen we de rest.</paragraph>
+        <paragraph>Bij 29 ÷ 4 maak je 7 groepjes van 4. Dat is 28. Er blijft 1 over. Dus: 29 ÷ 4 = 7 rest 1.</paragraph>
+        <paragraph>Controleer altijd: deler × quotiënt + rest = startgetal. Voorbeeld: 4 × 7 + 1 = 29.</paragraph>
+      </body>
+    </article>
+    <article id="art-breuken-vergelijken" subject="wiskunde" grade="4" skillRef="FRAC" iconRef="skill-frac">
+      <title>Breuken vergelijken</title>
+      <summary>Breuken met dezelfde noemer vergelijk je door naar de teller te kijken. 3/8 is groter dan 2/8.</summary>
+      <body>
+        <paragraph>Breuken met dezelfde noemer vergelijk je door naar de teller te kijken. 3/8 is groter dan 2/8.</paragraph>
+        <paragraph>Breuken met dezelfde teller vergelijk je door naar de noemer te kijken. 1/4 is groter dan 1/6, want vierden zijn grotere stukken dan zesden.</paragraph>
+        <paragraph>Een handige controle: teken een strook of denk aan pizza’s die in gelijke stukken verdeeld zijn.</paragraph>
+      </body>
+    </article>
+    <article id="art-wisselgeld" subject="wiskunde" grade="4" skillRef="MONEY" iconRef="skill-money">
+      <title>Wisselgeld berekenen</title>
+      <summary>Wisselgeld bereken je door de prijs van het betaalde bedrag af te trekken.</summary>
+      <body>
+        <paragraph>Wisselgeld bereken je door de prijs van het betaalde bedrag af te trekken.</paragraph>
+        <paragraph>Betaal je €10,00 voor iets van €7,35? Dan reken je €10,00 - €7,35 = €2,65.</paragraph>
+        <paragraph>Je kan ook aanvullen: van €7,35 naar €8,00 is €0,65 en van €8,00 naar €10,00 is €2,00. Samen €2,65.</paragraph>
+      </body>
+    </article>
+  </articles>
+  <exercises>
+    <exercise id="ex-num-place-001" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 3421 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>3400</value>
+        <explanation>3421 ligt het dichtst bij 3400. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-num-place-002" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 5089 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>5100</value>
+        <explanation>5089 ligt het dichtst bij 5100. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-num-place-003" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 7603 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>7600</value>
+        <explanation>7603 ligt het dichtst bij 7600. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-num-place-004" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 1896 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>1900</value>
+        <explanation>1896 ligt het dichtst bij 1900. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-num-place-005" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 9999 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>10000</value>
+        <explanation>9999 ligt het dichtst bij 10000. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-num-place-006" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 4050 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>4000</value>
+        <explanation>4050 ligt het dichtst bij 4000. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-num-place-007" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 6708 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>6700</value>
+        <explanation>6708 ligt het dichtst bij 6700. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-num-place-008" subject="wiskunde" grade="4" topic="getallen tot 10 000" skillRef="NUM-PLACE" difficulty="1" type="open_numeric" iconRef="topic-getallen-tot-10000" skillIconRef="skill-num-place">
+      <instruction>Rond af op het dichtstbijzijnde honderdtal.</instruction>
+      <question>
+        <text>Rond 2304 af op het dichtstbijzijnde honderdtal.</text>
+      </question>
+      <hints>
+        <hint order="1">Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</hint>
+      </hints>
+      <solution>
+        <value>2300</value>
+        <explanation>2304 ligt het dichtst bij 2300. Kijk vooral naar de tientallen.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Kijk naar het cijfer van de tientallen: 5 of meer rond je naar boven af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-001" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>2478 + 1365 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>3843</value>
+        <explanation>Tel eerst de duizendtallen en honderdtallen samen, controleer daarna tientallen en eenheden. Uitkomst: 3843.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-002" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>5820 - 1749 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>4071</value>
+        <explanation>Trek stap voor stap af. Uitkomst: 4071.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-003" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>3499 + 2501 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>6000</value>
+        <explanation>Tel eerst de duizendtallen en honderdtallen samen, controleer daarna tientallen en eenheden. Uitkomst: 6000.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-004" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>7306 - 1298 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>6008</value>
+        <explanation>Trek stap voor stap af. Uitkomst: 6008.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-005" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>4657 + 2836 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>7493</value>
+        <explanation>Tel eerst de duizendtallen en honderdtallen samen, controleer daarna tientallen en eenheden. Uitkomst: 7493.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-006" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>8020 - 3795 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>4225</value>
+        <explanation>Trek stap voor stap af. Uitkomst: 4225.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-007" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>6912 + 2088 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>9000</value>
+        <explanation>Tel eerst de duizendtallen en honderdtallen samen, controleer daarna tientallen en eenheden. Uitkomst: 9000.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-008" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>5406 - 1877 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>3529</value>
+        <explanation>Trek stap voor stap af. Uitkomst: 3529.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-009" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>2999 + 999 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>3998</value>
+        <explanation>Tel eerst de duizendtallen en honderdtallen samen, controleer daarna tientallen en eenheden. Uitkomst: 3998.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-add-sub-010" subject="wiskunde" grade="4" topic="optellen en aftrekken" skillRef="ADD-SUB" difficulty="2" type="open_numeric" iconRef="topic-optellen-aftrekken" skillIconRef="skill-add-sub">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>6543 - 3210 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Splits de getallen of reken cijferend onder elkaar.</hint>
+      </hints>
+      <solution>
+        <value>3333</value>
+        <explanation>Trek stap voor stap af. Uitkomst: 3333.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Splits de getallen of reken cijferend onder elkaar.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-001" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>24 × 13 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>312</value>
+        <explanation>24 × 13 = 24 × (10) + 24 × 3. Uitkomst: 312.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-002" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>36 × 12 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>432</value>
+        <explanation>36 × 12 = 36 × (10) + 36 × 2. Uitkomst: 432.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-003" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>875 ÷ 5 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>175</value>
+        <explanation>Controle: 5 × 175 = 875.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-004" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>936 ÷ 8 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>117</value>
+        <explanation>Controle: 8 × 117 = 936.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-005" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>47 × 6 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>282</value>
+        <explanation>47 × 6 = 47 × (6) + 47 × 0. Uitkomst: 282.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-006" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>128 ÷ 4 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>32</value>
+        <explanation>Controle: 4 × 32 = 128.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-007" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>62 × 15 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>930</value>
+        <explanation>62 × 15 = 62 × (10) + 62 × 5. Uitkomst: 930.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-008" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>999 ÷ 9 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>111</value>
+        <explanation>Controle: 9 × 111 = 999.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-009" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>39 × 18 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>702</value>
+        <explanation>39 × 18 = 39 × (10) + 39 × 8. Uitkomst: 702.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mul-div-010" subject="wiskunde" grade="4" topic="vermenigvuldigen en delen" skillRef="MUL-DIV" difficulty="2" type="open_numeric" iconRef="topic-vermenigvuldigen-delen" skillIconRef="skill-mul-div">
+      <instruction>Reken uit.</instruction>
+      <question>
+        <text>756 ÷ 7 = ?</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik tafels, splitsen of de omgekeerde bewerking.</hint>
+      </hints>
+      <solution>
+        <value>108</value>
+        <explanation>Controle: 7 × 108 = 756.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik tafels, splitsen of de omgekeerde bewerking.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-div-rest-001" subject="wiskunde" grade="4" topic="delen met rest" skillRef="MUL-DIV" difficulty="3" type="fill_blank" iconRef="topic-delen-met-rest" skillIconRef="skill-mul-div">
+      <instruction>Vul het quotiënt en de rest in.</instruction>
+      <question>
+        <text>29 ÷ 4 = ___ rest ___</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</hint>
+      </hints>
+      <solution>
+        <value>7 rest 1</value>
+        <explanation>4 × 7 = 28. 29 - 28 = 1.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-div-rest-002" subject="wiskunde" grade="4" topic="delen met rest" skillRef="MUL-DIV" difficulty="3" type="fill_blank" iconRef="topic-delen-met-rest" skillIconRef="skill-mul-div">
+      <instruction>Vul het quotiënt en de rest in.</instruction>
+      <question>
+        <text>53 ÷ 6 = ___ rest ___</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</hint>
+      </hints>
+      <solution>
+        <value>8 rest 5</value>
+        <explanation>6 × 8 = 48. 53 - 48 = 5.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-div-rest-003" subject="wiskunde" grade="4" topic="delen met rest" skillRef="MUL-DIV" difficulty="3" type="fill_blank" iconRef="topic-delen-met-rest" skillIconRef="skill-mul-div">
+      <instruction>Vul het quotiënt en de rest in.</instruction>
+      <question>
+        <text>74 ÷ 8 = ___ rest ___</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</hint>
+      </hints>
+      <solution>
+        <value>9 rest 2</value>
+        <explanation>8 × 9 = 72. 74 - 72 = 2.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-div-rest-004" subject="wiskunde" grade="4" topic="delen met rest" skillRef="MUL-DIV" difficulty="3" type="fill_blank" iconRef="topic-delen-met-rest" skillIconRef="skill-mul-div">
+      <instruction>Vul het quotiënt en de rest in.</instruction>
+      <question>
+        <text>91 ÷ 9 = ___ rest ___</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</hint>
+      </hints>
+      <solution>
+        <value>10 rest 1</value>
+        <explanation>9 × 10 = 90. 91 - 90 = 1.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-div-rest-005" subject="wiskunde" grade="4" topic="delen met rest" skillRef="MUL-DIV" difficulty="3" type="fill_blank" iconRef="topic-delen-met-rest" skillIconRef="skill-mul-div">
+      <instruction>Vul het quotiënt en de rest in.</instruction>
+      <question>
+        <text>68 ÷ 7 = ___ rest ___</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</hint>
+      </hints>
+      <solution>
+        <value>9 rest 5</value>
+        <explanation>7 × 9 = 63. 68 - 63 = 5.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-div-rest-006" subject="wiskunde" grade="4" topic="delen met rest" skillRef="MUL-DIV" difficulty="3" type="fill_blank" iconRef="topic-delen-met-rest" skillIconRef="skill-mul-div">
+      <instruction>Vul het quotiënt en de rest in.</instruction>
+      <question>
+        <text>46 ÷ 5 = ___ rest ___</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</hint>
+      </hints>
+      <solution>
+        <value>9 rest 1</value>
+        <explanation>5 × 9 = 45. 46 - 45 = 1.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek het grootste veelvoud van de deler dat niet groter is dan het startgetal.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-frac-001" subject="wiskunde" grade="4" topic="breuken" skillRef="FRAC" difficulty="2" type="multiple_choice" iconRef="topic-breuken" skillIconRef="skill-frac">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Welke breuk is groter: 3/8 of 5/8?</text>
+      </question>
+      <hints>
+        <hint order="1">Teken eventueel een strook of denk aan gelijke stukken.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">3/8</answer>
+        <answer id="b" correct="true">5/8</answer>
+        <answer id="c" correct="false">even groot</answer>
+        <answer id="d" correct="false">niet te bepalen</answer>
+      </answers>
+      <solution>
+        <value>5/8</value>
+        <explanation>De noemer is gelijk. Vergelijk dus de teller.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Teken eventueel een strook of denk aan gelijke stukken.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-frac-002" subject="wiskunde" grade="4" topic="breuken" skillRef="FRAC" difficulty="2" type="multiple_choice" iconRef="topic-breuken" skillIconRef="skill-frac">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Welke breuk is groter: 1/3 of 1/5?</text>
+      </question>
+      <hints>
+        <hint order="1">Teken eventueel een strook of denk aan gelijke stukken.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="true">1/3</answer>
+        <answer id="b" correct="false">1/5</answer>
+        <answer id="c" correct="false">even groot</answer>
+        <answer id="d" correct="false">niet te bepalen</answer>
+      </answers>
+      <solution>
+        <value>1/3</value>
+        <explanation>Bij dezelfde teller is de breuk met de kleinste noemer groter.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Teken eventueel een strook of denk aan gelijke stukken.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-frac-003" subject="wiskunde" grade="4" topic="breuken" skillRef="FRAC" difficulty="2" type="multiple_choice" iconRef="topic-breuken" skillIconRef="skill-frac">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Wat is de helft van 18?</text>
+      </question>
+      <hints>
+        <hint order="1">Teken eventueel een strook of denk aan gelijke stukken.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">6</answer>
+        <answer id="b" correct="false">8</answer>
+        <answer id="c" correct="true">9</answer>
+        <answer id="d" correct="false">12</answer>
+      </answers>
+      <solution>
+        <value>9</value>
+        <explanation>De helft betekent delen door 2.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Teken eventueel een strook of denk aan gelijke stukken.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-frac-004" subject="wiskunde" grade="4" topic="breuken" skillRef="FRAC" difficulty="2" type="multiple_choice" iconRef="topic-breuken" skillIconRef="skill-frac">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Welke breuk hoort bij 3 van de 4 gelijke stukken?</text>
+      </question>
+      <hints>
+        <hint order="1">Teken eventueel een strook of denk aan gelijke stukken.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">1/4</answer>
+        <answer id="b" correct="false">2/4</answer>
+        <answer id="c" correct="true">3/4</answer>
+        <answer id="d" correct="false">4/3</answer>
+      </answers>
+      <solution>
+        <value>3/4</value>
+        <explanation>De teller zegt hoeveel stukken je neemt.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Teken eventueel een strook of denk aan gelijke stukken.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-frac-005" subject="wiskunde" grade="4" topic="breuken" skillRef="FRAC" difficulty="2" type="multiple_choice" iconRef="topic-breuken" skillIconRef="skill-frac">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Welke breuk is gelijk aan 1/2?</text>
+      </question>
+      <hints>
+        <hint order="1">Teken eventueel een strook of denk aan gelijke stukken.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">1/4</answer>
+        <answer id="b" correct="true">2/4</answer>
+        <answer id="c" correct="false">3/5</answer>
+        <answer id="d" correct="false">4/2</answer>
+      </answers>
+      <solution>
+        <value>2/4</value>
+        <explanation>2 van de 4 gelijke stukken is evenveel als de helft.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Teken eventueel een strook of denk aan gelijke stukken.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-frac-006" subject="wiskunde" grade="4" topic="breuken" skillRef="FRAC" difficulty="2" type="multiple_choice" iconRef="topic-breuken" skillIconRef="skill-frac">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Wat is 1/4 van 32?</text>
+      </question>
+      <hints>
+        <hint order="1">Teken eventueel een strook of denk aan gelijke stukken.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">6</answer>
+        <answer id="b" correct="true">8</answer>
+        <answer id="c" correct="false">12</answer>
+        <answer id="d" correct="false">16</answer>
+      </answers>
+      <solution>
+        <value>8</value>
+        <explanation>Deel 32 door 4.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Teken eventueel een strook of denk aan gelijke stukken.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-time-001" subject="wiskunde" grade="4" topic="tijd" skillRef="TIME" difficulty="2" type="open_text" iconRef="topic-tijd" skillIconRef="skill-time">
+      <instruction>Bereken de tijdsduur.</instruction>
+      <question>
+        <text>Hoeveel tijd zit er tussen 08:15 en 09:00?</text>
+      </question>
+      <hints>
+        <hint order="1">Tel eerst tot het volgende hele uur en daarna verder.</hint>
+      </hints>
+      <solution>
+        <value>45 minuten</value>
+        <explanation>Van 08:15 tot 09:00 is 45 minuten.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Tel eerst tot het volgende hele uur en daarna verder.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-time-002" subject="wiskunde" grade="4" topic="tijd" skillRef="TIME" difficulty="2" type="open_text" iconRef="topic-tijd" skillIconRef="skill-time">
+      <instruction>Bereken de tijdsduur.</instruction>
+      <question>
+        <text>Hoeveel tijd zit er tussen 13:40 en 14:25?</text>
+      </question>
+      <hints>
+        <hint order="1">Tel eerst tot het volgende hele uur en daarna verder.</hint>
+      </hints>
+      <solution>
+        <value>45 minuten</value>
+        <explanation>Van 13:40 tot 14:25 is 45 minuten.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Tel eerst tot het volgende hele uur en daarna verder.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-time-003" subject="wiskunde" grade="4" topic="tijd" skillRef="TIME" difficulty="2" type="open_text" iconRef="topic-tijd" skillIconRef="skill-time">
+      <instruction>Bereken de tijdsduur.</instruction>
+      <question>
+        <text>Hoeveel tijd zit er tussen 10:10 en 11:35?</text>
+      </question>
+      <hints>
+        <hint order="1">Tel eerst tot het volgende hele uur en daarna verder.</hint>
+      </hints>
+      <solution>
+        <value>1 uur en 25 minuten</value>
+        <explanation>Van 10:10 tot 11:35 is 1 uur en 25 minuten.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Tel eerst tot het volgende hele uur en daarna verder.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-time-004" subject="wiskunde" grade="4" topic="tijd" skillRef="TIME" difficulty="2" type="open_text" iconRef="topic-tijd" skillIconRef="skill-time">
+      <instruction>Bereken de tijdsduur.</instruction>
+      <question>
+        <text>Hoeveel tijd zit er tussen 16:50 en 18:05?</text>
+      </question>
+      <hints>
+        <hint order="1">Tel eerst tot het volgende hele uur en daarna verder.</hint>
+      </hints>
+      <solution>
+        <value>1 uur en 15 minuten</value>
+        <explanation>Van 16:50 tot 18:05 is 1 uur en 15 minuten.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Tel eerst tot het volgende hele uur en daarna verder.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-time-005" subject="wiskunde" grade="4" topic="tijd" skillRef="TIME" difficulty="2" type="open_text" iconRef="topic-tijd" skillIconRef="skill-time">
+      <instruction>Bereken de tijdsduur.</instruction>
+      <question>
+        <text>Hoeveel tijd zit er tussen 07:30 en 08:45?</text>
+      </question>
+      <hints>
+        <hint order="1">Tel eerst tot het volgende hele uur en daarna verder.</hint>
+      </hints>
+      <solution>
+        <value>1 uur en 15 minuten</value>
+        <explanation>Van 07:30 tot 08:45 is 1 uur en 15 minuten.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Tel eerst tot het volgende hele uur en daarna verder.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-time-006" subject="wiskunde" grade="4" topic="tijd" skillRef="TIME" difficulty="2" type="open_text" iconRef="topic-tijd" skillIconRef="skill-time">
+      <instruction>Bereken de tijdsduur.</instruction>
+      <question>
+        <text>Hoeveel tijd zit er tussen 19:20 en 20:00?</text>
+      </question>
+      <hints>
+        <hint order="1">Tel eerst tot het volgende hele uur en daarna verder.</hint>
+      </hints>
+      <solution>
+        <value>40 minuten</value>
+        <explanation>Van 19:20 tot 20:00 is 40 minuten.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Tel eerst tot het volgende hele uur en daarna verder.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-money-001" subject="wiskunde" grade="4" topic="geld" skillRef="MONEY" difficulty="2" type="open_text" iconRef="topic-geld" skillIconRef="skill-money">
+      <instruction>Bereken het wisselgeld.</instruction>
+      <question>
+        <text>Je betaalt €10,00 voor iets van €7,35, Hoeveel krijg je terug?</text>
+      </question>
+      <hints>
+        <hint order="1">Trek de prijs af van het betaalde bedrag.</hint>
+      </hints>
+      <solution>
+        <value>€2,65</value>
+        <explanation>€10,00 - €7,35 = €2,65,</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Trek de prijs af van het betaalde bedrag.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-money-002" subject="wiskunde" grade="4" topic="geld" skillRef="MONEY" difficulty="2" type="open_text" iconRef="topic-geld" skillIconRef="skill-money">
+      <instruction>Bereken het wisselgeld.</instruction>
+      <question>
+        <text>Je betaalt €20,00 voor iets van €12,80, Hoeveel krijg je terug?</text>
+      </question>
+      <hints>
+        <hint order="1">Trek de prijs af van het betaalde bedrag.</hint>
+      </hints>
+      <solution>
+        <value>€7,20</value>
+        <explanation>€20,00 - €12,80 = €7,20,</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Trek de prijs af van het betaalde bedrag.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-money-003" subject="wiskunde" grade="4" topic="geld" skillRef="MONEY" difficulty="2" type="open_text" iconRef="topic-geld" skillIconRef="skill-money">
+      <instruction>Bereken het wisselgeld.</instruction>
+      <question>
+        <text>Je betaalt €5,00 voor iets van €3,45, Hoeveel krijg je terug?</text>
+      </question>
+      <hints>
+        <hint order="1">Trek de prijs af van het betaalde bedrag.</hint>
+      </hints>
+      <solution>
+        <value>€1,55</value>
+        <explanation>€5,00 - €3,45 = €1,55,</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Trek de prijs af van het betaalde bedrag.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-money-004" subject="wiskunde" grade="4" topic="geld" skillRef="MONEY" difficulty="2" type="open_text" iconRef="topic-geld" skillIconRef="skill-money">
+      <instruction>Bereken het wisselgeld.</instruction>
+      <question>
+        <text>Je betaalt €15,00 voor iets van €8,75, Hoeveel krijg je terug?</text>
+      </question>
+      <hints>
+        <hint order="1">Trek de prijs af van het betaalde bedrag.</hint>
+      </hints>
+      <solution>
+        <value>€6,25</value>
+        <explanation>€15,00 - €8,75 = €6,25,</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Trek de prijs af van het betaalde bedrag.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-money-005" subject="wiskunde" grade="4" topic="geld" skillRef="MONEY" difficulty="2" type="open_text" iconRef="topic-geld" skillIconRef="skill-money">
+      <instruction>Bereken het wisselgeld.</instruction>
+      <question>
+        <text>Je betaalt €50,00 voor iets van €36,60, Hoeveel krijg je terug?</text>
+      </question>
+      <hints>
+        <hint order="1">Trek de prijs af van het betaalde bedrag.</hint>
+      </hints>
+      <solution>
+        <value>€13,40</value>
+        <explanation>€50,00 - €36,60 = €13,40,</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Trek de prijs af van het betaalde bedrag.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-money-006" subject="wiskunde" grade="4" topic="geld" skillRef="MONEY" difficulty="2" type="open_text" iconRef="topic-geld" skillIconRef="skill-money">
+      <instruction>Bereken het wisselgeld.</instruction>
+      <question>
+        <text>Je betaalt €2,00 voor iets van €1,35, Hoeveel krijg je terug?</text>
+      </question>
+      <hints>
+        <hint order="1">Trek de prijs af van het betaalde bedrag.</hint>
+      </hints>
+      <solution>
+        <value>€0,65</value>
+        <explanation>€2,00 - €1,35 = €0,65,</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Trek de prijs af van het betaalde bedrag.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-measure-001" subject="wiskunde" grade="4" topic="meten" skillRef="MEASURE" difficulty="2" type="fill_blank" iconRef="topic-meten" skillIconRef="skill-measure">
+      <instruction>Vul de juiste omzetting in.</instruction>
+      <question>
+        <text>3 m = ___ cm</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</hint>
+      </hints>
+      <solution>
+        <value>300</value>
+        <explanation>1 m = 100 cm.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-measure-002" subject="wiskunde" grade="4" topic="meten" skillRef="MEASURE" difficulty="2" type="fill_blank" iconRef="topic-meten" skillIconRef="skill-measure">
+      <instruction>Vul de juiste omzetting in.</instruction>
+      <question>
+        <text>450 cm = ___ m ___ cm</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</hint>
+      </hints>
+      <solution>
+        <value>4 m 50 cm</value>
+        <explanation>400 cm is 4 m, er blijft 50 cm over.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-measure-003" subject="wiskunde" grade="4" topic="meten" skillRef="MEASURE" difficulty="2" type="fill_blank" iconRef="topic-meten" skillIconRef="skill-measure">
+      <instruction>Vul de juiste omzetting in.</instruction>
+      <question>
+        <text>2 kg = ___ g</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</hint>
+      </hints>
+      <solution>
+        <value>2000</value>
+        <explanation>1 kg = 1000 g.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-measure-004" subject="wiskunde" grade="4" topic="meten" skillRef="MEASURE" difficulty="2" type="fill_blank" iconRef="topic-meten" skillIconRef="skill-measure">
+      <instruction>Vul de juiste omzetting in.</instruction>
+      <question>
+        <text>1500 ml = ___ l ___ ml</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</hint>
+      </hints>
+      <solution>
+        <value>1 l 500 ml</value>
+        <explanation>1000 ml is 1 l, er blijft 500 ml over.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-measure-005" subject="wiskunde" grade="4" topic="meten" skillRef="MEASURE" difficulty="2" type="fill_blank" iconRef="topic-meten" skillIconRef="skill-measure">
+      <instruction>Vul de juiste omzetting in.</instruction>
+      <question>
+        <text>7 km = ___ m</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</hint>
+      </hints>
+      <solution>
+        <value>7000</value>
+        <explanation>1 km = 1000 m.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-measure-006" subject="wiskunde" grade="4" topic="meten" skillRef="MEASURE" difficulty="2" type="fill_blank" iconRef="topic-meten" skillIconRef="skill-measure">
+      <instruction>Vul de juiste omzetting in.</instruction>
+      <question>
+        <text>3250 g = ___ kg ___ g</text>
+      </question>
+      <hints>
+        <hint order="1">Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</hint>
+      </hints>
+      <solution>
+        <value>3 kg 250 g</value>
+        <explanation>3000 g is 3 kg, er blijft 250 g over.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Gebruik de juiste verhouding: meter-centimeter, kilogram-gram, liter-milliliter.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-001" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>Een raket heeft 248 bouten. De technicus plaatst er nog 157 bij. Hoeveel bouten zijn er nu?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>405</value>
+        <explanation>248 + 157 = 405.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-002" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>In een doos zitten 6 zakjes met telkens 24 knikkers. Hoeveel knikkers zijn dat samen?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>144</value>
+        <explanation>6 × 24 = 144.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-003" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>Een game duurt 35 minuten. Jules speelt 3 games. Hoeveel minuten speelt hij in totaal?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>105</value>
+        <explanation>3 × 35 = 105.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-004" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>Er zijn 96 stickers. Ze worden eerlijk verdeeld over 8 kinderen. Hoeveel krijgt elk kind?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>12</value>
+        <explanation>96 ÷ 8 = 12.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-005" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>Een trein vertrekt om 14:20 en komt aan om 15:05. Hoe lang duurt de rit?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>45 minuten</value>
+        <explanation>Van 14:20 naar 15:00 is 40 minuten, plus 5 minuten is 45 minuten.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-006" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>Een brood kost €2,45 en fruitsap kost €1,80. Hoeveel betaal je samen?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>€4,25</value>
+        <explanation>€2,45 + €1,80 = €4,25.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-007" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>Een robot legt 125 meter af per minuut. Hoeveel meter legt hij af in 4 minuten?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>500</value>
+        <explanation>125 × 4 = 500.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-word-008" subject="wiskunde" grade="4" topic="vraagstukken" skillRef="WORD" difficulty="3" type="open_text" iconRef="topic-vraagstukken" skillIconRef="skill-word">
+      <instruction>Lees goed en los het vraagstuk op.</instruction>
+      <question>
+        <text>Een boek heeft 184 pagina’s. Henri leest 46 pagina’s per dag. Na hoeveel dagen is het boek uit?</text>
+      </question>
+      <hints>
+        <hint order="1">Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</hint>
+      </hints>
+      <solution>
+        <value>4</value>
+        <explanation>184 ÷ 46 = 4.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Zoek eerst welke bewerking past: plus, min, keer of gedeeld door.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mixed-mc-001" subject="wiskunde" grade="4" topic="gemengde herhaling" skillRef="WORD" difficulty="3" type="multiple_choice" iconRef="topic-gemengde-herhaling" skillIconRef="skill-word">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Een ruimteschip heeft 1250 liter water. Er wordt 375 liter gebruikt. Hoeveel liter blijft er over?</text>
+      </question>
+      <hints>
+        <hint order="1">Er wordt iets gebruikt, dus je trekt af.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">1625</answer>
+        <answer id="b" correct="true">875</answer>
+        <answer id="c" correct="false">775</answer>
+        <answer id="d" correct="false">975</answer>
+      </answers>
+      <solution>
+        <value>875</value>
+        <explanation>1250 - 375 = 875.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Er wordt iets gebruikt, dus je trekt af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mixed-mc-002" subject="wiskunde" grade="4" topic="gemengde herhaling" skillRef="WORD" difficulty="3" type="multiple_choice" iconRef="topic-gemengde-herhaling" skillIconRef="skill-word">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Een ruimteschip heeft 2400 liter water. Er wordt 625 liter gebruikt. Hoeveel liter blijft er over?</text>
+      </question>
+      <hints>
+        <hint order="1">Er wordt iets gebruikt, dus je trekt af.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">1875</answer>
+        <answer id="b" correct="false">1675</answer>
+        <answer id="c" correct="false">3025</answer>
+        <answer id="d" correct="true">1775</answer>
+      </answers>
+      <solution>
+        <value>1775</value>
+        <explanation>2400 - 625 = 1775.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Er wordt iets gebruikt, dus je trekt af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mixed-mc-003" subject="wiskunde" grade="4" topic="gemengde herhaling" skillRef="WORD" difficulty="3" type="multiple_choice" iconRef="topic-gemengde-herhaling" skillIconRef="skill-word">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Een ruimteschip heeft 5080 liter water. Er wordt 1495 liter gebruikt. Hoeveel liter blijft er over?</text>
+      </question>
+      <hints>
+        <hint order="1">Er wordt iets gebruikt, dus je trekt af.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">6575</answer>
+        <answer id="b" correct="true">3585</answer>
+        <answer id="c" correct="false">3485</answer>
+        <answer id="d" correct="false">3685</answer>
+      </answers>
+      <solution>
+        <value>3585</value>
+        <explanation>5080 - 1495 = 3585.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Er wordt iets gebruikt, dus je trekt af.</incorrect>
+      </feedback>
+    </exercise>
+    <exercise id="ex-mixed-mc-004" subject="wiskunde" grade="4" topic="gemengde herhaling" skillRef="WORD" difficulty="3" type="multiple_choice" iconRef="topic-gemengde-herhaling" skillIconRef="skill-word">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question>
+        <text>Een ruimteschip heeft 3600 liter water. Er wordt 875 liter gebruikt. Hoeveel liter blijft er over?</text>
+      </question>
+      <hints>
+        <hint order="1">Er wordt iets gebruikt, dus je trekt af.</hint>
+      </hints>
+      <answers>
+        <answer id="a" correct="false">2625</answer>
+        <answer id="b" correct="true">2725</answer>
+        <answer id="c" correct="false">4475</answer>
+        <answer id="d" correct="false">2825</answer>
+      </answers>
+      <solution>
+        <value>2725</value>
+        <explanation>3600 - 875 = 2725.</explanation>
+      </solution>
+      <feedback>
+        <correct>Goed gedaan!</correct>
+        <incorrect>Er wordt iets gebruikt, dus je trekt af.</incorrect>
+      </feedback>
+    </exercise>
+  </exercises>
+  <worksheets>
+    <worksheet id="ws-math-l4-mix-001" subject="wiskunde" grade="4" printMode="black-and-white-friendly">
+      <title>Gemengde herhaling 1</title>
+      <theme>ruimte</theme>
+      <instructions>Los de oefeningen rustig op. Schrijf je tussenstappen waar nodig op.</instructions>
+      <exerciseRefs>
+        <exerciseRef id="ex-num-place-001" order="1" />
+        <exerciseRef id="ex-num-place-002" order="2" />
+        <exerciseRef id="ex-num-place-003" order="3" />
+        <exerciseRef id="ex-num-place-004" order="4" />
+        <exerciseRef id="ex-num-place-005" order="5" />
+        <exerciseRef id="ex-num-place-006" order="6" />
+        <exerciseRef id="ex-num-place-007" order="7" />
+        <exerciseRef id="ex-num-place-008" order="8" />
+        <exerciseRef id="ex-add-sub-001" order="9" />
+        <exerciseRef id="ex-add-sub-002" order="10" />
+        <exerciseRef id="ex-add-sub-003" order="11" />
+        <exerciseRef id="ex-add-sub-004" order="12" />
+        <exerciseRef id="ex-add-sub-005" order="13" />
+        <exerciseRef id="ex-add-sub-006" order="14" />
+        <exerciseRef id="ex-add-sub-007" order="15" />
+        <exerciseRef id="ex-add-sub-008" order="16" />
+        <exerciseRef id="ex-add-sub-009" order="17" />
+        <exerciseRef id="ex-add-sub-010" order="18" />
+        <exerciseRef id="ex-mul-div-001" order="19" />
+        <exerciseRef id="ex-mul-div-002" order="20" />
+      </exerciseRefs>
+    </worksheet>
+    <worksheet id="ws-math-l4-mix-002" subject="wiskunde" grade="4" printMode="black-and-white-friendly">
+      <title>Gemengde herhaling 2</title>
+      <theme>ruimte</theme>
+      <instructions>Los de oefeningen rustig op. Schrijf je tussenstappen waar nodig op.</instructions>
+      <exerciseRefs>
+        <exerciseRef id="ex-mul-div-003" order="1" />
+        <exerciseRef id="ex-mul-div-004" order="2" />
+        <exerciseRef id="ex-mul-div-005" order="3" />
+        <exerciseRef id="ex-mul-div-006" order="4" />
+        <exerciseRef id="ex-mul-div-007" order="5" />
+        <exerciseRef id="ex-mul-div-008" order="6" />
+        <exerciseRef id="ex-mul-div-009" order="7" />
+        <exerciseRef id="ex-mul-div-010" order="8" />
+        <exerciseRef id="ex-div-rest-001" order="9" />
+        <exerciseRef id="ex-div-rest-002" order="10" />
+        <exerciseRef id="ex-div-rest-003" order="11" />
+        <exerciseRef id="ex-div-rest-004" order="12" />
+        <exerciseRef id="ex-div-rest-005" order="13" />
+        <exerciseRef id="ex-div-rest-006" order="14" />
+        <exerciseRef id="ex-frac-001" order="15" />
+        <exerciseRef id="ex-frac-002" order="16" />
+        <exerciseRef id="ex-frac-003" order="17" />
+        <exerciseRef id="ex-frac-004" order="18" />
+        <exerciseRef id="ex-frac-005" order="19" />
+        <exerciseRef id="ex-frac-006" order="20" />
+      </exerciseRefs>
+    </worksheet>
+    <worksheet id="ws-math-l4-word-001" subject="wiskunde" grade="4" printMode="black-and-white-friendly">
+      <title>Vraagstukken en geld</title>
+      <theme>ruimte</theme>
+      <instructions>Los de oefeningen rustig op. Schrijf je tussenstappen waar nodig op.</instructions>
+      <exerciseRefs>
+        <exerciseRef id="ex-money-001" order="1" />
+        <exerciseRef id="ex-money-002" order="2" />
+        <exerciseRef id="ex-money-003" order="3" />
+        <exerciseRef id="ex-money-004" order="4" />
+        <exerciseRef id="ex-money-005" order="5" />
+        <exerciseRef id="ex-money-006" order="6" />
+        <exerciseRef id="ex-word-001" order="7" />
+        <exerciseRef id="ex-word-002" order="8" />
+        <exerciseRef id="ex-word-003" order="9" />
+        <exerciseRef id="ex-word-004" order="10" />
+        <exerciseRef id="ex-word-005" order="11" />
+        <exerciseRef id="ex-word-006" order="12" />
+        <exerciseRef id="ex-word-007" order="13" />
+        <exerciseRef id="ex-word-008" order="14" />
+      </exerciseRefs>
+    </worksheet>
+  </worksheets>
+  <importConfig>
+    <recommendedImporter>PoincareContentImporterV1</recommendedImporter>
+    <deduplicationKey>exercise/@id, article/@id, worksheet/@id</deduplicationKey>
+    <progressTracking>Track attempts, correct answers, timeSpentSeconds, hintUsage, languageUsed, and spacedRepetitionDueDate per exercise id.</progressTracking>
+  </importConfig>
+</poincareContentPack>

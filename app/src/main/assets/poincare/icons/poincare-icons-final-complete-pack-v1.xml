@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='utf-8'?>
+<poincareIconPack version="1.0" packId="poincare-icons-final-complete-pack-v1" created="2026-07-01" defaultTint="?attr/colorControlNormal" themeBackground="#050119">
+  <metadata>
+    <title>Poincaré final complete icon pack</title>
+    <description>Volledige originele, tintbare XML-iconenbibliotheek voor leerinhoud, thema’s, rewards, contenttypes en appnavigatie van Poincaré.</description>
+    <license>internal-use-original</license>
+    <copyrightNote>Originele iconen; geen overgenomen Junior Einstein-assets.</copyrightNote>
+  </metadata>
+  <skillIcons>
+    <icon id="skill-num-place" skillRef="NUM-PLACE" label="Getalbegrip tot 10 000" androidVectorFile="android-vector-drawables/ic_skill_number_sense.xml" svgFile="svg-xml/ic_skill_number_sense.svg" style="line" viewport="24x24" />
+    <icon id="skill-add-sub" skillRef="ADD-SUB" label="Optellen en aftrekken" androidVectorFile="android-vector-drawables/ic_skill_add_subtract.xml" svgFile="svg-xml/ic_skill_add_subtract.svg" style="line" viewport="24x24" />
+    <icon id="skill-mul-div" skillRef="MUL-DIV" label="Vermenigvuldigen en delen" androidVectorFile="android-vector-drawables/ic_skill_multiply_divide.xml" svgFile="svg-xml/ic_skill_multiply_divide.svg" style="line" viewport="24x24" />
+    <icon id="skill-frac" skillRef="FRAC" label="Breuken" androidVectorFile="android-vector-drawables/ic_skill_fractions.xml" svgFile="svg-xml/ic_skill_fractions.svg" style="line" viewport="24x24" />
+    <icon id="skill-time" skillRef="TIME" label="Tijd" androidVectorFile="android-vector-drawables/ic_skill_time.xml" svgFile="svg-xml/ic_skill_time.svg" style="line" viewport="24x24" />
+    <icon id="skill-money" skillRef="MONEY" label="Geld" androidVectorFile="android-vector-drawables/ic_skill_money.xml" svgFile="svg-xml/ic_skill_money.svg" style="line" viewport="24x24" />
+    <icon id="skill-measure" skillRef="MEASURE" label="Meten" androidVectorFile="android-vector-drawables/ic_skill_measure.xml" svgFile="svg-xml/ic_skill_measure.svg" style="line" viewport="24x24" />
+    <icon id="skill-word" skillRef="WORD" label="Vraagstukken" androidVectorFile="android-vector-drawables/ic_skill_word_problems.xml" svgFile="svg-xml/ic_skill_word_problems.svg" style="line" viewport="24x24" />
+    <icon id="skill-reading" skillRef="READ" label="Lezen" androidVectorFile="android-vector-drawables/ic_skill_reading.xml" svgFile="svg-xml/ic_skill_reading.svg" style="line" viewport="24x24" />
+    <icon id="skill-writing" skillRef="WRITE" label="Schrijven" androidVectorFile="android-vector-drawables/ic_skill_writing.xml" svgFile="svg-xml/ic_skill_writing.svg" style="line" viewport="24x24" />
+    <icon id="skill-listening" skillRef="LISTEN" label="Luisteren" androidVectorFile="android-vector-drawables/ic_skill_listening.xml" svgFile="svg-xml/ic_skill_listening.svg" style="line" viewport="24x24" />
+    <icon id="skill-speaking" skillRef="SPEAK" label="Spreken" androidVectorFile="android-vector-drawables/ic_skill_speaking.xml" svgFile="svg-xml/ic_skill_speaking.svg" style="line" viewport="24x24" />
+    <icon id="skill-reading-comprehension" skillRef="READ-COMP" label="Begrijpend lezen" androidVectorFile="android-vector-drawables/ic_skill_reading_comprehension.xml" svgFile="svg-xml/ic_skill_reading_comprehension.svg" style="line" viewport="24x24" />
+    <icon id="skill-spelling" skillRef="SPELL" label="Spelling" androidVectorFile="android-vector-drawables/ic_skill_spelling.xml" svgFile="svg-xml/ic_skill_spelling.svg" style="line" viewport="24x24" />
+    <icon id="skill-dictation" skillRef="DICT" label="Dictee" androidVectorFile="android-vector-drawables/ic_skill_dictation.xml" svgFile="svg-xml/ic_skill_dictation.svg" style="line" viewport="24x24" />
+    <icon id="skill-vocabulary" skillRef="VOCAB" label="Woordenschat" androidVectorFile="android-vector-drawables/ic_skill_vocabulary.xml" svgFile="svg-xml/ic_skill_vocabulary.svg" style="line" viewport="24x24" />
+    <icon id="skill-logic" skillRef="LOGIC" label="Logica" androidVectorFile="android-vector-drawables/ic_skill_logic.xml" svgFile="svg-xml/ic_skill_logic.svg" style="line" viewport="24x24" />
+    <icon id="skill-memory" skillRef="MEMORY" label="Memory" androidVectorFile="android-vector-drawables/ic_skill_memory.xml" svgFile="svg-xml/ic_skill_memory.svg" style="line" viewport="24x24" />
+    <icon id="skill-mazes" skillRef="MAZES" label="Doolhoven" androidVectorFile="android-vector-drawables/ic_skill_mazes.xml" svgFile="svg-xml/ic_skill_mazes.svg" style="line" viewport="24x24" />
+    <icon id="skill-clock-reading" skillRef="CLOCK-READ" label="Klokkijken" androidVectorFile="android-vector-drawables/ic_skill_clock_reading.xml" svgFile="svg-xml/ic_skill_clock_reading.svg" style="line" viewport="24x24" />
+    <icon id="skill-times-tables" skillRef="TABLES" label="Tafels" androidVectorFile="android-vector-drawables/ic_skill_times_tables.xml" svgFile="svg-xml/ic_skill_times_tables.svg" style="line" viewport="24x24" />
+    <icon id="skill-letters" skillRef="LETTERS" label="Letters" androidVectorFile="android-vector-drawables/ic_skill_letters.xml" svgFile="svg-xml/ic_skill_letters.svg" style="line" viewport="24x24" />
+    <icon id="skill-phonological-awareness" skillRef="PHONO" label="Fonologisch bewustzijn" androidVectorFile="android-vector-drawables/ic_skill_phonological_awareness.xml" svgFile="svg-xml/ic_skill_phonological_awareness.svg" style="line" viewport="24x24" />
+    <icon id="skill-rhyming" skillRef="RHYME" label="Rijmen" androidVectorFile="android-vector-drawables/ic_skill_rhyming.xml" svgFile="svg-xml/ic_skill_rhyming.svg" style="line" viewport="24x24" />
+    <icon id="skill-blending-segmenting" skillRef="BLEND-SEG" label="Hakken en plakken" androidVectorFile="android-vector-drawables/ic_skill_blending_segmenting.xml" svgFile="svg-xml/ic_skill_blending_segmenting.svg" style="line" viewport="24x24" />
+    <icon id="skill-technical-reading" skillRef="TECH-READ" label="Technisch lezen" androidVectorFile="android-vector-drawables/ic_skill_technical_reading.xml" svgFile="svg-xml/ic_skill_technical_reading.svg" style="line" viewport="24x24" />
+    <icon id="skill-sentence-structure" skillRef="SENT-STRUCT" label="Zinsbouw" androidVectorFile="android-vector-drawables/ic_skill_sentence_structure.xml" svgFile="svg-xml/ic_skill_sentence_structure.svg" style="line" viewport="24x24" />
+    <icon id="skill-grammar" skillRef="GRAMMAR" label="Grammatica" androidVectorFile="android-vector-drawables/ic_skill_grammar.xml" svgFile="svg-xml/ic_skill_grammar.svg" style="line" viewport="24x24" />
+    <icon id="skill-spatial-insight" skillRef="SPATIAL" label="Topologie / ruimtelijk inzicht" androidVectorFile="android-vector-drawables/ic_skill_spatial_insight.xml" svgFile="svg-xml/ic_skill_spatial_insight.svg" style="line" viewport="24x24" />
+    <icon id="skill-shapes" skillRef="SHAPES" label="Vormen" androidVectorFile="android-vector-drawables/ic_skill_shapes.xml" svgFile="svg-xml/ic_skill_shapes.svg" style="line" viewport="24x24" />
+    <icon id="skill-patterns" skillRef="PATTERNS" label="Patronen" androidVectorFile="android-vector-drawables/ic_skill_patterns.xml" svgFile="svg-xml/ic_skill_patterns.svg" style="line" viewport="24x24" />
+    <icon id="skill-colors" skillRef="COLORS" label="Kleuren" androidVectorFile="android-vector-drawables/ic_skill_colors.xml" svgFile="svg-xml/ic_skill_colors.svg" style="line" viewport="24x24" />
+    <icon id="skill-emotions" skillRef="EMOTIONS" label="Emoties" androidVectorFile="android-vector-drawables/ic_skill_emotions.xml" svgFile="svg-xml/ic_skill_emotions.svg" style="line" viewport="24x24" />
+  </skillIcons>
+  <topicIcons>
+    <icon id="topic-getallen-tot-10000" topic="getallen tot 10 000" label="Getallen tot 10 000" androidVectorFile="android-vector-drawables/ic_topic_numbers_10000.xml" svgFile="svg-xml/ic_topic_numbers_10000.svg" style="line" viewport="24x24" />
+    <icon id="topic-optellen-aftrekken" topic="optellen en aftrekken" label="Optellen en aftrekken" androidVectorFile="android-vector-drawables/ic_topic_add_subtract.xml" svgFile="svg-xml/ic_topic_add_subtract.svg" style="line" viewport="24x24" />
+    <icon id="topic-vermenigvuldigen-delen" topic="vermenigvuldigen en delen" label="Vermenigvuldigen en delen" androidVectorFile="android-vector-drawables/ic_topic_multiply_divide.xml" svgFile="svg-xml/ic_topic_multiply_divide.svg" style="line" viewport="24x24" />
+    <icon id="topic-delen-met-rest" topic="delen met rest" label="Delen met rest" androidVectorFile="android-vector-drawables/ic_topic_division_remainder.xml" svgFile="svg-xml/ic_topic_division_remainder.svg" style="line" viewport="24x24" />
+    <icon id="topic-breuken" topic="breuken" label="Breuken" androidVectorFile="android-vector-drawables/ic_topic_fractions.xml" svgFile="svg-xml/ic_topic_fractions.svg" style="line" viewport="24x24" />
+    <icon id="topic-tijd" topic="tijd" label="Tijd" androidVectorFile="android-vector-drawables/ic_topic_time.xml" svgFile="svg-xml/ic_topic_time.svg" style="line" viewport="24x24" />
+    <icon id="topic-geld" topic="geld" label="Geld" androidVectorFile="android-vector-drawables/ic_topic_money.xml" svgFile="svg-xml/ic_topic_money.svg" style="line" viewport="24x24" />
+    <icon id="topic-meten" topic="meten" label="Meten" androidVectorFile="android-vector-drawables/ic_topic_measure.xml" svgFile="svg-xml/ic_topic_measure.svg" style="line" viewport="24x24" />
+    <icon id="topic-vraagstukken" topic="vraagstukken" label="Vraagstukken" androidVectorFile="android-vector-drawables/ic_topic_word_problems.xml" svgFile="svg-xml/ic_topic_word_problems.svg" style="line" viewport="24x24" />
+    <icon id="topic-gemengde-herhaling" topic="gemengde herhaling" label="Gemengde herhaling" androidVectorFile="android-vector-drawables/ic_topic_mixed_practice.xml" svgFile="svg-xml/ic_topic_mixed_practice.svg" style="line" viewport="24x24" />
+    <icon id="topic-lezen" topic="lezen" label="Lezen" androidVectorFile="android-vector-drawables/ic_topic_reading.xml" svgFile="svg-xml/ic_topic_reading.svg" style="line" viewport="24x24" />
+    <icon id="topic-schrijven" topic="schrijven" label="Schrijven" androidVectorFile="android-vector-drawables/ic_topic_writing.xml" svgFile="svg-xml/ic_topic_writing.svg" style="line" viewport="24x24" />
+    <icon id="topic-luisteren" topic="luisteren" label="Luisteren" androidVectorFile="android-vector-drawables/ic_topic_listening.xml" svgFile="svg-xml/ic_topic_listening.svg" style="line" viewport="24x24" />
+    <icon id="topic-sudoku" topic="sudoku" label="Sudoku" androidVectorFile="android-vector-drawables/ic_topic_sudoku.xml" svgFile="svg-xml/ic_topic_sudoku.svg" style="line" viewport="24x24" />
+    <icon id="topic-math-crosswords" topic="math crosswords" label="Math crosswords" androidVectorFile="android-vector-drawables/ic_topic_math_crosswords.xml" svgFile="svg-xml/ic_topic_math_crosswords.svg" style="line" viewport="24x24" />
+    <icon id="topic-spreken" topic="spreken" label="Spreken" androidVectorFile="android-vector-drawables/ic_topic_speaking.xml" svgFile="svg-xml/ic_topic_speaking.svg" style="line" viewport="24x24" />
+    <icon id="topic-begrijpend-lezen" topic="begrijpend lezen" label="Begrijpend lezen" androidVectorFile="android-vector-drawables/ic_topic_reading_comprehension.xml" svgFile="svg-xml/ic_topic_reading_comprehension.svg" style="line" viewport="24x24" />
+    <icon id="topic-spelling" topic="spelling" label="Spelling" androidVectorFile="android-vector-drawables/ic_topic_spelling.xml" svgFile="svg-xml/ic_topic_spelling.svg" style="line" viewport="24x24" />
+    <icon id="topic-dictee" topic="dictee" label="Dictee" androidVectorFile="android-vector-drawables/ic_topic_dictation.xml" svgFile="svg-xml/ic_topic_dictation.svg" style="line" viewport="24x24" />
+    <icon id="topic-woordenschat" topic="woordenschat" label="Woordenschat" androidVectorFile="android-vector-drawables/ic_topic_vocabulary.xml" svgFile="svg-xml/ic_topic_vocabulary.svg" style="line" viewport="24x24" />
+    <icon id="topic-logica" topic="logica" label="Logica" androidVectorFile="android-vector-drawables/ic_topic_logic.xml" svgFile="svg-xml/ic_topic_logic.svg" style="line" viewport="24x24" />
+    <icon id="topic-memory" topic="memory" label="Memory" androidVectorFile="android-vector-drawables/ic_topic_memory.xml" svgFile="svg-xml/ic_topic_memory.svg" style="line" viewport="24x24" />
+    <icon id="topic-doolhoven" topic="doolhoven" label="Doolhoven" androidVectorFile="android-vector-drawables/ic_topic_mazes.xml" svgFile="svg-xml/ic_topic_mazes.svg" style="line" viewport="24x24" />
+    <icon id="topic-klokkijken" topic="klokkijken" label="Klokkijken" androidVectorFile="android-vector-drawables/ic_topic_clock_reading.xml" svgFile="svg-xml/ic_topic_clock_reading.svg" style="line" viewport="24x24" />
+    <icon id="topic-tafels" topic="tafels" label="Tafels" androidVectorFile="android-vector-drawables/ic_topic_times_tables.xml" svgFile="svg-xml/ic_topic_times_tables.svg" style="line" viewport="24x24" />
+    <icon id="topic-letters" topic="letters" label="Letters" androidVectorFile="android-vector-drawables/ic_topic_letters.xml" svgFile="svg-xml/ic_topic_letters.svg" style="line" viewport="24x24" />
+    <icon id="topic-phonological-awareness" topic="fonologisch bewustzijn" label="Fonologisch bewustzijn" androidVectorFile="android-vector-drawables/ic_topic_phonological_awareness.xml" svgFile="svg-xml/ic_topic_phonological_awareness.svg" style="line" viewport="24x24" />
+    <icon id="topic-rhyming" topic="rijmen" label="Rijmen" androidVectorFile="android-vector-drawables/ic_topic_rhyming.xml" svgFile="svg-xml/ic_topic_rhyming.svg" style="line" viewport="24x24" />
+    <icon id="topic-blending-segmenting" topic="hakken en plakken" label="Hakken en plakken" androidVectorFile="android-vector-drawables/ic_topic_blending_segmenting.xml" svgFile="svg-xml/ic_topic_blending_segmenting.svg" style="line" viewport="24x24" />
+    <icon id="topic-technical-reading" topic="technisch lezen" label="Technisch lezen" androidVectorFile="android-vector-drawables/ic_topic_technical_reading.xml" svgFile="svg-xml/ic_topic_technical_reading.svg" style="line" viewport="24x24" />
+    <icon id="topic-sentence-structure" topic="zinsbouw" label="Zinsbouw" androidVectorFile="android-vector-drawables/ic_topic_sentence_structure.xml" svgFile="svg-xml/ic_topic_sentence_structure.svg" style="line" viewport="24x24" />
+    <icon id="topic-grammar" topic="grammatica" label="Grammatica" androidVectorFile="android-vector-drawables/ic_topic_grammar.xml" svgFile="svg-xml/ic_topic_grammar.svg" style="line" viewport="24x24" />
+    <icon id="topic-spatial-insight" topic="topologie / ruimtelijk inzicht" label="Topologie / ruimtelijk inzicht" androidVectorFile="android-vector-drawables/ic_topic_spatial_insight.xml" svgFile="svg-xml/ic_topic_spatial_insight.svg" style="line" viewport="24x24" />
+    <icon id="topic-shapes" topic="vormen" label="Vormen" androidVectorFile="android-vector-drawables/ic_topic_shapes.xml" svgFile="svg-xml/ic_topic_shapes.svg" style="line" viewport="24x24" />
+    <icon id="topic-patterns" topic="patronen" label="Patronen" androidVectorFile="android-vector-drawables/ic_topic_patterns.xml" svgFile="svg-xml/ic_topic_patterns.svg" style="line" viewport="24x24" />
+    <icon id="topic-colors" topic="kleuren" label="Kleuren" androidVectorFile="android-vector-drawables/ic_topic_colors.xml" svgFile="svg-xml/ic_topic_colors.svg" style="line" viewport="24x24" />
+    <icon id="topic-emotions" topic="emoties" label="Emoties" androidVectorFile="android-vector-drawables/ic_topic_emotions.xml" svgFile="svg-xml/ic_topic_emotions.svg" style="line" viewport="24x24" />
+  </topicIcons>
+  <uiIcons>
+    <icon id="ui-rewards" key="rewards" label="Beloningen / achievements" androidVectorFile="android-vector-drawables/ic_ui_rewards.xml" svgFile="svg-xml/ic_ui_rewards.svg" style="line" viewport="24x24" />
+    <icon id="ui-profile" key="profile" label="Profiel" androidVectorFile="android-vector-drawables/ic_ui_profile.xml" svgFile="svg-xml/ic_ui_profile.svg" style="line" viewport="24x24" />
+    <icon id="ui-parent-zone" key="parent-zone" label="Ouderzone" androidVectorFile="android-vector-drawables/ic_ui_parent_zone.xml" svgFile="svg-xml/ic_ui_parent_zone.svg" style="line" viewport="24x24" />
+    <icon id="ui-settings" key="settings" label="Instellingen" androidVectorFile="android-vector-drawables/ic_ui_settings.xml" svgFile="svg-xml/ic_ui_settings.svg" style="line" viewport="24x24" />
+    <icon id="ui-home" key="home" label="Home" androidVectorFile="android-vector-drawables/ic_ui_home.xml" svgFile="svg-xml/ic_ui_home.svg" style="line" viewport="24x24" />
+    <icon id="ui-back" key="back" label="Terug" androidVectorFile="android-vector-drawables/ic_ui_back.xml" svgFile="svg-xml/ic_ui_back.svg" style="line" viewport="24x24" />
+    <icon id="ui-next" key="next" label="Volgende" androidVectorFile="android-vector-drawables/ic_ui_next.xml" svgFile="svg-xml/ic_ui_next.svg" style="line" viewport="24x24" />
+    <icon id="ui-lock" key="lock" label="Vergrendeld" androidVectorFile="android-vector-drawables/ic_ui_lock.xml" svgFile="svg-xml/ic_ui_lock.svg" style="line" viewport="24x24" />
+    <icon id="ui-unlock" key="unlock" label="Ontgrendeld" androidVectorFile="android-vector-drawables/ic_ui_unlock.xml" svgFile="svg-xml/ic_ui_unlock.svg" style="line" viewport="24x24" />
+    <icon id="ui-audio" key="audio" label="Audio" androidVectorFile="android-vector-drawables/ic_ui_audio.xml" svgFile="svg-xml/ic_ui_audio.svg" style="line" viewport="24x24" />
+    <icon id="ui-hints" key="hints" label="Hints" androidVectorFile="android-vector-drawables/ic_ui_hints.xml" svgFile="svg-xml/ic_ui_hints.svg" style="line" viewport="24x24" />
+    <icon id="ui-success" key="success" label="Juist / succes" androidVectorFile="android-vector-drawables/ic_ui_success.xml" svgFile="svg-xml/ic_ui_success.svg" style="line" viewport="24x24" />
+    <icon id="ui-error" key="error" label="Fout" androidVectorFile="android-vector-drawables/ic_ui_error.xml" svgFile="svg-xml/ic_ui_error.svg" style="line" viewport="24x24" />
+    <icon id="ui-close" key="close" label="Sluiten" androidVectorFile="android-vector-drawables/ic_ui_close.xml" svgFile="svg-xml/ic_ui_close.svg" style="line" viewport="24x24" />
+    <icon id="ui-play" key="play" label="Afspelen" androidVectorFile="android-vector-drawables/ic_ui_play.xml" svgFile="svg-xml/ic_ui_play.svg" style="line" viewport="24x24" />
+    <icon id="ui-pause" key="pause" label="Pauzeren" androidVectorFile="android-vector-drawables/ic_ui_pause.xml" svgFile="svg-xml/ic_ui_pause.svg" style="line" viewport="24x24" />
+    <icon id="ui-refresh" key="refresh" label="Opnieuw / refresh" androidVectorFile="android-vector-drawables/ic_ui_refresh.xml" svgFile="svg-xml/ic_ui_refresh.svg" style="line" viewport="24x24" />
+    <icon id="ui-search" key="search" label="Zoeken" androidVectorFile="android-vector-drawables/ic_ui_search.xml" svgFile="svg-xml/ic_ui_search.svg" style="line" viewport="24x24" />
+    <icon id="ui-info" key="info" label="Info" androidVectorFile="android-vector-drawables/ic_ui_info.xml" svgFile="svg-xml/ic_ui_info.svg" style="line" viewport="24x24" />
+    <icon id="ui-progress" key="progress" label="Voortgang" androidVectorFile="android-vector-drawables/ic_ui_progress.xml" svgFile="svg-xml/ic_ui_progress.svg" style="line" viewport="24x24" />
+  </uiIcons>
+  <themeIcons>
+    <icon id="theme-animals" key="animals" label="Dieren" androidVectorFile="android-vector-drawables/ic_theme_animals.xml" svgFile="svg-xml/ic_theme_animals.svg" style="line" viewport="24x24" />
+    <icon id="theme-vehicles" key="vehicles" label="Voertuigen" androidVectorFile="android-vector-drawables/ic_theme_vehicles.xml" svgFile="svg-xml/ic_theme_vehicles.svg" style="line" viewport="24x24" />
+    <icon id="theme-seasons" key="seasons" label="Seizoenen" androidVectorFile="android-vector-drawables/ic_theme_seasons.xml" svgFile="svg-xml/ic_theme_seasons.svg" style="line" viewport="24x24" />
+    <icon id="theme-days" key="days" label="Dagen" androidVectorFile="android-vector-drawables/ic_theme_days.xml" svgFile="svg-xml/ic_theme_days.svg" style="line" viewport="24x24" />
+    <icon id="theme-months" key="months" label="Maanden" androidVectorFile="android-vector-drawables/ic_theme_months.xml" svgFile="svg-xml/ic_theme_months.svg" style="line" viewport="24x24" />
+    <icon id="theme-food" key="food" label="Eten" androidVectorFile="android-vector-drawables/ic_theme_food.xml" svgFile="svg-xml/ic_theme_food.svg" style="line" viewport="24x24" />
+    <icon id="theme-fruit" key="fruit" label="Fruit" androidVectorFile="android-vector-drawables/ic_theme_fruit.xml" svgFile="svg-xml/ic_theme_fruit.svg" style="line" viewport="24x24" />
+    <icon id="theme-vegetables" key="vegetables" label="Groenten" androidVectorFile="android-vector-drawables/ic_theme_vegetables.xml" svgFile="svg-xml/ic_theme_vegetables.svg" style="line" viewport="24x24" />
+    <icon id="theme-body" key="body" label="Lichaam" androidVectorFile="android-vector-drawables/ic_theme_body.xml" svgFile="svg-xml/ic_theme_body.svg" style="line" viewport="24x24" />
+    <icon id="theme-nature" key="nature" label="Natuur" androidVectorFile="android-vector-drawables/ic_theme_nature.xml" svgFile="svg-xml/ic_theme_nature.svg" style="line" viewport="24x24" />
+    <icon id="theme-space" key="space" label="Ruimte" androidVectorFile="android-vector-drawables/ic_theme_space.xml" svgFile="svg-xml/ic_theme_space.svg" style="line" viewport="24x24" />
+    <icon id="theme-music" key="music" label="Muziek" androidVectorFile="android-vector-drawables/ic_theme_music.xml" svgFile="svg-xml/ic_theme_music.svg" style="line" viewport="24x24" />
+    <icon id="theme-sport" key="sport" label="Sport" androidVectorFile="android-vector-drawables/ic_theme_sport.xml" svgFile="svg-xml/ic_theme_sport.svg" style="line" viewport="24x24" />
+  </themeIcons>
+  <rewardIcons>
+    <icon id="reward-badge" key="badge" label="Badge" androidVectorFile="android-vector-drawables/ic_reward_badge.xml" svgFile="svg-xml/ic_reward_badge.svg" style="line" viewport="24x24" />
+    <icon id="reward-level" key="level" label="Level" androidVectorFile="android-vector-drawables/ic_reward_level.xml" svgFile="svg-xml/ic_reward_level.svg" style="line" viewport="24x24" />
+    <icon id="reward-star" key="star" label="Ster" androidVectorFile="android-vector-drawables/ic_reward_star.xml" svgFile="svg-xml/ic_reward_star.svg" style="line" viewport="24x24" />
+    <icon id="reward-poop" key="poop" label="Poepje" androidVectorFile="android-vector-drawables/ic_reward_poop.xml" svgFile="svg-xml/ic_reward_poop.svg" style="line" viewport="24x24" />
+    <icon id="reward-candy" key="candy" label="Snoepje" androidVectorFile="android-vector-drawables/ic_reward_candy.xml" svgFile="svg-xml/ic_reward_candy.svg" style="line" viewport="24x24" />
+  </rewardIcons>
+  <contentTypeIcons>
+    <icon id="content-article" key="article" label="Artikel" androidVectorFile="android-vector-drawables/ic_content_article.xml" svgFile="svg-xml/ic_content_article.svg" style="line" viewport="24x24" />
+    <icon id="content-worksheet" key="worksheet" label="Oefenblad" androidVectorFile="android-vector-drawables/ic_content_worksheet.xml" svgFile="svg-xml/ic_content_worksheet.svg" style="line" viewport="24x24" />
+    <icon id="content-online-exercise" key="online-exercise" label="Online oefening" androidVectorFile="android-vector-drawables/ic_content_online_exercise.xml" svgFile="svg-xml/ic_content_online_exercise.svg" style="line" viewport="24x24" />
+    <icon id="content-quiz" key="quiz" label="Quiz" androidVectorFile="android-vector-drawables/ic_content_quiz.xml" svgFile="svg-xml/ic_content_quiz.svg" style="line" viewport="24x24" />
+    <icon id="content-game" key="game" label="Spel" androidVectorFile="android-vector-drawables/ic_content_game.xml" svgFile="svg-xml/ic_content_game.svg" style="line" viewport="24x24" />
+  </contentTypeIcons>
+  <importNotes>
+    <note>Gebruik topicIcons voor oefeningen, en skillIcons voor overzichten/progress dashboards.</note>
+    <note>De Android VectorDrawables zijn wit en tintbaar via ImageView tint of AppCompat; ze passen op een donkere #050119 achtergrond.</note>
+    <note>De SVG-XML bestanden zijn bedoeld voor web previews, Figma import of niet-Android renderers.</note>
+    <note>Uitbreiding toegevoegd voor taalvaardigheden (lezen, schrijven, luisteren) en puzzeltypes (sudoku, math crosswords).</note>
+    <note>Tweede uitbreiding toegevoegd voor spreken, begrijpend lezen, spelling, dictee, woordenschat, logica, memory, doolhoven, klokkijken en tafels.</note>
+    <note>Complete uitbreiding toegevoegd voor pre-leesvaardigheden, taal, ruimtelijk inzicht, vormen, patronen, kleuren, emoties en app-secties zoals profiel, ouderzone, beloningen en instellingen.</note>
+    <note>Finale basisbibliotheek toegevoegd voor thema’s, rewards, contenttypes en appnavigatie: dieren, voertuigen, seizoenen, dagen, maanden, eten, fruit, groenten, lichaam, natuur, ruimte, muziek, sport, badges, levels, sterren, poepjes, snoepjes, home, back, next, lock, unlock, audio, hints, success en error.</note>
+  </importNotes>
+</poincareIconPack>

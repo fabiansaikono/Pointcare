@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+  <xs:element name="poincareContentPack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="metadata" type="MetadataType"/>
+        <xs:element name="locales" type="LocalesType" minOccurs="0"/>
+        <xs:element name="skills" type="SkillsType" minOccurs="0"/>
+        <xs:element name="articles" type="ArticlesType" minOccurs="0"/>
+        <xs:element name="exercises" type="ExercisesType" minOccurs="0"/>
+        <xs:element name="worksheets" type="WorksheetsType" minOccurs="0"/>
+        <xs:element name="importConfig" type="LooseContainerType" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required"/>
+      <xs:attribute name="packId" type="xs:string" use="required"/>
+      <xs:attribute name="iconPackRef" type="xs:string" use="optional"/>
+      <xs:attribute name="language" type="xs:string" use="required"/>
+      <xs:attribute name="created" type="xs:date" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="MetadataType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="author" type="xs:string" minOccurs="0"/>
+      <xs:element name="license" type="xs:string" minOccurs="0"/>
+      <xs:element name="copyrightNote" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LocalesType">
+    <xs:sequence>
+      <xs:element name="locale" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="default" type="xs:boolean" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SkillsType">
+    <xs:sequence>
+      <xs:element name="skill" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="iconRef" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArticlesType">
+    <xs:sequence>
+      <xs:element name="article" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="summary" type="xs:string" minOccurs="0"/>
+            <xs:element name="body" type="LooseContainerType" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="subject" type="xs:string" use="required"/>
+          <xs:attribute name="grade" type="xs:string" use="required"/>
+          <xs:attribute name="skillRef" type="xs:string" use="optional"/>
+          <xs:attribute name="iconRef" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ExercisesType">
+    <xs:sequence>
+      <xs:element name="exercise" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="instruction" type="xs:string"/>
+            <xs:element name="question" type="LooseContainerType"/>
+            <xs:element name="hints" type="LooseContainerType" minOccurs="0"/>
+            <xs:element name="answers" type="LooseContainerType" minOccurs="0"/>
+            <xs:element name="solution" type="LooseContainerType"/>
+            <xs:element name="feedback" type="LooseContainerType" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="subject" type="xs:string" use="required"/>
+          <xs:attribute name="grade" type="xs:string" use="required"/>
+          <xs:attribute name="topic" type="xs:string" use="required"/>
+          <xs:attribute name="skillRef" type="xs:string" use="optional"/>
+          <xs:attribute name="difficulty" type="xs:integer" use="required"/>
+          <xs:attribute name="type" type="xs:string" use="required"/>
+          <xs:attribute name="iconRef" type="xs:string" use="optional"/>
+          <xs:attribute name="skillIconRef" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WorksheetsType">
+    <xs:sequence>
+      <xs:element name="worksheet" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="theme" type="xs:string" minOccurs="0"/>
+            <xs:element name="instructions" type="xs:string" minOccurs="0"/>
+            <xs:element name="exerciseRefs" type="LooseContainerType" minOccurs="0"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+          <xs:attribute name="subject" type="xs:string" use="required"/>
+          <xs:attribute name="grade" type="xs:string" use="required"/>
+          <xs:attribute name="printMode" type="xs:string" use="optional"/>
+          <xs:attribute name="iconRef" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LooseContainerType" mixed="true">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute processContents="lax"/>
+  </xs:complexType>
+</xs:schema>

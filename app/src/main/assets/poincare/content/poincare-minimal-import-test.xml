@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<poincareContentPack version="1.0" packId="poincare-minimal-test" language="nl-BE" created="2026-07-01">
+  <metadata>
+    <title>Poincaré minimale importtest</title>
+    <description>Klein bestand om de importer snel te testen.</description>
+    <license>internal-use-original</license>
+  </metadata>
+  <skills>
+    <skill id="ADD-SUB"><name>Optellen en aftrekken</name></skill>
+  </skills>
+  <exercises>
+    <exercise id="test-add-001" subject="wiskunde" grade="4" topic="optellen" skillRef="ADD-SUB" difficulty="1" type="open_numeric">
+      <instruction>Reken uit.</instruction>
+      <question><text>248 + 157 = ?</text></question>
+      <solution><value>405</value><explanation>248 + 157 = 405.</explanation></solution>
+      <feedback><correct>Goed gedaan!</correct><incorrect>Splits beide getallen en tel opnieuw.</incorrect></feedback>
+    </exercise>
+    <exercise id="test-sub-001" subject="wiskunde" grade="4" topic="aftrekken" skillRef="ADD-SUB" difficulty="1" type="multiple_choice">
+      <instruction>Kies het juiste antwoord.</instruction>
+      <question><text>900 - 275 = ?</text></question>
+      <answers>
+        <answer id="a" correct="false">525</answer>
+        <answer id="b" correct="true">625</answer>
+        <answer id="c" correct="false">675</answer>
+      </answers>
+      <solution><value>625</value><explanation>900 - 275 = 625.</explanation></solution>
+    </exercise>
+  </exercises>
+</poincareContentPack>

@@ -1,0 +1,244 @@
+Create a polished SVG/vector brand asset set for an Android educational app called “Poincaré”.
+
+The style must match a calm, premium, intelligent, space-themed learning app. It should be slightly playful but not childish. The assets should feel suitable for a smart child, not a toddler app.
+
+Use this exact visual direction:
+
+* dark navy space background when shown on a board;
+* clean bold white linework;
+* RAL 1018 bright yellow as the main accent;
+* RAL 5025 cool blue as the secondary accent;
+* supporting colors: white and very dark navy;
+* flat vector style;
+* crisp geometric forms;
+* rounded corners and friendly but precise shapes;
+* consistent stroke width;
+* transparent-background-friendly icons;
+* scalable SVG output;
+* no photorealism;
+* no 3D rendering;
+* no cartoon mascots;
+* no messy gradients;
+* no tiny details;
+* no excessive stars or confetti;
+* no childish clipart.
+
+Overall mood:
+Smart. Focused. Calm. Curious. Space exploration. Learning in orbit.
+
+The core brand idea is “point carré”: a point and a square.
+Represent this as:
+
+* a bright yellow circular point;
+* a cool blue square;
+* a white orbital curve or circular orbit;
+* the point and square are in orbit together, suggesting curiosity and structure.
+
+The logo system should include:
+
+1. A primary wordmark: “poincaré”
+2. A standalone app icon / logo mark
+3. A set of seven planet-style learning icons
+
+The visual result should be as close as possible to the provided mockup: dark navy space, white orbit lines, yellow dot, blue square, refined geometric iconography.
+
+PRIMARY LOGO WORDMARK PROMPT
+
+Create a refined SVG vector wordmark for the app name:
+
+Poincaré
+
+The wordmark should use a clean modern geometric sans-serif style, rounded but precise, premium and readable.
+
+Key idea:
+Integrate the “point carré” concept into the logo.
+
+Make the “o” in “Poincaré” into the main symbol:
+
+* the “o” becomes a white orbital circular curve, not a normal letter;
+* inside the orbit is a bright yellow circular point;
+* near the upper-left of the orbit is a small cool blue square;
+* the yellow point and blue square should feel like two learning objects in orbit;
+* the orbit should visually still read as the letter “o”.
+
+The rest of the letters should be white:
+P — orbit-o — i — n — c — a — r — é
+
+The accent on the “é” must be clean and visible.
+
+The logo should feel:
+
+* intelligent;
+* calm;
+* space-themed;
+* educational;
+* modern;
+* not childish.
+
+Use:
+
+* white for the wordmark;
+* RAL 1018 bright yellow for the point;
+* RAL 5025 cool blue for the square;
+* optional very dark navy if a background is needed.
+
+Create also a standalone logo mark:
+
+* rounded-square app icon shape;
+* dark navy background;
+* white orbital circular curve;
+* yellow point inside the orbit;
+* blue square on the orbit near the upper-right;
+* a few tiny white stars only if they remain clean at small sizes;
+* one small yellow star accent is allowed;
+* no text inside the app icon.
+
+Important SVG requirements:
+
+* clean vector paths;
+* consistent stroke width;
+* no raster effects;
+* no complex gradients;
+* transparent background version for the wordmark;
+* app icon version should work inside a rounded square;
+* readable at small Android launcher icon sizes.
+
+Avoid:
+
+* handwritten fonts;
+* childish fonts;
+* complex star fields;
+* cartoon planets;
+* over-detailed texture;
+* incorrect spelling;
+* missing accent on é.
+
+PLANET ICON SET PROMPT
+
+Create seven SVG vector planet icons for the Poincaré learning app.
+
+All seven icons must belong to the same visual family.
+
+Shared icon style:
+
+* each icon is a circular dark navy / deep blue planet;
+* each planet has a white outline;
+* each planet has a thin white orbital ring crossing around it;
+* each planet may have one small yellow orbit dot;
+* use subtle internal blue surface shapes, but keep them simple;
+* use white linework for the main educational symbol;
+* use RAL 1018 bright yellow for small accents;
+* use RAL 5025 cool blue for secondary accents;
+* flat vector style;
+* consistent stroke weight;
+* simple shapes;
+* transparent background;
+* no labels;
+* no excessive stars;
+* no gradients unless extremely subtle and vector-safe.
+
+Canvas:
+
+* each icon should be centered;
+* each icon should work as a circular UI button;
+* each icon should be readable at 48dp and larger;
+
+ICON 1 — Lezen & schrijven
+Create a planet icon for reading and writing.
+Inside the planet:
+
+* ABC in white linework;
+* simple blue page lines;
+* a yellow fountain pen nib or pen tip ;
+* optional tiny star sparkle near the pen;
+* keep the page and pen centered and readable.
+  Meaning: reading, writing, letters, learning words.
+
+ICON 2 — Rekenen
+Create a planet icon for maths/arithmetic.
+Inside the planet:
+
+* a 2x2 grid of rounded square calculator-style buttons;
+* symbols: plus, minus, multiplication, equals;
+* plus, minus and multiplication in white;
+* equals symbol in yellow;
+* button outlines in white or cool blue;
+* one small yellow orbit dot on the ring.
+  Meaning: arithmetic, tables, division, mental maths, number operations.
+
+ICON 3 — Puzzels
+Create a planet icon for puzzles.
+Inside the planet:
+
+* a large white puzzle piece on the left;
+* a small sudoku/grid shape on the right;
+* optional simple digits like 1, 3, 4 only if they remain clean vector shapes;
+* if text/numbers become messy, use simple square grid marks instead;
+* include a blue square accent on the orbit.
+  Meaning: puzzles, sudoku, math crossword, drag-and-drop challenges.
+
+ICON 4 — Meetkunde
+Create a planet icon for geometry.
+Inside the planet:
+
+* a white set square / triangle ruler;
+* a white and yellow compass;
+* a simple blue-white wireframe cube;
+* arrange them cleanly, like geometry tools floating in space;
+* one yellow dot may sit on the orbit.
+  Meaning: geometry, shapes, measurement, spatial reasoning.
+
+ICON 5 — Logica
+Create a planet icon for logic.
+Inside the planet:
+
+* a stylized white brain outline combined with circuit pathways;
+* yellow circuit nodes;
+* white connecting lines;
+* optional maze/path feel;
+* keep it simple and not medical-looking.
+  Meaning: logic, reasoning, patterns, problem solving, strategy.
+
+ICON 6 — Taaloefeningen / Vertalen
+Create a planet icon for language exercises and translation.
+Inside the planet:
+
+* two overlapping speech bubbles;
+* one white speech bubble with a simple “A” shape;
+* one cool blue speech bubble with a generic language glyph or abstract character;
+* two curved arrows between the bubbles, one white and one yellow;
+* do not rely on complex text; the translation arrows are the main message.
+  Meaning: language, translation, multilingual support, vocabulary.
+
+ICON 7 — Thema’s
+Create a planet icon for specific themed learning worlds.
+Inside and around the planet:
+
+* earth planet;
+* three small orbiting circular badges:
+
+  1. a small rocket for space theme;
+  2. a simple human body silhouette;
+  3. a small moon ;
+* include one yellow orbit dot and one blue square accent.
+  Meaning: specific themes like space, anatomy, farm and future custom worlds.
+
+Output requirements:
+
+* transparent background for each icon;
+* no text labels;
+* keep the icons readable at small sizes;
+* keep all icons visually consistent;
+* maintain the same planet size, orbit thickness, stroke width and color usage across the full set.
+
+Negative prompt:
+Do not create childish cartoon icons.
+Do not use mascots.
+Do not use photorealistic planets.
+Do not use complex gradients.
+Do not use busy star backgrounds inside the icons.
+Do not include text.
+Do not create inconsistent icon styles.
+Do not make the symbols too detailed for app use.
+Do not use random colors outside the defined palette.
+
