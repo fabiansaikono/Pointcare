@@ -171,10 +171,10 @@ private fun CrosswordCell(
     val textColor = when {
         cell is MathCrosswordCell.Sign -> PlanetGold
         isFixed -> StarWhite
-        shown == null -> StarWhite.copy(alpha = 0.35f)
-        !valueIsAllowed -> Color(0xFF8B0000)
-        hasCorrectLine -> Color(0xFF006400)
-        shown == expected -> Color(0xFF006400)
+        shown == null -> StarWhite.copy(alpha = 0.75f)
+        !valueIsAllowed -> PlanetRed
+        hasCorrectLine -> PlanetGreen
+        shown == expected -> PlanetGreen
         else -> DeepSpaceBlue
     }
     Box(

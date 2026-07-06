@@ -129,7 +129,7 @@ fun ReadingContent(
                             Spacer(modifier = Modifier.height(16.dp))
                             FilledIconButton(
                                 onClick = onPlayPrompt,
-                                colors = IconButtonDefaults.filledIconButtonColors(containerColor = PlanetGold, contentColor = DeepSpaceBlue)
+                                colors = IconButtonDefaults.filledIconButtonColors(containerColor = PlanetBlue, contentColor = DeepSpaceBlue)
                             ) {
                                 Icon(Icons.Default.PlayArrow, contentDescription = "Luister")
                             }
@@ -172,7 +172,7 @@ fun ReadingContent(
                 val buttonColor = when {
                     uiState.isFinished -> PlanetGold
                     uiState.isCorrect == true -> PlanetBlue
-                    uiState.isWrong -> Color.Red
+                    uiState.isWrong -> PlanetRed
                     else -> Color.Gray.copy(alpha = 0.5f)
                 }
 

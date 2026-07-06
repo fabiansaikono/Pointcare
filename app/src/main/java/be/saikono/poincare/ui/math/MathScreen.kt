@@ -177,7 +177,7 @@ fun MathContent(
                         val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
                         val buttonColor = when {
                             uiState.isFinished -> PlanetGold
-                            uiState.isCorrect == true -> PlanetGold
+                            uiState.isCorrect == true -> PlanetBlue
                             uiState.isWrong -> PlanetRed
                             else -> Color.Gray.copy(alpha = 0.5f)
                         }

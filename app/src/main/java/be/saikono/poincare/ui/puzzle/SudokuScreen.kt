@@ -131,7 +131,7 @@ private fun SudokuGrid(
                                     .background(
                                         when {
                                             isGiven -> Color.White.copy(alpha = 0.16f)
-                                            value != null -> Color.White.copy(alpha = 0.20f)
+                                            value != null -> Color.White.copy(alpha = 0.50f)
                                             else -> Color.White.copy(alpha = 0.06f)
                                         }
                                     )
@@ -143,11 +143,11 @@ private fun SudokuGrid(
                                     color = when {
                                         isGiven -> StarWhite
                                         value == null -> StarWhite
-                                        correct -> Color(0xFF006400)
-                                        else -> Color(0xFF8B0000)
+                                        correct -> PlanetGreen
+                                        else -> PlanetRed
                                     },
                                     style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = if (isGiven || value != null) FontWeight.Bold else FontWeight.Medium,
+                                    fontWeight = if (isGiven || value != null) FontWeight.Black else FontWeight.Medium,
                                     textAlign = TextAlign.Center
                                 )
                             }

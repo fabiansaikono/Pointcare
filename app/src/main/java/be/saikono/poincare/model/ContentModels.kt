@@ -13,7 +13,8 @@ enum class InputMode {
     TRACE_LETTER,
     MATH_CROSSWORD,
     SUDOKU_GRID,
-    NUMBER_WALL
+    NUMBER_WALL,
+    CALCULATOR_PUZZLE
 }
 
 @Serializable

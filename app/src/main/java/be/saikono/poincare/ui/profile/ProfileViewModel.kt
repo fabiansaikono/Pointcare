@@ -53,6 +53,8 @@ class ProfileViewModel(
         readingLevel: SkillLevel,
         writingLevel: SkillLevel,
         mathLevel: SkillLevel,
+        geometryLevel: SkillLevel,
+        worldKnowledgeLevel: SkillLevel,
         puzzleLevel: SkillLevel,
         giftedMode: Boolean,
         onComplete: () -> Unit
@@ -73,6 +75,10 @@ class ProfileViewModel(
                 writingLevel = writingLevel,
                 mathLevel = mathLevel,
                 puzzleLevel = puzzleLevel,
+                geometryLevel = geometryLevel,
+                worldKnowledgeLevel = worldKnowledgeLevel,
+                hiddenMainCategories = emptyList(),
+                hiddenSubcategories = emptyList(),
                 giftedModeEnabled = giftedMode
             )
             profileRepository.saveProfile(profile)

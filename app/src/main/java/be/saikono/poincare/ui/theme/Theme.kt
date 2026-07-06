@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = PlanetBlue,
+    primary = DeepSpaceBlue,
     secondary = PlanetGold,
     tertiary = PlanetRed,
     background = DeepSpaceBlue,
@@ -25,7 +25,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = PlanetBlue,
+    primary = DeepSpaceBlue,
     secondary = PlanetGold,
     tertiary = PlanetRed,
     background = StarWhite,
@@ -37,6 +37,7 @@ private val LightColorScheme = lightColorScheme(
     onSurface = DeepSpaceBlue,
 
     /* Other default colors to override
+    PlanetBlue
     surface = Color(0xFFFFFBFE),
     onPrimary = Color.White,
     onSecondary = Color.White,

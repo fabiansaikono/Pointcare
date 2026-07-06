@@ -1,0 +1,199 @@
+2026-07-06 19:35:06.048  3663-5474  OplusAppQu...Controller system_server                        E  notifyStartActivity intent:Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 xflg=0x4 cmp=be.saikono.poincare/.MainActivity bnds=[74,1322][384,1706] (has extras) }
+2026-07-06 19:35:06.051  3663-3763  QosSceneRe...tartScene] system_server                        E  notifyActivityStart get launchedFromUid failed through AppManager! launchedFromPackage: com.android.launcher, pkg: be.saikono.poincare
+---------------------------- PROCESS STARTED (29407) for package be.saikono.poincare ----------------------------
+2026-07-06 19:35:06.099 29407-29407 nativeloader            be.saikono.poincare                  D  Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+2026-07-06 19:35:06.101 29407-29407 OplusActiv...eadExtImpl be.saikono.poincare                  D  java.lang.NoSuchMethodException: dalvik.system.VMRuntime.SupressionGC [int, int]
+2026-07-06 19:35:06.102 29407-29407 libc                    be.saikono.poincare                  W  Access denied finding property "persist.vendor.sys.activitylog"
+2026-07-06 19:35:06.102 29407-29407 OneTrace                be.saikono.poincare                  I  Mark active for pid=29407? true
+2026-07-06 19:35:06.102 29407-29407 cutils-dev              be.saikono.poincare                  D  otrace_set_tracing_enabled? true tag:0
+2026-07-06 19:35:06.102 29407-29664 cutils-dev              be.saikono.poincare                  D  properties changed in otrace_seq_number_changed!
+2026-07-06 19:35:06.108  3663-5640  OplusDexOptimizeManager system_server                        E  pkgSetting or primaryCpuAbi is null for package: be.saikono.poincare
+2026-07-06 19:35:06.110  3663-3878  OplusThermalStats       system_server                        E  Error getting package info: be.saikono.poincare
+2026-07-06 19:35:06.112 29407-29407 nativeloader            be.saikono.poincare                  D  Load /data/user/0/be.saikono.poincare/code_cache/startup_agents/c52d6b25-agent.so using system ns (caller=<unknown>): ok
+2026-07-06 19:35:06.108 29407-29407 re-initialized>         be.saikono.poincare                  W  type=1400 audit(0.0:38118): avc:  granted  { execute } for  path="/data/data/be.saikono.poincare/code_cache/startup_agents/c52d6b25-agent.so" dev="dm-77" ino=2662894 scontext=u:r:untrusted_app:s0:c148,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c148,c256,c512,c768 tclass=file app=be.saikono.poincare
+2026-07-06 19:35:06.115 29407-29407 aikono.poincare         be.saikono.poincare                  W  hiddenapi: DexFile /data/data/be.saikono.poincare/code_cache/.studio/instruments-9dbd448e.jar is in boot class path but is not in a known location
+2026-07-06 19:35:06.117 29407-29670 OplusAppHeapManager     be.saikono.poincare                  D  java.lang.NoSuchMethodException: dalvik.system.VMRuntime.updateProcessValue [int, int, int]
+2026-07-06 19:35:06.175 29407-29407 aikono.poincare         be.saikono.poincare                  W  Redefining intrinsic method java.lang.Thread java.lang.Thread.currentThread(). This may cause the unexpected use of the original definition of java.lang.Thread java.lang.Thread.currentThread()in methods that have already been compiled.
+2026-07-06 19:35:06.175 29407-29407 aikono.poincare         be.saikono.poincare                  W  Redefining intrinsic method boolean java.lang.Thread.interrupted(). This may cause the unexpected use of the original definition of boolean java.lang.Thread.interrupted()in methods that have already been compiled.
+2026-07-06 19:35:06.177 29407-29407 CompactWindowAppManager be.saikono.poincare                  D  initCompactApplicationInfo CompactMode: , NormalMode: 
+2026-07-06 19:35:06.179 29407-29407 Configuration           be.saikono.poincare                  V  Updating configuration, locales updated from [] to [nl_BE]
+2026-07-06 19:35:06.179 29407-29407 OplusScrollToTopManager be.saikono.poincare                  D  setIsInWhiteList false
+2026-07-06 19:35:06.180 29407-29407 OplusViewDebugManager   be.saikono.poincare                  D  OplusViewDebugManager Constructor android.view.debug.OplusViewDebugManager@b5cd237 [mHasViewDebugProperty true] [mHasMsgDebugProperty false] [DEBUG false] [EXTRAINFOENABLE false] [LIGHT_OS false]
+2026-07-06 19:35:06.180 29407-29407 DynamicFra...igManager] be.saikono.poincare                  E  initAnimationConfig: animAwareItem is empty, return
+2026-07-06 19:35:06.182 29407-29407 CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 202956589; UID 10148; state: ENABLED
+2026-07-06 19:35:06.187 29407-29407 libc                    be.saikono.poincare                  W  Access denied finding property "ro.odm.prev.product.name"
+2026-07-06 19:35:06.254 29407-29407 nativeloader            be.saikono.poincare                  D  Configuring clns-9 for other apk /data/app/~~cqaLW88ETKHIX9UENgCZVg==/be.saikono.poincare-U53dTUq6PrG2Cs358V_Tlw==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~cqaLW88ETKHIX9UENgCZVg==/be.saikono.poincare-U53dTUq6PrG2Cs358V_Tlw==/lib/arm64, permitted_path=/data:/mnt/expand:/data/user/0/be.saikono.poincare
+2026-07-06 19:35:06.256 29407-29407 aikono.poincare         be.saikono.poincare                  I  AssetManager2(0xb4000076f5edc028) locale list changing from [] to [nl-BE]
+2026-07-06 19:35:06.257 29407-29407 aikono.poincare         be.saikono.poincare                  I  AssetManager2(0xb4000076f5edc328) locale list changing from [] to [nl-BE]
+2026-07-06 19:35:06.258 29407-29407 GraphicsEnvironment     be.saikono.poincare                  V  Currently set values for:
+2026-07-06 19:35:06.258 29407-29407 GraphicsEnvironment     be.saikono.poincare                  V    angle_gl_driver_selection_pkgs=[]
+2026-07-06 19:35:06.258 29407-29407 GraphicsEnvironment     be.saikono.poincare                  V    angle_gl_driver_selection_values=[]
+2026-07-06 19:35:06.258 29407-29407 GraphicsEnvironment     be.saikono.poincare                  V  be.saikono.poincare is not listed in per-application setting
+2026-07-06 19:35:06.258 29407-29407 GraphicsEnvironment     be.saikono.poincare                  V  ANGLE allowlist from config: 
+2026-07-06 19:35:06.258 29407-29407 GraphicsEnvironment     be.saikono.poincare                  V  be.saikono.poincare is not listed in ANGLE allowlist or settings, returning default
+2026-07-06 19:35:06.259 29407-29407 GraphicsEnvironment     be.saikono.poincare                  V  Updatable production driver is not supported on the device.
+2026-07-06 19:35:06.259 29407-29407 ResourcesManagerExtImpl be.saikono.poincare                  D  applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:-1
+2026-07-06 19:35:06.260 29407-29407 SurfaceSyncGroup        be.saikono.poincare                  D  preCreateSurfaceSyncGroupTimerThread
+2026-07-06 19:35:06.265 29407-29407 OplusGraphicsEvent      be.saikono.poincare                  D  OplusGraphicsEventListener create now!
+2026-07-06 19:35:06.265 29407-29407 OplusGraphicsEvent      be.saikono.poincare                  D  addEventListener success!
+2026-07-06 19:35:06.268 29407-29407 CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 279646685; UID 10148; state: ENABLED
+2026-07-06 19:35:06.270 29407-29407 OplusActivityManager    be.saikono.poincare                  D  get AMS extension: android.os.BinderProxy@6d0514b
+2026-07-06 19:35:06.271 29407-29407 HWUI                    be.saikono.poincare                  I  SupportApps size 2
+2026-07-06 19:35:06.271 29407-29407 ExtensionsLoader        be.saikono.poincare                  D  createInstance(64bit) : createExtendedFactory
+2026-07-06 19:35:06.271 29407-29407 ExtensionsLoader        be.saikono.poincare                  D  Opened libSchedAssistExtImpl.so
+2026-07-06 19:35:06.271 29407-29407 SchedAssist             be.saikono.poincare                  E  open sharedFd failed with error=Permission denied
+2026-07-06 19:35:06.271 29407-29407 SchedAssist             be.saikono.poincare                  E  open sharedFd failed with error=Permission denied
+2026-07-06 19:35:06.272 29407-29407 SchedAssist             be.saikono.poincare                  E  open sharedFd failed with error=Permission denied
+2026-07-06 19:35:06.272 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  createInstance(64bit) : createExtendedFactory
+2026-07-06 19:35:06.272 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  Opened libSchedAssistExtImpl.so
+2026-07-06 19:35:06.272 29407-29682 DisplayManager          be.saikono.poincare                  I  Choreographer implicitly registered for the refresh rate.
+2026-07-06 19:35:06.273 29407-29407 aikono.poincare         be.saikono.poincare                  I  AssetManager2(0xb4000076f5edc628) locale list changing from [] to [nl-BE]
+2026-07-06 19:35:06.273 29407-29407 ResourcesManagerExtImpl be.saikono.poincare                  D  applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026-07-06 19:35:06.275 29407-29682 colorx                  be.saikono.poincare                  D  I can't find colorx layer , let's enumerate colorx layers first.
+2026-07-06 19:35:06.278 29407-29407 ashmem                  be.saikono.poincare                  E  Pinning is deprecated since Android Q. Please use trim or other methods.
+2026-07-06 19:35:06.279 29407-29407 OplusPredi...Controller be.saikono.poincare                  E   NoSuchMethodException 
+2026-07-06 19:35:06.279 29407-29407 OplusPredi...Controller be.saikono.poincare                  D  initPredictiveBackConfig for be.saikono.poincare.MainActivity@43c233b initPredictiveBackConfig mShouldInterceptKeyEvent false
+2026-07-06 19:35:06.279 29407-29407 WindowOnBackDispatcher  be.saikono.poincare                  D   predictive settings is disabled for ApplicationInfo{af92a58 be.saikono.poincare}
+2026-07-06 19:35:06.279 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  ===== BEGIN DUMP OF OVERRIDDEN SETTINGS =====
+2026-07-06 19:35:06.279 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  ===== END DUMP OF OVERRIDDEN SETTINGS =====
+2026-07-06 19:35:06.280 29407-29407 oplus.andr...actoryImpl be.saikono.poincare                  I  Unknow feature:IOplusTextViewRTLUtilForUG
+2026-07-06 19:35:06.282 29407-29407 CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 309578419; UID 10148; state: ENABLED
+2026-07-06 19:35:06.282 29407-29682 qdgralloc               be.saikono.poincare                  D  Fetching IMapper5 from QtiMapper5
+2026-07-06 19:35:06.282 29407-29407 DesktopModeFlags        be.saikono.poincare                  D  Toggle override initialized to: OVERRIDE_UNSET
+2026-07-06 19:35:06.288 29407-29682 SnapAlloc               be.saikono.poincare                  I  Graphics lib is available
+2026-07-06 19:35:06.292 29407-29682 Adreno-UNKNOWN          be.saikono.poincare                  I  Using previously loaded IMapper library.
+2026-07-06 19:35:06.294 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  QUALCOMM build          : 3967b80d3b, Ica4ce9bea6
+                                                                                                    Build Date              : 02/12/26
+                                                                                                    Shader Compiler Version : E031.47.18.49
+                                                                                                    Local Branch            : 
+                                                                                                    Remote Branch           : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.15.4.0.11.00.00.1088.862
+                                                                                                    Remote Branch           : NONE
+                                                                                                    Reconstruct Branch      : NOTHING
+2026-07-06 19:35:06.294 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  Build Config            : S P 18.0.0 AArch64
+2026-07-06 19:35:06.294 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  Driver Path             : /vendor/lib64/hw/vulkan.adreno.so
+2026-07-06 19:35:06.294 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  Driver Version          : 0800.72
+2026-07-06 19:35:06.294 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  PFP                     : 0x01500081
+2026-07-06 19:35:06.294 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  ME                      : 0x01500022
+2026-07-06 19:35:06.294 29407-29682 AdrenoVK-0              be.saikono.poincare                  I  Application Name    : android framework
+                                                                                                    Process Name        : be.saikono.poincare
+                                                                                                    Application Version : 0x00000000
+                                                                                                    Engine Name         : android framework
+                                                                                                    Engine Version      : 0x00000000
+                                                                                                    Api Version         : 0x00401000
+2026-07-06 19:35:06.296 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  createInstance(64bit) : createExtendedFactory
+2026-07-06 19:35:06.296 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  Opened libeglextimpl.so
+2026-07-06 19:35:06.297 29407-29682 PreCache                be.saikono.poincare                  D  [IPreCacheRus]loadRUSConfigs#102 failed to transact: -22 prc:be.saikono.poincare
+2026-07-06 19:35:06.302 29407-29407 aikono.poincare         be.saikono.poincare                  I  AssetManager2(0xb4000076f5edc928) locale list changing from [] to [nl-BE]
+2026-07-06 19:35:06.302 29407-29407 TextToSpeech            be.saikono.poincare                  I  Sucessfully bound to com.google.android.tts
+2026-07-06 19:35:06.308 29407-29407 ActivityThread          be.saikono.poincare                  D  ComponentInfo{be.saikono.poincare/be.saikono.poincare.MainActivity} checkFinished=false 2
+2026-07-06 19:35:06.308 29407-29407 ResourcesManagerExtImpl be.saikono.poincare                  D  applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026-07-06 19:35:06.310 29407-29407 AutofillCl...Controller be.saikono.poincare                  V  onActivityPostResumed()
+2026-07-06 19:35:06.310 29407-29407 AutofillCl...Controller be.saikono.poincare                  V  onActivityPostResumed(): Relayout fix enabled
+2026-07-06 19:35:06.310 29407-29407 AutofillCl...Controller be.saikono.poincare                  V  forResume(): Not attempting refill.
+2026-07-06 19:35:06.310 29407-29407 CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 352594277; UID 10148; state: ENABLED
+2026-07-06 19:35:06.310 29407-29407 OplusInputMethodUtil    be.saikono.poincare                  D  init sDebug to false, init sDebugIme to false, init sAlwaysOn to false
+2026-07-06 19:35:06.310 29407-29407 OplusInputMethodUtil    be.saikono.poincare                  D  updateDebugToClass InputMethodManager.DEBUG = false
+2026-07-06 19:35:06.310 29407-29407 OplusInputMethodUtil    be.saikono.poincare                  D  updateDebugToClass ImeFocusController.DEBUG = false
+2026-07-06 19:35:06.310 29407-29407 OplusInputMethodUtil    be.saikono.poincare                  D  updateDebugToClass OnBackInvokedDispatcher.DEBUG = false
+2026-07-06 19:35:06.310 29407-29407 OplusInputMethodUtil    be.saikono.poincare                  D  updateDebugToClass InsetsController.DEBUG = false
+2026-07-06 19:35:06.310 29407-29407 OplusInputMethodUtil    be.saikono.poincare                  D  updateDebugToClass BaseInputConnection.DEBUG = false
+2026-07-06 19:35:06.313 29407-29407 CompatChangeReporter    be.saikono.poincare                  D  Compat change id reported: 349153669; UID 10148; state: ENABLED
+2026-07-06 19:35:06.313 29407-29407 WindowManager           be.saikono.poincare                  D  Add to mViews: com.android.internal.policy.DecorView{32b2000 I.E...... R.....ID 0,0-0,0 alpha=1.0 viewInfo = }[MainActivity],pkg= be.saikono.poincare
+2026-07-06 19:35:06.313 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  createInstance(64bit) : createExtendedFactory
+2026-07-06 19:35:06.314 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  Opened libhwuiextimpl.so
+2026-07-06 19:35:06.314 29407-29682 skia                    be.saikono.poincare                  D  setRusSupported enable 1
+2026-07-06 19:35:06.316 29407-29407 OplusAppWatchdog        be.saikono.poincare                  D  monitor disabled
+2026-07-06 19:35:06.316 29407-29407 InsetsController        be.saikono.poincare                  D  Setting requestedVisibleTypes to -16 (was -9)
+2026-07-06 19:35:06.319 29407-29407 ViewRootImplExtImpl     be.saikono.poincare                  D  onDisplayChanged -1 for VRI android.view.ViewRootImpl@1223c2c
+2026-07-06 19:35:06.319 29407-29407 ResourcesManagerExtImpl be.saikono.poincare                  D  applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026-07-06 19:35:06.320 29407-29407 OplusBracketLog         be.saikono.poincare                  E  [OplusViewMirrorManager] updateHostViewRootIfNeeded, not support android.view.ViewRootImpl@1223c2c
+2026-07-06 19:35:06.320 29407-29407 DynamicFra...foManager] be.saikono.poincare                  I  updatePixelSize: sPixelSize has been updated, process = be.saikono.poincare
+2026-07-06 19:35:06.367 29407-29692 SQLiteLog               be.saikono.poincare                  E  (1) no such column: "GeometryLevel" in "ALTER TABLE profiles RENAME COLUMN GeometryLevel TO geometryLevel"
+2026-07-06 19:35:06.393 29407-29407 WindowOnBackDispatcher  be.saikono.poincare                  D   predictive settings is disabled for ApplicationInfo{af92a58 be.saikono.poincare}
+2026-07-06 19:35:06.393 29407-29407 WindowOnBackDispatcher  be.saikono.poincare                  D   predictive settings is disabled for ApplicationInfo{af92a58 be.saikono.poincare}
+2026-07-06 19:35:06.409 29407-29407 ViewRootImplExtImpl     be.saikono.poincare                  D  wrapConfigInfoIntoFlags rotation=0, smallestScreenWidthDp=0, isAutolayoutSwdpModified=false, residentWS=false, scenario=0, bounds=Rect(0, 0 - 1440, 3168), isFirstDraw=true, relayoutAsync=false, flags=0, newFlags=-486539264, title=be.saikono.poincare/be.saikono.poincare.MainActivity
+2026-07-06 19:35:06.412 29407-29407 VRI[MainActivity]       be.saikono.poincare                  D  relayoutWindow result, sizeChanged:true, surfaceControlChanged:true, transformHintChanged:false, mSurfaceSize:Point(1440, 3168), mLastSurfaceSize:Point(0, 0), mWidth:-1, mHeight:-1, requestedWidth:1440, requestedHeight:3168, transformHint:0, installOrientation:0, displayRotation:0, isSurfaceValid:true, attr.flag:-2122252032, tmpFrames:ClientWindowFrames{frame=[0,0][1440,3168] display=[0,0][1440,3168] parentFrame=[0,0][0,0]}, relayoutResult:3, relayoutAsync:false, mSyncSeqId:0
+2026-07-06 19:35:06.412 29407-29407 VRI[MainActivity]       be.saikono.poincare                  W  updateBlastSurfaceIfNeeded, surfaceSize:Point(1440, 3168), lastSurfaceSize:Point(0, 0), format:-1, blastBufferQueue:null
+2026-07-06 19:35:06.412 29407-29407 BufferQueueConsumer     be.saikono.poincare                  D  [](id:72df00000000,api:0,p:-1,c:29407) connect: controlledByApp=false
+2026-07-06 19:35:06.412 29407-29407 BufferQueueConsumer     be.saikono.poincare                  D  [VRI[MainActivity]#0(BLAST Consumer)0](id:72df00000000,api:0,p:-1,c:29407) setMaxAcquiredBufferCount: 2
+2026-07-06 19:35:06.413 29407-29682 BufferQueueProducer     be.saikono.poincare                  D  [VRI[MainActivity]#0(BLAST Consumer)0](id:72df00000000,api:1,p:29407,c:29407) connect: api=1 producerControlledByApp=true
+2026-07-06 19:35:06.417 29407-29407 SurfaceControl          be.saikono.poincare                  I   setExtendedRangeBrightness sc=Surface(name=be.saikono.poincare/be.saikono.poincare.MainActivity)/@0x53356ad,currentBufferRatio=1.0,desiredRatio=1.0
+2026-07-06 19:35:06.420 29407-29682 AdrenoUtils             be.saikono.poincare                  I  <ReadGpuID:366>: Reading chip ID through GSL
+2026-07-06 19:35:06.427 29407-29682 BLASTBufferQueue        be.saikono.poincare                  D  [VRI[MainActivity]#0](f:0,a:1) acquireNextBufferLocked size=1440x3168 mFrameNumber=1 applyTransaction=true mTimestamp=222066958887318(auto) mPendingTransactions.size=0 graphicBufferId=126302103273475 transform=0
+2026-07-06 19:35:06.427 29407-29682 VRI[MainActivity]       be.saikono.poincare                  D  Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true syncBuffer=false
+2026-07-06 19:35:06.428 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  createInstance(64bit) : createExtendedFactory
+2026-07-06 19:35:06.428 29407-29682 ExtensionsLoader        be.saikono.poincare                  D  Opened libSchedAssistExtImpl.so
+2026-07-06 19:35:06.428 29407-29407 VRI[MainActivity]       be.saikono.poincare                  D  draw finished. seqId=0
+2026-07-06 19:35:06.435 29407-29407 VRI[MainActivity]       be.saikono.poincare                  W  handleResized, msg:, frameChanged:false, configChanged:false, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026-07-06 19:35:06.435 29407-29407 VRI[MainActivity]       be.saikono.poincare                  W  handleResized, msg:, frameChanged:false, configChanged:false, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026-07-06 19:35:06.436 29407-29407 VRI[MainActivity]       be.saikono.poincare                  W  handleResized, msg:, frameChanged:false, configChanged:false, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026-07-06 19:35:06.437 29407-29703 OplusWindowManager      be.saikono.poincare                  D  get WMS extension: android.os.BinderProxy@12dd290
+2026-07-06 19:35:06.437 29407-29407 DynamicFra...igManager] be.saikono.poincare                  I  initFrameRateConfig: init with OplusDynamicFRTCConfig
+                                                                                                    	levelsFor120hz: [120, 60]
+                                                                                                    	thresholdsFor120hz: [300]
+                                                                                                    	levelsFor90hz: [90, 45]
+                                                                                                    	thresholdsFor90hz: [214]
+2026-07-06 19:35:06.437 29407-29407 DynamicFra...igManager] be.saikono.poincare                  I  FRTCConfigManager: FRTC_CAPABILITY = 0, package name = be.saikono.poincare, WINDOW_ANIMATION_SPEED_RATE = 10, SCROLL_ANIMATION_SPEED_RATE = 20, PACKAGE_ENABLE = true
+2026-07-06 19:35:06.437 29407-29407 DynamicFra...ontroller] be.saikono.poincare                  I  init info: mPackageName = be.saikono.poincare, mIsEnabled = true
+2026-07-06 19:35:06.438 29407-29682 VRI[MainActivity]       be.saikono.poincare                  D  Received frameCommittedCallback lastAttemptedDrawFrameNum=2 didProduceBuffer=false syncBuffer=false
+2026-07-06 19:35:06.438 29407-29407 VRI[MainActivity]       be.saikono.poincare                  D  draw finished. seqId=0
+2026-07-06 19:35:06.441 29407-29407 VRI[MainActivity]       be.saikono.poincare                  D  onFocusEvent true
+2026-07-06 19:35:06.443 29407-29407 DynamicFra...igManager] be.saikono.poincare                  I  initFrameRateConfig: init with OplusDynamicFRTCConfig
+                                                                                                    	levelsFor120hz: [120, 60]
+                                                                                                    	thresholdsFor120hz: [300]
+                                                                                                    	levelsFor90hz: [90, 45]
+                                                                                                    	thresholdsFor90hz: [214]
+2026-07-06 19:35:06.443 29407-29407 DynamicFra...igManager] be.saikono.poincare                  I  FRTCConfigManager: FRTC_CAPABILITY = 0, package name = be.saikono.poincare, WINDOW_ANIMATION_SPEED_RATE = 10, SCROLL_ANIMATION_SPEED_RATE = 20, PACKAGE_ENABLE = true
+2026-07-06 19:35:06.443 29407-29407 DynamicFra...ontroller] be.saikono.poincare                  I  init info: mPackageName = be.saikono.poincare, mIsEnabled = true
+2026-07-06 19:35:06.443 29407-29407 InsetsController        be.saikono.poincare                  D  hide(ime(), fromIme=false)
+2026-07-06 19:35:06.443 29407-29407 ImeTracker              be.saikono.poincare                  I  be.saikono.poincare:45b10f18: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+2026-07-06 19:35:06.451 29407-29664 aikono.poincare         be.saikono.poincare                  I  Compiler allocated 7307KB to compile void android.view.ViewRootImpl.performTraversals()
+2026-07-06 19:35:06.783 29407-29703 InteractionJankMonitor  be.saikono.poincare                  W  Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=be.saikono.poincare
+2026-07-06 19:35:06.836 29407-29669 TextToSpeech            be.saikono.poincare                  I  Connected to TTS engine
+2026-07-06 19:35:06.869 29407-29692 SQLiteLog               be.saikono.poincare                  E  (1) no such column: "GeometryLevel" in "ALTER TABLE profiles RENAME COLUMN GeometryLevel TO geometryLevel"
+2026-07-06 19:35:06.871 29407-29700 SQLiteLog               be.saikono.poincare                  E  (1) no such column: "GeometryLevel" in "ALTER TABLE profiles RENAME COLUMN GeometryLevel TO geometryLevel"
+2026-07-06 19:35:06.894 29407-29407 AndroidRuntime          be.saikono.poincare                  E  FATAL EXCEPTION: main (Fix with AI)
+                                                                                                    Process: be.saikono.poincare, PID: 29407
+                                                                                                    android.database.sqlite.SQLiteException: no such column: "GeometryLevel" (code 1 SQLITE_ERROR): , while compiling: ALTER TABLE profiles RENAME COLUMN GeometryLevel TO geometryLevel
+                                                                                                    	at android.database.sqlite.SQLiteConnection.nativePrepareStatement(Native Method)
+                                                                                                    	at android.database.sqlite.SQLiteConnection.-$$Nest$smnativePrepareStatement(SQLiteConnection.java:0)
+                                                                                                    	at android.database.sqlite.SQLiteConnection$PreparedStatementCache.createStatement(SQLiteConnection.java:1590)
+                                                                                                    	at android.database.sqlite.SQLiteConnection.acquirePreparedStatementLI(SQLiteConnection.java:1123)
+                                                                                                    	at android.database.sqlite.SQLiteConnection.acquirePreparedStatement(SQLiteConnection.java:1151)
+                                                                                                    	at android.database.sqlite.SQLiteConnection.prepare(SQLiteConnection.java:711)
+                                                                                                    	at android.database.sqlite.SQLiteSession.prepare(SQLiteSession.java:625)
+                                                                                                    	at android.database.sqlite.SQLiteProgram.<init>(SQLiteProgram.java:62)
+                                                                                                    	at android.database.sqlite.SQLiteStatement.<init>(SQLiteStatement.java:34)
+                                                                                                    	at android.database.sqlite.SQLiteDatabase.executeSql(SQLiteDatabase.java:2234)
+                                                                                                    	at android.database.sqlite.SQLiteDatabase.execSQL(SQLiteDatabase.java:2154)
+                                                                                                    	at androidx.sqlite.db.framework.FrameworkSQLiteDatabase.execSQL(FrameworkSQLiteDatabase.android.kt:264)
+                                                                                                    	at be.saikono.poincare.data.local.DatabaseMigrations$MIGRATION_5_6$1.migrate(DatabaseMigrations.kt:17)
+                                                                                                    	at androidx.room.migration.Migration.migrate(Migration.android.kt:79)
+                                                                                                    	at androidx.room.BaseRoomConnectionManager.onMigrate(RoomConnectionManager.kt:212)
+                                                                                                    	at androidx.room.RoomConnectionManager$SupportOpenHelperCallback.onUpgrade(RoomConnectionManager.android.kt:165)
+                                                                                                    	at androidx.sqlite.db.framework.FrameworkSQLiteOpenHelper$OpenHelper.onUpgrade(FrameworkSQLiteOpenHelper.android.kt:245)
+                                                                                                    	at android.database.sqlite.SQLiteOpenHelper.getDatabaseLocked(SQLiteOpenHelper.java:437)
+                                                                                                    	at android.database.sqlite.SQLiteOpenHelper.getWritableDatabase(SQLiteOpenHelper.java:336)
+                                                                                                    	at androidx.sqlite.db.framework.FrameworkSQLiteOpenHelper$OpenHelper.getWritableOrReadableDatabase(FrameworkSQLiteOpenHelper.android.kt:224)
+                                                                                                    	at androidx.sqlite.db.framework.FrameworkSQLiteOpenHelper$OpenHelper.innerGetDatabase(FrameworkSQLiteOpenHelper.android.kt:180)
+                                                                                                    	at androidx.sqlite.db.framework.FrameworkSQLiteOpenHelper$OpenHelper.getSupportDatabase(FrameworkSQLiteOpenHelper.android.kt:141)
+                                                                                                    	at androidx.sqlite.db.framework.FrameworkSQLiteOpenHelper.getWritableDatabase(FrameworkSQLiteOpenHelper.android.kt:96)
+                                                                                                    	at androidx.sqlite.driver.SupportSQLiteDriver.open(SupportSQLiteDriver.android.kt:57)
+                                                                                                    	at androidx.sqlite.driver.SupportSQLiteDriver.open(SupportSQLiteDriver.android.kt:33)
+                                                                                                    	at androidx.room.coroutines.PassthroughConnectionPool.connection$lambda$0(PassthroughConnectionPool.kt:47)
+                                                                                                    	at androidx.room.coroutines.PassthroughConnectionPool$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+                                                                                                    	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+                                                                                                    	at androidx.room.coroutines.PassthroughConnectionPool.useConnection(PassthroughConnectionPool.kt:58)
+                                                                                                    	at androidx.room.RoomConnectionManager.useConnection(RoomConnectionManager.android.kt:138)
+                                                                                                    	at androidx.room.RoomDatabase.useConnection(RoomDatabase.android.kt:619)
+                                                                                                    	at androidx.room.TriggerBasedInvalidationTracker.syncTriggers$room_runtime(InvalidationTracker.kt:306)
+                                                                                                    	at androidx.room.TriggerBasedInvalidationTracker$createFlow$1$1.invokeSuspend(InvalidationTracker.kt:239)
+                                                                                                    	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+                                                                                                    	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+                                                                                                    	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+                                                                                                    	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+                                                                                                    	at java.lang.Thread.run(Thread.java:1572)
+                                                                                                    	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@c5dea31, Dispatchers.Main.immediate]
+2026-07-06 19:35:06.903 29407-29407 Process                 be.saikono.poincare                  I  Quit itself,  Pid:29407  StackTrace:com.android.internal.os.RuntimeInit$KillApplicationHandler.uncaughtException:201 java.lang.ThreadGroup.uncaughtException:1098 java.lang.ThreadGroup.uncaughtException:1093 com.android.internal.os.RuntimeInitExtImpl.uncaughtExceptionExt:75 com.android.internal.os.RuntimeInit$LoggingHandler.uncaughtException:138 com.android.internal.os.RuntimeInit$KillApplicationHandler.ensureLogging:226 com.android.internal.os.RuntimeInit$KillApplicationHandler.uncaughtException:171 java.lang.ThreadGroup.uncaughtException:1098 java.lang.ThreadGroup.uncaughtException:1093 kotlinx.coroutines.internal.CoroutineExceptionHandlerImplKt.propagateExceptionFinalResort:31 
+2026-07-06 19:35:06.903 29407-29407 Process                 be.saikono.poincare                  I  Sending signal. PID: 29407 SIG: 9
+---------------------------- PROCESS ENDED (29407) for package be.saikono.poincare ----------------------------

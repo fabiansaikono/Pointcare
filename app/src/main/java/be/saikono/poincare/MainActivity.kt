@@ -18,13 +18,12 @@ import be.saikono.poincare.data.local.PoincareDatabase
 import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.repository.*
 import be.saikono.poincare.data.audio.AudioService
-import be.saikono.poincare.data.sync.PoincareWorkerFactory
 import be.saikono.poincare.data.sync.SyncManager
 import be.saikono.poincare.domain.adaptive.AdaptiveDifficultyEngine
 import be.saikono.poincare.ui.Screen
 import be.saikono.poincare.model.*
-import be.saikono.poincare.ui.math.*
 import be.saikono.poincare.ui.profile.*
+import be.saikono.poincare.ui.math.*
 import be.saikono.poincare.ui.reading.*
 import be.saikono.poincare.ui.writing.*
 import be.saikono.poincare.ui.puzzle.*
@@ -55,7 +54,7 @@ class MainActivity : ComponentActivity() {
                 PoincareDatabase::class.java,
                 "poincare-db"
             ).addMigrations(DatabaseMigrations.MIGRATION_4_5)
-                .fallbackToDestructiveMigrationFrom(1, 2, 3)
+                .fallbackToDestructiveMigration()
                 .build()
             
             val profileRepository = LocalProfileRepository(database.profileDao())
@@ -69,15 +68,6 @@ class MainActivity : ComponentActivity() {
             
             val profileViewModelFactory = ProfileViewModelFactory(profileRepository, settingsDataStore)
             val spaceMapViewModelFactory = SpaceMapViewModelFactory(profileRepository, progressRepository, settingsDataStore)
-            val mathViewModelFactory = MathViewModelFactory(
-                contentRepository, 
-                progressRepository, 
-                settingsDataStore,
-                syncManager,
-                adaptiveEngine,
-                audioService,
-                profileRepository
-            )
             val writingViewModelFactory = WritingViewModelFactory(
                 contentRepository,
                 progressRepository,
@@ -91,6 +81,15 @@ class MainActivity : ComponentActivity() {
                 progressRepository,
                 settingsDataStore,
                 syncManager,
+                audioService,
+                profileRepository
+            )
+            val mathViewModelFactory = MathViewModelFactory(
+                contentRepository,
+                progressRepository,
+                settingsDataStore,
+                syncManager,
+                adaptiveEngine,
                 audioService,
                 profileRepository
             )
@@ -114,7 +113,7 @@ class MainActivity : ComponentActivity() {
                 PoincareTheme {
                     CompositionLocalProvider(LocalAppLanguage provides (appLanguage ?: "nl")) {
                         PoincareApp(
-                            profileViewModelFactory, 
+                            profileViewModelFactory,
                             spaceMapViewModelFactory,
                             mathViewModelFactory,
                             writingViewModelFactory,
@@ -244,12 +243,6 @@ fun PoincareApp(
                     onNavigateBack = { navController.popBackStack() }
                 )
             }
-            composable(Screen.Math.route) { 
-                MathScreen(
-                    viewModel = mathViewModel,
-                    onNavigateBack = { navController.popBackStack() }
-                )
-            }
             composable(Screen.Writing.route) {
                 WritingScreen(
                     viewModel = writingViewModel,
@@ -259,6 +252,12 @@ fun PoincareApp(
             composable(Screen.Reading.route) {
                 ReadingScreen(
                     viewModel = readingViewModel,
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+            composable(Screen.Math.route) {
+                MathScreen(
+                    viewModel = mathViewModel,
                     onNavigateBack = { navController.popBackStack() }
                 )
             }

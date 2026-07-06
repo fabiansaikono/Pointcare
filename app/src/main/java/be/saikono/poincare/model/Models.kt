@@ -34,12 +34,14 @@ data class ChildProfile(
     val readingLevel: SkillLevel = SkillLevel.FIRST_GRADE,
     val writingLevel: SkillLevel = SkillLevel.FIRST_GRADE,
     val mathLevel: SkillLevel = SkillLevel.FIRST_GRADE,
+    val geometryLevel: SkillLevel = SkillLevel.FIRST_GRADE,
+    val worldKnowledgeLevel: SkillLevel = SkillLevel.FIRST_GRADE,
     val puzzleLevel: SkillLevel = SkillLevel.FIRST_GRADE,
     val hiddenMainCategories: List<String> = emptyList(),
     val hiddenSubcategories: List<String> = emptyList(),
     val giftedModeEnabled: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
-    val updatedAt: Long = System.currentTimeMillis()
+    val updatedAt: Long = System.currentTimeMillis(),
 )
 
 fun ChildProfile.isMainCategoryEnabled(domain: LearningDomain): Boolean =
@@ -62,7 +64,9 @@ fun formatVisibleNumbers(value: String): String = value
 
 fun isDisplayNumber(value: String): Boolean {
     val trimmed = value.trim()
-    return trimmed.isNotEmpty() && trimmed.all { it.isDigit() || it == '.' || it == ',' || it == '-' || it == ' ' }
+    return trimmed.isNotEmpty() && trimmed.all { char -> 
+        (char.isDigit() || char == '.' || char == ',' || char == '-' || char == ' ')
+    }
 }
 
 fun normalizeAnswer(value: String): String {
@@ -80,7 +84,7 @@ data class LevelProgress(
     val totalPoints: Int,
     val currentLevelPoints: Int,
     val pointsNeededForNextLevel: Int,
-    val progressFraction: Float
+    val progressFraction: Float,
 )
 
 fun pointsNeededForLevel(level: Int): Int = when {

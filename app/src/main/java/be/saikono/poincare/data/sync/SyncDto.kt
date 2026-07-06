@@ -51,7 +51,9 @@ fun ChildProfile.toDto() = ProfileSyncDto(
         "reading" to readingLevel.name,
         "writing" to writingLevel.name,
         "math" to mathLevel.name,
-        "puzzle" to puzzleLevel.name
+        "puzzle" to puzzleLevel.name,
+        "geometry" to geometryLevel.name,
+        "worldKnowledge" to worldKnowledgeLevel.name,
     ),
     hiddenMainCategories = hiddenMainCategories,
     hiddenSubcategories = hiddenSubcategories,

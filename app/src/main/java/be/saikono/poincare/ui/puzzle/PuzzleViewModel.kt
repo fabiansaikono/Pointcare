@@ -74,9 +74,10 @@ class PuzzleViewModel(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             val level = profile.puzzleLevel
+            val mathLevel = profile.mathLevel
             val loadedPuzzles = level.toGrade()?.let { grade ->
                 selectedSubcategoryId?.let { subcategoryId ->
-                    generatedPuzzleExercise(subcategoryId, level, selectedDifficultyStars)?.let { generatedPuzzle ->
+                    generatedPuzzleExercise(subcategoryId, level, mathLevel, selectedDifficultyStars)?.let { generatedPuzzle ->
                         listOf(generatedPuzzle)
                     } ?: contentRepository.getExercises(subcategoryId = subcategoryId, grade = grade, difficultyStars = selectedDifficultyStars)
                 } ?: contentRepository.getExercises(LearningDomain.PUZZLE, level)
@@ -105,8 +106,14 @@ class PuzzleViewModel(
         selectedDifficultyStars = stars?.coerceIn(1, 3)
     }
 
-    private fun generatedPuzzleExercise(subcategoryId: String, level: SkillLevel, difficultyStars: Int?): ExerciseContent? {
+    private fun generatedPuzzleExercise(
+        subcategoryId: String,
+        level: SkillLevel,
+        mathLevel: SkillLevel,
+        difficultyStars: Int?
+    ): ExerciseContent? {
         val stars = difficultyStars?.coerceIn(1, 3) ?: 1
+        val mathGrade = mathLevel.toGrade() ?: level.toGrade() ?: 1
         return when (subcategoryId) {
             "sudoku" -> ExerciseContent(
                 id = "generated-sudoku-${level.name.lowercase()}-$stars",
@@ -146,8 +153,64 @@ class PuzzleViewModel(
                 ),
                 answer = "completed"
             )
+            "calculator-puzzle" -> ExerciseContent(
+                id = "generated-calculator-puzzle-grade-$mathGrade-$stars",
+                domain = LearningDomain.PUZZLE,
+                skill = "calculator-puzzle",
+                section = ExerciseSection.PUZZLES,
+                level = level,
+                inputMode = InputMode.CALCULATOR_PUZZLE,
+                prompt = LocalizedText(
+                    nl = "Calculatorpuzzel",
+                    en = "Calculator puzzle",
+                    fr = "Puzzle calculatrice"
+                ),
+                data = mapOf(
+                    "mainCategory" to "logic_puzzles",
+                    "subcategoryId" to "calculator-puzzle",
+                    "grade" to mathGrade.toString(),
+                    "mathGrade" to mathGrade.toString(),
+                    "difficultyStars" to stars.toString(),
+                    "topic" to "Calculatorpuzzel",
+                    "topic_en-US" to "Calculator puzzle",
+                    "topic_fr-BE" to "Puzzle calculatrice",
+                    "progressKey" to "calculator-puzzle-grade-$mathGrade"
+                ),
+                answer = "completed"
+            )
             else -> null
         }
+    }
+
+    fun onCalculatorPuzzleAttempt(attempt: CalculatorPuzzleAttempt) {
+        val state = _uiState.value
+        val exercise = state.currentExercise ?: return
+        val duration = System.currentTimeMillis() - startTime
+
+        _uiState.update {
+            it.copy(
+                isSolved = attempt.isCorrect || it.isSolved,
+                isWrong = !attempt.isCorrect,
+                showFeedback = true
+            )
+        }
+
+        if (attempt.isCorrect) audioService.playSuccess() else audioService.playFailure()
+
+        saveProgress(
+            exercise = exercise,
+            durationMs = duration,
+            correct = attempt.isCorrect,
+            submittedAnswer = attempt.submittedExpression,
+            extraMetadata = mapOf(
+                "calculatorChallengeId" to attempt.challengeId,
+                "calculatorTargetExpression" to attempt.targetExpression,
+                "calculatorTargetResult" to CalculatorPuzzleGenerator.formatNumber(attempt.targetResult),
+                "calculatorSubmittedResult" to (attempt.submittedResult?.let(CalculatorPuzzleGenerator::formatNumber) ?: ""),
+                "calculatorAttemptNumber" to attempt.attemptNumber.toString(),
+                "progressState" to if (attempt.isCorrect) "answered_correct" else "answered_wrong"
+            )
+        )
     }
 
     fun playCurrentQuestion() {
@@ -250,7 +313,13 @@ class PuzzleViewModel(
         return (unfinished.ifEmpty { candidates }).shuffled()
     }
 
-    private fun saveProgress(exercise: ExerciseContent, durationMs: Long, correct: Boolean, submittedAnswer: String) {
+    private fun saveProgress(
+        exercise: ExerciseContent,
+        durationMs: Long,
+        correct: Boolean,
+        submittedAnswer: String,
+        extraMetadata: Map<String, String> = emptyMap()
+    ) {
         val profileId = _uiState.value.currentProfileId ?: return
         viewModelScope.launch {
             val event = ProgressEvent(
@@ -270,7 +339,7 @@ class PuzzleViewModel(
                     "subcategoryId" to (exercise.data["subcategoryId"] ?: ""),
                     "grade" to (exercise.data["grade"] ?: (exercise.level.toGrade()?.toString() ?: "")),
                     "progressState" to if (correct) "completed" else "retry_wrong"
-                )
+                ) + extraMetadata
             )
             progressRepository.addProgress(event)
             syncManager.scheduleSync()

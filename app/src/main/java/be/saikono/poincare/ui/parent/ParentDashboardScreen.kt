@@ -232,6 +232,8 @@ fun ProfileSettingsSection(
         DomainLevelSelector("Lezen", LearningDomain.READING, profile.readingLevel, onUpdateLevel)
         DomainLevelSelector("Schrijven", LearningDomain.WRITING, profile.writingLevel, onUpdateLevel)
         DomainLevelSelector("Wiskunde", LearningDomain.MATH, profile.mathLevel, onUpdateLevel)
+        DomainLevelSelector("Meetkunde", LearningDomain.GEOMETRY, profile.geometryLevel, onUpdateLevel)
+        DomainLevelSelector("Wereldkennis", LearningDomain.WORLD_KNOWLEDGE, profile.worldKnowledgeLevel, onUpdateLevel)
         DomainLevelSelector("Puzzels", LearningDomain.PUZZLE, profile.puzzleLevel, onUpdateLevel)
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -282,9 +284,9 @@ fun CategoryAccessSection(
         LearningDomain.READING to "Communicatie",
         LearningDomain.WRITING to "Schrijven",
         LearningDomain.MATH to "Getallen",
-        LearningDomain.PUZZLE to "Puzzels",
+        LearningDomain.GEOMETRY to "Meetkunde",
         LearningDomain.WORLD_KNOWLEDGE to "Wereldkennis",
-        LearningDomain.GEOMETRY to "Meetkunde"
+        LearningDomain.PUZZLE to "Puzzels"
     )
 
     categories.forEach { (domain, label) ->
@@ -626,6 +628,8 @@ fun ParentDashboardPreview() {
                     readingLevel = SkillLevel.FIRST_GRADE,
                     writingLevel = SkillLevel.FIRST_GRADE,
                     mathLevel = SkillLevel.FIRST_GRADE,
+                    geometryLevel = SkillLevel.FIRST_GRADE,
+                    worldKnowledgeLevel = SkillLevel.FIRST_GRADE,
                     puzzleLevel = SkillLevel.FIRST_GRADE
                 ),
                 pendingSyncCount = 5,

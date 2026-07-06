@@ -151,7 +151,7 @@ fun SpaceMapContent(
                         ) to LearningDomain.READING,
                         MainMenuItem(
                             name = mainCategoryLabel(LearningDomain.WRITING, appLanguage),
-                            color = NebulaPurple,
+                            color = PlanetBlue,
                             iconResId = R.drawable.icon_01_abc_pencil,
                             delayMillis = 250,
                             enabled = profile?.writingLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.WRITING) == true,
@@ -160,7 +160,7 @@ fun SpaceMapContent(
                         ) to LearningDomain.WRITING,
                         MainMenuItem(
                             name = mainCategoryLabel(LearningDomain.MATH, appLanguage),
-                            color = PlanetGold,
+                            color = PlanetBlue,
                             iconResId = R.drawable.icon_02_calculator,
                             delayMillis = 500,
                             enabled = profile?.mathLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.MATH) == true,
@@ -169,10 +169,10 @@ fun SpaceMapContent(
                         ) to LearningDomain.MATH,
                         MainMenuItem(
                             name = mainCategoryLabel(LearningDomain.GEOMETRY, appLanguage),
-                            color = NebulaPurple,
+                            color = PlanetBlue,
                             iconResId = R.drawable.icon_04_cube,
                             delayMillis = 750,
-                            enabled = profile?.mathLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.GEOMETRY) == true,
+                            enabled = profile?.geometryLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.GEOMETRY) == true,
                             progress = uiState.categoryProgress[LearningDomain.GEOMETRY],
                             onClick = onNavigateToGeometry
                         ) to LearningDomain.GEOMETRY,
@@ -181,13 +181,13 @@ fun SpaceMapContent(
                             color = PlanetBlue,
                             iconResId = R.drawable.icon_08_space_planet,
                             delayMillis = 1000,
-                            enabled = profile?.readingLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.WORLD_KNOWLEDGE) == true,
+                            enabled = profile?.worldKnowledgeLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.WORLD_KNOWLEDGE) == true,
                             progress = uiState.categoryProgress[LearningDomain.WORLD_KNOWLEDGE],
                             onClick = onNavigateToWorldKnowledge
                         ) to LearningDomain.WORLD_KNOWLEDGE,
                         MainMenuItem(
                             name = mainCategoryLabel(LearningDomain.PUZZLE, appLanguage),
-                            color = PlanetRed,
+                            color = PlanetBlue,
                             iconResId = R.drawable.icon_06_brain_network,
                             delayMillis = 1250,
                             enabled = profile?.puzzleLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.PUZZLE) == true,
@@ -537,6 +537,8 @@ fun SpaceMapPreview() {
                     readingLevel = SkillLevel.FIRST_GRADE,
                     writingLevel = SkillLevel.FIRST_GRADE,
                     mathLevel = SkillLevel.FIRST_GRADE,
+                    geometryLevel = SkillLevel.FIRST_GRADE,
+                    worldKnowledgeLevel = SkillLevel.FIRST_GRADE,
                     puzzleLevel = SkillLevel.FIRST_GRADE
                 ),
                 isLoading = false

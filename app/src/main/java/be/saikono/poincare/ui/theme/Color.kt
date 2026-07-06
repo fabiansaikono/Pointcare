@@ -7,6 +7,7 @@ val NebulaPurple = Color(0xFF241444)
 val StarWhite = Color(0xFFFFFFFF)
 val PlanetGold = Color(0xFFFFD700)
 val PlanetBlue = Color(0xFF4FC3F7)
+val PlanetGreen = Color(0xFF006400)
 val PlanetRed = Color(0xFFEF5350)
 val CockpitGray = Color(0xFF1C1C1E)
 

@@ -26,6 +26,8 @@ fun CreateProfileScreen(
     var writingLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var mathLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var puzzleLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
+    var geometryLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
+    var worldKnowledgeLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var giftedMode by remember { mutableStateOf(false) }
 
     Box(
@@ -78,6 +80,9 @@ fun CreateProfileScreen(
             LevelSelector("Schrijfniveau", writingLevel) { writingLevel = it }
             LevelSelector("Wiskundeniveau", mathLevel) { mathLevel = it }
             LevelSelector("Puzzelniveau", puzzleLevel) { puzzleLevel = it }
+            LevelSelector("Meetkundeniveau", geometryLevel) { geometryLevel = it }
+            LevelSelector("Wereldkennis niveau", worldKnowledgeLevel) { worldKnowledgeLevel = it }
+
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -97,6 +102,8 @@ fun CreateProfileScreen(
                         writingLevel = writingLevel,
                         mathLevel = mathLevel,
                         puzzleLevel = puzzleLevel,
+                        geometryLevel = geometryLevel,
+                        worldKnowledgeLevel = worldKnowledgeLevel,
                         giftedMode = giftedMode,
                         onComplete = onProfileCreated
                     )

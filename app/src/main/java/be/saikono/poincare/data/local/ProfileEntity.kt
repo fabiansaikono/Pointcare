@@ -18,6 +18,8 @@ data class ProfileEntity(
     val readingLevel: SkillLevel,
     val writingLevel: SkillLevel,
     val mathLevel: SkillLevel,
+    val geometryLevel: SkillLevel,
+    val worldKnowledgeLevel: SkillLevel,
     val puzzleLevel: SkillLevel,
     val hiddenMainCategories: List<String>,
     val hiddenSubcategories: List<String>,

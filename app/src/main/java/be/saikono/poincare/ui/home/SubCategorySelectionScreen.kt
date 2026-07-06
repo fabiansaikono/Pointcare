@@ -43,7 +43,7 @@ data class SubCategory(
     val nameNl: String,
     val iconResId: Int,
     val exerciseCount: Int? = 100,
-    val accentColor: Color = PlanetBlue
+    val accentColor: Color = DeepSpaceBlue
 )
 
 @Composable
@@ -338,7 +338,7 @@ private fun CategoryProgressBar(progress: LevelProgress) {
         }
         LinearProgressIndicator(
             progress = { progress.progressFraction.coerceIn(0f, 1f) },
-            color = PlanetGold,
+            color = PlanetBlue,
             trackColor = Color.White.copy(alpha = 0.12f),
             modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp))
         )
@@ -423,11 +423,11 @@ private fun localizedUiText(key: String, locale: String): String = when (languag
         "startMission" -> "Commencer la mission"
         "missionBriefing" -> "Briefing de mission"
         "close" -> "Fermer"
-        "chooseDifficulty" -> "Choisis la difficulte"
+        "chooseDifficulty" -> "Choisis la difficulté"
         "cancel" -> "Annuler"
         "back" -> "Retour"
         "chooseMission" -> "Choisis ta mission"
-        "completed" -> "termine"
+        "completed" -> "terminé"
         else -> key
     }
     else -> when (key) {
@@ -446,10 +446,10 @@ private fun localizedUiText(key: String, locale: String): String = when (languag
 
 private fun localizedSubcategoryName(id: String, locale: String): String? = when (languageOf(locale)) {
     "en" -> mapOf(
-        "addition" to "Addition", "subtraction" to "Subtraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Mixed operations", "number_sequences" to "Number sequences", "fractions" to "Fractions", "time" to "Time", "money" to "Money", "measurement" to "Measurement", "geometry_shapes" to "Shapes and geometry", "reading" to "Reading", "listening" to "Listening", "vocabulary" to "Vocabulary", "translation_nl_to_en" to "Dutch to English", "translation_nl_to_fr" to "Dutch to French", "translation_en_to_nl" to "English to Dutch", "translation_en_to_fr" to "English to French", "translation_fr_to_nl" to "French to Dutch", "translation_fr_to_en" to "French to English", "writing" to "Writing", "spelling" to "Spelling", "sentence_order" to "Sentence order", "grammar" to "Grammar", "space" to "Space", "nature" to "Nature", "geography" to "Geography", "science" to "Science", "history" to "History", "everyday_life" to "Everyday life", "sudoku" to "Sudoku", "math-crosswords" to "Math crossword", "pattern_sequences" to "Patterns", "odd_one_out" to "Odd one out", "analogies" to "Analogies", "grid_logic" to "Grid logic", "mazes" to "Mazes", "visual_reasoning" to "Visual reasoning", "memory_rules" to "Memory rules"
+        "addition" to "Addition", "subtraction" to "Subtraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Mixed operations", "number_sequences" to "Number sequences", "fractions" to "Fractions", "time" to "Time", "money" to "Money", "measurement" to "Measurement", "geometry_shapes" to "Shapes and geometry", "reading" to "Reading", "listening" to "Listening", "vocabulary" to "Vocabulary", "translation_nl_to_en" to "Dutch to English", "translation_nl_to_fr" to "Dutch to French", "translation_en_to_nl" to "English to Dutch", "translation_en_to_fr" to "English to French", "translation_fr_to_nl" to "French to Dutch", "translation_fr_to_en" to "French to English", "writing" to "Writing", "spelling" to "Spelling", "sentence_order" to "Sentence order", "grammar" to "Grammar", "space" to "Space", "nature" to "Nature", "geography" to "Geography", "science" to "Science", "history" to "History", "everyday_life" to "Everyday life", "sudoku" to "Sudoku", "math-crosswords" to "Math crossword", "calculator-puzzle" to "Calculator puzzle", "pattern_sequences" to "Patterns", "odd_one_out" to "Odd one out", "analogies" to "Analogies", "grid_logic" to "Grid logic", "mazes" to "Mazes", "visual_reasoning" to "Visual reasoning", "memory_rules" to "Memory rules"
     )[id]
     "fr" -> mapOf(
-        "addition" to "Addition", "subtraction" to "Soustraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Operations mixtes", "number_sequences" to "Suites de nombres", "fractions" to "Fractions", "time" to "Heure", "money" to "Argent", "measurement" to "Mesures", "geometry_shapes" to "Formes et geometrie", "reading" to "Lecture", "listening" to "Ecoute", "vocabulary" to "Vocabulaire", "translation_nl_to_en" to "Neerlandais vers anglais", "translation_nl_to_fr" to "Neerlandais vers francais", "translation_en_to_nl" to "Anglais vers neerlandais", "translation_en_to_fr" to "Anglais vers francais", "translation_fr_to_nl" to "Francais vers neerlandais", "translation_fr_to_en" to "Francais vers anglais", "writing" to "Ecriture", "spelling" to "Orthographe", "sentence_order" to "Ordre des phrases", "grammar" to "Grammaire", "space" to "Espace", "nature" to "Nature", "geography" to "Geographie", "science" to "Science", "history" to "Histoire", "everyday_life" to "Vie quotidienne", "sudoku" to "Sudoku", "math-crosswords" to "Mots croises de calcul", "pattern_sequences" to "Motifs", "odd_one_out" to "Intrus", "analogies" to "Analogies", "grid_logic" to "Logique de grille", "mazes" to "Labyrinthes", "visual_reasoning" to "Raisonnement visuel", "memory_rules" to "Regles de memoire"
+        "addition" to "Addition", "subtraction" to "Soustraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Operations mixtes", "number_sequences" to "Suites de nombres", "fractions" to "Fractions", "time" to "Heure", "money" to "Argent", "measurement" to "Mesures", "geometry_shapes" to "Formes et geometrie", "reading" to "Lecture", "listening" to "Ecoute", "vocabulary" to "Vocabulaire", "translation_nl_to_en" to "Neerlandais vers anglais", "translation_nl_to_fr" to "Neerlandais vers francais", "translation_en_to_nl" to "Anglais vers neerlandais", "translation_en_to_fr" to "Anglais vers francais", "translation_fr_to_nl" to "Francais vers neerlandais", "translation_fr_to_en" to "Francais vers anglais", "writing" to "Ecriture", "spelling" to "Orthographe", "sentence_order" to "Ordre des phrases", "grammar" to "Grammaire", "space" to "Espace", "nature" to "Nature", "geography" to "Geographie", "science" to "Science", "history" to "Histoire", "everyday_life" to "Vie quotidienne", "sudoku" to "Sudoku", "math-crosswords" to "Mots croises de calcul","calculator-puzzle" to "Puzzle calculatrice", "pattern_sequences" to "Motifs", "odd_one_out" to "Intrus", "analogies" to "Analogies", "grid_logic" to "Logique de grille", "mazes" to "Labyrinthes", "visual_reasoning" to "Raisonnement visuel", "memory_rules" to "Regles de memoire"
     )[id]
     else -> null
 }
@@ -498,6 +498,7 @@ fun getSubCategoriesForDomain(domain: String): List<SubCategory> {
         LearningDomain.PUZZLE.name -> listOf(
             SubCategory("sudoku", "Sudoku", R.drawable.ic_topic_sudoku, null),
             SubCategory("math-crosswords", "Rekenkruiswoord", R.drawable.ic_topic_math_crosswords, null),
+            SubCategory("calculator-puzzle", "Rekenmachine", R.drawable.ic_topic_mixed_practice, null),
             SubCategory("pattern_sequences", "Patronen", R.drawable.ic_topic_patterns),
             SubCategory("odd_one_out", "Welke hoort er niet bij?", R.drawable.ic_topic_logic),
             SubCategory("analogies", "Analogieën", R.drawable.ic_topic_logic),

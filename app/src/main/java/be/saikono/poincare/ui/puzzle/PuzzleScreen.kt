@@ -48,6 +48,7 @@ fun PuzzleScreen(
         onDigitPlaced = viewModel::onDigitPlaced,
         onQuestionClick = viewModel::playCurrentQuestion,
         onGeneratedPuzzleComplete = viewModel::onGeneratedPuzzleComplete,
+        onCalculatorPuzzleAttempt = viewModel::onCalculatorPuzzleAttempt,
         onNextPuzzle = viewModel::nextPuzzle
     )
 }
@@ -59,6 +60,7 @@ fun PuzzleContent(
     onDigitPlaced: (Int, Int) -> Unit,
     onQuestionClick: () -> Unit,
     onGeneratedPuzzleComplete: () -> Unit,
+    onCalculatorPuzzleAttempt: (CalculatorPuzzleAttempt) -> Unit,
     onNextPuzzle: () -> Unit
 ) {
     val puzzle = uiState.currentExercise
@@ -70,7 +72,7 @@ fun PuzzleContent(
             .background(DeepSpaceBlue)
     ) {
         SpaceBackground()
-        val isGeneratedPuzzle = puzzle?.data?.get("subcategoryId") in setOf("sudoku", "math-crosswords")
+        val isGeneratedPuzzle = puzzle?.data?.get("subcategoryId") in setOf("sudoku", "math-crosswords", "calculator-puzzle")
 
         Column(
             modifier = Modifier
@@ -123,6 +125,16 @@ fun PuzzleContent(
                         onComplete = onGeneratedPuzzleComplete,
                         modifier = Modifier.weight(1f)
                     )
+                } else if (subcategoryId == "calculator-puzzle") {
+                    CalculatorPuzzleGame(
+                        mathGrade = puzzle.data["mathGrade"]?.toIntOrNull()
+                            ?: puzzle.data["grade"]?.toIntOrNull()
+                            ?: 1,
+                        difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        exerciseLanguage = uiState.exerciseLanguage,
+                        onAttemptSubmitted = onCalculatorPuzzleAttempt,
+                        modifier = Modifier.weight(1f)
+                    )
                 } else {
                     Text(
                         text = puzzle.prompt.get(uiState.exerciseLanguage),
@@ -161,9 +173,9 @@ fun PuzzleContent(
                     Spacer(modifier = Modifier.weight(1f))
                 }
 
-                if (uiState.isSolved || uiState.isFinished) {
+                if (subcategoryId != "calculator-puzzle" && (uiState.isSolved || uiState.isFinished)) {
                     val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
-                    val buttonColor = if (uiState.isFinished) PlanetGold else PlanetRed
+                    val buttonColor = PlanetBlue
 
                     Button(
                         onClick = if (uiState.isFinished) onNavigateBack else onNextPuzzle,
@@ -204,10 +216,10 @@ fun PuzzleChoiceArea(
                     val selected = selectedIndices.contains(index)
                     Surface(
                         color = when {
-                            isSolved && selected -> Color(0xFF4CAF50).copy(alpha = 0.35f)
-                            pendingChoiceIndex == index -> PlanetBlue.copy(alpha = 0.35f)
-                            selected -> PlanetRed.copy(alpha = 0.35f)
-                            else -> Color.White.copy(alpha = 0.08f)
+                            isSolved && selected -> PlanetGreen.copy(alpha = 0.75f)
+                            pendingChoiceIndex == index -> PlanetBlue.copy(alpha = 0.75f)
+                            selected -> PlanetRed.copy(alpha = 0.75f)
+                            else -> Color.White.copy(alpha = 0.5f)
                         },
                         contentColor = StarWhite,
                         shape = RoundedCornerShape(12.dp),
@@ -270,7 +282,7 @@ fun PuzzleBoard(
                                     targetSlotPosition = it.positionInWindow()
                                 }
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(if (isSolved) Color(0xFF4CAF50).copy(alpha = 0.3f) else Color.White.copy(alpha = 0.1f)),
+                                .background(if (isSolved) Color(0xFF4CAF50).copy(alpha = 0.3f) else Color.White.copy(alpha = 0.2f)),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
@@ -396,6 +408,7 @@ fun PuzzleScreenPreview() {
             onDigitPlaced = { _, _ -> },
             onQuestionClick = {},
             onGeneratedPuzzleComplete = {},
+            onCalculatorPuzzleAttempt = {},
             onNextPuzzle = {}
         )
     }
