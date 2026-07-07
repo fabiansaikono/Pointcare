@@ -3,39 +3,66 @@ package be.saikono.poincare
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import be.saikono.poincare.data.audio.AudioService
 import be.saikono.poincare.data.local.DatabaseMigrations
 import be.saikono.poincare.data.local.PoincareDatabase
 import be.saikono.poincare.data.settings.SettingsDataStore
-import be.saikono.poincare.repository.*
-import be.saikono.poincare.data.audio.AudioService
-import be.saikono.poincare.data.sync.SyncManager
 import be.saikono.poincare.domain.adaptive.AdaptiveDifficultyEngine
+import be.saikono.poincare.model.LearningDomain
+import be.saikono.poincare.model.LocalAppLanguage
+import be.saikono.poincare.model.SkillLevel
+import be.saikono.poincare.model.isMainCategoryEnabled
+import be.saikono.poincare.model.levelProgressFor
+import be.saikono.poincare.repository.AssetContentRepository
+import be.saikono.poincare.repository.LocalProfileRepository
+import be.saikono.poincare.repository.LocalProgressRepository
 import be.saikono.poincare.ui.Screen
-import be.saikono.poincare.model.*
-import be.saikono.poincare.ui.profile.*
-import be.saikono.poincare.ui.math.*
-import be.saikono.poincare.ui.reading.*
-import be.saikono.poincare.ui.writing.*
-import be.saikono.poincare.ui.puzzle.*
-import be.saikono.poincare.ui.spaceMap.*
-import be.saikono.poincare.ui.parent.*
-import be.saikono.poincare.ui.home.*
+import be.saikono.poincare.ui.home.SubCategorySelectionScreen
+import be.saikono.poincare.ui.math.MathScreen
+import be.saikono.poincare.ui.math.MathViewModel
+import be.saikono.poincare.ui.math.MathViewModelFactory
+import be.saikono.poincare.ui.parent.ParentDashboardScreen
+import be.saikono.poincare.ui.parent.ParentPinGate
+import be.saikono.poincare.ui.parent.ParentViewModel
+import be.saikono.poincare.ui.parent.ParentViewModelFactory
+import be.saikono.poincare.ui.profile.CreateProfileScreen
+import be.saikono.poincare.ui.profile.ProfileSelectionScreen
+import be.saikono.poincare.ui.profile.ProfileViewModel
+import be.saikono.poincare.ui.profile.ProfileViewModelFactory
+import be.saikono.poincare.ui.puzzle.PuzzleScreen
+import be.saikono.poincare.ui.puzzle.PuzzleViewModel
+import be.saikono.poincare.ui.puzzle.PuzzleViewModelFactory
+import be.saikono.poincare.ui.reading.ReadingScreen
+import be.saikono.poincare.ui.reading.ReadingViewModel
+import be.saikono.poincare.ui.reading.ReadingViewModelFactory
+import be.saikono.poincare.ui.spaceMap.SpaceMapScreen
+import be.saikono.poincare.ui.spaceMap.SpaceMapViewModel
+import be.saikono.poincare.ui.spaceMap.SpaceMapViewModelFactory
 import be.saikono.poincare.ui.theme.PoincareTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.room.Room
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
+import be.saikono.poincare.ui.writing.WritingScreen
+import be.saikono.poincare.ui.writing.WritingViewModel
+import be.saikono.poincare.ui.writing.WritingViewModelFactory
+import be.saikono.poincare.data.sync.SyncManager
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,31 +70,38 @@ class MainActivity : ComponentActivity() {
             super.onCreate(savedInstanceState)
             enableEdgeToEdge()
             WindowCompat.setDecorFitsSystemWindows(window, false)
-
             val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
             windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-            
-            // Manual DI for MVP purposes
+
             val database = Room.databaseBuilder(
                 applicationContext,
                 PoincareDatabase::class.java,
                 "poincare-db"
-            ).addMigrations(DatabaseMigrations.MIGRATION_4_5)
+            )
+                .addMigrations(DatabaseMigrations.MIGRATION_4_5, DatabaseMigrations.MIGRATION_5_6)
                 .fallbackToDestructiveMigration()
                 .build()
-            
+
             val profileRepository = LocalProfileRepository(database.profileDao())
             val progressRepository = LocalProgressRepository(database.progressDao())
             val contentRepository = AssetContentRepository(applicationContext)
             val settingsDataStore = SettingsDataStore(applicationContext)
             val audioService = AudioService(applicationContext, settingsDataStore, profileRepository)
-
             val syncManager = SyncManager(applicationContext)
             val adaptiveEngine = AdaptiveDifficultyEngine()
-            
+
             val profileViewModelFactory = ProfileViewModelFactory(profileRepository, settingsDataStore)
             val spaceMapViewModelFactory = SpaceMapViewModelFactory(profileRepository, progressRepository, settingsDataStore)
+            val mathViewModelFactory = MathViewModelFactory(
+                contentRepository,
+                progressRepository,
+                settingsDataStore,
+                syncManager,
+                adaptiveEngine,
+                audioService,
+                profileRepository
+            )
             val writingViewModelFactory = WritingViewModelFactory(
                 contentRepository,
                 progressRepository,
@@ -81,15 +115,6 @@ class MainActivity : ComponentActivity() {
                 progressRepository,
                 settingsDataStore,
                 syncManager,
-                audioService,
-                profileRepository
-            )
-            val mathViewModelFactory = MathViewModelFactory(
-                contentRepository,
-                progressRepository,
-                settingsDataStore,
-                syncManager,
-                adaptiveEngine,
                 audioService,
                 profileRepository
             )
@@ -107,9 +132,9 @@ class MainActivity : ComponentActivity() {
                 settingsDataStore,
                 audioService
             )
+
             setContent {
                 val appLanguage by settingsDataStore.appLanguage.collectAsState(initial = "nl")
-                
                 PoincareTheme {
                     CompositionLocalProvider(LocalAppLanguage provides (appLanguage ?: "nl")) {
                         PoincareApp(
@@ -149,7 +174,7 @@ fun PoincareApp(
     val readingViewModel: ReadingViewModel = viewModel(factory = readingViewModelFactory)
     val puzzleViewModel: PuzzleViewModel = viewModel(factory = puzzleViewModelFactory)
     val parentViewModel: ParentViewModel = viewModel(factory = parentViewModelFactory)
-    
+
     Box(modifier = Modifier.fillMaxSize()) {
         NavHost(navController = navController, startDestination = Screen.ProfileSelection.route) {
             composable(Screen.ProfileSelection.route) {
@@ -159,12 +184,14 @@ fun PoincareApp(
                     onProfileSelected = { navController.navigate(Screen.SpaceMap.route) }
                 )
             }
+
             composable(Screen.CreateProfile.route) {
                 CreateProfileScreen(
                     viewModel = profileViewModel,
                     onProfileCreated = { navController.navigate(Screen.SpaceMap.route) }
                 )
             }
+
             composable(Screen.SpaceMap.route) {
                 SpaceMapScreen(
                     viewModel = spaceMapViewModel,
@@ -178,6 +205,7 @@ fun PoincareApp(
                     onSwitchProfile = { navController.navigate(Screen.ProfileSelection.route) }
                 )
             }
+
             composable(Screen.SubCategorySelection.route) { backStackEntry ->
                 val domain = backStackEntry.arguments?.getString("domain") ?: ""
                 val spaceMapUiState by spaceMapViewModel.uiState.collectAsState()
@@ -190,6 +218,7 @@ fun PoincareApp(
                     LearningDomain.GEOMETRY.name -> if (spaceMapUiState.currentProfile?.isMainCategoryEnabled(LearningDomain.GEOMETRY) != false) spaceMapUiState.currentProfile?.mathLevel ?: SkillLevel.NOT_APPLICABLE else SkillLevel.NOT_APPLICABLE
                     else -> SkillLevel.NOT_APPLICABLE
                 }
+
                 SubCategorySelectionScreen(
                     domain = domain,
                     currentLevel = currentLevel,
@@ -243,30 +272,23 @@ fun PoincareApp(
                     onNavigateBack = { navController.popBackStack() }
                 )
             }
-            composable(Screen.Writing.route) {
-                WritingScreen(
-                    viewModel = writingViewModel,
-                    onNavigateBack = { navController.popBackStack() }
-                )
-            }
-            composable(Screen.Reading.route) {
-                ReadingScreen(
-                    viewModel = readingViewModel,
-                    onNavigateBack = { navController.popBackStack() }
-                )
-            }
+
             composable(Screen.Math.route) {
-                MathScreen(
-                    viewModel = mathViewModel,
-                    onNavigateBack = { navController.popBackStack() }
-                )
+                MathScreen(viewModel = mathViewModel, onNavigateBack = { navController.popBackStack() })
             }
+
+            composable(Screen.Writing.route) {
+                WritingScreen(viewModel = writingViewModel, onNavigateBack = { navController.popBackStack() })
+            }
+
+            composable(Screen.Reading.route) {
+                ReadingScreen(viewModel = readingViewModel, onNavigateBack = { navController.popBackStack() })
+            }
+
             composable(Screen.Puzzle.route) {
-                PuzzleScreen(
-                    viewModel = puzzleViewModel,
-                    onNavigateBack = { navController.popBackStack() }
-                )
+                PuzzleScreen(viewModel = puzzleViewModel, onNavigateBack = { navController.popBackStack() })
             }
+
             composable(Screen.ParentDashboard.route) {
                 var showPinGate by remember { mutableStateOf(true) }
                 val parentUiState by parentViewModel.uiState.collectAsState()

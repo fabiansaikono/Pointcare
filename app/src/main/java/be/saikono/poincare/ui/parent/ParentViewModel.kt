@@ -116,8 +116,8 @@ class ParentViewModel(
                 LearningDomain.WRITING -> profile.copy(writingLevel = level)
                 LearningDomain.MATH -> profile.copy(mathLevel = level)
                 LearningDomain.PUZZLE -> profile.copy(puzzleLevel = level)
-                LearningDomain.WORLD_KNOWLEDGE -> profile.copy(readingLevel = level)
-                LearningDomain.GEOMETRY -> profile.copy(mathLevel = level)
+                LearningDomain.WORLD_KNOWLEDGE -> profile.copy(worldKnowledgeLevel = level)
+                LearningDomain.GEOMETRY -> profile.copy(geometryLevel = level)
             }
             profileRepository.saveProfile(updatedProfile.copy(updatedAt = System.currentTimeMillis()))
         }
@@ -151,6 +151,13 @@ class ParentViewModel(
         val profile = _uiState.value.currentProfile ?: return
         viewModelScope.launch {
             profileRepository.saveProfile(profile.copy(giftedModeEnabled = enabled, updatedAt = System.currentTimeMillis()))
+        }
+    }
+
+    fun updateShowUnassignedExercises(enabled: Boolean) {
+        val profile = _uiState.value.currentProfile ?: return
+        viewModelScope.launch {
+            profileRepository.saveProfile(profile.copy(showUnassignedExercises = enabled, updatedAt = System.currentTimeMillis()))
         }
     }
 

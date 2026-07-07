@@ -169,7 +169,7 @@ fun WritingContent(
                         .height(56.dp)
                         .semantics { contentDescription = localizedExerciseText("nextMissionReady", uiState.exerciseLanguage) }
                 ) {
-                    Text(buttonText, color = if (uiState.isComplete || uiState.isFinished) CockpitGray else StarWhite, fontWeight = FontWeight.Bold)
+                    Text(buttonText, color = if (uiState.isComplete || uiState.isFinished) DeepSpaceBlue else StarWhite, fontWeight = FontWeight.Medium)
                 }
             } else {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

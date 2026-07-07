@@ -13,8 +13,8 @@ enum class InputMode {
     TRACE_LETTER,
     MATH_CROSSWORD,
     SUDOKU_GRID,
-    NUMBER_WALL,
-    CALCULATOR_PUZZLE
+    CALCULATOR_PUZZLE,
+    NUMBER_WALL
 }
 
 @Serializable
@@ -49,9 +49,9 @@ data class ExerciseContent(
     val prompt: LocalizedText,
     val speechText: LocalizedText? = null,
     val translation: LocalizedText? = null,
-    val data: Map<String, String>, // Flexible data for specific exercise types
+    val data: Map<String, String>,
     val answer: String,
-    val hints: List<LocalizedText> = emptyList(),
+    val hints: List<String> = emptyList(),
     val rewardMetadata: RewardMetadata = RewardMetadata()
 )
 
@@ -78,7 +78,6 @@ fun ExerciseContent.localizedOptions(locale: String): List<String> =
         .orEmpty()
 
 fun ExerciseContent.localizedAnswer(locale: String): String = localizedData("answer", locale) ?: answer
-
 fun ExerciseContent.localizedPromptTts(locale: String): String = localizedData("promptTts", locale) ?: prompt.get(locale)
 
 fun ExerciseContent.localizedOptionSpeech(option: String, locale: String): String {

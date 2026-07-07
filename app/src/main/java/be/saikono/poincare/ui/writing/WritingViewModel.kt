@@ -45,6 +45,8 @@ class WritingViewModel(
     private var startTime = 0L
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
+    private var latestProfile: ChildProfile? = null
+    private var hasContentRequest = false
 
     init {
         observeProfile()
@@ -58,12 +60,16 @@ class WritingViewModel(
                     else profileRepository.getProfileById(id)
                 }
                 .collect { profile ->
-                    _uiState.update { it.copy(
-                        currentProfileId = profile?.id,
-                        exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE"
-                    ) }
-                    
-                    if (exercises.isEmpty() && profile != null) {
+                    latestProfile = profile
+                    _uiState.update {
+                        it.copy(
+                            currentProfileId = profile?.id,
+                            exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE",
+                            isLoading = hasContentRequest && profile != null
+                        )
+                    }
+
+                    if (hasContentRequest && profile != null) {
                         loadContentForProfile(profile)
                     }
                 }
@@ -77,26 +83,59 @@ class WritingViewModel(
             val loadedExercises = level.toGrade()?.let { grade ->
                 val domainExercises = contentRepository.getExercises(LearningDomain.WRITING, level)
                 selectedSubcategoryId?.let { subcategoryId ->
-                    contentRepository.getExercises(subcategoryId = subcategoryId, grade = grade, difficultyStars = selectedDifficultyStars)
-                }?.ifEmpty { domainExercises } ?: domainExercises
+                    val subcategoryExercises = contentRepository.getExercises(
+                        subcategoryId = subcategoryId,
+                        grade = grade,
+                        difficultyStars = selectedDifficultyStars
+                    )
+                    if (profile.showUnassignedExercises) {
+                        (subcategoryExercises + domainExercises.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
+                    } else {
+                        subcategoryExercises
+                    }
+                } ?: if (profile.showUnassignedExercises) {
+                    domainExercises
+                } else {
+                    domainExercises.filter { !it.isUnassignedExercise() }
+                }
             }.orEmpty()
-            
+
             exercises = orderUnfinishedFirst(loadedExercises, profile.id)
-            
             if (exercises.isNotEmpty()) {
                 startExercise(0)
             } else {
-                _uiState.update { it.copy(isLoading = false) }
+                _uiState.update {
+                    it.copy(
+                        currentExercise = null,
+                        userPath = emptyList(),
+                        userInput = "",
+                        isCorrect = null,
+                        isWrong = false,
+                        showFeedback = false,
+                        isComplete = false,
+                        isFinished = false,
+                        isLoading = false
+                    )
+                }
             }
         }
     }
 
     fun setSubcategoryId(subcategoryId: String?) {
         selectedSubcategoryId = subcategoryId
+        hasContentRequest = true
+        latestProfile?.let { profile ->
+            loadContentForProfile(profile)
+            return
+        }
+
         viewModelScope.launch {
             val profileId = _uiState.value.currentProfileId
             val profile = profileId?.let { profileRepository.getProfileById(it).first() }
-            if (profile != null) loadContentForProfile(profile)
+            if (profile != null) {
+                latestProfile = profile
+                loadContentForProfile(profile)
+            }
         }
     }
 
@@ -107,7 +146,7 @@ class WritingViewModel(
     private fun startExercise(index: Int) {
         currentIndex = index
         startTime = System.currentTimeMillis()
-        _uiState.update { 
+        _uiState.update {
             it.copy(
                 currentExercise = exercises[index],
                 userPath = emptyList(),
@@ -174,10 +213,15 @@ class WritingViewModel(
     }
 
     private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
-
     private fun String.isWholeInteger(): Boolean = trim().matches(Regex("-?\\d+"))
-
     private fun ExerciseContent.optionSpeechLocale(defaultLocale: String): String = data["audioTargetLocale"] ?: defaultLocale
+    private fun ExerciseContent.isUnassignedExercise(): Boolean = data["subcategoryId"].isNullOrBlank()
+
+    private fun List<ExerciseContent>.unassignedForDifficulty(difficultyStars: Int?): List<ExerciseContent> =
+        filter { exercise ->
+            exercise.isUnassignedExercise() &&
+                (difficultyStars == null || exercise.data["difficultyStars"]?.toIntOrNull() == difficultyStars)
+        }
 
     private suspend fun orderUnfinishedFirst(candidates: List<ExerciseContent>, profileId: String): List<ExerciseContent> {
         val completedIds = progressRepository.getProgressByChild(profileId).first()
@@ -195,15 +239,9 @@ class WritingViewModel(
 
     fun onTraceComplete() {
         if (_uiState.value.isComplete) return
-        
-        // Simple evaluation: for MVP we mark as complete if they finished the gesture
-        // In a real version, we'd compare userPath with exercise.data["path"]
-        
         val state = _uiState.value
         val exercise = state.currentExercise ?: return
-        val endTime = System.currentTimeMillis()
-        val duration = endTime - startTime
-
+        val duration = System.currentTimeMillis() - startTime
         _uiState.update { it.copy(isComplete = true) }
         audioService.playSuccess()
         saveProgress(exercise, duration, true)
@@ -238,7 +276,7 @@ class WritingViewModel(
         if (currentIndex + 1 < exercises.size) {
             _uiState.update { it.copy(isLoading = true) }
             startExercise(currentIndex + 1)
-        } else {
+        } else if (exercises.isNotEmpty()) {
             exercises = exercises.shuffled()
             _uiState.update { it.copy(isLoading = true) }
             startExercise(0)

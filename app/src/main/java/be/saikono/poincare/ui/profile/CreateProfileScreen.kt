@@ -1,17 +1,39 @@
 package be.saikono.poincare.ui.profile
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import be.saikono.poincare.model.SkillLevel
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.theme.DeepSpaceBlue
+import be.saikono.poincare.ui.theme.PlanetGold
 import be.saikono.poincare.ui.theme.StarWhite
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,8 +48,7 @@ fun CreateProfileScreen(
     var writingLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var mathLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var puzzleLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
-    var geometryLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
-    var worldKnowledgeLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
+    var showUnassignedExercises by remember { mutableStateOf(false) }
     var giftedMode by remember { mutableStateOf(false) }
 
     Box(
@@ -80,14 +101,39 @@ fun CreateProfileScreen(
             LevelSelector("Schrijfniveau", writingLevel) { writingLevel = it }
             LevelSelector("Wiskundeniveau", mathLevel) { mathLevel = it }
             LevelSelector("Puzzelniveau", puzzleLevel) { puzzleLevel = it }
-            LevelSelector("Meetkundeniveau", geometryLevel) { geometryLevel = it }
-            LevelSelector("Wereldkennis niveau", worldKnowledgeLevel) { worldKnowledgeLevel = it }
-
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp)
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Show unassigned exercises",
+                        color = StarWhite,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Only enable this when you want exercises without a subcategory to appear.",
+                        color = StarWhite.copy(alpha = 0.65f),
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+                Switch(
+                    checked = showUnassignedExercises,
+                    onCheckedChange = { showUnassignedExercises = it }
+                )
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
             ) {
                 Text(text = "Gifted Mode", color = StarWhite)
                 Switch(checked = giftedMode, onCheckedChange = { giftedMode = it })
@@ -102,13 +148,14 @@ fun CreateProfileScreen(
                         writingLevel = writingLevel,
                         mathLevel = mathLevel,
                         puzzleLevel = puzzleLevel,
-                        geometryLevel = geometryLevel,
-                        worldKnowledgeLevel = worldKnowledgeLevel,
+                        showUnassignedExercises = showUnassignedExercises,
                         giftedMode = giftedMode,
                         onComplete = onProfileCreated
                     )
                 },
-                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
                 enabled = name.isNotBlank()
             ) {
                 Text("Start Missie")
@@ -123,28 +170,37 @@ fun LevelSelector(
     currentLevel: SkillLevel,
     onLevelSelected: (SkillLevel) -> Unit
 ) {
+    val selectableLevels = remember { SkillLevel.entries.filterNot { it == SkillLevel.NOT_APPLICABLE } }
+
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(text = label, style = MaterialTheme.typography.labelLarge, color = StarWhite)
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 4.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            SkillLevel.entries.forEach { level ->
-                FilterChip(
-                    selected = currentLevel == level,
-                    onClick = { onLevelSelected(level) },
-                    label = { Text(level.displayLabel()) },
-                    colors = FilterChipDefaults.filterChipColors(
-                        labelColor = StarWhite,
-                        selectedLabelColor = DeepSpaceBlue,
-                        selectedContainerColor = StarWhite
+        Spacer(modifier = Modifier.height(4.dp))
+        selectableLevels.chunked(3).forEach { rowLevels ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                rowLevels.forEach { level ->
+                    FilterChip(
+                        selected = currentLevel == level,
+                        onClick = { onLevelSelected(level) },
+                        label = { Text(level.displayLabel()) },
+                        colors = FilterChipDefaults.filterChipColors(
+                            labelColor = StarWhite,
+                            selectedLabelColor = DeepSpaceBlue,
+                            selectedContainerColor = PlanetGold
+                        ),
+                        modifier = Modifier.weight(1f)
                     )
-                )
+                }
+                repeat(3 - rowLevels.size) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
             }
         }
     }
 }
 
-private fun SkillLevel.displayLabel(): String = if (this == SkillLevel.NOT_APPLICABLE) "N/A" else (ordinal + 1).toString()
+private fun SkillLevel.displayLabel(): String = (ordinal + 1).toString()

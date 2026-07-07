@@ -72,7 +72,7 @@ fun PuzzleContent(
             .background(DeepSpaceBlue)
     ) {
         SpaceBackground()
-        val isGeneratedPuzzle = puzzle?.data?.get("subcategoryId") in setOf("sudoku", "math-crosswords", "calculator-puzzle")
+        val isGeneratedPuzzle = puzzle?.data?.get("subcategoryId") in setOf("sudoku", "math-crosswords", "calculator-puzzle", "constellations")
 
         Column(
             modifier = Modifier
@@ -135,6 +135,14 @@ fun PuzzleContent(
                         onAttemptSubmitted = onCalculatorPuzzleAttempt,
                         modifier = Modifier.weight(1f)
                     )
+                } else if (subcategoryId == "constellations") {
+                    ConstellationsPuzzleGame(
+                        grade = puzzle.data["grade"]?.toIntOrNull() ?: 1,
+                        difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        exerciseLanguage = uiState.exerciseLanguage,
+                        onComplete = onGeneratedPuzzleComplete,
+                        modifier = Modifier.weight(1f)
+                    )
                 } else {
                     Text(
                         text = puzzle.prompt.get(uiState.exerciseLanguage),
@@ -173,9 +181,10 @@ fun PuzzleContent(
                     Spacer(modifier = Modifier.weight(1f))
                 }
 
-                if (subcategoryId != "calculator-puzzle" && (uiState.isSolved || uiState.isFinished)) {
+                val isCalculatorPuzzle = subcategoryId == "calculator-puzzle"
+                if ((uiState.isSolved || uiState.isFinished) && !isCalculatorPuzzle) {
                     val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
-                    val buttonColor = PlanetBlue
+                    val buttonColor = PlanetGold
 
                     Button(
                         onClick = if (uiState.isFinished) onNavigateBack else onNextPuzzle,
@@ -185,7 +194,7 @@ fun PuzzleContent(
                             .height(56.dp)
                             .semantics { contentDescription = if (uiState.isSolved) localizedExerciseText("nextMissionReady", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage) }
                     ) {
-                        Text(buttonText, color = StarWhite, fontWeight = FontWeight.Bold)
+                        Text(buttonText, color = DeepSpaceBlue, fontWeight = FontWeight.Medium)
                     }
                 }
             } else {

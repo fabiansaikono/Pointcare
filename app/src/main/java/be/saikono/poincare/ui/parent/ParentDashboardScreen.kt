@@ -1,8 +1,22 @@
 package be.saikono.poincare.ui.parent
 
+import android.speech.tts.Voice
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -10,8 +24,36 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,12 +63,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.saikono.poincare.data.settings.VoiceSettings
-import be.saikono.poincare.model.*
+import be.saikono.poincare.model.AnimationSettings
+import be.saikono.poincare.model.ChildProfile
+import be.saikono.poincare.model.LearningDomain
+import be.saikono.poincare.model.SkillLevel
+import be.saikono.poincare.model.isMainCategoryEnabled
+import be.saikono.poincare.model.isSubcategoryEnabled
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.home.getSubCategoriesForDomain
 import be.saikono.poincare.ui.spaceMap.SpaceBackground
-import be.saikono.poincare.ui.theme.*
+import be.saikono.poincare.ui.theme.CockpitGray
+import be.saikono.poincare.ui.theme.DeepSpaceBlue
+import be.saikono.poincare.ui.theme.PlanetBlue
+import be.saikono.poincare.ui.theme.PlanetGold
+import be.saikono.poincare.ui.theme.PlanetRed
+import be.saikono.poincare.ui.theme.PoincareTheme
+import be.saikono.poincare.ui.theme.StarWhite
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOf
 
@@ -37,10 +91,11 @@ fun ParentDashboardScreen(
     onProfileDeleted: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val availableVoices by viewModel.availableVoices.collectAsState()
 
     ParentDashboardContent(
         uiState = uiState,
-        availableVoices = viewModel.availableVoices,
+        availableVoices = availableVoices,
         getVoiceSettings = viewModel::getVoiceSettings,
         onUpdateVoiceSettings = viewModel::updateVoiceSettings,
         onTestVoice = viewModel::testVoice,
@@ -51,17 +106,17 @@ fun ParentDashboardScreen(
         onUpdateMainCategoryEnabled = viewModel::updateMainCategoryEnabled,
         onUpdateSubcategoryEnabled = viewModel::updateSubcategoryEnabled,
         onUpdateGiftedMode = viewModel::updateGiftedMode,
+        onUpdateShowUnassignedExercises = viewModel::updateShowUnassignedExercises,
         onUpdateAnimationSettings = viewModel::updateAnimationSettings,
         onUpdateLanguage = viewModel::updateLanguage,
         onDeleteProfile = { viewModel.deleteCurrentProfile(onProfileDeleted) }
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ParentDashboardContent(
     uiState: ParentDashboardUiState,
-    availableVoices: StateFlow<List<android.speech.tts.Voice>>,
+    availableVoices: List<Voice>,
     getVoiceSettings: (String) -> Flow<VoiceSettings>,
     onUpdateVoiceSettings: (String, VoiceSettings) -> Unit,
     onTestVoice: (String, String, VoiceSettings) -> Unit,
@@ -72,6 +127,7 @@ fun ParentDashboardContent(
     onUpdateMainCategoryEnabled: (LearningDomain, Boolean) -> Unit,
     onUpdateSubcategoryEnabled: (String, Boolean) -> Unit,
     onUpdateGiftedMode: (Boolean) -> Unit,
+    onUpdateShowUnassignedExercises: (Boolean) -> Unit,
     onUpdateAnimationSettings: (AnimationSettings) -> Unit,
     onUpdateLanguage: (LanguageLayer, String) -> Unit,
     onDeleteProfile: () -> Unit
@@ -86,13 +142,12 @@ fun ParentDashboardContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .widthIn(max = 800.dp) // Optimized for tablets
+                .widthIn(max = 800.dp)
                 .align(Alignment.TopCenter)
                 .systemNavigationMargin()
                 .padding(horizontal = 24.dp, vertical = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Top Bar
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -101,7 +156,11 @@ fun ParentDashboardContent(
                     onClick = onNavigateBack,
                     modifier = Modifier.size(48.dp)
                 ) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Terug naar kaart", tint = StarWhite)
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Terug naar kaart",
+                        tint = StarWhite
+                    )
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(
@@ -112,7 +171,10 @@ fun ParentDashboardContent(
             }
 
             if (uiState.isLoading) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
                     CircularProgressIndicator(color = PlanetGold)
                 }
             } else {
@@ -130,6 +192,7 @@ fun ParentDashboardContent(
                         onUpdateMainCategoryEnabled = onUpdateMainCategoryEnabled,
                         onUpdateSubcategoryEnabled = onUpdateSubcategoryEnabled,
                         onUpdateGiftedMode = onUpdateGiftedMode,
+                        onUpdateShowUnassignedExercises = onUpdateShowUnassignedExercises,
                         onDeleteProfile = onDeleteProfile
                     )
 
@@ -138,7 +201,7 @@ fun ParentDashboardContent(
                         onUpdateLanguage = onUpdateLanguage
                     )
 
-                    /* Voice settings hidden as per user request
+                    /* Voice settings hidden as requested.
                     VoiceSettingsSection(
                         availableVoices = availableVoices,
                         getVoiceSettings = getVoiceSettings,
@@ -152,10 +215,8 @@ fun ParentDashboardContent(
                         onUpdateSettings = onUpdateAnimationSettings
                     )
 
-                    SyncStatusSection(
-                        pendingCount = uiState.pendingSyncCount
-                    )
-                    
+                    SyncStatusSection(pendingCount = uiState.pendingSyncCount)
+
                     Spacer(modifier = Modifier.height(40.dp))
                 }
             }
@@ -172,9 +233,11 @@ fun ProfileSettingsSection(
     onUpdateMainCategoryEnabled: (LearningDomain, Boolean) -> Unit,
     onUpdateSubcategoryEnabled: (String, Boolean) -> Unit,
     onUpdateGiftedMode: (Boolean) -> Unit,
+    onUpdateShowUnassignedExercises: (Boolean) -> Unit,
     onDeleteProfile: () -> Unit
 ) {
     if (profile == null) return
+
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     var nameText by remember(profile.id) { mutableStateOf(profile.name) }
     var birthYearText by remember(profile.id) { mutableStateOf(profile.birthYear.toString()) }
@@ -186,20 +249,31 @@ fun ProfileSettingsSection(
             titleContentColor = DeepSpaceBlue,
             textContentColor = DeepSpaceBlue,
             title = { Text("Profiel verwijderen") },
-            text = { Text("Weet je zeker dat je het account van ${profile.name} wilt verwijderen? Dit kan niet ongedaan worden gemaakt.") },
+            text = {
+                Text(
+                    "Weet je zeker dat je het account van ${profile.name} wilt verwijderen? " +
+                            "Dit kan niet ongedaan worden gemaakt."
+                )
+            },
             confirmButton = {
                 Button(
                     onClick = {
                         showDeleteConfirmation = false
                         onDeleteProfile()
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = DeepSpaceBlue, contentColor = PlanetGold)
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = DeepSpaceBlue,
+                        contentColor = PlanetGold
+                    )
                 ) {
                     Text("Verwijderen")
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDeleteConfirmation = false }, colors = ButtonDefaults.textButtonColors(contentColor = DeepSpaceBlue)) {
+                TextButton(
+                    onClick = { showDeleteConfirmation = false },
+                    colors = ButtonDefaults.textButtonColors(contentColor = DeepSpaceBlue)
+                ) {
                     Text("Annuleren")
                 }
             }
@@ -227,14 +301,47 @@ fun ProfileSettingsSection(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Text(text = "Opleidings-niveaus", style = MaterialTheme.typography.titleSmall, color = StarWhite)
-        
-        DomainLevelSelector("Lezen", LearningDomain.READING, profile.readingLevel, onUpdateLevel)
-        DomainLevelSelector("Schrijven", LearningDomain.WRITING, profile.writingLevel, onUpdateLevel)
-        DomainLevelSelector("Wiskunde", LearningDomain.MATH, profile.mathLevel, onUpdateLevel)
-        DomainLevelSelector("Meetkunde", LearningDomain.GEOMETRY, profile.geometryLevel, onUpdateLevel)
-        DomainLevelSelector("Wereldkennis", LearningDomain.WORLD_KNOWLEDGE, profile.worldKnowledgeLevel, onUpdateLevel)
-        DomainLevelSelector("Puzzels", LearningDomain.PUZZLE, profile.puzzleLevel, onUpdateLevel)
+        Text(
+            text = "Opleidings-niveaus",
+            style = MaterialTheme.typography.titleSmall,
+            color = StarWhite
+        )
+
+        DomainLevelSelector("Lezen", LearningDomain.READING, profile.levelFor(LearningDomain.READING), onUpdateLevel)
+        DomainLevelSelector("Schrijven", LearningDomain.WRITING, profile.levelFor(LearningDomain.WRITING), onUpdateLevel)
+        DomainLevelSelector("Wiskunde", LearningDomain.MATH, profile.levelFor(LearningDomain.MATH), onUpdateLevel)
+        DomainLevelSelector("Meetkunde", LearningDomain.GEOMETRY, profile.levelFor(LearningDomain.GEOMETRY), onUpdateLevel)
+        DomainLevelSelector("Wereldkennis", LearningDomain.WORLD_KNOWLEDGE, profile.levelFor(LearningDomain.WORLD_KNOWLEDGE), onUpdateLevel)
+        DomainLevelSelector("Puzzels", LearningDomain.PUZZLE, profile.levelFor(LearningDomain.PUZZLE), onUpdateLevel)
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
+        ) {
+            Text(
+                text = "Gemengde extra oefeningen tonen",
+                color = StarWhite,
+                modifier = Modifier.weight(1f).padding(end = 12.dp)
+            )
+            Checkbox(
+                checked = profile.showUnassignedExercises,
+                onCheckedChange = onUpdateShowUnassignedExercises,
+                colors = CheckboxDefaults.colors(
+                    checkedColor = PlanetBlue,
+                    checkmarkColor = DeepSpaceBlue
+                )
+            )
+        }
+
+        Text(
+            text = "Deze oefeningen kunnen punten geven, maar tellen niet mee voor voortgang per missie.",
+            color = StarWhite.copy(alpha = 0.66f),
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.fillMaxWidth()
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -247,13 +354,22 @@ fun ProfileSettingsSection(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().padding(top = 16.dp).heightIn(min = 48.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+                .heightIn(min = 48.dp)
         ) {
             Text(text = "Gifted Mode (Adaptief)", color = StarWhite)
             Switch(
-                checked = profile.giftedModeEnabled, 
+                checked = profile.giftedModeEnabled,
                 onCheckedChange = onUpdateGiftedMode,
-                modifier = Modifier.semantics { contentDescription = "Schakel Gifted Mode in voor meer uitdagende puzzels" }
+                colors = SwitchDefaults.colors(
+                    checkedTrackColor = PlanetBlue,
+                    checkedThumbColor = StarWhite
+                ),
+                modifier = Modifier.semantics {
+                    contentDescription = "Schakel Gifted Mode in voor meer uitdagende puzzels"
+                }
             )
         }
 
@@ -277,10 +393,14 @@ fun CategoryAccessSection(
     onUpdateMainCategoryEnabled: (LearningDomain, Boolean) -> Unit,
     onUpdateSubcategoryEnabled: (String, Boolean) -> Unit
 ) {
-    Text(text = "Categorieen", style = MaterialTheme.typography.titleSmall, color = StarWhite)
+    Text(
+        text = "Categorieen",
+        style = MaterialTheme.typography.titleSmall,
+        color = StarWhite
+    )
     Spacer(modifier = Modifier.height(8.dp))
 
-    val categories = listOf(
+    val categories: List<Pair<LearningDomain, String>> = listOf(
         LearningDomain.READING to "Communicatie",
         LearningDomain.WRITING to "Schrijven",
         LearningDomain.MATH to "Getallen",
@@ -292,32 +412,54 @@ fun CategoryAccessSection(
     categories.forEach { (domain, label) ->
         val domainEnabled = profile.isMainCategoryEnabled(domain)
         var expanded by remember(domain) { mutableStateOf(false) }
-        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 6.dp)
+        ) {
             Row(
-                modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 48.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f).clickable { expanded = !expanded }) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { expanded = !expanded }
+                ) {
                     Text(
                         text = if (expanded) "▾" else "▸",
                         color = StarWhite.copy(alpha = 0.75f),
                         style = MaterialTheme.typography.titleMedium
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(label, color = StarWhite, style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        text = label,
+                        color = StarWhite,
+                        style = MaterialTheme.typography.titleMedium
+                    )
                 }
                 Checkbox(
                     checked = domainEnabled,
-                    onCheckedChange = { onUpdateMainCategoryEnabled(domain, it) },
-                    colors = CheckboxDefaults.colors(checkedColor = PlanetGold, checkmarkColor = CockpitGray)
+                    onCheckedChange = { checked -> onUpdateMainCategoryEnabled(domain, checked) },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = PlanetBlue,
+                        checkmarkColor = DeepSpaceBlue
+                    )
                 )
             }
 
             if (domainEnabled && expanded) {
                 getSubCategoriesForDomain(domain.name).forEach { subcategory ->
                     Row(
-                        modifier = Modifier.fillMaxWidth().padding(start = 16.dp).heightIn(min = 40.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp)
+                            .heightIn(min = 40.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -325,12 +467,17 @@ fun CategoryAccessSection(
                             text = subcategory.nameNl,
                             color = StarWhite.copy(alpha = 0.78f),
                             style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.weight(1f).padding(end = 12.dp)
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(end = 12.dp)
                         )
                         Checkbox(
                             checked = profile.isSubcategoryEnabled(subcategory.id),
-                            onCheckedChange = { onUpdateSubcategoryEnabled(subcategory.id, it) },
-                            colors = CheckboxDefaults.colors(checkedColor = PlanetBlue, checkmarkColor = StarWhite)
+                            onCheckedChange = { checked -> onUpdateSubcategoryEnabled(subcategory.id, checked) },
+                            colors = CheckboxDefaults.colors(
+                                checkedColor = PlanetBlue,
+                                checkmarkColor = StarWhite
+                            )
                         )
                     }
                 }
@@ -346,35 +493,58 @@ fun DomainLevelSelector(
     currentLevel: SkillLevel,
     onUpdateLevel: (LearningDomain, SkillLevel) -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
-        Text(text = label, color = StarWhite.copy(alpha = 0.7f), style = MaterialTheme.typography.labelMedium)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    ) {
+        Text(
+            text = label,
+            color = StarWhite.copy(alpha = 0.7f),
+            style = MaterialTheme.typography.labelMedium
+        )
         Row(
-            modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            SkillLevel.entries.forEach { level ->
-                val isSelected = level == currentLevel
-                Surface(
-                    onClick = { onUpdateLevel(domain, level) },
-                    shape = RoundedCornerShape(8.dp),
-                    color = if (isSelected) PlanetGold else Color.White.copy(alpha = 0.05f),
-                    contentColor = if (isSelected) CockpitGray else StarWhite,
-                    modifier = Modifier.heightIn(min = 40.dp).weight(1f)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Text(
-                            text = level.displayLabel(),
-                            style = MaterialTheme.typography.labelLarge,
-                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                        )
+            SkillLevel.entries
+                .filterNot { level -> level == SkillLevel.NOT_APPLICABLE }
+                .forEach { level ->
+                    val isSelected = level == currentLevel
+                    Surface(
+                        onClick = { onUpdateLevel(domain, level) },
+                        shape = RoundedCornerShape(8.dp),
+                        color = if (isSelected) PlanetBlue else Color.White.copy(alpha = 0.05f),
+                        contentColor = if (isSelected) StarWhite else StarWhite,
+                        modifier = Modifier
+                            .heightIn(min = 40.dp)
+                            .weight(1f)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = level.displayLabel(),
+                                style = MaterialTheme.typography.labelLarge,
+                                fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
+                            )
+                        }
                     }
                 }
-            }
         }
     }
 }
 
-private fun SkillLevel.displayLabel(): String = if (this == SkillLevel.NOT_APPLICABLE) "N/A" else (ordinal + 1).toString()
+private fun SkillLevel.displayLabel(): String = (ordinal + 1).toString()
+
+private fun ChildProfile.levelFor(domain: LearningDomain): SkillLevel = when (domain) {
+    LearningDomain.READING -> readingLevel
+    LearningDomain.WRITING -> writingLevel
+    LearningDomain.MATH -> mathLevel
+    LearningDomain.PUZZLE -> puzzleLevel
+    LearningDomain.GEOMETRY -> geometryLevel
+    LearningDomain.WORLD_KNOWLEDGE -> worldKnowledgeLevel
+}
 
 @Composable
 fun EditableSettingTextField(
@@ -395,11 +565,23 @@ fun EditableSettingTextField(
             onValueChange = onValueChange,
             label = { Text(label) },
             singleLine = true,
-            modifier = Modifier.weight(1f).semantics { this.contentDescription = contentDescription },
-            colors = OutlinedTextFieldDefaults.colors(focusedTextColor = StarWhite, unfocusedTextColor = StarWhite)
+            modifier = Modifier
+                .weight(1f)
+                .semantics { this.contentDescription = contentDescription },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = StarWhite,
+                unfocusedTextColor = StarWhite
+            )
         )
-        IconButton(onClick = onSave, modifier = Modifier.size(48.dp)) {
-            Icon(Icons.Default.Check, contentDescription = "$label opslaan", tint = PlanetGold)
+        IconButton(
+            onClick = onSave,
+            modifier = Modifier.size(48.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Check,
+                contentDescription = "$label opslaan",
+                tint = PlanetGold
+            )
         }
     }
 }
@@ -412,7 +594,9 @@ fun LanguageSettingsSection(
     if (profile == null) return
 
     DashboardCard(title = "Taal Instellingen") {
-        LanguageRow("Taal", profile.appLanguage) { onUpdateLanguage(LanguageLayer.ALL, it) }
+        LanguageRow("Taal", profile.appLanguage) { selectedLanguage ->
+            onUpdateLanguage(LanguageLayer.ALL, selectedLanguage)
+        }
     }
 }
 
@@ -425,7 +609,10 @@ fun LanguageRow(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).heightIn(min = 48.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+            .heightIn(min = 48.dp)
     ) {
         Text(text = label, color = StarWhite.copy(alpha = 0.7f))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -435,14 +622,14 @@ fun LanguageRow(
                     onClick = { onLanguageSelected(code) },
                     shape = RoundedCornerShape(8.dp),
                     color = if (isSelected) PlanetBlue else Color.White.copy(alpha = 0.05f),
-                    contentColor = StarWhite,
+                    contentColor = if (isSelected) DeepSpaceBlue else StarWhite,
                     modifier = Modifier.heightIn(min = 40.dp)
                 ) {
                     Text(
                         text = code.uppercase(),
                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                         style = MaterialTheme.typography.labelMedium,
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                        fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
                     )
                 }
             }
@@ -457,47 +644,67 @@ private fun normalizeLanguageCode(code: String): String = when (code) {
     else -> code
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VoiceSettingsSection(
-    availableVoices: StateFlow<List<android.speech.tts.Voice>>,
+    availableVoices: List<Voice>,
     getVoiceSettings: (String) -> Flow<VoiceSettings>,
     onUpdateVoiceSettings: (String, VoiceSettings) -> Unit,
     onTestVoice: (String, String, VoiceSettings) -> Unit
 ) {
-    val voices by availableVoices.collectAsState()
     var selectedLocale by remember { mutableStateOf("nl-BE") }
-    val settings by getVoiceSettings(selectedLocale).collectAsState(initial = VoiceSettings(null, 1.0f, 1.0f))
+    val settings by getVoiceSettings(selectedLocale).collectAsState(
+        initial = VoiceSettings(null, 1.0f, 1.0f)
+    )
 
     DashboardCard(title = "Stem Instellingen") {
-        // Locale Selector
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf("nl-BE", "fr-BE", "fr-FR", "en").forEach { locale ->
                 FilterChip(
                     selected = selectedLocale == locale,
                     onClick = { selectedLocale = locale },
-                    label = { Text(locale) }
+                    label = { Text(locale) },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = PlanetBlue,
+                        selectedLabelColor = DeepSpaceBlue
+                    )
                 )
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Voice Dropdown
-        Text(text = "Kies Stem", style = MaterialTheme.typography.labelMedium, color = StarWhite)
-        voices.filter { voice -> voice.locale.language == selectedLocale.take(2) }.let { filteredVoices ->
-            if (filteredVoices.isEmpty()) {
-                Text("Geen extra stemmen gevonden op dit apparaat.", color = StarWhite.copy(alpha = 0.5f))
-            } else {
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    filteredVoices.forEach { voice ->
-                        Surface(
-                            onClick = { onUpdateVoiceSettings(selectedLocale, settings.copy(voiceId = voice.name)) },
-                            color = if (settings.voiceId == voice.name) PlanetBlue else Color.White.copy(alpha = 0.05f),
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(text = voice.name, modifier = Modifier.padding(8.dp), color = StarWhite)
-                        }
+        Text(
+            text = "Kies Stem",
+            style = MaterialTheme.typography.labelMedium,
+            color = StarWhite
+        )
+
+        val filteredVoices = availableVoices.filter { voice ->
+            voice.locale.language == selectedLocale.take(2)
+        }
+
+        if (filteredVoices.isEmpty()) {
+            Text(
+                text = "Geen extra stemmen gevonden op dit apparaat.",
+                color = StarWhite.copy(alpha = 0.5f)
+            )
+        } else {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                filteredVoices.forEach { voice ->
+                    Surface(
+                        onClick = {
+                            onUpdateVoiceSettings(selectedLocale, settings.copy(voiceId = voice.name))
+                        },
+                        color = if (settings.voiceId == voice.name) PlanetBlue else Color.White.copy(alpha = 0.05f),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = voice.name,
+                            modifier = Modifier.padding(8.dp),
+                            color = StarWhite
+                        )
                     }
                 }
             }
@@ -505,7 +712,6 @@ fun VoiceSettingsSection(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Pitch & Rate
         SliderWithLabel("Toonhoogte (Pitch)", settings.pitch, 0.5f..2.0f) {
             onUpdateVoiceSettings(selectedLocale, settings.copy(pitch = it))
         }
@@ -516,7 +722,9 @@ fun VoiceSettingsSection(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { onTestVoice("Hallo, ik ben de stem van Poincaré.", selectedLocale, settings) },
+            onClick = {
+                onTestVoice("Hallo, ik ben de stem van Poincaré.", selectedLocale, settings)
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Stem Testen")
@@ -525,10 +733,27 @@ fun VoiceSettingsSection(
 }
 
 @Composable
-fun SliderWithLabel(label: String, value: Float, range: ClosedFloatingPointRange<Float>, onValueChange: (Float) -> Unit) {
+fun SliderWithLabel(
+    label: String,
+    value: Float,
+    range: ClosedFloatingPointRange<Float>,
+    onValueChange: (Float) -> Unit
+) {
     Column {
-        Text(text = "$label: ${"%.1f".format(value)}", color = StarWhite, style = MaterialTheme.typography.labelMedium)
-        Slider(value = value, onValueChange = onValueChange, valueRange = range, colors = SliderDefaults.colors(thumbColor = PlanetGold, activeTrackColor = PlanetGold))
+        Text(
+            text = "$label: ${"%.1f".format(value)}",
+            color = StarWhite,
+            style = MaterialTheme.typography.labelMedium
+        )
+        Slider(
+            value = value,
+            onValueChange = onValueChange,
+            valueRange = range,
+            colors = SliderDefaults.colors(
+                thumbColor = PlanetGold,
+                activeTrackColor = PlanetGold
+            )
+        )
     }
 }
 
@@ -560,17 +785,30 @@ fun AnimationSettingsSection(
 }
 
 @Composable
-fun SettingsToggle(label: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+fun SettingsToggle(
+    label: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).heightIn(min = 48.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+            .heightIn(min = 48.dp)
     ) {
         Text(text = label, color = StarWhite)
         Switch(
-            checked = checked, 
+            checked = checked,
             onCheckedChange = onCheckedChange,
-            modifier = Modifier.semantics { contentDescription = "Zet $label aan of uit" }
+            colors = SwitchDefaults.colors(
+                checkedTrackColor = PlanetBlue,
+                checkedThumbColor = StarWhite
+            ),
+            modifier = Modifier.semantics {
+                contentDescription = "Zet $label aan of uit"
+            }
         )
     }
 }
@@ -581,21 +819,28 @@ fun SyncStatusSection(pendingCount: Int) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 48.dp)
         ) {
             Text(text = "Niet gesyncte missies", color = StarWhite)
             Text(
                 text = pendingCount.toString(),
                 color = if (pendingCount > 0) PlanetRed else Color.Green,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.semantics { contentDescription = "Er zijn $pendingCount missies die nog gesynchroniseerd moeten worden" }
+                modifier = Modifier.semantics {
+                    contentDescription = "Er zijn $pendingCount missies die nog gesynchroniseerd moeten worden"
+                }
             )
         }
     }
 }
 
 @Composable
-fun DashboardCard(title: String, content: @Composable ColumnScope.() -> Unit) {
+fun DashboardCard(
+    title: String,
+    content: @Composable ColumnScope.() -> Unit
+) {
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.05f)),
         modifier = Modifier.fillMaxWidth()
@@ -624,7 +869,7 @@ fun ParentDashboardPreview() {
                     name = "Henri",
                     avatarId = "1",
                     rocketColorId = "1",
-                    birthYear = 2018,
+                    birthYear = 2021,
                     readingLevel = SkillLevel.FIRST_GRADE,
                     writingLevel = SkillLevel.FIRST_GRADE,
                     mathLevel = SkillLevel.FIRST_GRADE,
@@ -635,7 +880,7 @@ fun ParentDashboardPreview() {
                 pendingSyncCount = 5,
                 isLoading = false
             ),
-            availableVoices = flowOf(emptyList<android.speech.tts.Voice>()).collectAsState(initial = emptyList()) as StateFlow<List<android.speech.tts.Voice>>,
+            availableVoices = emptyList(),
             getVoiceSettings = { flowOf(VoiceSettings(null, 1.0f, 1.0f)) },
             onUpdateVoiceSettings = { _, _ -> },
             onTestVoice = { _, _, _ -> },
@@ -646,6 +891,7 @@ fun ParentDashboardPreview() {
             onUpdateMainCategoryEnabled = { _, _ -> },
             onUpdateSubcategoryEnabled = { _, _ -> },
             onUpdateGiftedMode = {},
+            onUpdateShowUnassignedExercises = {},
             onUpdateAnimationSettings = {},
             onUpdateLanguage = { _, _ -> },
             onDeleteProfile = {}

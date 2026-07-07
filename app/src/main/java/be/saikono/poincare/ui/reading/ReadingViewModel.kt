@@ -7,6 +7,7 @@ import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.data.sync.SyncManager
 import be.saikono.poincare.model.*
 import be.saikono.poincare.repository.ContentRepository
+import be.saikono.poincare.repository.ProfileRepository
 import be.saikono.poincare.repository.ProgressRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -33,7 +34,7 @@ class ReadingViewModel(
     private val settingsDataStore: SettingsDataStore,
     private val syncManager: SyncManager,
     private val audioService: AudioService,
-    private val profileRepository: be.saikono.poincare.repository.ProfileRepository
+    private val profileRepository: ProfileRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ReadingUiState())
@@ -45,6 +46,8 @@ class ReadingViewModel(
     private var translationsUsed = 0
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
+    private var latestProfile: ChildProfile? = null
+    private var hasContentRequest = false
 
     init {
         observeProfile()
@@ -58,13 +61,17 @@ class ReadingViewModel(
                     else profileRepository.getProfileById(id)
                 }
                 .collect { profile ->
-                    _uiState.update { it.copy(
-                        currentProfileId = profile?.id,
-                        exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE",
-                        supportLanguage = profile?.supportLanguage ?: "nl-BE"
-                    ) }
-                    
-                    if (exercises.isEmpty() && profile != null) {
+                    latestProfile = profile
+                    _uiState.update {
+                        it.copy(
+                            currentProfileId = profile?.id,
+                            exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE",
+                            supportLanguage = profile?.supportLanguage ?: "nl-BE",
+                            isLoading = hasContentRequest && profile != null
+                        )
+                    }
+
+                    if (hasContentRequest && profile != null) {
                         loadContentForProfile(profile)
                     }
                 }
@@ -74,31 +81,62 @@ class ReadingViewModel(
     private fun loadContentForProfile(profile: ChildProfile) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            // Fetch exercises for the child's reading level
             val level = profile.readingLevel
             val loadedExercises = level.toGrade()?.let { grade ->
                 val domainExercises = contentRepository.getExercises(LearningDomain.READING, level)
                 selectedSubcategoryId?.let { subcategoryId ->
-                    contentRepository.getExercises(subcategoryId = subcategoryId, grade = grade, difficultyStars = selectedDifficultyStars)
-                }?.ifEmpty { domainExercises } ?: domainExercises
+                    val subcategoryExercises = contentRepository.getExercises(
+                        subcategoryId = subcategoryId,
+                        grade = grade,
+                        difficultyStars = selectedDifficultyStars
+                    )
+                    if (profile.showUnassignedExercises) {
+                        (subcategoryExercises + domainExercises.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
+                    } else {
+                        subcategoryExercises
+                    }
+                } ?: if (profile.showUnassignedExercises) {
+                    domainExercises
+                } else {
+                    domainExercises.filter { !it.isUnassignedExercise() }
+                }
             }.orEmpty()
-            
+
             exercises = orderUnfinishedFirst(loadedExercises, profile.id)
-            
             if (exercises.isNotEmpty()) {
                 startExercise(0)
             } else {
-                _uiState.update { it.copy(isLoading = false) }
+                _uiState.update {
+                    it.copy(
+                        currentExercise = null,
+                        selectedOption = null,
+                        builtWord = "",
+                        isCorrect = null,
+                        isWrong = false,
+                        isFinished = false,
+                        showFeedback = false,
+                        isLoading = false
+                    )
+                }
             }
         }
     }
 
     fun setSubcategoryId(subcategoryId: String?) {
         selectedSubcategoryId = subcategoryId
+        hasContentRequest = true
+        latestProfile?.let { profile ->
+            loadContentForProfile(profile)
+            return
+        }
+
         viewModelScope.launch {
             val profileId = _uiState.value.currentProfileId
             val profile = profileId?.let { profileRepository.getProfileById(it).first() }
-            if (profile != null) loadContentForProfile(profile)
+            if (profile != null) {
+                latestProfile = profile
+                loadContentForProfile(profile)
+            }
         }
     }
 
@@ -111,7 +149,7 @@ class ReadingViewModel(
         startTime = System.currentTimeMillis()
         translationsUsed = 0
         val exercise = exercises[index]
-        _uiState.update { 
+        _uiState.update {
             it.copy(
                 currentExercise = exercise,
                 selectedOption = null,
@@ -184,7 +222,6 @@ class ReadingViewModel(
         if (_uiState.value.isCorrect == true) return
         val newWord = _uiState.value.builtWord + letter
         _uiState.update { it.copy(builtWord = newWord) }
-        
         val exercise = _uiState.value.currentExercise ?: return
         if (newWord.length >= exercise.localizedAnswer(_uiState.value.exerciseLanguage).length) {
             checkAnswer(newWord)
@@ -200,9 +237,7 @@ class ReadingViewModel(
         val exercise = state.currentExercise ?: return
         val isCorrect = normalizeAnswer(answer) == normalizeAnswer(exercise.localizedAnswer(state.exerciseLanguage))
         val duration = System.currentTimeMillis() - startTime
-
         _uiState.update { it.copy(isCorrect = isCorrect, isWrong = !isCorrect, showFeedback = true) }
-
         if (isCorrect) {
             saveProgress(exercise, duration, true)
             audioService.playSuccess()
@@ -213,10 +248,15 @@ class ReadingViewModel(
     }
 
     private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
-
     private fun String.isWholeInteger(): Boolean = trim().matches(Regex("-?\\d+"))
-
     private fun ExerciseContent.optionSpeechLocale(defaultLocale: String): String = data["audioTargetLocale"] ?: defaultLocale
+    private fun ExerciseContent.isUnassignedExercise(): Boolean = data["subcategoryId"].isNullOrBlank()
+
+    private fun List<ExerciseContent>.unassignedForDifficulty(difficultyStars: Int?): List<ExerciseContent> =
+        filter { exercise ->
+            exercise.isUnassignedExercise() &&
+                (difficultyStars == null || exercise.data["difficultyStars"]?.toIntOrNull() == difficultyStars)
+        }
 
     private suspend fun orderUnfinishedFirst(candidates: List<ExerciseContent>, profileId: String): List<ExerciseContent> {
         val completedIds = progressRepository.getProgressByChild(profileId).first()
@@ -257,7 +297,7 @@ class ReadingViewModel(
         if (currentIndex + 1 < exercises.size) {
             _uiState.update { it.copy(isLoading = true) }
             startExercise(currentIndex + 1)
-        } else {
+        } else if (exercises.isNotEmpty()) {
             exercises = exercises.shuffled()
             _uiState.update { it.copy(isLoading = true) }
             startExercise(0)

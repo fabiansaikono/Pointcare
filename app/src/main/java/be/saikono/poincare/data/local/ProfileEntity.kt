@@ -23,6 +23,7 @@ data class ProfileEntity(
     val puzzleLevel: SkillLevel,
     val hiddenMainCategories: List<String>,
     val hiddenSubcategories: List<String>,
+    val showUnassignedExercises: Boolean,
     val giftedModeEnabled: Boolean,
     val createdAt: Long,
     val updatedAt: Long

@@ -21,6 +21,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import be.saikono.poincare.ui.theme.CockpitGray
+import be.saikono.poincare.ui.theme.DeepSpaceBlue
 import be.saikono.poincare.ui.theme.PlanetGold
 import be.saikono.poincare.ui.theme.StarWhite
 
@@ -82,7 +83,7 @@ fun NumberButton(
 ) {
     val isAction = text == "DEL" || text == "OK"
     val backgroundColor = if (isAction && text == "OK") PlanetGold else Color.White.copy(alpha = 0.1f)
-    val contentColor = if (isAction && text == "OK") CockpitGray else StarWhite
+    val contentColor = if (isAction && text == "OK") DeepSpaceBlue else StarWhite
 
     Box(
         modifier = modifier

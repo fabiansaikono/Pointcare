@@ -6,7 +6,11 @@ import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.model.ChildProfile
 import be.saikono.poincare.model.SkillLevel
 import be.saikono.poincare.repository.ProfileRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -33,9 +37,7 @@ class ProfileViewModel(
                 settingsDataStore.parentPin
             ) { profiles, selectedId, parentPin ->
                 ProfileUiState(profiles = profiles, selectedProfileId = selectedId, parentPin = parentPin)
-            }.collect {
-                _uiState.value = it
-            }
+            }.collect { _uiState.value = it }
         }
     }
 
@@ -53,9 +55,8 @@ class ProfileViewModel(
         readingLevel: SkillLevel,
         writingLevel: SkillLevel,
         mathLevel: SkillLevel,
-        geometryLevel: SkillLevel,
-        worldKnowledgeLevel: SkillLevel,
         puzzleLevel: SkillLevel,
+        showUnassignedExercises: Boolean,
         giftedMode: Boolean,
         onComplete: () -> Unit
     ) {
@@ -64,8 +65,8 @@ class ProfileViewModel(
             val profile = ChildProfile(
                 id = UUID.randomUUID().toString(),
                 name = name,
-                avatarId = "default_avatar", // Placeholder for now
-                rocketColorId = "default_rocket", // Placeholder for now
+                avatarId = "default_avatar",
+                rocketColorId = "default_rocket",
                 birthYear = birthYear,
                 appLanguage = defaultLang,
                 exerciseLanguage = defaultLang,
@@ -75,10 +76,7 @@ class ProfileViewModel(
                 writingLevel = writingLevel,
                 mathLevel = mathLevel,
                 puzzleLevel = puzzleLevel,
-                geometryLevel = geometryLevel,
-                worldKnowledgeLevel = worldKnowledgeLevel,
-                hiddenMainCategories = emptyList(),
-                hiddenSubcategories = emptyList(),
+                showUnassignedExercises = showUnassignedExercises,
                 giftedModeEnabled = giftedMode
             )
             profileRepository.saveProfile(profile)

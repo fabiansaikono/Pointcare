@@ -131,7 +131,7 @@ private fun SudokuGrid(
                                     .background(
                                         when {
                                             isGiven -> Color.White.copy(alpha = 0.16f)
-                                            value != null -> Color.White.copy(alpha = 0.50f)
+                                            value != null -> Color.White.copy(alpha = 0.70f)
                                             else -> Color.White.copy(alpha = 0.06f)
                                         }
                                     )

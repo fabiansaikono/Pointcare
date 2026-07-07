@@ -47,7 +47,11 @@ class SpaceMapViewModel(
                         ) { profile, progress, animations ->
                             val completed = progress.filter { it.answerCorrect }
                             val categoryProgress = LearningDomain.entries.associateWith { domain ->
-                                levelProgressFor(completed.filter { it.domain == domain }.sumOf { it.rewardStampsEarned })
+                                levelProgressFor(
+                                    completed
+                                        .filter { it.domain == domain && !it.isUnassignedExercise() }
+                                        .sumOf { it.rewardStampsEarned }
+                                )
                             }
                             val subcategoryCompletions = completed
                                 .filter { event -> profile?.selectedGradeFor(event.domain)?.let { selectedGrade -> event.grade() == selectedGrade } == true }
@@ -92,6 +96,8 @@ class SpaceMapViewModel(
 
     private fun ProgressEvent.grade(): Int? = metadata["grade"]?.toIntOrNull()
         ?: GRADE_IN_PROGRESS_KEY.find(metadata["progressKey"] ?: exerciseId)?.groupValues?.getOrNull(1)?.toIntOrNull()
+
+    private fun ProgressEvent.isUnassignedExercise(): Boolean = metadata["subcategoryId"].isNullOrBlank()
 
     companion object {
         private val GRADE_IN_PROGRESS_KEY = Regex("_g(\\d+)(?:_|$)")

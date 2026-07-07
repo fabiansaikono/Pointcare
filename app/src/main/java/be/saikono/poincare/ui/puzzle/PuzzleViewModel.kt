@@ -15,8 +15,8 @@ import java.util.UUID
 data class PuzzleUiState(
     val currentExercise: ExerciseContent? = null,
     val availableDigits: List<String> = emptyList(),
-    val placedDigits: Map<Int, String> = emptyMap(), // index to digit
-    val placedIndices: Set<Int> = emptySet(), // indices from availableDigits that were placed
+    val placedDigits: Map<Int, String> = emptyMap(),
+    val placedIndices: Set<Int> = emptySet(),
     val isSolved: Boolean = false,
     val isWrong: Boolean = false,
     val isFinished: Boolean = false,
@@ -45,6 +45,8 @@ class PuzzleViewModel(
     private var startTime = 0L
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
+    private var latestProfile: ChildProfile? = null
+    private var hasContentRequest = false
 
     init {
         observeProfile()
@@ -58,12 +60,16 @@ class PuzzleViewModel(
                     else profileRepository.getProfileById(id)
                 }
                 .collect { profile ->
-                    _uiState.update { it.copy(
-                        currentProfileId = profile?.id,
-                        exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE"
-                    ) }
-                    
-                    if (puzzles.isEmpty() && profile != null) {
+                    latestProfile = profile
+                    _uiState.update {
+                        it.copy(
+                            currentProfileId = profile?.id,
+                            exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE",
+                            isLoading = hasContentRequest && profile != null
+                        )
+                    }
+
+                    if (hasContentRequest && profile != null) {
                         loadContentForProfile(profile)
                     }
                 }
@@ -79,26 +85,64 @@ class PuzzleViewModel(
                 selectedSubcategoryId?.let { subcategoryId ->
                     generatedPuzzleExercise(subcategoryId, level, mathLevel, selectedDifficultyStars)?.let { generatedPuzzle ->
                         listOf(generatedPuzzle)
-                    } ?: contentRepository.getExercises(subcategoryId = subcategoryId, grade = grade, difficultyStars = selectedDifficultyStars)
-                } ?: contentRepository.getExercises(LearningDomain.PUZZLE, level)
+                    } ?: run {
+                        val domainPuzzles = contentRepository.getExercises(LearningDomain.PUZZLE, level)
+                        val subcategoryPuzzles = contentRepository.getExercises(
+                            subcategoryId = subcategoryId,
+                            grade = grade,
+                            difficultyStars = selectedDifficultyStars
+                        )
+                        if (profile.showUnassignedExercises) {
+                            (subcategoryPuzzles + domainPuzzles.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
+                        } else {
+                            subcategoryPuzzles
+                        }
+                    }
+                } ?: run {
+                    val domainPuzzles = contentRepository.getExercises(LearningDomain.PUZZLE, level)
+                    if (profile.showUnassignedExercises) domainPuzzles
+                    else domainPuzzles.filter { !it.isUnassignedExercise() }
+                }
             }.orEmpty()
-            
+
             puzzles = orderUnfinishedFirst(loadedPuzzles, profile.id)
-            
+
             if (puzzles.isNotEmpty()) {
                 startPuzzle(0)
             } else {
-                _uiState.update { it.copy(isLoading = false) }
+                _uiState.update {
+                    it.copy(
+                        currentExercise = null,
+                        availableDigits = emptyList(),
+                        placedDigits = emptyMap(),
+                        placedIndices = emptySet(),
+                        pendingChoiceIndex = null,
+                        isLoading = false,
+                        isSolved = false,
+                        isWrong = false,
+                        isFinished = false,
+                        showFeedback = false
+                    )
+                }
             }
         }
     }
 
     fun setSubcategoryId(subcategoryId: String?) {
         selectedSubcategoryId = subcategoryId
+        hasContentRequest = true
+        latestProfile?.let { profile ->
+            loadContentForProfile(profile)
+            return
+        }
+
         viewModelScope.launch {
             val profileId = _uiState.value.currentProfileId
             val profile = profileId?.let { profileRepository.getProfileById(it).first() }
-            if (profile != null) loadContentForProfile(profile)
+            if (profile != null) {
+                latestProfile = profile
+                loadContentForProfile(profile)
+            }
         }
     }
 
@@ -178,6 +222,30 @@ class PuzzleViewModel(
                 ),
                 answer = "completed"
             )
+            "constellations" -> ExerciseContent(
+                id = "generated-constellations-${level.name.lowercase()}-$stars",
+                domain = LearningDomain.PUZZLE,
+                skill = "constellations",
+                section = ExerciseSection.PUZZLES,
+                level = level,
+                inputMode = InputMode.TAP_CHOICE,
+                prompt = LocalizedText(
+                    nl = "Constellations",
+                    en = "Constellations",
+                    fr = "Constellations"
+                ),
+                data = mapOf(
+                    "mainCategory" to "logic_puzzles",
+                    "subcategoryId" to "constellations",
+                    "grade" to (level.toGrade()?.toString() ?: "1"),
+                    "difficultyStars" to stars.toString(),
+                    "topic" to "Constellations",
+                    "topic_en-US" to "Constellations",
+                    "topic_fr-BE" to "Constellations",
+                    "progressKey" to "constellations-${level.name.lowercase()}-$stars"
+                ),
+                answer = "completed"
+            )
             else -> null
         }
     }
@@ -237,7 +305,7 @@ class PuzzleViewModel(
         currentIndex = index
         startTime = System.currentTimeMillis()
         val puzzle = puzzles[index]
-        _uiState.update { 
+        _uiState.update {
             it.copy(
                 currentExercise = puzzle,
                 availableDigits = puzzle.data["available"]?.split(",") ?: puzzle.localizedOptions(_uiState.value.exerciseLanguage),
@@ -255,7 +323,7 @@ class PuzzleViewModel(
 
     fun onDigitPlaced(slotIndex: Int, digitIndex: Int) {
         if (_uiState.value.isSolved) return
-        
+
         val puzzle = _uiState.value.currentExercise ?: return
         val digit = _uiState.value.availableDigits.getOrNull(digitIndex) ?: return
         if (_uiState.value.pendingChoiceIndex != digitIndex) {
@@ -273,23 +341,19 @@ class PuzzleViewModel(
 
         val newPlaced = _uiState.value.placedDigits.toMutableMap()
         newPlaced[slotIndex] = digit
-        
+
         val newIndices = _uiState.value.placedIndices.toMutableSet()
         newIndices.add(digitIndex)
-        
-        _uiState.update { it.copy(placedDigits = newPlaced, placedIndices = newIndices) }
 
-        // Auto-check if all slots (only one for MVP puzzle) are filled
+        _uiState.update { it.copy(placedDigits = newPlaced, placedIndices = newIndices) }
         checkSolution(newPlaced)
     }
 
     private fun checkSolution(placed: Map<Int, String>) {
         val puzzle = _uiState.value.currentExercise ?: return
-        
-        // For MVP equation puzzles, we expect the answer to match the placed digit
         val userSolution = placed[0] ?: return
         val isCorrect = normalizeAnswer(userSolution) == normalizeAnswer(puzzle.localizedAnswer(_uiState.value.exerciseLanguage))
-        
+
         if (isCorrect) {
             val duration = System.currentTimeMillis() - startTime
             _uiState.update { it.copy(isSolved = true, isWrong = false, showFeedback = true) }
@@ -303,6 +367,14 @@ class PuzzleViewModel(
     }
 
     private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
+
+    private fun ExerciseContent.isUnassignedExercise(): Boolean = data["subcategoryId"].isNullOrBlank()
+
+    private fun List<ExerciseContent>.unassignedForDifficulty(difficultyStars: Int?): List<ExerciseContent> =
+        filter { exercise ->
+            exercise.isUnassignedExercise() &&
+                (difficultyStars == null || exercise.data["difficultyStars"]?.toIntOrNull() == difficultyStars)
+        }
 
     private suspend fun orderUnfinishedFirst(candidates: List<ExerciseContent>, profileId: String): List<ExerciseContent> {
         val completedIds = progressRepository.getProgressByChild(profileId).first()
@@ -349,7 +421,7 @@ class PuzzleViewModel(
     fun nextPuzzle() {
         if (currentIndex + 1 < puzzles.size) {
             startPuzzle(currentIndex + 1)
-        } else {
+        } else if (puzzles.isNotEmpty()) {
             puzzles = puzzles.shuffled()
             startPuzzle(0)
         }

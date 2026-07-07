@@ -12,7 +12,7 @@ import androidx.room.TypeConverters
         StampCardEntity::class,
         SyncQueueEntity::class
     ],
-    version = 6
+    version = 7
 )
 @TypeConverters(Converters::class)
 abstract class PoincareDatabase : RoomDatabase() {

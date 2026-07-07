@@ -20,7 +20,7 @@ class PoincareApplication : Application(), Configuration.Provider {
                     PoincareDatabase::class.java,
                     "poincare-db"
                 ).addMigrations(DatabaseMigrations.MIGRATION_4_5)
-                    .fallbackToDestructiveMigrationFrom(1, 2, 3)
+                    .fallbackToDestructiveMigration()
                     .build()
                 
                 val progressRepository = LocalProgressRepository(database.progressDao())

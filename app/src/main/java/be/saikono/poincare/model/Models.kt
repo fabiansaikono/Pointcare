@@ -7,17 +7,30 @@ val LocalAppLanguage = staticCompositionLocalOf { "nl" }
 
 @Serializable
 enum class SkillLevel {
-    FIRST_GRADE, SECOND_GRADE, THIRD_GRADE, FOURTH_GRADE, FIFTH_GRADE, SIXTH_GRADE, NOT_APPLICABLE
+    FIRST_GRADE,
+    SECOND_GRADE,
+    THIRD_GRADE,
+    FOURTH_GRADE,
+    FIFTH_GRADE,
+    SIXTH_GRADE,
+    NOT_APPLICABLE
 }
 
 @Serializable
 enum class LearningDomain {
-    MATH, READING, WRITING, PUZZLE, WORLD_KNOWLEDGE, GEOMETRY
+    MATH,
+    READING,
+    WRITING,
+    PUZZLE,
+    WORLD_KNOWLEDGE,
+    GEOMETRY
 }
 
 @Serializable
 enum class SyncStatus {
-    PENDING, SYNCED, FAILED
+    PENDING,
+    SYNCED,
+    FAILED
 }
 
 @Serializable
@@ -39,16 +52,14 @@ data class ChildProfile(
     val puzzleLevel: SkillLevel = SkillLevel.FIRST_GRADE,
     val hiddenMainCategories: List<String> = emptyList(),
     val hiddenSubcategories: List<String> = emptyList(),
+    val showUnassignedExercises: Boolean = false,
     val giftedModeEnabled: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
-    val updatedAt: Long = System.currentTimeMillis(),
+    val updatedAt: Long = System.currentTimeMillis()
 )
 
-fun ChildProfile.isMainCategoryEnabled(domain: LearningDomain): Boolean =
-    domain.name !in hiddenMainCategories
-
-fun ChildProfile.isSubcategoryEnabled(subcategoryId: String): Boolean =
-    subcategoryId !in hiddenSubcategories
+fun ChildProfile.isMainCategoryEnabled(domain: LearningDomain): Boolean = domain.name !in hiddenMainCategories
+fun ChildProfile.isSubcategoryEnabled(subcategoryId: String): Boolean = subcategoryId !in hiddenSubcategories
 
 fun formatVisibleNumbers(value: String): String = value
     .replace(GENERATED_EURO_WHOLE_NUMBER_REGEX) { match ->
@@ -64,31 +75,34 @@ fun formatVisibleNumbers(value: String): String = value
 
 fun isDisplayNumber(value: String): Boolean {
     val trimmed = value.trim()
-    return trimmed.isNotEmpty() && trimmed.all { char -> 
-        (char.isDigit() || char == '.' || char == ',' || char == '-' || char == ' ')
-    }
+    return trimmed.isNotEmpty() && trimmed.all { it.isDigit() || it == '.' || it == ',' || it == '-' || it == ' ' }
 }
 
 fun normalizeAnswer(value: String): String {
     val normalized = formatVisibleNumbers(value).trim().lowercase().replace("\\s+".toRegex(), " ")
-    return if (normalized.any { it.isDigit() }) normalized.replace(".", "").replace(" ", "").replace(',', '.') else normalized
+    return if (normalized.any { it.isDigit() }) {
+        normalized.replace(".", "").replace(" ", "").replace(',', '.')
+    } else {
+        normalized
+    }
 }
 
-private val GENERATED_WHOLE_NUMBER_REGEX = Regex("(?<![\\d.])0\\.(\\d{3})(?![\\d,])")
-private val GENERATED_EURO_WHOLE_NUMBER_REGEX = Regex("€\\s*0\\.(\\d{3})(?![\\d,])")
+private val GENERATED_EURO_WHOLE_NUMBER_REGEX = Regex("€\\s*(\\d+)\\.000(?:,0)?")
 private val EURO_SPACING_REGEX = Regex("€\\s*")
-private val LARGE_WHOLE_NUMBER_REGEX = Regex("(?<![\\d:.,])\\d{4,}(?![\\d:.,])")
+private val GENERATED_WHOLE_NUMBER_REGEX = Regex("(?<![\\d.,])(\\d+)\\.000(?:,0)?(?![\\d.,])")
+private val LARGE_WHOLE_NUMBER_REGEX = Regex("(?<![\\d.,])\\d{4,}(?![\\d.,])")
 
+@Serializable
 data class LevelProgress(
     val level: Int,
     val totalPoints: Int,
     val currentLevelPoints: Int,
     val pointsNeededForNextLevel: Int,
-    val progressFraction: Float,
+    val progressFraction: Float
 )
 
 fun pointsNeededForLevel(level: Int): Int = when {
-    level <= 0 -> 0
+    level <= 0 -> 100
     level == 1 -> 100
     else -> 100 + level * 5
 }
@@ -114,10 +128,15 @@ fun missionPointsFor(exercise: ExerciseContent, correct: Boolean): Int {
     if (!correct) return 1
     val difficulty = exercise.data["difficultyStars"]?.toIntOrNull()?.coerceIn(1, 3) ?: 1
     val typeBonus = when (exercise.inputMode) {
-        InputMode.MATH_CROSSWORD, InputMode.SUDOKU_GRID -> 18
-        InputMode.DRAG_DROP_DIGITS, InputMode.DRAG_DROP_LETTERS, InputMode.TRACE_LETTER -> 10
+        InputMode.MATH_CROSSWORD,
+        InputMode.SUDOKU_GRID,
+        InputMode.CALCULATOR_PUZZLE -> 18
+        InputMode.DRAG_DROP_DIGITS,
+        InputMode.DRAG_DROP_LETTERS,
+        InputMode.TRACE_LETTER -> 10
         InputMode.CUSTOM_NUMBER_PAD -> 8
-        InputMode.TAP_CHOICE, InputMode.LISTEN_AND_SELECT -> 5
+        InputMode.TAP_CHOICE,
+        InputMode.LISTEN_AND_SELECT -> 5
         else -> 6
     }
     return (difficulty * 10 + typeBonus).coerceIn(1, 50)
@@ -146,8 +165,8 @@ data class ProgressEvent(
 data class ParentReward(
     val id: String,
     val childProfileId: String,
-    val tier: Int, // 1, 2, 3
-    val label: Map<String, String>, // locale to label map
+    val tier: Int,
+    val label: Map<String, String>,
     val stampsRequired: Int,
     val currentStamps: Int = 0,
     val isClaimed: Boolean = false,

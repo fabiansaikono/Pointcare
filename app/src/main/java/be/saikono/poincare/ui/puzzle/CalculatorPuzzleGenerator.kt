@@ -170,7 +170,7 @@ object CalculatorPuzzleGenerator {
     }
 
     private fun prettyExpression(expression: String): String {
-        return formatExpressionNumbers(expression)
+        return expression
             .replace("*", " × ")
             .replace("/", " ÷ ")
             .replace("+", " + ")
@@ -178,13 +178,6 @@ object CalculatorPuzzleGenerator {
             .replace(Regex("\\s+"), " ")
             .trim()
             .replace("( - ", "(-")
-    }
-
-    private fun formatExpressionNumbers(expression: String): String {
-        return Regex("\\d+(?:\\.\\d+)?").replace(expression) { match ->
-            val value = match.value.toDoubleOrNull()
-            if (value == null) match.value else formatNumber(value)
-        }
     }
 
     private fun normalizeResult(value: Double): Double {

@@ -20,11 +20,8 @@ class LocalProfileRepository(private val profileDao: ProfileDao) : ProfileReposi
     override fun getProfileById(id: String): Flow<ChildProfile?> =
         profileDao.getProfileByIdFlow(id).map { it?.toModel() }
 
-    override suspend fun saveProfile(profile: ChildProfile) =
-        profileDao.insertProfile(profile.toEntity())
-
-    override suspend fun deleteProfile(profile: ChildProfile) =
-        profileDao.deleteProfile(profile.toEntity())
+    override suspend fun saveProfile(profile: ChildProfile) = profileDao.insertProfile(profile.toEntity())
+    override suspend fun deleteProfile(profile: ChildProfile) = profileDao.deleteProfile(profile.toEntity())
 }
 
 private fun ProfileEntity.toModel() = ChildProfile(
@@ -40,11 +37,12 @@ private fun ProfileEntity.toModel() = ChildProfile(
     readingLevel = readingLevel,
     writingLevel = writingLevel,
     mathLevel = mathLevel,
-    puzzleLevel = puzzleLevel,
     geometryLevel = geometryLevel,
     worldKnowledgeLevel = worldKnowledgeLevel,
+    puzzleLevel = puzzleLevel,
     hiddenMainCategories = hiddenMainCategories,
     hiddenSubcategories = hiddenSubcategories,
+    showUnassignedExercises = showUnassignedExercises,
     giftedModeEnabled = giftedModeEnabled,
     createdAt = createdAt,
     updatedAt = updatedAt
@@ -63,11 +61,12 @@ private fun ChildProfile.toEntity() = ProfileEntity(
     readingLevel = readingLevel,
     writingLevel = writingLevel,
     mathLevel = mathLevel,
-    puzzleLevel = puzzleLevel,
     geometryLevel = geometryLevel,
     worldKnowledgeLevel = worldKnowledgeLevel,
+    puzzleLevel = puzzleLevel,
     hiddenMainCategories = hiddenMainCategories,
     hiddenSubcategories = hiddenSubcategories,
+    showUnassignedExercises = showUnassignedExercises,
     giftedModeEnabled = giftedModeEnabled,
     createdAt = createdAt,
     updatedAt = updatedAt

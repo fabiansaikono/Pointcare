@@ -171,7 +171,7 @@ fun ReadingContent(
                 val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
                 val buttonColor = when {
                     uiState.isFinished -> PlanetGold
-                    uiState.isCorrect == true -> PlanetBlue
+                    uiState.isCorrect == true -> PlanetGold
                     uiState.isWrong -> PlanetRed
                     else -> Color.Gray.copy(alpha = 0.5f)
                 }
@@ -188,7 +188,7 @@ fun ReadingContent(
                     Text(
                         text = buttonText, 
                         color = if (uiState.isCorrect == true || uiState.isFinished) DeepSpaceBlue else StarWhite,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Medium
                     )
                 }
             } else {
