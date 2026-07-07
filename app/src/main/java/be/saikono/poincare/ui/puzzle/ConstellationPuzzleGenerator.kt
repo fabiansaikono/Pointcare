@@ -28,6 +28,12 @@ object ConstellationPuzzleGenerator {
         val dx = (1f - scale) / 2f + (random.nextFloat() - 0.5f) * 0.025f
         val dy = (1f - scale) / 2f + (random.nextFloat() - 0.5f) * 0.025f
 
+        val labelsByStarId = generatedLabelsForTemplate(
+            template = template,
+            grade = normalizedGrade,
+            difficultyStars = normalizedStars,
+            random = random
+        )
         val targetStars = template.stars.mapIndexed { index, star ->
             val x = clamp01(dx + star.x * scale + randomJitter(random, jitter))
             val y = clamp01(dy + star.y * scale + randomJitter(random, jitter))
@@ -38,6 +44,7 @@ object ConstellationPuzzleGenerator {
                 y = y,
                 isTarget = true,
                 order = index + 1,
+                label = labelsByStarId[star.id] ?: (index + 1).toString(),
                 brightness = star.brightness
             )
         }
@@ -93,6 +100,7 @@ object ConstellationPuzzleGenerator {
                     y = y,
                     isTarget = false,
                     order = null,
+                    label = null,
                     brightness = 0.55f + random.nextFloat() * 0.35f
                 )
             }
@@ -104,6 +112,210 @@ object ConstellationPuzzleGenerator {
         (random.nextFloat() - 0.5f) * amount
 
     private fun clamp01(value: Float): Float = min(0.94f, max(0.06f, value))
+
+    private enum class LabelStyle { Counting, Odd, Multiples, Fractions, Expressions }
+
+    private fun generatedLabelsForTemplate(
+        template: Template,
+        grade: Int,
+        difficultyStars: Int,
+        random: Random
+    ): Map<String, String> {
+        val baseLabels = generatedLabels(
+            count = template.stars.size,
+            grade = grade,
+            difficultyStars = difficultyStars,
+            random = random
+        )
+        val labels = template.stars.mapIndexed { index, star ->
+            star.id to baseLabels.getOrElse(index) { (index + 1).toString() }
+        }.toMap().toMutableMap()
+
+        val neighboursByStarId = mutableMapOf<String, MutableSet<String>>()
+        template.stars.forEach { star -> neighboursByStarId.getOrPut(star.id) { mutableSetOf() } }
+        template.connections.forEach { (from, to) ->
+            neighboursByStarId.getOrPut(from) { mutableSetOf() }.add(to)
+            neighboursByStarId.getOrPut(to) { mutableSetOf() }.add(from)
+        }
+
+        val components = connectedComponents(template.stars.map { it.id }, neighboursByStarId)
+
+        // Separate disconnected one-line components must be visually/logically clear.
+        // Example: one edge can show 2 -> 4, another 52 -> 54 instead of reusing the same labels.
+        components.forEachIndexed { componentIndex, component ->
+            val componentConnections = template.connections.filter { (from, to) ->
+                from in component && to in component
+            }
+            if (component.size == 2 && componentConnections.size == 1) {
+                val orderedPair = componentConnections.first()
+                val pairLabels = separateEdgeLabels(
+                    componentIndex = componentIndex,
+                    grade = grade,
+                    difficultyStars = difficultyStars,
+                    random = random
+                )
+                labels[orderedPair.first] = pairLabels.first
+                labels[orderedPair.second] = pairLabels.second
+            }
+        }
+
+        // Branches are different: when multiple lines leave one point, the destination labels
+        // should be equivalent, so it is clear those stars belong together.
+        neighboursByStarId
+            .filterValues { neighbours -> neighbours.size > 1 }
+            .keys
+            .sorted()
+            .forEachIndexed { branchIndex, branchStarId ->
+                val neighbours = neighboursByStarId[branchStarId].orEmpty().sorted()
+                val equivalentLabels = equivalentBranchLabels(
+                    count = neighbours.size,
+                    grade = grade,
+                    difficultyStars = difficultyStars,
+                    branchIndex = branchIndex,
+                    random = random
+                )
+                neighbours.forEachIndexed { index, neighbourId ->
+                    labels[neighbourId] = equivalentLabels[index % equivalentLabels.size]
+                }
+            }
+
+        return labels
+    }
+
+    private fun connectedComponents(
+        starIds: List<String>,
+        neighboursByStarId: Map<String, Set<String>>
+    ): List<Set<String>> {
+        val visited = mutableSetOf<String>()
+        val result = mutableListOf<Set<String>>()
+        starIds.forEach { start ->
+            if (start !in visited) {
+                val component = mutableSetOf<String>()
+                val stack = mutableListOf(start)
+                while (stack.isNotEmpty()) {
+                    val current = stack.removeAt(stack.lastIndex)
+                    if (current in visited) continue
+                    visited += current
+                    component += current
+                    neighboursByStarId[current].orEmpty().forEach { neighbour ->
+                        if (neighbour !in visited) stack += neighbour
+                    }
+                }
+                result += component
+            }
+        }
+        return result
+    }
+
+    private fun separateEdgeLabels(
+        componentIndex: Int,
+        grade: Int,
+        difficultyStars: Int,
+        random: Random
+    ): Pair<String, String> {
+        val step = when {
+            grade >= 4 || difficultyStars >= 3 -> listOf(2, 3, 5, 6)[(componentIndex + random.nextInt(4)) % 4]
+            grade >= 2 -> listOf(2, 3, 4)[(componentIndex + random.nextInt(3)) % 3]
+            else -> 2
+        }
+        val base = when {
+            grade >= 4 || difficultyStars >= 3 -> 52 + componentIndex * 10
+            grade >= 2 -> 12 + componentIndex * 10
+            else -> 2 + componentIndex * 10
+        }
+        return base.toString() to (base + step).toString()
+    }
+
+    private fun equivalentBranchLabels(
+        count: Int,
+        grade: Int,
+        difficultyStars: Int,
+        branchIndex: Int,
+        random: Random
+    ): List<String> {
+        val minimumCount = count.coerceAtLeast(1)
+        return when {
+            grade >= 4 && difficultyStars >= 3 -> {
+                val target = listOf(12, 18, 24, 30, 36)[(branchIndex + random.nextInt(5)) % 5]
+                expressionVariantsFor(target).take(minimumCount).ifEmpty { List(minimumCount) { target.toString() } }
+            }
+            grade >= 3 && difficultyStars >= 2 -> {
+                val numerator = (branchIndex + 1) * 2
+                val denominator = listOf(3, 4, 5)[(branchIndex + random.nextInt(3)) % 3]
+                List(minimumCount) { index ->
+                    val multiplier = index + 1
+                    "${numerator * multiplier}/${denominator * multiplier}"
+                }
+            }
+            grade >= 2 -> {
+                val factor = listOf(2, 3, 4, 5, 7)[(branchIndex + random.nextInt(5)) % 5]
+                val value = factor * (branchIndex + 2)
+                List(minimumCount) { value.toString() }
+            }
+            else -> {
+                val value = 1 + branchIndex * 2
+                List(minimumCount) { value.toString() }
+            }
+        }
+    }
+
+    private fun expressionVariantsFor(target: Int): List<String> {
+        val multiplicationPairs = (1..target)
+            .filter { divisor -> target % divisor == 0 }
+            .map { divisor -> divisor to target / divisor }
+            .filter { (left, right) -> left <= 9 && right <= 12 }
+            .map { (left, right) -> "${left}×${right}" }
+
+        val additionPairs = listOf(
+            "${target / 2}+${target - target / 2}",
+            "${target + 3}-3",
+            "${target - 2}+2"
+        )
+
+        return (multiplicationPairs + additionPairs).distinct()
+    }
+
+    private fun generatedLabels(
+        count: Int,
+        grade: Int,
+        difficultyStars: Int,
+        random: Random
+    ): List<String> {
+        val availableStyles = when {
+            grade <= 1 && difficultyStars <= 1 -> listOf(LabelStyle.Counting, LabelStyle.Odd)
+            grade <= 2 -> listOf(LabelStyle.Counting, LabelStyle.Odd, LabelStyle.Multiples)
+            grade <= 3 -> listOf(LabelStyle.Odd, LabelStyle.Multiples, LabelStyle.Fractions)
+            else -> listOf(LabelStyle.Multiples, LabelStyle.Fractions, LabelStyle.Expressions)
+        }
+        val style = availableStyles[random.nextInt(availableStyles.size)]
+        return when (style) {
+            LabelStyle.Counting -> List(count) { index -> (index + 1).toString() }
+            LabelStyle.Odd -> List(count) { index -> (1 + index * 2).toString() }
+            LabelStyle.Multiples -> {
+                val factor = when {
+                    grade >= 5 -> listOf(6, 7, 8, 9, 12)[random.nextInt(5)]
+                    grade >= 3 -> listOf(3, 4, 5, 6, 7)[random.nextInt(5)]
+                    else -> listOf(2, 3, 5, 10)[random.nextInt(4)]
+                }
+                List(count) { index -> ((index + 1) * factor).toString() }
+            }
+            LabelStyle.Fractions -> {
+                val denominator = when {
+                    grade >= 5 -> listOf(3, 4, 5, 6)[random.nextInt(4)]
+                    else -> listOf(2, 3, 4)[random.nextInt(3)]
+                }
+                List(count) { index -> "${index + 1}/$denominator" }
+            }
+            LabelStyle.Expressions -> {
+                val multipliers = listOf(3, 4, 5, 6, 7, 8, 9)
+                List(count) { index ->
+                    val left = index + 1
+                    val right = multipliers[(index + random.nextInt(multipliers.size)) % multipliers.size]
+                    "${left}×${right}"
+                }
+            }
+        }
+    }
 
     private data class Template(
         val id: String,

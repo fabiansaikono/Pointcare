@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -213,49 +214,62 @@ fun CalculatorPuzzleGame(
             .padding(12.dp)
     ) {
         val useTwoColumns = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE || maxWidth >= 720.dp
-        val compactLayout = useTwoColumns || maxHeight < 780.dp
+        val compactLayout = useTwoColumns || maxHeight < 700.dp
 
         if (useTwoColumns) {
             Row(
                 modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(14.dp),
-                verticalAlignment = Alignment.Top
+                horizontalArrangement = Arrangement.spacedBy(18.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                CalculatorPuzzleInfoColumn(
-                    copy = copy,
-                    challenge = challenge,
-                    mode = mode,
-                    display = display,
-                    feedback = feedback,
-                    feedbackIsCorrect = feedbackIsCorrect,
-                    tipCount = tipCount,
-                    isComplete = challenge != null && feedbackIsCorrect == true,
-                    compact = true,
-                    onQuestionClick = ::speakQuestion,
-                    onRandomExercise = ::startRandomExercise,
-                    onReset = ::resetPuzzle,
-                    onNextMission = ::startRandomExercise,
+                Box(
                     modifier = Modifier
                         .weight(1f)
-                        .fillMaxHeight()
-                )
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CalculatorPuzzleInfoColumn(
+                        copy = copy,
+                        challenge = challenge,
+                        mode = mode,
+                        display = display,
+                        feedback = feedback,
+                        feedbackIsCorrect = feedbackIsCorrect,
+                        tipCount = tipCount,
+                        isComplete = challenge != null && feedbackIsCorrect == true,
+                        compact = true,
+                        spaceEvenly = true,
+                        onQuestionClick = ::speakQuestion,
+                        onRandomExercise = ::startRandomExercise,
+                        onReset = ::resetPuzzle,
+                        onNextMission = ::startRandomExercise,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.94f)
+                    )
+                }
 
-                CalculatorKeypad(
-                    copy = copy,
-                    tipCount = tipCount,
-                    tipEnabled = challenge != null && tipCount < 3,
-                    onTip = { tipCount = (tipCount + 1).coerceAtMost(3) },
-                    onKeyPressed = ::pressKey,
-                    compact = true,
+                Box(
                     modifier = Modifier
                         .weight(0.9f)
-                        .fillMaxHeight()
-                )
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CalculatorKeypad(
+                        copy = copy,
+                        tipCount = tipCount,
+                        tipEnabled = challenge != null && tipCount < 3,
+                        onTip = { tipCount = (tipCount + 1).coerceAtMost(3) },
+                        onKeyPressed = ::pressKey,
+                        compact = false,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
         } else {
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(if (compactLayout) 10.dp else 14.dp)
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
                 CalculatorPuzzleInfoColumn(
                     copy = copy,
@@ -267,11 +281,14 @@ fun CalculatorPuzzleGame(
                     tipCount = tipCount,
                     isComplete = challenge != null && feedbackIsCorrect == true,
                     compact = compactLayout,
+                    spaceEvenly = true,
                     onQuestionClick = ::speakQuestion,
                     onRandomExercise = ::startRandomExercise,
                     onReset = ::resetPuzzle,
                     onNextMission = ::startRandomExercise,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
                 )
 
                 CalculatorKeypad(
@@ -299,24 +316,22 @@ private fun CalculatorPuzzleInfoColumn(
     tipCount: Int,
     isComplete: Boolean,
     compact: Boolean,
+    spaceEvenly: Boolean,
     onQuestionClick: () -> Unit,
     onRandomExercise: () -> Unit,
     onReset: () -> Unit,
     onNextMission: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val sectionSpacing = if (compact) 14.dp else 20.dp
+    val sectionSpacing = if (compact) 20.dp else 28.dp
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(sectionSpacing)
+        verticalArrangement = if (spaceEvenly) {
+            Arrangement.SpaceEvenly
+        } else {
+            Arrangement.spacedBy(sectionSpacing)
+        }
     ) {
-        Text(
-            text = copy.title,
-            color = StarWhite,
-            fontSize = if (compact) 20.sp else 23.sp,
-            fontWeight = FontWeight.Bold
-        )
-
         CalculatorTopActions(
             copy = copy,
             compact = compact,
@@ -366,7 +381,7 @@ private fun CalculatorTopActions(
     onReset: () -> Unit,
     onNextMission: () -> Unit
 ) {
-    val actionHeight = if (compact) 38.dp else 42.dp
+    val actionHeight = if (compact) 42.dp else 46.dp
     val secondaryLabel = if (isComplete) copy.nextMission else copy.reset
     val secondaryAction = if (isComplete) onNextMission else onReset
     Row(
@@ -427,7 +442,7 @@ private fun ChallengeCard(
     val questionText = if (hasQuestion) {
         calculatorPuzzleQuestionText(copy, challenge.expression)
     } else {
-        copy.noQuestionTitle
+        removeDotAfterTrailingEquals(copy.noQuestionTitle)
     }
 
     Card(
@@ -529,8 +544,8 @@ private fun CalculatorKeypad(
     compact: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val keyHeight = if (compact) 46.dp else 54.dp
-    val gap = if (compact) 8.dp else 10.dp
+    val keyHeight = if (compact) 48.dp else 56.dp
+    val gap = if (compact) 10.dp else 12.dp
     val tipLabel = copy.tip
 
     Column(
@@ -561,26 +576,29 @@ private fun CalculatorKeypad(
             keyHeight = keyHeight,
             gap = gap
         )
-        Row(horizontalArrangement = Arrangement.spacedBy(gap), modifier = Modifier.fillMaxWidth()) {
-            CalculatorKey(
-                label = "0",
-                onClick = { onKeyPressed("0") },
-                modifier = Modifier.weight(1f),
-                height = keyHeight
-            )
-            CalculatorKey(
-                label = ".",
-                onClick = { onKeyPressed(".") },
-                modifier = Modifier.weight(1f),
-                height = keyHeight
-            )
-            CalculatorActionKey(
-                label = tipLabel,
-                onClick = onTip,
-                enabled = tipEnabled,
-                modifier = Modifier.weight(2f),
-                height = keyHeight
-            )
+        BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+            val singleKeyWidth = (maxWidth - gap * 3f) / 4f
+            Row(horizontalArrangement = Arrangement.spacedBy(gap), modifier = Modifier.fillMaxWidth()) {
+                CalculatorKey(
+                    label = "0",
+                    onClick = { onKeyPressed("0") },
+                    modifier = Modifier.width(singleKeyWidth),
+                    height = keyHeight
+                )
+                CalculatorKey(
+                    label = ".",
+                    onClick = { onKeyPressed(".") },
+                    modifier = Modifier.width(singleKeyWidth),
+                    height = keyHeight
+                )
+                CalculatorActionKey(
+                    label = tipLabel,
+                    onClick = onTip,
+                    enabled = tipEnabled,
+                    modifier = Modifier.width(singleKeyWidth * 2f + gap),
+                    height = keyHeight
+                )
+            }
         }
     }
 }
@@ -662,6 +680,10 @@ private fun CalculatorActionKey(
             )
         }
     }
+}
+
+private fun removeDotAfterTrailingEquals(text: String): String {
+    return if (text.endsWith("=.")) text.dropLast(1) else text
 }
 
 private fun calculatorPuzzleQuestionText(copy: CalculatorPuzzleCopy, expression: String): String {

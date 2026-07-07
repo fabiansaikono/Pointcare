@@ -47,7 +47,7 @@ fun PuzzleScreen(
         onNavigateBack = { viewModel.stopAudio(); onNavigateBack() },
         onDigitPlaced = viewModel::onDigitPlaced,
         onQuestionClick = viewModel::playCurrentQuestion,
-        onGeneratedPuzzleComplete = viewModel::onGeneratedPuzzleComplete,
+        onGeneratedPuzzleComplete = viewModel::onGeneratedPuzzleComplete, onGalaxyconComplete = viewModel::onGalaxyconComplete,
         onCalculatorPuzzleAttempt = viewModel::onCalculatorPuzzleAttempt,
         onNextPuzzle = viewModel::nextPuzzle
     )
@@ -59,7 +59,7 @@ fun PuzzleContent(
     onNavigateBack: () -> Unit,
     onDigitPlaced: (Int, Int) -> Unit,
     onQuestionClick: () -> Unit,
-    onGeneratedPuzzleComplete: () -> Unit,
+    onGeneratedPuzzleComplete: () -> Unit, onGalaxyconComplete: (GalaxyconRunResult) -> Unit,
     onCalculatorPuzzleAttempt: (CalculatorPuzzleAttempt) -> Unit,
     onNextPuzzle: () -> Unit
 ) {
@@ -72,8 +72,9 @@ fun PuzzleContent(
             .background(DeepSpaceBlue)
     ) {
         SpaceBackground()
-        val isGeneratedPuzzle = puzzle?.data?.get("subcategoryId") in setOf("sudoku", "math-crosswords", "calculator-puzzle", "constellations")
-
+        val generatedSubcategoryId = puzzle?.data?.get("subcategoryId")
+        val isGeneratedPuzzle = generatedSubcategoryId in setOf("sudoku", "math-crosswords", "calculator-puzzle", "constellations", GALAXYCON_SUBCATEGORY_ID)
+        val generatedPuzzleHandlesOwnMissionButtons = generatedSubcategoryId in setOf("calculator-puzzle", "constellations")
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -143,7 +144,7 @@ fun PuzzleContent(
                         onComplete = onGeneratedPuzzleComplete,
                         modifier = Modifier.weight(1f)
                     )
-                } else {
+                } else if (subcategoryId == GALAXYCON_SUBCATEGORY_ID) { GalaxyconGame( language = uiState.exerciseLanguage, level = puzzle.level, initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1, onComplete = onGalaxyconComplete, modifier = Modifier.weight(1f) ) } else {
                     Text(
                         text = puzzle.prompt.get(uiState.exerciseLanguage),
                         style = MaterialTheme.typography.headlineSmall,

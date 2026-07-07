@@ -1,8 +1,14 @@
 package be.saikono.poincare.ui.puzzle
 
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -16,7 +22,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -24,7 +29,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,8 +42,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
@@ -55,7 +60,6 @@ import be.saikono.poincare.ui.theme.DeepSpaceBlue
 import be.saikono.poincare.ui.theme.NebulaPurple
 import be.saikono.poincare.ui.theme.PlanetBlue
 import be.saikono.poincare.ui.theme.PlanetGold
-import be.saikono.poincare.ui.theme.PlanetRed
 import be.saikono.poincare.ui.theme.StarWhite
 import kotlin.math.roundToInt
 
@@ -80,7 +84,6 @@ fun ConstellationsPuzzleGame(
             )
         )
     }
-    var firstSelectedStarId by remember(puzzle.id) { mutableStateOf<String?>(null) }
     var selectedEdges by remember(puzzle.id) { mutableStateOf<Set<ConstellationEdge>>(emptySet()) }
     var highlightedTip by remember(puzzle.id) { mutableStateOf<ConstellationEdge?>(null) }
     var feedback by remember(puzzle.id) { mutableStateOf<String?>(null) }
@@ -102,7 +105,6 @@ fun ConstellationsPuzzleGame(
     }
 
     fun resetPath() {
-        firstSelectedStarId = null
         selectedEdges = emptySet()
         highlightedTip = null
         feedback = null
@@ -115,32 +117,20 @@ fun ConstellationsPuzzleGame(
         feedback = if (missing == null) copy.completed else copy.tipConnect
     }
 
-    fun onStarTapped(star: ConstellationStar) {
-        if (isComplete) return
+    fun onConnectionDrawn(fromStarId: String, toStarId: String) {
+        if (isComplete || fromStarId == toStarId) return
         highlightedTip = null
-        val first = firstSelectedStarId
-        if (first == null) {
-            firstSelectedStarId = star.id
-            feedback = copy.firstStarSelected
-            return
-        }
-        if (first == star.id) {
-            firstSelectedStarId = null
-            feedback = null
-            return
-        }
 
-        val edge = ConstellationEdge.of(first, star.id)
+        val edge = ConstellationEdge.of(fromStarId, toStarId)
         val edgeIsRequired = edge in requiredEdges
         val alreadyConnected = edge in selectedEdges
         val newSelectedEdges = if (edgeIsRequired && !alreadyConnected) selectedEdges + edge else selectedEdges
         selectedEdges = newSelectedEdges
-        firstSelectedStarId = if (edgeIsRequired && !alreadyConnected) star.id else null
 
-        val completedAfterTap = newSelectedEdges.containsAll(requiredEdges)
+        val completedAfterDrag = newSelectedEdges.containsAll(requiredEdges)
         feedback = when {
             alreadyConnected -> copy.alreadyConnected
-            edgeIsRequired -> if (completedAfterTap) copy.completed else copy.correctConnection
+            edgeIsRequired -> if (completedAfterDrag) copy.completed else copy.correctConnection
             else -> copy.wrongConnection
         }
 
@@ -148,10 +138,10 @@ fun ConstellationsPuzzleGame(
             ConstellationConnectionAttempt(
                 puzzleId = puzzle.id,
                 constellationId = puzzle.templateId,
-                fromStarId = first,
-                toStarId = star.id,
+                fromStarId = fromStarId,
+                toStarId = toStarId,
                 correct = edgeIsRequired && !alreadyConnected,
-                completed = completedAfterTap,
+                completed = completedAfterDrag,
                 selectedConnectionCount = newSelectedEdges.size,
                 requiredConnectionCount = requiredEdges.size
             )
@@ -169,7 +159,7 @@ fun ConstellationsPuzzleGame(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ConstellationsInfoPanel(
+            ConstellationsSidePanel(
                 puzzle = puzzle,
                 copy = copy,
                 exerciseLanguage = exerciseLanguage,
@@ -187,11 +177,8 @@ fun ConstellationsPuzzleGame(
                 puzzle = puzzle,
                 selectedEdges = selectedEdges,
                 highlightedTip = highlightedTip,
-                firstSelectedStarId = firstSelectedStarId,
                 isComplete = isComplete,
-                difficultyStars = difficultyStars,
-                copy = copy,
-                onStarTapped = ::onStarTapped,
+                onConnectionDrawn = ::onConnectionDrawn,
                 modifier = Modifier
                     .weight(0.60f)
                     .fillMaxHeight()
@@ -204,40 +191,41 @@ fun ConstellationsPuzzleGame(
                 .padding(horizontal = 12.dp, vertical = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ConstellationsInfoPanel(
+            ConstellationsHeader(
                 puzzle = puzzle,
                 copy = copy,
                 exerciseLanguage = exerciseLanguage,
                 feedback = feedback,
                 isComplete = isComplete,
                 onMissionClicked = { onSpeakText?.invoke(puzzle.mission.get(exerciseLanguage)) },
-                onNewMission = ::newMission,
-                onResetPath = ::resetPath,
-                onTip = ::showTip,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(0.38f)
+                modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(14.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             ConstellationCanvasCard(
                 puzzle = puzzle,
                 selectedEdges = selectedEdges,
                 highlightedTip = highlightedTip,
-                firstSelectedStarId = firstSelectedStarId,
                 isComplete = isComplete,
-                difficultyStars = difficultyStars,
-                copy = copy,
-                onStarTapped = ::onStarTapped,
+                onConnectionDrawn = ::onConnectionDrawn,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(0.62f)
+                    .weight(1f)
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            ConstellationsBottomControls(
+                copy = copy,
+                isComplete = isComplete,
+                onTip = ::showTip,
+                onResetPath = ::resetPath,
+                onNewMission = ::newMission,
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
 }
 
 @Composable
-private fun ConstellationsInfoPanel(
+private fun ConstellationsSidePanel(
     puzzle: ConstellationPuzzle,
     copy: ConstellationsCopy,
     exerciseLanguage: String,
@@ -251,7 +239,42 @@ private fun ConstellationsInfoPanel(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceEvenly,
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        ConstellationsHeader(
+            puzzle = puzzle,
+            copy = copy,
+            exerciseLanguage = exerciseLanguage,
+            feedback = feedback,
+            isComplete = isComplete,
+            onMissionClicked = onMissionClicked,
+            modifier = Modifier.fillMaxWidth()
+        )
+        ConstellationsBottomControls(
+            copy = copy,
+            isComplete = isComplete,
+            onTip = onTip,
+            onResetPath = onResetPath,
+            onNewMission = onNewMission,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+private fun ConstellationsHeader(
+    puzzle: ConstellationPuzzle,
+    copy: ConstellationsCopy,
+    exerciseLanguage: String,
+    feedback: String?,
+    isComplete: Boolean,
+    onMissionClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -262,77 +285,63 @@ private fun ConstellationsInfoPanel(
             textAlign = TextAlign.Center
         )
 
-        Surface(
+        Text(
+            text = puzzle.mission.get(exerciseLanguage),
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(20.dp))
                 .clickable { onMissionClicked() }
                 .semantics { contentDescription = puzzle.mission.get(exerciseLanguage) },
-            color = PlanetGold,
-            contentColor = DeepSpaceBlue,
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = puzzle.mission.get(exerciseLanguage),
-                    color = DeepSpaceBlue,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = copy.tapMissionToHear,
-                    color = DeepSpaceBlue.copy(alpha = 0.80f),
-                    style = MaterialTheme.typography.bodySmall,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
+            color = StarWhite,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center
+        )
 
         if (feedback != null) {
-            Surface(
-                color = if (isComplete) PlanetGold else PlanetBlue.copy(alpha = 0.35f),
-                contentColor = if (isComplete) DeepSpaceBlue else StarWhite,
-                shape = RoundedCornerShape(999.dp),
+            Text(
+                text = feedback,
+                color = if (isComplete) PlanetGold else PlanetBlue,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = feedback,
-                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
-                    color = if (isComplete) DeepSpaceBlue else StarWhite,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.SemiBold
-                )
-            }
-        } else {
-            Spacer(modifier = Modifier.height(38.dp))
+            )
         }
 
         if (isComplete) {
             Surface(
-                color = CockpitGray.copy(alpha = 0.65f),
+                color = CockpitGray.copy(alpha = 0.60f),
                 contentColor = StarWhite,
                 shape = RoundedCornerShape(18.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(
-                    modifier = Modifier.padding(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = "${copy.factPrefix}: ${puzzle.fact.get(exerciseLanguage)}",
-                        color = PlanetGold,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
+                Text(
+                    text = "${copy.factPrefix}: ${puzzle.fact.get(exerciseLanguage)}",
+                    color = PlanetGold,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)
+                )
             }
         }
+    }
+}
 
+@Composable
+private fun ConstellationsBottomControls(
+    copy: ConstellationsCopy,
+    isComplete: Boolean,
+    onTip: () -> Unit,
+    onResetPath: () -> Unit,
+    onNewMission: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -340,9 +349,12 @@ private fun ConstellationsInfoPanel(
         ) {
             Button(
                 onClick = onTip,
+                enabled = !isComplete,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = PlanetBlue,
-                    contentColor = StarWhite
+                    contentColor = StarWhite,
+                    disabledContainerColor = PlanetBlue.copy(alpha = 0.28f),
+                    disabledContentColor = StarWhite.copy(alpha = 0.55f)
                 ),
                 shape = RoundedCornerShape(999.dp),
                 modifier = Modifier
@@ -370,17 +382,6 @@ private fun ConstellationsInfoPanel(
                 )
             }
         }
-
-        OutlinedButton(
-            onClick = onNewMission,
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = PlanetGold),
-            shape = RoundedCornerShape(999.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(46.dp)
-        ) {
-            Text(copy.newMission, color = PlanetGold, fontWeight = FontWeight.Bold)
-        }
     }
 }
 
@@ -389,19 +390,37 @@ private fun ConstellationCanvasCard(
     puzzle: ConstellationPuzzle,
     selectedEdges: Set<ConstellationEdge>,
     highlightedTip: ConstellationEdge?,
-    firstSelectedStarId: String?,
     isComplete: Boolean,
-    difficultyStars: Int,
-    copy: ConstellationsCopy,
-    onStarTapped: (ConstellationStar) -> Unit,
+    onConnectionDrawn: (String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var activeDragStarId by remember(puzzle.id) { mutableStateOf<String?>(null) }
+    var dragPosition by remember(puzzle.id) { mutableStateOf<Offset?>(null) }
+
+    val infiniteTransition = rememberInfiniteTransition()
+    val completePulse by infiniteTransition.animateFloat(
+        initialValue = 0.72f,
+        targetValue = 1.0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 650),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+    val completeScale by infiniteTransition.animateFloat(
+        initialValue = 0.94f,
+        targetValue = 1.08f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 650),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(28.dp),
         colors = CardDefaults.cardColors(containerColor = CockpitGray.copy(alpha = 0.42f))
     ) {
-        BoxWithConstraints(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
@@ -413,131 +432,206 @@ private fun ConstellationCanvasCard(
                         )
                     )
                 )
-                .padding(8.dp)
         ) {
-            val density = LocalDensity.current
-            val widthPx = with(density) { maxWidth.toPx() }
-            val heightPx = with(density) { maxHeight.toPx() }
-            val starSize = if (maxWidth < 380.dp || maxHeight < 360.dp) 34.dp else 44.dp
-            val starSizePx = with(density) { starSize.toPx() }
-            val requiredEdges = puzzle.requiredEdges
+            BoxWithConstraints(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+            ) {
+                val density = LocalDensity.current
+                val widthPx = with(density) { maxWidth.toPx() }
+                val heightPx = with(density) { maxHeight.toPx() }
+                val hasLongLabels = puzzle.stars.any { it.isTarget && ((it.label ?: it.order?.toString()).orEmpty().length > 3) }
+                val starSize = when {
+                    maxWidth < 380.dp || maxHeight < 360.dp -> if (hasLongLabels) 44.dp else 38.dp
+                    hasLongLabels -> 52.dp
+                    else -> 44.dp
+                }
+                val starSizePx = with(density) { starSize.toPx() }
+                val touchRadius = starSizePx * 0.92f
+                val requiredEdges = puzzle.requiredEdges
 
-            Canvas(modifier = Modifier.fillMaxSize()) {
+                fun starHasOpenRequiredConnection(starId: String): Boolean = requiredEdges.any { edge ->
+                    (edge.a == starId || edge.b == starId) && edge !in selectedEdges
+                }
+
+                fun starIsPartOfSelectedPath(starId: String): Boolean = selectedEdges.any { edge ->
+                    edge.a == starId || edge.b == starId
+                }
+
                 fun pointFor(starId: String): Offset? {
                     val star = puzzle.stars.firstOrNull { it.id == starId } ?: return null
-                    return Offset(star.x * size.width, star.y * size.height)
+                    return Offset(star.x * widthPx, star.y * heightPx)
                 }
 
-                selectedEdges.forEach { edge ->
-                    val from = pointFor(edge.a)
-                    val to = pointFor(edge.b)
-                    if (from != null && to != null) {
-                        drawLine(
-                            color = PlanetGold.copy(alpha = if (isComplete) 0.98f else 0.86f),
-                            start = from,
-                            end = to,
-                            strokeWidth = if (isComplete) 7f else 5f,
-                            cap = StrokeCap.Round
-                        )
+                fun nearestStar(position: Offset): ConstellationStar? = puzzle.stars
+                    .map { star ->
+                        val center = Offset(star.x * widthPx, star.y * heightPx)
+                        val dx = center.x - position.x
+                        val dy = center.y - position.y
+                        star to (dx * dx + dy * dy)
                     }
-                }
+                    .minByOrNull { it.second }
+                    ?.takeIf { it.second <= touchRadius * touchRadius }
+                    ?.first
 
-                highlightedTip?.let { edge ->
-                    val from = pointFor(edge.a)
-                    val to = pointFor(edge.b)
-                    if (from != null && to != null) {
-                        drawLine(
-                            color = PlanetBlue.copy(alpha = 0.92f),
-                            start = from,
-                            end = to,
-                            strokeWidth = 6f,
-                            cap = StrokeCap.Round
-                        )
-                    }
-                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .pointerInput(puzzle.id, selectedEdges, isComplete, widthPx, heightPx) {
+                            detectDragGestures(
+                                onDragStart = { startOffset ->
+                                    if (isComplete) {
+                                        activeDragStarId = null
+                                        dragPosition = null
+                                    } else {
+                                        val startStar = nearestStar(startOffset)
+                                        activeDragStarId = startStar?.id
+                                        dragPosition = startStar?.let { startOffset }
+                                    }
+                                },
+                                onDrag = { change, _ ->
+                                    if (activeDragStarId != null) {
+                                        dragPosition = change.position
+                                        change.consume()
+                                    }
+                                },
+                                onDragEnd = {
+                                    val from = activeDragStarId
+                                    val end = dragPosition?.let { nearestStar(it) }
+                                    if (from != null && end != null && from != end.id) {
+                                        onConnectionDrawn(from, end.id)
+                                    }
+                                    activeDragStarId = null
+                                    dragPosition = null
+                                },
+                                onDragCancel = {
+                                    activeDragStarId = null
+                                    dragPosition = null
+                                }
+                            )
+                        }
+                ) {
+                    Canvas(modifier = Modifier.fillMaxSize()) {
+                        if (isComplete) {
+                            requiredEdges.forEach { edge ->
+                                val from = pointFor(edge.a)
+                                val to = pointFor(edge.b)
+                                if (from != null && to != null) {
+                                    drawLine(
+                                        color = StarWhite.copy(alpha = 0.12f + completePulse * 0.18f),
+                                        start = from,
+                                        end = to,
+                                        strokeWidth = 13f,
+                                        cap = StrokeCap.Round
+                                    )
+                                }
+                            }
+                        }
 
-                if (isComplete) {
-                    requiredEdges.forEach { edge ->
-                        val from = pointFor(edge.a)
-                        val to = pointFor(edge.b)
-                        if (from != null && to != null) {
+                        selectedEdges.forEach { edge ->
+                            val from = pointFor(edge.a)
+                            val to = pointFor(edge.b)
+                            if (from != null && to != null) {
+                                drawLine(
+                                    color = StarWhite.copy(alpha = if (isComplete) 0.92f + completePulse * 0.08f else 0.88f),
+                                    start = from,
+                                    end = to,
+                                    strokeWidth = if (isComplete) 7f else 5f,
+                                    cap = StrokeCap.Round
+                                )
+                            }
+                        }
+
+                        highlightedTip?.let { edge ->
+                            val from = pointFor(edge.a)
+                            val to = pointFor(edge.b)
+                            if (from != null && to != null) {
+                                drawLine(
+                                    color = PlanetBlue.copy(alpha = 0.92f),
+                                    start = from,
+                                    end = to,
+                                    strokeWidth = 6f,
+                                    cap = StrokeCap.Round
+                                )
+                            }
+                        }
+
+                        val activeStart = activeDragStarId?.let { pointFor(it) }
+                        val activeEnd = dragPosition
+                        if (!isComplete && activeStart != null && activeEnd != null) {
                             drawLine(
-                                color = StarWhite.copy(alpha = 0.20f),
-                                start = from,
-                                end = to,
-                                strokeWidth = 12f,
+                                color = PlanetBlue.copy(alpha = 0.78f),
+                                start = activeStart,
+                                end = activeEnd,
+                                strokeWidth = 5f,
                                 cap = StrokeCap.Round
                             )
                         }
                     }
-                }
-            }
 
-            puzzle.stars.forEach { star ->
-                val isSelected = star.id == firstSelectedStarId
-                val isConnected = selectedEdges.any { edge -> edge.a == star.id || edge.b == star.id }
-                val isTipStar = highlightedTip?.let { it.a == star.id || it.b == star.id } == true
-                val shouldShowOrder = difficultyStars == 1 && star.isTarget
-                val shouldShowName = isComplete && star.isTarget
-                val starColor = when {
-                    isTipStar -> PlanetBlue
-                    isSelected -> PlanetRed
-                    isConnected || isComplete -> PlanetGold
-                    star.isTarget -> StarWhite
-                    else -> StarWhite.copy(alpha = 0.42f)
-                }
-                val textColor = when {
-                    isTipStar -> StarWhite
-                    isSelected -> StarWhite
-                    isConnected || isComplete -> DeepSpaceBlue
-                    star.isTarget -> DeepSpaceBlue
-                    else -> DeepSpaceBlue.copy(alpha = 0.55f)
-                }
-                val x = (star.x * widthPx - starSizePx / 2f).roundToInt()
-                val y = (star.y * heightPx - starSizePx / 2f).roundToInt()
+                    puzzle.stars.forEach { star ->
+                        val label = star.label ?: star.order?.toString().orEmpty()
+                        val isSelected = star.id == activeDragStarId
+                        val isConnected = starIsPartOfSelectedPath(star.id)
+                        val hasOpenConnection = starHasOpenRequiredConnection(star.id)
+                        val shouldContinueFromStar = !isComplete && isConnected && hasOpenConnection
+                        val isTipStar = highlightedTip?.let { it.a == star.id || it.b == star.id } == true
+                        val starColor = when {
+                            isSelected -> PlanetBlue
+                            isTipStar -> PlanetBlue
+                            shouldContinueFromStar -> PlanetBlue
+                            isComplete && star.isTarget -> PlanetGold
+                            isConnected -> StarWhite
+                            star.isTarget -> StarWhite
+                            else -> StarWhite.copy(alpha = 0.42f)
+                        }
+                        val textColor = when {
+                            isSelected || isTipStar || shouldContinueFromStar -> StarWhite
+                            isConnected || isComplete -> DeepSpaceBlue
+                            star.isTarget -> DeepSpaceBlue
+                            else -> DeepSpaceBlue.copy(alpha = 0.55f)
+                        }
+                        val starAlpha = when {
+                            isComplete && star.isTarget -> (0.70f + completePulse * 0.30f).coerceIn(0.70f, 1f)
+                            else -> (0.68f + star.brightness * 0.24f).coerceIn(0.55f, 0.98f)
+                        }
+                        val starScale = if (isComplete && star.isTarget) completeScale else 1f
+                        val x = (star.x * widthPx - starSizePx / 2f).roundToInt()
+                        val y = (star.y * heightPx - starSizePx / 2f).roundToInt()
 
-                Box(
-                    modifier = Modifier
-                        .offset { IntOffset(x, y) }
-                        .size(starSize)
-                        .clip(CircleShape)
-                        .background(starColor.copy(alpha = (0.68f + star.brightness * 0.24f).coerceIn(0.55f, 0.98f)))
-                        .clickable { onStarTapped(star) }
-                        .semantics {
-                            contentDescription = if (star.name.isBlank()) "Star" else star.name
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = when {
-                            shouldShowOrder -> star.order?.toString().orEmpty()
-                            shouldShowName -> star.name.take(2).uppercase()
-                            else -> "✦"
-                        },
-                        color = textColor,
-                        fontSize = if (shouldShowName) 10.sp else 16.sp,
-                        fontWeight = FontWeight.Black,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            }
-
-            if (firstSelectedStarId != null && !isComplete) {
-                val selectedName = puzzle.stars.firstOrNull { it.id == firstSelectedStarId }?.name.orEmpty()
-                Surface(
-                    color = PlanetBlue.copy(alpha = 0.55f),
-                    contentColor = StarWhite,
-                    shape = RoundedCornerShape(999.dp),
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(10.dp)
-                ) {
-                    Text(
-                        text = if (selectedName.isBlank()) copy.selectedPrefix else "${copy.selectedPrefix}: $selectedName",
-                        color = StarWhite,
-                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
-                        fontWeight = FontWeight.SemiBold
-                    )
+                        Box(
+                            modifier = Modifier
+                                .offset { IntOffset(x, y) }
+                                .size(starSize)
+                                .graphicsLayer {
+                                    scaleX = starScale
+                                    scaleY = starScale
+                                    alpha = starAlpha
+                                }
+                                .clip(CircleShape)
+                                .background(starColor)
+                                .semantics {
+                                    contentDescription = if (star.name.isBlank()) "Star" else star.name
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = if (star.isTarget && label.isNotBlank()) label else "✦",
+                                color = textColor,
+                                fontSize = when {
+                                    !star.isTarget -> 16.sp
+                                    label.length >= 5 -> 9.sp
+                                    label.length >= 4 -> 10.sp
+                                    label.length >= 3 -> 12.sp
+                                    else -> 15.sp
+                                },
+                                fontWeight = FontWeight.Black,
+                                textAlign = TextAlign.Center,
+                                maxLines = 1
+                            )
+                        }
+                    }
                 }
             }
         }

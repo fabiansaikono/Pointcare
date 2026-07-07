@@ -35,6 +35,7 @@ data class ConstellationStar(
     val y: Float,
     val isTarget: Boolean,
     val order: Int? = null,
+    val label: String? = order?.toString(),
     val brightness: Float = 1f
 )
 
@@ -85,14 +86,14 @@ data class ConstellationsCopy(
 fun constellationsCopy(language: String): ConstellationsCopy = when (language) {
     "fr", "fr-BE", "fr_BE", "fr-FR", "fr_FR" -> ConstellationsCopy(
         title = "Constellations",
-        tapMissionToHear = "Appuie sur la mission pour l'écouter.",
+        tapMissionToHear = "",
         newMission = "Nouvelle mission",
         nextMission = "Mission suivante",
         resetPath = "Effacer le chemin",
         tip = "Indice",
         factPrefix = "Info",
         selectedPrefix = "Sélection",
-        firstStarSelected = "Choisis une deuxième étoile pour tracer une ligne.",
+        firstStarSelected = "Glisse vers une autre étoile.",
         correctConnection = "Bien joué ! Cette ligne fait partie de la constellation.",
         wrongConnection = "Cette ligne ne fait pas partie de la constellation.",
         alreadyConnected = "Cette ligne est déjà connectée.",
@@ -103,14 +104,14 @@ fun constellationsCopy(language: String): ConstellationsCopy = when (language) {
 
     "en", "en-US", "en_US", "en-GB", "en_GB" -> ConstellationsCopy(
         title = "Constellations",
-        tapMissionToHear = "Tap the mission to hear it.",
+        tapMissionToHear = "",
         newMission = "New mission",
         nextMission = "Next mission",
         resetPath = "Clear path",
         tip = "Tip",
         factPrefix = "Fact",
         selectedPrefix = "Selected",
-        firstStarSelected = "Choose a second star to draw a line.",
+        firstStarSelected = "Drag to another star.",
         correctConnection = "Nice! That line belongs to the constellation.",
         wrongConnection = "That line is not part of the constellation.",
         alreadyConnected = "That line is already connected.",
@@ -121,14 +122,14 @@ fun constellationsCopy(language: String): ConstellationsCopy = when (language) {
 
     else -> ConstellationsCopy(
         title = "Constellations",
-        tapMissionToHear = "Tik op de missie om ze te horen.",
+        tapMissionToHear = "",
         newMission = "Nieuwe missie",
         nextMission = "Volgende missie",
         resetPath = "Pad wissen",
         tip = "Tip",
         factPrefix = "Weetje",
         selectedPrefix = "Geselecteerd",
-        firstStarSelected = "Kies een tweede ster om een lijn te tekenen.",
+        firstStarSelected = "Sleep naar een andere ster.",
         correctConnection = "Goed zo! Die lijn hoort bij de constellatie.",
         wrongConnection = "Die lijn hoort niet bij de constellatie.",
         alreadyConnected = "Die lijn is al verbonden.",

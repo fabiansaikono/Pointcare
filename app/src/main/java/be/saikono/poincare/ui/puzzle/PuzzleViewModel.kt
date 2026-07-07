@@ -246,7 +246,7 @@ class PuzzleViewModel(
                 ),
                 answer = "completed"
             )
-            else -> null
+            "galaxycon" -> ExerciseContent( id = "generated-galaxycon-${level.name.lowercase()}-$stars", domain = LearningDomain.PUZZLE, skill = GALAXYCON_SUBCATEGORY_ID, section = ExerciseSection.PUZZLES, level = level, inputMode = InputMode.DRAG_DROP_LETTERS, prompt = LocalizedText(nl = "Galaxycon", en = "Galaxycon", fr = "Galaxycon"), data = mapOf( "mainCategory" to "logic_puzzles", "subcategoryId" to GALAXYCON_SUBCATEGORY_ID, "grade" to (level.toGrade()?.toString() ?: ""), "difficultyStars" to stars.toString(), "topic" to "Galaxycon", "topic_en-US" to "Galaxycon", "topic_fr-BE" to "Galaxycon" ), answer = "planet" ) else -> null
         }
     }
 
@@ -301,7 +301,7 @@ class PuzzleViewModel(
         saveProgress(exercise, duration, correct = true, submittedAnswer = "completed")
     }
 
-    private fun startPuzzle(index: Int) {
+    fun onGalaxyconComplete(result: GalaxyconRunResult) { val state = _uiState.value val exercise = state.currentExercise ?: return val duration = if (result.elapsedMs > 0L) result.elapsedMs else System.currentTimeMillis() - startTime _uiState.update { it.copy(isSolved = result.planetReached, isWrong = !result.planetReached, showFeedback = true) } if (result.planetReached) audioService.playSuccess() else audioService.playFailure() saveGalaxyconProgress(exercise, duration, result) } private fun startPuzzle(index: Int) {
         currentIndex = index
         startTime = System.currentTimeMillis()
         val puzzle = puzzles[index]
@@ -418,7 +418,7 @@ class PuzzleViewModel(
         }
     }
 
-    fun nextPuzzle() {
+    private fun saveGalaxyconProgress(exercise: ExerciseContent, durationMs: Long, result: GalaxyconRunResult) { val profileId = _uiState.value.currentProfileId ?: return viewModelScope.launch { val event = ProgressEvent( id = UUID.randomUUID().toString(), childProfileId = profileId, exerciseId = exercise.id, domain = exercise.domain, skill = exercise.skill, timestamp = System.currentTimeMillis(), answerCorrect = result.planetReached, responseTimeMs = durationMs, retryCount = if (result.planetReached) 0 else 1, rewardStampsEarned = (missionPointsFor(exercise, result.planetReached) + result.stickersEarned.size).coerceAtMost(50), metadata = mapOf( "answer" to if (result.planetReached) "planet_reached" else "run_finished", "progressKey" to (exercise.data["progressKey"] ?: exercise.id), "subcategoryId" to GALAXYCON_SUBCATEGORY_ID, "grade" to (exercise.data["grade"] ?: (exercise.level.toGrade()?.toString() ?: "")), "progressState" to if (result.planetReached) "completed" else "retry_wrong", "galaxyconScorePercent" to result.displayScore, "galaxyconPoints" to result.points.toString(), "galaxyconCollisions" to result.collisions.toString(), "galaxyconWordsCompleted" to "${result.wordsCompleted}/${result.totalWords}", "galaxyconStarsCollected" to result.starsCollected.toString(), "galaxyconStickers" to result.stickersEarned.joinToString("|"), "stickerBookSubgame" to GALAXYCON_SUBCATEGORY_ID ) ) progressRepository.addProgress(event) syncManager.scheduleSync() } } fun nextPuzzle() {
         if (currentIndex + 1 < puzzles.size) {
             startPuzzle(currentIndex + 1)
         } else if (puzzles.isNotEmpty()) {

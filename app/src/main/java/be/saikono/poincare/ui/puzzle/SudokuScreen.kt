@@ -86,12 +86,34 @@ fun SudokuGame(
             })
         }
         if (isLandscape) {
-            Row(modifier = Modifier.fillMaxWidth().weight(1f), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                Box(modifier = Modifier.weight(1f).fillMaxHeight()) { grid(Modifier.fillMaxSize()) }
-                bank(Modifier.widthIn(max = 156.dp).fillMaxHeight())
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(bottom = 6.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    grid(Modifier.fillMaxSize())
+                }
+                Box(
+                    modifier = Modifier
+                        .width(178.dp)
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    bank(Modifier.wrapContentWidth())
+                }
             }
         } else {
             grid(Modifier.fillMaxWidth().aspectRatio(1f))
+            Spacer(modifier = Modifier.height(18.dp))
             bank(Modifier.fillMaxWidth())
         }
         if (complete) {
@@ -188,13 +210,26 @@ private fun SudokuGridLines(puzzle: SudokuPuzzle, modifier: Modifier = Modifier)
 
 @Composable
 private fun NumberBank(values: List<Int>, maxValue: Int, modifier: Modifier = Modifier, onValueDropped: (Int, Offset) -> Unit) {
-    val isPortrait = LocalConfiguration.current.orientation != android.content.res.Configuration.ORIENTATION_LANDSCAPE
-    val rows = if (isPortrait) values.chunked(5) else values.chunked(3)
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically), horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
+    val isLandscape = LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+    val columns = if (isLandscape) 3 else 5
+    val rows = values.chunked(columns)
+    val verticalGap = if (isLandscape) 8.dp else 10.dp
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(verticalGap, Alignment.CenterVertically),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.wrapContentWidth(align = Alignment.CenterHorizontally)
+    ) {
         rows.forEach { rowValues ->
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 rowValues.forEach { value ->
                     DraggableSudokuValue(value = value, enabled = value <= maxValue, onDropped = onValueDropped)
+                }
+                repeat(columns - rowValues.size) {
+                    Spacer(modifier = Modifier.size(50.dp))
                 }
             }
         }
