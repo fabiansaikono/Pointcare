@@ -246,7 +246,26 @@ class PuzzleViewModel(
                 ),
                 answer = "completed"
             )
-            "galaxycon" -> ExerciseContent( id = "generated-galaxycon-${level.name.lowercase()}-$stars", domain = LearningDomain.PUZZLE, skill = GALAXYCON_SUBCATEGORY_ID, section = ExerciseSection.PUZZLES, level = level, inputMode = InputMode.DRAG_DROP_LETTERS, prompt = LocalizedText(nl = "Galaxycon", en = "Galaxycon", fr = "Galaxycon"), data = mapOf( "mainCategory" to "logic_puzzles", "subcategoryId" to GALAXYCON_SUBCATEGORY_ID, "grade" to (level.toGrade()?.toString() ?: ""), "difficultyStars" to stars.toString(), "topic" to "Galaxycon", "topic_en-US" to "Galaxycon", "topic_fr-BE" to "Galaxycon" ), answer = "planet" ) else -> null
+            "galaxycon" -> ExerciseContent( id = "generated-galaxycon-${level.name.lowercase()}-$stars", domain = LearningDomain.PUZZLE, skill = GALAXYCON_SUBCATEGORY_ID, section = ExerciseSection.PUZZLES, level = level, inputMode = InputMode.DRAG_DROP_LETTERS, prompt = LocalizedText(nl = "Galaxycon", en = "Galaxycon", fr = "Galaxycon"), data = mapOf( "mainCategory" to "logic_puzzles", "subcategoryId" to GALAXYCON_SUBCATEGORY_ID, "grade" to (level.toGrade()?.toString() ?: ""), "difficultyStars" to stars.toString(), "topic" to "Galaxycon", "topic_en-US" to "Galaxycon", "topic_fr-BE" to "Galaxycon" ), answer = "planet" ) "word-seeker" -> ExerciseContent(
+ id = "generated-word-seeker-${level.name.lowercase()}-$stars",
+ domain = LearningDomain.PUZZLE,
+ skill = "word-seeker",
+ section = ExerciseSection.PUZZLES,
+ level = level,
+ inputMode = InputMode.WORD_SEEKER,
+ prompt = LocalizedText(nl = "Woordzoeker", en = "Word seeker", fr = "Cherche-mots"),
+ data = mapOf(
+ "mainCategory" to "logic_puzzles",
+ "subcategoryId" to "word-seeker",
+ "grade" to (level.toGrade()?.toString() ?: ""),
+ "difficultyStars" to stars.toString(),
+ "topic" to "Woordzoeker",
+ "topic_en-US" to "Word seeker",
+ "topic_fr-BE" to "Cherche-mots"
+ ),
+ answer = "completed"
+ )
+ else -> null
         }
     }
 

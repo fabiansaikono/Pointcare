@@ -120,7 +120,14 @@ fun PuzzleContent(
                         onComplete = onGeneratedPuzzleComplete,
                         modifier = Modifier.weight(1f)
                     )
-                } else if (subcategoryId == "math-crosswords") {
+                } else if (subcategoryId == "word-seeker") {
+ WordSeekerGame(
+ initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+ exerciseLanguage = uiState.exerciseLanguage,
+ onComplete = onGeneratedPuzzleComplete,
+ modifier = Modifier.weight(1f)
+ )
+ } else if (subcategoryId == "math-crosswords") {
                     MathCrosswordGame(
                         initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
                         onComplete = onGeneratedPuzzleComplete,
