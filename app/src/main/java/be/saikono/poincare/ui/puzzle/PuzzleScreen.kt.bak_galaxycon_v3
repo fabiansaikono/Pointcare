@@ -1,0 +1,432 @@
+package be.saikono.poincare.ui.puzzle
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import be.saikono.poincare.model.*
+import be.saikono.poincare.ui.components.DifficultyStars
+import be.saikono.poincare.ui.components.systemNavigationMargin
+import be.saikono.poincare.ui.localizedExerciseText
+import be.saikono.poincare.ui.spaceMap.SpaceBackground
+import be.saikono.poincare.ui.theme.*
+import kotlin.math.roundToInt
+
+@Composable
+fun PuzzleScreen(
+    viewModel: PuzzleViewModel,
+    onNavigateBack: () -> Unit
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    DisposableEffect(Unit) { onDispose { viewModel.stopAudio() } }
+    PuzzleContent(
+        uiState = uiState,
+        onNavigateBack = { viewModel.stopAudio(); onNavigateBack() },
+        onDigitPlaced = viewModel::onDigitPlaced,
+        onQuestionClick = viewModel::playCurrentQuestion,
+        onGeneratedPuzzleComplete = viewModel::onGeneratedPuzzleComplete, onGalaxyconComplete = viewModel::onGalaxyconComplete,
+        onCalculatorPuzzleAttempt = viewModel::onCalculatorPuzzleAttempt,
+        onNextPuzzle = viewModel::nextPuzzle
+    )
+}
+
+@Composable
+fun PuzzleContent(
+    uiState: PuzzleUiState,
+    onNavigateBack: () -> Unit,
+    onDigitPlaced: (Int, Int) -> Unit,
+    onQuestionClick: () -> Unit,
+    onGeneratedPuzzleComplete: () -> Unit, onGalaxyconComplete: (GalaxyconRunResult) -> Unit,
+    onCalculatorPuzzleAttempt: (CalculatorPuzzleAttempt) -> Unit,
+    onNextPuzzle: () -> Unit
+) {
+    val puzzle = uiState.currentExercise
+    val isLandscape = androidx.compose.ui.platform.LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(DeepSpaceBlue)
+    ) {
+        SpaceBackground()
+        val generatedSubcategoryId = puzzle?.data?.get("subcategoryId")
+        val isGeneratedPuzzle = generatedSubcategoryId in setOf("sudoku", "math-crosswords", "calculator-puzzle", "constellations", GALAXYCON_SUBCATEGORY_ID)
+        val generatedPuzzleHandlesOwnMissionButtons = generatedSubcategoryId in setOf("calculator-puzzle", "constellations")
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.TopCenter)
+                .systemNavigationMargin()
+                .padding(if (isGeneratedPuzzle) 12.dp else 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Top Bar
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = onNavigateBack,
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Icon(Icons.Default.ArrowBack, contentDescription = localizedExerciseText("backToMap", uiState.exerciseLanguage), tint = StarWhite)
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                if (!isGeneratedPuzzle) {
+                    Text(
+                        text = puzzle?.localizedTopic(uiState.exerciseLanguage) ?: "Missie",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = StarWhite
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                DifficultyStars(puzzle?.data?.get("difficultyStars")?.toIntOrNull())
+            }
+
+            if (uiState.isLoading) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator(color = PlanetRed)
+                }
+            } else if (puzzle != null) {
+                Spacer(modifier = Modifier.height(12.dp))
+
+                val subcategoryId = puzzle.data["subcategoryId"]
+                if (subcategoryId == "sudoku") {
+                    SudokuGame(
+                        initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        onComplete = onGeneratedPuzzleComplete,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else if (subcategoryId == "word-seeker") {
+ WordSeekerGame(
+ initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+ exerciseLanguage = uiState.exerciseLanguage,
+ onComplete = onGeneratedPuzzleComplete,
+ modifier = Modifier.weight(1f)
+ )
+ } else if (subcategoryId == "math-crosswords") {
+                    MathCrosswordGame(
+                        initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        onComplete = onGeneratedPuzzleComplete,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else if (subcategoryId == "calculator-puzzle") {
+                    CalculatorPuzzleGame(
+                        mathGrade = puzzle.data["mathGrade"]?.toIntOrNull()
+                            ?: puzzle.data["grade"]?.toIntOrNull()
+                            ?: 1,
+                        difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        exerciseLanguage = uiState.exerciseLanguage,
+                        onAttemptSubmitted = onCalculatorPuzzleAttempt,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else if (subcategoryId == "constellations") {
+                    ConstellationsPuzzleGame(
+                        grade = puzzle.data["grade"]?.toIntOrNull() ?: 1,
+                        difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        exerciseLanguage = uiState.exerciseLanguage,
+                        onComplete = onGeneratedPuzzleComplete,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else if (subcategoryId == GALAXYCON_SUBCATEGORY_ID) { GalaxyconGame( language = uiState.exerciseLanguage, level = puzzle.level, initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1, onComplete = onGalaxyconComplete, modifier = Modifier.weight(1f) ) } else {
+                    Text(
+                        text = puzzle.prompt.get(uiState.exerciseLanguage),
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = StarWhite,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .semantics { contentDescription = "Puzzel: ${puzzle.prompt.get(uiState.exerciseLanguage)}" }
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    val equation = puzzle.data["equation"]
+                    if (equation.isNullOrBlank()) {
+                        PuzzleChoiceArea(
+                            options = uiState.availableDigits,
+                            selectedIndices = uiState.placedIndices,
+                            pendingChoiceIndex = uiState.pendingChoiceIndex,
+                            isSolved = uiState.isSolved,
+                            onChoiceSelected = { digitIndex -> onDigitPlaced(0, digitIndex) },
+                            isLandscape = isLandscape,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    } else {
+                        PuzzleBoard(
+                            equation = equation,
+                            availableDigits = uiState.availableDigits,
+                            placedDigits = uiState.placedDigits,
+                            placedIndices = uiState.placedIndices,
+                            isSolved = uiState.isSolved,
+                            onDigitPlaced = { digitIndex -> onDigitPlaced(0, digitIndex) }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+
+                val isCalculatorPuzzle = subcategoryId == "calculator-puzzle"
+                if ((uiState.isSolved || uiState.isFinished) && !isCalculatorPuzzle) {
+                    val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
+                    val buttonColor = PlanetGold
+
+                    Button(
+                        onClick = if (uiState.isFinished) onNavigateBack else onNextPuzzle,
+                        colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
+                        modifier = Modifier
+                            .then(if (isLandscape) Modifier.fillMaxWidth(0.5f).align(Alignment.Start) else Modifier.fillMaxWidth())
+                            .height(56.dp)
+                            .semantics { contentDescription = if (uiState.isSolved) localizedExerciseText("nextMissionReady", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage) }
+                    ) {
+                        Text(buttonText, color = DeepSpaceBlue, fontWeight = FontWeight.Medium)
+                    }
+                }
+            } else {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = localizedExerciseText("noMissions", uiState.exerciseLanguage), color = StarWhite)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun PuzzleChoiceArea(
+    options: List<String>,
+    selectedIndices: Set<Int>,
+    pendingChoiceIndex: Int?,
+    isSolved: Boolean,
+    onChoiceSelected: (Int) -> Unit,
+    isLandscape: Boolean = false,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        options.withIndex().chunked(if (isLandscape) 2 else 1).forEach { rowOptions ->
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                rowOptions.forEach { indexed ->
+                    val index = indexed.index
+                    val option = indexed.value
+                    val selected = selectedIndices.contains(index)
+                    Surface(
+                        color = when {
+                            isSolved && selected -> PlanetGreen.copy(alpha = 0.75f)
+                            pendingChoiceIndex == index -> PlanetBlue.copy(alpha = 0.75f)
+                            selected -> PlanetRed.copy(alpha = 0.75f)
+                            else -> Color.White.copy(alpha = 0.5f)
+                        },
+                        contentColor = StarWhite,
+                        shape = RoundedCornerShape(12.dp),
+                        modifier = Modifier
+                            .weight(1f)
+                            .heightIn(min = 56.dp)
+                            .clickable(enabled = !isSolved) { onChoiceSelected(index) }
+                    ) {
+                        Box(contentAlignment = Alignment.CenterStart, modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+                            Text(
+                                text = option,
+                                style = if (isDisplayNumber(option)) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.bodyLarge,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                }
+                if (isLandscape && rowOptions.size == 1) Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+    }
+}
+
+@Composable
+fun PuzzleBoard(
+    equation: String,
+    availableDigits: List<String>,
+    placedDigits: Map<Int, String>,
+    placedIndices: Set<Int>,
+    isSolved: Boolean,
+    onDigitPlaced: (Int) -> Unit
+) {
+    var targetSlotPosition by remember { mutableStateOf(Offset.Zero) }
+
+    BoxWithConstraints(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+        val scope = this
+        val compact = scope.maxHeight < 300.dp
+        val boardGap = if (compact) 20.dp else 40.dp
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(boardGap),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            // ... (equation Row remains same)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(if (compact) 8.dp else 12.dp),
+                modifier = Modifier.semantics { contentDescription = "De vergelijking die je moet oplossen" }
+            ) {
+                val parts = equation.split(" ")
+                parts.forEach { part ->
+                    if (part == "x") {
+                        // This is the target slot
+                        val placed = placedDigits[0]
+                        Box(
+                            modifier = Modifier
+                                .size(72.dp)
+                                .onGloballyPositioned { 
+                                    targetSlotPosition = it.positionInWindow()
+                                }
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(if (isSolved) Color(0xFF4CAF50).copy(alpha = 0.3f) else Color.White.copy(alpha = 0.2f)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = placed ?: "?",
+                                style = if (compact) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displaySmall,
+                                color = if (placed != null) StarWhite else StarWhite.copy(alpha = 0.3f)
+                            )
+                        }
+                    } else {
+                        Text(
+                            text = part,
+                            style = if (compact) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displaySmall,
+                            color = StarWhite
+                        )
+                    }
+                }
+            }
+
+            // Available Draggable Digits
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.semantics { contentDescription = "Sleep een cijfer naar het vakje om de vergelijking op te lossen" }
+            ) {
+                availableDigits.forEachIndexed { index, digit ->
+                    val isPlaced = placedIndices.contains(index)
+                    if (!isPlaced) {
+                        DraggableDigit(
+                            digit = digit,
+                            isSolved = isSolved,
+                            onDrop = { absoluteDropPos ->
+                                // Check distance to target slot center
+                                val dist = (absoluteDropPos - targetSlotPosition).getDistance()
+                                if (dist < 100f) { // threshold in px
+                                    onDigitPlaced(index)
+                                }
+                            }
+                        )
+                    } else {
+                        // Placeholder to keep spacing or just Spacer
+                        Spacer(modifier = Modifier.size(72.dp))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun DraggableDigit(
+    digit: String,
+    isSolved: Boolean,
+    onDrop: (Offset) -> Unit
+) {
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
+    var isDragging by remember { mutableStateOf(false) }
+    var startPosition by remember { mutableStateOf(Offset.Zero) }
+
+    Box(
+        modifier = Modifier
+            .onGloballyPositioned { if (!isDragging) startPosition = it.positionInWindow() }
+            .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+            .size(72.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(if (isDragging) PlanetRed.copy(alpha = 0.8f) else NebulaPurple)
+            .pointerInput(isSolved) {
+                if (isSolved) return@pointerInput
+                detectDragGestures(
+                    onDragStart = { isDragging = true },
+                    onDragEnd = {
+                        isDragging = false
+                        onDrop(startPosition + Offset(offsetX, offsetY))
+                        offsetX = 0f
+                        offsetY = 0f
+                    },
+                    onDragCancel = {
+                        isDragging = false
+                        offsetX = 0f
+                        offsetY = 0f
+                    },
+                    onDrag = { change, dragAmount ->
+                        change.consume()
+                        offsetX += dragAmount.x
+                        offsetY += dragAmount.y
+                    }
+                )
+            }
+            .clickable(enabled = !isSolved) { 
+                // Manual placement for accessibility
+                onDrop(startPosition + Offset(0f, -200f)) // Fake drop near top
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = digit,
+            style = MaterialTheme.typography.displaySmall,
+            color = StarWhite
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PuzzleScreenPreview() {
+    PoincareTheme {
+        PuzzleContent(
+            uiState = PuzzleUiState(
+                currentExercise = ExerciseContent(
+                    id = "preview",
+                    domain = LearningDomain.PUZZLE,
+                    skill = "drag_drop_math",
+                    section = ExerciseSection.PUZZLES,
+                    level = SkillLevel.FIRST_GRADE,
+                    inputMode = InputMode.DRAG_DROP_DIGITS,
+                    prompt = LocalizedText("Sleep de cijfers om de som kloppend te maken: _ + 5 = 12"),
+                    answer = "7",
+                    data = mapOf("equation" to "x + 5 = 12", "available" to "5,7,8")
+                ),
+                availableDigits = listOf("5", "7", "8"),
+                isLoading = false
+            ),
+            onNavigateBack = {},
+            onDigitPlaced = { _, _ -> },
+            onQuestionClick = {},
+            onGeneratedPuzzleComplete = {},
+            onCalculatorPuzzleAttempt = {},
+            onNextPuzzle = {}
+        )
+    }
+}

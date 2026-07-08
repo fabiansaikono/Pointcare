@@ -454,7 +454,7 @@ private fun ChallengeCard(
             text = questionText,
             color = PlanetGold,
             fontSize = if (hasQuestion) {
-                if (compact) 22.sp else 26.sp
+                if (compact) 18.sp else 26.sp
             } else {
                 if (compact) 16.sp else 18.sp
             },
@@ -525,9 +525,9 @@ private fun CalculatorDisplay(display: String, compact: Boolean) {
     ) {
         Text(
             text = display,
-            modifier = Modifier.padding(if (compact) 13.dp else 18.dp),
+            modifier = Modifier.padding(if (compact) 8.dp else 18.dp),
             textAlign = TextAlign.End,
-            fontSize = if (compact) 25.sp else 30.sp,
+            fontSize = if (compact) 22.sp else 30.sp,
             fontWeight = FontWeight.Black,
             maxLines = 2
         )

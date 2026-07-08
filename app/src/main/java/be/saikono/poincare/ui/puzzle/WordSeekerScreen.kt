@@ -61,13 +61,15 @@ import kotlin.random.Random
 fun WordSeekerGame(
     initialStars: Int,
     exerciseLanguage: String,
+    grade: Int = 1,
     onComplete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val stars = initialStars.coerceIn(1, 3)
-    val seed = rememberSaveable(stars, exerciseLanguage) { Random.nextInt() }
-    val puzzle = remember(stars, exerciseLanguage, seed) {
-        WordSeekerGenerator.generate(stars = stars, locale = exerciseLanguage, seed = seed)
+    val gradeLevel = grade.coerceIn(1, 6)
+    val seed = rememberSaveable(stars, exerciseLanguage, gradeLevel) { Random.nextInt() }
+    val puzzle = remember(stars, exerciseLanguage, gradeLevel, seed) {
+        WordSeekerGenerator.generate(stars = stars, locale = exerciseLanguage, grade = gradeLevel, seed = seed)
     }
 
     var foundWordsList by rememberSaveable(seed) { mutableStateOf(emptyList<String>()) }
@@ -96,9 +98,10 @@ fun WordSeekerGame(
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(if (isLandscape) 4.dp else 8.dp, Alignment.CenterVertically)
     ) {
-        Row(
+        if (!isLandscape) {
+            Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -115,6 +118,7 @@ fun WordSeekerGame(
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.Bold
             )
+            }
         }
 
         val grid: @Composable (Modifier) -> Unit = { gridModifier ->
@@ -153,7 +157,7 @@ fun WordSeekerGame(
             ) {
                 Box(
                     modifier = Modifier
-                        .weight(1f)
+                        .weight(1.15f)
                         .fillMaxHeight(),
                     contentAlignment = Alignment.Center
                 ) {
@@ -165,7 +169,7 @@ fun WordSeekerGame(
                 }
                 wordList(
                     Modifier
-                        .widthIn(min = 160.dp, max = 230.dp)
+                        .widthIn(min = 128.dp, max = 170.dp)
                         .fillMaxHeight()
                 )
             }
@@ -326,8 +330,8 @@ private fun WordSeekerWordList(
         tonalElevation = 0.dp
     ) {
         Column(
-            modifier = Modifier.padding(12.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.padding(if (isLandscape) 9.dp else 12.dp),
+            verticalArrangement = Arrangement.spacedBy(if (isLandscape) 6.dp else 8.dp)
         ) {
             val chunkSize = if (isLandscape) 1 else 2
             words.chunked(chunkSize).forEach { rowWords ->
@@ -442,7 +446,7 @@ private data class WordSeekerPuzzle(
 }
 
 private object WordSeekerGenerator {
-    fun generate(stars: Int, locale: String, seed: Int): WordSeekerPuzzle {
+    fun generate(stars: Int, locale: String, grade: Int, seed: Int): WordSeekerPuzzle {
         val random = Random(seed)
         val size = when (stars.coerceIn(1, 3)) {
             1 -> 8
@@ -454,7 +458,7 @@ private object WordSeekerGenerator {
             2 -> 7
             else -> 9
         }
-        val candidates = wordBank(locale)
+        val candidates = wordBank(locale, grade)
             .filter { it.length <= size }
             .shuffled(random)
             .take(targetWordCount + 5)
@@ -528,16 +532,40 @@ private object WordSeekerGenerator {
         else -> listOf(0 to 1, 1 to 0, 1 to 1, -1 to 1, 0 to -1, -1 to 0, 1 to -1, -1 to -1)
     }
 
-    private fun wordBank(locale: String): List<String> = when (locale) {
-        "fr", "fr-BE", "fr_BE", "fr-FR", "fr_FR" -> listOf(
-            "ETOILE", "LUNE", "SOLEIL", "PLANETE", "FUSEE", "COMETE", "GALAXIE", "TERRE", "SATURNE", "ORBITE", "NEBULEUSE", "MARS"
-        )
-        "en", "en-US", "en_US", "en-GB", "en_GB" -> listOf(
-            "STAR", "MOON", "SUN", "PLANET", "ROCKET", "COMET", "GALAXY", "EARTH", "SATURN", "ORBIT", "NEBULA", "MARS"
-        )
-        else -> listOf(
-            "STER", "MAAN", "ZON", "PLANEET", "RAKET", "KOMEET", "MELKWEG", "AARDE", "SATURNUS", "ORBIT", "GALAXIE", "MARS"
-        )
+    private fun wordBank(locale: String, grade: Int): List<String> {
+        val level = grade.coerceIn(1, 6)
+        return when (normalizeWordSeekerLocale(locale)) {
+            "fr-BE" -> when (level) {
+                1 -> listOf("SOLEIL", "LUNE", "ETOILE", "TERRE", "MER", "RUE", "VILLE", "ARBRE", "CHAT", "CHIEN", "NUAGE", "PLUIE")
+                2 -> listOf("PLANETE", "FUSEE", "FORET", "RIVIERE", "MONT", "OCEAN", "HIVER", "ETE", "ANIMAL", "FLEUR", "CARTE", "PAYS")
+                3 -> listOf("EUROPE", "AFRIQUE", "ASIE", "BELGIQUE", "FRANCE", "ITALIE", "CAPITALE", "VOLCAN", "DESERT", "CLIMAT", "ENERGIE", "NATURE")
+                4 -> listOf("CONTINENT", "EQUATEUR", "ORIGINE", "HISTOIRE", "CULTURE", "METEO", "ESPECE", "PLANETE", "SATELLITE", "ORBITE", "BASALTE", "GLACIER")
+                5 -> listOf("ATMOSPHERE", "ECOSYSTEME", "BIODIVERS", "LATITUDE", "LONGITUDE", "MIGRATION", "CIVILISER", "DEMOCRATIE", "RESSOURCE", "GRAVITE", "PRESSION", "EROSION")
+                else -> listOf("BIOSPHERE", "HEMISPHERE", "TECTONIQUE", "CIVILISATION", "INDUSTRIE", "EVOLUTION", "EXPEDITION", "REVOLUTION", "CONSERVATION", "URBANISME", "NUTRIMENT", "MICROSCOPE")
+            }
+            "en-US" -> when (level) {
+                1 -> listOf("SUN", "MOON", "STAR", "EARTH", "SEA", "ROAD", "CITY", "TREE", "CAT", "DOG", "CLOUD", "RAIN")
+                2 -> listOf("PLANET", "ROCKET", "FOREST", "RIVER", "MOUNT", "OCEAN", "WINTER", "SUMMER", "ANIMAL", "FLOWER", "MAP", "COUNTRY")
+                3 -> listOf("EUROPE", "AFRICA", "ASIA", "BELGIUM", "FRANCE", "ITALY", "CAPITAL", "VOLCANO", "DESERT", "CLIMATE", "ENERGY", "NATURE")
+                4 -> listOf("CONTINENT", "EQUATOR", "ORIGIN", "HISTORY", "CULTURE", "WEATHER", "SPECIES", "PLANET", "SATELLITE", "ORBIT", "BASALT", "GLACIER")
+                5 -> listOf("ATMOSPHERE", "ECOSYSTEM", "BIODIVERS", "LATITUDE", "LONGITUDE", "MIGRATION", "CIVILIZED", "DEMOCRACY", "RESOURCE", "GRAVITY", "PRESSURE", "EROSION")
+                else -> listOf("BIOSPHERE", "HEMISPHERE", "TECTONIC", "CIVILIZATION", "INDUSTRY", "EVOLUTION", "EXPEDITION", "REVOLUTION", "CONSERVE", "URBANISM", "NUTRIENT", "MICROSCOPE")
+            }
+            else -> when (level) {
+                1 -> listOf("ZON", "MAAN", "STER", "AARDE", "ZEE", "WEG", "STAD", "BOOM", "KAT", "HOND", "WOLK", "REGEN")
+                2 -> listOf("PLANEET", "RAKET", "BOS", "RIVIER", "BERG", "OCEAAN", "WINTER", "ZOMER", "DIER", "BLOEM", "KAART", "LAND")
+                3 -> listOf("EUROPA", "AFRIKA", "AZIE", "BELGIE", "FRANKRIJK", "ITALIE", "HOOFDSTAD", "VULKAAN", "WOESTIJN", "KLIMAAT", "ENERGIE", "NATUUR")
+                4 -> listOf("CONTINENT", "EVENAAR", "OORSPRONG", "HISTORIE", "CULTUUR", "WEER", "SOORTEN", "PLANEET", "SATELLIET", "ORBIT", "BASALT", "GLETSJER")
+                5 -> listOf("ATMOSFEER", "ECOSYSTEEM", "BIODIVERS", "BREEDTE", "LENGTE", "MIGRATIE", "BESCHAVING", "DEMOCRATIE", "GRONDSTOF", "ZWAARTE", "LUCHTDRUK", "EROSIE")
+                else -> listOf("BIOSFEER", "HALFROND", "TEKTONIEK", "BESCHAVING", "INDUSTRIE", "EVOLUTIE", "EXPEDITIE", "REVOLUTIE", "BEHOUD", "URBANISME", "VOEDINGSSTOF", "MICROSCOOP")
+            }
+        }
+    }
+
+    private fun normalizeWordSeekerLocale(locale: String): String = when (locale.replace('_', '-')) {
+        "fr", "fr-BE", "fr-FR" -> "fr-BE"
+        "en", "en-US", "en-GB" -> "en-US"
+        else -> "nl-BE"
     }
 
     private const val EMPTY = '\u0000'

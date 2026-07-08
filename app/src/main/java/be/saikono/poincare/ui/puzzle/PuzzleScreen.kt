@@ -73,14 +73,14 @@ fun PuzzleContent(
     ) {
         SpaceBackground()
         val generatedSubcategoryId = puzzle?.data?.get("subcategoryId")
-        val isGeneratedPuzzle = generatedSubcategoryId in setOf("sudoku", "math-crosswords", "calculator-puzzle", "constellations", GALAXYCON_SUBCATEGORY_ID)
+        val isGeneratedPuzzle = generatedSubcategoryId in setOf("sudoku", "math-crosswords", "word-seeker", "calculator-puzzle", "constellations", GALAXYCON_SUBCATEGORY_ID)
         val generatedPuzzleHandlesOwnMissionButtons = generatedSubcategoryId in setOf("calculator-puzzle", "constellations")
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .align(Alignment.TopCenter)
                 .systemNavigationMargin()
-                .padding(if (isGeneratedPuzzle) 12.dp else 24.dp),
+                .padding(if (isGeneratedPuzzle && isLandscape) 6.dp else if (isGeneratedPuzzle) 12.dp else 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Top Bar
@@ -90,18 +90,11 @@ fun PuzzleContent(
             ) {
                 IconButton(
                     onClick = onNavigateBack,
-                    modifier = Modifier.size(48.dp)
+                    modifier = Modifier.size(if (isGeneratedPuzzle && isLandscape) 36.dp else 48.dp)
                 ) {
                     Icon(Icons.Default.ArrowBack, contentDescription = localizedExerciseText("backToMap", uiState.exerciseLanguage), tint = StarWhite)
                 }
-                Spacer(modifier = Modifier.width(16.dp))
-                if (!isGeneratedPuzzle) {
-                    Text(
-                        text = puzzle?.localizedTopic(uiState.exerciseLanguage) ?: "Missie",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = StarWhite
-                    )
-                }
+                Spacer(modifier = Modifier.width(if (isGeneratedPuzzle && isLandscape) 4.dp else 16.dp))
                 Spacer(modifier = Modifier.weight(1f))
                 DifficultyStars(puzzle?.data?.get("difficultyStars")?.toIntOrNull())
             }
@@ -425,6 +418,7 @@ fun PuzzleScreenPreview() {
             onDigitPlaced = { _, _ -> },
             onQuestionClick = {},
             onGeneratedPuzzleComplete = {},
+        onGalaxyconComplete = {},
             onCalculatorPuzzleAttempt = {},
             onNextPuzzle = {}
         )

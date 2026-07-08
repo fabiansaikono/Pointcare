@@ -93,12 +93,12 @@ fun constellationsCopy(language: String): ConstellationsCopy = when (language) {
         tip = "Indice",
         factPrefix = "Info",
         selectedPrefix = "Sélection",
-        firstStarSelected = "Glisse vers une autre étoile.",
+        firstStarSelected = "Tape une deuxième étoile ou glisse vers elle.",
         correctConnection = "Bien joué ! Cette ligne fait partie de la constellation.",
         wrongConnection = "Cette ligne ne fait pas partie de la constellation.",
         alreadyConnected = "Cette ligne est déjà connectée.",
         completed = "Constellation trouvée !",
-        tipConnect = "Relie ces deux étoiles",
+        tipConnect = "Indice avec les valeurs",
         startHere = "Commence ici"
     )
 
@@ -111,12 +111,12 @@ fun constellationsCopy(language: String): ConstellationsCopy = when (language) {
         tip = "Tip",
         factPrefix = "Fact",
         selectedPrefix = "Selected",
-        firstStarSelected = "Drag to another star.",
+        firstStarSelected = "Tap a second star or drag to it.",
         correctConnection = "Nice! That line belongs to the constellation.",
         wrongConnection = "That line is not part of the constellation.",
         alreadyConnected = "That line is already connected.",
         completed = "Constellation found!",
-        tipConnect = "Connect these two stars",
+        tipConnect = "Tip with the values",
         startHere = "Start here"
     )
 
@@ -129,12 +129,12 @@ fun constellationsCopy(language: String): ConstellationsCopy = when (language) {
         tip = "Tip",
         factPrefix = "Weetje",
         selectedPrefix = "Geselecteerd",
-        firstStarSelected = "Sleep naar een andere ster.",
+        firstStarSelected = "Tik een tweede ster aan of sleep ernaartoe.",
         correctConnection = "Goed zo! Die lijn hoort bij de constellatie.",
         wrongConnection = "Die lijn hoort niet bij de constellatie.",
         alreadyConnected = "Die lijn is al verbonden.",
         completed = "Constellatie gevonden!",
-        tipConnect = "Verbind deze twee sterren",
+        tipConnect = "Tip met de waarden",
         startHere = "Start hier"
     )
 }

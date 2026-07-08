@@ -1,9 +1,13 @@
 package be.saikono.poincare.ui.puzzle
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.pm.ActivityInfo
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectVerticalDragGestures
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -18,7 +22,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -29,6 +32,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,8 +42,12 @@ import androidx.compose.runtime.withFrameMillis
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -65,6 +73,18 @@ fun GalaxyconGame(
         GalaxyconGenerator.createLevel(language, level, initialStars)
     }
     val locale = normalizeGalaxyconLocale(language)
+    val context = LocalContext.current
+
+    DisposableEffect(Unit) {
+        val activity = context.findGalaxyconActivity()
+        val previousOrientation = activity?.requestedOrientation
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        onDispose {
+            if (activity != null && previousOrientation != null) {
+                activity.requestedOrientation = previousOrientation
+            }
+        }
+    }
 
     var runKey by remember { mutableStateOf(0) }
     var playerLane by remember(runKey) { mutableStateOf(1) }
@@ -94,7 +114,7 @@ fun GalaxyconGame(
 
     val currentWord = levelSpec.words.getOrNull(currentWordIndex)
     val nextRequiredLetter = currentWord?.text?.getOrNull(currentLetterIndex)
-    val multiplier = activeMultiplier.coerceAtLeast(1)
+    val controlsUseLandscape = false
 
     LaunchedEffect(levelSpec.id, runKey) {
         while (!ended) {
@@ -139,18 +159,20 @@ fun GalaxyconGame(
 
             hitObjects.forEach { obj ->
                 hitIds += obj.id
+                val scoreMultiplier = if (multiplierRemainingMs > 0L) activeMultiplier.coerceIn(1, 5) else 1
                 when (obj.type) {
-                    GalaxyconObjectType.CORRECT_LETTER -> {
+                    GalaxyconObjectType.CORRECT_LETTER,
+                    GalaxyconObjectType.WRONG_LETTER -> {
                         if (loopNextRequiredLetter != null && obj.label.equals(loopNextRequiredLetter.toString(), ignoreCase = true)) {
-                            points += 10 * multiplier
+                            points += 10 * scoreMultiplier
                             correctLetters += 1
                             currentLetterIndex += 1
-                            feedbackText = "+${10 * multiplier} ${obj.label}"
+                            feedbackText = "+${10 * scoreMultiplier} ${obj.label}"
                             feedbackUntilMs = frameMs + 900L
 
                             val word = loopCurrentWord
                             if (word != null && currentLetterIndex >= word.text.length) {
-                                points += 50 * multiplier
+                                points += 50 * scoreMultiplier
                                 stickersEarned = (stickersEarned + word.text.uppercase()).distinct()
                                 lives = (lives + 1).coerceAtMost(GALAXYCON_MAX_LIVES)
                                 currentWordIndex += 1
@@ -158,18 +180,18 @@ fun GalaxyconGame(
                                 feedbackText = stickerText(locale, word.text.uppercase())
                                 feedbackUntilMs = frameMs + 1_600L
                             }
+                        } else {
+                            activeMultiplier = 1
+                            multiplierRemainingMs = 0L
+                            feedbackText = wrongLetterText(locale)
+                            feedbackUntilMs = frameMs + 900L
                         }
-                    }
-
-                    GalaxyconObjectType.WRONG_LETTER -> {
-                        feedbackText = wrongLetterText(locale)
-                        feedbackUntilMs = frameMs + 900L
                     }
 
                     GalaxyconObjectType.STAR -> {
                         starsCollected += 1
-                        points += 5 * multiplier
-                        feedbackText = "+${5 * multiplier} ★"
+                        points += 5 * scoreMultiplier
+                        feedbackText = "+${5 * scoreMultiplier} ★"
                         feedbackUntilMs = frameMs + 900L
                     }
 
@@ -182,6 +204,8 @@ fun GalaxyconGame(
                     }
 
                     GalaxyconObjectType.DEBRIS -> {
+                        activeMultiplier = 1
+                        multiplierRemainingMs = 0L
                         if (invulnerableMs == 0L) {
                             lives -= 1
                             collisions += 1
@@ -230,23 +254,37 @@ fun GalaxyconGame(
             .fillMaxHeight()
             .clip(RoundedCornerShape(24.dp))
             .background(DeepSpaceBlue.copy(alpha = 0.55f))
-            .pointerInput(ended) {
-                detectVerticalDragGestures { change, dragAmount ->
-                    change.consume()
-                    if (ended) return@detectVerticalDragGestures
-                    when {
-                        dragAmount < -10f -> playerLane = (playerLane - 1).coerceAtLeast(0)
-                        dragAmount > 10f -> playerLane = (playerLane + 1).coerceAtMost(2)
-                    }
-                }
+            .pointerInput(ended, controlsUseLandscape) {
+                val isLandscapeGesture = controlsUseLandscape
+                var totalDrag = Offset.Zero
+                detectDragGestures(
+                    onDragStart = { totalDrag = Offset.Zero },
+                    onDrag = { change, dragAmount ->
+                        change.consume()
+                        if (!ended) {
+                            totalDrag += dragAmount
+                        }
+                    },
+                    onDragEnd = {
+                        if (!ended) {
+                            val laneSwipe = if (isLandscapeGesture) totalDrag.y else totalDrag.x
+                            when {
+                                laneSwipe < -32f -> playerLane = (playerLane - 1).coerceAtLeast(0)
+                                laneSwipe > 32f -> playerLane = (playerLane + 1).coerceAtMost(2)
+                            }
+                        }
+                        totalDrag = Offset.Zero
+                    },
+                    onDragCancel = { totalDrag = Offset.Zero }
+                )
             }
     ) {
-        val laneHeight = maxHeight / 3
-        val objectSize = if (maxHeight < 360.dp) 42.dp else 52.dp
-        val playerSize = if (maxHeight < 360.dp) 56.dp else 68.dp
-        val playerX = maxWidth * 0.12f
-        val planetX = maxWidth * (0.82f - distanceProgress * 0.12f)
-
+        val isLandscape = false
+        val laneSize = if (isLandscape) maxHeight / 3 else maxWidth / 3
+        val objectSize = if (maxHeight < 360.dp || maxWidth < 420.dp) 42.dp else 52.dp
+        val playerSize = if (maxHeight < 360.dp || maxWidth < 420.dp) 56.dp else 68.dp
+        val playerX = if (isLandscape) maxWidth * 0.12f else laneStart(playerLane, laneSize) + laneSize / 2 - playerSize / 2
+        val playerY = if (isLandscape) laneStart(playerLane, laneSize) + laneSize / 2 - playerSize / 2 else maxHeight * 0.78f
         GalaxyconHud(
             levelSpec = levelSpec,
             locale = locale,
@@ -263,19 +301,12 @@ fun GalaxyconGame(
                 .padding(10.dp)
         )
 
-        LaneBackgrounds(laneHeight = laneHeight)
-
-        GalaxyconPlanet(
-            name = levelSpec.planetName,
-            modifier = Modifier
-                .offset(x = planetX, y = laneTop(1, laneHeight) + laneHeight / 2 - 44.dp)
-                .size(88.dp)
-        )
+        LaneBackgrounds(laneSize = laneSize, isLandscape = isLandscape)
 
         GalaxyconPlayer(
             invulnerable = invulnerableMs > 0L,
             modifier = Modifier
-                .offset(x = playerX, y = laneTop(playerLane, laneHeight) + laneHeight / 2 - playerSize / 2)
+                .offset(x = playerX, y = playerY)
                 .size(playerSize)
         )
 
@@ -283,25 +314,12 @@ fun GalaxyconGame(
             GalaxyconObjectView(
                 obj = obj,
                 size = objectSize,
+                nextRequiredLetter = nextRequiredLetter,
                 modifier = Modifier.offset(
-                    x = maxWidth * obj.x,
-                    y = laneTop(obj.lane, laneHeight) + laneHeight / 2 - objectSize / 2
+                    x = if (isLandscape) maxWidth * obj.x else laneStart(obj.lane, laneSize) + laneSize / 2 - objectSize / 2,
+                    y = if (isLandscape) laneStart(obj.lane, laneSize) + laneSize / 2 - objectSize / 2 else maxHeight * (1f - obj.x) - objectSize / 2
                 )
             )
-        }
-
-        Column(
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .padding(end = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            SmallControlButton(text = "▲") {
-                if (!ended) playerLane = (playerLane - 1).coerceAtLeast(0)
-            }
-            SmallControlButton(text = "▼") {
-                if (!ended) playerLane = (playerLane + 1).coerceAtMost(2)
-            }
         }
 
         AnimatedVisibility(
@@ -363,7 +381,7 @@ private fun GalaxyconHud(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Galaxycon · ${levelSpec.planetName}",
+                    text = levelSpec.planetName,
                     color = StarWhite,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
@@ -384,15 +402,27 @@ private fun GalaxyconHud(
                     color = StarWhite,
                     style = MaterialTheme.typography.labelLarge
                 )
+                val multiplierSeconds = ((multiplierRemainingMs / 1000f).roundToInt()).coerceIn(0, 15)
                 Text(
                     text = if (activeMultiplier > 1) {
-                        "X$activeMultiplier · ${((multiplierRemainingMs / 1000f).roundToInt()).coerceAtLeast(0)}s"
+                        "X$activeMultiplier · ${multiplierSeconds}s"
                     } else {
-                        "X1"
+                        localizedGalaxyconText("multiplierReady", locale)
                     },
                     color = if (activeMultiplier > 1) PlanetGold else StarWhite.copy(alpha = 0.65f),
-                    style = MaterialTheme.typography.labelLarge,
+                    style = if (activeMultiplier > 1) MaterialTheme.typography.labelSmall else MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold
+                )
+            }
+            if (activeMultiplier > 1) {
+                LinearProgressIndicator(
+                    progress = { (multiplierRemainingMs.toFloat() / GALAXYCON_MULTIPLIER_DURATION_MS.toFloat()).coerceIn(0f, 1f) },
+                    color = PlanetGold,
+                    trackColor = StarWhite.copy(alpha = 0.12f),
+                    modifier = Modifier
+                        .fillMaxWidth(0.55f)
+                        .height(4.dp)
+                        .clip(RoundedCornerShape(4.dp))
                 )
             }
 
@@ -428,17 +458,28 @@ private fun GalaxyconHud(
 }
 
 @Composable
-private fun LaneBackgrounds(laneHeight: Dp) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        repeat(3) { lane ->
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(laneHeight)
-                    .background(
-                        if (lane == 1) PlanetBlue.copy(alpha = 0.05f) else Color.White.copy(alpha = 0.025f)
-                    )
-            )
+private fun LaneBackgrounds(laneSize: Dp, isLandscape: Boolean) {
+    if (isLandscape) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            repeat(3) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(laneSize)
+                        .background(Color.Transparent)
+                )
+            }
+        }
+    } else {
+        Row(modifier = Modifier.fillMaxSize()) {
+            repeat(3) {
+                Box(
+                    modifier = Modifier
+                        .width(laneSize)
+                        .fillMaxHeight()
+                        .background(Color.Transparent)
+                )
+            }
         }
     }
 }
@@ -446,15 +487,17 @@ private fun LaneBackgrounds(laneHeight: Dp) {
 @Composable
 private fun GalaxyconPlayer(invulnerable: Boolean, modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(22.dp))
-            .background(if (invulnerable) PlanetRed.copy(alpha = 0.35f) else PlanetBlue.copy(alpha = 0.82f)),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = "🚀",
-            style = MaterialTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center
+            style = MaterialTheme.typography.displaySmall,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.background(
+                if (invulnerable) PlanetRed.copy(alpha = 0.18f) else Color.Transparent,
+                RoundedCornerShape(18.dp)
+            )
         )
     }
 }
@@ -462,11 +505,30 @@ private fun GalaxyconPlayer(invulnerable: Boolean, modifier: Modifier = Modifier
 @Composable
 private fun GalaxyconPlanet(name: String, modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier
-            .clip(CircleShape)
-            .background(PlanetGold.copy(alpha = 0.90f)),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val w = size.width
+            val h = size.height
+            val planet = Path().apply {
+                moveTo(w * 0.48f, h * 0.04f)
+                cubicTo(w * 0.78f, h * 0.02f, w * 0.98f, h * 0.25f, w * 0.92f, h * 0.52f)
+                cubicTo(w * 0.88f, h * 0.83f, w * 0.56f, h * 1.00f, w * 0.26f, h * 0.88f)
+                cubicTo(w * 0.02f, h * 0.78f, w * 0.02f, h * 0.32f, w * 0.22f, h * 0.16f)
+                cubicTo(w * 0.30f, h * 0.09f, w * 0.38f, h * 0.05f, w * 0.48f, h * 0.04f)
+                close()
+            }
+            drawPath(planet, PlanetGold.copy(alpha = 0.90f))
+            drawLine(
+                color = DeepSpaceBlue.copy(alpha = 0.24f),
+                start = Offset(w * 0.12f, h * 0.58f),
+                end = Offset(w * 0.88f, h * 0.42f),
+                strokeWidth = w * 0.10f,
+                cap = androidx.compose.ui.graphics.StrokeCap.Round
+            )
+            drawCircle(StarWhite.copy(alpha = 0.18f), radius = w * 0.10f, center = Offset(w * 0.35f, h * 0.28f))
+        }
         Text(
             text = name.take(3).uppercase(),
             color = DeepSpaceBlue,
@@ -480,49 +542,72 @@ private fun GalaxyconPlanet(name: String, modifier: Modifier = Modifier) {
 private fun GalaxyconObjectView(
     obj: GalaxyconFlyingObject,
     size: Dp,
+    nextRequiredLetter: Char?,
     modifier: Modifier = Modifier
 ) {
-    val color = when (obj.type) {
-        GalaxyconObjectType.CORRECT_LETTER -> PlanetBlue.copy(alpha = 0.90f)
-        GalaxyconObjectType.WRONG_LETTER -> NebulaPurple.copy(alpha = 0.90f)
-        GalaxyconObjectType.STAR -> PlanetGold.copy(alpha = 0.95f)
-        GalaxyconObjectType.MULTIPLIER -> PlanetRed.copy(alpha = 0.88f)
-        GalaxyconObjectType.DEBRIS -> StarWhite.copy(alpha = 0.22f)
-    }
-    val contentColor = when (obj.type) {
-        GalaxyconObjectType.STAR, GalaxyconObjectType.CORRECT_LETTER -> DeepSpaceBlue
-        else -> StarWhite
-    }
+    when (obj.type) {
+        GalaxyconObjectType.CORRECT_LETTER,
+        GalaxyconObjectType.WRONG_LETTER -> {
+            Box(
+                modifier = modifier.size(size),
+                contentAlignment = Alignment.Center
+            ) {
+                val isCurrentCorrectLetter = nextRequiredLetter != null && obj.label.equals(nextRequiredLetter.toString(), ignoreCase = true)
+                Text(
+                    text = obj.label,
+                    color = if (isCurrentCorrectLetter) PlanetGold else StarWhite,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Black,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
 
-    Box(
-        modifier = modifier
-            .size(size)
-            .clip(RoundedCornerShape(16.dp))
-            .background(color),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = obj.label,
-            color = contentColor,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
-        )
-    }
-}
+        GalaxyconObjectType.DEBRIS -> {
+            Box(
+                modifier = modifier.size(size),
+                contentAlignment = Alignment.Center
+            ) {
+                Canvas(modifier = Modifier.fillMaxSize()) {
+                    val w = this.size.width
+                    val h = this.size.height
+                    val asteroid = Path().apply {
+                        moveTo(w * 0.50f, h * 0.04f)
+                        lineTo(w * 0.78f, h * 0.14f)
+                        lineTo(w * 0.96f, h * 0.44f)
+                        lineTo(w * 0.82f, h * 0.78f)
+                        lineTo(w * 0.54f, h * 0.96f)
+                        lineTo(w * 0.20f, h * 0.84f)
+                        lineTo(w * 0.05f, h * 0.54f)
+                        lineTo(w * 0.16f, h * 0.20f)
+                        close()
+                    }
+                    drawPath(asteroid, Color(0xFF8A7B6A).copy(alpha = 0.94f))
+                    drawCircle(DeepSpaceBlue.copy(alpha = 0.24f), radius = w * 0.09f, center = Offset(w * 0.34f, h * 0.36f))
+                    drawCircle(DeepSpaceBlue.copy(alpha = 0.20f), radius = w * 0.06f, center = Offset(w * 0.62f, h * 0.62f))
+                    drawCircle(StarWhite.copy(alpha = 0.16f), radius = w * 0.05f, center = Offset(w * 0.62f, h * 0.24f))
+                }
+            }
+        }
 
-@Composable
-private fun SmallControlButton(text: String, onClick: () -> Unit) {
-    Surface(
-        color = PlanetBlue.copy(alpha = 0.86f),
-        contentColor = DeepSpaceBlue,
-        shape = RoundedCornerShape(14.dp),
-        modifier = Modifier
-            .size(48.dp)
-            .clickable { onClick() }
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            Text(text = text, fontWeight = FontWeight.Bold)
+        GalaxyconObjectType.STAR,
+        GalaxyconObjectType.MULTIPLIER -> {
+            val color = if (obj.type == GalaxyconObjectType.MULTIPLIER) PlanetBlue.copy(alpha = 0.92f) else PlanetGold.copy(alpha = 0.95f)
+            Box(
+                modifier = modifier
+                    .size(size)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(color),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = obj.label,
+                    color = DeepSpaceBlue,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
@@ -595,7 +680,13 @@ private fun GalaxyconResultCard(
     }
 }
 
-private fun laneTop(lane: Int, laneHeight: Dp): Dp = laneHeight * lane.toFloat()
+private tailrec fun Context.findGalaxyconActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findGalaxyconActivity()
+    else -> null
+}
+
+private fun laneStart(lane: Int, laneSize: Dp): Dp = laneSize * lane.toFloat()
 
 private fun wordProgress(word: String, currentLetterIndex: Int): String = word
     .mapIndexed { index, char -> if (index < currentLetterIndex) char.toString() else "_" }
@@ -611,6 +702,7 @@ private fun localizedGalaxyconText(key: String, locale: String): String = when (
         "collisions" -> "Collisions"
         "stickers" -> "Stickers earned"
         "replay" -> "Replay"
+        "multiplierReady" -> "X1"
         else -> key
     }
 
@@ -623,6 +715,7 @@ private fun localizedGalaxyconText(key: String, locale: String): String = when (
         "collisions" -> "Collisions"
         "stickers" -> "Stickers gagnes"
         "replay" -> "Rejouer"
+        "multiplierReady" -> "X1"
         else -> key
     }
 
@@ -635,6 +728,7 @@ private fun localizedGalaxyconText(key: String, locale: String): String = when (
         "collisions" -> "Botsingen"
         "stickers" -> "Stickers verdiend"
         "replay" -> "Opnieuw"
+        "multiplierReady" -> "X1"
         else -> key
     }
 }

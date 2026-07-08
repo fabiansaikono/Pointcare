@@ -13,6 +13,7 @@ enum class InputMode {
     TRACE_LETTER,
     MATH_CROSSWORD,
     SUDOKU_GRID,
+    WORD_SEEKER,
     CALCULATOR_PUZZLE,
     NUMBER_WALL
 }
