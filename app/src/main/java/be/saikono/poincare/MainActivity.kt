@@ -1,4 +1,4 @@
-package be.saikono.poincare
+﻿package be.saikono.poincare
 
 import android.os.Bundle
 import android.util.Log
@@ -63,6 +63,8 @@ import be.saikono.poincare.ui.writing.WritingScreen
 import be.saikono.poincare.ui.writing.WritingViewModel
 import be.saikono.poincare.ui.writing.WritingViewModelFactory
 import be.saikono.poincare.data.sync.SyncManager
+import be.saikono.poincare.ui.puzzle.orbitbuilder.OrbitBuilderScreen
+import be.saikono.poincare.ui.puzzle.orbitbuilder.OrbitBuilderViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -173,6 +175,7 @@ fun PoincareApp(
     val writingViewModel: WritingViewModel = viewModel(factory = writingViewModelFactory)
     val readingViewModel: ReadingViewModel = viewModel(factory = readingViewModelFactory)
     val puzzleViewModel: PuzzleViewModel = viewModel(factory = puzzleViewModelFactory)
+    val orbitBuilderViewModel: OrbitBuilderViewModel = viewModel()
     val parentViewModel: ParentViewModel = viewModel(factory = parentViewModelFactory)
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -261,10 +264,10 @@ fun PoincareApp(
                                 Screen.Math.route
                             }
                             LearningDomain.PUZZLE.name -> {
-                                puzzleViewModel.setDifficultyStars(stars.takeIf { it in 1..3 })
-                                puzzleViewModel.setSubcategoryId(subId)
-                                Screen.Puzzle.route
-                            }
+                                    puzzleViewModel.setDifficultyStars(stars.takeIf { it in 1..3 })
+                                    puzzleViewModel.setSubcategoryId(subId)
+                                    Screen.Puzzle.route
+                                }
                             else -> Screen.SpaceMap.route
                         }
                         navController.navigate(route)
@@ -287,6 +290,13 @@ fun PoincareApp(
 
             composable(Screen.Puzzle.route) {
                 PuzzleScreen(viewModel = puzzleViewModel, onNavigateBack = { navController.popBackStack() })
+            }
+
+            composable(Screen.OrbitBuilder.route) {
+                OrbitBuilderScreen(
+                    viewModel = orbitBuilderViewModel,
+                    onNavigateBack = { navController.popBackStack() }
+                )
             }
 
             composable(Screen.ParentDashboard.route) {
@@ -313,3 +323,4 @@ fun PoincareApp(
         }
     }
 }
+

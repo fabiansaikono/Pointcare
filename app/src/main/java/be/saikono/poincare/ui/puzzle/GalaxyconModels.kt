@@ -7,9 +7,11 @@ import kotlin.math.round
 import kotlin.random.Random
 
 const val GALAXYCON_SUBCATEGORY_ID = "galaxycon"
-const val GALAXYCON_START_LIVES = 5
-const val GALAXYCON_MAX_LIVES = 5
+const val GALAXYCON_START_LIVES = 3
+const val GALAXYCON_MAX_LIVES = 3
 const val GALAXYCON_MULTIPLIER_DURATION_MS = 15_000L
+const val GALAXYCON_HEART_BONUS_MIN_OBJECTS = 40L
+const val GALAXYCON_HEART_BONUS_MAX_OBJECTS = 60L
 
 data class GalaxyconWord(
     val id: String,
@@ -46,13 +48,19 @@ enum class GalaxyconObjectType {
     WRONG_LETTER,
     STAR,
     MULTIPLIER,
-    DEBRIS
+    DEBRIS,
+    SHIELD,
+    HEART
 }
 
 data class GalaxyconFlyingObject(
     val id: Long,
     val type: GalaxyconObjectType,
     val lane: Int,
+    /**
+     * Travel coordinate. Objects spawn above the screen at 1.08 and move down to 0.
+     * The screen maps this to a top-to-bottom vertical position with 1f - x.
+     */
     val x: Float,
     val label: String,
     val multiplier: Int = 1
@@ -82,23 +90,24 @@ object GalaxyconGenerator {
     ): GalaxyconLevelSpec {
         val stars = difficultyStars.coerceIn(1, 3)
         val normalizedLocale = normalizeGalaxyconLocale(locale)
-        val gradeBias = when (level) {
-            SkillLevel.NOT_APPLICABLE -> 1
-            else -> level.ordinal + 1
-        }.coerceIn(1, 6)
-        val targetDifficulty = (stars + (gradeBias - 1) / 2).coerceIn(1, 3)
-        val words = wordsFor(normalizedLocale)
-            .filter { it.difficulty <= targetDifficulty }
-            .sortedWith(compareBy<GalaxyconWord> { it.difficulty }.thenBy { it.text.length })
-            .let { pool ->
-                val needed = when (stars) {
-                    1 -> 3
-                    2 -> 4
-                    else -> 5
-                }
-                val seed = 31 * normalizedLocale.hashCode() + 17 * level.name.hashCode() + stars
-                pool.shuffled(Random(seed)).take(needed)
-            }
+        val allWords = wordsFor(normalizedLocale)
+        val exactDifficultyWords = allWords.filter { it.difficulty == stars }
+        val fallbackWords = allWords.filter { it.difficulty <= stars }
+        val needed = when (stars) {
+            1 -> 3
+            2 -> 4
+            else -> 5
+        }
+        val seed = 31 * normalizedLocale.hashCode() + 17 * level.name.hashCode() + stars
+        val selectedPool = if (exactDifficultyWords.size >= needed) exactDifficultyWords else fallbackWords
+        val words = selectedPool
+            .shuffled(Random(seed))
+            .sortedWith(
+                compareByDescending<GalaxyconWord> { if (stars >= 2 && it.difficulty == stars) 1 else 0 }
+                    .thenBy { it.text.length }
+                    .thenBy { it.difficulty }
+            )
+            .take(needed)
 
         val planet = when (stars) {
             1 -> "Lumora"
@@ -113,14 +122,14 @@ object GalaxyconGenerator {
             words = words,
             difficultyStars = stars,
             speedFractionPerSecond = when (stars) {
-                1 -> 0.18f
-                2 -> 0.22f
-                else -> 0.26f
+                1 -> 0.155f
+                2 -> 0.195f
+                else -> 0.225f
             },
             spawnEveryMs = when (stars) {
-                1 -> 1_350L
-                2 -> 1_150L
-                else -> 980L
+                1 -> 1_450L
+                2 -> 980L
+                else -> 850L
             },
             durationMs = when (stars) {
                 1 -> 55_000L
@@ -129,8 +138,8 @@ object GalaxyconGenerator {
             },
             maxExpectedCollisions = when (stars) {
                 1 -> 8
-                2 -> 7
-                else -> 6
+                2 -> 8
+                else -> 9
             },
             seed = 73 * normalizedLocale.hashCode() + 19 * level.name.hashCode() + stars
         )
@@ -145,12 +154,45 @@ object GalaxyconGenerator {
         val rng = Random(level.seed + spawnIndex.toInt() * 97)
         val lane = rng.nextInt(0, 3)
         val roll = rng.nextFloat()
+        val stars = level.difficultyStars.coerceIn(1, 3)
+
+        val correctChance = if (nextRequiredLetter != null) {
+            when (stars) {
+                1 -> 0.34f
+                2 -> 0.30f
+                else -> 0.26f
+            }
+        } else {
+            0f
+        }
+        val wrongChance = when (stars) {
+            1 -> 0.12f
+            2 -> 0.15f
+            else -> 0.17f
+        }
+        val debrisChance = when (stars) {
+            1 -> 0.27f
+            2 -> 0.38f
+            else -> 0.43f
+        }
+        val starChance = when (stars) {
+            1 -> 0.13f
+            2 -> 0.10f
+            else -> 0.08f
+        }
+        val multiplierChance = when (stars) {
+            1 -> 0.06f
+            2 -> 0.05f
+            else -> 0.04f
+        }
+
         val type = when {
-            nextRequiredLetter != null && roll < correctLetterChance(level.difficultyStars) -> GalaxyconObjectType.CORRECT_LETTER
-            roll < wrongLetterLimit(level.difficultyStars) -> GalaxyconObjectType.WRONG_LETTER
-            roll < 0.73f -> GalaxyconObjectType.DEBRIS
-            roll < 0.91f -> GalaxyconObjectType.STAR
-            else -> GalaxyconObjectType.MULTIPLIER
+            roll < correctChance -> GalaxyconObjectType.CORRECT_LETTER
+            roll < correctChance + wrongChance -> GalaxyconObjectType.WRONG_LETTER
+            roll < correctChance + wrongChance + debrisChance -> GalaxyconObjectType.DEBRIS
+            roll < correctChance + wrongChance + debrisChance + starChance -> GalaxyconObjectType.STAR
+            roll < correctChance + wrongChance + debrisChance + starChance + multiplierChance -> GalaxyconObjectType.MULTIPLIER
+            else -> GalaxyconObjectType.SHIELD
         }
 
         return when (type) {
@@ -195,21 +237,46 @@ object GalaxyconGenerator {
                 type = type,
                 lane = lane,
                 x = 1.08f,
-                label = listOf("☄", "◆", "◼")[rng.nextInt(3)]
+                label = listOf("☄", "◆", "◾", "⬟")[rng.nextInt(4)]
+            )
+
+            GalaxyconObjectType.SHIELD -> GalaxyconFlyingObject(
+                id = spawnIndex,
+                type = type,
+                lane = lane,
+                x = 1.08f,
+                label = "SH"
+            )
+
+            GalaxyconObjectType.HEART -> GalaxyconFlyingObject(
+                id = spawnIndex,
+                type = type,
+                lane = lane,
+                x = 1.08f,
+                label = "♥"
             )
         }
     }
 
-    private fun correctLetterChance(stars: Int): Float = when (stars) {
-        1 -> 0.44f
-        2 -> 0.39f
-        else -> 0.34f
+    fun createHeartObject(
+        level: GalaxyconLevelSpec,
+        spawnIndex: Long
+    ): GalaxyconFlyingObject {
+        val rng = Random(level.seed + spawnIndex.toInt() * 131 + 41)
+        return GalaxyconFlyingObject(
+            id = spawnIndex,
+            type = GalaxyconObjectType.HEART,
+            lane = rng.nextInt(0, 3),
+            x = 1.08f,
+            label = "♥"
+        )
     }
 
-    private fun wrongLetterLimit(stars: Int): Float = when (stars) {
-        1 -> 0.55f
-        2 -> 0.58f
-        else -> 0.62f
+    fun nextHeartSpawnIndex(level: GalaxyconLevelSpec, previousHeartSpawnIndex: Long): Long {
+        val salt = if (previousHeartSpawnIndex == 0L) 11 else previousHeartSpawnIndex.toInt() * 17
+        val rng = Random(level.seed + salt)
+        val interval = rng.nextLong(GALAXYCON_HEART_BONUS_MIN_OBJECTS, GALAXYCON_HEART_BONUS_MAX_OBJECTS + 1L)
+        return previousHeartSpawnIndex + interval
     }
 
     private fun randomWrongLetter(rng: Random, nextRequiredLetter: Char?, locale: String): Char {
@@ -219,7 +286,9 @@ object GalaxyconGenerator {
         }
         var candidate = alphabet[rng.nextInt(alphabet.length)]
         repeat(8) {
-            if (nextRequiredLetter == null || !candidate.equals(nextRequiredLetter, ignoreCase = true)) return candidate
+            if (nextRequiredLetter == null || !candidate.equals(nextRequiredLetter, ignoreCase = true)) {
+                return candidate
+            }
             candidate = alphabet[rng.nextInt(alphabet.length)]
         }
         return if (nextRequiredLetter?.uppercaseChar() == 'A') 'B' else 'A'
@@ -230,35 +299,49 @@ object GalaxyconGenerator {
             GalaxyconWord("galaxycon_en_sun", "sun", "De zon geeft licht.", "The sun gives light.", "Le soleil donne de la lumiere.", 1),
             GalaxyconWord("galaxycon_en_moon", "moon", "Je ziet hem vaak 's nachts.", "You often see it at night.", "On la voit souvent la nuit.", 1),
             GalaxyconWord("galaxycon_en_star", "star", "Een lichtpunt in de ruimte.", "A bright point in space.", "Un point lumineux dans l'espace.", 1),
+            GalaxyconWord("galaxycon_en_mars", "mars", "Een rode planeet.", "A red planet.", "Une planete rouge.", 1),
+            GalaxyconWord("galaxycon_en_comet", "comet", "Een ijzige ruimtereiziger.", "An icy space traveler.", "Un voyageur glace de l'espace.", 2),
             GalaxyconWord("galaxycon_en_rocket", "rocket", "Hij vliegt naar de ruimte.", "It flies into space.", "Elle vole vers l'espace.", 2),
             GalaxyconWord("galaxycon_en_planet", "planet", "Een wereld die rond een ster draait.", "A world that moves around a star.", "Un monde qui tourne autour d'une etoile.", 2),
             GalaxyconWord("galaxycon_en_orbit", "orbit", "Een baan rond een planeet.", "A path around a planet.", "Un chemin autour d'une planete.", 2),
+            GalaxyconWord("galaxycon_en_saturn", "saturn", "Een planeet met ringen.", "A planet with rings.", "Une planete avec des anneaux.", 2),
             GalaxyconWord("galaxycon_en_galaxy", "galaxy", "Een groep sterren.", "A group of stars.", "Un groupe d'etoiles.", 3),
             GalaxyconWord("galaxycon_en_astronaut", "astronaut", "Iemand die naar de ruimte reist.", "A person who travels to space.", "Une personne qui voyage dans l'espace.", 3),
-            GalaxyconWord("galaxycon_en_meteor", "meteor", "Een vallende ruimtesteen.", "A falling space rock.", "Une pierre de l'espace qui tombe.", 3)
+            GalaxyconWord("galaxycon_en_meteor", "meteor", "Een vallende ruimtesteen.", "A falling space rock.", "Une pierre de l'espace qui tombe.", 3),
+            GalaxyconWord("galaxycon_en_telescope", "telescope", "Je kijkt ermee naar sterren.", "You use it to look at stars.", "On l'utilise pour regarder les etoiles.", 3),
+            GalaxyconWord("galaxycon_en_universe", "universe", "Alles in de ruimte samen.", "Everything in space together.", "Tout l'espace ensemble.", 3)
         )
 
         "fr-BE" -> listOf(
             GalaxyconWord("galaxycon_fr_sol", "sol", "De grond onder je voeten.", "The ground under your feet.", "Le sol sous tes pieds.", 1),
             GalaxyconWord("galaxycon_fr_lune", "lune", "Je ziet haar vaak 's nachts.", "You often see it at night.", "On la voit souvent la nuit.", 1),
+            GalaxyconWord("galaxycon_fr_mars", "mars", "Een rode planeet.", "A red planet.", "Une planete rouge.", 1),
+            GalaxyconWord("galaxycon_fr_ciel", "ciel", "Daar zie je sterren.", "You see stars there.", "On y voit les etoiles.", 1),
             GalaxyconWord("galaxycon_fr_etoile", "etoile", "Een lichtpunt in de ruimte.", "A bright point in space.", "Un point lumineux dans l'espace.", 2),
             GalaxyconWord("galaxycon_fr_fusee", "fusee", "Ze vliegt naar de ruimte.", "It flies into space.", "Elle vole vers l'espace.", 2),
             GalaxyconWord("galaxycon_fr_planete", "planete", "Een wereld die rond een ster draait.", "A world that moves around a star.", "Un monde qui tourne autour d'une etoile.", 2),
+            GalaxyconWord("galaxycon_fr_comete", "comete", "Een ijzige ruimtereiziger.", "An icy space traveler.", "Un voyageur glace de l'espace.", 2),
             GalaxyconWord("galaxycon_fr_orbite", "orbite", "Een baan rond een planeet.", "A path around a planet.", "Un chemin autour d'une planete.", 3),
             GalaxyconWord("galaxycon_fr_galaxie", "galaxie", "Een groep sterren.", "A group of stars.", "Un groupe d'etoiles.", 3),
-            GalaxyconWord("galaxycon_fr_meteore", "meteore", "Een vallende ruimtesteen.", "A falling space rock.", "Une pierre de l'espace qui tombe.", 3)
+            GalaxyconWord("galaxycon_fr_meteore", "meteore", "Een vallende ruimtesteen.", "A falling space rock.", "Une pierre de l'espace qui tombe.", 3),
+            GalaxyconWord("galaxycon_fr_astronaute", "astronaute", "Iemand die naar de ruimte reist.", "A person who travels to space.", "Une personne qui voyage dans l'espace.", 3),
+            GalaxyconWord("galaxycon_fr_univers", "univers", "Alles in de ruimte samen.", "Everything in space together.", "Tout l'espace ensemble.", 3)
         )
 
         else -> listOf(
             GalaxyconWord("galaxycon_nl_zon", "zon", "De zon geeft licht.", "The sun gives light.", "Le soleil donne de la lumiere.", 1),
             GalaxyconWord("galaxycon_nl_maan", "maan", "Je ziet hem vaak 's nachts.", "You often see it at night.", "On la voit souvent la nuit.", 1),
             GalaxyconWord("galaxycon_nl_ster", "ster", "Een lichtpunt in de ruimte.", "A bright point in space.", "Un point lumineux dans l'espace.", 1),
+            GalaxyconWord("galaxycon_nl_mars", "mars", "Een rode planeet.", "A red planet.", "Une planete rouge.", 1),
             GalaxyconWord("galaxycon_nl_raket", "raket", "Hij vliegt naar de ruimte.", "It flies into space.", "Elle vole vers l'espace.", 2),
             GalaxyconWord("galaxycon_nl_planeet", "planeet", "Een wereld die rond een ster draait.", "A world that moves around a star.", "Un monde qui tourne autour d'une etoile.", 2),
             GalaxyconWord("galaxycon_nl_baan", "baan", "Een route rond een planeet.", "A path around a planet.", "Un chemin autour d'une planete.", 2),
+            GalaxyconWord("galaxycon_nl_komeet", "komeet", "Een ijzige ruimtereiziger.", "An icy space traveler.", "Un voyageur glace de l'espace.", 2),
             GalaxyconWord("galaxycon_nl_melkweg", "melkweg", "Onze grote groep sterren.", "Our large group of stars.", "Notre grand groupe d'etoiles.", 3),
             GalaxyconWord("galaxycon_nl_astronaut", "astronaut", "Iemand die naar de ruimte reist.", "A person who travels to space.", "Une personne qui voyage dans l'espace.", 3),
-            GalaxyconWord("galaxycon_nl_meteoor", "meteoor", "Een vallende ruimtesteen.", "A falling space rock.", "Une pierre de l'espace qui tombe.", 3)
+            GalaxyconWord("galaxycon_nl_meteoor", "meteoor", "Een vallende ruimtesteen.", "A falling space rock.", "Une pierre de l'espace qui tombe.", 3),
+            GalaxyconWord("galaxycon_nl_sterren", "sterren", "Lichtjes aan de hemel.", "Lights in the sky.", "Des lumieres dans le ciel.", 3),
+            GalaxyconWord("galaxycon_nl_telescoop", "telescoop", "Je kijkt ermee naar sterren.", "You use it to look at stars.", "On l'utilise pour regarder les etoiles.", 3)
         )
     }
 }
@@ -281,7 +364,6 @@ fun calculateGalaxyconResult(
     val bonusTarget = max(1, level.words.size * 35)
     val bonusScore = percent(starsCollected * 5 + multipliersCollected * 20, bonusTarget)
     val planetScore = if (planetReached) 100f else 0f
-
     val finalScore = (
         wordScore * 0.40f +
             letterScore * 0.20f +
@@ -289,7 +371,6 @@ fun calculateGalaxyconResult(
             bonusScore * 0.10f +
             planetScore * 0.10f
         ).coerceIn(0f, 100f)
-
     val rounded = round(finalScore * 10f) / 10f
     return GalaxyconRunResult(
         scorePercent = rounded,

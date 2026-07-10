@@ -3,12 +3,44 @@ package be.saikono.poincare.ui.puzzle
 import be.saikono.poincare.model.LocalizedText
 
 /**
- * Runtime data for the generated Constellations puzzle.
- *
- * Coordinates use a normalized 0f..1f system so the same puzzle can be drawn on any screen size.
- * The star patterns are simplified educational connect-the-star versions of real constellations
- * or well-known asterisms inside real constellations.
+ * A connection is undirected: A-B is the same as B-A.
  */
+data class ConstellationEdge(
+    val a: String,
+    val b: String
+) {
+    companion object {
+        fun of(first: String, second: String): ConstellationEdge {
+            return if (first <= second) ConstellationEdge(first, second) else ConstellationEdge(second, first)
+        }
+    }
+}
+
+data class ConstellationConnection(
+    val fromStarId: String,
+    val toStarId: String
+) {
+    val edge: ConstellationEdge = ConstellationEdge.of(fromStarId, toStarId)
+}
+
+data class ConstellationStar(
+    val id: String,
+    val name: String,
+    val x: Float,
+    val y: Float,
+    val isTarget: Boolean,
+    val order: Int? = null,
+    val label: String? = null,
+    val brightness: Float = 0.85f,
+    /**
+     * Stars with the same groupId belong to the same independent line.
+     * The player only has to connect neighbouring orders inside the same group.
+     */
+    val groupId: String? = null,
+    val groupSymbol: String? = null,
+    val groupRule: LocalizedText? = null
+)
+
 data class ConstellationPuzzle(
     val id: String,
     val templateId: String,
@@ -20,38 +52,17 @@ data class ConstellationPuzzle(
     val stars: List<ConstellationStar>,
     val connections: List<ConstellationConnection>,
     val targetStarIds: Set<String>,
-    val seed: Long
+    val seed: Long,
+    val rules: List<LocalizedText> = emptyList()
 ) {
     val requiredEdges: Set<ConstellationEdge>
-        get() = connections.map { ConstellationEdge.of(it.fromStarId, it.toStarId) }.toSet()
+        get() = connections.map { it.edge }.toSet()
 
-    fun targetStarsInOrder(): List<ConstellationStar> = targetStarIds.mapNotNull { id -> stars.firstOrNull { it.id == id } }
-}
+    val targetStars: List<ConstellationStar>
+        get() = stars.filter { it.isTarget }
 
-data class ConstellationStar(
-    val id: String,
-    val name: String,
-    val x: Float,
-    val y: Float,
-    val isTarget: Boolean,
-    val order: Int? = null,
-    val label: String? = order?.toString(),
-    val brightness: Float = 1f
-)
-
-data class ConstellationConnection(
-    val fromStarId: String,
-    val toStarId: String
-)
-
-data class ConstellationEdge(
-    val a: String,
-    val b: String
-) {
-    companion object {
-        fun of(first: String, second: String): ConstellationEdge =
-            if (first <= second) ConstellationEdge(first, second) else ConstellationEdge(second, first)
-    }
+    val starsById: Map<String, ConstellationStar>
+        get() = stars.associateBy { it.id }
 }
 
 data class ConstellationConnectionAttempt(
@@ -67,74 +78,74 @@ data class ConstellationConnectionAttempt(
 
 data class ConstellationsCopy(
     val title: String,
-    val tapMissionToHear: String,
-    val newMission: String,
-    val nextMission: String,
-    val resetPath: String,
-    val tip: String,
-    val factPrefix: String,
-    val selectedPrefix: String,
-    val firstStarSelected: String,
+    val ruleTitle: String,
+    val chooseFirst: String,
+    val chooseSecond: String,
     val correctConnection: String,
     val wrongConnection: String,
     val alreadyConnected: String,
     val completed: String,
+    val tip: String,
     val tipConnect: String,
-    val startHere: String
+    val noTipNeeded: String,
+    val resetPath: String,
+    val nextMission: String,
+    val factPrefix: String,
+    val progress: String
 )
 
-fun constellationsCopy(language: String): ConstellationsCopy = when (language) {
-    "fr", "fr-BE", "fr_BE", "fr-FR", "fr_FR" -> ConstellationsCopy(
-        title = "Constellations",
-        tapMissionToHear = "",
-        newMission = "Nouvelle mission",
-        nextMission = "Mission suivante",
-        resetPath = "Effacer le chemin",
-        tip = "Indice",
-        factPrefix = "Info",
-        selectedPrefix = "Sélection",
-        firstStarSelected = "Tape une deuxième étoile ou glisse vers elle.",
-        correctConnection = "Bien joué ! Cette ligne fait partie de la constellation.",
-        wrongConnection = "Cette ligne ne fait pas partie de la constellation.",
-        alreadyConnected = "Cette ligne est déjà connectée.",
-        completed = "Constellation trouvée !",
-        tipConnect = "Indice avec les valeurs",
-        startHere = "Commence ici"
-    )
-
-    "en", "en-US", "en_US", "en-GB", "en_GB" -> ConstellationsCopy(
-        title = "Constellations",
-        tapMissionToHear = "",
-        newMission = "New mission",
-        nextMission = "Next mission",
-        resetPath = "Clear path",
-        tip = "Tip",
-        factPrefix = "Fact",
-        selectedPrefix = "Selected",
-        firstStarSelected = "Tap a second star or drag to it.",
-        correctConnection = "Nice! That line belongs to the constellation.",
-        wrongConnection = "That line is not part of the constellation.",
-        alreadyConnected = "That line is already connected.",
-        completed = "Constellation found!",
-        tipConnect = "Tip with the values",
-        startHere = "Start here"
-    )
-
-    else -> ConstellationsCopy(
-        title = "Constellations",
-        tapMissionToHear = "",
-        newMission = "Nieuwe missie",
-        nextMission = "Volgende missie",
-        resetPath = "Pad wissen",
-        tip = "Tip",
-        factPrefix = "Weetje",
-        selectedPrefix = "Geselecteerd",
-        firstStarSelected = "Tik een tweede ster aan of sleep ernaartoe.",
-        correctConnection = "Goed zo! Die lijn hoort bij de constellatie.",
-        wrongConnection = "Die lijn hoort niet bij de constellatie.",
-        alreadyConnected = "Die lijn is al verbonden.",
-        completed = "Constellatie gevonden!",
-        tipConnect = "Tip met de waarden",
-        startHere = "Start hier"
-    )
+fun constellationsCopy(language: String): ConstellationsCopy {
+    return when (language.lowercase()) {
+        "fr-be", "fr", "fr-fr" -> ConstellationsCopy(
+            title = "Constellations",
+            ruleTitle = "Règle",
+            chooseFirst = "Choisis une étoile de départ.",
+            chooseSecond = "Choisis l'étoile suivante avec le même symbole, du début vers la fin.",
+            correctConnection = "Bien joué. Continue ce chemin vers la fin.",
+            wrongConnection = "Pas encore. Commence au début de ce chemin et avance valeur par valeur.",
+            alreadyConnected = "Cette ligne est déjà faite.",
+            completed = "Constellation terminée !",
+            tip = "Indice",
+            tipConnect = "Indice : relie ces deux prochaines valeurs dans le bon ordre.",
+            noTipNeeded = "Tout est déjà relié.",
+            resetPath = "Effacer",
+            nextMission = "Mission suivante",
+            factPrefix = "Info espace",
+            progress = "Lignes"
+        )
+        "en-us", "en-gb", "en" -> ConstellationsCopy(
+            title = "Constellations",
+            ruleTitle = "Rule",
+            chooseFirst = "Choose a starting star.",
+            chooseSecond = "Choose the next star with the same symbol, from start to finish.",
+            correctConnection = "Good connection. Keep moving toward the end of this path.",
+            wrongConnection = "Not yet. Start at the beginning of this path and move value by value.",
+            alreadyConnected = "That line is already complete.",
+            completed = "Constellation complete!",
+            tip = "Hint",
+            tipConnect = "Hint: connect these next two values in the correct order.",
+            noTipNeeded = "Everything is already connected.",
+            resetPath = "Clear",
+            nextMission = "Next mission",
+            factPrefix = "Space fact",
+            progress = "Lines"
+        )
+        else -> ConstellationsCopy(
+            title = "Constellaties",
+            ruleTitle = "Regel",
+            chooseFirst = "Kies een startster.",
+            chooseSecond = "Kies de volgende ster met hetzelfde symbool, van start naar einde.",
+            correctConnection = "Goed verbonden. Ga verder naar het einde van dit pad.",
+            wrongConnection = "Nog niet. Begin bij de start van dit pad en ga waarde per waarde verder.",
+            alreadyConnected = "Die lijn is al klaar.",
+            completed = "Constellatie voltooid!",
+            tip = "Tip",
+            tipConnect = "Tip: verbind deze twee volgende waarden in de juiste volgorde.",
+            noTipNeeded = "Alles is al verbonden.",
+            resetPath = "Wissen",
+            nextMission = "Volgende missie",
+            factPrefix = "Ruimtefeitje",
+            progress = "Lijnen"
+        )
+    }
 }

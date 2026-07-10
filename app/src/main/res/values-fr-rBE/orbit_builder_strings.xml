@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="orbit_builder_title">Constructeur d’orbite</string>
+    <string name="orbit_builder_math_orbit">Orbite mathématique</string>
+    <string name="orbit_builder_build_route">Construis la route</string>
+    <string name="orbit_builder_launch">Lancer la fusée</string>
+    <string name="orbit_builder_reset">Réinitialiser</string>
+    <string name="orbit_builder_current_value">Valeur actuelle</string>
+    <string name="orbit_builder_target_value">Valeur cible</string>
+    <string name="orbit_builder_arrows_used">Flèches utilisées</string>
+    <string name="orbit_builder_mission_complete">Mission terminée</string>
+    <string name="orbit_builder_try_again">Réessayer</string>
+    <string name="orbit_builder_next_mission">Mission suivante</string>
+    <string name="orbit_builder_fail_asteroid">La fusée a heurté un astéroïde.</string>
+    <string name="orbit_builder_fail_left_map">La fusée est sortie de la carte orbitale.</string>
+    <string name="orbit_builder_fail_wrong_value">La fusée a atteint la planète avec une mauvaise valeur.</string>
+    <string name="orbit_builder_fail_loop">La route tourne en boucle.</string>
+    <string name="orbit_builder_fail_invalid_division">Cette porte de division ne donne pas un résultat entier.</string>
+    <string name="orbit_builder_fail_no_path">La fusée n’a pas pu terminer la route.</string>
+    <string name="orbit_builder_final_value">Valeur finale : %1$s</string>
+    <string name="orbit_builder_success_with_stars">Super orbite ! Étoiles : %1$d</string>
+    <string name="orbit_builder_draw_route">Trace le chemin depuis la fusée avec ton doigt.</string>
+    <string name="orbit_builder_draw_to_planet">Continue jusqu’à atteindre la planète.</string>
+    <string name="orbit_builder_ready_to_launch">Trajet prêt. Lance la fusée.</string>
+    <string name="orbit_builder_path_used">Trajet utilisé</string>
+    <string name="orbit_builder_start_value">Valeur de départ</string>
+</resources>

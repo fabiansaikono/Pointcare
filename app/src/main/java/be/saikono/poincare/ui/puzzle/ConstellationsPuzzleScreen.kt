@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.puzzle
 
+import android.content.res.Configuration
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -7,8 +8,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -72,14 +73,13 @@ fun ConstellationsPuzzleGame(
     difficultyStars: Int,
     exerciseLanguage: String,
     onComplete: () -> Unit,
-    missionKey: Any? = null,
     modifier: Modifier = Modifier,
     onConnectionAttempt: (ConstellationConnectionAttempt) -> Unit = {},
     onSpeakText: ((String) -> Unit)? = null
 ) {
     val copy = remember(exerciseLanguage) { constellationsCopy(exerciseLanguage) }
-    var missionSeed by remember(grade, difficultyStars, exerciseLanguage, missionKey) { mutableStateOf(System.currentTimeMillis()) }
-    var puzzle by remember(grade, difficultyStars, exerciseLanguage, missionKey, missionSeed) {
+    var missionSeed by remember(grade, difficultyStars) { mutableStateOf(System.currentTimeMillis()) }
+    var puzzle by remember(grade, difficultyStars, missionSeed) {
         mutableStateOf(
             ConstellationPuzzleGenerator.generate(
                 grade = grade,
@@ -89,20 +89,50 @@ fun ConstellationsPuzzleGame(
         )
     }
     var selectedEdges by remember(puzzle.id) { mutableStateOf<Set<ConstellationEdge>>(emptySet()) }
-    var firstSelectedStarId by remember(puzzle.id) { mutableStateOf<String?>(null) }
-    var focusedEdge by remember(puzzle.id) { mutableStateOf<ConstellationEdge?>(null) }
-    var feedback by remember(puzzle.id) { mutableStateOf<String?>(null) }
+    var selectedStarId by remember(puzzle.id) { mutableStateOf<String?>(null) }
+    var highlightedTip by remember(puzzle.id) { mutableStateOf<ConstellationEdge?>(null) }
+    var feedback by remember(puzzle.id) { mutableStateOf<String?>(copy.chooseFirst) }
     var completionReported by remember(puzzle.id) { mutableStateOf(false) }
 
-    val orderedRequiredEdges = puzzle.connections.map { ConstellationEdge.of(it.fromStarId, it.toStarId) }
-    val requiredEdges = orderedRequiredEdges.toSet()
-    val activeGoalEdge = focusedEdge?.takeIf { it in requiredEdges && it !in selectedEdges }
-        ?: orderedRequiredEdges.firstOrNull { it !in selectedEdges }
+    val requiredEdges = puzzle.requiredEdges
     val isComplete = requiredEdges.isNotEmpty() && selectedEdges.containsAll(requiredEdges)
+    val showGroupSymbols = puzzle.targetStars.mapNotNull { it.groupId }.distinct().size > 1
+
+    fun onePathChooseSecondText(): String = when (exerciseLanguage.lowercase()) {
+        "fr-be", "fr", "fr-fr" -> "Choisis l'étoile suivante, du début vers la fin. Le chemin peut tourner."
+        "en-us", "en-gb", "en" -> "Choose the next star, from start to finish. The path may turn."
+        else -> "Kies de volgende ster, van start naar einde. Het pad mag draaien."
+    }
+
+    fun onePathCorrectConnectionText(): String = when (exerciseLanguage.lowercase()) {
+        "fr-be", "fr", "fr-fr" -> "Bien joué. Continue vers la fin de la suite."
+        "en-us", "en-gb", "en" -> "Good connection. Continue toward the end of the sequence."
+        else -> "Goed verbonden. Ga verder naar het einde van de reeks."
+    }
+
+    fun onePathWrongConnectionText(): String = when (exerciseLanguage.lowercase()) {
+        "fr-be", "fr", "fr-fr" -> "Pas encore. Commence au début et avance étape par étape vers la fin."
+        "en-us", "en-gb", "en" -> "Not yet. Start at the beginning and move step by step toward the end."
+        else -> "Nog niet. Begin bij de start en verbind stap voor stap naar het einde."
+    }
+
+    fun onePathTipConnectText(): String = when (exerciseLanguage.lowercase()) {
+        "fr-be", "fr", "fr-fr" -> "Indice : relie ces deux prochaines valeurs, même si le chemin tourne."
+        "en-us", "en-gb", "en" -> "Hint: connect these next two values, even if the path turns."
+        else -> "Tip: verbind deze twee volgende waarden, ook als het pad draait."
+    }
+
+    fun startAtBeginningText(): String = when (exerciseLanguage.lowercase()) {
+        "fr-be", "fr", "fr-fr" -> "Commence par la première valeur de cette suite. L'ordre des suites A, B et C n'a pas d'importance."
+        "en-us", "en-gb", "en" -> "Start with the first value of this sequence. The order of A, B and C does not matter."
+        else -> "Start met de eerste waarde van deze reeks. De volgorde van A, B en C maakt niet uit."
+    }
 
     LaunchedEffect(isComplete, puzzle.id) {
         if (isComplete && !completionReported) {
             completionReported = true
+            selectedStarId = null
+            highlightedTip = null
             feedback = copy.completed
             onComplete()
         }
@@ -114,48 +144,79 @@ fun ConstellationsPuzzleGame(
 
     fun resetPath() {
         selectedEdges = emptySet()
-        firstSelectedStarId = null
-        focusedEdge = null
-        feedback = null
+        selectedStarId = null
+        highlightedTip = null
+        feedback = copy.chooseFirst
         completionReported = false
     }
 
+    fun edgeLabel(edge: ConstellationEdge): String {
+        val from = puzzle.starsById[edge.a]
+        val to = puzzle.starsById[edge.b]
+        val first = listOfNotNull(if (showGroupSymbols) from?.groupSymbol else null, from?.label).joinToString(" ").trim()
+        val second = listOfNotNull(if (showGroupSymbols) to?.groupSymbol else null, to?.label).joinToString(" ").trim()
+        val rule = from?.groupRule?.get(exerciseLanguage) ?: to?.groupRule?.get(exerciseLanguage)
+        return listOfNotNull("$first → $second", rule?.let { "($it)" }).joinToString(" ")
+    }
+
+    fun nextConnectionForGroup(groupId: String?): ConstellationConnection? {
+        return puzzle.connections
+            .filter { connection ->
+                puzzle.starsById[connection.fromStarId]?.groupId == groupId &&
+                    puzzle.starsById[connection.toStarId]?.groupId == groupId
+            }
+            .sortedBy { connection -> puzzle.starsById[connection.fromStarId]?.order ?: Int.MAX_VALUE }
+            .firstOrNull { connection -> connection.edge !in selectedEdges }
+    }
+
+    fun firstMissingConnection(): ConstellationConnection? {
+        val groupIds = puzzle.targetStars
+            .sortedWith(compareBy<ConstellationStar> { it.groupId.orEmpty() }.thenBy { it.order ?: Int.MAX_VALUE })
+            .map { it.groupId }
+            .distinct()
+        return groupIds.firstNotNullOfOrNull { groupId -> nextConnectionForGroup(groupId) }
+    }
+
+    fun isExpectedStartStar(starId: String): Boolean {
+        val star = puzzle.starsById[starId] ?: return false
+        return nextConnectionForGroup(star.groupId)?.fromStarId == starId
+    }
+
+    fun isNextConnectionInOrder(fromStarId: String, toStarId: String): Boolean {
+        val from = puzzle.starsById[fromStarId] ?: return false
+        val to = puzzle.starsById[toStarId] ?: return false
+        if (from.groupId != to.groupId) return false
+        val next = nextConnectionForGroup(from.groupId) ?: return false
+        return next.fromStarId == fromStarId && next.toStarId == toStarId
+    }
+
+    fun connectionLabel(connection: ConstellationConnection): String {
+        return edgeLabel(ConstellationEdge(connection.fromStarId, connection.toStarId))
+    }
+
     fun showTip() {
-        val missing = activeGoalEdge ?: orderedRequiredEdges.firstOrNull { it !in selectedEdges }
-        focusedEdge = missing
-        feedback = if (missing == null) copy.completed else constellationTipForNextEdge(puzzle, missing, exerciseLanguage)
+        val missing = firstMissingConnection()
+        highlightedTip = missing?.edge
+        selectedStarId = missing?.fromStarId
+        feedback = if (missing == null) copy.noTipNeeded else "${if (showGroupSymbols) copy.tipConnect else onePathTipConnectText()} ${connectionLabel(missing)}"
     }
 
-    fun onGoalClicked(edge: ConstellationEdge) {
-        if (edge in selectedEdges || edge !in requiredEdges) return
-        focusedEdge = edge
-        firstSelectedStarId = null
-        feedback = constellationTipForNextEdge(puzzle, edge, exerciseLanguage)
-    }
-
-    fun starHasOpenRequiredConnection(starId: String, edges: Set<ConstellationEdge> = selectedEdges): Boolean = requiredEdges.any { edge ->
-        (edge.a == starId || edge.b == starId) && edge !in edges
-    }
-
-    fun connectStars(fromStarId: String, toStarId: String): Boolean {
-        if (isComplete || fromStarId == toStarId) return false
+    fun submitConnection(fromStarId: String, toStarId: String) {
+        if (isComplete || fromStarId == toStarId) return
+        highlightedTip = null
+        selectedStarId = null
 
         val edge = ConstellationEdge.of(fromStarId, toStarId)
-        val edgeIsRequired = edge in requiredEdges
         val alreadyConnected = edge in selectedEdges
-        val newSelectedEdges = if (edgeIsRequired && !alreadyConnected) selectedEdges + edge else selectedEdges
+        val edgeIsNextInOrder = isNextConnectionInOrder(fromStarId, toStarId)
+        val newSelectedEdges = if (edgeIsNextInOrder && !alreadyConnected) selectedEdges + edge else selectedEdges
         selectedEdges = newSelectedEdges
 
         val completedAfterConnection = newSelectedEdges.containsAll(requiredEdges)
-        val nextMissingEdge = orderedRequiredEdges.firstOrNull { it !in newSelectedEdges }
-        if (edgeIsRequired && !alreadyConnected) {
-            focusedEdge = nextMissingEdge
-        }
-
         feedback = when {
             alreadyConnected -> copy.alreadyConnected
-            edgeIsRequired -> if (completedAfterConnection) copy.completed else copy.correctConnection
-            else -> copy.wrongConnection
+            edgeIsNextInOrder -> if (completedAfterConnection) copy.completed else if (showGroupSymbols) copy.correctConnection else onePathCorrectConnectionText()
+            else -> if (showGroupSymbols) startAtBeginningText() else onePathWrongConnectionText()
         }
 
         onConnectionAttempt(
@@ -164,44 +225,49 @@ fun ConstellationsPuzzleGame(
                 constellationId = puzzle.templateId,
                 fromStarId = fromStarId,
                 toStarId = toStarId,
-                correct = edgeIsRequired && !alreadyConnected,
+                correct = edgeIsNextInOrder && !alreadyConnected,
                 completed = completedAfterConnection,
                 selectedConnectionCount = newSelectedEdges.size,
                 requiredConnectionCount = requiredEdges.size
             )
         )
-        return edgeIsRequired && !alreadyConnected
     }
 
-    fun onConnectionDrawn(fromStarId: String, toStarId: String) {
-        connectStars(fromStarId, toStarId)
-        firstSelectedStarId = null
-    }
-
-    fun onStarTapped(starId: String) {
+    fun onStarTapped(star: ConstellationStar) {
         if (isComplete) return
-        val first = firstSelectedStarId
-        if (first == null) {
-            firstSelectedStarId = starId
-            val edgeForStar = activeGoalEdge?.takeIf { it.a == starId || it.b == starId }
-                ?: orderedRequiredEdges.firstOrNull { edge ->
-                    edge !in selectedEdges && (edge.a == starId || edge.b == starId)
+        if (!star.isTarget) {
+            feedback = if (showGroupSymbols) startAtBeginningText() else onePathWrongConnectionText()
+            selectedStarId = null
+            highlightedTip = null
+            return
+        }
+
+        val current = selectedStarId
+        highlightedTip = null
+        when {
+            current == null -> {
+                if (isExpectedStartStar(star.id)) {
+                    selectedStarId = star.id
+                    feedback = if (showGroupSymbols) copy.chooseSecond else onePathChooseSecondText()
+                } else {
+                    selectedStarId = null
+                    feedback = if (showGroupSymbols) startAtBeginningText() else onePathWrongConnectionText()
                 }
-            focusedEdge = edgeForStar
-            feedback = edgeForStar?.let { constellationPartnerHint(puzzle, starId, it, exerciseLanguage) } ?: copy.firstStarSelected
-            return
+            }
+            current == star.id -> {
+                selectedStarId = null
+                feedback = copy.chooseFirst
+            }
+            isExpectedStartStar(star.id) && !isNextConnectionInOrder(current, star.id) -> {
+                selectedStarId = star.id
+                feedback = if (showGroupSymbols) copy.chooseSecond else onePathChooseSecondText()
+            }
+            else -> submitConnection(current, star.id)
         }
-        if (first == starId) {
-            firstSelectedStarId = null
-            feedback = null
-            return
-        }
-        connectStars(first, starId)
-        firstSelectedStarId = null
     }
 
     val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     if (isLandscape) {
         Row(
@@ -215,29 +281,27 @@ fun ConstellationsPuzzleGame(
                 puzzle = puzzle,
                 copy = copy,
                 exerciseLanguage = exerciseLanguage,
-                feedback = feedback,
                 selectedEdges = selectedEdges,
-                activeGoalEdge = activeGoalEdge,
+                feedback = feedback,
                 isComplete = isComplete,
                 onMissionClicked = { onSpeakText?.invoke(puzzle.mission.get(exerciseLanguage)) },
-                onGoalClicked = ::onGoalClicked,
                 onNewMission = ::newMission,
                 onResetPath = ::resetPath,
                 onTip = ::showTip,
                 modifier = Modifier
-                    .weight(0.40f)
+                    .weight(0.42f)
                     .fillMaxHeight()
             )
             ConstellationCanvasCard(
                 puzzle = puzzle,
                 selectedEdges = selectedEdges,
-                focusedEdge = activeGoalEdge,
-                firstSelectedStarId = firstSelectedStarId,
+                selectedStarId = selectedStarId,
+                highlightedTip = highlightedTip,
                 isComplete = isComplete,
                 onStarTapped = ::onStarTapped,
-                onConnectionDrawn = ::onConnectionDrawn,
+                onConnectionDrawn = ::submitConnection,
                 modifier = Modifier
-                    .weight(0.60f)
+                    .weight(0.58f)
                     .fillMaxHeight()
             )
         }
@@ -252,36 +316,26 @@ fun ConstellationsPuzzleGame(
                 puzzle = puzzle,
                 copy = copy,
                 exerciseLanguage = exerciseLanguage,
+                selectedEdges = selectedEdges,
                 feedback = feedback,
                 isComplete = isComplete,
                 onMissionClicked = { onSpeakText?.invoke(puzzle.mission.get(exerciseLanguage)) },
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            ConstellationGoalsPanel(
-                puzzle = puzzle,
-                selectedEdges = selectedEdges,
-                activeGoalEdge = activeGoalEdge,
-                exerciseLanguage = exerciseLanguage,
-                onGoalClicked = ::onGoalClicked,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(max = 132.dp)
-            )
             Spacer(modifier = Modifier.height(10.dp))
             ConstellationCanvasCard(
                 puzzle = puzzle,
                 selectedEdges = selectedEdges,
-                focusedEdge = activeGoalEdge,
-                firstSelectedStarId = firstSelectedStarId,
+                selectedStarId = selectedStarId,
+                highlightedTip = highlightedTip,
                 isComplete = isComplete,
                 onStarTapped = ::onStarTapped,
-                onConnectionDrawn = ::onConnectionDrawn,
+                onConnectionDrawn = ::submitConnection,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             ConstellationsBottomControls(
                 copy = copy,
                 isComplete = isComplete,
@@ -299,12 +353,10 @@ private fun ConstellationsSidePanel(
     puzzle: ConstellationPuzzle,
     copy: ConstellationsCopy,
     exerciseLanguage: String,
-    feedback: String?,
     selectedEdges: Set<ConstellationEdge>,
-    activeGoalEdge: ConstellationEdge?,
+    feedback: String?,
     isComplete: Boolean,
     onMissionClicked: () -> Unit,
-    onGoalClicked: (ConstellationEdge) -> Unit,
     onNewMission: () -> Unit,
     onResetPath: () -> Unit,
     onTip: () -> Unit,
@@ -319,20 +371,11 @@ private fun ConstellationsSidePanel(
             puzzle = puzzle,
             copy = copy,
             exerciseLanguage = exerciseLanguage,
+            selectedEdges = selectedEdges,
             feedback = feedback,
             isComplete = isComplete,
             onMissionClicked = onMissionClicked,
             modifier = Modifier.fillMaxWidth()
-        )
-        ConstellationGoalsPanel(
-            puzzle = puzzle,
-            selectedEdges = selectedEdges,
-            activeGoalEdge = activeGoalEdge,
-            exerciseLanguage = exerciseLanguage,
-            onGoalClicked = onGoalClicked,
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
         )
         ConstellationsBottomControls(
             copy = copy,
@@ -345,103 +388,39 @@ private fun ConstellationsSidePanel(
     }
 }
 
-
-@Composable
-private fun ConstellationGoalsPanel(
-    puzzle: ConstellationPuzzle,
-    selectedEdges: Set<ConstellationEdge>,
-    activeGoalEdge: ConstellationEdge?,
-    exerciseLanguage: String,
-    onGoalClicked: (ConstellationEdge) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val scrollState = rememberScrollState()
-    val orderedEdges = puzzle.connections.map { ConstellationEdge.of(it.fromStarId, it.toStarId) }
-    val completedCount = orderedEdges.count { it in selectedEdges }
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(22.dp),
-        colors = CardDefaults.cardColors(containerColor = CockpitGray.copy(alpha = 0.38f))
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
-                .verticalScroll(scrollState),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = constellationGoalTitle(exerciseLanguage, completedCount, orderedEdges.size),
-                color = PlanetGold,
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-            orderedEdges.forEachIndexed { index, edge ->
-                val completed = edge in selectedEdges
-                val focused = edge == activeGoalEdge && !completed
-                val prompt = constellationConnectionPrompt(puzzle, edge, exerciseLanguage)
-                Surface(
-                    color = when {
-                        completed -> CockpitGray.copy(alpha = 0.34f)
-                        focused -> PlanetGold.copy(alpha = 0.94f)
-                        else -> DeepSpaceBlue.copy(alpha = 0.52f)
-                    },
-                    contentColor = when {
-                        completed -> StarWhite.copy(alpha = 0.48f)
-                        focused -> DeepSpaceBlue
-                        else -> StarWhite
-                    },
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable(enabled = !completed) { onGoalClicked(edge) }
-                ) {
-                    Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-                        Text(
-                            text = if (completed) "✓ ${prompt.main}" else "${index + 1}. ${prompt.main}",
-                            color = when {
-                                completed -> StarWhite.copy(alpha = 0.48f)
-                                focused -> DeepSpaceBlue
-                                else -> StarWhite
-                            },
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = prompt.rule,
-                            color = when {
-                                completed -> StarWhite.copy(alpha = 0.38f)
-                                focused -> DeepSpaceBlue.copy(alpha = 0.78f)
-                                else -> StarWhite.copy(alpha = 0.70f)
-                            },
-                            style = MaterialTheme.typography.labelSmall,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
 @Composable
 private fun ConstellationsHeader(
     puzzle: ConstellationPuzzle,
     copy: ConstellationsCopy,
     exerciseLanguage: String,
+    selectedEdges: Set<ConstellationEdge>,
     feedback: String?,
     isComplete: Boolean,
     onMissionClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val total = puzzle.requiredEdges.size
+    val done = selectedEdges.size.coerceAtMost(total)
+
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
+        Text(
+            text = copy.title,
+            style = MaterialTheme.typography.headlineSmall,
+            color = PlanetGold,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = puzzle.constellationName.get(exerciseLanguage),
+            color = StarWhite.copy(alpha = 0.82f),
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center
+        )
         Text(
             text = puzzle.mission.get(exerciseLanguage),
             modifier = Modifier
@@ -453,7 +432,33 @@ private fun ConstellationsHeader(
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center
         )
-
+        Surface(
+            color = CockpitGray.copy(alpha = 0.58f),
+            contentColor = StarWhite,
+            shape = RoundedCornerShape(18.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = "${copy.progress}: $done / $total",
+                    color = PlanetGold,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                puzzle.rules.forEach { rule ->
+                    Text(
+                        text = rule.get(exerciseLanguage),
+                        color = StarWhite,
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+        }
         if (feedback != null) {
             Text(
                 text = feedback,
@@ -464,7 +469,6 @@ private fun ConstellationsHeader(
                 modifier = Modifier.fillMaxWidth()
             )
         }
-
         if (isComplete) {
             Surface(
                 color = CockpitGray.copy(alpha = 0.60f),
@@ -494,26 +498,44 @@ private fun ConstellationsBottomControls(
     onNewMission: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if (isComplete) return
-
-    Column(
+    Row(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Button(
             onClick = onTip,
-            enabled = true,
+            enabled = !isComplete,
             colors = ButtonDefaults.buttonColors(
                 containerColor = PlanetBlue,
-                contentColor = StarWhite
+                contentColor = StarWhite,
+                disabledContainerColor = PlanetBlue.copy(alpha = 0.28f),
+                disabledContentColor = StarWhite.copy(alpha = 0.55f)
             ),
             shape = RoundedCornerShape(999.dp),
             modifier = Modifier
-                .fillMaxWidth()
+                .weight(1f)
                 .height(48.dp)
         ) {
             Text(copy.tip, color = StarWhite, fontWeight = FontWeight.Bold)
+        }
+        Button(
+            onClick = if (isComplete) onNewMission else onResetPath,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = PlanetGold,
+                contentColor = DeepSpaceBlue
+            ),
+            shape = RoundedCornerShape(999.dp),
+            modifier = Modifier
+                .weight(1f)
+                .height(48.dp)
+        ) {
+            Text(
+                text = if (isComplete) copy.nextMission else copy.resetPath,
+                color = DeepSpaceBlue,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
@@ -522,10 +544,10 @@ private fun ConstellationsBottomControls(
 private fun ConstellationCanvasCard(
     puzzle: ConstellationPuzzle,
     selectedEdges: Set<ConstellationEdge>,
-    focusedEdge: ConstellationEdge?,
-    firstSelectedStarId: String?,
+    selectedStarId: String?,
+    highlightedTip: ConstellationEdge?,
     isComplete: Boolean,
-    onStarTapped: (String) -> Unit,
+    onStarTapped: (ConstellationStar) -> Unit,
     onConnectionDrawn: (String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -576,34 +598,55 @@ private fun ConstellationCanvasCard(
                 val density = LocalDensity.current
                 val widthPx = with(density) { maxWidth.toPx() }
                 val heightPx = with(density) { maxHeight.toPx() }
-                val hasLongLabels = puzzle.stars.any { it.isTarget && ((it.label ?: it.order?.toString()).orEmpty().length > 3) }
+                val hasLongLabels = puzzle.stars.any { it.isTarget && (it.label.orEmpty().length > 3) }
                 val starSize = when {
-                    maxWidth < 380.dp || maxHeight < 360.dp -> if (hasLongLabels) 44.dp else 38.dp
-                    hasLongLabels -> 52.dp
-                    else -> 44.dp
+                    maxWidth < 380.dp || maxHeight < 360.dp -> if (hasLongLabels) 50.dp else 44.dp
+                    hasLongLabels -> 62.dp
+                    else -> 54.dp
                 }
                 val starSizePx = with(density) { starSize.toPx() }
-                val touchRadius = starSizePx * 0.92f
+                val touchRadius = starSizePx * 1.18f
                 val requiredEdges = puzzle.requiredEdges
+                val starsById = puzzle.starsById
 
-                fun starHasOpenRequiredConnection(starId: String): Boolean = requiredEdges.any { edge ->
-                    (edge.a == starId || edge.b == starId) && edge !in selectedEdges
+                fun nextConnectionForGroup(groupId: String?): ConstellationConnection? {
+                    return puzzle.connections
+                        .filter { connection ->
+                            starsById[connection.fromStarId]?.groupId == groupId &&
+                                starsById[connection.toStarId]?.groupId == groupId
+                        }
+                        .sortedBy { connection -> starsById[connection.fromStarId]?.order ?: Int.MAX_VALUE }
+                        .firstOrNull { connection -> connection.edge !in selectedEdges }
                 }
+
+                fun starIsExpectedStart(starId: String): Boolean {
+                    val star = starsById[starId] ?: return false
+                    return nextConnectionForGroup(star.groupId)?.fromStarId == starId
+                }
+
+                val candidateStarIds = selectedStarId
+                    ?.let { id ->
+                        val star = starsById[id]
+                        val next = star?.let { nextConnectionForGroup(it.groupId) }
+                        if (next?.fromStarId == id) setOf(next.toStarId) else emptySet<String>()
+                    }
+                    .orEmpty()
+                val tipStarIds = highlightedTip
+                    ?.let { setOf(it.a, it.b) }
+                    .orEmpty()
+                val showGroupSymbols = puzzle.targetStars.mapNotNull { it.groupId }.distinct().size > 1
 
                 fun starIsPartOfSelectedPath(starId: String): Boolean = selectedEdges.any { edge ->
                     edge.a == starId || edge.b == starId
                 }
 
-                fun starIsFocusedGoal(starId: String): Boolean = focusedEdge?.let { edge ->
-                    edge !in selectedEdges && (edge.a == starId || edge.b == starId)
-                } == true
-
                 fun pointFor(starId: String): Offset? {
-                    val star = puzzle.stars.firstOrNull { it.id == starId } ?: return null
+                    val star = starsById[starId] ?: return null
                     return Offset(star.x * widthPx, star.y * heightPx)
                 }
 
                 fun nearestStar(position: Offset): ConstellationStar? = puzzle.stars
+                    .filter { it.isTarget }
                     .map { star ->
                         val center = Offset(star.x * widthPx, star.y * heightPx)
                         val dx = center.x - position.x
@@ -624,7 +667,7 @@ private fun ConstellationCanvasCard(
                                         activeDragStarId = null
                                         dragPosition = null
                                     } else {
-                                        val startStar = nearestStar(startOffset)
+                                        val startStar = nearestStar(startOffset)?.takeIf { starIsExpectedStart(it.id) }
                                         activeDragStarId = startStar?.id
                                         dragPosition = startStar?.let { startOffset }
                                     }
@@ -652,22 +695,6 @@ private fun ConstellationCanvasCard(
                         }
                 ) {
                     Canvas(modifier = Modifier.fillMaxSize()) {
-                        if (isComplete) {
-                            requiredEdges.forEach { edge ->
-                                val from = pointFor(edge.a)
-                                val to = pointFor(edge.b)
-                                if (from != null && to != null) {
-                                    drawLine(
-                                        color = StarWhite.copy(alpha = 0.12f + completePulse * 0.18f),
-                                        start = from,
-                                        end = to,
-                                        strokeWidth = 13f,
-                                        cap = StrokeCap.Round
-                                    )
-                                }
-                            }
-                        }
-
                         selectedEdges.forEach { edge ->
                             val from = pointFor(edge.a)
                             val to = pointFor(edge.b)
@@ -696,28 +723,39 @@ private fun ConstellationCanvasCard(
                     }
 
                     puzzle.stars.forEach { star ->
-                        val label = star.label ?: star.order?.toString().orEmpty()
-                        val isSelected = star.id == activeDragStarId || star.id == firstSelectedStarId
+                        val label = star.label.orEmpty()
+                        val isSelected = star.id == selectedStarId || star.id == activeDragStarId
+                        val isCandidate = star.id in candidateStarIds
                         val isConnected = starIsPartOfSelectedPath(star.id)
-                        val isFocusedGoal = starIsFocusedGoal(star.id)
+                        val shouldContinueFromStar = !isComplete && starIsExpectedStart(star.id)
+                        val isTipStar = star.id in tipStarIds
+                        val isStartStar = star.isTarget && star.order == 1
+                        val startNeedsAttention = isStartStar && shouldContinueFromStar && !isConnected
                         val starColor = when {
-                            isSelected -> PlanetBlue
-                            isFocusedGoal -> PlanetGold
-                            isComplete && star.isTarget -> PlanetGold
+                            !star.isTarget -> StarWhite.copy(alpha = 0.42f)
+                            isSelected -> PlanetGold
+                            isCandidate || isTipStar || shouldContinueFromStar -> PlanetBlue
+                            isComplete -> PlanetGold
                             isConnected -> StarWhite
-                            star.isTarget -> StarWhite
-                            else -> StarWhite.copy(alpha = 0.42f)
+                            else -> StarWhite
                         }
                         val textColor = when {
-                            isSelected -> StarWhite
-                            isFocusedGoal || isConnected || isComplete || star.isTarget -> DeepSpaceBlue
-                            else -> DeepSpaceBlue.copy(alpha = 0.55f)
+                            !star.isTarget -> DeepSpaceBlue.copy(alpha = 0.50f)
+                            isSelected -> DeepSpaceBlue
+                            isCandidate || isTipStar || shouldContinueFromStar -> StarWhite
+                            isConnected || isComplete -> DeepSpaceBlue
+                            else -> DeepSpaceBlue
                         }
                         val starAlpha = when {
                             isComplete && star.isTarget -> (0.70f + completePulse * 0.30f).coerceIn(0.70f, 1f)
-                            else -> (0.68f + star.brightness * 0.24f).coerceIn(0.55f, 0.98f)
+                            !star.isTarget -> (0.30f + star.brightness * 0.30f).coerceIn(0.25f, 0.62f)
+                            else -> (0.70f + star.brightness * 0.24f).coerceIn(0.62f, 0.98f)
                         }
-                        val starScale = if (isComplete && star.isTarget) completeScale else 1f
+                        val starScale = when {
+                            isComplete && star.isTarget -> completeScale
+                            isSelected || isCandidate || isTipStar -> 1.08f
+                            else -> 1f
+                        }
                         val x = (star.x * widthPx - starSizePx / 2f).roundToInt()
                         val y = (star.y * heightPx - starSizePx / 2f).roundToInt()
 
@@ -732,201 +770,70 @@ private fun ConstellationCanvasCard(
                                 }
                                 .clip(CircleShape)
                                 .background(starColor)
-                                .clickable { onStarTapped(star.id) }
+                                .border(
+                                    width = if (startNeedsAttention) 2.dp else 0.dp,
+                                    color = if (startNeedsAttention) PlanetGold.copy(alpha = 0.92f) else StarWhite.copy(alpha = 0f),
+                                    shape = CircleShape
+                                )
+                                .clickable(enabled = star.isTarget && !isComplete) { onStarTapped(star) }
                                 .semantics {
-                                    contentDescription = if (star.name.isBlank()) "Star" else star.name
+                                    contentDescription = if (star.isTarget) {
+                                        listOfNotNull(if (showGroupSymbols) star.groupSymbol else null, star.label).joinToString(" ")
+                                    } else {
+                                        "Background star"
+                                    }
                                 },
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(
-                                text = if (star.isTarget && label.isNotBlank()) label else "✦",
-                                color = textColor,
-                                fontSize = when {
-                                    !star.isTarget -> 16.sp
-                                    label.length >= 5 -> 9.sp
-                                    label.length >= 4 -> 10.sp
-                                    label.length >= 3 -> 12.sp
-                                    else -> 15.sp
-                                },
-                                fontWeight = FontWeight.Black,
-                                textAlign = TextAlign.Center,
-                                maxLines = 1
-                            )
+                            if (star.isTarget) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.Center,
+                                    modifier = Modifier.padding(horizontal = 3.dp)
+                                ) {
+                                    if (showGroupSymbols) {
+                                        Text(
+                                            text = star.groupSymbol.orEmpty(),
+                                            color = textColor.copy(alpha = 0.78f),
+                                            fontSize = 9.sp,
+                                            fontWeight = FontWeight.Black,
+                                            lineHeight = 9.sp,
+                                            textAlign = TextAlign.Center,
+                                            maxLines = 1
+                                        )
+                                    }
+                                    Text(
+                                        text = label,
+                                        color = textColor,
+                                        fontSize = when {
+                                            label.length >= 6 -> 8.sp
+                                            label.length >= 5 -> 9.sp
+                                            label.length >= 4 -> 10.sp
+                                            label.length >= 3 -> 12.sp
+                                            else -> 15.sp
+                                        },
+                                        fontWeight = FontWeight.Black,
+                                        lineHeight = 14.sp,
+                                        textAlign = TextAlign.Center,
+                                        maxLines = 1
+                                    )
+                                }
+                            } else {
+                                Text(
+                                    text = "✦",
+                                    color = textColor,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Black,
+                                    textAlign = TextAlign.Center,
+                                    maxLines = 1
+                                )
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
-
-
-
-private data class ConstellationPrompt(val main: String, val rule: String)
-
-private fun constellationGoalTitle(locale: String, completed: Int, total: Int): String = when (normalizeGalaxyconLocale(locale)) {
-    "en-US" -> "Connections $completed/$total"
-    "fr-BE" -> "Lignes $completed/$total"
-    else -> "Verbindingen $completed/$total"
-}
-
-private fun constellationConnectionPrompt(
-    puzzle: ConstellationPuzzle,
-    edge: ConstellationEdge,
-    locale: String
-): ConstellationPrompt {
-    val labels = orderedLabelsForEdge(puzzle, edge)
-    val left = labels.first
-    val right = labels.second
-    return ConstellationPrompt(
-        main = "$left ↔ $right",
-        rule = constellationShortRuleText(left, right, locale)
-    )
-}
-
-
-private fun constellationShortRuleText(left: String, right: String, locale: String): String {
-    val a = evaluateConstellationLabel(left)
-    val b = evaluateConstellationLabel(right)
-    val normalized = normalizeGalaxyconLocale(locale)
-    if (a != null && b != null) {
-        if (kotlin.math.abs(a - b) < 0.0001f) {
-            return when (normalized) {
-                "en-US" -> "same value"
-                "fr-BE" -> "même valeur"
-                else -> "zelfde waarde"
-            }
-        }
-        val low = minOf(a, b)
-        val high = maxOf(a, b)
-        val diff = high - low
-        val multiplier = if (low != 0f) high / low else null
-        val wholeMultiplier = multiplier?.roundToInt()
-        if (wholeMultiplier != null && wholeMultiplier in 2..12 && kotlin.math.abs(multiplier - wholeMultiplier) < 0.0001f) {
-            return "${formatConstellationNumber(low)} × $wholeMultiplier = ${formatConstellationNumber(high)}"
-        }
-        return "${formatConstellationNumber(low)} + ${formatConstellationNumber(diff)} = ${formatConstellationNumber(high)}"
-    }
-    return when (normalized) {
-        "en-US" -> "same pattern"
-        "fr-BE" -> "même modèle"
-        else -> "zelfde patroon"
-    }
-}
-
-private fun constellationPartnerHint(
-    puzzle: ConstellationPuzzle,
-    selectedStarId: String,
-    edge: ConstellationEdge,
-    locale: String
-): String {
-    val selected = puzzle.stars.firstOrNull { it.id == selectedStarId }
-    val partnerId = if (edge.a == selectedStarId) edge.b else edge.a
-    val partner = puzzle.stars.firstOrNull { it.id == partnerId }
-    val selectedLabel = selected?.label?.takeIf { it.isNotBlank() } ?: selected?.order?.toString().orEmpty()
-    val partnerLabel = partner?.label?.takeIf { it.isNotBlank() } ?: partner?.order?.toString().orEmpty()
-    return when (normalizeGalaxyconLocale(locale)) {
-        "en-US" -> "Now connect $selectedLabel with $partnerLabel."
-        "fr-BE" -> "Maintenant, relie $selectedLabel avec $partnerLabel."
-        else -> "Verbind nu $selectedLabel met $partnerLabel."
-    }
-}
-
-private fun orderedLabelsForEdge(puzzle: ConstellationPuzzle, edge: ConstellationEdge): Pair<String, String> {
-    val first = puzzle.stars.firstOrNull { it.id == edge.a }
-    val second = puzzle.stars.firstOrNull { it.id == edge.b }
-    val ordered = listOfNotNull(first, second).sortedBy { it.order ?: Int.MAX_VALUE }
-    val left = ordered.getOrNull(0)?.label?.takeIf { it.isNotBlank() } ?: ordered.getOrNull(0)?.order?.toString().orEmpty()
-    val right = ordered.getOrNull(1)?.label?.takeIf { it.isNotBlank() } ?: ordered.getOrNull(1)?.order?.toString().orEmpty()
-    return left to right
-}
-
-private fun constellationTipForNextEdge(
-    puzzle: ConstellationPuzzle,
-    edge: ConstellationEdge,
-    locale: String
-): String {
-    val labels = orderedLabelsForEdge(puzzle, edge)
-    val left = labels.first
-    val right = labels.second
-    val rule = constellationRuleText(left, right, locale)
-    return when (normalizeGalaxyconLocale(locale)) {
-        "en-US" -> "Tip: connect $left with $right. $rule"
-        "fr-BE" -> "Indice : relie $left avec $right. $rule"
-        else -> "Tip: verbind $left met $right. $rule"
-    }
-}
-
-private fun constellationRuleText(left: String, right: String, locale: String): String {
-    val a = evaluateConstellationLabel(left)
-    val b = evaluateConstellationLabel(right)
-    val normalized = normalizeGalaxyconLocale(locale)
-    if (a != null && b != null) {
-        if (kotlin.math.abs(a - b) < 0.0001f) {
-            return when (normalized) {
-                "en-US" -> "They have the same value."
-                "fr-BE" -> "Ils ont la même valeur."
-                else -> "Ze hebben dezelfde waarde."
-            }
-        }
-        val low = minOf(a, b)
-        val high = maxOf(a, b)
-        val diff = high - low
-        val multiplier = if (low != 0f) high / low else null
-        val wholeMultiplier = multiplier?.roundToInt()
-        if (wholeMultiplier != null && wholeMultiplier in 2..12 && kotlin.math.abs(multiplier - wholeMultiplier) < 0.0001f) {
-            return when (normalized) {
-                "en-US" -> "Rule: ${formatConstellationNumber(low)} × $wholeMultiplier = ${formatConstellationNumber(high)}."
-                "fr-BE" -> "Règle : ${formatConstellationNumber(low)} × $wholeMultiplier = ${formatConstellationNumber(high)}."
-                else -> "Regel: ${formatConstellationNumber(low)} × $wholeMultiplier = ${formatConstellationNumber(high)}."
-            }
-        }
-        return when (normalized) {
-            "en-US" -> "Rule: ${formatConstellationNumber(low)} + ${formatConstellationNumber(diff)} = ${formatConstellationNumber(high)}."
-            "fr-BE" -> "Règle : ${formatConstellationNumber(low)} + ${formatConstellationNumber(diff)} = ${formatConstellationNumber(high)}."
-            else -> "Regel: ${formatConstellationNumber(low)} + ${formatConstellationNumber(diff)} = ${formatConstellationNumber(high)}."
-        }
-    }
-    return when (normalized) {
-        "en-US" -> "Look for the two values that follow the same pattern."
-        "fr-BE" -> "Cherche les deux valeurs qui suivent le même modèle."
-        else -> "Zoek de twee waarden die hetzelfde patroon volgen."
-    }
-}
-
-private fun evaluateConstellationLabel(label: String): Float? {
-    val clean = label.trim().replace(',', '.')
-    clean.toFloatOrNull()?.let { return it }
-    if ('/' in clean) {
-        val parts = clean.split('/')
-        val numerator = parts.getOrNull(0)?.toFloatOrNull()
-        val denominator = parts.getOrNull(1)?.toFloatOrNull()
-        if (numerator != null && denominator != null && denominator != 0f) return numerator / denominator
-    }
-    if ('×' in clean) {
-        val parts = clean.split('×')
-        val left = parts.getOrNull(0)?.toFloatOrNull()
-        val right = parts.getOrNull(1)?.toFloatOrNull()
-        if (left != null && right != null) return left * right
-    }
-    if ('+' in clean) {
-        val parts = clean.split('+')
-        val left = parts.getOrNull(0)?.toFloatOrNull()
-        val right = parts.getOrNull(1)?.toFloatOrNull()
-        if (left != null && right != null) return left + right
-    }
-    val minusIndex = clean.indexOf('-', startIndex = 1)
-    if (minusIndex > 0) {
-        val left = clean.substring(0, minusIndex).toFloatOrNull()
-        val right = clean.substring(minusIndex + 1).toFloatOrNull()
-        if (left != null && right != null) return left - right
-    }
-    return null
-}
-
-private fun formatConstellationNumber(value: Float): String {
-    val rounded = value.roundToInt()
-    return if (kotlin.math.abs(value - rounded) < 0.0001f) rounded.toString() else "%.1f".format(java.util.Locale.US, value)
 }
 
 @Preview(showBackground = true, widthDp = 420, heightDp = 760)
@@ -938,8 +845,8 @@ private fun ConstellationsPuzzleGamePreview() {
             .background(DeepSpaceBlue)
     ) {
         ConstellationsPuzzleGame(
-            grade = 3,
-            difficultyStars = 2,
+            grade = 4,
+            difficultyStars = 3,
             exerciseLanguage = "nl-BE",
             onComplete = {},
             modifier = Modifier.fillMaxSize()

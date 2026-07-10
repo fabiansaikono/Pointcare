@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <poincareExerciseIndex version="3.12" generatedAt="2026-07-03T00:00:00+02:00" totalExerciseCount="21600" exercisesPerSubcategoryPerGrade="100" excludedGeneratedSubcategories="math_crossword,sudoku">
   <idPolicy>{subCategory}_d{difficulty}_g{grade}_seq{sequence4}</idPolicy>
   <progressStates>not_started, completed, retry_wrong</progressStates>
@@ -9,7 +9,7 @@
   <mainCategory id="math" file="poincare-exercises-math-v3.xml" exerciseCount="4800">
     <title locale="nl-BE">Wiskunde</title>
     <title locale="en-US">Math</title>
-    <title locale="fr-BE">Mathématiques</title>
+    <title locale="fr-BE">MathÃ©matiques</title>
     <subcategory id="addition" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Optellen</title>
       <title locale="en-US">Addition</title>
@@ -351,7 +351,7 @@
     <subcategory id="writing" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Schrijven</title>
       <title locale="en-US">Writing</title>
-      <title locale="fr-BE">Écriture</title>
+      <title locale="fr-BE">Ã‰criture</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -388,7 +388,7 @@
     <subcategory id="listening" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Luisteren</title>
       <title locale="en-US">Listening</title>
-      <title locale="fr-BE">Écoute</title>
+      <title locale="fr-BE">Ã‰coute</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -536,7 +536,7 @@
     <subcategory id="translation_nl_to_en" exerciseCount="600" exercisesPerGrade="100" sourceLocale="nl-BE" targetLocale="en-US">
       <title locale="nl-BE">Nederlands naar Engels</title>
       <title locale="en-US">Dutch to English</title>
-      <title locale="fr-BE">Néerlandais vers anglais</title>
+      <title locale="fr-BE">NÃ©erlandais vers anglais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -573,7 +573,7 @@
     <subcategory id="translation_nl_to_fr" exerciseCount="600" exercisesPerGrade="100" sourceLocale="nl-BE" targetLocale="fr-BE">
       <title locale="nl-BE">Nederlands naar Frans</title>
       <title locale="en-US">Dutch to French</title>
-      <title locale="fr-BE">Néerlandais vers français</title>
+      <title locale="fr-BE">NÃ©erlandais vers franÃ§ais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -610,7 +610,7 @@
     <subcategory id="translation_en_to_nl" exerciseCount="600" exercisesPerGrade="100" sourceLocale="en-US" targetLocale="nl-BE">
       <title locale="nl-BE">Engels naar Nederlands</title>
       <title locale="en-US">English to Dutch</title>
-      <title locale="fr-BE">Anglais vers néerlandais</title>
+      <title locale="fr-BE">Anglais vers nÃ©erlandais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -647,7 +647,7 @@
     <subcategory id="translation_en_to_fr" exerciseCount="600" exercisesPerGrade="100" sourceLocale="en-US" targetLocale="fr-BE">
       <title locale="nl-BE">Engels naar Frans</title>
       <title locale="en-US">English to French</title>
-      <title locale="fr-BE">Anglais vers français</title>
+      <title locale="fr-BE">Anglais vers franÃ§ais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -684,7 +684,7 @@
     <subcategory id="translation_fr_to_nl" exerciseCount="600" exercisesPerGrade="100" sourceLocale="fr-BE" targetLocale="nl-BE">
       <title locale="nl-BE">Frans naar Nederlands</title>
       <title locale="en-US">French to Dutch</title>
-      <title locale="fr-BE">Français vers néerlandais</title>
+      <title locale="fr-BE">FranÃ§ais vers nÃ©erlandais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -721,7 +721,7 @@
     <subcategory id="translation_fr_to_en" exerciseCount="600" exercisesPerGrade="100" sourceLocale="fr-BE" targetLocale="en-US">
       <title locale="nl-BE">Frans naar Engels</title>
       <title locale="en-US">French to English</title>
-      <title locale="fr-BE">Français vers anglais</title>
+      <title locale="fr-BE">FranÃ§ais vers anglais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -800,7 +800,7 @@
     <subcategory id="odd_one_out" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Welk hoort er niet bij?</title>
       <title locale="en-US">Odd one out</title>
-      <title locale="fr-BE">L’intrus</title>
+      <title locale="fr-BE">Lâ€™intrus</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -835,7 +835,7 @@
       </breakdown>
     </subcategory>
     <subcategory id="analogies" exerciseCount="600" exercisesPerGrade="100">
-      <title locale="nl-BE">Analogieën</title>
+      <title locale="nl-BE">AnalogieÃ«n</title>
       <title locale="en-US">Analogies</title>
       <title locale="fr-BE">Analogies</title>
       <breakdown>
@@ -985,7 +985,7 @@
     <subcategory id="memory_rules" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Geheugenregels</title>
       <title locale="en-US">Memory rules</title>
-      <title locale="fr-BE">Règles de mémoire</title>
+      <title locale="fr-BE">RÃ¨gles de mÃ©moire</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -1101,7 +1101,7 @@
     <subcategory id="geography" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Aardrijkskunde</title>
       <title locale="en-US">Geography</title>
-      <title locale="fr-BE">Géographie</title>
+      <title locale="fr-BE">GÃ©ographie</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -1250,7 +1250,7 @@
   <mainCategory id="geometry" file="poincare-exercises-geometry-v3.xml" exerciseCount="1800">
     <title locale="nl-BE">Meetkunde</title>
     <title locale="en-US">Geometry</title>
-    <title locale="fr-BE">Géométrie</title>
+    <title locale="fr-BE">GÃ©omÃ©trie</title>
     <subcategory id="time" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Tijd</title>
       <title locale="en-US">Time</title>
@@ -1328,7 +1328,7 @@
     <subcategory id="geometry_shapes" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Vormen en meetkunde</title>
       <title locale="en-US">Shapes and geometry</title>
-      <title locale="fr-BE">Formes et géométrie</title>
+      <title locale="fr-BE">Formes et gÃ©omÃ©trie</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
           <difficulty stars="1" exerciseCount="34" />
@@ -1362,5 +1362,19 @@
         </grade>
       </breakdown>
     </subcategory>
-  </mainCategory>
+  
+ <subcategory id="orbit-builder" exerciseCount="12" exercisesPerGrade="2">
+  <title locale="nl-BE">Orbitbouwer</title>
+  <title locale="en-US">Orbit Builder</title>
+  <title locale="fr-BE">Constructeur dâ€™orbite</title>
+  <breakdown>
+   <grade value="1" exerciseCount="2"><difficulty stars="1" exerciseCount="2" /></grade>
+   <grade value="2" exerciseCount="2"><difficulty stars="1" exerciseCount="2" /></grade>
+   <grade value="3" exerciseCount="2"><difficulty stars="2" exerciseCount="2" /></grade>
+   <grade value="4" exerciseCount="3"><difficulty stars="2" exerciseCount="2" /><difficulty stars="3" exerciseCount="1" /></grade>
+   <grade value="5" exerciseCount="2"><difficulty stars="3" exerciseCount="2" /></grade>
+   <grade value="6" exerciseCount="1"><difficulty stars="3" exerciseCount="1" /></grade>
+  </breakdown>
+ </subcategory>
+</mainCategory>
 </poincareExerciseIndex>

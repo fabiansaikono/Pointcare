@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="P2V01 vessel sprite without visible hull text">
+  <title>P2V01 vessel sprite — no visible text</title>
+  <desc>Flat 2D side-view compact dark industrial vessel sprite with transparent background, nose left, rear engines right, plain central label plate, and no laser.</desc>
+
+  <defs>
+    <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b3e40"/>
+      <stop offset="0.45" stop-color="#232628"/>
+      <stop offset="1" stop-color="#101214"/>
+    </linearGradient>
+    <linearGradient id="darkHull" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#303335"/>
+      <stop offset="1" stop-color="#111315"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#505356"/>
+      <stop offset="1" stop-color="#17191b"/>
+    </linearGradient>
+    <radialGradient id="engineGlow" cx="0.45" cy="0.5" r="0.7">
+      <stop offset="0" stop-color="#eaf8ff" stop-opacity="1"/>
+      <stop offset="0.35" stop-color="#7fd8ff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#148dff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="laserGlow" cx="0.5" cy="0.5" r="0.65">
+      <stop offset="0" stop-color="#fff9a8" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#ffd000" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffb000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="1.6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style><![CDATA[
+      .outline{stroke:#050608;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+      .panel{stroke:#07090a;stroke-width:.75;stroke-linejoin:round;fill:none;opacity:.82}
+      .fine{stroke:#777b7f;stroke-width:.45;stroke-linecap:round;opacity:.28;fill:none}
+      .bolt{fill:#090a0b;stroke:#55585a;stroke-width:.25;opacity:.85}
+      .light{fill:#f7a51b;stroke:#2b1400;stroke-width:.35}
+      .deep{fill:#08090a;stroke:#242628;stroke-width:.6}
+      .scratch{stroke:#86898b;stroke-width:.38;stroke-linecap:round;opacity:.25}
+    ]]></style>
+  </defs>
+  <g id="P2V01-ship" shape-rendering="geometricPrecision">
+    <!-- rear engine glow on the RIGHT -->
+    <ellipse cx="121" cy="55" rx="7" ry="7" fill="url(#engineGlow)" filter="url(#softGlow)"/>
+    <ellipse cx="121" cy="73" rx="7" ry="7" fill="url(#engineGlow)" filter="url(#softGlow)"/>
+
+    <!-- compact vessel body: nose LEFT, engines RIGHT -->
+    <path class="outline" fill="url(#hull)" d="M7 64 L17 47 L34 40 H91 L107 47 L118 58 V70 L107 81 L91 88 H34 L17 81 Z"/>
+    <path class="outline" fill="#111416" d="M8 64 L19 49 L29 45 L23 55 L23 73 L29 83 L19 79 Z"/>
+    <path fill="#263033" stroke="#08090a" stroke-width=".8" d="M13 58 L19 52 L22 56 V62 H14 Z M13 66 H22 V72 L19 76 L13 70 Z"/>
+    <path class="outline" fill="url(#darkHull)" d="M109 50 H119 V61 H109 Z M109 67 H119 V78 H109 Z"/>
+    <rect x="118" y="53" width="6" height="5" rx="2" fill="#58cfff" opacity=".95"/>
+    <rect x="118" y="70" width="6" height="5" rx="2" fill="#58cfff" opacity=".95"/>
+    <path class="fine" d="M110 54 H118 M110 58 H118 M110 71 H118 M110 75 H118"/>
+
+    <!-- central armor plate: no white vertical stripes -->
+    <path class="outline" fill="#292c2e" d="M33 48 H88 L97 55 V73 L88 80 H33 L26 73 V55 Z" opacity=".96"/>
+    <path class="panel" d="M33 48 H88 L97 55 V73 L88 80 H33 L26 73 V55 Z"/>
+    <path class="fine" d="M29 43 H91"/>
+    <path class="fine" d="M29 49 H91"/>
+    <path class="fine" d="M29 79 H91"/>
+    <path class="fine" d="M29 85 H91"/>
+    <path class="panel" d="M29 43 L30.8 50 M29 85 L30.8 78"/>
+    <path class="panel" d="M38 43 L39.8 50 M38 85 L39.8 78"/>
+    <path class="panel" d="M51 43 L52.8 50 M51 85 L52.8 78"/>
+    <path class="panel" d="M64 43 L65.8 50 M64 85 L65.8 78"/>
+    <path class="panel" d="M77 43 L78.8 50 M77 85 L78.8 78"/>
+    <path class="panel" d="M90 43 L91.8 50 M90 85 L91.8 78"/>
+    <path class="panel" d="M101 43 L102.8 50 M101 85 L102.8 78"/>
+    <rect class="panel" x="17" y="52" width="9" height="8" rx="1"/>
+    <rect class="panel" x="17" y="68" width="9" height="8" rx="1"/>
+    <rect class="panel" x="31" y="41" width="12" height="6" rx="1"/>
+    <rect class="panel" x="78" y="41" width="12" height="6" rx="1"/>
+    <rect class="panel" x="97" y="51" width="9" height="7" rx="1"/>
+    <rect class="panel" x="97" y="70" width="9" height="7" rx="1"/>
+    <rect class="panel" x="33" y="82" width="12" height="4" rx="1"/>
+    <rect class="panel" x="78" y="82" width="12" height="4" rx="1"/>
+    <rect class="panel" x="30" y="52" width="8" height="5" rx="1"/>
+    <rect class="panel" x="86" y="52" width="7" height="5" rx="1"/>
+    <rect class="panel" x="30" y="72" width="8" height="5" rx="1"/>
+    <rect class="panel" x="86" y="72" width="7" height="5" rx="1"/>
+    <rect class="light" x="21" y="56" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="21" y="72" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="38" y="45" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="55" y="45" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="73" y="45" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="90" y="48" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="39" y="83" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="57" y="83" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="76" y="83" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="103" y="59" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="103" y="69" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="28" y="61" width="1.7" height="1" rx=".3"/>
+    <rect class="light" x="93" y="62" width="1.7" height="1" rx=".3"/>
+    <circle class="bolt" cx="32" cy="49" r=".7"/>
+    <circle class="bolt" cx="40" cy="49" r=".7"/>
+    <circle class="bolt" cx="86" cy="49" r=".7"/>
+    <circle class="bolt" cx="95" cy="49" r=".7"/>
+    <circle class="bolt" cx="32" cy="79" r=".7"/>
+    <circle class="bolt" cx="40" cy="79" r=".7"/>
+    <circle class="bolt" cx="86" cy="79" r=".7"/>
+    <circle class="bolt" cx="95" cy="79" r=".7"/>
+    <circle class="bolt" cx="24" cy="43" r=".7"/>
+    <circle class="bolt" cx="105" cy="47" r=".7"/>
+    <circle class="bolt" cx="24" cy="85" r=".7"/>
+    <circle class="bolt" cx="105" cy="81" r=".7"/>
+    <path class="scratch" d="M36 53 l4 -1"/>
+    <path class="scratch" d="M86 54 l3 -1"/>
+    <path class="scratch" d="M35 75 l4 -1"/>
+    <path class="scratch" d="M82 75 l4 -1"/>
+    <path class="scratch" d="M48 42 l4 -1"/>
+    <path class="scratch" d="M68 86 l4 -1"/>
+    <path class="scratch" d="M21 68 l3 -1"/>
+    <path class="scratch" d="M102 55 l3 -1"/>
+    <!-- plain central label plate: ship text removed -->
+    <rect x="35.5" y="54.5" width="57" height="19" rx="2" fill="#2a2d2f" stroke="#111315" stroke-width="0.7" opacity="0.98"/>
+  </g>
+</svg>

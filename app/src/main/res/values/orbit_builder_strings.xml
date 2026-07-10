@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="orbit_builder_title">Orbit Builder</string>
+    <string name="orbit_builder_math_orbit">Math Orbit</string>
+    <string name="orbit_builder_build_route">Build the route</string>
+    <string name="orbit_builder_launch">Launch rocket</string>
+    <string name="orbit_builder_reset">Reset</string>
+    <string name="orbit_builder_current_value">Current value</string>
+    <string name="orbit_builder_target_value">Target value</string>
+    <string name="orbit_builder_arrows_used">Arrows used</string>
+    <string name="orbit_builder_mission_complete">Mission complete</string>
+    <string name="orbit_builder_try_again">Try again</string>
+    <string name="orbit_builder_next_mission">Next mission</string>
+    <string name="orbit_builder_fail_asteroid">The rocket hit an asteroid.</string>
+    <string name="orbit_builder_fail_left_map">The rocket left the orbit map.</string>
+    <string name="orbit_builder_fail_wrong_value">The rocket reached the planet with the wrong value.</string>
+    <string name="orbit_builder_fail_loop">The route created a loop.</string>
+    <string name="orbit_builder_fail_invalid_division">This division gate does not give a clean result.</string>
+    <string name="orbit_builder_fail_no_path">The rocket could not complete the route.</string>
+    <string name="orbit_builder_final_value">Final value: %1$s</string>
+    <string name="orbit_builder_success_with_stars">Great orbit! Stars: %1$d</string>
+    <string name="orbit_builder_draw_route">Draw the path from the rocket with your finger.</string>
+    <string name="orbit_builder_draw_to_planet">Keep drawing until you reach the planet.</string>
+    <string name="orbit_builder_ready_to_launch">Route ready. Launch the rocket.</string>
+    <string name="orbit_builder_path_used">Path used</string>
+    <string name="orbit_builder_start_value">Start value</string>
+</resources>

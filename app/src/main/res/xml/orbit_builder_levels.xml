@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<orbitBuilderLevels version="1.0" mode="math-orbit">
+    <level id="orbit_math_001" grade="1" difficultyStars="1" rows="8" columns="6" startRow="7" startColumn="0" initialDirection="RIGHT" targetRow="0" targetColumn="5" startValue="4" targetValue="10" maxPlaceableArrows="5" optimalArrowCount="3" />
+    <level id="orbit_math_002" grade="1" difficultyStars="1" rows="8" columns="6" startRow="7" startColumn="1" initialDirection="UP" targetRow="2" targetColumn="5" startValue="2" targetValue="9" maxPlaceableArrows="5" optimalArrowCount="3" />
+    <level id="orbit_math_003" grade="2" difficultyStars="1" rows="8" columns="6" startRow="6" startColumn="0" initialDirection="RIGHT" targetRow="1" targetColumn="4" startValue="12" targetValue="7" maxPlaceableArrows="5" optimalArrowCount="4" />
+    <level id="orbit_math_004" grade="2" difficultyStars="1" rows="8" columns="6" startRow="7" startColumn="5" initialDirection="LEFT" targetRow="0" targetColumn="0" startValue="9" targetValue="15" maxPlaceableArrows="6" optimalArrowCount="4" />
+    <level id="orbit_math_005" grade="3" difficultyStars="2" rows="8" columns="6" startRow="7" startColumn="0" initialDirection="RIGHT" targetRow="0" targetColumn="5" startValue="6" targetValue="24" maxPlaceableArrows="7" optimalArrowCount="5" />
+    <level id="orbit_math_006" grade="3" difficultyStars="2" rows="8" columns="6" startRow="7" startColumn="3" initialDirection="UP" targetRow="1" targetColumn="0" startValue="5" targetValue="18" maxPlaceableArrows="8" optimalArrowCount="5" />
+    <level id="orbit_math_007" grade="4" difficultyStars="2" rows="8" columns="6" startRow="7" startColumn="5" initialDirection="LEFT" targetRow="2" targetColumn="0" startValue="14" targetValue="12" maxPlaceableArrows="8" optimalArrowCount="5" />
+    <level id="orbit_math_008" grade="4" difficultyStars="2" rows="8" columns="6" startRow="7" startColumn="0" initialDirection="RIGHT" targetRow="1" targetColumn="5" startValue="8" targetValue="30" maxPlaceableArrows="8" optimalArrowCount="6" />
+    <level id="orbit_math_009" grade="4" difficultyStars="3" rows="8" columns="6" startRow="7" startColumn="0" initialDirection="RIGHT" targetRow="0" targetColumn="5" startValue="10" targetValue="42" maxPlaceableArrows="10" optimalArrowCount="7" />
+    <level id="orbit_math_010" grade="5" difficultyStars="3" rows="8" columns="6" startRow="7" startColumn="5" initialDirection="LEFT" targetRow="0" targetColumn="0" startValue="9" targetValue="16" maxPlaceableArrows="10" optimalArrowCount="7" />
+    <level id="orbit_math_011" grade="5" difficultyStars="3" rows="8" columns="6" startRow="7" startColumn="2" initialDirection="UP" targetRow="0" targetColumn="4" startValue="20" targetValue="25" maxPlaceableArrows="10" optimalArrowCount="8" />
+    <level id="orbit_math_012" grade="6" difficultyStars="3" rows="8" columns="6" startRow="7" startColumn="0" initialDirection="RIGHT" targetRow="0" targetColumn="5" startValue="7" targetValue="64" maxPlaceableArrows="10" optimalArrowCount="8" />
+</orbitBuilderLevels>

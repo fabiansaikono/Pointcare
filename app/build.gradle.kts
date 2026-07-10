@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+    implementation("com.caverock:androidsvg-aar:1.4")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

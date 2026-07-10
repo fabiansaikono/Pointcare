@@ -83,7 +83,7 @@ class PuzzleViewModel(
             val mathLevel = profile.mathLevel
             val loadedPuzzles = level.toGrade()?.let { grade ->
                 selectedSubcategoryId?.let { subcategoryId ->
-                    generatedPuzzleExercise(subcategoryId, level, mathLevel, selectedDifficultyStars)?.let { generatedPuzzle ->
+                    generatedPuzzleExercise(subcategoryId, level, mathLevel, profile.readingLevel, selectedDifficultyStars)?.let { generatedPuzzle ->
                         listOf(generatedPuzzle)
                     } ?: run {
                         val domainPuzzles = contentRepository.getExercises(LearningDomain.PUZZLE, level)
@@ -154,6 +154,7 @@ class PuzzleViewModel(
         subcategoryId: String,
         level: SkillLevel,
         mathLevel: SkillLevel,
+        readingLevel: SkillLevel,
         difficultyStars: Int?
     ): ExerciseContent? {
         val stars = difficultyStars?.coerceIn(1, 3) ?: 1
@@ -246,6 +247,51 @@ class PuzzleViewModel(
                 ),
                 answer = "completed"
             )
+            "orbit-builder" -> ExerciseContent(
+                id = "generated-orbit-builder-${level.name.lowercase()}-$stars",
+                domain = LearningDomain.PUZZLE,
+                skill = "orbit-builder",
+                section = ExerciseSection.PUZZLES,
+                level = level,
+                inputMode = InputMode.TAP_CHOICE,
+                prompt = LocalizedText(nl = "Orbitbouwer", en = "Orbit Builder", fr = "Constructeur d’orbite"),
+                data = mapOf(
+                    "mainCategory" to "logic_puzzles",
+                    "subcategoryId" to "orbit-builder",
+                    "grade" to (level.toGrade()?.toString() ?: "1"),
+                    "difficultyStars" to stars.toString(),
+                    "topic" to "Orbitbouwer",
+                    "topic_en-US" to "Orbit Builder",
+                    "topic_fr-BE" to "Constructeur d’orbite",
+                    "progressKey" to "orbit-builder-${level.name.lowercase()}-$stars"
+                ),
+                answer = "completed"
+            )             "mothership-dock" -> ExerciseContent(
+                id = "generated-mothership-dock-${level.name.lowercase()}-$stars",
+                domain = LearningDomain.PUZZLE,
+                skill = MOTHERSHIP_DOCK_SUBCATEGORY_ID,
+                section = ExerciseSection.PUZZLES,
+                level = level,
+                inputMode = InputMode.TAP_CHOICE,
+                prompt = LocalizedText(
+                    nl = "Moederschip",
+                    en = "Mothership dock",
+                    fr = "Vaisseau mère"
+                ),
+                data = mapOf(
+                    "mainCategory" to "logic_puzzles",
+                    "subcategoryId" to MOTHERSHIP_DOCK_SUBCATEGORY_ID,
+                    "grade" to (level.toGrade()?.toString() ?: "1"),
+                    "readingGrade" to (readingLevel.toGrade()?.toString() ?: (level.toGrade()?.toString() ?: "1")),
+                    "mathGrade" to mathGrade.toString(),
+                    "difficultyStars" to stars.toString(),
+                    "topic" to "Moederschip",
+                    "topic_en-US" to "Mothership dock",
+                    "topic_fr-BE" to "Vaisseau mère",
+                    "progressKey" to "mothership-dock-${level.name.lowercase()}-$stars"
+                ),
+                answer = "completed"
+            )
             "galaxycon" -> ExerciseContent(
             id = "generated-galaxycon-${level.name.lowercase()}-$stars",
             domain = LearningDomain.PUZZLE,
@@ -335,11 +381,37 @@ class PuzzleViewModel(
         if (state.isSolved) return
         val exercise = state.currentExercise ?: return
         val duration = System.currentTimeMillis() - startTime
-        _uiState.update { it.copy(isSolved = true, isWrong = false, showFeedback = true) }
+        _uiState.update { it.copy(isSolved = false, isWrong = false, showFeedback = false) }
         audioService.playSuccess()
         saveProgress(exercise, duration, correct = true, submittedAnswer = "completed")
     }
 
+    fun onOrbitBuilderComplete(levelId: String, stars: Int) {
+        val state = _uiState.value
+        val exercise = state.currentExercise ?: return
+        val duration = System.currentTimeMillis() - startTime
+        val orbitExercise = exercise.copy(
+            id = "${exercise.id}-$levelId",
+            data = exercise.data + mapOf(
+                "progressKey" to "orbit-builder-$levelId",
+                "orbitBuilderLevelId" to levelId,
+                "orbitBuilderStars" to stars.toString()
+            )
+        )
+        _uiState.update { it.copy(isSolved = false, isWrong = false, showFeedback = false) }
+        audioService.playSuccess()
+        saveProgress(
+            exercise = orbitExercise,
+            durationMs = duration,
+            correct = true,
+            submittedAnswer = "completed",
+            extraMetadata = mapOf(
+                "orbitBuilderLevelId" to levelId,
+                "orbitBuilderStars" to stars.toString(),
+                "progressState" to "completed"
+            )
+        )
+    }
     fun onGalaxyconComplete(result: GalaxyconRunResult) {
         val state = _uiState.value
         val exercise = state.currentExercise ?: return
@@ -415,7 +487,7 @@ class PuzzleViewModel(
 
         if (isCorrect) {
             val duration = System.currentTimeMillis() - startTime
-            _uiState.update { it.copy(isSolved = true, isWrong = false, showFeedback = true) }
+            _uiState.update { it.copy(isSolved = false, isWrong = false, showFeedback = false) }
             audioService.playSuccess()
             saveProgress(puzzle, duration, correct = true, submittedAnswer = userSolution)
         } else {
@@ -508,6 +580,70 @@ class PuzzleViewModel(
                     "galaxyconStarsCollected" to result.starsCollected.toString(),
                     "galaxyconStickers" to result.stickersEarned.joinToString("|"),
                     "stickerBookSubgame" to GALAXYCON_SUBCATEGORY_ID
+                )
+            )
+            progressRepository.addProgress(event)
+            syncManager.scheduleSync()
+        }
+    }
+
+        fun onMothershipDockComplete(result: MothershipDockRunResult) {
+        val state = _uiState.value
+        val exercise = state.currentExercise ?: return
+        val duration = if (result.elapsedMs > 0L) {
+            result.elapsedMs
+        } else {
+            System.currentTimeMillis() - startTime
+        }
+
+        _uiState.update {
+            it.copy(
+                isSolved = false,
+                isWrong = false,
+                showFeedback = false
+            )
+        }
+
+        if (result.docked) {
+            audioService.playSuccess()
+        } else {
+            audioService.playFailure()
+        }
+
+        saveMothershipDockProgress(exercise, duration, result)
+    }
+
+    private fun saveMothershipDockProgress(
+        exercise: ExerciseContent,
+        durationMs: Long,
+        result: MothershipDockRunResult
+    ) {
+        val profileId = _uiState.value.currentProfileId ?: return
+        viewModelScope.launch {
+            val event = ProgressEvent(
+                id = UUID.randomUUID().toString(),
+                childProfileId = profileId,
+                exerciseId = exercise.id,
+                domain = exercise.domain,
+                skill = exercise.skill,
+                timestamp = System.currentTimeMillis(),
+                answerCorrect = result.docked,
+                responseTimeMs = durationMs,
+                retryCount = if (result.docked) 0 else 1,
+                rewardStampsEarned = missionPointsFor(exercise, result.docked),
+                metadata = mapOf(
+                    "answer" to if (result.docked) "friendly_docked" else "dock_failed",
+                    "progressKey" to (exercise.data["progressKey"] ?: exercise.id),
+                    "subcategoryId" to MOTHERSHIP_DOCK_SUBCATEGORY_ID,
+                    "grade" to (exercise.data["grade"] ?: (exercise.level.toGrade()?.toString() ?: "")),
+                    "progressState" to if (result.docked) "completed" else "retry_wrong",
+                    "mothershipDockTarget" to result.target,
+                    "mothershipDockMode" to result.mode,
+                    "mothershipDockShots" to result.shotsFired.toString(),
+                    "mothershipDockEnemiesDestroyed" to result.enemiesDestroyed.toString(),
+                    "mothershipDockFriendlyHit" to result.friendlyHit.toString(),
+                    "mothershipDockEnemyDocked" to result.enemyDocked.toString(),
+                    "stickerBookSubgame" to MOTHERSHIP_DOCK_SUBCATEGORY_ID
                 )
             )
             progressRepository.addProgress(event)

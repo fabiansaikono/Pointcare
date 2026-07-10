@@ -3,6 +3,9 @@ package be.saikono.poincare.ui.puzzle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.Canvas
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
@@ -14,8 +17,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
@@ -24,9 +29,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import be.saikono.poincare.ui.theme.*
 import kotlinx.coroutines.delay
+import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.roundToInt
+import kotlin.math.sin
 import kotlin.random.Random
 
 @Composable
@@ -40,12 +49,21 @@ fun SudokuGame(
     val puzzle = remember(stars, seed) { SudokuGenerator.generate(stars, seed) }
     var entries by rememberSaveable(seed, saver = sudokuEntriesSaver) { mutableStateOf<Map<Pair<Int, Int>, Int>>(emptyMap()) }
     var cellCenters by remember(puzzle) { mutableStateOf<Map<Pair<Int, Int>, Offset>>(emptyMap()) }
+    var wrongFeedback by remember(puzzle) { mutableStateOf<SudokuWrongFeedback?>(null) }
+    var wrongFeedbackRunId by remember(puzzle) { mutableIntStateOf(0) }
     var elapsedSeconds by rememberSaveable(seed) { mutableIntStateOf(0) }
     val complete = puzzle.solution.indices.all { row ->
         puzzle.solution[row].indices.all { col ->
             val cell = row to col
             val value = if (cell in puzzle.givens) puzzle.solution[row][col] else entries[cell]
             value == puzzle.solution[row][col]
+        }
+    }
+
+    LaunchedEffect(wrongFeedbackRunId) {
+        if (wrongFeedbackRunId > 0) {
+            delay(1000)
+            wrongFeedback = null
         }
     }
 
@@ -69,11 +87,23 @@ fun SudokuGame(
             Text(formatTimer(elapsedSeconds), color = PlanetGold, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
         }
         val grid: @Composable (Modifier) -> Unit = { gridModifier ->
-            SudokuGrid(puzzle, entries, complete, modifier = gridModifier, onCellPositioned = { cell, center ->
-                cellCenters = cellCenters + (cell to center)
-            }, onCellClicked = { cell ->
-                if (cell !in puzzle.givens && !complete) entries = entries - cell
-            })
+            SudokuGrid(
+                puzzle = puzzle,
+                entries = entries,
+                complete = complete,
+                wrongFeedback = wrongFeedback,
+                wrongFeedbackRunId = wrongFeedbackRunId,
+                modifier = gridModifier,
+                onCellPositioned = { cell, center ->
+                    cellCenters = cellCenters + (cell to center)
+                },
+                onCellClicked = { cell ->
+                    if (cell !in puzzle.givens && !complete) {
+                        entries = entries - cell
+                        wrongFeedback = null
+                    }
+                }
+            )
         }
         val bank: @Composable (Modifier) -> Unit = { bankModifier ->
             NumberBank(values = (1..9).toList(), maxValue = puzzle.size, modifier = bankModifier, onValueDropped = { value, dropPosition ->
@@ -82,7 +112,16 @@ fun SudokuGame(
                     .minByOrNull { (_, center) -> (center - dropPosition).getDistance() }
                     ?.takeIf { (_, center) -> (center - dropPosition).getDistance() < 140f }
                     ?.key
-                if (target != null) entries = entries + (target to value)
+                if (target != null) {
+                    val feedback = buildSudokuWrongFeedback(puzzle, entries, target, value)
+                    entries = entries + (target to value)
+                    if (feedback != null) {
+                        wrongFeedback = feedback
+                        wrongFeedbackRunId += 1
+                    } else {
+                        wrongFeedback = null
+                    }
+                }
             })
         }
         if (isLandscape) {
@@ -127,10 +166,21 @@ private fun SudokuGrid(
     puzzle: SudokuPuzzle,
     entries: Map<Pair<Int, Int>, Int>,
     complete: Boolean,
+    wrongFeedback: SudokuWrongFeedback?,
+    wrongFeedbackRunId: Int,
     modifier: Modifier = Modifier,
     onCellPositioned: (Pair<Int, Int>, Offset) -> Unit,
     onCellClicked: (Pair<Int, Int>) -> Unit
 ) {
+    val conflictAnimation = remember { Animatable(0f) }
+    LaunchedEffect(wrongFeedbackRunId) {
+        conflictAnimation.snapTo(0f)
+        if (wrongFeedback != null) {
+            conflictAnimation.animateTo(1f, animationSpec = tween(durationMillis = 1000, easing = LinearEasing))
+        }
+    }
+    val conflictProgress = conflictAnimation.value
+
     BoxWithConstraints(modifier = modifier, contentAlignment = Alignment.Center) {
         val gridSize = minOf(maxWidth, maxHeight)
         Box(modifier = Modifier.size(gridSize)) {
@@ -142,6 +192,8 @@ private fun SudokuGrid(
                             val isGiven = cell in puzzle.givens
                             val value = if (isGiven) puzzle.solution[row][col] else entries[cell]
                             val correct = value == null || value == puzzle.solution[row][col]
+                            val isConflictingExistingValue = wrongFeedback?.conflictingCells?.contains(cell) == true
+                            val conflictTextGrowth = if (isConflictingExistingValue) conflictProgress else 0f
                             Box(
                                 modifier = Modifier
                                     .weight(1f)
@@ -163,13 +215,20 @@ private fun SudokuGrid(
                                 Text(
                                     text = value?.toString().orEmpty(),
                                     color = when {
+                                        isConflictingExistingValue -> PlanetRed
                                         isGiven -> StarWhite
                                         value == null -> StarWhite
                                         correct -> PlanetGreen
                                         else -> PlanetRed
                                     },
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = if (isGiven || value != null) FontWeight.Black else FontWeight.Medium,
+                                    style = MaterialTheme.typography.titleMedium.copy(
+                                        fontSize = if (isConflictingExistingValue) (22f + 12f * conflictTextGrowth).sp else MaterialTheme.typography.titleMedium.fontSize
+                                    ),
+                                    fontWeight = when {
+                                        isConflictingExistingValue -> FontWeight((650 + 350 * conflictTextGrowth).roundToInt().coerceIn(650, 1000))
+                                        isGiven || value != null -> FontWeight.Black
+                                        else -> FontWeight.Medium
+                                    },
                                     textAlign = TextAlign.Center
                                 )
                             }
@@ -177,13 +236,23 @@ private fun SudokuGrid(
                     }
                 }
             }
-            SudokuGridLines(puzzle = puzzle, modifier = Modifier.matchParentSize())
+            SudokuGridLines(
+                puzzle = puzzle,
+                wrongFeedback = wrongFeedback,
+                conflictProgress = conflictProgress,
+                modifier = Modifier.matchParentSize()
+            )
         }
     }
 }
 
 @Composable
-private fun SudokuGridLines(puzzle: SudokuPuzzle, modifier: Modifier = Modifier) {
+private fun SudokuGridLines(
+    puzzle: SudokuPuzzle,
+    wrongFeedback: SudokuWrongFeedback?,
+    conflictProgress: Float,
+    modifier: Modifier = Modifier
+) {
     Canvas(modifier = modifier) {
         val cellWidth = size.width / puzzle.size
         val cellHeight = size.height / puzzle.size
@@ -204,6 +273,38 @@ private fun SudokuGridLines(puzzle: SudokuPuzzle, modifier: Modifier = Modifier)
         for (row in puzzle.boxRows until puzzle.size step puzzle.boxRows) {
             val y = row * cellHeight
             drawLine(boxLineColor, Offset(0f, y), Offset(size.width, y), strokeWidth = 3f, cap = StrokeCap.Square)
+        }
+
+        wrongFeedback?.let { feedback ->
+            val pulse = abs(sin((conflictProgress * PI.toFloat() * 6f).toDouble())).toFloat()
+            val red = PlanetRed.copy(alpha = 0.20f + 0.80f * pulse)
+            val strokeWidth = 5f + 3f * pulse
+            feedback.rows.forEach { row ->
+                drawRect(
+                    color = red,
+                    topLeft = Offset(0f, row * cellHeight),
+                    size = Size(size.width, cellHeight),
+                    style = Stroke(width = strokeWidth)
+                )
+            }
+            feedback.columns.forEach { col ->
+                drawRect(
+                    color = red,
+                    topLeft = Offset(col * cellWidth, 0f),
+                    size = Size(cellWidth, size.height),
+                    style = Stroke(width = strokeWidth)
+                )
+            }
+            feedback.boxes.forEach { box ->
+                val top = box.first * puzzle.boxRows * cellHeight
+                val left = box.second * puzzle.boxCols * cellWidth
+                drawRect(
+                    color = red,
+                    topLeft = Offset(left, top),
+                    size = Size(puzzle.boxCols * cellWidth, puzzle.boxRows * cellHeight),
+                    style = Stroke(width = strokeWidth)
+                )
+            }
         }
     }
 }
@@ -273,6 +374,71 @@ private fun DraggableSudokuValue(value: Int, enabled: Boolean, onDropped: (Int, 
                 )
             }
     ) { Box(contentAlignment = Alignment.Center) { Text(value.toString(), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold) } }
+}
+
+
+private data class SudokuWrongFeedback(
+    val target: Pair<Int, Int>,
+    val value: Int,
+    val rows: Set<Int>,
+    val columns: Set<Int>,
+    val boxes: Set<Pair<Int, Int>>,
+    val conflictingCells: Set<Pair<Int, Int>>
+)
+
+private fun buildSudokuWrongFeedback(
+    puzzle: SudokuPuzzle,
+    entries: Map<Pair<Int, Int>, Int>,
+    target: Pair<Int, Int>,
+    value: Int
+): SudokuWrongFeedback? {
+    val correctValue = puzzle.solution[target.first][target.second]
+    if (value == correctValue) return null
+
+    fun valueAt(row: Int, col: Int): Int? {
+        val cell = row to col
+        return if (cell in puzzle.givens) puzzle.solution[row][col] else entries[cell]
+    }
+
+    val rowConflicts = mutableSetOf<Pair<Int, Int>>()
+    val columnConflicts = mutableSetOf<Pair<Int, Int>>()
+    val boxConflicts = mutableSetOf<Pair<Int, Int>>()
+
+    for (col in 0 until puzzle.size) {
+        val cell = target.first to col
+        if (cell != target && valueAt(target.first, col) == value) rowConflicts += cell
+    }
+    for (row in 0 until puzzle.size) {
+        val cell = row to target.second
+        if (cell != target && valueAt(row, target.second) == value) columnConflicts += cell
+    }
+
+    val boxStartRow = (target.first / puzzle.boxRows) * puzzle.boxRows
+    val boxStartCol = (target.second / puzzle.boxCols) * puzzle.boxCols
+    for (row in boxStartRow until boxStartRow + puzzle.boxRows) {
+        for (col in boxStartCol until boxStartCol + puzzle.boxCols) {
+            val cell = row to col
+            if (cell != target && valueAt(row, col) == value) boxConflicts += cell
+        }
+    }
+
+    val rows = if (rowConflicts.isNotEmpty()) setOf(target.first) else emptySet()
+    val columns = if (columnConflicts.isNotEmpty()) setOf(target.second) else emptySet()
+    val boxes = if (boxConflicts.isNotEmpty()) setOf((target.first / puzzle.boxRows) to (target.second / puzzle.boxCols)) else emptySet()
+    val conflicts = rowConflicts + columnConflicts + boxConflicts
+
+    return if (conflicts.isEmpty()) {
+        null
+    } else {
+        SudokuWrongFeedback(
+            target = target,
+            value = value,
+            rows = rows,
+            columns = columns,
+            boxes = boxes,
+            conflictingCells = conflicts
+        )
+    }
 }
 
 private fun formatTimer(totalSeconds: Int): String {

@@ -34,6 +34,8 @@ import be.saikono.poincare.ui.localizedExerciseText
 import be.saikono.poincare.ui.spaceMap.SpaceBackground
 import be.saikono.poincare.ui.theme.*
 import kotlin.math.roundToInt
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.foundation.layout.Box
 
 @Composable
 fun PuzzleScreen(
@@ -47,7 +49,8 @@ fun PuzzleScreen(
         onNavigateBack = { viewModel.stopAudio(); onNavigateBack() },
         onDigitPlaced = viewModel::onDigitPlaced,
         onQuestionClick = viewModel::playCurrentQuestion,
-        onGeneratedPuzzleComplete = viewModel::onGeneratedPuzzleComplete, onGalaxyconComplete = viewModel::onGalaxyconComplete,
+        onGeneratedPuzzleComplete = viewModel::onGeneratedPuzzleComplete, onOrbitBuilderComplete = viewModel::onOrbitBuilderComplete,
+        onGalaxyconComplete = viewModel::onGalaxyconComplete, onMothershipDockComplete = viewModel::onMothershipDockComplete,
         onCalculatorPuzzleAttempt = viewModel::onCalculatorPuzzleAttempt,
         onNextPuzzle = viewModel::nextPuzzle
     )
@@ -59,7 +62,8 @@ fun PuzzleContent(
     onNavigateBack: () -> Unit,
     onDigitPlaced: (Int, Int) -> Unit,
     onQuestionClick: () -> Unit,
-    onGeneratedPuzzleComplete: () -> Unit, onGalaxyconComplete: (GalaxyconRunResult) -> Unit,
+    onGeneratedPuzzleComplete: () -> Unit, onOrbitBuilderComplete: (String, Int) -> Unit,
+    onGalaxyconComplete: (GalaxyconRunResult) -> Unit, onMothershipDockComplete: (MothershipDockRunResult) -> Unit,
     onCalculatorPuzzleAttempt: (CalculatorPuzzleAttempt) -> Unit,
     onNextPuzzle: () -> Unit
 ) {
@@ -73,8 +77,9 @@ fun PuzzleContent(
     ) {
         SpaceBackground()
         val generatedSubcategoryId = puzzle?.data?.get("subcategoryId")
-        val isGeneratedPuzzle = generatedSubcategoryId in setOf("sudoku", "math-crosswords", "word-seeker", "calculator-puzzle", "constellations", GALAXYCON_SUBCATEGORY_ID)
-        val generatedPuzzleHandlesOwnMissionButtons = generatedSubcategoryId in setOf("calculator-puzzle", "constellations")
+        var galaxyconLetterProgress by remember(puzzle?.id, generatedSubcategoryId) { mutableStateOf(0f) }
+        val isGeneratedPuzzle = generatedSubcategoryId in setOf("sudoku", "math-crosswords", "word-seeker", "calculator-puzzle", "constellations", "orbit-builder", GALAXYCON_SUBCATEGORY_ID, MOTHERSHIP_DOCK_SUBCATEGORY_ID)
+        val generatedPuzzleHandlesOwnMissionButtons = generatedSubcategoryId in setOf("calculator-puzzle", "constellations", "orbit-builder")
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -96,7 +101,23 @@ fun PuzzleContent(
                 }
                 Spacer(modifier = Modifier.width(if (isGeneratedPuzzle && isLandscape) 4.dp else 16.dp))
                 Spacer(modifier = Modifier.weight(1f))
-                DifficultyStars(puzzle?.data?.get("difficultyStars")?.toIntOrNull())
+                if (generatedSubcategoryId == GALAXYCON_SUBCATEGORY_ID) {
+                    LinearProgressIndicator(
+                        progress = { galaxyconLetterProgress.coerceIn(0f, 1f) },
+                        color = PlanetBlue,
+                        trackColor = StarWhite.copy(alpha = 0.12f),
+                        modifier = Modifier
+                            .width(LocalConfiguration.current.screenWidthDp.dp * 0.20f)
+                            .height(4.dp)
+                            .clip(RoundedCornerShape(50))
+                    )
+}
+                Box(
+                    modifier = Modifier.width(LocalConfiguration.current.screenWidthDp.dp * 0.20f),
+                    contentAlignment = Alignment.CenterEnd
+                ) {
+                    DifficultyStars(puzzle?.data?.get("difficultyStars")?.toIntOrNull())
+                }
             }
 
             if (uiState.isLoading) {
@@ -144,7 +165,26 @@ fun PuzzleContent(
                         onComplete = onGeneratedPuzzleComplete,
                         modifier = Modifier.weight(1f)
                     )
-                } else if (subcategoryId == GALAXYCON_SUBCATEGORY_ID) { GalaxyconGame( language = uiState.exerciseLanguage, level = puzzle.level, initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1, onComplete = onGalaxyconComplete, modifier = Modifier.weight(1f) ) } else {
+                } else if (subcategoryId == "orbit-builder") {
+                    be.saikono.poincare.ui.puzzle.orbitbuilder.OrbitBuilderPuzzleGame(
+                        initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        onMissionComplete = onOrbitBuilderComplete,
+                        modifier = Modifier.weight(1f)
+                    )         } else if (subcategoryId == MOTHERSHIP_DOCK_SUBCATEGORY_ID) {
+            MothershipDockGame(
+                readingGrade = puzzle.data["readingGrade"]?.toIntOrNull()
+                    ?: puzzle.data["grade"]?.toIntOrNull()
+                    ?: 1,
+                mathGrade = puzzle.data["mathGrade"]?.toIntOrNull()
+                    ?: puzzle.data["grade"]?.toIntOrNull()
+                    ?: 1,
+                difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                exerciseLanguage = uiState.exerciseLanguage,
+                onComplete = onMothershipDockComplete,
+                modifier = Modifier.weight(1f)
+            )
+        } else if (subcategoryId == GALAXYCON_SUBCATEGORY_ID) { GalaxyconGame( language = uiState.exerciseLanguage, level = puzzle.level, initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1, onComplete = onGalaxyconComplete,
+                            onLetterProgressChanged = { galaxyconLetterProgress = it }, modifier = Modifier.weight(1f) ) } else {
                     Text(
                         text = puzzle.prompt.get(uiState.exerciseLanguage),
                         style = MaterialTheme.typography.headlineSmall,
@@ -182,8 +222,8 @@ fun PuzzleContent(
                     Spacer(modifier = Modifier.weight(1f))
                 }
 
-                val isCalculatorPuzzle = subcategoryId == "calculator-puzzle"
-                if ((uiState.isSolved || uiState.isFinished) && !isCalculatorPuzzle) {
+                val currentPuzzleHandlesOwnMissionButtons = subcategoryId in setOf("calculator-puzzle", "constellations")
+                if ((uiState.isSolved || uiState.isFinished) && !currentPuzzleHandlesOwnMissionButtons) {
                     val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
                     val buttonColor = PlanetGold
 
@@ -418,7 +458,8 @@ fun PuzzleScreenPreview() {
             onDigitPlaced = { _, _ -> },
             onQuestionClick = {},
             onGeneratedPuzzleComplete = {},
-        onGalaxyconComplete = {},
+        onOrbitBuilderComplete = { _, _ -> },
+        onGalaxyconComplete = {}, onMothershipDockComplete = {},
             onCalculatorPuzzleAttempt = {},
             onNextPuzzle = {}
         )

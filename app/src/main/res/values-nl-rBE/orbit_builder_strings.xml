@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="orbit_builder_title">Orbitbouwer</string>
+    <string name="orbit_builder_math_orbit">Wiskunde-orbit</string>
+    <string name="orbit_builder_build_route">Bouw de route</string>
+    <string name="orbit_builder_launch">Lanceer raket</string>
+    <string name="orbit_builder_reset">Herstart</string>
+    <string name="orbit_builder_current_value">Huidige waarde</string>
+    <string name="orbit_builder_target_value">Doelwaarde</string>
+    <string name="orbit_builder_arrows_used">Pijlen gebruikt</string>
+    <string name="orbit_builder_mission_complete">Missie voltooid</string>
+    <string name="orbit_builder_try_again">Probeer opnieuw</string>
+    <string name="orbit_builder_next_mission">Volgende missie</string>
+    <string name="orbit_builder_fail_asteroid">De raket botste op een asteroïde.</string>
+    <string name="orbit_builder_fail_left_map">De raket vloog uit de orbitkaart.</string>
+    <string name="orbit_builder_fail_wrong_value">De raket bereikte de planeet met de verkeerde waarde.</string>
+    <string name="orbit_builder_fail_loop">De route blijft in een lus draaien.</string>
+    <string name="orbit_builder_fail_invalid_division">Deze deelpoort geeft geen mooi geheel resultaat.</string>
+    <string name="orbit_builder_fail_no_path">De raket kon de route niet afwerken.</string>
+    <string name="orbit_builder_final_value">Eindwaarde: %1$s</string>
+    <string name="orbit_builder_success_with_stars">Knappe orbit! Sterren: %1$d</string>
+    <string name="orbit_builder_draw_route">Teken met je vinger een pad vanaf de raket.</string>
+    <string name="orbit_builder_draw_to_planet">Teken verder tot je de planeet bereikt.</string>
+    <string name="orbit_builder_ready_to_launch">Route klaar. Lanceer de raket.</string>
+    <string name="orbit_builder_path_used">Pad gebruikt</string>
+    <string name="orbit_builder_start_value">Startwaarde</string>
+</resources>

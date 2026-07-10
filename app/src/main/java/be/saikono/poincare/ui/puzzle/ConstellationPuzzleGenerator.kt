@@ -14,526 +14,385 @@ object ConstellationPuzzleGenerator {
         val normalizedGrade = grade.coerceIn(1, 6)
         val normalizedStars = difficultyStars.coerceIn(1, 3)
         val random = Random(seed)
-        val pool = templates.filter { template ->
-            template.minGrade <= normalizedGrade && template.baseDifficulty <= normalizedStars + 1
-        }.ifEmpty { templates.filter { it.minGrade <= normalizedGrade }.ifEmpty { templates } }
-
-        val template = pool[random.nextInt(pool.size)]
-        val jitter = when (normalizedStars) {
-            1 -> 0.004f
-            2 -> 0.010f
-            else -> 0.016f
-        }
-        val scale = 0.90f + random.nextFloat() * 0.06f
-        val dx = (1f - scale) / 2f + (random.nextFloat() - 0.5f) * 0.025f
-        val dy = (1f - scale) / 2f + (random.nextFloat() - 0.5f) * 0.025f
-
-        val labelsByStarId = generatedLabelsForTemplate(
-            template = template,
+        val groupLengths = groupLengthsFor(normalizedStars, random)
+        val groupCount = groupLengths.size
+        val patterns = buildPatterns(
             grade = normalizedGrade,
+            difficultyStars = normalizedStars,
+            groupLengths = groupLengths,
+            random = random
+        )
+        val stars = mutableListOf<ConstellationStar>()
+        val connections = mutableListOf<ConstellationConnection>()
+        val targetStarIds = mutableSetOf<String>()
+
+        val layouts = generateLayouts(
+            groupCount = groupCount,
+            groupLengths = groupLengths,
             difficultyStars = normalizedStars,
             random = random
         )
-        val targetStars = template.stars.mapIndexed { index, star ->
-            val x = clamp01(dx + star.x * scale + randomJitter(random, jitter))
-            val y = clamp01(dy + star.y * scale + randomJitter(random, jitter))
-            ConstellationStar(
-                id = star.id,
-                name = star.name,
-                x = x,
-                y = y,
-                isTarget = true,
-                order = index + 1,
-                label = labelsByStarId[star.id] ?: (index + 1).toString(),
-                brightness = star.brightness
-            )
+
+        patterns.forEachIndexed { groupIndex, pattern ->
+            val groupId = "path-${groupIndex + 1}"
+            val symbol = listOf("A", "B", "C").getOrElse(groupIndex) { ('A' + groupIndex).toString() }
+            val visibleSymbol = symbol.takeIf { groupCount > 1 }
+            val points = layouts[groupIndex].take(groupLengths[groupIndex])
+            val values = pattern.values.take(points.size)
+
+            points.forEachIndexed { orderIndex, point ->
+                val starId = "$groupId-star-${orderIndex + 1}"
+                targetStarIds += starId
+                stars += ConstellationStar(
+                    id = starId,
+                    name = if (visibleSymbol != null) "${symbol}${orderIndex + 1}" else "Star ${orderIndex + 1}",
+                    x = clamp01(point.first + randomJitter(random, 0.008f + normalizedStars * 0.003f)),
+                    y = clamp01(point.second + randomJitter(random, 0.008f + normalizedStars * 0.003f)),
+                    isTarget = true,
+                    order = orderIndex + 1,
+                    label = values[orderIndex],
+                    brightness = 0.80f + random.nextFloat() * 0.18f,
+                    groupId = groupId,
+                    groupSymbol = visibleSymbol,
+                    groupRule = pattern.rule
+                )
+            }
+
+            for (i in 0 until points.lastIndex) {
+                connections += ConstellationConnection(
+                    fromStarId = "$groupId-star-${i + 1}",
+                    toStarId = "$groupId-star-${i + 2}"
+                )
+            }
         }
 
         val distractorCount = when (normalizedStars) {
-            1 -> max(0, template.stars.size / 4)
-            2 -> max(2, template.stars.size / 2)
-            else -> max(4, template.stars.size)
+            1 -> 2
+            2 -> 4
+            else -> 6
         }
-        val distractors = generateDistractors(random, targetStars, distractorCount)
-        val shuffledStars = (targetStars + distractors).shuffled(random)
+        stars += generateDistractors(random, stars, distractorCount)
+
+        val constellationName = randomConstellationName(random)
+        val rules = patterns.mapIndexed { index, pattern ->
+            if (groupCount == 1) {
+                pattern.rule
+            } else {
+                val symbol = listOf("A", "B", "C").getOrElse(index) { ('A' + index).toString() }
+                LocalizedText(
+                    nl = "$symbol: ${pattern.rule.nl}",
+                    en = "$symbol: ${pattern.rule.en ?: pattern.rule.nl}",
+                    fr = "$symbol : ${pattern.rule.fr ?: pattern.rule.nl}"
+                )
+            }
+        }
+
+        val mission = if (groupCount == 1) {
+            LocalizedText(
+                nl = "Verbind de reeks van start naar einde. Het pad kan alle richtingen uitgaan, maar je volgt altijd de volgende waarde.",
+                en = "Connect the sequence from start to finish. The path can go in any direction, but you always follow the next value.",
+                fr = "Relie la suite du début à la fin. Le chemin peut aller dans toutes les directions, mais tu suis toujours la valeur suivante."
+            )
+        } else {
+            LocalizedText(
+                nl = "Verbind elke reeks van start naar einde. Je mag zelf kiezen of je met A, B of C begint.",
+                en = "Connect each sequence from start to finish. You may choose whether to start with A, B or C.",
+                fr = "Relie chaque suite du début à la fin. Tu peux choisir de commencer par A, B ou C."
+            )
+        }
 
         return ConstellationPuzzle(
-            id = "generated-constellation-${template.id}-$normalizedGrade-$normalizedStars-$seed",
-            templateId = template.id,
-            constellationName = template.name,
-            mission = LocalizedText(
-                nl = "Verbind de sterren van ${template.name.nl}.",
-                en = "Connect the stars of ${template.name.en ?: template.name.nl}.",
-                fr = "Relie les étoiles de ${template.name.fr ?: template.name.nl}."
+            id = "constellation-dynamic-paths-$normalizedGrade-$normalizedStars-$seed",
+            templateId = "dynamic-paths-v4",
+            constellationName = constellationName,
+            mission = mission,
+            fact = LocalizedText(
+                nl = "Sterrenbeelden lijken soms rommelig, maar een duidelijk startpunt en een vaste volgorde maken het patroon herkenbaar.",
+                en = "Constellations can look messy, but a clear starting point and a fixed order make the pattern easier to recognize.",
+                fr = "Les constellations peuvent sembler désordonnées, mais un début clair et un ordre fixe rendent le motif plus facile à reconnaître."
             ),
-            fact = template.fact,
             difficultyStars = normalizedStars,
             grade = normalizedGrade,
-            stars = shuffledStars,
-            connections = template.connections.map { ConstellationConnection(it.first, it.second) },
-            targetStarIds = template.stars.map { it.id }.toSet(),
-            seed = seed
+            stars = stars.shuffled(random),
+            connections = connections,
+            targetStarIds = targetStarIds,
+            seed = seed,
+            rules = rules
         )
+    }
+
+    private data class Pattern(
+        val values: List<String>,
+        val rule: LocalizedText
+    )
+
+    private data class Zone(
+        val x: Float,
+        val y: Float,
+        val width: Float,
+        val height: Float
+    )
+
+    private fun groupLengthsFor(difficultyStars: Int, random: Random): List<Int> {
+        return when (difficultyStars) {
+            1 -> listOf(3)
+            2 -> if (random.nextBoolean()) listOf(3, 3) else listOf(4, 3)
+            else -> when (random.nextInt(3)) {
+                0 -> listOf(4, 3, 3)
+                1 -> listOf(3, 4, 3)
+                else -> listOf(4, 4, 3)
+            }
+        }
+    }
+
+    private fun buildPatterns(
+        grade: Int,
+        difficultyStars: Int,
+        groupLengths: List<Int>,
+        random: Random
+    ): List<Pattern> {
+        val patterns = mutableListOf<Pattern>()
+        val usedStarts = mutableSetOf<Int>()
+
+        groupLengths.forEachIndexed { index, length ->
+            patterns += when {
+                grade <= 1 -> additionPattern(
+                    start = uniqueStart(random, usedStarts, 1, 12) + index * 8,
+                    step = if (difficultyStars == 1) 1 else listOf(1, 2)[random.nextInt(2)],
+                    length = length
+                )
+                grade == 2 -> additionPattern(
+                    start = uniqueStart(random, usedStarts, 2, 30) + index * 12,
+                    step = listOf(2, 3, 5)[(index + random.nextInt(3)) % 3],
+                    length = length
+                )
+                grade == 3 -> when ((index + random.nextInt(2)) % 2) {
+                    0 -> multiplicationPattern(
+                        start = listOf(2, 3, 4, 5)[random.nextInt(4)],
+                        factor = 2,
+                        length = length
+                    )
+                    else -> additionPattern(
+                        start = uniqueStart(random, usedStarts, 10, 60),
+                        step = listOf(5, 10)[random.nextInt(2)],
+                        length = length
+                    )
+                }
+                grade == 4 -> when ((index + random.nextInt(2)) % 2) {
+                    0 -> multiplicationPattern(
+                        start = listOf(2, 3, 4, 5, 6)[random.nextInt(5)],
+                        factor = listOf(2, 3)[random.nextInt(2)],
+                        length = length
+                    )
+                    else -> additionPattern(
+                        start = uniqueStart(random, usedStarts, 15, 80),
+                        step = listOf(5, 10, 25)[random.nextInt(3)],
+                        length = length
+                    )
+                }
+                else -> when ((index + random.nextInt(3)) % 3) {
+                    0 -> multiplicationPattern(
+                        start = listOf(2, 3, 4, 5, 6)[random.nextInt(5)],
+                        factor = listOf(2, 3, 4)[random.nextInt(3)],
+                        length = length
+                    )
+                    1 -> fractionPattern(
+                        numeratorStart = listOf(1, 2, 3)[random.nextInt(3)],
+                        denominator = listOf(4, 5, 8, 10)[random.nextInt(4)],
+                        length = length
+                    )
+                    else -> additionPattern(
+                        start = uniqueStart(random, usedStarts, 100, 400),
+                        step = listOf(25, 50, 100)[random.nextInt(3)],
+                        length = length
+                    )
+                }
+            }
+        }
+
+        return patterns
+    }
+
+    private fun additionPattern(start: Int, step: Int, length: Int): Pattern {
+        val values = List(length) { (start + it * step).toString() }
+        return Pattern(
+            values = values,
+            rule = LocalizedText(
+                nl = "tel telkens $step erbij",
+                en = "add $step each time",
+                fr = "ajoute $step à chaque fois"
+            )
+        )
+    }
+
+    private fun multiplicationPattern(start: Int, factor: Int, length: Int): Pattern {
+        val values = generateSequence(start) { it * factor }
+            .take(length)
+            .map { it.toString() }
+            .toList()
+        return Pattern(
+            values = values,
+            rule = LocalizedText(
+                nl = "vermenigvuldig telkens met $factor",
+                en = "multiply by $factor each time",
+                fr = "multiplie par $factor à chaque fois"
+            )
+        )
+    }
+
+    private fun fractionPattern(numeratorStart: Int, denominator: Int, length: Int): Pattern {
+        val values = List(length) { index -> "${numeratorStart + index}/$denominator" }
+        return Pattern(
+            values = values,
+            rule = LocalizedText(
+                nl = "de teller wordt telkens 1 groter",
+                en = "the numerator grows by 1 each time",
+                fr = "le numérateur augmente de 1 à chaque fois"
+            )
+        )
+    }
+
+    private fun generateLayouts(
+        groupCount: Int,
+        groupLengths: List<Int>,
+        difficultyStars: Int,
+        random: Random
+    ): List<List<Pair<Float, Float>>> {
+        val zones = zonesFor(groupCount, random).shuffled(random)
+        return groupLengths.mapIndexed { index, length ->
+            val zone = zones[index]
+            val shape = pathShape(length, difficultyStars, random)
+            val mirrorX = random.nextBoolean()
+            val mirrorY = random.nextBoolean()
+            val swapAxes = random.nextInt(100) < when (groupCount) {
+                1 -> 35
+                2 -> 45
+                else -> 50
+            }
+
+            shape.map { point ->
+                var x = point.first
+                var y = point.second
+                if (swapAxes) {
+                    val oldX = x
+                    x = y
+                    y = oldX
+                }
+                if (mirrorX) x = 1f - x
+                if (mirrorY) y = 1f - y
+                clamp01(zone.x + x * zone.width) to clamp01(zone.y + y * zone.height)
+            }
+        }
+    }
+
+    private fun zonesFor(groupCount: Int, random: Random): List<Zone> {
+        val options = when (groupCount) {
+            1 -> listOf(
+                listOf(Zone(0.06f, 0.08f, 0.88f, 0.84f)),
+                listOf(Zone(0.12f, 0.06f, 0.76f, 0.88f))
+            )
+            2 -> listOf(
+                listOf(Zone(0.06f, 0.08f, 0.88f, 0.36f), Zone(0.06f, 0.56f, 0.88f, 0.36f)),
+                listOf(Zone(0.06f, 0.10f, 0.40f, 0.80f), Zone(0.54f, 0.10f, 0.40f, 0.80f)),
+                listOf(Zone(0.06f, 0.08f, 0.54f, 0.42f), Zone(0.40f, 0.54f, 0.54f, 0.38f)),
+                listOf(Zone(0.40f, 0.08f, 0.54f, 0.42f), Zone(0.06f, 0.54f, 0.54f, 0.38f))
+            )
+            else -> listOf(
+                listOf(Zone(0.06f, 0.07f, 0.88f, 0.25f), Zone(0.06f, 0.38f, 0.88f, 0.24f), Zone(0.06f, 0.68f, 0.88f, 0.24f)),
+                listOf(Zone(0.06f, 0.08f, 0.40f, 0.38f), Zone(0.54f, 0.08f, 0.40f, 0.38f), Zone(0.08f, 0.56f, 0.84f, 0.36f)),
+                listOf(Zone(0.06f, 0.10f, 0.28f, 0.80f), Zone(0.36f, 0.10f, 0.28f, 0.80f), Zone(0.66f, 0.10f, 0.28f, 0.80f)),
+                listOf(Zone(0.08f, 0.08f, 0.36f, 0.36f), Zone(0.56f, 0.22f, 0.36f, 0.36f), Zone(0.22f, 0.58f, 0.56f, 0.34f))
+            )
+        }
+        return options[random.nextInt(options.size)]
+    }
+
+    private fun pathShape(
+        length: Int,
+        difficultyStars: Int,
+        random: Random
+    ): List<Pair<Float, Float>> {
+        val easyThreePointShapes = listOf(
+            listOf(0.16f to 0.38f, 0.50f to 0.56f, 0.84f to 0.34f),
+            listOf(0.20f to 0.72f, 0.48f to 0.32f, 0.80f to 0.62f),
+            listOf(0.22f to 0.24f, 0.52f to 0.34f, 0.78f to 0.72f)
+        )
+        val threePointShapes = easyThreePointShapes + listOf(
+            listOf(0.18f to 0.48f, 0.50f to 0.18f, 0.82f to 0.78f),
+            listOf(0.24f to 0.20f, 0.72f to 0.40f, 0.44f to 0.80f),
+            listOf(0.30f to 0.86f, 0.50f to 0.42f, 0.70f to 0.12f),
+            listOf(0.18f to 0.78f, 0.76f to 0.62f, 0.42f to 0.20f)
+        )
+        val fourPointShapes = listOf(
+            listOf(0.10f to 0.25f, 0.38f to 0.72f, 0.62f to 0.28f, 0.90f to 0.68f),
+            listOf(0.14f to 0.72f, 0.34f to 0.28f, 0.62f to 0.22f, 0.86f to 0.64f),
+            listOf(0.22f to 0.18f, 0.72f to 0.34f, 0.38f to 0.62f, 0.84f to 0.84f),
+            listOf(0.22f to 0.84f, 0.44f to 0.58f, 0.62f to 0.34f, 0.78f to 0.14f),
+            listOf(0.26f to 0.22f, 0.48f to 0.78f, 0.70f to 0.42f, 0.44f to 0.14f),
+            listOf(0.16f to 0.50f, 0.42f to 0.20f, 0.66f to 0.58f, 0.84f to 0.34f)
+        )
+        return when {
+            length <= 3 && difficultyStars <= 1 -> easyThreePointShapes[random.nextInt(easyThreePointShapes.size)].take(length)
+            length <= 3 -> threePointShapes[random.nextInt(threePointShapes.size)].take(length)
+            else -> fourPointShapes[random.nextInt(fourPointShapes.size)].take(length)
+        }
     }
 
     private fun generateDistractors(
         random: Random,
-        targetStars: List<ConstellationStar>,
+        existingStars: List<ConstellationStar>,
         count: Int
     ): List<ConstellationStar> {
         val result = mutableListOf<ConstellationStar>()
         var attempts = 0
-        while (result.size < count && attempts < count * 40) {
+        while (result.size < count && attempts < count * 100) {
             attempts += 1
-            val x = 0.07f + random.nextFloat() * 0.86f
+            val x = 0.06f + random.nextFloat() * 0.88f
             val y = 0.08f + random.nextFloat() * 0.84f
-            val tooClose = (targetStars + result).any { star ->
+            val tooClose = (existingStars + result).any { star ->
                 val dx = star.x - x
                 val dy = star.y - y
-                dx * dx + dy * dy < 0.0055f
+                dx * dx + dy * dy < 0.0072f
             }
             if (!tooClose) {
                 result += ConstellationStar(
                     id = "distractor-${result.size}-$attempts",
-                    name = "",
+                    name = "background star",
                     x = x,
                     y = y,
                     isTarget = false,
                     order = null,
                     label = null,
-                    brightness = 0.55f + random.nextFloat() * 0.35f
+                    brightness = 0.32f + random.nextFloat() * 0.36f,
+                    groupId = null,
+                    groupSymbol = null,
+                    groupRule = null
                 )
             }
         }
         return result
     }
 
-    private fun randomJitter(random: Random, amount: Float): Float =
-        (random.nextFloat() - 0.5f) * amount
+    private fun randomConstellationName(random: Random): LocalizedText {
+        val names = listOf(
+            LocalizedText(nl = "Sterrenvlecht", en = "Star weave", fr = "Tresse d'étoiles"),
+            LocalizedText(nl = "Kosmische route", en = "Cosmic route", fr = "Route cosmique"),
+            LocalizedText(nl = "Nevelpad", en = "Nebula trail", fr = "Chemin de nébuleuse"),
+            LocalizedText(nl = "Meteorenspoor", en = "Meteor trail", fr = "Trace de météores"),
+            LocalizedText(nl = "Ruimteladder", en = "Space ladder", fr = "Échelle spatiale")
+        )
+        return names[random.nextInt(names.size)]
+    }
+
+    private fun uniqueStart(random: Random, usedStarts: MutableSet<Int>, from: Int, to: Int): Int {
+        repeat(30) {
+            val value = random.nextInt(from, to + 1)
+            if (usedStarts.add(value)) return value
+        }
+        return max(from, (usedStarts.maxOrNull() ?: from) + 7)
+    }
+
+    private fun randomJitter(random: Random, amount: Float): Float = (random.nextFloat() - 0.5f) * amount
 
     private fun clamp01(value: Float): Float = min(0.94f, max(0.06f, value))
-
-    private enum class LabelStyle { Counting, Odd, Multiples, Fractions, Expressions }
-
-    private fun generatedLabelsForTemplate(
-        template: Template,
-        grade: Int,
-        difficultyStars: Int,
-        random: Random
-    ): Map<String, String> {
-        val baseLabels = generatedLabels(
-            count = template.stars.size,
-            grade = grade,
-            difficultyStars = difficultyStars,
-            random = random
-        )
-        val labels = template.stars.mapIndexed { index, star ->
-            star.id to baseLabels.getOrElse(index) { (index + 1).toString() }
-        }.toMap().toMutableMap()
-
-        val neighboursByStarId = mutableMapOf<String, MutableSet<String>>()
-        template.stars.forEach { star -> neighboursByStarId.getOrPut(star.id) { mutableSetOf() } }
-        template.connections.forEach { (from, to) ->
-            neighboursByStarId.getOrPut(from) { mutableSetOf() }.add(to)
-            neighboursByStarId.getOrPut(to) { mutableSetOf() }.add(from)
-        }
-
-        val components = connectedComponents(template.stars.map { it.id }, neighboursByStarId)
-
-        // Separate disconnected one-line components must be visually/logically clear.
-        // Example: one edge can show 2 -> 4, another 52 -> 54 instead of reusing the same labels.
-        components.forEachIndexed { componentIndex, component ->
-            val componentConnections = template.connections.filter { (from, to) ->
-                from in component && to in component
-            }
-            if (component.size == 2 && componentConnections.size == 1) {
-                val orderedPair = componentConnections.first()
-                val pairLabels = separateEdgeLabels(
-                    componentIndex = componentIndex,
-                    grade = grade,
-                    difficultyStars = difficultyStars,
-                    random = random
-                )
-                labels[orderedPair.first] = pairLabels.first
-                labels[orderedPair.second] = pairLabels.second
-            }
-        }
-
-        // Branches are different: when multiple lines leave one point, the destination labels
-        // should be equivalent, so it is clear those stars belong together.
-        neighboursByStarId
-            .filterValues { neighbours -> neighbours.size > 1 }
-            .keys
-            .sorted()
-            .forEachIndexed { branchIndex, branchStarId ->
-                val neighbours = neighboursByStarId[branchStarId].orEmpty().sorted()
-                val equivalentLabels = equivalentBranchLabels(
-                    count = neighbours.size,
-                    grade = grade,
-                    difficultyStars = difficultyStars,
-                    branchIndex = branchIndex,
-                    random = random
-                )
-                neighbours.forEachIndexed { index, neighbourId ->
-                    labels[neighbourId] = equivalentLabels[index % equivalentLabels.size]
-                }
-            }
-
-        return labels
-    }
-
-    private fun connectedComponents(
-        starIds: List<String>,
-        neighboursByStarId: Map<String, Set<String>>
-    ): List<Set<String>> {
-        val visited = mutableSetOf<String>()
-        val result = mutableListOf<Set<String>>()
-        starIds.forEach { start ->
-            if (start !in visited) {
-                val component = mutableSetOf<String>()
-                val stack = mutableListOf(start)
-                while (stack.isNotEmpty()) {
-                    val current = stack.removeAt(stack.lastIndex)
-                    if (current in visited) continue
-                    visited += current
-                    component += current
-                    neighboursByStarId[current].orEmpty().forEach { neighbour ->
-                        if (neighbour !in visited) stack += neighbour
-                    }
-                }
-                result += component
-            }
-        }
-        return result
-    }
-
-    private fun separateEdgeLabels(
-        componentIndex: Int,
-        grade: Int,
-        difficultyStars: Int,
-        random: Random
-    ): Pair<String, String> {
-        val step = when {
-            grade >= 4 || difficultyStars >= 3 -> listOf(2, 3, 5, 6)[(componentIndex + random.nextInt(4)) % 4]
-            grade >= 2 -> listOf(2, 3, 4)[(componentIndex + random.nextInt(3)) % 3]
-            else -> 2
-        }
-        val base = when {
-            grade >= 4 || difficultyStars >= 3 -> 52 + componentIndex * 10
-            grade >= 2 -> 12 + componentIndex * 10
-            else -> 2 + componentIndex * 10
-        }
-        return base.toString() to (base + step).toString()
-    }
-
-    private fun equivalentBranchLabels(
-        count: Int,
-        grade: Int,
-        difficultyStars: Int,
-        branchIndex: Int,
-        random: Random
-    ): List<String> {
-        val minimumCount = count.coerceAtLeast(1)
-        return when {
-            grade >= 4 && difficultyStars >= 3 -> {
-                val target = listOf(12, 18, 24, 30, 36)[(branchIndex + random.nextInt(5)) % 5]
-                expressionVariantsFor(target).take(minimumCount).ifEmpty { List(minimumCount) { target.toString() } }
-            }
-            grade >= 3 && difficultyStars >= 2 -> {
-                val numerator = (branchIndex + 1) * 2
-                val denominator = listOf(3, 4, 5)[(branchIndex + random.nextInt(3)) % 3]
-                List(minimumCount) { index ->
-                    val multiplier = index + 1
-                    "${numerator * multiplier}/${denominator * multiplier}"
-                }
-            }
-            grade >= 2 -> {
-                val factor = listOf(2, 3, 4, 5, 7)[(branchIndex + random.nextInt(5)) % 5]
-                val value = factor * (branchIndex + 2)
-                List(minimumCount) { value.toString() }
-            }
-            else -> {
-                val value = 1 + branchIndex * 2
-                List(minimumCount) { value.toString() }
-            }
-        }
-    }
-
-    private fun expressionVariantsFor(target: Int): List<String> {
-        val multiplicationPairs = (1..target)
-            .filter { divisor -> target % divisor == 0 }
-            .map { divisor -> divisor to target / divisor }
-            .filter { (left, right) -> left <= 9 && right <= 12 }
-            .map { (left, right) -> "${left}×${right}" }
-
-        val additionPairs = listOf(
-            "${target / 2}+${target - target / 2}",
-            "${target + 3}-3",
-            "${target - 2}+2"
-        )
-
-        return (multiplicationPairs + additionPairs).distinct()
-    }
-
-    private fun generatedLabels(
-        count: Int,
-        grade: Int,
-        difficultyStars: Int,
-        random: Random
-    ): List<String> {
-        val availableStyles = when {
-            grade <= 1 && difficultyStars <= 1 -> listOf(LabelStyle.Counting, LabelStyle.Odd)
-            grade <= 2 -> listOf(LabelStyle.Counting, LabelStyle.Odd, LabelStyle.Multiples)
-            grade <= 3 -> listOf(LabelStyle.Odd, LabelStyle.Multiples, LabelStyle.Fractions)
-            else -> listOf(LabelStyle.Multiples, LabelStyle.Fractions, LabelStyle.Expressions)
-        }
-        val style = availableStyles[random.nextInt(availableStyles.size)]
-        return when (style) {
-            LabelStyle.Counting -> List(count) { index -> (index + 1).toString() }
-            LabelStyle.Odd -> List(count) { index -> (1 + index * 2).toString() }
-            LabelStyle.Multiples -> {
-                val factor = when {
-                    grade >= 5 -> listOf(6, 7, 8, 9, 12)[random.nextInt(5)]
-                    grade >= 3 -> listOf(3, 4, 5, 6, 7)[random.nextInt(5)]
-                    else -> listOf(2, 3, 5, 10)[random.nextInt(4)]
-                }
-                List(count) { index -> ((index + 1) * factor).toString() }
-            }
-            LabelStyle.Fractions -> {
-                val denominator = when {
-                    grade >= 5 -> listOf(3, 4, 5, 6)[random.nextInt(4)]
-                    else -> listOf(2, 3, 4)[random.nextInt(3)]
-                }
-                List(count) { index -> "${index + 1}/$denominator" }
-            }
-            LabelStyle.Expressions -> {
-                val multipliers = listOf(3, 4, 5, 6, 7, 8, 9)
-                List(count) { index ->
-                    val left = index + 1
-                    val right = multipliers[(index + random.nextInt(multipliers.size)) % multipliers.size]
-                    "${left}×${right}"
-                }
-            }
-        }
-    }
-
-    private data class Template(
-        val id: String,
-        val name: LocalizedText,
-        val minGrade: Int,
-        val baseDifficulty: Int,
-        val stars: List<StarTemplate>,
-        val connections: List<Pair<String, String>>,
-        val fact: LocalizedText
-    )
-
-    private data class StarTemplate(
-        val id: String,
-        val name: String,
-        val x: Float,
-        val y: Float,
-        val brightness: Float = 1f
-    )
-
-    private val templates: List<Template> = listOf(
-        Template(
-            id = "cassiopeia",
-            name = LocalizedText(nl = "Cassiopeia", en = "Cassiopeia", fr = "Cassiopée"),
-            minGrade = 1,
-            baseDifficulty = 1,
-            stars = listOf(
-                StarTemplate("caph", "Caph", 0.10f, 0.56f, 0.95f),
-                StarTemplate("shedar", "Schedar", 0.29f, 0.35f, 1.00f),
-                StarTemplate("gamma-cas", "Gamma Cas", 0.47f, 0.58f, 0.90f),
-                StarTemplate("ruchbah", "Ruchbah", 0.66f, 0.38f, 0.80f),
-                StarTemplate("segin", "Segin", 0.86f, 0.56f, 0.75f)
-            ),
-            connections = listOf("caph" to "shedar", "shedar" to "gamma-cas", "gamma-cas" to "ruchbah", "ruchbah" to "segin"),
-            fact = LocalizedText(
-                nl = "Cassiopeia lijkt op een W aan de hemel.",
-                en = "Cassiopeia often looks like a W in the sky.",
-                fr = "Cassiopée ressemble souvent à un W dans le ciel."
-            )
-        ),
-        Template(
-            id = "pegasus-square",
-            name = LocalizedText(nl = "Pegasus", en = "Pegasus", fr = "Pégase"),
-            minGrade = 1,
-            baseDifficulty = 1,
-            stars = listOf(
-                StarTemplate("markab", "Markab", 0.24f, 0.28f, 0.90f),
-                StarTemplate("scheat", "Scheat", 0.24f, 0.70f, 0.88f),
-                StarTemplate("alpheratz", "Alpheratz", 0.70f, 0.70f, 1.00f),
-                StarTemplate("algenib", "Algenib", 0.70f, 0.28f, 0.92f)
-            ),
-            connections = listOf("markab" to "scheat", "scheat" to "alpheratz", "alpheratz" to "algenib", "algenib" to "markab"),
-            fact = LocalizedText(
-                nl = "Pegasus is het gevleugelde paard uit de Griekse mythologie.",
-                en = "Pegasus is the winged horse from Greek mythology.",
-                fr = "Pégase est le cheval ailé de la mythologie grecque."
-            )
-        ),
-        Template(
-            id = "crux",
-            name = LocalizedText(nl = "Crux", en = "Crux", fr = "Croix du Sud"),
-            minGrade = 1,
-            baseDifficulty = 1,
-            stars = listOf(
-                StarTemplate("gacrux", "Gacrux", 0.50f, 0.17f, 0.95f),
-                StarTemplate("acrux", "Acrux", 0.50f, 0.80f, 1.00f),
-                StarTemplate("mimosa", "Mimosa", 0.31f, 0.48f, 0.95f),
-                StarTemplate("delta-crucis", "Delta Crucis", 0.70f, 0.48f, 0.75f)
-            ),
-            connections = listOf("gacrux" to "acrux", "mimosa" to "delta-crucis"),
-            fact = LocalizedText(
-                nl = "Crux wordt ook het Zuiderkruis genoemd.",
-                en = "Crux is also called the Southern Cross.",
-                fr = "Crux est aussi appelée la Croix du Sud."
-            )
-        ),
-        Template(
-            id = "ursa-major-dipper",
-            name = LocalizedText(nl = "Grote Beer", en = "Ursa Major", fr = "Grande Ourse"),
-            minGrade = 2,
-            baseDifficulty = 2,
-            stars = listOf(
-                StarTemplate("dubhe", "Dubhe", 0.18f, 0.20f, 1.00f),
-                StarTemplate("merak", "Merak", 0.20f, 0.45f, 0.94f),
-                StarTemplate("phecda", "Phecda", 0.38f, 0.54f, 0.88f),
-                StarTemplate("megrez", "Megrez", 0.50f, 0.36f, 0.70f),
-                StarTemplate("alioth", "Alioth", 0.64f, 0.32f, 0.97f),
-                StarTemplate("mizar", "Mizar", 0.78f, 0.26f, 0.95f),
-                StarTemplate("alkaid", "Alkaid", 0.91f, 0.18f, 0.94f)
-            ),
-            connections = listOf("dubhe" to "merak", "merak" to "phecda", "phecda" to "megrez", "megrez" to "alioth", "alioth" to "mizar", "mizar" to "alkaid"),
-            fact = LocalizedText(
-                nl = "Deze zeven sterren zijn de bekende steelpan in de Grote Beer.",
-                en = "These seven stars are the well-known Big Dipper pattern inside Ursa Major.",
-                fr = "Ces sept étoiles forment le célèbre chariot dans la Grande Ourse."
-            )
-        ),
-        Template(
-            id = "orion",
-            name = LocalizedText(nl = "Orion", en = "Orion", fr = "Orion"),
-            minGrade = 2,
-            baseDifficulty = 2,
-            stars = listOf(
-                StarTemplate("betelgeuse", "Betelgeuse", 0.28f, 0.18f, 1.00f),
-                StarTemplate("bellatrix", "Bellatrix", 0.58f, 0.21f, 0.92f),
-                StarTemplate("mintaka", "Mintaka", 0.58f, 0.43f, 0.82f),
-                StarTemplate("rigel", "Rigel", 0.64f, 0.78f, 1.00f),
-                StarTemplate("saiph", "Saiph", 0.34f, 0.78f, 0.88f),
-                StarTemplate("alnitak", "Alnitak", 0.34f, 0.44f, 0.86f),
-                StarTemplate("alnilam", "Alnilam", 0.46f, 0.47f, 0.90f)
-            ),
-            connections = listOf(
-                "betelgeuse" to "bellatrix", "bellatrix" to "mintaka", "mintaka" to "rigel", "rigel" to "saiph",
-                "saiph" to "alnitak", "alnitak" to "betelgeuse", "alnitak" to "alnilam", "alnilam" to "mintaka"
-            ),
-            fact = LocalizedText(
-                nl = "De drie sterren op een rij vormen de Gordel van Orion.",
-                en = "The three stars in a row form Orion's Belt.",
-                fr = "Les trois étoiles alignées forment la ceinture d'Orion."
-            )
-        ),
-        Template(
-            id = "cygnus",
-            name = LocalizedText(nl = "Zwaan", en = "Cygnus", fr = "Cygne"),
-            minGrade = 2,
-            baseDifficulty = 2,
-            stars = listOf(
-                StarTemplate("deneb", "Deneb", 0.50f, 0.13f, 1.00f),
-                StarTemplate("sadr", "Sadr", 0.50f, 0.40f, 0.94f),
-                StarTemplate("albireo", "Albireo", 0.50f, 0.80f, 0.85f),
-                StarTemplate("gienah", "Gienah", 0.27f, 0.46f, 0.82f),
-                StarTemplate("delta-cygni", "Delta Cygni", 0.74f, 0.46f, 0.80f)
-            ),
-            connections = listOf("deneb" to "sadr", "sadr" to "albireo", "gienah" to "sadr", "sadr" to "delta-cygni"),
-            fact = LocalizedText(
-                nl = "Cygnus wordt ook het Noorderkruis genoemd.",
-                en = "Cygnus is also called the Northern Cross.",
-                fr = "Le Cygne est aussi appelé la Croix du Nord."
-            )
-        ),
-        Template(
-            id = "lyra",
-            name = LocalizedText(nl = "Lier", en = "Lyra", fr = "Lyre"),
-            minGrade = 2,
-            baseDifficulty = 2,
-            stars = listOf(
-                StarTemplate("vega", "Vega", 0.50f, 0.15f, 1.00f),
-                StarTemplate("epsilon-lyrae", "Epsilon Lyrae", 0.37f, 0.35f, 0.72f),
-                StarTemplate("zeta-lyrae", "Zeta Lyrae", 0.62f, 0.35f, 0.76f),
-                StarTemplate("beta-lyrae", "Sheliak", 0.66f, 0.68f, 0.82f),
-                StarTemplate("gamma-lyrae", "Sulafat", 0.35f, 0.68f, 0.80f)
-            ),
-            connections = listOf("vega" to "epsilon-lyrae", "vega" to "zeta-lyrae", "epsilon-lyrae" to "gamma-lyrae", "gamma-lyrae" to "beta-lyrae", "beta-lyrae" to "zeta-lyrae"),
-            fact = LocalizedText(
-                nl = "Vega is de heldere ster bovenaan de Lier.",
-                en = "Vega is the bright star at the top of Lyra.",
-                fr = "Véga est l'étoile brillante en haut de la Lyre."
-            )
-        ),
-        Template(
-            id = "leo",
-            name = LocalizedText(nl = "Leeuw", en = "Leo", fr = "Lion"),
-            minGrade = 3,
-            baseDifficulty = 3,
-            stars = listOf(
-                StarTemplate("regulus", "Regulus", 0.24f, 0.60f, 1.00f),
-                StarTemplate("algieba", "Algieba", 0.35f, 0.43f, 0.95f),
-                StarTemplate("adhafera", "Adhafera", 0.46f, 0.31f, 0.78f),
-                StarTemplate("rasalas", "Rasalas", 0.58f, 0.27f, 0.74f),
-                StarTemplate("chertan", "Chertan", 0.58f, 0.61f, 0.76f),
-                StarTemplate("zosma", "Zosma", 0.69f, 0.50f, 0.85f),
-                StarTemplate("denebola", "Denebola", 0.86f, 0.43f, 0.88f)
-            ),
-            connections = listOf("regulus" to "algieba", "algieba" to "adhafera", "adhafera" to "rasalas", "regulus" to "chertan", "chertan" to "zosma", "zosma" to "denebola"),
-            fact = LocalizedText(
-                nl = "Leo is een van de sterrenbeelden van de dierenriem.",
-                en = "Leo is one of the zodiac constellations.",
-                fr = "Le Lion est une des constellations du zodiaque."
-            )
-        ),
-        Template(
-            id = "aquila",
-            name = LocalizedText(nl = "Arend", en = "Aquila", fr = "Aigle"),
-            minGrade = 3,
-            baseDifficulty = 3,
-            stars = listOf(
-                StarTemplate("altair", "Altair", 0.50f, 0.43f, 1.00f),
-                StarTemplate("tarazed", "Tarazed", 0.43f, 0.29f, 0.82f),
-                StarTemplate("alshain", "Alshain", 0.58f, 0.57f, 0.78f),
-                StarTemplate("delta-aquilae", "Delta Aquilae", 0.35f, 0.64f, 0.70f),
-                StarTemplate("zeta-aquilae", "Zeta Aquilae", 0.68f, 0.22f, 0.72f)
-            ),
-            connections = listOf("tarazed" to "altair", "altair" to "alshain", "altair" to "delta-aquilae", "altair" to "zeta-aquilae"),
-            fact = LocalizedText(
-                nl = "Altair is de helderste ster van Aquila.",
-                en = "Altair is the brightest star in Aquila.",
-                fr = "Altaïr est l'étoile la plus brillante de l'Aigle."
-            )
-        ),
-        Template(
-            id = "scorpius",
-            name = LocalizedText(nl = "Schorpioen", en = "Scorpius", fr = "Scorpion"),
-            minGrade = 4,
-            baseDifficulty = 3,
-            stars = listOf(
-                StarTemplate("graffias", "Graffias", 0.21f, 0.18f, 0.78f),
-                StarTemplate("dschubba", "Dschubba", 0.36f, 0.22f, 0.84f),
-                StarTemplate("antares", "Antares", 0.31f, 0.38f, 1.00f),
-                StarTemplate("jabbah", "Jabbah", 0.46f, 0.43f, 0.72f),
-                StarTemplate("sargas", "Sargas", 0.55f, 0.57f, 0.83f),
-                StarTemplate("lesath", "Lesath", 0.73f, 0.70f, 0.77f),
-                StarTemplate("shaula", "Shaula", 0.82f, 0.78f, 0.92f)
-            ),
-            connections = listOf("graffias" to "dschubba", "dschubba" to "antares", "antares" to "jabbah", "jabbah" to "sargas", "sargas" to "lesath", "lesath" to "shaula"),
-            fact = LocalizedText(
-                nl = "Antares is een opvallend rode ster in Scorpius.",
-                en = "Antares is a striking red-looking star in Scorpius.",
-                fr = "Antarès est une étoile à l'aspect rouge dans le Scorpion."
-            )
-        )
-    )
 }
