@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.saikono.poincare.model.*
 import be.saikono.poincare.ui.components.DifficultyStars
+import be.saikono.poincare.ui.missionCompleteGoBackText
 import be.saikono.poincare.ui.components.LetterTracingComponent
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.localizedExerciseText
@@ -159,7 +160,7 @@ fun WritingContent(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
+                val buttonText = if (uiState.isFinished) missionCompleteGoBackText(uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
                 Button(
                     onClick = if (uiState.isFinished) onNavigateBack else onNextExercise,
                     enabled = uiState.isComplete || uiState.isFinished,
@@ -238,7 +239,8 @@ private fun WritingAnswerArea(
     isLandscape: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    val options = exercise.localizedOptions(locale)
+    // POINCARE_REPAIR_V29: stable-answer-shuffle
+    val options = remember(exercise.id, locale) { exercise.localizedOptions(locale).shuffled() }
     if (options.isNotEmpty()) {
         Column(modifier = modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             options.chunked(if (isLandscape) 2 else 1).forEach { rowOptions ->

@@ -20,6 +20,8 @@ class AudioService(
     private val profileRepository: ProfileRepository? = null
 ) {
     private val ttsVoiceService = SystemTtsVoiceService(context)
+    // POINCARE_REPAIR_V31: manifest-backed Belgian-Dutch neural audio
+    private val neuralSpeechAssets = NeuralSpeechAssetStore(context)
     private var mediaPlayer: MediaPlayer? = null
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
@@ -54,32 +56,78 @@ class AudioService(
         }
     }
 
+    // POINCARE_REPAIR_V31: neural NL-BE first, system TTS fallback
     fun speak(text: String, locale: String) {
         scope.launch {
+            val normalizedText = normalizeSpeechText(text)
             try {
                 val profileId = settingsDataStore.selectedProfileId.first()
                 val profile = profileId?.let { profileRepository?.getProfileById(it)?.first() }
                 val selectedLocale = locale.ifBlank {
-                    profile?.speechLanguage
-                        ?: profile?.exerciseLanguage
-                        ?: profile?.appLanguage
-                        ?: "nl-BE"
+                    profile?.speechLanguage ?: profile?.exerciseLanguage ?: profile?.appLanguage ?: "nl-BE"
                 }
                 if (profileId != null) {
                     val settings = settingsDataStore.getVoiceSettings(profileId, selectedLocale).first()
                     applyVoiceSettings(settings)
                 } else {
-                    ttsVoiceService.setPitch(1.1f)
-                    ttsVoiceService.setSpeechRate(1.1f)
+                    ttsVoiceService.setPitch(1.0f)
+                    ttsVoiceService.setSpeechRate(1.0f)
                 }
-                val volume = settingsDataStore.animationSettings.first().voiceVolume
-                ttsVoiceService.speak(normalizeSpeechText(text), selectedLocale, volume)
+                val volume = settingsDataStore.animationSettings.first().voiceVolume.coerceIn(0f, 1f)
+                if (!playNeuralSpeechIfAvailable(normalizedText, selectedLocale, volume)) {
+                    ttsVoiceService.speak(normalizedText, selectedLocale, volume)
+                }
             } catch (e: Exception) {
-                ttsVoiceService.setPitch(1.1f)
-                ttsVoiceService.setSpeechRate(1.1f)
-                ttsVoiceService.speak(normalizeSpeechText(text), locale)
+                val safeLocale = locale.ifBlank { "nl-BE" }
+                ttsVoiceService.setPitch(1.0f)
+                ttsVoiceService.setSpeechRate(1.0f)
+                if (!playNeuralSpeechIfAvailable(normalizedText, safeLocale, 1.0f)) {
+                    ttsVoiceService.speak(normalizedText, safeLocale)
+                }
             }
         }
+    }
+
+    private fun playNeuralSpeechIfAvailable(text: String, locale: String, volume: Float): Boolean {
+        val assetPath = neuralSpeechAssets.findAsset(locale, text) ?: return false
+        return playBundledAsset(assetPath, volume)
+    }
+
+    private fun playBundledAsset(assetPath: String, volume: Float): Boolean = runCatching {
+        ttsVoiceService.stop()
+        mediaPlayer?.release()
+        val player = MediaPlayer()
+        val descriptor = runCatching { context.assets.openFd(assetPath) }.getOrNull()
+        if (descriptor != null) {
+            descriptor.use {
+                player.setDataSource(it.fileDescriptor, it.startOffset, it.length)
+            }
+        } else {
+            val extension = assetPath.substringAfterLast('.', "bin")
+            val cacheFile = java.io.File(
+                context.cacheDir,
+                "poincare_tts_${assetPath.hashCode()}.$extension"
+            )
+            if (!cacheFile.exists() || cacheFile.length() == 0L) {
+                context.assets.open(assetPath).use { input ->
+                    cacheFile.outputStream().use { output -> input.copyTo(output) }
+                }
+            }
+            player.setDataSource(cacheFile.absolutePath)
+        }
+        player.setVolume(volume.coerceIn(0f, 1f), volume.coerceIn(0f, 1f))
+        player.prepare()
+        mediaPlayer = player
+        player.setOnCompletionListener { completed ->
+            completed.release()
+            if (mediaPlayer === completed) mediaPlayer = null
+        }
+        player.start()
+        true
+    }.getOrElse {
+        mediaPlayer?.release()
+        mediaPlayer = null
+        false
     }
 
     private fun normalizeSpeechText(text: String): String = text
@@ -102,8 +150,8 @@ class AudioService(
         } else {
             ttsVoiceService.clearVoiceSelection()
         }
-        ttsVoiceService.setPitch(settings.pitch.takeIf { it > 0f } ?: 1.1f)
-        ttsVoiceService.setSpeechRate(settings.rate.takeIf { it > 0f } ?: 1.1f)
+        ttsVoiceService.setPitch(settings.pitch.takeIf { it > 0f } ?: 1.0f)
+        ttsVoiceService.setSpeechRate(settings.rate.takeIf { it > 0f } ?: 1.0f)
     }
 
     fun playSuccess() {

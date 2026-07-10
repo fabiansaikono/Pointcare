@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import be.saikono.poincare.model.*
 import be.saikono.poincare.ui.components.DifficultyStars
+import be.saikono.poincare.ui.missionCompleteGoBackText
 import be.saikono.poincare.ui.components.TapToTranslateText
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.localizedExerciseText
@@ -141,7 +142,10 @@ fun ReadingContent(
                     when (exercise.inputMode) {
                         InputMode.LISTEN_AND_SELECT, InputMode.TAP_CHOICE -> {
                             LetterSoundRenderer(
-                                options = exercise.localizedOptions(uiState.exerciseLanguage),
+                                options = remember(exercise.id, uiState.exerciseLanguage) {
+                                    // POINCARE_REPAIR_V29: stable-answer-shuffle
+                                    exercise.localizedOptions(uiState.exerciseLanguage).shuffled()
+                                },
                                 selectedOption = uiState.selectedOption,
                                 isCorrect = uiState.isCorrect,
                                 isLandscape = isLandscape,
@@ -168,7 +172,7 @@ fun ReadingContent(
                 }
 
                 // Next Button
-                val buttonText = if (uiState.isFinished) localizedExerciseText("backToMap", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
+                val buttonText = if (uiState.isFinished) missionCompleteGoBackText(uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
                 val buttonColor = when {
                     uiState.isFinished -> PlanetGold
                     uiState.isCorrect == true -> PlanetGold

@@ -25,22 +25,24 @@ import be.saikono.poincare.ui.theme.DeepSpaceBlue
 import be.saikono.poincare.ui.theme.PlanetGold
 import be.saikono.poincare.ui.theme.StarWhite
 
+// POINCARE_REPAIR_V30: compact-number-pad
 @Composable
 fun CustomNumberPad(
     onNumberClick: (String) -> Unit,
     onDeleteClick: () -> Unit,
     onConfirmClick: () -> Unit,
     modifier: Modifier = Modifier,
-    hapticEnabled: Boolean = true
+    hapticEnabled: Boolean = true,
+    compact: Boolean = false
 ) {
     val haptic = LocalHapticFeedback.current
 
     Column(
         modifier = modifier
             .background(CockpitGray, shape = RoundedCornerShape(24.dp))
-            .padding(16.dp)
+            .padding(if (compact) 10.dp else 16.dp)
             .semantics { contentDescription = "Getallen toetsenbord" },
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(if (compact) 8.dp else 12.dp)
     ) {
         val rows = listOf(
             listOf("1", "2", "3"),
@@ -52,7 +54,7 @@ fun CustomNumberPad(
         rows.forEach { row ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(if (compact) 8.dp else 12.dp)
             ) {
                 row.forEach { item ->
                     NumberButton(
@@ -67,7 +69,8 @@ fun CustomNumberPad(
                                 else -> onNumberClick(item)
                             }
                         },
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        compact = compact
                     )
                 }
             }
@@ -79,7 +82,8 @@ fun CustomNumberPad(
 fun NumberButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    compact: Boolean = false
 ) {
     val isAction = text == "DEL" || text == "OK"
     val backgroundColor = if (isAction && text == "OK") PlanetGold else Color.White.copy(alpha = 0.1f)
@@ -87,8 +91,8 @@ fun NumberButton(
 
     Box(
         modifier = modifier
-            .heightIn(min = 60.dp)
-            .aspectRatio(1.5f)
+            .heightIn(min = if (compact) 44.dp else 60.dp)
+            .aspectRatio(if (compact) 1.9f else 1.5f)
             .clip(RoundedCornerShape(16.dp))
             .background(backgroundColor)
             .clickable(onClickLabel = when(text) {

@@ -193,29 +193,31 @@ fun SubCategorySelectionScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-            Text(
-                text = localizedUiText("chooseMission", appLanguage),
-                style = MaterialTheme.typography.headlineMedium,
-                color = StarWhite,
-                textAlign = TextAlign.Center
-            )
+            // POINCARE_REPAIR_V30: no-choose-mission-title
 
-            CategoryProgressBar(categoryProgress)
+            if (domain != LearningDomain.PUZZLE.name) {
 
+                CategoryProgressBar(categoryProgress)
+
+            } // POINCARE_REPAIR_V29: puzzle-no-progress
             Spacer(modifier = Modifier.height(20.dp))
 
             BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-                val minTileSize = if (maxHeight < 480.dp) 96.dp else 120.dp
+                // POINCARE_REPAIR_V30: landscape-4x2-grid
+
+                val isLandscapeGrid = maxWidth > maxHeight
+
+                val tileAspectRatio = if (isLandscapeGrid) 1.15f else 1f
                 LazyVerticalGrid(
-                    columns = GridCells.Adaptive(minSize = minTileSize),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    columns = if (isLandscapeGrid) GridCells.Fixed(4) else GridCells.Adaptive(minSize = 120.dp),
+                    horizontalArrangement = Arrangement.spacedBy(if (isLandscapeGrid) 14.dp else 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(if (isLandscapeGrid) 12.dp else 16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(subCategories) { sub ->
-                        SubCategoryCard(sub.localized(appLanguage), completedCount = subcategoryCompletions[sub.id] ?: 0, enabled = hasExercisesForGrade, locale = appLanguage) {
+                        SubCategoryCard(sub.localized(appLanguage), completedCount = subcategoryCompletions[sub.id] ?: 0, enabled = hasExercisesForGrade, locale = appLanguage, showProgress = domain != LearningDomain.PUZZLE.name, tileAspectRatio = tileAspectRatio) {
                             when {
                                 domain == LearningDomain.PUZZLE.name -> pendingSubcategory = sub
                                 articleForSubcategory(sub.id, articles) != null -> pendingMissionChoice = sub
@@ -346,11 +348,11 @@ private fun CategoryProgressBar(progress: LevelProgress) {
 }
 
 @Composable
-fun SubCategoryCard(sub: SubCategory, completedCount: Int, enabled: Boolean, locale: String, onClick: () -> Unit) {
+fun SubCategoryCard(sub: SubCategory, completedCount: Int, enabled: Boolean, locale: String, showProgress: Boolean = true, tileAspectRatio: Float = 1f, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1f)
+            .aspectRatio(tileAspectRatio)
             .clip(RoundedCornerShape(18.dp))
             .alpha(if (enabled) 1f else 0.4f)
             .clickable(enabled = enabled) { onClick() },
@@ -377,13 +379,32 @@ fun SubCategoryCard(sub: SubCategory, completedCount: Int, enabled: Boolean, loc
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = sub.exerciseCount?.let { "$completedCount/$it ${localizedUiText("completed", locale)}" } ?: "$completedCount ${localizedUiText("completed", locale)}",
-                style = MaterialTheme.typography.labelMedium,
-                color = if (enabled) PlanetGold else StarWhite.copy(alpha = 0.45f),
-                textAlign = TextAlign.Center
-            )
+            if (showProgress) {
+                Spacer(modifier = Modifier.height(4.dp))
+                // POINCARE_WRITTEN_MATH_OPEN_ENDED_PROGRESS
+                val openEndedGenerated = sub.id in setOf("addition", "subtraction", "multiplication", "division")
+                val total = sub.exerciseCount.takeUnless { openEndedGenerated }
+                val cycleCompleted = if (total != null && total > 0 && completedCount > 0) {
+                    ((completedCount - 1) % total) + 1
+                } else completedCount
+                Text(
+                    text = total?.let { "$cycleCompleted/$it ${localizedUiText("completed", locale)}" }
+                        ?: "$cycleCompleted ${localizedUiText("completed", locale)}",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = if (enabled) PlanetGold else StarWhite.copy(alpha = 0.45f),
+                    textAlign = TextAlign.Center
+                )
+                total?.takeIf { it > 0 }?.let { exerciseTotal ->
+                    Spacer(modifier = Modifier.height(8.dp))
+                    LinearProgressIndicator(
+                        progress = { (cycleCompleted.toFloat() / exerciseTotal.toFloat()).coerceIn(0f, 1f) },
+                        color = PlanetBlue,
+                        trackColor = if (completedCount > exerciseTotal) PlanetBlue.copy(alpha = 0.5f)
+                            else Color.White.copy(alpha = 0.12f),
+                        modifier = Modifier.fillMaxWidth(0.72f).height(7.dp).clip(RoundedCornerShape(4.dp))
+                    )
+                }
+            } // POINCARE_REPAIR_V29: cycle-progress
         }
     }
 }
@@ -498,13 +519,13 @@ fun getSubCategoriesForDomain(domain: String): List<SubCategory> {
             SubCategory("grammar", "Grammatica", R.drawable.ic_topic_grammar)
         )
         LearningDomain.PUZZLE.name -> listOf(
-            SubCategory("sudoku", "Sudoku", R.drawable.ic_topic_sudoku, null),
-            SubCategory("math-crosswords", "Rekenkruiswoord", R.drawable.ic_topic_math_crosswords, null),
+            SubCategory("sudoku", "Sudoku", R.drawable.ic_puzzle_sudoku_mono, null),
+            SubCategory("math-crosswords", "Rekenkruiswoord", R.drawable.ic_puzzle_math_crossword_mono, null),
 
- SubCategory("word-seeker", "Word seeker", R.drawable.ic_topic_word_seeker, null), SubCategory("mothership-dock", "Moederschip", R.drawable.ic_theme_space, null), SubCategory("galaxycon", "Galaxycon", R.drawable.ic_theme_space, null),
-            SubCategory("calculator-puzzle", "Rekenmachine", R.drawable.ic_topic_mixed_practice, null),
-            SubCategory("constellations", "Constellations", R.drawable.ic_theme_space, null),
-                SubCategory("orbit-builder", "Orbitbouwer", R.drawable.ic_theme_space, null)
+ SubCategory("word-seeker", "Word seeker", R.drawable.ic_puzzle_word_seeker_mono, null), SubCategory("mothership-dock", "Moederschip", R.drawable.ic_puzzle_mothership_mono, null), SubCategory("galaxycon", "Galaxycon", R.drawable.ic_puzzle_galaxycon_mono, null),
+            SubCategory("calculator-puzzle", "Rekenmachine", R.drawable.ic_puzzle_calculator_mono, null),
+            SubCategory("constellations", "Constellations", R.drawable.ic_puzzle_constellations_mono, null),
+                SubCategory("orbit-builder", "Orbitbouwer", R.drawable.ic_puzzle_orbit_builder_mono, null)
         )
         else -> emptyList()
     }

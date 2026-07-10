@@ -47,6 +47,11 @@ class WritingViewModel(
     private var selectedDifficultyStars: Int? = null
     private var latestProfile: ChildProfile? = null
     private var hasContentRequest = false
+    // POINCARE_REPAIR_V29: mission-cycle
+    private var pendingExerciseIds: MutableSet<String> = mutableSetOf()
+    private val retryExercises: MutableList<ExerciseContent> = mutableListOf()
+    private var firstAttemptForCurrent = true
+    private var missionCycleId: String = UUID.randomUUID().toString()
 
     init {
         observeProfile()
@@ -99,8 +104,10 @@ class WritingViewModel(
                     domainExercises.filter { !it.isUnassignedExercise() }
                 }
             }.orEmpty()
-
-            exercises = orderUnfinishedFirst(loadedExercises, profile.id)
+            exercises = loadedExercises.shuffled()
+            pendingExerciseIds = exercises.map { it.id }.toMutableSet()
+            retryExercises.clear()
+            missionCycleId = UUID.randomUUID().toString()
             if (exercises.isNotEmpty()) {
                 startExercise(0)
             } else {
@@ -146,6 +153,7 @@ class WritingViewModel(
     private fun startExercise(index: Int) {
         currentIndex = index
         startTime = System.currentTimeMillis()
+        firstAttemptForCurrent = true
         _uiState.update {
             it.copy(
                 currentExercise = exercises[index],
@@ -202,14 +210,29 @@ class WritingViewModel(
         val exercise = state.currentExercise ?: return
         val isCorrect = normalizeAnswer(answer) == normalizeAnswer(exercise.localizedAnswer(state.exerciseLanguage))
         val duration = System.currentTimeMillis() - startTime
+        val countsForProgress = registerAnswerOutcome(exercise, isCorrect)
         _uiState.update { it.copy(isCorrect = isCorrect, isWrong = !isCorrect, showFeedback = true, isComplete = isCorrect) }
         if (isCorrect) {
             audioService.playSuccess()
-            saveProgress(exercise, duration, true)
+            saveProgress(exercise, duration, countsForProgress, attemptCorrect = true)
         } else {
             audioService.playFailure()
-            saveProgress(exercise, duration, false)
+            saveProgress(exercise, duration, countsForProgress = false, attemptCorrect = false)
         }
+    }
+
+    private fun registerAnswerOutcome(exercise: ExerciseContent, isCorrect: Boolean): Boolean {
+        if (!isCorrect) {
+            firstAttemptForCurrent = false
+            return false
+        }
+        val countsForProgress = firstAttemptForCurrent && exercise.id in pendingExerciseIds
+        if (countsForProgress) {
+            pendingExerciseIds.remove(exercise.id)
+        } else if (exercise.id in pendingExerciseIds && retryExercises.none { it.id == exercise.id }) {
+            retryExercises += exercise
+        }
+        return countsForProgress
     }
 
     private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
@@ -243,11 +266,17 @@ class WritingViewModel(
         val exercise = state.currentExercise ?: return
         val duration = System.currentTimeMillis() - startTime
         _uiState.update { it.copy(isComplete = true) }
+        pendingExerciseIds.remove(exercise.id)
         audioService.playSuccess()
-        saveProgress(exercise, duration, true)
+        saveProgress(exercise, duration, countsForProgress = true, attemptCorrect = true)
     }
 
-    private fun saveProgress(exercise: ExerciseContent, durationMs: Long, correct: Boolean) {
+    private fun saveProgress(
+        exercise: ExerciseContent,
+        durationMs: Long,
+        countsForProgress: Boolean,
+        attemptCorrect: Boolean
+    ) {
         val profileId = _uiState.value.currentProfileId ?: return
         viewModelScope.launch {
             val event = ProgressEvent(
@@ -257,14 +286,20 @@ class WritingViewModel(
                 domain = exercise.domain,
                 skill = exercise.skill,
                 timestamp = System.currentTimeMillis(),
-                answerCorrect = correct,
+                answerCorrect = countsForProgress,
                 responseTimeMs = durationMs,
-                rewardStampsEarned = missionPointsFor(exercise, correct),
+                rewardStampsEarned = missionPointsFor(exercise, countsForProgress),
                 metadata = mapOf(
                     "progressKey" to (exercise.data["progressKey"] ?: exercise.id),
                     "subcategoryId" to (exercise.data["subcategoryId"] ?: ""),
                     "grade" to (exercise.data["grade"] ?: (exercise.level.toGrade()?.toString() ?: "")),
-                    "progressState" to if (correct) "completed" else "retry_wrong"
+                    "progressState" to when {
+                        countsForProgress -> "completed_first_try"
+                        attemptCorrect -> "retry_correct_not_first_try"
+                        else -> "retry_wrong"
+                    },
+                    "missionCycleId" to missionCycleId,
+                    "firstTry" to countsForProgress.toString()
                 )
             )
             progressRepository.addProgress(event)
@@ -273,11 +308,26 @@ class WritingViewModel(
     }
 
     fun nextExercise() {
+        if (pendingExerciseIds.isEmpty()) {
+            _uiState.update { it.copy(isFinished = true, isLoading = false) }
+            return
+        }
+
         if (currentIndex + 1 < exercises.size) {
             _uiState.update { it.copy(isLoading = true) }
             startExercise(currentIndex + 1)
-        } else if (exercises.isNotEmpty()) {
-            exercises = exercises.shuffled()
+            return
+        }
+
+        exercises = retryExercises
+            .distinctBy { it.id }
+            .filter { it.id in pendingExerciseIds }
+            .shuffled()
+        retryExercises.clear()
+        currentIndex = 0
+        if (exercises.isEmpty()) {
+            _uiState.update { it.copy(isFinished = true, isLoading = false) }
+        } else {
             _uiState.update { it.copy(isLoading = true) }
             startExercise(0)
         }

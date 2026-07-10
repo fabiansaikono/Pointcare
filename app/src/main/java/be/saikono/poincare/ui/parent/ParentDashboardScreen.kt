@@ -1,5 +1,7 @@
 package be.saikono.poincare.ui.parent
 
+// POINCARE_REPAIR_V29: parent-localization
+
 import android.speech.tts.Voice
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -164,7 +166,7 @@ fun ParentDashboardContent(
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(
-                    text = "Ouder Dashboard",
+                    text = parentText("dashboard"),
                     style = MaterialTheme.typography.titleLarge,
                     color = StarWhite
                 )
@@ -248,11 +250,10 @@ fun ProfileSettingsSection(
             containerColor = PlanetGold.copy(alpha = 0.85f),
             titleContentColor = DeepSpaceBlue,
             textContentColor = DeepSpaceBlue,
-            title = { Text("Profiel verwijderen") },
+            title = { Text(parentText("deleteProfileTitle")) },
             text = {
                 Text(
-                    "Weet je zeker dat je het account van ${profile.name} wilt verwijderen? " +
-                            "Dit kan niet ongedaan worden gemaakt."
+                    parentDeleteConfirmation(profile.name)
                 )
             },
             confirmButton = {
@@ -266,7 +267,7 @@ fun ProfileSettingsSection(
                         contentColor = PlanetGold
                     )
                 ) {
-                    Text("Verwijderen")
+                    Text(parentText("delete"))
                 }
             },
             dismissButton = {
@@ -274,18 +275,18 @@ fun ProfileSettingsSection(
                     onClick = { showDeleteConfirmation = false },
                     colors = ButtonDefaults.textButtonColors(contentColor = DeepSpaceBlue)
                 ) {
-                    Text("Annuleren")
+                    Text(parentText("cancel"))
                 }
             }
         )
     }
 
-    DashboardCard(title = "Profiel Instellingen") {
+    DashboardCard(title = parentText("profileSettings")) {
         EditableSettingTextField(
             value = nameText,
             onValueChange = { nameText = it },
             onSave = { if (nameText.isNotBlank()) onUpdateName(nameText.trim()) },
-            label = "Naam van de astronaut",
+            label = parentText("astronautName"),
             contentDescription = "Naam van de kind-astronaut"
         )
 
@@ -295,24 +296,24 @@ fun ProfileSettingsSection(
             value = birthYearText,
             onValueChange = { value -> birthYearText = value.filter { it.isDigit() }.take(4) },
             onSave = { birthYearText.toIntOrNull()?.let(onUpdateBirthYear) },
-            label = "Geboortejaar",
+            label = parentText("birthYear"),
             contentDescription = "Geboortejaar van de astronaut"
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Opleidings-niveaus",
+            text = parentText("educationLevels"),
             style = MaterialTheme.typography.titleSmall,
             color = StarWhite
         )
 
-        DomainLevelSelector("Lezen", LearningDomain.READING, profile.levelFor(LearningDomain.READING), onUpdateLevel)
-        DomainLevelSelector("Schrijven", LearningDomain.WRITING, profile.levelFor(LearningDomain.WRITING), onUpdateLevel)
-        DomainLevelSelector("Wiskunde", LearningDomain.MATH, profile.levelFor(LearningDomain.MATH), onUpdateLevel)
-        DomainLevelSelector("Meetkunde", LearningDomain.GEOMETRY, profile.levelFor(LearningDomain.GEOMETRY), onUpdateLevel)
-        DomainLevelSelector("Wereldkennis", LearningDomain.WORLD_KNOWLEDGE, profile.levelFor(LearningDomain.WORLD_KNOWLEDGE), onUpdateLevel)
-        DomainLevelSelector("Puzzels", LearningDomain.PUZZLE, profile.levelFor(LearningDomain.PUZZLE), onUpdateLevel)
+        DomainLevelSelector(parentText("reading"), LearningDomain.READING, profile.levelFor(LearningDomain.READING), onUpdateLevel)
+        DomainLevelSelector(parentText("writing"), LearningDomain.WRITING, profile.levelFor(LearningDomain.WRITING), onUpdateLevel)
+        DomainLevelSelector(parentText("math"), LearningDomain.MATH, profile.levelFor(LearningDomain.MATH), onUpdateLevel)
+        DomainLevelSelector(parentText("geometry"), LearningDomain.GEOMETRY, profile.levelFor(LearningDomain.GEOMETRY), onUpdateLevel)
+        DomainLevelSelector(parentText("worldKnowledge"), LearningDomain.WORLD_KNOWLEDGE, profile.levelFor(LearningDomain.WORLD_KNOWLEDGE), onUpdateLevel)
+        DomainLevelSelector(parentText("puzzles"), LearningDomain.PUZZLE, profile.levelFor(LearningDomain.PUZZLE), onUpdateLevel)
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -322,7 +323,7 @@ fun ProfileSettingsSection(
             modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
         ) {
             Text(
-                text = "Gemengde extra oefeningen tonen",
+                text = parentText("showMixedExercises"),
                 color = StarWhite,
                 modifier = Modifier.weight(1f).padding(end = 12.dp)
             )
@@ -337,7 +338,7 @@ fun ProfileSettingsSection(
         }
 
         Text(
-            text = "Deze oefeningen kunnen punten geven, maar tellen niet mee voor voortgang per missie.",
+            text = parentText("mixedExerciseHint"),
             color = StarWhite.copy(alpha = 0.66f),
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.fillMaxWidth()
@@ -359,7 +360,7 @@ fun ProfileSettingsSection(
                 .padding(top = 16.dp)
                 .heightIn(min = 48.dp)
         ) {
-            Text(text = "Gifted Mode (Adaptief)", color = StarWhite)
+            Text(text = parentText("giftedMode"), color = StarWhite)
             Switch(
                 checked = profile.giftedModeEnabled,
                 onCheckedChange = onUpdateGiftedMode,
@@ -382,7 +383,7 @@ fun ProfileSettingsSection(
         ) {
             Icon(Icons.Default.Delete, contentDescription = null)
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Account verwijderen")
+            Text(parentText("deleteAccount"))
         }
     }
 }
@@ -394,19 +395,19 @@ fun CategoryAccessSection(
     onUpdateSubcategoryEnabled: (String, Boolean) -> Unit
 ) {
     Text(
-        text = "Categorieen",
+        text = parentText("categories"),
         style = MaterialTheme.typography.titleSmall,
         color = StarWhite
     )
     Spacer(modifier = Modifier.height(8.dp))
 
     val categories: List<Pair<LearningDomain, String>> = listOf(
-        LearningDomain.READING to "Communicatie",
-        LearningDomain.WRITING to "Schrijven",
-        LearningDomain.MATH to "Getallen",
-        LearningDomain.GEOMETRY to "Meetkunde",
-        LearningDomain.WORLD_KNOWLEDGE to "Wereldkennis",
-        LearningDomain.PUZZLE to "Puzzels"
+        LearningDomain.READING to parentText("communication"),
+        LearningDomain.WRITING to parentText("writing"),
+        LearningDomain.MATH to parentText("numbers"),
+        LearningDomain.GEOMETRY to parentText("geometry"),
+        LearningDomain.WORLD_KNOWLEDGE to parentText("worldKnowledge"),
+        LearningDomain.PUZZLE to parentText("puzzles")
     )
 
     categories.forEach { (domain, label) ->
@@ -464,7 +465,7 @@ fun CategoryAccessSection(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = subcategory.nameNl,
+                            text = parentSubcategoryText(subcategory.id, subcategory.nameNl),
                             color = StarWhite.copy(alpha = 0.78f),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier
@@ -593,8 +594,8 @@ fun LanguageSettingsSection(
 ) {
     if (profile == null) return
 
-    DashboardCard(title = "Taal Instellingen") {
-        LanguageRow("Taal", profile.appLanguage) { selectedLanguage ->
+    DashboardCard(title = parentText("languageSettings")) {
+        LanguageRow(parentText("language"), profile.appLanguage) { selectedLanguage ->
             onUpdateLanguage(LanguageLayer.ALL, selectedLanguage)
         }
     }
@@ -762,23 +763,23 @@ fun AnimationSettingsSection(
     settings: AnimationSettings,
     onUpdateSettings: (AnimationSettings) -> Unit
 ) {
-    DashboardCard(title = "App Instellingen") {
-        SettingsToggle("Animaties inschakelen", settings.animationsEnabled) {
+    DashboardCard(title = parentText("appSettings")) {
+        SettingsToggle(parentText("animations"), settings.animationsEnabled) {
             onUpdateSettings(settings.copy(animationsEnabled = it))
         }
-        SettingsToggle("Reduced Motion", settings.reducedMotionEnabled) {
+        SettingsToggle(parentText("reducedMotion"), settings.reducedMotionEnabled) {
             onUpdateSettings(settings.copy(reducedMotionEnabled = it))
         }
-        SettingsToggle("Geluidseffecten", settings.soundEffectsEnabled) {
+        SettingsToggle(parentText("soundEffects"), settings.soundEffectsEnabled) {
             onUpdateSettings(settings.copy(soundEffectsEnabled = it))
         }
-        SliderWithLabel("Volume geluidseffecten", settings.soundEffectsVolume, 0f..1f) {
+        SliderWithLabel(parentText("soundVolume"), settings.soundEffectsVolume, 0f..1f) {
             onUpdateSettings(settings.copy(soundEffectsVolume = it))
         }
-        SliderWithLabel("Volume stem", settings.voiceVolume, 0f..1f) {
+        SliderWithLabel(parentText("voiceVolume"), settings.voiceVolume, 0f..1f) {
             onUpdateSettings(settings.copy(voiceVolume = it))
         }
-        SettingsToggle("Haptische feedback", settings.hapticFeedbackEnabled) {
+        SettingsToggle(parentText("haptics"), settings.hapticFeedbackEnabled) {
             onUpdateSettings(settings.copy(hapticFeedbackEnabled = it))
         }
     }
@@ -815,7 +816,7 @@ fun SettingsToggle(
 
 @Composable
 fun SyncStatusSection(pendingCount: Int) {
-    DashboardCard(title = "Systeem Status") {
+    DashboardCard(title = parentText("systemStatus")) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -823,7 +824,7 @@ fun SyncStatusSection(pendingCount: Int) {
                 .fillMaxWidth()
                 .heightIn(min = 48.dp)
         ) {
-            Text(text = "Niet gesyncte missies", color = StarWhite)
+            Text(text = parentText("unsyncedMissions"), color = StarWhite)
             Text(
                 text = pendingCount.toString(),
                 color = if (pendingCount > 0) PlanetRed else Color.Green,

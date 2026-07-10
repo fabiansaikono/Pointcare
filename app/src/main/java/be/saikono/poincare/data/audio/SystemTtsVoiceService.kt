@@ -6,6 +6,7 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.Voice
 import java.util.Locale
 
+// POINCARE_REPAIR_V31: neutral system fallback settings
 class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
     private var tts: TextToSpeech? = null
     private var isInitialized = false
@@ -13,8 +14,8 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
     private var pendingSpeak: Triple<String, String, Float>? = null
     private var pendingVoiceId: String? = null
     private var explicitVoiceSelected = false
-    private var currentPitch: Float = 1.1f
-    private var currentSpeechRate: Float = 1.1f
+    private var currentPitch: Float = 1.0f
+    private var currentSpeechRate: Float = 1.0f
 
     init {
         try {
@@ -29,7 +30,7 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
             isInitialized = true
             pendingVoiceId?.let(::setVoice)
             tts?.setPitch(currentPitch)
-            tts?.setSpeechRate(currentSpeechRate)
+            tts?.setSpeechRate(0.90f)
             pendingSpeak?.let { (text, locale, volume) -> speak(text, locale, volume) }
             pendingSpeak = null
             onReady?.invoke()
@@ -83,7 +84,7 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
     fun setSpeechRate(rate: Float) {
         currentSpeechRate = rate
         if (!isInitialized) return
-        tts?.setSpeechRate(rate)
+        tts?.setSpeechRate(0.90f)
     }
 
     fun speak(text: String, locale: String, volume: Float = 1.0f) {
@@ -96,7 +97,7 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
             tts?.language = targetLocale
             if (!explicitVoiceSelected) selectBestVoice(targetLocale)
             tts?.setPitch(currentPitch)
-            tts?.setSpeechRate(currentSpeechRate)
+            tts?.setSpeechRate(0.90f)
             val params = Bundle().apply { putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume.coerceIn(0f, 1f)) }
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, null)
         } catch (e: Exception) {

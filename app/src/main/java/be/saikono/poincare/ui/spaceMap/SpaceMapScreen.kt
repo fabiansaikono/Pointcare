@@ -191,7 +191,7 @@ fun SpaceMapContent(
                             iconResId = R.drawable.icon_06_brain_network,
                             delayMillis = 1250,
                             enabled = profile?.puzzleLevel?.let { it != SkillLevel.NOT_APPLICABLE } == true && profile?.isMainCategoryEnabled(LearningDomain.PUZZLE) == true,
-                            progress = uiState.categoryProgress[LearningDomain.PUZZLE],
+                            progress = null, // POINCARE_REPAIR_V29: puzzle-no-progress
                             onClick = onNavigateToPuzzle
                         ) to LearningDomain.PUZZLE
                     ).map { it.first }
