@@ -3,12 +3,17 @@ package be.saikono.poincare.ui.reading
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import be.saikono.poincare.data.audio.AudioService
+import be.saikono.poincare.data.audit.AuditLog
 import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.data.sync.SyncManager
 import be.saikono.poincare.model.*
 import be.saikono.poincare.repository.ContentRepository
 import be.saikono.poincare.repository.ProfileRepository
 import be.saikono.poincare.repository.ProgressRepository
+import be.saikono.poincare.ui.writing.LanguageCurriculumExerciseFactory
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -24,7 +29,12 @@ data class ReadingUiState(
     val isLoading: Boolean = true,
     val currentProfileId: String? = null,
     val exerciseLanguage: String = "nl",
-    val supportLanguage: String = "nl"
+    val supportLanguage: String = "nl",
+    val dictationWrongKey: String? = null,
+    val dictationHintKey: String? = null,
+    val dictationHintSequence: Long = 0L,
+    val dictationRevealKeys: Set<String> = emptySet(),
+    val dictationWrongAttempts: Int = 0
 )
 
 @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
@@ -46,8 +56,13 @@ class ReadingViewModel(
     private var translationsUsed = 0
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
+    private var selectedWorldLevel: Int? = null
+    private var dictationInactivityJob: Job? = null
+    private var dictationWrongKeyJob: Job? = null
     private var latestProfile: ChildProfile? = null
     private var hasContentRequest = false
+    private var contentLoadJob: Job? = null
+    private var contentLoadGeneration = 0L
     // POINCARE_REPAIR_V29: mission-cycle
     private var pendingExerciseIds: MutableSet<String> = mutableSetOf()
     private val retryExercises: MutableList<ExerciseContent> = mutableListOf()
@@ -84,46 +99,118 @@ class ReadingViewModel(
     }
 
     private fun loadContentForProfile(profile: ChildProfile) {
-        viewModelScope.launch {
+        val requestGeneration = ++contentLoadGeneration
+        contentLoadJob?.cancel()
+        contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            val level = profile.readingLevel
-            val loadedExercises = level.toGrade()?.let { grade ->
-                val domainExercises = contentRepository.getExercises(LearningDomain.READING, level)
-                selectedSubcategoryId?.let { subcategoryId ->
-                    val subcategoryExercises = contentRepository.getExercises(
-                        subcategoryId = subcategoryId,
-                        grade = grade,
+            try {
+                val level = profile.readingLevel
+                val isDictation = selectedSubcategoryId == DICTATION_SUBCATEGORY
+                val isTranslation = TranslationExerciseFactory.supports(selectedSubcategoryId)
+                val isWorldKnowledge = selectedSubcategoryId in WORLD_SUBCATEGORIES
+                val loadedExercises = if (isDictation) {
+                    val grade = level.toGrade() ?: 1
+                    val sourceExercises = listOf(READING_SUBCATEGORY, LISTENING_SUBCATEGORY)
+                        .flatMap { sourceSubcategory ->
+                            contentRepository.getExercises(
+                                mainCategory = "reading",
+                                subcategoryId = sourceSubcategory,
+                                grade = grade,
+                                difficultyStars = selectedDifficultyStars
+                            ) + LanguageCurriculumExerciseFactory.build(
+                                domain = LearningDomain.READING,
+                                subcategoryId = sourceSubcategory,
+                                level = level,
+                                selectedDifficulty = selectedDifficultyStars
+                            )
+                        }
+                        .distinctBy { it.id }
+                    DictationExerciseFactory.build(
+                        level = level,
+                        exerciseLocale = profile.exerciseLanguage,
+                        selectedDifficulty = selectedDifficultyStars,
+                        sourceExercises = sourceExercises
+                    )
+                } else if (isTranslation) {
+                    val vocabularySources = (
+                        contentRepository.getExercises(LearningDomain.READING, profile.readingLevel) +
+                            contentRepository.getExercises(LearningDomain.WRITING, profile.writingLevel)
+                        ).filter { it.data["subcategoryId"] !in TRANSLATION_SUBCATEGORIES }
+                    TranslationExerciseFactory.build(
+                        subcategoryId = selectedSubcategoryId.orEmpty(),
+                        level = level,
+                        selectedDifficulty = selectedDifficultyStars,
+                        sourceExercises = vocabularySources
+                    )
+                } else if (isWorldKnowledge) {
+                    val worldGrade = selectedWorldLevel?.coerceIn(1, 6) ?: 1
+                    val themeId = selectedSubcategoryId.orEmpty()
+                    val xml = contentRepository.getExercises(
+                        mainCategory = "world-knowledge",
+                        subcategoryId = themeId,
+                        grade = worldGrade,
                         difficultyStars = selectedDifficultyStars
                     )
-                    if (profile.showUnassignedExercises) {
-                        (subcategoryExercises + domainExercises.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
-                    } else {
-                        subcategoryExercises
-                    }
-                } ?: if (profile.showUnassignedExercises) {
-                    domainExercises
+                    val generated = if (WorldKnowledgeExtraExerciseFactory.supports(themeId)) {
+                        WorldKnowledgeExtraExerciseFactory.build(themeId, worldGrade)
+                    } else emptyList()
+                    (xml + generated).distinctBy { it.id }
                 } else {
-                    domainExercises.filter { !it.isUnassignedExercise() }
+                    level.toGrade()?.let { grade ->
+                        val domainExercises = contentRepository.getExercises(LearningDomain.READING, level)
+                        selectedSubcategoryId?.let { subcategoryId ->
+                            val subcategoryExercises = contentRepository.getExercises(
+                                mainCategory = "reading",
+                                subcategoryId = subcategoryId,
+                                grade = grade,
+                                difficultyStars = selectedDifficultyStars
+                            )
+                            val supplemental = LanguageCurriculumExerciseFactory.build(
+                                domain = LearningDomain.READING,
+                                subcategoryId = subcategoryId,
+                                level = level,
+                                selectedDifficulty = selectedDifficultyStars
+                            )
+                            if (profile.showUnassignedExercises) {
+                                (subcategoryExercises + supplemental + domainExercises.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
+                            } else {
+                                (subcategoryExercises + supplemental).distinctBy { it.id }
+                            }
+                        } ?: if (profile.showUnassignedExercises) {
+                            domainExercises
+                        } else {
+                            domainExercises.filter { !it.isUnassignedExercise() }
+                        }
+                    }.orEmpty()
                 }
-            }.orEmpty()
-            exercises = loadedExercises.shuffled()
-            pendingExerciseIds = exercises.map { it.id }.toMutableSet()
-            retryExercises.clear()
-            missionCycleId = UUID.randomUUID().toString()
-            if (exercises.isNotEmpty()) {
-                startExercise(0)
-            } else {
-                _uiState.update {
-                    it.copy(
-                        currentExercise = null,
-                        selectedOption = null,
-                        builtWord = "",
-                        isCorrect = null,
-                        isWrong = false,
-                        isFinished = false,
-                        showFeedback = false,
-                        isLoading = false
-                    )
+
+                if (requestGeneration != contentLoadGeneration) return@launch
+                exercises = loadedExercises.shuffled()
+                pendingExerciseIds = exercises.map { it.id }.toMutableSet()
+                retryExercises.clear()
+                missionCycleId = UUID.randomUUID().toString()
+                if (exercises.isNotEmpty()) {
+                    startExercise(0)
+                } else {
+                    _uiState.update {
+                        it.copy(
+                            currentExercise = null,
+                            selectedOption = null,
+                            builtWord = "",
+                            isCorrect = null,
+                            isWrong = false,
+                            isFinished = false,
+                            showFeedback = false,
+                            isLoading = false
+                        )
+                    }
+                }
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (error: Throwable) {
+                if (requestGeneration == contentLoadGeneration) {
+                    exercises = emptyList()
+                    _uiState.update { it.copy(currentExercise = null, isLoading = false, isFinished = false) }
                 }
             }
         }
@@ -151,12 +238,19 @@ class ReadingViewModel(
         selectedDifficultyStars = stars?.coerceIn(1, 3)
     }
 
+    fun setWorldLevel(level: Int?) {
+        selectedWorldLevel = level?.coerceIn(1, 6)
+    }
+
     private fun startExercise(index: Int) {
         currentIndex = index
         startTime = System.currentTimeMillis()
         firstAttemptForCurrent = true
         translationsUsed = 0
-        val exercise = exercises[index]
+        val exercise = exercises.getOrNull(index) ?: run {
+            _uiState.update { it.copy(currentExercise = null, isLoading = false) }
+            return
+        }
         _uiState.update {
             it.copy(
                 currentExercise = exercise,
@@ -166,10 +260,18 @@ class ReadingViewModel(
                 isWrong = false,
                 isFinished = false,
                 showFeedback = false,
-                isLoading = false
+                isLoading = false,
+                dictationWrongKey = null,
+                dictationHintKey = null,
+                dictationRevealKeys = emptySet(),
+                dictationWrongAttempts = 0
             )
         }
-        if (exercise.inputMode == InputMode.LISTEN_AND_SELECT) playListeningAudio(autoPlay = true)
+        AuditLog.record("mission_started", _uiState.value.currentProfileId, exercise.domain.name, exercise.data["subcategoryId"], exercise.id)
+        scheduleDictationHint()
+        if (exercise.inputMode == InputMode.LISTEN_AND_SELECT || exercise.inputMode == InputMode.CUSTOM_TEXT_KEYBOARD) {
+            playListeningAudio(autoPlay = true)
+        }
     }
 
     fun playListeningAudio(autoPlay: Boolean = false) {
@@ -178,7 +280,8 @@ class ReadingViewModel(
         val audioText = exercise.audioTextFor(state.exerciseLanguage)
         val audioLocale = exercise.audioLocaleFor(state.exerciseLanguage)
         val audioId = exercise.audioIdFor(state.exerciseLanguage) ?: exercise.id
-        val fallback = audioText ?: exercise.speechText?.get(state.exerciseLanguage) ?: exercise.localizedAnswer(state.exerciseLanguage)
+        val fallback = (audioText ?: exercise.speechText?.get(state.exerciseLanguage) ?: exercise.localizedAnswer(state.exerciseLanguage))
+            .normalizeListeningCue(audioLocale)
         if (autoPlay) {
             audioService.playExerciseAudioDelayed(
                 exerciseId = audioId,
@@ -194,7 +297,14 @@ class ReadingViewModel(
         }
     }
 
-    private fun ExerciseContent.audioTextFor(locale: String): String? = localizedData("audioText", locale)
+    private fun ExerciseContent.audioTextFor(locale: String): String? =
+        localizedData("audioText", locale)?.normalizeListeningCue(locale)
+
+    private fun String.normalizeListeningCue(locale: String): String {
+        if (!normalizeContentLocale(locale).startsWith("nl")) return this
+        val match = DUTCH_SOUND_EXAMPLE.matchEntire(trim()) ?: return this
+        return "de klank ${match.groupValues[1].trim()}"
+    }
     private fun ExerciseContent.audioIdFor(locale: String): String? = localizedData("audioId", locale)
     private fun ExerciseContent.audioLocaleFor(locale: String): String = localizedData("audioTtsLanguage", locale) ?: locale
 
@@ -210,6 +320,7 @@ class ReadingViewModel(
 
     fun onOptionSelected(option: String) {
         if (_uiState.value.isCorrect == true) return
+        AuditLog.record("answer_option_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         val state = _uiState.value
         val exercise = state.currentExercise ?: return
         if (option.isWholeInteger()) {
@@ -226,14 +337,53 @@ class ReadingViewModel(
         checkAnswer(option)
     }
 
-    fun onLetterAdded(letter: String) {
+    fun onTextCharacterAdded(letter: String) {
         if (_uiState.value.isCorrect == true) return
+        val target = normalizeAnswer(_uiState.value.currentExercise?.localizedAnswer(_uiState.value.exerciseLanguage).orEmpty())
+        val normalizedLetter = normalizeAnswer(letter)
+        val isWrongLetter = normalizedLetter.isNotBlank() && normalizedLetter !in target
         val newWord = _uiState.value.builtWord + letter
-        _uiState.update { it.copy(builtWord = newWord) }
-        val exercise = _uiState.value.currentExercise ?: return
-        if (newWord.length >= exercise.localizedAnswer(_uiState.value.exerciseLanguage).length) {
-            checkAnswer(newWord)
+        _uiState.update {
+            it.copy(
+                builtWord = newWord,
+                isCorrect = null,
+                isWrong = false,
+                showFeedback = false,
+                dictationWrongKey = if (isWrongLetter) letter.lowercase() else null,
+                dictationHintKey = null
+            )
         }
+        AuditLog.record("dictation_key_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id, details = mapOf("wrongLetter" to isWrongLetter.toString()))
+        if (isWrongLetter) {
+            dictationWrongKeyJob?.cancel()
+            dictationWrongKeyJob = viewModelScope.launch {
+                delay(700)
+                _uiState.update { state -> state.copy(dictationWrongKey = null) }
+            }
+        }
+        scheduleDictationHint()
+    }
+
+    fun onTextBackspace() {
+        if (_uiState.value.isCorrect == true) return
+        _uiState.update {
+            it.copy(
+                builtWord = it.builtWord.dropLast(1),
+                isCorrect = null,
+                isWrong = false,
+                showFeedback = false,
+                dictationHintKey = null
+            )
+        }
+        AuditLog.record("dictation_backspace", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
+        scheduleDictationHint()
+    }
+
+    fun submitDictation() {
+        val answer = _uiState.value.builtWord
+        if (answer.isBlank()) return
+        AuditLog.record("dictation_submitted", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
+        checkAnswer(answer)
     }
 
     fun onTranslationUsed() {
@@ -246,13 +396,47 @@ class ReadingViewModel(
         val isCorrect = normalizeAnswer(answer) == normalizeAnswer(exercise.localizedAnswer(state.exerciseLanguage))
         val duration = System.currentTimeMillis() - startTime
         val countsForProgress = registerAnswerOutcome(exercise, isCorrect)
-        _uiState.update { it.copy(isCorrect = isCorrect, isWrong = !isCorrect, showFeedback = true) }
+        _uiState.update {
+            val wrongAttempts = if (isCorrect) 0 else it.dictationWrongAttempts + 1
+            val reveal = if (!isCorrect && wrongAttempts >= 2 && exercise.inputMode == InputMode.CUSTOM_TEXT_KEYBOARD) {
+                exercise.localizedAnswer(state.exerciseLanguage).lowercase().filterNot { character -> character.isWhitespace() }.map { character -> character.toString() }.toSet()
+            } else it.dictationRevealKeys
+            it.copy(
+                isCorrect = isCorrect,
+                isWrong = !isCorrect,
+                showFeedback = true,
+                dictationWrongAttempts = wrongAttempts,
+                dictationRevealKeys = reveal,
+                dictationHintKey = null
+            )
+        }
         if (isCorrect) {
+            dictationInactivityJob?.cancel()
             saveProgress(exercise, duration, countsForProgress, attemptCorrect = true)
             audioService.playSuccess()
         } else {
             audioService.playFailure()
             saveProgress(exercise, duration, countsForProgress = false, attemptCorrect = false)
+        }
+    }
+
+    private fun scheduleDictationHint() {
+        dictationInactivityJob?.cancel()
+        val state = _uiState.value
+        val exercise = state.currentExercise ?: return
+        if (exercise.inputMode != InputMode.CUSTOM_TEXT_KEYBOARD || state.isCorrect == true) return
+        dictationInactivityJob = viewModelScope.launch {
+            delay(5_000)
+            val current = _uiState.value
+            if (current.currentExercise?.id != exercise.id || current.isCorrect == true) return@launch
+            val answer = exercise.localizedAnswer(current.exerciseLanguage)
+            val typed = current.builtWord
+            val firstMismatch = typed.indices.firstOrNull { index -> answer.getOrNull(index)?.lowercaseChar() != typed[index].lowercaseChar() }
+            val nextIndex = firstMismatch ?: typed.length
+            val next = answer.getOrNull(nextIndex)?.toString()?.lowercase()?.takeIf { it.isNotBlank() } ?: return@launch
+            _uiState.update { it.copy(dictationHintKey = next, dictationHintSequence = it.dictationHintSequence + 1) }
+            delay(1_000)
+            _uiState.update { stateAfter -> if (stateAfter.dictationHintKey == next) stateAfter.copy(dictationHintKey = null) else stateAfter }
         }
     }
 
@@ -271,7 +455,7 @@ class ReadingViewModel(
     }
 
     private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
-    private fun String.isWholeInteger(): Boolean = trim().matches(Regex("-?\\d+"))
+    private fun String.isWholeInteger(): Boolean = trim().replace(" ", "").replace(".", "").matches(Regex("-?\\d+"))
     private fun ExerciseContent.optionSpeechLocale(defaultLocale: String): String = data["audioTargetLocale"] ?: defaultLocale
     private fun ExerciseContent.isUnassignedExercise(): Boolean = data["subcategoryId"].isNullOrBlank()
 
@@ -328,13 +512,13 @@ class ReadingViewModel(
     }
 
     fun nextExercise() {
+        AuditLog.record("next_mission_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         if (pendingExerciseIds.isEmpty()) {
             _uiState.update { it.copy(isFinished = true, isLoading = false) }
             return
         }
 
         if (currentIndex + 1 < exercises.size) {
-            _uiState.update { it.copy(isLoading = true) }
             startExercise(currentIndex + 1)
             return
         }
@@ -348,7 +532,6 @@ class ReadingViewModel(
         if (exercises.isEmpty()) {
             _uiState.update { it.copy(isFinished = true, isLoading = false) }
         } else {
-            _uiState.update { it.copy(isLoading = true) }
             startExercise(0)
         }
     }
@@ -356,5 +539,17 @@ class ReadingViewModel(
     override fun onCleared() {
         super.onCleared()
         audioService.shutdown()
+    }
+
+    companion object {
+        private const val DICTATION_SUBCATEGORY = "dictation"
+private val DUTCH_SOUND_EXAMPLE = Regex("(?i)^(?:de\\s+klank\\s+)?(.+?)\\s+zoals\\s+in\\s+.+$")
+        private const val READING_SUBCATEGORY = "reading"
+        private const val LISTENING_SUBCATEGORY = "listening"
+        private val WORLD_SUBCATEGORIES = SubcategoryCatalog.worldThemeIds
+        private val TRANSLATION_SUBCATEGORIES = setOf(
+            "translation_nl_to_en", "translation_nl_to_fr", "translation_en_to_nl",
+            "translation_en_to_fr", "translation_fr_to_nl", "translation_fr_to_en"
+        )
     }
 }

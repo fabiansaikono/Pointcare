@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.puzzle
 
+import androidx.compose.foundation.layout.PaddingValues
 import android.content.res.Configuration
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -172,10 +173,11 @@ fun MothershipDockGame(
                 val frameNow = System.currentTimeMillis()
 
                 if (session.outcomeName == null) {
-                    val baseTravelSeconds = when (difficultyStars.coerceIn(1, 3)) {
+                    val baseTravelSeconds = when (difficultyStars.coerceIn(1, 4)) {
                         1 -> 5f
                         2 -> 4.2f
-                        else -> 3.6f
+                        3 -> 3.6f
+                        else -> 3.1f
                     } * if (isLandscape) 1.60f else 1.15f
                     val travelDistancePx = startEdgeToFinishLineDistance(canvasSize, isLandscape)
                     val baseSpeedPxPerSecond = if (baseTravelSeconds > 0f) travelDistancePx / baseTravelSeconds else 0f
@@ -676,6 +678,8 @@ private fun DockOutcomePanel(
             )
             if (won) {
                 Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = onNextMission,
                     colors = ButtonDefaults.buttonColors(containerColor = PlanetBlue, contentColor = DeepSpaceBlue)
                 ) {
@@ -688,6 +692,8 @@ private fun DockOutcomePanel(
                     textAlign = TextAlign.Center
                 )
                 Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = onRetry,
                     colors = ButtonDefaults.buttonColors(containerColor = PlanetGold, contentColor = DeepSpaceBlue)
                 ) {
@@ -769,7 +775,7 @@ private object MothershipDockGenerator {
         seed: Int
     ): DockChallenge {
         val random = Random(seed)
-        val stars = difficultyStars.coerceIn(1, 3)
+        val stars = difficultyStars.coerceIn(1, 4)
         val allowWords = readingGrade <= 2
         val mode = if (allowWords && random.nextFloat() < 0.55f) DockMode.Words else DockMode.Numbers
         return when (mode) {
@@ -782,7 +788,8 @@ private object MothershipDockGenerator {
         return when (stars) {
             1 -> random.nextInt(6, 13)   // 3 friendly ships x 2..4 enemies
             2 -> random.nextInt(9, 16)   // 3 friendly ships x 3..5 enemies
-            else -> random.nextInt(12, 19) // 3 friendly ships x 4..6 enemies
+            3 -> random.nextInt(12, 19) // 3 friendly ships x 4..6 enemies
+            else -> random.nextInt(18, 25) // Hard Mode level 4: 3 friendly ships x 6..8 enemies
         }
     }
 
@@ -808,7 +815,8 @@ private object MothershipDockGenerator {
         val target = when (stars) {
             1 -> random.nextInt(6, 31)
             2 -> random.nextInt(18, 101)
-            else -> random.nextInt(30, 181)
+            3 -> random.nextInt(30, 181)
+            else -> random.nextInt(120, 1_001)
         }
         val enemyCount = totalEnemyCount(stars, random)
         val expressions = mutableListOf<DockVesselTemplate>()
@@ -824,7 +832,8 @@ private object MothershipDockGenerator {
                 val spread = when (stars) {
                     1 -> 9
                     2 -> 18
-                    else -> 28
+                    3 -> 28
+                    else -> 80
                 }
                 val delta = random.nextInt(-spread, spread + 1).takeIf { it != 0 } ?: 3
                 wrong = (target + delta).coerceAtLeast(2)
@@ -853,17 +862,20 @@ private object MothershipDockGenerator {
             "en" -> when (stars) {
                 1 -> listOf("sun", "moon", "ship", "star", "map", "ring", "mars", "dust", "port", "beam")
                 2 -> listOf("orbit", "comet", "pilot", "laser", "rocket", "planet", "signal", "meteor", "sensor", "target")
-                else -> listOf("galaxy", "station", "captain", "asteroid", "mission", "oxygen", "gravity", "hangar", "quantum", "reactor")
+                3 -> listOf("galaxy", "station", "captain", "asteroid", "mission", "oxygen", "gravity", "hangar", "quantum", "reactor")
+                else -> listOf("asteroid", "universe", "eclipse", "shuttle", "capsule", "orbital", "starship", "airlock", "thruster", "sunflare")
             }
             "fr" -> when (stars) {
                 1 -> listOf("soleil", "lune", "base", "etoile", "mars", "carte", "fusee", "port", "rayon", "dock")
                 2 -> listOf("orbite", "comete", "pilote", "laser", "planete", "signal", "meteor", "cosmos", "cible", "module")
-                else -> listOf("galaxie", "station", "capitaine", "asteroide", "mission", "oxygene", "gravite", "hangar", "reacteur", "quantum")
+                3 -> listOf("galaxie", "station", "capitaine", "asteroide", "mission", "oxygene", "gravite", "hangar", "reacteur", "quantum")
+                else -> listOf("meteore", "univers", "eclipse", "navette", "capsule", "orbital", "cosmos", "module", "moteur", "lumiere")
             }
             else -> when (stars) {
                 1 -> listOf("zon", "maan", "schip", "ster", "mars", "kaart", "ring", "stof", "poort", "straal")
                 2 -> listOf("baan", "komeet", "piloot", "laser", "raket", "planeet", "signaal", "meteoor", "doel", "sensor")
-                else -> listOf("melkweg", "station", "kapitein", "asteroide", "missie", "zuurstof", "zwaarte", "hangar", "reactor", "quantum")
+                3 -> listOf("melkweg", "station", "kapitein", "asteroide", "missie", "zuurstof", "zwaarte", "hangar", "reactor", "quantum")
+                else -> listOf("meteoor", "heelal", "eclips", "shuttle", "capsule", "baanvlak", "sterbaan", "ruimte", "komeet", "sterrijk")
             }
         }
         return candidates.filter { it.length <= 8 }
@@ -875,7 +887,7 @@ private object MothershipDockGenerator {
             addAll(subtractionExpressions(result, stars, random))
             if (mathGrade >= 2 || stars >= 2) addAll(multiplicationExpressions(result, stars, random))
             if (stars >= 3) addAll(compactDoubleStepExpressions(result, random))
-        }.filter { it.length <= 5 }
+        }.filter { it.length <= if (stars >= 4) 8 else 5 }
         return attempts.randomOrNull() ?: result.toString().take(5)
     }
 
@@ -884,7 +896,8 @@ private object MothershipDockGenerator {
         val maxLeft = when (stars) {
             1 -> result - 1
             2 -> max(1, result - 5)
-            else -> max(1, result - 10)
+            3 -> max(1, result - 10)
+            else -> max(1, result - 25)
         }
         val a = random.nextInt(1, maxLeft + 1).coerceAtMost(result - 1)
         val b = result - a
@@ -896,7 +909,8 @@ private object MothershipDockGenerator {
         val b = when (stars) {
             1 -> random.nextInt(1, 10)
             2 -> random.nextInt(2, 16)
-            else -> random.nextInt(3, 26)
+            3 -> random.nextInt(3, 26)
+            else -> random.nextInt(20, 101)
         }
         val a = result + b
         return listOf("$a-$b")
@@ -906,7 +920,8 @@ private object MothershipDockGenerator {
         val factorRange = when (stars) {
             1 -> 2..5
             2 -> 2..9
-            else -> 2..12
+            3 -> 2..12
+            else -> 6..20
         }
         val factors = factorRange.filter { it != 0 && result % it == 0 }
         if (factors.isEmpty()) return emptyList()
@@ -924,7 +939,7 @@ private object MothershipDockGenerator {
 
 
 private fun createInitialDockVessels(challenge: DockChallenge, difficultyStars: Int): List<DockVessel> {
-    val stars = difficultyStars.coerceIn(1, 3)
+    val stars = difficultyStars.coerceIn(1, 4)
     val friendly = challenge.vessels.firstOrNull { it.isFriendly }
     val enemies = challenge.vessels.filter { !it.isFriendly }.shuffled()
 
@@ -937,7 +952,8 @@ private fun createInitialDockVessels(challenge: DockChallenge, difficultyStars: 
             val enemiesPerFriendly = when (stars) {
                 1 -> Random.nextInt(2, 5)
                 2 -> Random.nextInt(3, 6)
-                else -> Random.nextInt(4, 7)
+                3 -> Random.nextInt(4, 7)
+                else -> Random.nextInt(6, 9)
             }
             repeat(enemiesPerFriendly) {
                 enemies.getOrNull(enemyIndex)?.let { add(it) }

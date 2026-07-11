@@ -227,14 +227,14 @@ private fun mainCategoryLabel(domain: LearningDomain, locale: String): String {
     }
     return when (domain) {
         LearningDomain.READING -> when (language) {
-            "en" -> "Communicate"
-            "fr" -> "Communiquer"
-            else -> "Communicatie"
+            "en" -> "Reading & listening"
+            "fr" -> "Lecture et écoute"
+            else -> "Lezen & luisteren"
         }
         LearningDomain.WRITING -> when (language) {
-            "en" -> "Writing"
-            "fr" -> "Ecriture"
-            else -> "Schrijven"
+            "en" -> "Spelling & grammar"
+            "fr" -> "Orthographe et grammaire"
+            else -> "Spelling & grammatica"
         }
         LearningDomain.MATH -> when (language) {
             "en" -> "Numbers"
@@ -242,9 +242,9 @@ private fun mainCategoryLabel(domain: LearningDomain, locale: String): String {
             else -> "Getallen"
         }
         LearningDomain.GEOMETRY -> when (language) {
-            "en" -> "Geometry"
-            "fr" -> "Geometrie"
-            else -> "Meetkunde"
+            "en" -> "Measurement & geometry"
+            "fr" -> "Mesures et géométrie"
+            else -> "Meten & meetkunde"
         }
         LearningDomain.WORLD_KNOWLEDGE -> when (language) {
             "en" -> "World knowledge"

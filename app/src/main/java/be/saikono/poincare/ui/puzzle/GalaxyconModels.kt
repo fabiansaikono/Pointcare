@@ -88,7 +88,7 @@ object GalaxyconGenerator {
         level: SkillLevel,
         difficultyStars: Int
     ): GalaxyconLevelSpec {
-        val stars = difficultyStars.coerceIn(1, 3)
+        val stars = difficultyStars.coerceIn(1, 4)
         val normalizedLocale = normalizeGalaxyconLocale(locale)
         val allWords = wordsFor(normalizedLocale)
         val exactDifficultyWords = allWords.filter { it.difficulty == stars }
@@ -96,7 +96,8 @@ object GalaxyconGenerator {
         val needed = when (stars) {
             1 -> 3
             2 -> 4
-            else -> 5
+            3 -> 5
+            else -> 6
         }
         val seed = 31 * normalizedLocale.hashCode() + 17 * level.name.hashCode() + stars
         val selectedPool = if (exactDifficultyWords.size >= needed) exactDifficultyWords else fallbackWords
@@ -112,7 +113,8 @@ object GalaxyconGenerator {
         val planet = when (stars) {
             1 -> "Lumora"
             2 -> "Nebulix"
-            else -> "Orbinox"
+            3 -> "Orbinox"
+            else -> "Quasarion"
         }
 
         return GalaxyconLevelSpec(
@@ -124,22 +126,26 @@ object GalaxyconGenerator {
             speedFractionPerSecond = when (stars) {
                 1 -> 0.155f
                 2 -> 0.195f
-                else -> 0.225f
+                3 -> 0.225f
+                else -> 0.255f
             },
             spawnEveryMs = when (stars) {
                 1 -> 1_450L
                 2 -> 980L
-                else -> 850L
+                3 -> 850L
+                else -> 720L
             },
             durationMs = when (stars) {
                 1 -> 55_000L
                 2 -> 65_000L
-                else -> 75_000L
+                3 -> 75_000L
+                else -> 85_000L
             },
             maxExpectedCollisions = when (stars) {
                 1 -> 8
                 2 -> 8
-                else -> 9
+                3 -> 9
+                else -> 10
             },
             seed = 73 * normalizedLocale.hashCode() + 19 * level.name.hashCode() + stars
         )
@@ -154,13 +160,14 @@ object GalaxyconGenerator {
         val rng = Random(level.seed + spawnIndex.toInt() * 97)
         val lane = rng.nextInt(0, 3)
         val roll = rng.nextFloat()
-        val stars = level.difficultyStars.coerceIn(1, 3)
+        val stars = level.difficultyStars.coerceIn(1, 4)
 
         val correctChance = if (nextRequiredLetter != null) {
             when (stars) {
                 1 -> 0.34f
                 2 -> 0.30f
-                else -> 0.26f
+                3 -> 0.26f
+                else -> 0.22f
             }
         } else {
             0f
@@ -168,22 +175,26 @@ object GalaxyconGenerator {
         val wrongChance = when (stars) {
             1 -> 0.12f
             2 -> 0.15f
-            else -> 0.17f
+            3 -> 0.17f
+            else -> 0.20f
         }
         val debrisChance = when (stars) {
             1 -> 0.27f
             2 -> 0.38f
-            else -> 0.43f
+            3 -> 0.43f
+            else -> 0.48f
         }
         val starChance = when (stars) {
             1 -> 0.13f
             2 -> 0.10f
-            else -> 0.08f
+            3 -> 0.08f
+            else -> 0.06f
         }
         val multiplierChance = when (stars) {
             1 -> 0.06f
             2 -> 0.05f
-            else -> 0.04f
+            3 -> 0.04f
+            else -> 0.03f
         }
 
         val type = when {

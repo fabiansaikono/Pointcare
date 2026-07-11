@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.puzzle
 
+import androidx.compose.foundation.layout.PaddingValues
 import android.content.res.Configuration
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -504,6 +505,7 @@ private fun ConstellationsBottomControls(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Button(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             onClick = onTip,
             enabled = !isComplete,
             colors = ButtonDefaults.buttonColors(
@@ -520,6 +522,7 @@ private fun ConstellationsBottomControls(
             Text(copy.tip, color = StarWhite, fontWeight = FontWeight.Bold)
         }
         Button(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             onClick = if (isComplete) onNewMission else onResetPath,
             colors = ButtonDefaults.buttonColors(
                 containerColor = PlanetGold,

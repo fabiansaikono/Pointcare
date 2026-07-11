@@ -12,7 +12,7 @@ object ConstellationPuzzleGenerator {
         seed: Long = System.currentTimeMillis()
     ): ConstellationPuzzle {
         val normalizedGrade = grade.coerceIn(1, 6)
-        val normalizedStars = difficultyStars.coerceIn(1, 3)
+        val normalizedStars = difficultyStars.coerceIn(1, 4)
         val random = Random(seed)
         val groupLengths = groupLengthsFor(normalizedStars, random)
         val groupCount = groupLengths.size
@@ -69,7 +69,8 @@ object ConstellationPuzzleGenerator {
         val distractorCount = when (normalizedStars) {
             1 -> 2
             2 -> 4
-            else -> 6
+            3 -> 6
+            else -> 9
         }
         stars += generateDistractors(random, stars, distractorCount)
 
@@ -137,10 +138,15 @@ object ConstellationPuzzleGenerator {
         return when (difficultyStars) {
             1 -> listOf(3)
             2 -> if (random.nextBoolean()) listOf(3, 3) else listOf(4, 3)
-            else -> when (random.nextInt(3)) {
+            3 -> when (random.nextInt(3)) {
                 0 -> listOf(4, 3, 3)
                 1 -> listOf(3, 4, 3)
                 else -> listOf(4, 4, 3)
+            }
+            else -> when (random.nextInt(3)) {
+                0 -> listOf(5, 4, 4)
+                1 -> listOf(4, 5, 4, 3)
+                else -> listOf(5, 5, 4)
             }
         }
     }
@@ -158,12 +164,12 @@ object ConstellationPuzzleGenerator {
             patterns += when {
                 grade <= 1 -> additionPattern(
                     start = uniqueStart(random, usedStarts, 1, 12) + index * 8,
-                    step = if (difficultyStars == 1) 1 else listOf(1, 2)[random.nextInt(2)],
+                    step = when { difficultyStars == 1 -> 1; difficultyStars >= 4 -> listOf(2, 3, 4)[random.nextInt(3)]; else -> listOf(1, 2)[random.nextInt(2)] },
                     length = length
                 )
                 grade == 2 -> additionPattern(
                     start = uniqueStart(random, usedStarts, 2, 30) + index * 12,
-                    step = listOf(2, 3, 5)[(index + random.nextInt(3)) % 3],
+                    step = if (difficultyStars >= 4) listOf(5, 10, 15)[(index + random.nextInt(3)) % 3] else listOf(2, 3, 5)[(index + random.nextInt(3)) % 3],
                     length = length
                 )
                 grade == 3 -> when ((index + random.nextInt(2)) % 2) {

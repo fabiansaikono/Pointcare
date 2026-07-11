@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.puzzle
 
+import be.saikono.poincare.model.formatVisibleNumbers
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.UUID
@@ -15,7 +16,7 @@ object CalculatorPuzzleGenerator {
         random: Random = Random.Default
     ): CalculatorPuzzleChallenge {
         val grade = mathGrade.coerceIn(1, 6)
-        val stars = difficultyStars.coerceIn(1, 3)
+        val stars = difficultyStars.coerceIn(1, 4)
         val expression = randomExpression(grade, stars, random)
         val result = evaluateExpression(expression) ?: 0.0
         return challengeFrom(expression, result, grade, stars)
@@ -33,7 +34,7 @@ object CalculatorPuzzleGenerator {
             expression = prettyExpression(normalized),
             result = result,
             mathGrade = mathGrade.coerceIn(1, 6),
-            difficultyStars = difficultyStars.coerceIn(1, 3)
+            difficultyStars = difficultyStars.coerceIn(1, 4)
         )
     }
 
@@ -54,7 +55,7 @@ object CalculatorPuzzleGenerator {
             .setScale(6, RoundingMode.HALF_UP)
             .stripTrailingZeros()
             .toPlainString()
-        return if (rounded == "-0") "0" else rounded
+        return formatVisibleNumbers(if (rounded == "-0") "0" else rounded)
     }
 
     private fun challengeFrom(
@@ -100,40 +101,50 @@ object CalculatorPuzzleGenerator {
             1 -> when (stars) {
                 1 -> addition(10)
                 2 -> if (random.nextBoolean()) addition(20) else subtraction(20)
-                else -> "${number(10)} + ${number(10)} - ${number(5)}"
+                3 -> "${number(10)} + ${number(10)} - ${number(5)}"
+                else -> "${number(15)} + ${number(15)} + ${number(10)} - ${number(10)}"
             }
 
             2 -> when (stars) {
                 1 -> if (random.nextBoolean()) addition(50) else subtraction(50)
                 2 -> if (random.nextBoolean()) addition(100) else subtraction(100)
-                else -> "${number(50)} + ${number(50)} - ${number(25)}"
+                3 -> "${number(50)} + ${number(50)} - ${number(25)}"
+                else -> "${number(100)} - ${number(40)} + ${number(60)} - ${number(25)}"
             }
 
             3 -> when (stars) {
                 1 -> multiplication(10)
                 2 -> if (random.nextBoolean()) multiplication(12) else division(12)
-                else -> "${number(10)} × ${number(10)} + ${number(20)}"
+                3 -> "${number(10)} × ${number(10)} + ${number(20)}"
+                else -> "(${number(12)} + ${number(12)}) × ${number(8)} - ${number(30)}"
             }
 
             4 -> when (stars) {
                 1 -> if (random.nextBoolean()) multiplication(12) else division(20)
                 2 -> "${number(12)} × ${number(12)} - ${number(40)}"
-                else -> "${number(40)} + ${number(12)} × ${number(12)}"
+                3 -> "${number(40)} + ${number(12)} × ${number(12)}"
+                else -> "(${number(40)} - ${number(15)}) × ${number(12)} + ${number(100)}"
             }
 
             5 -> when (stars) {
                 1 -> "${number(100)} + ${number(12)} × ${number(12)}"
                 2 -> "${number(20)} × ${number(20)} - ${number(100)}"
-                else -> "${number(50)} × ${number(12)} ÷ ${listOf(2, 3, 4).random(random)} + ${number(100)}"
+                3 -> "${number(50)} × ${number(12)} ÷ ${listOf(2, 3, 4).random(random)} + ${number(100)}"
+                else -> "(${number(75)} + ${number(50)}) × ${number(16)} ÷ ${listOf(2, 4, 5).random(random)} - ${number(250)}"
             }
 
             else -> when (stars) {
                 1 -> "${number(150)} + ${number(20)} × ${number(12)}"
                 2 -> "${number(50)} × ${number(20)} - ${number(250)}"
-                else -> {
+                3 -> {
                     val divisor = listOf(2, 3, 4, 5).random(random)
                     val a = number(20) * divisor
                     "$a × ${number(20)} ÷ $divisor + ${number(200)}"
+                }
+                else -> {
+                    val divisor = listOf(4, 5, 8, 10).random(random)
+                    val a = number(50) * divisor
+                    "($a ÷ $divisor + ${number(250)}) × ${number(20)} - ${number(500)}"
                 }
             }
         }
@@ -170,7 +181,7 @@ object CalculatorPuzzleGenerator {
     }
 
     private fun prettyExpression(expression: String): String {
-        return expression
+        val readable = expression
             .replace("*", " × ")
             .replace("/", " ÷ ")
             .replace("+", " + ")
@@ -178,6 +189,7 @@ object CalculatorPuzzleGenerator {
             .replace(Regex("\\s+"), " ")
             .trim()
             .replace("( - ", "(-")
+        return formatVisibleNumbers(readable)
     }
 
     private fun normalizeResult(value: Double): Double {

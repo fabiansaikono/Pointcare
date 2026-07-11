@@ -5,13 +5,14 @@ import kotlin.random.Random
 object MathCrosswordGenerator {
     fun generate(stars: Int, seed: Int = Random.nextInt()): MathCrosswordPuzzle {
         val random = Random(seed)
-        val normalizedStars = stars.coerceIn(1, 3)
+        val normalizedStars = stars.coerceIn(1, 4)
         val rowCount = 13
         val columnCount = 13
         val maxValue = when (normalizedStars) {
             1 -> 20
             2 -> 100
-            else -> 500
+            3 -> 500
+            else -> 2_000
         }
         val numberValues = mutableMapOf<Pair<Int, Int>, Int>()
         val cells = mutableMapOf<Pair<Int, Int>, MathCrosswordCell>()
@@ -20,7 +21,8 @@ object MathCrosswordGenerator {
         fun randomOperand(): Int = when (normalizedStars) {
             1 -> random.nextInt(1, 16)
             2 -> random.nextInt(1, 41)
-            else -> random.nextInt(1, 81)
+            3 -> random.nextInt(1, 81)
+            else -> random.nextInt(10, 201)
         }
 
         fun evaluate(left: Int, op: String, right: Int): Int? = when (op) {
@@ -89,7 +91,8 @@ object MathCrosswordGenerator {
         val targetEquations = when (normalizedStars) {
             1 -> 8
             2 -> 10
-            else -> 12
+            3 -> 12
+            else -> 14
         }
         for ((row, col, horizontal) in candidates) {
             if (equations.size >= targetEquations) break
@@ -98,7 +101,7 @@ object MathCrosswordGenerator {
         if (equations.size < 8) return generate(stars, seed + 1)
 
         val numberCells = numberValues.keys.shuffled(random)
-        val fixed = numberCells.take(6).toSet()
+        val fixed = numberCells.take(if (normalizedStars >= 4) 3 else 6).toSet()
         val puzzle = MathCrosswordPuzzle(rowCount = rowCount, columnCount = columnCount, cells = cells, equations = equations, fixedNumberCells = fixed)
         return if (validateGeneratedPuzzle(puzzle)) puzzle else generate(stars, seed + 1)
     }

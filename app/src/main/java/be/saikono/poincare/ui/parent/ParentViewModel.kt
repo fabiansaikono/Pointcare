@@ -62,7 +62,7 @@ class ParentViewModel(
             if (settings.voiceId != null) audioService.getTtsVoiceService().setVoice(settings.voiceId)
             audioService.getTtsVoiceService().setPitch(settings.pitch)
             audioService.getTtsVoiceService().setSpeechRate(settings.rate)
-            audioService.getTtsVoiceService().speak(text, locale)
+            audioService.speak(text, locale)
         }
     }
 

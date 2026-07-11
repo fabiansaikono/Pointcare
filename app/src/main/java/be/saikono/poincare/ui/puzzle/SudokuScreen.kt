@@ -44,7 +44,7 @@ fun SudokuGame(
     onComplete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val stars = initialStars.coerceIn(1, 3)
+    val stars = initialStars.coerceIn(1, 4)
     val seed = rememberSaveable(stars) { Random.nextInt() }
     val puzzle = remember(stars, seed) { SudokuGenerator.generate(stars, seed) }
     var entries by rememberSaveable(seed, saver = sudokuEntriesSaver) { mutableStateOf<Map<Pair<Int, Int>, Int>>(emptyMap()) }

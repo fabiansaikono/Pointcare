@@ -1,5 +1,7 @@
 package be.saikono.poincare.ui.profile
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import be.saikono.poincare.model.SkillLevel
+import be.saikono.poincare.ui.parent.parentText
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.theme.DeepSpaceBlue
 import be.saikono.poincare.ui.theme.PlanetGold
@@ -47,9 +50,8 @@ fun CreateProfileScreen(
     var readingLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var writingLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var mathLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
-    var puzzleLevel by remember { mutableStateOf(SkillLevel.FIRST_GRADE) }
     var showUnassignedExercises by remember { mutableStateOf(false) }
-    var giftedMode by remember { mutableStateOf(false) }
+    var hardMode by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -100,7 +102,6 @@ fun CreateProfileScreen(
             LevelSelector("Leesniveau", readingLevel) { readingLevel = it }
             LevelSelector("Schrijfniveau", writingLevel) { writingLevel = it }
             LevelSelector("Wiskundeniveau", mathLevel) { mathLevel = it }
-            LevelSelector("Puzzelniveau", puzzleLevel) { puzzleLevel = it }
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -135,11 +136,13 @@ fun CreateProfileScreen(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
             ) {
-                Text(text = "Gifted Mode", color = StarWhite)
-                Switch(checked = giftedMode, onCheckedChange = { giftedMode = it })
+                Text(text = parentText("giftedMode"), color = StarWhite)
+                Switch(checked = hardMode, onCheckedChange = { hardMode = it })
             }
 
             Button(
+                shape = RoundedCornerShape(12.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                 onClick = {
                     viewModel.createProfile(
                         name = name,
@@ -147,9 +150,9 @@ fun CreateProfileScreen(
                         readingLevel = readingLevel,
                         writingLevel = writingLevel,
                         mathLevel = mathLevel,
-                        puzzleLevel = puzzleLevel,
+                        puzzleLevel = mathLevel,
                         showUnassignedExercises = showUnassignedExercises,
-                        giftedMode = giftedMode,
+                        giftedMode = hardMode,
                         onComplete = onProfileCreated
                     )
                 },
@@ -184,6 +187,7 @@ fun LevelSelector(
             ) {
                 rowLevels.forEach { level ->
                     FilterChip(
+                    shape = RoundedCornerShape(12.dp),
                         selected = currentLevel == level,
                         onClick = { onLevelSelected(level) },
                         label = { Text(level.displayLabel()) },

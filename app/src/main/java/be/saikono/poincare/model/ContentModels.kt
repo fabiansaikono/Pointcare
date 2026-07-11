@@ -10,6 +10,7 @@ enum class InputMode {
     TAP_CHOICE,
     LISTEN_AND_SELECT,
     BUILD_WORD,
+    CUSTOM_TEXT_KEYBOARD,
     TRACE_LETTER,
     MATH_CROSSWORD,
     SUDOKU_GRID,
@@ -32,11 +33,13 @@ data class LocalizedText(
     val fr: String? = null,
     val en: String? = null
 ) {
-    fun get(locale: String): String = when (locale) {
+    fun getRaw(locale: String): String = when (locale) {
         "fr", "fr-BE", "fr_BE", "fr-FR", "fr_FR" -> fr ?: nl
         "en", "en-US", "en_US", "en-GB", "en_GB" -> en ?: nl
         else -> nl
     }
+
+    fun get(locale: String): String = formatVisibleNumbers(getRaw(locale))
 }
 
 @Serializable
@@ -73,13 +76,15 @@ fun ExerciseContent.localizedOptions(locale: String): List<String> =
         ?.let { rawOptions ->
             val separator = if (rawOptions.contains('\n')) "\n" else ","
             rawOptions.split(separator)
-                .map { it.trim() }
+                .map { formatVisibleNumbers(it.trim()) }
                 .filter { it.isNotBlank() }
         }
         .orEmpty()
 
-fun ExerciseContent.localizedAnswer(locale: String): String = localizedData("answer", locale) ?: answer
-fun ExerciseContent.localizedPromptTts(locale: String): String = localizedData("promptTts", locale) ?: prompt.get(locale)
+fun ExerciseContent.localizedAnswer(locale: String): String =
+    formatVisibleNumbers(localizedData("answer", locale) ?: answer)
+fun ExerciseContent.localizedPromptTts(locale: String): String =
+    localizedData("promptTts", locale) ?: prompt.getRaw(locale)
 
 fun ExerciseContent.localizedOptionSpeech(option: String, locale: String): String {
     val options = localizedOptions(locale)
@@ -92,8 +97,10 @@ fun ExerciseContent.localizedOptionSpeech(option: String, locale: String): Strin
 }
 
 fun ExerciseContent.localizedTopic(locale: String): String =
-    localizedData("topic", locale)?.replaceFirstChar { it.uppercase() }
-        ?: skill.replace('-', ' ').replace('_', ' ').replaceFirstChar { it.uppercase() }
+    formatVisibleNumbers(
+        localizedData("topic", locale)?.replaceFirstChar { it.uppercase() }
+            ?: skill.replace('-', ' ').replace('_', ' ').replaceFirstChar { it.uppercase() }
+    )
 
 @Serializable
 data class RewardMetadata(

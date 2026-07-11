@@ -1,8 +1,8 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<poincareExerciseIndex version="3.12" generatedAt="2026-07-03T00:00:00+02:00" totalExerciseCount="21600" exercisesPerSubcategoryPerGrade="100" excludedGeneratedSubcategories="math_crossword,sudoku">
+<?xml version='1.0' encoding='UTF-8'?>
+<poincareExerciseIndex version="3.14" generatedAt="2026-07-14T09:52:06+02:00" totalExerciseCount="25200" exercisesPerSubcategoryPerGrade="100" excludedGeneratedSubcategories="math_crossword,sudoku">
   <idPolicy>{subCategory}_d{difficulty}_g{grade}_seq{sequence4}</idPolicy>
   <progressStates>not_started, completed, retry_wrong</progressStates>
-  <categoryPolicy>v3.12 removes the separate vocabulary subcategory because vocabulary is covered by World knowledge. Time, measurement, and shapes remain under Geometry.</categoryPolicy>
+  <categoryPolicy>v3.14 keeps reading/listening and spelling/grammar as separate visible learning domains while preserving stable serialized domain identifiers. Metric comparisons are grouped under Measurement and geometry.</categoryPolicy>
   <audioPolicy>Use prompt/@ttsText for reading exercise prompts. Audio exercises contain audioSources. Shape answer buttons include answer/speak text and must read only the shape name, not the symbol code or filled-state.</audioPolicy>
   <displayPolicy>Visible exercise labels must not contain theme labels, variant values, underscores, ellipses, or answer-option lists. Writing uses a yellow question-mark missing marker.</displayPolicy>
   <diversityPolicy>v3.12 regenerates Reading and Writing. Reading uses a curated icon vocabulary to reduce duplicates and inaccurate icons.</diversityPolicy>
@@ -16,34 +16,34 @@
       <title locale="fr-BE">Additions</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -53,34 +53,34 @@
       <title locale="fr-BE">Soustractions</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -90,34 +90,34 @@
       <title locale="fr-BE">Multiplications</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -127,34 +127,34 @@
       <title locale="fr-BE">Divisions</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -164,34 +164,34 @@
       <title locale="fr-BE">Calcul mixte</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -201,34 +201,34 @@
       <title locale="fr-BE">Suites de nombres</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -238,34 +238,34 @@
       <title locale="fr-BE">Fractions</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -275,39 +275,39 @@
       <title locale="fr-BE">Argent</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
   </mainCategory>
-  <mainCategory id="language" file="poincare-exercises-language-v3.xml" exerciseCount="7200">
+  <mainCategory id="language" file="poincare-exercises-language-v3.xml" exerciseCount="7800">
     <title locale="nl-BE">Taal</title>
     <title locale="en-US">Language</title>
     <title locale="fr-BE">Langue</title>
@@ -317,34 +317,34 @@
       <title locale="fr-BE">Lecture</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -354,34 +354,34 @@
       <title locale="fr-BE">Ã‰criture</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -391,34 +391,34 @@
       <title locale="fr-BE">Ã‰coute</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -428,34 +428,34 @@
       <title locale="fr-BE">Orthographe</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -465,71 +465,71 @@
       <title locale="fr-BE">Grammaire</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
-    <subcategory id="sentence_order" exerciseCount="600" exercisesPerGrade="100">
+    <subcategory id="question_words" exerciseCount="600" exercisesPerGrade="100"><title locale="nl-BE">Vraagwoorden</title><title locale="en-US">Question words</title><title locale="fr-BE">Mots interrogatifs</title><breakdown><grade value="1" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="2" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="3" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="4" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="5" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="6" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade></breakdown></subcategory><subcategory id="sentence_order" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Zinsvolgorde</title>
       <title locale="en-US">Sentence order</title>
       <title locale="fr-BE">Ordre des phrases</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -539,34 +539,34 @@
       <title locale="fr-BE">NÃ©erlandais vers anglais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -576,34 +576,34 @@
       <title locale="fr-BE">NÃ©erlandais vers franÃ§ais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -613,34 +613,34 @@
       <title locale="fr-BE">Anglais vers nÃ©erlandais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -650,34 +650,34 @@
       <title locale="fr-BE">Anglais vers franÃ§ais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -687,34 +687,34 @@
       <title locale="fr-BE">FranÃ§ais vers nÃ©erlandais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -724,34 +724,34 @@
       <title locale="fr-BE">FranÃ§ais vers anglais</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -766,34 +766,34 @@
       <title locale="fr-BE">Suites logiques</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -803,34 +803,34 @@
       <title locale="fr-BE">Lâ€™intrus</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -840,34 +840,34 @@
       <title locale="fr-BE">Analogies</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -877,34 +877,34 @@
       <title locale="fr-BE">Logique de grille</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -914,34 +914,34 @@
       <title locale="fr-BE">Labyrinthes</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -951,34 +951,34 @@
       <title locale="fr-BE">Raisonnement visuel</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -988,34 +988,34 @@
       <title locale="fr-BE">RÃ¨gles de mÃ©moire</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1030,34 +1030,34 @@
       <title locale="fr-BE">Espace</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1067,34 +1067,34 @@
       <title locale="fr-BE">Nature</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1104,34 +1104,34 @@
       <title locale="fr-BE">GÃ©ographie</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1141,34 +1141,34 @@
       <title locale="fr-BE">Sciences</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1178,34 +1178,34 @@
       <title locale="fr-BE">Histoire</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1215,76 +1215,76 @@
       <title locale="fr-BE">Vie quotidienne</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
   </mainCategory>
-  <mainCategory id="geometry" file="poincare-exercises-geometry-v3.xml" exerciseCount="1800">
-    <title locale="nl-BE">Meetkunde</title>
-    <title locale="en-US">Geometry</title>
-    <title locale="fr-BE">GÃ©omÃ©trie</title>
+  <mainCategory id="geometry" file="poincare-exercises-geometry-v3.xml" exerciseCount="4800">
+    <title locale="nl-BE">Meten &amp; meetkunde</title>
+    <title locale="en-US">Measurement &amp; geometry</title>
+    <title locale="fr-BE">Mesures et géométrie</title>
     <subcategory id="time" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Tijd</title>
       <title locale="en-US">Time</title>
       <title locale="fr-BE">Heure</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1294,71 +1294,71 @@
       <title locale="fr-BE">Mesures</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
-    <subcategory id="geometry_shapes" exerciseCount="600" exercisesPerGrade="100">
+    <subcategory id="compare_size" exerciseCount="600" exercisesPerGrade="100"><title locale="nl-BE">Groter en kleiner</title><title locale="en-US">Bigger and smaller</title><title locale="fr-BE">Plus grand et plus petit</title><breakdown><grade value="1" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="2" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="3" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="4" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="5" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="6" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade></breakdown></subcategory><subcategory id="compare_weight" exerciseCount="600" exercisesPerGrade="100"><title locale="nl-BE">Zwaarder en lichter</title><title locale="en-US">Heavier and lighter</title><title locale="fr-BE">Plus lourd et plus léger</title><breakdown><grade value="1" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="2" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="3" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="4" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="5" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="6" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade></breakdown></subcategory><subcategory id="compare_height" exerciseCount="600" exercisesPerGrade="100"><title locale="nl-BE">Hoger en lager</title><title locale="en-US">Higher and lower</title><title locale="fr-BE">Plus haut et plus bas</title><breakdown><grade value="1" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="2" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="3" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="4" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="5" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="6" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade></breakdown></subcategory><subcategory id="compare_length" exerciseCount="600" exercisesPerGrade="100"><title locale="nl-BE">Langer en korter</title><title locale="en-US">Longer and shorter</title><title locale="fr-BE">Plus long et plus court</title><breakdown><grade value="1" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="2" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="3" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="4" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="5" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="6" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade></breakdown></subcategory><subcategory id="compare_distance" exerciseCount="600" exercisesPerGrade="100"><title locale="nl-BE">Verder en dichterbij</title><title locale="en-US">Farther and closer</title><title locale="fr-BE">Plus loin et plus près</title><breakdown><grade value="1" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="2" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="3" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="4" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="5" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade><grade value="6" exerciseCount="100"><difficulty stars="1" exerciseCount="34"/><difficulty stars="2" exerciseCount="33"/><difficulty stars="3" exerciseCount="33"/></grade></breakdown></subcategory><subcategory id="geometry_shapes" exerciseCount="600" exercisesPerGrade="100">
       <title locale="nl-BE">Vormen en meetkunde</title>
       <title locale="en-US">Shapes and geometry</title>
       <title locale="fr-BE">Formes et gÃ©omÃ©trie</title>
       <breakdown>
         <grade value="1" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="2" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="3" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="4" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="5" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
         <grade value="6" exerciseCount="100">
-          <difficulty stars="1" exerciseCount="34" />
-          <difficulty stars="2" exerciseCount="33" />
-          <difficulty stars="3" exerciseCount="33" />
+          <difficulty stars="1" exerciseCount="34"/>
+          <difficulty stars="2" exerciseCount="33"/>
+          <difficulty stars="3" exerciseCount="33"/>
         </grade>
       </breakdown>
     </subcategory>
@@ -1368,12 +1368,12 @@
   <title locale="en-US">Orbit Builder</title>
   <title locale="fr-BE">Constructeur dâ€™orbite</title>
   <breakdown>
-   <grade value="1" exerciseCount="2"><difficulty stars="1" exerciseCount="2" /></grade>
-   <grade value="2" exerciseCount="2"><difficulty stars="1" exerciseCount="2" /></grade>
-   <grade value="3" exerciseCount="2"><difficulty stars="2" exerciseCount="2" /></grade>
-   <grade value="4" exerciseCount="3"><difficulty stars="2" exerciseCount="2" /><difficulty stars="3" exerciseCount="1" /></grade>
-   <grade value="5" exerciseCount="2"><difficulty stars="3" exerciseCount="2" /></grade>
-   <grade value="6" exerciseCount="1"><difficulty stars="3" exerciseCount="1" /></grade>
+   <grade value="1" exerciseCount="2"><difficulty stars="1" exerciseCount="2"/></grade>
+   <grade value="2" exerciseCount="2"><difficulty stars="1" exerciseCount="2"/></grade>
+   <grade value="3" exerciseCount="2"><difficulty stars="2" exerciseCount="2"/></grade>
+   <grade value="4" exerciseCount="3"><difficulty stars="2" exerciseCount="2"/><difficulty stars="3" exerciseCount="1"/></grade>
+   <grade value="5" exerciseCount="2"><difficulty stars="3" exerciseCount="2"/></grade>
+   <grade value="6" exerciseCount="1"><difficulty stars="3" exerciseCount="1"/></grade>
   </breakdown>
  </subcategory>
 </mainCategory>

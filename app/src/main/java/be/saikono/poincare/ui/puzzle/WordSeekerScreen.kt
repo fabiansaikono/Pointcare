@@ -65,7 +65,7 @@ fun WordSeekerGame(
     onComplete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val stars = initialStars.coerceIn(1, 3)
+    val stars = initialStars.coerceIn(1, 4)
     val gradeLevel = grade.coerceIn(1, 6)
     val seed = rememberSaveable(stars, exerciseLanguage, gradeLevel) { Random.nextInt() }
     val puzzle = remember(stars, exerciseLanguage, gradeLevel, seed) {
@@ -77,6 +77,9 @@ fun WordSeekerGame(
     var currentPath by remember { mutableStateOf<List<WordCell>>(emptyList()) }
     var elapsedSeconds by rememberSaveable(seed) { mutableIntStateOf(0) }
     var completeEventSent by rememberSaveable(seed) { mutableStateOf(false) }
+    var interactionVersion by rememberSaveable(seed) { mutableIntStateOf(0) }
+    var hintedWord by remember(seed) { mutableStateOf<String?>(null) }
+    var hintVisible by remember(seed) { mutableStateOf(false) }
 
     val isComplete = foundWords.size == puzzle.words.size && puzzle.words.isNotEmpty()
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -93,6 +96,33 @@ fun WordSeekerGame(
             delay(1000)
             elapsedSeconds += 1
         }
+    }
+
+    LaunchedEffect(seed, isComplete, interactionVersion, foundWordsList) {
+        hintedWord = null
+        hintVisible = false
+        while (!isComplete) {
+            delay(5_000)
+            val nextWord = puzzle.placements
+                .firstOrNull { placement -> placement.word !in foundWords }
+                ?.word
+                ?: break
+            hintedWord = nextWord
+            repeat(2) {
+                hintVisible = true
+                delay(350)
+                hintVisible = false
+                delay(250)
+            }
+            hintedWord = null
+        }
+    }
+
+    val hintedCell = remember(puzzle, hintedWord) {
+        puzzle.placements
+            .firstOrNull { placement -> placement.word == hintedWord }
+            ?.cells()
+            ?.firstOrNull()
     }
 
     Column(
@@ -126,8 +156,14 @@ fun WordSeekerGame(
                 puzzle = puzzle,
                 foundWords = foundWords,
                 currentPath = currentPath,
-                onPathChanged = { currentPath = it },
+                hintCell = hintedCell,
+                hintVisible = hintVisible,
+                onPathChanged = { path ->
+                    currentPath = path
+                    interactionVersion += 1
+                },
                 onSelectionFinished = { path ->
+                    interactionVersion += 1
                     val found = puzzle.match(path)
                     if (found != null && found !in foundWords) {
                         foundWordsList = (foundWordsList + found).distinct()
@@ -142,6 +178,8 @@ fun WordSeekerGame(
             WordSeekerWordList(
                 words = puzzle.words,
                 foundWords = foundWords,
+                hintedWord = hintedWord,
+                hintVisible = hintVisible,
                 isLandscape = isLandscape,
                 modifier = listModifier
             )
@@ -203,6 +241,8 @@ private fun WordSeekerGrid(
     puzzle: WordSeekerPuzzle,
     foundWords: Set<String>,
     currentPath: List<WordCell>,
+    hintCell: WordCell?,
+    hintVisible: Boolean,
     onPathChanged: (List<WordCell>) -> Unit,
     onSelectionFinished: (List<WordCell>) -> Unit,
     modifier: Modifier = Modifier
@@ -287,6 +327,7 @@ private fun WordSeekerGrid(
                         val cell = WordCell(rowIndex, colIndex)
                         val isFound = cell in foundCells
                         val isCurrent = cell in currentCells
+                        val isHint = hintVisible && cell == hintCell
                         Box(
                             modifier = Modifier
                                 .weight(1f)
@@ -295,6 +336,7 @@ private fun WordSeekerGrid(
                                     when {
                                         isCurrent -> PlanetBlue.copy(alpha = 0.34f)
                                         isFound -> PlanetGold.copy(alpha = 0.14f)
+                                        isHint -> PlanetBlue.copy(alpha = 0.30f)
                                         else -> Color.White.copy(alpha = 0.045f)
                                     }
                                 )
@@ -320,6 +362,8 @@ private fun WordSeekerGrid(
 private fun WordSeekerWordList(
     words: List<String>,
     foundWords: Set<String>,
+    hintedWord: String?,
+    hintVisible: Boolean,
     isLandscape: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -342,10 +386,15 @@ private fun WordSeekerWordList(
                 ) {
                     rowWords.forEach { word ->
                         val found = word in foundWords
+                        val isHint = hintVisible && word == hintedWord
                         Text(
                             text = word,
                             modifier = Modifier.weight(1f),
-                            color = if (found) Color.Gray.copy(alpha = 0.72f) else PlanetGold,
+                            color = when {
+                                found -> Color.Gray.copy(alpha = 0.72f)
+                                isHint -> PlanetBlue
+                                else -> PlanetGold
+                            },
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold,
                             textDecoration = if (found) TextDecoration.LineThrough else TextDecoration.None,
@@ -448,15 +497,17 @@ private data class WordSeekerPuzzle(
 private object WordSeekerGenerator {
     fun generate(stars: Int, locale: String, grade: Int, seed: Int): WordSeekerPuzzle {
         val random = Random(seed)
-        val size = when (stars.coerceIn(1, 3)) {
+        val size = when (stars.coerceIn(1, 4)) {
             1 -> 8
             2 -> 10
-            else -> 12
+            3 -> 12
+            else -> 14
         }
-        val targetWordCount = when (stars.coerceIn(1, 3)) {
+        val targetWordCount = when (stars.coerceIn(1, 4)) {
             1 -> 5
             2 -> 7
-            else -> 9
+            3 -> 9
+            else -> 11
         }
         val candidates = wordBank(locale, grade)
             .filter { it.length <= size }
@@ -526,9 +577,10 @@ private object WordSeekerGenerator {
         return null
     }
 
-    private fun directionsFor(stars: Int): List<Pair<Int, Int>> = when (stars.coerceIn(1, 3)) {
+    private fun directionsFor(stars: Int): List<Pair<Int, Int>> = when (stars.coerceIn(1, 4)) {
         1 -> listOf(0 to 1, 1 to 0)
         2 -> listOf(0 to 1, 1 to 0, 1 to 1, -1 to 1)
+        3 -> listOf(0 to 1, 1 to 0, 1 to 1, -1 to 1, 0 to -1, -1 to 0)
         else -> listOf(0 to 1, 1 to 0, 1 to 1, -1 to 1, 0 to -1, -1 to 0, 1 to -1, -1 to -1)
     }
 

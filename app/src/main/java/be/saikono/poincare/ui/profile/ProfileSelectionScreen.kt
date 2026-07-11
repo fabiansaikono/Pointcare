@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.profile
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import be.saikono.poincare.model.ChildProfile
+import be.saikono.poincare.model.LocalAppLanguage
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.theme.*
 
@@ -27,6 +29,7 @@ fun ProfileSelectionScreen(
     onProfileSelected: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val appLanguage = LocalAppLanguage.current
     var showPinDialog by remember { mutableStateOf(false) }
     var pinValue by remember { mutableStateOf("") }
     var pinError by remember { mutableStateOf(false) }
@@ -67,6 +70,8 @@ fun ProfileSelectionScreen(
             },
             confirmButton = {
                 Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = {
                         if (viewModel.isParentPinCorrect(pinValue)) {
                             showPinDialog = false
@@ -85,7 +90,9 @@ fun ProfileSelectionScreen(
                 }
             },
             dismissButton = {
-                TextButton(onClick = { 
+                TextButton(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),onClick = { 
                     showPinDialog = false
                     pinValue = ""
                     pinError = false
@@ -103,6 +110,7 @@ fun ProfileSelectionScreen(
             .systemNavigationMargin(),
         contentAlignment = Alignment.Center
     ) {
+        if (!uiState.isLoading) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(32.dp)
@@ -124,8 +132,7 @@ fun ProfileSelectionScreen(
                         profile = profile,
                         isSelected = profile.id == uiState.selectedProfileId,
                         onClick = {
-                            viewModel.selectProfile(profile.id)
-                            onProfileSelected()
+                            viewModel.selectProfile(profile.id, onProfileSelected)
                         }
                     )
                 }
@@ -133,6 +140,38 @@ fun ProfileSelectionScreen(
                 item {
                     AddProfileItem(onClick = { showPinDialog = true })
                 }
+            }
+        }
+        } else {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                Box(modifier = Modifier.size(132.dp), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator(
+                        progress = { uiState.loadingProgress.coerceIn(0, 100) / 100f },
+                        modifier = Modifier.fillMaxSize(),
+                        color = PlanetBlue,
+                        trackColor = StarWhite.copy(alpha = 0.14f),
+                        strokeWidth = 10.dp
+                    )
+                    Text(
+                        text = "${uiState.loadingProgress.coerceIn(0, 100)}%",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = StarWhite,
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                    )
+                }
+                Text(
+                    text = when {
+                        appLanguage.startsWith("fr") -> "Chargement des exercices ..."
+                        appLanguage.startsWith("en") -> "Loading exercises ..."
+                        else -> "Oefeningen laden ..."
+                    },
+                    color = StarWhite,
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center
+                )
             }
         }
     }

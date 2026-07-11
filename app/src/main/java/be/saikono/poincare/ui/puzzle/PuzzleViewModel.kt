@@ -2,12 +2,15 @@ package be.saikono.poincare.ui.puzzle
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import be.saikono.poincare.data.audit.AuditLog
 import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.data.sync.SyncManager
 import be.saikono.poincare.model.*
 import be.saikono.poincare.repository.ContentRepository
 import be.saikono.poincare.repository.ProfileRepository
 import be.saikono.poincare.repository.ProgressRepository
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -47,6 +50,8 @@ class PuzzleViewModel(
     private var selectedDifficultyStars: Int? = null
     private var latestProfile: ChildProfile? = null
     private var hasContentRequest = false
+    private var contentLoadJob: Job? = null
+    private var contentLoadGeneration = 0L
 
     init {
         observeProfile()
@@ -77,54 +82,72 @@ class PuzzleViewModel(
     }
 
     private fun loadContentForProfile(profile: ChildProfile) {
-        viewModelScope.launch {
+        val requestGeneration = ++contentLoadGeneration
+        contentLoadJob?.cancel()
+        contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            val level = profile.puzzleLevel
-            val mathLevel = profile.mathLevel
-            val loadedPuzzles = level.toGrade()?.let { grade ->
-                selectedSubcategoryId?.let { subcategoryId ->
-                    generatedPuzzleExercise(subcategoryId, level, mathLevel, profile.readingLevel, selectedDifficultyStars)?.let { generatedPuzzle ->
-                        listOf(generatedPuzzle)
+            try {
+                val level = profile.levelForPuzzle(selectedSubcategoryId)
+                val mathLevel = profile.mathLevel
+                val loadedPuzzles = level.toGrade()?.let { grade ->
+                    selectedSubcategoryId?.let { subcategoryId ->
+                        generatedPuzzleExercise(subcategoryId, level, mathLevel, profile.readingLevel, selectedDifficultyStars, profile.hardModeEnabled)?.let { generatedPuzzle ->
+                            listOf(generatedPuzzle)
+                        } ?: run {
+                            val domainPuzzles = contentRepository.getExercises(LearningDomain.PUZZLE, level)
+                            val subcategoryPuzzles = contentRepository.getExercises(
+                                mainCategory = "puzzle",
+                                subcategoryId = subcategoryId,
+                                grade = grade,
+                                difficultyStars = selectedDifficultyStars
+                            )
+                            if (profile.showUnassignedExercises) {
+                                (subcategoryPuzzles + domainPuzzles.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
+                            } else {
+                                subcategoryPuzzles
+                            }
+                        }
                     } ?: run {
                         val domainPuzzles = contentRepository.getExercises(LearningDomain.PUZZLE, level)
-                        val subcategoryPuzzles = contentRepository.getExercises(
-                            subcategoryId = subcategoryId,
-                            grade = grade,
-                            difficultyStars = selectedDifficultyStars
-                        )
-                        if (profile.showUnassignedExercises) {
-                            (subcategoryPuzzles + domainPuzzles.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
-                        } else {
-                            subcategoryPuzzles
-                        }
+                        if (profile.showUnassignedExercises) domainPuzzles
+                        else domainPuzzles.filter { !it.isUnassignedExercise() }
                     }
-                } ?: run {
-                    val domainPuzzles = contentRepository.getExercises(LearningDomain.PUZZLE, level)
-                    if (profile.showUnassignedExercises) domainPuzzles
-                    else domainPuzzles.filter { !it.isUnassignedExercise() }
+                }.orEmpty()
+
+                val orderedPuzzles = orderUnfinishedFirst(loadedPuzzles, profile.id)
+                if (requestGeneration != contentLoadGeneration) return@launch
+                puzzles = orderedPuzzles
+
+                if (puzzles.isNotEmpty()) {
+                    startPuzzle(0)
+                } else {
+                    showEmptyPuzzleState()
                 }
-            }.orEmpty()
-
-            puzzles = orderUnfinishedFirst(loadedPuzzles, profile.id)
-
-            if (puzzles.isNotEmpty()) {
-                startPuzzle(0)
-            } else {
-                _uiState.update {
-                    it.copy(
-                        currentExercise = null,
-                        availableDigits = emptyList(),
-                        placedDigits = emptyMap(),
-                        placedIndices = emptySet(),
-                        pendingChoiceIndex = null,
-                        isLoading = false,
-                        isSolved = false,
-                        isWrong = false,
-                        isFinished = false,
-                        showFeedback = false
-                    )
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (error: Throwable) {
+                if (requestGeneration == contentLoadGeneration) {
+                    puzzles = emptyList()
+                    showEmptyPuzzleState()
                 }
             }
+        }
+    }
+
+    private fun showEmptyPuzzleState() {
+        _uiState.update {
+            it.copy(
+                currentExercise = null,
+                availableDigits = emptyList(),
+                placedDigits = emptyMap(),
+                placedIndices = emptySet(),
+                pendingChoiceIndex = null,
+                isLoading = false,
+                isSolved = false,
+                isWrong = false,
+                isFinished = false,
+                showFeedback = false
+            )
         }
     }
 
@@ -155,9 +178,11 @@ class PuzzleViewModel(
         level: SkillLevel,
         mathLevel: SkillLevel,
         readingLevel: SkillLevel,
-        difficultyStars: Int?
+        difficultyStars: Int?,
+        hardModeEnabled: Boolean
     ): ExerciseContent? {
         val stars = difficultyStars?.coerceIn(1, 3) ?: 1
+        val generationDifficulty = effectiveGeneratedDifficulty(stars, hardModeEnabled)
         val mathGrade = mathLevel.toGrade() ?: level.toGrade() ?: 1
         return when (subcategoryId) {
             "sudoku" -> ExerciseContent(
@@ -173,6 +198,7 @@ class PuzzleViewModel(
                     "subcategoryId" to "sudoku",
                     "grade" to (level.toGrade()?.toString() ?: ""),
                     "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
                     "topic" to "Sudoku",
                     "topic_en-US" to "Sudoku",
                     "topic_fr-BE" to "Sudoku"
@@ -192,6 +218,7 @@ class PuzzleViewModel(
                     "subcategoryId" to "math-crosswords",
                     "grade" to (level.toGrade()?.toString() ?: ""),
                     "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
                     "topic" to "Rekenkruiswoord",
                     "topic_en-US" to "Math crossword",
                     "topic_fr-BE" to "Mots croises de calcul"
@@ -216,6 +243,7 @@ class PuzzleViewModel(
                     "grade" to mathGrade.toString(),
                     "mathGrade" to mathGrade.toString(),
                     "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
                     "topic" to "Calculatorpuzzel",
                     "topic_en-US" to "Calculator puzzle",
                     "topic_fr-BE" to "Puzzle calculatrice",
@@ -240,6 +268,7 @@ class PuzzleViewModel(
                     "subcategoryId" to "constellations",
                     "grade" to (level.toGrade()?.toString() ?: "1"),
                     "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
                     "topic" to "Constellations",
                     "topic_en-US" to "Constellations",
                     "topic_fr-BE" to "Constellations",
@@ -260,6 +289,7 @@ class PuzzleViewModel(
                     "subcategoryId" to "orbit-builder",
                     "grade" to (level.toGrade()?.toString() ?: "1"),
                     "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
                     "topic" to "Orbitbouwer",
                     "topic_en-US" to "Orbit Builder",
                     "topic_fr-BE" to "Constructeur d’orbite",
@@ -285,6 +315,7 @@ class PuzzleViewModel(
                     "readingGrade" to (readingLevel.toGrade()?.toString() ?: (level.toGrade()?.toString() ?: "1")),
                     "mathGrade" to mathGrade.toString(),
                     "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
                     "topic" to "Moederschip",
                     "topic_en-US" to "Mothership dock",
                     "topic_fr-BE" to "Vaisseau mère",
@@ -305,6 +336,7 @@ class PuzzleViewModel(
                 "subcategoryId" to GALAXYCON_SUBCATEGORY_ID,
                 "grade" to (level.toGrade()?.toString() ?: ""),
                 "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
                 "topic" to "Galaxycon",
                 "topic_en-US" to "Galaxycon",
                 "topic_fr-BE" to "Galaxycon"
@@ -325,6 +357,7 @@ class PuzzleViewModel(
  "subcategoryId" to "word-seeker",
  "grade" to (level.toGrade()?.toString() ?: ""),
  "difficultyStars" to stars.toString(),
+                    "generationDifficulty" to generationDifficulty.toString(),
  "topic" to "Woordzoeker",
  "topic_en-US" to "Word seeker",
  "topic_fr-BE" to "Cherche-mots"
@@ -433,9 +466,12 @@ class PuzzleViewModel(
     }
 
     private fun startPuzzle(index: Int) {
+        val puzzle = puzzles.getOrNull(index) ?: run {
+            showEmptyPuzzleState()
+            return
+        }
         currentIndex = index
         startTime = System.currentTimeMillis()
-        val puzzle = puzzles[index]
         _uiState.update {
             it.copy(
                 currentExercise = puzzle,
@@ -450,9 +486,11 @@ class PuzzleViewModel(
                 isLoading = false
             )
         }
+        AuditLog.record("mission_started", _uiState.value.currentProfileId, puzzle.domain.name, puzzle.data["subcategoryId"], puzzle.id)
     }
 
     fun onDigitPlaced(slotIndex: Int, digitIndex: Int) {
+        AuditLog.record("puzzle_choice_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         if (_uiState.value.isSolved) return
 
         val puzzle = _uiState.value.currentExercise ?: return
@@ -651,7 +689,12 @@ class PuzzleViewModel(
         }
     }
 
+    fun speakText(text: String) {
+        audioService.speak(text, _uiState.value.exerciseLanguage)
+    }
+
     fun nextPuzzle() {
+        AuditLog.record("next_mission_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         if (currentIndex + 1 < puzzles.size) {
             startPuzzle(currentIndex + 1)
         } else if (puzzles.isNotEmpty()) {
@@ -659,4 +702,9 @@ class PuzzleViewModel(
             startPuzzle(0)
         }
     }
+    private fun ChildProfile.levelForPuzzle(subcategoryId: String?): SkillLevel = when (subcategoryId) {
+        "word-seeker", "mothership-dock" -> readingLevel
+        else -> mathLevel
+    }
+
 }

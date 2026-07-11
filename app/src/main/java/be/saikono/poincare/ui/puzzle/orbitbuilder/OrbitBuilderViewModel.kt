@@ -1,6 +1,7 @@
 package be.saikono.poincare.ui.puzzle.orbitbuilder
 
 import androidx.lifecycle.ViewModel
+import be.saikono.poincare.data.audit.AuditLog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -9,15 +10,47 @@ class OrbitBuilderViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(OrbitBuilderUiState())
     val uiState: StateFlow<OrbitBuilderUiState> = _uiState
 
-    fun setDifficultyStars(stars: Int?) {
-        val selectedStars = stars?.coerceIn(1, 3) ?: 1
-        val filteredLevels = OrbitBuilderLevels.all.filter { it.difficultyStars == selectedStars }.ifEmpty { OrbitBuilderLevels.all }.shuffled()
+    private var displayedStars: Int = 1
+    private var generationDifficulty: Int = 1
+    private var grade: Int = 1
+
+    fun setDifficulty(
+        displayedStars: Int?,
+        generationDifficulty: Int? = displayedStars,
+        grade: Int = this.grade
+    ) {
+        val visible = displayedStars?.coerceIn(1, 3) ?: 1
+        val effective = (generationDifficulty ?: visible).coerceIn(1, 4)
+        val normalizedGrade = grade.coerceIn(1, 6)
+        this.displayedStars = visible
+        this.generationDifficulty = effective
+        this.grade = normalizedGrade
+        val generatedLevel = OrbitBuilderLevels.random(
+            displayedStars = visible,
+            generationDifficulty = effective,
+            grade = normalizedGrade
+        )
         _uiState.update { state ->
-            state.copy(levels = filteredLevels, levelIndex = 0, drawnPath = emptyList(), placedArrows = emptyMap(), attempts = 0, phase = OrbitBuilderPhase.PLANNING, launchStepIndex = 0, simulationResult = null, launchRunId = state.launchRunId + 1)
+            state.copy(
+                levels = listOf(generatedLevel),
+                levelIndex = 0,
+                drawnPath = emptyList(),
+                placedArrows = emptyMap(),
+                attempts = 0,
+                phase = OrbitBuilderPhase.PLANNING,
+                launchStepIndex = 0,
+                simulationResult = null,
+                launchRunId = state.launchRunId + 1
+            )
         }
     }
 
+    fun setDifficultyStars(stars: Int?) {
+        setDifficulty(stars, stars, grade)
+    }
+
     fun startDrawnPath(row: Int, column: Int) {
+        AuditLog.record("orbit_path_started")
         _uiState.update { state ->
             if (state.phase != OrbitBuilderPhase.PLANNING) return@update state
             val level = state.currentLevel
@@ -50,6 +83,7 @@ class OrbitBuilderViewModel : ViewModel() {
     }
 
     fun launch() {
+        AuditLog.record("orbit_launch_pressed")
         _uiState.update { state ->
             if (!state.canLaunch) return@update state
             val attempts = state.attempts + 1
@@ -81,13 +115,24 @@ class OrbitBuilderViewModel : ViewModel() {
     }
 
     fun nextMission() {
+        AuditLog.record("next_mission_pressed", domain = "PUZZLE", subcategoryId = "orbit-builder")
+        val generatedLevel = OrbitBuilderLevels.random(
+            displayedStars = displayedStars,
+            generationDifficulty = generationDifficulty,
+            grade = grade
+        )
         _uiState.update { state ->
-            val nextIndex = when {
-                state.levels.isEmpty() -> 0
-                state.levels.size == 1 -> 0
-                else -> state.levels.indices.filter { it != state.levelIndex }.random()
-            }
-            state.copy(levelIndex = nextIndex, drawnPath = emptyList(), placedArrows = emptyMap(), attempts = 0, phase = OrbitBuilderPhase.PLANNING, launchStepIndex = 0, simulationResult = null, launchRunId = state.launchRunId + 1)
+            state.copy(
+                levels = listOf(generatedLevel),
+                levelIndex = 0,
+                drawnPath = emptyList(),
+                placedArrows = emptyMap(),
+                attempts = 0,
+                phase = OrbitBuilderPhase.PLANNING,
+                launchStepIndex = 0,
+                simulationResult = null,
+                launchRunId = state.launchRunId + 1
+            )
         }
     }
 

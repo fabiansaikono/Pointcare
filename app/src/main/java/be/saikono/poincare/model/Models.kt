@@ -61,17 +61,88 @@ data class ChildProfile(
 fun ChildProfile.isMainCategoryEnabled(domain: LearningDomain): Boolean = domain.name !in hiddenMainCategories
 fun ChildProfile.isSubcategoryEnabled(subcategoryId: String): Boolean = subcategoryId !in hiddenSubcategories
 
+/**
+ * Hard Mode deliberately keeps the serialized [giftedModeEnabled] field for
+ * backwards-compatible profile storage while changing its user-facing meaning.
+ */
+val ChildProfile.hardModeEnabled: Boolean
+    get() = giftedModeEnabled
+
+/**
+ * Returns the generation difficulty while keeping the visible tier unchanged.
+ * Normal mode uses levels 1..3. Hard Mode maps visible 1/2/3 stars to
+ * generation levels 2/3/4 respectively.
+ */
+fun effectiveGeneratedDifficulty(displayedStars: Int, hardModeEnabled: Boolean): Int {
+    val visible = displayedStars.coerceIn(1, 3)
+    return if (hardModeEnabled) visible + 1 else visible
+}
+
+fun ChildProfile.effectiveGeneratedDifficulty(displayedStars: Int): Int =
+    effectiveGeneratedDifficulty(displayedStars, hardModeEnabled)
+
 fun formatVisibleNumbers(value: String): String = value
-    .replace(GENERATED_EURO_WHOLE_NUMBER_REGEX) { match ->
-        "€ ${match.groupValues[1].toIntOrNull()?.toString() ?: match.groupValues[1]}"
-    }
+    .replace(VISIBLE_NUMBER_TOKEN_REGEX) { match -> formatVisibleNumberToken(match.value) }
     .replace(EURO_SPACING_REGEX, "€ ")
-    .replace(GENERATED_WHOLE_NUMBER_REGEX) { match ->
-        match.groupValues[1].toIntOrNull()?.toString() ?: match.value
+
+private fun formatVisibleNumberToken(raw: String): String {
+    val sign = when {
+        raw.startsWith("−") -> "−"
+        raw.startsWith("-") -> "-"
+        else -> ""
     }
-    .replace(LARGE_WHOLE_NUMBER_REGEX) { match ->
-        match.value.reversed().chunked(3).joinToString(" ").reversed()
+    val unsigned = raw.removePrefix("−").removePrefix("-")
+    val compact = unsigned.replace(" ", "")
+
+    // Preserve time/date components such as 08:05 instead of turning them into 8:5.
+    if (!compact.contains('.') && !compact.contains(',') && compact.length > 1 && compact.startsWith('0')) {
+        return sign + compact
     }
+
+    val integerPart: String
+    val decimalPart: String?
+    when {
+        compact.contains(',') -> {
+            integerPart = compact.substringBefore(',').replace(".", "")
+            decimalPart = compact.substringAfter(',', "").takeIf { it.isNotEmpty() }
+        }
+        compact.count { it == '.' } > 1 -> {
+            integerPart = compact.replace(".", "")
+            decimalPart = null
+        }
+        compact.contains('.') -> {
+            val before = compact.substringBefore('.')
+            val after = compact.substringAfter('.')
+            val dotIsThousandsSeparator = after.length == 3 && before.isNotEmpty() && before != "0"
+            if (dotIsThousandsSeparator) {
+                integerPart = before + after
+                decimalPart = null
+            } else {
+                integerPart = before
+                decimalPart = after.takeIf { it.isNotEmpty() }
+            }
+        }
+        else -> {
+            integerPart = compact
+            decimalPart = null
+        }
+    }
+
+    val normalizedInteger = integerPart.ifBlank { "0" }
+    val groupedInteger = normalizedInteger
+        .reversed()
+        .chunked(3)
+        .joinToString(" ")
+        .reversed()
+    return buildString {
+        append(sign)
+        append(groupedInteger)
+        decimalPart?.let {
+            append(',')
+            append(it)
+        }
+    }
+}
 
 fun isDisplayNumber(value: String): Boolean {
     val trimmed = value.trim()
@@ -87,10 +158,10 @@ fun normalizeAnswer(value: String): String {
     }
 }
 
-private val GENERATED_EURO_WHOLE_NUMBER_REGEX = Regex("€\\s*(\\d+)\\.000(?:,0)?")
 private val EURO_SPACING_REGEX = Regex("€\\s*")
-private val GENERATED_WHOLE_NUMBER_REGEX = Regex("(?<![\\d.,])(\\d+)\\.000(?:,0)?(?![\\d.,])")
-private val LARGE_WHOLE_NUMBER_REGEX = Regex("(?<![\\d.,])\\d{4,}(?![\\d.,])")
+private val VISIBLE_NUMBER_TOKEN_REGEX = Regex(
+    "(?<![\\p{L}\\d])([−-]?(?:\\d{1,3}(?:[ .]\\d{3})+|\\d+)(?:[.,]\\d+)?)(?![\\p{L}\\d])"
+)
 
 @Serializable
 data class LevelProgress(
@@ -133,7 +204,8 @@ fun missionPointsFor(exercise: ExerciseContent, correct: Boolean): Int {
         InputMode.CALCULATOR_PUZZLE -> 18
         InputMode.DRAG_DROP_DIGITS,
         InputMode.DRAG_DROP_LETTERS,
-        InputMode.TRACE_LETTER -> 10
+        InputMode.TRACE_LETTER,
+        InputMode.CUSTOM_TEXT_KEYBOARD -> 10
         InputMode.CUSTOM_NUMBER_PAD -> 8
         InputMode.TAP_CHOICE,
         InputMode.LISTEN_AND_SELECT -> 5

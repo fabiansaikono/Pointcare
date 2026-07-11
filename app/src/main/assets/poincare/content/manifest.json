@@ -1,7 +1,7 @@
 {
-  "version": "3.13",
-  "generatedAt": "2026-07-03T00:00:00+02:00",
-  "totalExerciseCount": 21600,
+  "version": "3.14",
+  "generatedAt": "2026-07-14T09:52:06+02:00",
+  "totalExerciseCount": 25200,
   "exercisesPerSubcategoryPerGrade": 100,
   "excludedGeneratedSubcategories": [
     "math_crossword",
@@ -28,18 +28,21 @@
     "Missing-letter prompt question marks are normal text; only the separate missing marker is yellow.",
     "Writing exercises now render the word-to-complete as a separate line via missingLetterDisplay/@visibleLine.",
     "Listening letter/sound exercises include audio/@phoneticText and audio/@ttsText for reliable pronunciation.",
-    "Writing answer options include speak metadata so letters/clusters like a, aa, ui and eu are read correctly."
+    "Writing answer options include speak metadata so letters/clusters like a, aa, ui and eu are read correctly.",
+    "Added five metric comparison subcategories under Measurement and geometry: bigger/smaller, heavier/lighter, higher/lower, longer/shorter, and farther/closer.",
+    "Added Question words under Spelling and grammar with which, what, how, when, where, who, why, and how many.",
+    "Refined visible category labels to Reading and listening, Spelling and grammar, and Measurement and geometry in nl-BE, en-US, and fr-BE.",
+    "Preserved existing serialized learning-domain and progress identifiers for backward compatibility."
   ],
   "files": [
-    "poincare-exercises-math-v3.xml",
-    "poincare-exercises-language-v3.xml",
-    "poincare-exercises-logic-puzzles-v3.xml",
-    "poincare-exercises-world-knowledge-v3.xml",
-    "poincare-exercises-geometry-v3.xml",
-    "poincare-exercises-index-v3.xml",
-    "poincare-content-pack-v3-full.xsd",
-    "manifest.json",
-    "validation-report.json"
+    "poincare-exercises-math.xml",
+    "poincare-exercises-language.xml",
+    "poincare-exercises-logic-puzzles.xml",
+    "poincare-exercises-world-knowledge.xml",
+    "poincare-exercises-geometry.xml",
+    "poincare-exercises-index.xml",
+    "poincare-content-pack-full.xsd",
+    "manifest.json"
   ],
   "qualityFixes": [
     "Removed visible Choose from / Kies uit / Choisis parmi option lists from prompts",
@@ -53,7 +56,8 @@
     "Removed vocabulary subcategory from language XML and index",
     "Removed the missingMarkerColor top-level attribute from writing exercises to avoid coloring the prompt question mark.",
     "Added markerColor only to missingLetterDisplay metadata.",
-    "Added displayValueMustBeUsed=true to short letter/sound answers to prevent showing canonical or stale values such as een."
+    "Added displayValueMustBeUsed=true to short letter/sound answers to prevent showing canonical or stale values such as een.",
+    "Corrected generated nl-BE/en-US comparison wording and Belgian French contractions without changing exercise IDs or progress keys."
   ],
   "fixesInThisVersion": [
     "Communicatie/Luisteren and Schrijven/Schrijven no longer use raw single-letter text for TTS.",

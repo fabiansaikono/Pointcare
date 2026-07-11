@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import be.saikono.poincare.model.formatVisibleNumbers
 import be.saikono.poincare.ui.theme.PlanetBlue
 import be.saikono.poincare.ui.theme.StarWhite
 import kotlinx.coroutines.delay
@@ -58,14 +59,14 @@ fun TapToTranslateText(
         ) { isShowing ->
             if (isShowing) {
                 Text(
-                    text = translation,
+                    text = formatVisibleNumbers(translation),
                     style = MaterialTheme.typography.headlineSmall,
                     color = PlanetBlue,
                     fontWeight = FontWeight.Bold
                 )
             } else {
                 Text(
-                    text = text,
+                    text = formatVisibleNumbers(text),
                     style = MaterialTheme.typography.headlineSmall,
                     color = StarWhite
                 )

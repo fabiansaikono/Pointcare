@@ -32,18 +32,34 @@ import be.saikono.poincare.model.ChildProfile
 import be.saikono.poincare.model.LevelProgress
 import be.saikono.poincare.model.LearningDomain
 import be.saikono.poincare.model.SkillLevel
+import be.saikono.poincare.model.SubcategoryCatalog
 import be.saikono.poincare.model.isSubcategoryEnabled
+import be.saikono.poincare.model.formatVisibleNumbers
 import be.saikono.poincare.model.levelProgressFor
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.spaceMap.SpaceBackground
 import be.saikono.poincare.ui.theme.*
+
+data class SubCategoryOption(
+    val id: String,
+    val nameNl: String,
+    val nameEn: String,
+    val nameFr: String
+) {
+    fun localized(locale: String): String = when (languageOf(locale)) {
+        "en" -> nameEn
+        "fr" -> nameFr
+        else -> nameNl
+    }
+}
 
 data class SubCategory(
     val id: String,
     val nameNl: String,
     val iconResId: Int,
     val exerciseCount: Int? = 100,
-    val accentColor: Color = DeepSpaceBlue
+    val accentColor: Color = DeepSpaceBlue,
+    val options: List<SubCategoryOption> = emptyList()
 )
 
 @Composable
@@ -52,12 +68,16 @@ fun SubCategorySelectionScreen(
     currentLevel: SkillLevel,
     categoryProgress: LevelProgress = levelProgressFor(0),
     subcategoryCompletions: Map<String, Int> = emptyMap(),
+    worldLevelCompletions: Map<String, Map<Int, Int>> = emptyMap(),
+    subcategoryAvailability: Map<String, Boolean> = emptyMap(),
     profile: ChildProfile?,
     onSubCategorySelected: (String, Int) -> Unit,
     onNavigateBack: () -> Unit
 ) {
     var pendingSubcategory by remember { mutableStateOf<SubCategory?>(null) }
+    var pendingWorldSubcategory by remember { mutableStateOf<SubCategory?>(null) }
     var pendingMissionChoice by remember { mutableStateOf<SubCategory?>(null) }
+    var pendingOptionsSubcategory by remember { mutableStateOf<SubCategory?>(null) }
     var briefingSubcategory by remember { mutableStateOf<SubCategory?>(null) }
     var briefingLocale by remember { mutableStateOf("nl-BE") }
     val context = LocalContext.current
@@ -95,16 +115,24 @@ fun SubCategorySelectionScreen(
                 text = { Text(localizedUiText("briefingChoice", appLanguage)) },
                 confirmButton = {
                     Button(
+                        shape = RoundedCornerShape(12.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                         onClick = {
                         pendingMissionChoice = null
-                        if (domain == LearningDomain.PUZZLE.name) pendingSubcategory = subcategory else onSubCategorySelected(subcategory.id, 0)
+                        when (domain) {
+                            LearningDomain.PUZZLE.name -> pendingSubcategory = subcategory
+                            LearningDomain.WORLD_KNOWLEDGE.name -> pendingWorldSubcategory = subcategory
+                            else -> onSubCategorySelected(subcategory.id, 0)
+                        }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = DeepSpaceBlue, contentColor = PlanetGold)
                     ) { Text(localizedUiText("startMission", appLanguage)) }
                 },
                 dismissButton = {
                     if (briefing != null) {
-                        TextButton(onClick = {
+                        TextButton(
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),onClick = {
                             pendingMissionChoice = null
                             briefingLocale = profile?.supportLanguage?.let(::normalizeBriefingLocale) ?: "nl-BE"
                             briefingSubcategory = subcategory
@@ -132,15 +160,123 @@ fun SubCategorySelectionScreen(
                 },
                 confirmButton = {
                     Button(
+                        shape = RoundedCornerShape(12.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                         onClick = {
                         val selected = briefingSubcategory ?: return@Button
                         briefingSubcategory = null
-                        if (domain == LearningDomain.PUZZLE.name) pendingSubcategory = selected else onSubCategorySelected(selected.id, 0)
+                        when (domain) {
+                            LearningDomain.PUZZLE.name -> pendingSubcategory = selected
+                            LearningDomain.WORLD_KNOWLEDGE.name -> pendingWorldSubcategory = selected
+                            else -> onSubCategorySelected(selected.id, 0)
+                        }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = DeepSpaceBlue, contentColor = PlanetGold)
                     ) { Text(localizedUiText("startMission", appLanguage)) }
                 },
-                dismissButton = { TextButton(onClick = { briefingSubcategory = null }) { Text(localizedUiText("close", appLanguage)) } }
+                dismissButton = { TextButton(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = { briefingSubcategory = null }) { Text(localizedUiText("close", appLanguage)) } }
+            )
+        }
+
+        pendingOptionsSubcategory?.let { subcategory ->
+            AlertDialog(
+                onDismissRequest = { pendingOptionsSubcategory = null },
+                containerColor = PlanetGold.copy(alpha = 0.90f),
+                titleContentColor = DeepSpaceBlue,
+                textContentColor = DeepSpaceBlue,
+                title = { Text(localizedUiText("chooseOption", appLanguage)) },
+                text = {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        subcategory.options.forEach { option ->
+                            val fullId = SubcategoryCatalog.fullFocusId(subcategory.id, option.id)
+                            val enabled = subcategoryAvailability[fullId] == true
+                            Button(
+                                shape = RoundedCornerShape(12.dp),
+                                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                                onClick = {
+                                    pendingOptionsSubcategory = null
+                                    onSubCategorySelected(fullId, 0)
+                                },
+                                enabled = enabled,
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = DeepSpaceBlue,
+                                    contentColor = PlanetGold,
+                                    disabledContainerColor = Color.Gray.copy(alpha = .25f),
+                                    disabledContentColor = DeepSpaceBlue.copy(alpha = .55f)
+                                )
+                            ) { Text(option.localized(appLanguage), textAlign = TextAlign.Center) }
+                        }
+                    }
+                },
+                confirmButton = {},
+                dismissButton = {
+                    TextButton(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = { pendingOptionsSubcategory = null }) {
+                        Text(localizedUiText("cancel", appLanguage))
+                    }
+                }
+            )
+        }
+
+        pendingWorldSubcategory?.let { subcategory ->
+            val completedByLevel = worldLevelCompletions[subcategory.id].orEmpty()
+            AlertDialog(
+                onDismissRequest = { pendingWorldSubcategory = null },
+                containerColor = PlanetGold.copy(alpha = 0.90f),
+                titleContentColor = DeepSpaceBlue,
+                textContentColor = DeepSpaceBlue,
+                title = {
+                    Text(when {
+                        appLanguage.startsWith("fr") -> "Choisis ton niveau"
+                        appLanguage.startsWith("en") -> "Choose your level"
+                        else -> "Kies je niveau"
+                    })
+                },
+                text = {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        (1..6).forEach { level ->
+                            val previousComplete = level == 1 || (completedByLevel[level - 1] ?: 0) >= WORLD_LEVEL_MISSION_COUNT
+                            val completed = completedByLevel[level] ?: 0
+                            Button(
+                                shape = RoundedCornerShape(12.dp),
+                                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                                onClick = {
+                                    pendingWorldSubcategory = null
+                                    onSubCategorySelected(subcategory.id, level)
+                                },
+                                enabled = previousComplete,
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = DeepSpaceBlue,
+                                    contentColor = PlanetGold,
+                                    disabledContainerColor = DeepSpaceBlue.copy(alpha = .25f),
+                                    disabledContentColor = DeepSpaceBlue.copy(alpha = .55f)
+                                )
+                            ) {
+                                Text(
+                                    text = buildString {
+                                        append(when {
+                                            appLanguage.startsWith("fr") -> "Niveau $level"
+                                            appLanguage.startsWith("en") -> "Level $level"
+                                            else -> "Niveau $level"
+                                        })
+                                        append("  ")
+                                        append(completed.coerceAtMost(WORLD_LEVEL_MISSION_COUNT))
+                                        append("/")
+                                        append(WORLD_LEVEL_MISSION_COUNT)
+                                        if (!previousComplete) append("  🔒")
+                                    }
+                                )
+                            }
+                        }
+                    }
+                },
+                confirmButton = {},
+                dismissButton = {
+                    TextButton(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = { pendingWorldSubcategory = null }) {
+                        Text(localizedUiText("cancel", appLanguage))
+                    }
+                }
             )
         }
 
@@ -155,6 +291,8 @@ fun SubCategorySelectionScreen(
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         (1..3).forEach { stars ->
                             Button(
+                                shape = RoundedCornerShape(12.dp),
+                                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                                 onClick = {
                                 val subcategory = pendingSubcategory ?: return@Button
                                 pendingSubcategory = null
@@ -166,7 +304,7 @@ fun SubCategorySelectionScreen(
                     }
                 },
                 confirmButton = {},
-                dismissButton = { TextButton(onClick = { pendingSubcategory = null }) { Text(localizedUiText("cancel", appLanguage)) } }
+                dismissButton = { TextButton(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = { pendingSubcategory = null }) { Text(localizedUiText("cancel", appLanguage)) } }
             )
         }
 
@@ -217,9 +355,18 @@ fun SubCategorySelectionScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(subCategories) { sub ->
-                        SubCategoryCard(sub.localized(appLanguage), completedCount = subcategoryCompletions[sub.id] ?: 0, enabled = hasExercisesForGrade, locale = appLanguage, showProgress = domain != LearningDomain.PUZZLE.name, tileAspectRatio = tileAspectRatio) {
+                        val gradeAware = domain in setOf(
+                            LearningDomain.MATH.name,
+                            LearningDomain.READING.name,
+                            LearningDomain.WRITING.name,
+                            LearningDomain.GEOMETRY.name
+                        )
+                        val tileEnabled = hasExercisesForGrade && (!gradeAware || subcategoryAvailability[sub.id] != false)
+                        SubCategoryCard(sub.localized(appLanguage), completedCount = subcategoryCompletions[sub.id] ?: 0, enabled = tileEnabled, locale = appLanguage, showProgress = domain != LearningDomain.PUZZLE.name && domain != LearningDomain.WORLD_KNOWLEDGE.name, tileAspectRatio = tileAspectRatio) {
                             when {
+                                sub.options.isNotEmpty() -> pendingOptionsSubcategory = sub
                                 domain == LearningDomain.PUZZLE.name -> pendingSubcategory = sub
+                                domain == LearningDomain.WORLD_KNOWLEDGE.name -> pendingWorldSubcategory = sub
                                 articleForSubcategory(sub.id, articles) != null -> pendingMissionChoice = sub
                                 else -> onSubCategorySelected(sub.id, 0)
                             }
@@ -335,7 +482,7 @@ private fun CategoryProgressBar(progress: LevelProgress) {
             Text("Level ${progress.level}", color = StarWhite, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
             Column(horizontalAlignment = Alignment.End) {
                 Text("Level ${progress.level + 1}", color = StarWhite, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
-                Text("${progress.currentLevelPoints}/${progress.pointsNeededForNextLevel}", color = StarWhite.copy(alpha = 0.7f), style = MaterialTheme.typography.labelSmall)
+                Text(formatVisibleNumbers("${progress.currentLevelPoints}/${progress.pointsNeededForNextLevel}"), color = StarWhite.copy(alpha = 0.7f), style = MaterialTheme.typography.labelSmall)
             }
         }
         LinearProgressIndicator(
@@ -363,11 +510,22 @@ fun SubCategoryCard(sub: SubCategory, completedCount: Int, enabled: Boolean, loc
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            val isNewMathIcon = sub.iconResId in setOf(
+                R.drawable.ic_math_addition_new,
+                R.drawable.ic_math_subtraction_new,
+                R.drawable.ic_math_multiplication_new,
+                R.drawable.ic_math_division_new,
+                R.drawable.ic_math_mixed_new,
+                R.drawable.ic_math_sequences_new,
+                R.drawable.ic_math_fractions_new,
+                R.drawable.ic_math_money_new
+            )
             Icon(
                 painter = painterResource(id = sub.iconResId),
                 contentDescription = null,
-                tint = if (enabled) StarWhite else StarWhite.copy(alpha = 0.55f),
-                modifier = Modifier.size(48.dp)
+                tint = if (isNewMathIcon) Color.Unspecified
+                    else if (enabled) StarWhite else StarWhite.copy(alpha = 0.55f),
+                modifier = Modifier.size(if (isNewMathIcon) 58.dp else 48.dp)
             )
             
             Spacer(modifier = Modifier.height(10.dp))
@@ -382,14 +540,16 @@ fun SubCategoryCard(sub: SubCategory, completedCount: Int, enabled: Boolean, loc
             if (showProgress) {
                 Spacer(modifier = Modifier.height(4.dp))
                 // POINCARE_WRITTEN_MATH_OPEN_ENDED_PROGRESS
-                val openEndedGenerated = sub.id in setOf("addition", "subtraction", "multiplication", "division")
+                val openEndedGenerated = sub.id in setOf("addition", "subtraction", "multiplication", "division", "mixed_arithmetic", "number_sequences", "fractions", "money")
                 val total = sub.exerciseCount.takeUnless { openEndedGenerated }
                 val cycleCompleted = if (total != null && total > 0 && completedCount > 0) {
                     ((completedCount - 1) % total) + 1
                 } else completedCount
                 Text(
-                    text = total?.let { "$cycleCompleted/$it ${localizedUiText("completed", locale)}" }
-                        ?: "$cycleCompleted ${localizedUiText("completed", locale)}",
+                    text = formatVisibleNumbers(
+                        total?.let { "$cycleCompleted/$it ${localizedUiText("completed", locale)}" }
+                            ?: "$cycleCompleted ${localizedUiText("completed", locale)}"
+                    ),
                     style = MaterialTheme.typography.labelMedium,
                     color = if (enabled) PlanetGold else StarWhite.copy(alpha = 0.45f),
                     textAlign = TextAlign.Center
@@ -418,12 +578,12 @@ private fun languageOf(locale: String): String = when (locale) {
 }
 
 private fun localizedCategoryTitle(domain: LearningDomain, locale: String): String = when (domain) {
-    LearningDomain.READING -> when (languageOf(locale)) { "en" -> "Communicate"; "fr" -> "Communiquer"; else -> "Communicatie" }
-    LearningDomain.WRITING -> when (languageOf(locale)) { "en" -> "Writing"; "fr" -> "Ecriture"; else -> "Schrijven" }
+    LearningDomain.READING -> when (languageOf(locale)) { "en" -> "Reading & listening"; "fr" -> "Lecture et écoute"; else -> "Lezen & luisteren" }
+    LearningDomain.WRITING -> when (languageOf(locale)) { "en" -> "Spelling & grammar"; "fr" -> "Orthographe et grammaire"; else -> "Spelling & grammatica" }
     LearningDomain.MATH -> when (languageOf(locale)) { "en" -> "Numbers"; "fr" -> "Nombres"; else -> "Wiskunde" }
     LearningDomain.PUZZLE -> when (languageOf(locale)) { "en" -> "Puzzles"; "fr" -> "Puzzles"; else -> "Puzzels" }
     LearningDomain.WORLD_KNOWLEDGE -> when (languageOf(locale)) { "en" -> "World knowledge"; "fr" -> "Le Monde"; else -> "Wereldkennis" }
-    LearningDomain.GEOMETRY -> when (languageOf(locale)) { "en" -> "Geometry"; "fr" -> "Geometrie"; else -> "Meetkunde" }
+    LearningDomain.GEOMETRY -> when (languageOf(locale)) { "en" -> "Measurement & geometry"; "fr" -> "Mesures et géométrie"; else -> "Meten & meetkunde" }
 }
 
 private fun localizedUiText(key: String, locale: String): String = when (languageOf(locale)) {
@@ -433,6 +593,7 @@ private fun localizedUiText(key: String, locale: String): String = when (languag
         "missionBriefing" -> "Mission briefing"
         "close" -> "Close"
         "chooseDifficulty" -> "Choose difficulty"
+        "chooseOption" -> "Choose an option"
         "cancel" -> "Cancel"
         "back" -> "Back"
         "chooseMission" -> "Choose your mission"
@@ -445,6 +606,7 @@ private fun localizedUiText(key: String, locale: String): String = when (languag
         "missionBriefing" -> "Briefing de mission"
         "close" -> "Fermer"
         "chooseDifficulty" -> "Choisis la difficulté"
+        "chooseOption" -> "Choisis une option"
         "cancel" -> "Annuler"
         "back" -> "Retour"
         "chooseMission" -> "Choisis ta mission"
@@ -457,6 +619,7 @@ private fun localizedUiText(key: String, locale: String): String = when (languag
         "missionBriefing" -> "Mission briefing"
         "close" -> "Sluiten"
         "chooseDifficulty" -> "Kies moeilijkheid"
+        "chooseOption" -> "Kies een onderdeel"
         "cancel" -> "Annuleren"
         "back" -> "Terug"
         "chooseMission" -> "Kies je missie"
@@ -467,11 +630,11 @@ private fun localizedUiText(key: String, locale: String): String = when (languag
 
 private fun localizedSubcategoryName(id: String, locale: String): String? = when (languageOf(locale)) {
     "en" -> mapOf(
-        "addition" to "Addition", "subtraction" to "Subtraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Mixed operations", "number_sequences" to "Number sequences", "fractions" to "Fractions", "time" to "Time", "money" to "Money", "measurement" to "Measurement", "geometry_shapes" to "Shapes and geometry", "reading" to "Reading", "listening" to "Listening", "vocabulary" to "Vocabulary", "translation_nl_to_en" to "Dutch to English", "translation_nl_to_fr" to "Dutch to French", "translation_en_to_nl" to "English to Dutch", "translation_en_to_fr" to "English to French", "translation_fr_to_nl" to "French to Dutch", "translation_fr_to_en" to "French to English", "writing" to "Writing", "spelling" to "Spelling", "sentence_order" to "Sentence order", "grammar" to "Grammar", "space" to "Space", "nature" to "Nature", "geography" to "Geography", "science" to "Science", "history" to "History", "everyday_life" to "Everyday life", "sudoku" to "Sudoku", "math-crosswords" to "Math crossword", "word-seeker" to "Word seeker", "mothership-dock" to "Mothership dock", "galaxycon" to "Galaxycon", "calculator-puzzle" to "Calculator puzzle", "constellations" to "Constellations",
+        "addition" to "Addition", "subtraction" to "Subtraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Mixed operations", "number_sequences" to "Number sequences", "fractions" to "Fractions", "time" to "Time", "money" to "Money", "measurement" to "Measurement", "compare_size" to "Bigger and smaller", "compare_weight" to "Heavier and lighter", "compare_height" to "Higher and lower", "compare_length" to "Longer and shorter", "compare_distance" to "Farther and closer", "geometry_shapes" to "Shapes and geometry", "reading" to "Reading", "listening" to "Listening", "dictation" to "Dictation", "vocabulary" to "Vocabulary", "translation_nl_to_en" to "Dutch to English", "translation_nl_to_fr" to "Dutch to French", "translation_en_to_nl" to "English to Dutch", "translation_en_to_fr" to "English to French", "translation_fr_to_nl" to "French to Dutch", "translation_fr_to_en" to "French to English", "letter_tracing" to "Write letters", "writing" to "Writing", "spelling" to "Spelling", "sentence_order" to "Sentence order", "grammar" to "Grammar", "question_words" to "Question words", "singular_plural" to "Singular and plural", "conjugations" to "Conjugations", "verbs" to "Verbs", "past_tense" to "Past tenses", "future_tense" to "Future tenses", "space" to "Space", "nature" to "Nature", "geography" to "Geography", "science" to "Science", "history" to "History", "everyday_life" to "Everyday life", "animals" to "Animals", "human_body" to "Human body", "plants" to "Plants", "weather_climate" to "Weather and climate", "technology" to "Technology", "arts_culture" to "Arts and culture", "citizenship_society" to "Citizenship and society", "environment_sustainability" to "Environment and sustainability", "sudoku" to "Sudoku", "math-crosswords" to "Math crossword", "word-seeker" to "Word seeker", "mothership-dock" to "Mothership dock", "galaxycon" to "Galaxycon", "calculator-puzzle" to "Calculator puzzle", "constellations" to "Constellations",
             "orbit-builder" to "Orbit Builder", "pattern_sequences" to "Patterns", "odd_one_out" to "Odd one out", "analogies" to "Analogies", "grid_logic" to "Grid logic", "mazes" to "Mazes", "visual_reasoning" to "Visual reasoning", "memory_rules" to "Memory rules"
     )[id]
     "fr" -> mapOf(
-        "addition" to "Addition", "subtraction" to "Soustraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Operations mixtes", "number_sequences" to "Suites de nombres", "fractions" to "Fractions", "time" to "Heure", "money" to "Argent", "measurement" to "Mesures", "geometry_shapes" to "Formes et geometrie", "reading" to "Lecture", "listening" to "Ecoute", "vocabulary" to "Vocabulaire", "translation_nl_to_en" to "Neerlandais vers anglais", "translation_nl_to_fr" to "Neerlandais vers francais", "translation_en_to_nl" to "Anglais vers neerlandais", "translation_en_to_fr" to "Anglais vers francais", "translation_fr_to_nl" to "Francais vers neerlandais", "translation_fr_to_en" to "Francais vers anglais", "writing" to "Ecriture", "spelling" to "Orthographe", "sentence_order" to "Ordre des phrases", "grammar" to "Grammaire", "space" to "Espace", "nature" to "Nature", "geography" to "Geographie", "science" to "Science", "history" to "Histoire", "everyday_life" to "Vie quotidienne", "sudoku" to "Sudoku", "math-crosswords" to "Mots croises de calcul", "word-seeker" to "Cherche-mots", "mothership-dock" to "Mothership dock", "mothership-dock" to "Vaisseau mere", "galaxycon" to "Galaxycon","calculator-puzzle" to "Puzzle calculatrice", "constellations" to "Constellations",
+        "addition" to "Addition", "subtraction" to "Soustraction", "multiplication" to "Multiplication", "division" to "Division", "mixed_arithmetic" to "Operations mixtes", "number_sequences" to "Suites de nombres", "fractions" to "Fractions", "time" to "Heure", "money" to "Argent", "measurement" to "Mesures", "compare_size" to "Plus grand et plus petit", "compare_weight" to "Plus lourd et plus léger", "compare_height" to "Plus haut et plus bas", "compare_length" to "Plus long et plus court", "compare_distance" to "Plus loin et plus près", "geometry_shapes" to "Formes et géométrie", "reading" to "Lecture", "listening" to "Ecoute", "dictation" to "Dictée", "vocabulary" to "Vocabulaire", "translation_nl_to_en" to "Neerlandais vers anglais", "translation_nl_to_fr" to "Neerlandais vers francais", "translation_en_to_nl" to "Anglais vers neerlandais", "translation_en_to_fr" to "Anglais vers francais", "translation_fr_to_nl" to "Francais vers neerlandais", "translation_fr_to_en" to "Francais vers anglais", "letter_tracing" to "Écrire les lettres", "writing" to "Ecriture", "spelling" to "Orthographe", "sentence_order" to "Ordre des phrases", "grammar" to "Grammaire", "question_words" to "Mots interrogatifs", "singular_plural" to "Singulier et pluriel", "conjugations" to "Conjugaisons", "verbs" to "Verbes", "past_tense" to "Temps du passé", "future_tense" to "Temps du futur", "space" to "Espace", "nature" to "Nature", "geography" to "Geographie", "science" to "Science", "history" to "Histoire", "everyday_life" to "Vie quotidienne", "animals" to "Animaux", "human_body" to "Corps humain", "plants" to "Plantes", "weather_climate" to "Météo et climat", "technology" to "Technologie", "arts_culture" to "Arts et culture", "citizenship_society" to "Citoyenneté et société", "environment_sustainability" to "Environnement et durabilité", "sudoku" to "Sudoku", "math-crosswords" to "Mots croises de calcul", "word-seeker" to "Cherche-mots", "mothership-dock" to "Mothership dock", "mothership-dock" to "Vaisseau mere", "galaxycon" to "Galaxycon","calculator-puzzle" to "Puzzle calculatrice", "constellations" to "Constellations",
             "orbit-builder" to "Constructeur d’orbite", "pattern_sequences" to "Motifs", "odd_one_out" to "Intrus", "analogies" to "Analogies", "grid_logic" to "Logique de grille", "mazes" to "Labyrinthes", "visual_reasoning" to "Raisonnement visuel", "memory_rules" to "Regles de memoire"
     )[id]
     else -> null
@@ -480,23 +643,29 @@ private fun localizedSubcategoryName(id: String, locale: String): String? = when
 fun getSubCategoriesForDomain(domain: String): List<SubCategory> {
     return when (domain) {
         LearningDomain.MATH.name -> listOf(
-            SubCategory("addition", "Optellen", R.drawable.ic_topic_add_subtract),
-            SubCategory("subtraction", "Aftrekken", R.drawable.ic_topic_add_subtract),
-            SubCategory("multiplication", "Vermenigvuldigen", R.drawable.ic_topic_multiply_divide),
-            SubCategory("division", "Delen", R.drawable.ic_topic_division_remainder),
-            SubCategory("mixed_arithmetic", "Gemengde bewerkingen", R.drawable.ic_topic_mixed_practice),
-            SubCategory("number_sequences", "Getallenreeksen", R.drawable.ic_topic_numbers_10000),
-            SubCategory("fractions", "Breuken", R.drawable.ic_topic_fractions),
-            SubCategory("money", "Geld", R.drawable.ic_topic_money),
+            SubCategory("addition", "Optellen", R.drawable.ic_math_addition_new, null),
+            SubCategory("subtraction", "Aftrekken", R.drawable.ic_math_subtraction_new, null),
+            SubCategory("multiplication", "Vermenigvuldigen", R.drawable.ic_math_multiplication_new, null),
+            SubCategory("division", "Delen", R.drawable.ic_math_division_new, null),
+            SubCategory("mixed_arithmetic", "Gemengde bewerkingen", R.drawable.ic_math_mixed_new, null),
+            SubCategory("number_sequences", "Getallenreeksen", R.drawable.ic_math_sequences_new, null),
+            SubCategory("fractions", "Breuken", R.drawable.ic_math_fractions_new, null),
+            SubCategory("money", "Geld", R.drawable.ic_math_money_new, null),
         )
         LearningDomain.GEOMETRY.name -> listOf(
             SubCategory("time", "Tijd", R.drawable.ic_topic_time),
             SubCategory("measurement", "Meten", R.drawable.ic_topic_measure),
+            SubCategory("compare_size", "Groter en kleiner", R.drawable.ic_topic_measure),
+            SubCategory("compare_weight", "Zwaarder en lichter", R.drawable.ic_topic_measure),
+            SubCategory("compare_height", "Hoger en lager", R.drawable.ic_topic_measure),
+            SubCategory("compare_length", "Langer en korter", R.drawable.ic_topic_measure),
+            SubCategory("compare_distance", "Verder en dichterbij", R.drawable.ic_topic_measure),
             SubCategory("geometry_shapes", "Vormen en meetkunde", R.drawable.ic_topic_shapes)
         )
         LearningDomain.READING.name -> listOf(
             SubCategory("reading", "Lezen", R.drawable.ic_topic_reading),
             SubCategory("listening", "Luisteren", R.drawable.ic_topic_listening),
+            SubCategory("dictation", "Dictee", R.drawable.ic_topic_spelling, null),
             SubCategory("translation_nl_to_en", "Nederlands naar Engels", R.drawable.ic_topic_vocabulary),
             SubCategory("translation_nl_to_fr", "Nederlands naar Frans", R.drawable.ic_topic_vocabulary),
             SubCategory("translation_en_to_nl", "Engels naar Nederlands", R.drawable.ic_topic_vocabulary),
@@ -505,18 +674,33 @@ fun getSubCategoriesForDomain(domain: String): List<SubCategory> {
             SubCategory("translation_fr_to_en", "Frans naar Engels", R.drawable.ic_topic_vocabulary)
         )
         LearningDomain.WORLD_KNOWLEDGE.name -> listOf(
-            SubCategory("space", "Ruimte", R.drawable.ic_theme_space),
-            SubCategory("nature", "Natuur", R.drawable.ic_theme_nature),
-            SubCategory("geography", "Aardrijkskunde", R.drawable.ic_theme_nature),
-            SubCategory("science", "Wetenschap", R.drawable.ic_theme_space),
-            SubCategory("history", "Geschiedenis", R.drawable.ic_topic_reading_comprehension),
-            SubCategory("everyday_life", "Dagelijks leven", R.drawable.ic_theme_body)
+            SubCategory("space", "Ruimte", R.drawable.ic_world_space_mono),
+            SubCategory("nature", "Natuur", R.drawable.ic_world_nature_mono),
+            SubCategory("geography", "Aardrijkskunde", R.drawable.ic_world_geography_mono),
+            SubCategory("science", "Wetenschap", R.drawable.ic_world_science_mono),
+            SubCategory("history", "Geschiedenis", R.drawable.ic_world_history_mono),
+            SubCategory("everyday_life", "Dagelijks leven", R.drawable.ic_world_everyday_life_mono),
+            SubCategory("animals", "Dieren", R.drawable.ic_world_animals_mono),
+            SubCategory("human_body", "Menselijk lichaam", R.drawable.ic_world_human_body_mono),
+            SubCategory("plants", "Planten", R.drawable.ic_world_plants_mono),
+            SubCategory("weather_climate", "Weer en klimaat", R.drawable.ic_world_weather_climate_mono),
+            SubCategory("technology", "Technologie", R.drawable.ic_world_technology_mono),
+            SubCategory("arts_culture", "Kunst en cultuur", R.drawable.ic_world_arts_culture_mono),
+            SubCategory("citizenship_society", "Burgerschap en samenleving", R.drawable.ic_world_citizenship_society_mono),
+            SubCategory("environment_sustainability", "Milieu en duurzaamheid", R.drawable.ic_world_environment_sustainability_mono)
         )
         LearningDomain.WRITING.name -> listOf(
+            SubCategory("letter_tracing", "Letters schrijven", R.drawable.ic_topic_writing, null),
             SubCategory("writing", "Schrijven", R.drawable.ic_topic_writing),
             SubCategory("spelling", "Spelling", R.drawable.ic_topic_spelling),
             SubCategory("sentence_order", "Zinsvolgorde", R.drawable.ic_topic_sentence_structure),
-            SubCategory("grammar", "Grammatica", R.drawable.ic_topic_grammar)
+            SubCategory("grammar", "Grammatica", R.drawable.ic_topic_grammar),
+            SubCategory("question_words", "Vraagwoorden", R.drawable.ic_topic_grammar),
+            SubCategory("singular_plural", "Enkelvoud en meervoud", R.drawable.ic_language_singular_plural_mono, options = singularPluralOptions()),
+            SubCategory("conjugations", "Vervoegingen", R.drawable.ic_language_conjugations_mono, options = conjugationOptions()),
+            SubCategory("verbs", "Werkwoorden", R.drawable.ic_language_verbs_mono, options = verbOptions()),
+            SubCategory("past_tense", "Verleden tijden", R.drawable.ic_language_past_tense_mono, options = pastTenseOptions()),
+            SubCategory("future_tense", "Toekomende tijden", R.drawable.ic_language_future_tense_mono, options = futureTenseOptions())
         )
         LearningDomain.PUZZLE.name -> listOf(
             SubCategory("sudoku", "Sudoku", R.drawable.ic_puzzle_sudoku_mono, null),
@@ -531,6 +715,46 @@ fun getSubCategoriesForDomain(domain: String): List<SubCategory> {
     }
 }
 
+private fun singularPluralOptions() = listOf(
+    SubCategoryOption("regular", "Regelmatige meervouden", "Regular plurals", "Pluriels réguliers"),
+    SubCategoryOption("apostrophe", "Meervoud met apostrof", "Apostrophe plurals", "Pluriels avec apostrophe"),
+    SubCategoryOption("f_v", "f en v", "f and v", "f et v"),
+    SubCategoryOption("s_z", "s en z", "s and z", "s et z"),
+    SubCategoryOption("irregular", "Onregelmatige meervouden", "Irregular plurals", "Pluriels irréguliers")
+)
+
+private fun conjugationOptions() = listOf(
+    SubCategoryOption("first_person", "Ik-vorm", "First person", "Première personne"),
+    SubCategoryOption("second_person", "Jij-vorm", "Second person", "Deuxième personne"),
+    SubCategoryOption("third_person", "Hij/zij-vorm", "Third person", "Troisième personne"),
+    SubCategoryOption("plural_persons", "Meervoudsvormen", "Plural persons", "Personnes au pluriel"),
+    SubCategoryOption("inversion", "Inversie", "Inversion", "Inversion")
+)
+
+private fun verbOptions() = listOf(
+    SubCategoryOption("infinitive", "Infinitief", "Infinitive", "Infinitif"),
+    SubCategoryOption("stem", "Stam", "Stem", "Radical"),
+    SubCategoryOption("finite_verb", "Persoonsvorm", "Finite verb", "Verbe conjugué"),
+    SubCategoryOption("verb_or_noun", "Werkwoord of naamwoord", "Verb or noun", "Verbe ou nom"),
+    SubCategoryOption("strong_weak", "Sterke en zwakke werkwoorden", "Strong and weak verbs", "Verbes réguliers et irréguliers")
+)
+
+private fun pastTenseOptions() = listOf(
+    SubCategoryOption("imperfect", "Onvoltooid verleden tijd", "Simple past", "Imparfait"),
+    SubCategoryOption("perfect", "Voltooid verleden tijd", "Present perfect", "Passé composé"),
+    SubCategoryOption("kofschip", "'t kofschip", "Past-tense spelling", "Orthographe du passé"),
+    SubCategoryOption("irregular_past", "Onregelmatige verleden tijd", "Irregular past", "Passé irrégulier"),
+    SubCategoryOption("past_sentence", "Zinnen in het verleden", "Past-tense sentences", "Phrases au passé")
+)
+
+private fun futureTenseOptions() = listOf(
+    SubCategoryOption("will_future", "Zullen + infinitief", "Will future", "Futur simple"),
+    SubCategoryOption("going_to", "Gaan + infinitief", "Going to", "Futur proche"),
+    SubCategoryOption("present_future", "Tegenwoordige tijd met toekomst", "Present for future", "Présent à valeur de futur"),
+    SubCategoryOption("future_word_order", "Woordvolgorde in de toekomst", "Future word order", "Ordre des mots au futur"),
+    SubCategoryOption("future_time_signal", "Tijdsignalen", "Future time signals", "Indicateurs de temps")
+)
+
 private fun SubCategory.isVisibleForAppLocale(appLanguage: String): Boolean {
     val sourceLocale = when (id) {
         "translation_nl_to_en", "translation_nl_to_fr" -> "nl-BE"
@@ -540,3 +764,5 @@ private fun SubCategory.isVisibleForAppLocale(appLanguage: String): Boolean {
     }
     return normalizeBriefingLocale(appLanguage) == sourceLocale
 }
+
+private const val WORLD_LEVEL_MISSION_COUNT = 100

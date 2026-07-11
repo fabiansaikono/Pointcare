@@ -2,6 +2,7 @@ package be.saikono.poincare.ui.math
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import be.saikono.poincare.data.audit.AuditLog
 import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.domain.adaptive.AdaptiveDifficultyEngine
 import be.saikono.poincare.domain.adaptive.AdaptiveRecommendation
@@ -10,7 +11,9 @@ import be.saikono.poincare.repository.ContentRepository
 import be.saikono.poincare.repository.ProfileRepository
 import be.saikono.poincare.repository.ProgressRepository
 import java.util.UUID
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -51,10 +54,16 @@ class MathViewModel(
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
     private var generatedOperation: WrittenOperation? = null
+    private var generatedSubcategoryId: String? = null
     private var generatedLevel: SkillLevel? = null
+    private var latestProfile: ChildProfile? = null
+    private var hasContentRequest = false
+    private var contentLoadJob: Job? = null
+    private var contentLoadGeneration = 0L
 
     private companion object {
         const val GENERATED_BATCH_SIZE = 24
+        val GEOMETRY_SUBCATEGORIES = setOf("time", "measurement", "geometry_shapes")
     }
 
     init {
@@ -82,14 +91,16 @@ class MathViewModel(
                     if (id == null) flowOf(null) else profileRepository.getProfileById(id)
                 }
                 .collect { profile ->
+                    latestProfile = profile
                     _uiState.update {
                         it.copy(
                             currentProfileId = profile?.id,
-                            exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE"
+                            exerciseLanguage = profile?.exerciseLanguage ?: "nl-BE",
+                            isLoading = hasContentRequest && profile != null
                         )
                     }
 
-                    if (exercises.isEmpty() && profile != null) {
+                    if (hasContentRequest && profile != null) {
                         loadContentForProfile(profile)
                     }
                 }
@@ -97,58 +108,98 @@ class MathViewModel(
     }
 
     private fun loadContentForProfile(profile: ChildProfile) {
-        viewModelScope.launch {
+        val requestGeneration = ++contentLoadGeneration
+        contentLoadJob?.cancel()
+        contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            val level = profile.mathLevel
-            val writtenOperation = WrittenOperation.fromSubcategoryId(selectedSubcategoryId)
-            generatedOperation = writtenOperation
-            generatedLevel = level.takeIf { writtenOperation != null }
-
-            val loadedExercises = when {
-                writtenOperation != null -> {
-                    val nextMissionNumber = nextGeneratedMissionNumber(
-                        profileId = profile.id,
-                        operation = writtenOperation,
-                        level = level
-                    )
-                    WrittenCalculationGenerator.generate(
-                        operation = writtenOperation,
-                        level = level,
-                        startMissionNumber = nextMissionNumber,
-                        count = GENERATED_BATCH_SIZE
-                    )
+            try {
+                val isGeometry = selectedSubcategoryId in GEOMETRY_SUBCATEGORIES
+                val level = if (isGeometry) profile.geometryLevel else profile.mathLevel
+                val requestedOperation = WrittenOperation.fromSubcategoryId(selectedSubcategoryId)
+                val requestedGeneratedId = selectedSubcategoryId?.takeIf {
+                    requestedOperation != null || GeneratedMathExerciseGenerator.supports(it)
                 }
 
-                else -> level.toGrade()?.let { grade ->
-                    val domainExercises = contentRepository.getExercises(LearningDomain.MATH, level)
-                    selectedSubcategoryId?.let { subcategoryId ->
-                        contentRepository.getExercises(
-                            subcategoryId = subcategoryId,
-                            grade = grade,
-                            difficultyStars = selectedDifficultyStars
+                val loadedExercises = when {
+                    requestedOperation != null -> {
+                        val nextMissionNumber = nextGeneratedMissionNumber(
+                            profileId = profile.id,
+                            subcategoryId = requestedOperation.subcategoryId,
+                            level = level
                         )
-                    }?.ifEmpty { domainExercises } ?: domainExercises
-                }.orEmpty()
-            }
+                        WrittenCalculationGenerator.generate(
+                            operation = requestedOperation,
+                            level = level,
+                            startMissionNumber = nextMissionNumber,
+                            count = GENERATED_BATCH_SIZE,
+                            hardModeEnabled = profile.hardModeEnabled
+                        )
+                    }
 
-            // Generated written calculations stay in mission-number order so each
-            // completed-count band uses its configured random difficulty chances.
-            exercises = if (writtenOperation != null) {
-                loadedExercises
-            } else {
-                orderUnfinishedFirst(loadedExercises, profile.id)
-            }
+                    requestedGeneratedId != null -> {
+                        val nextMissionNumber = nextGeneratedMissionNumber(
+                            profileId = profile.id,
+                            subcategoryId = requestedGeneratedId,
+                            level = level
+                        )
+                        GeneratedMathExerciseGenerator.generate(
+                            subcategoryId = requestedGeneratedId,
+                            level = level,
+                            startMissionNumber = nextMissionNumber,
+                            count = GENERATED_BATCH_SIZE,
+                            hardModeEnabled = profile.hardModeEnabled
+                        )
+                    }
 
-            if (exercises.isNotEmpty()) {
-                startExercise(0)
-            } else {
-                _uiState.update {
-                    it.copy(
-                        currentExercise = null,
-                        writtenCalculation = null,
-                        calculationEntries = emptyMap(),
-                        isLoading = false
-                    )
+                    else -> level.toGrade()?.let { grade ->
+                        val domain = if (isGeometry) LearningDomain.GEOMETRY else LearningDomain.MATH
+                        val mainCategory = if (isGeometry) "geometry" else "math"
+                        val domainExercises = contentRepository.getExercises(domain, level)
+                        selectedSubcategoryId?.let { subcategoryId ->
+                            contentRepository.getExercises(
+                                mainCategory = mainCategory,
+                                subcategoryId = subcategoryId,
+                                grade = grade,
+                                difficultyStars = selectedDifficultyStars
+                            )
+                        }?.ifEmpty {
+                            domainExercises.filter { it.data["subcategoryId"] == selectedSubcategoryId }
+                        } ?: domainExercises
+                    }.orEmpty()
+                }
+
+                if (requestGeneration != contentLoadGeneration) return@launch
+                generatedOperation = requestedOperation
+                generatedSubcategoryId = requestedGeneratedId
+                generatedLevel = level.takeIf { requestedGeneratedId != null }
+                exercises = if (requestedGeneratedId != null) loadedExercises else orderUnfinishedFirst(loadedExercises, profile.id)
+
+                if (requestGeneration != contentLoadGeneration) return@launch
+                if (exercises.isNotEmpty()) {
+                    startExercise(0)
+                } else {
+                    _uiState.update {
+                        it.copy(
+                            currentExercise = null,
+                            writtenCalculation = null,
+                            calculationEntries = emptyMap(),
+                            isLoading = false
+                        )
+                    }
+                }
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (error: Throwable) {
+                if (requestGeneration == contentLoadGeneration) {
+                    exercises = emptyList()
+                    _uiState.update {
+                        it.copy(
+                            currentExercise = null,
+                            writtenCalculation = null,
+                            calculationEntries = emptyMap(),
+                            isLoading = false
+                        )
+                    }
                 }
             }
         }
@@ -156,10 +207,18 @@ class MathViewModel(
 
     fun setSubcategoryId(subcategoryId: String?) {
         selectedSubcategoryId = subcategoryId
+        hasContentRequest = true
+        latestProfile?.let {
+            loadContentForProfile(it)
+            return
+        }
         viewModelScope.launch {
             val profileId = _uiState.value.currentProfileId
             val profile = profileId?.let { profileRepository.getProfileById(it).first() }
-            if (profile != null) loadContentForProfile(profile)
+            if (profile != null) {
+                latestProfile = profile
+                loadContentForProfile(profile)
+            }
         }
     }
 
@@ -170,7 +229,10 @@ class MathViewModel(
     private fun startExercise(index: Int) {
         currentIndex = index
         startTime = System.currentTimeMillis()
-        val exercise = exercises[index]
+        val exercise = exercises.getOrNull(index) ?: run {
+            _uiState.update { it.copy(currentExercise = null, isLoading = false) }
+            return
+        }
         _uiState.update {
             it.copy(
                 currentExercise = exercise,
@@ -184,6 +246,7 @@ class MathViewModel(
                 isLoading = false
             )
         }
+        AuditLog.record("mission_started", _uiState.value.currentProfileId, exercise.domain.name, exercise.data["subcategoryId"], exercise.id)
     }
 
     fun onCalculationSymbolDropped(cellId: String, symbol: String) {
@@ -209,6 +272,9 @@ class MathViewModel(
                 showFeedback = false
             )
         }
+        if (calculation.isAnswerComplete(updatedEntries)) {
+            checkWrittenCalculation()
+        }
     }
 
     fun onCalculationCellClicked(cellId: String) {
@@ -228,13 +294,34 @@ class MathViewModel(
     }
 
     fun onNumberClick(number: String) {
-        if (_uiState.value.isCorrect == true) return
-        _uiState.update { it.copy(userInput = it.userInput + number) }
+        AuditLog.record("number_key_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
+        val state = _uiState.value
+        if (state.isCorrect == true) return
+        when (number) {
+            "." -> {
+                if (state.userInput.contains('.') || state.userInput.contains(',')) return
+                val next = if (state.userInput.isBlank()) "0." else state.userInput + "."
+                _uiState.update { it.copy(userInput = next) }
+            }
+            else -> _uiState.update { it.copy(userInput = it.userInput + number) }
+        }
     }
 
     fun onDeleteClick() {
         if (_uiState.value.isCorrect == true) return
         _uiState.update { it.copy(userInput = it.userInput.dropLast(1)) }
+    }
+
+    fun resetExercise() {
+        _uiState.update { state ->
+            state.copy(
+                userInput = "",
+                calculationEntries = if (state.writtenCalculation != null) emptyMap() else state.calculationEntries,
+                isCorrect = null,
+                isWrong = false,
+                showFeedback = false
+            )
+        }
     }
 
     fun onTextInputChanged(value: String) {
@@ -250,6 +337,7 @@ class MathViewModel(
     }
 
     fun onChoiceSelected(value: String) {
+        AuditLog.record("math_choice_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         if (_uiState.value.isCorrect == true) return
         val state = _uiState.value
         val exercise = state.currentExercise ?: return
@@ -326,18 +414,18 @@ class MathViewModel(
 
     private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
 
-    private fun String.isWholeInteger(): Boolean = trim().matches(Regex("-?\\d+"))
+    private fun String.isWholeInteger(): Boolean = trim().replace(" ", "").replace(".", "").matches(Regex("-?\\d+"))
 
     private fun ExerciseContent.optionSpeechLocale(defaultLocale: String): String =
         data["audioTargetLocale"] ?: defaultLocale
 
     private suspend fun nextGeneratedMissionNumber(
         profileId: String,
-        operation: WrittenOperation,
+        subcategoryId: String,
         level: SkillLevel
     ): Int {
         val grade = level.toGrade() ?: return 1
-        val idPrefix = "generated-${operation.subcategoryId}-g$grade-"
+        val idPrefix = "generated-$subcategoryId-g$grade-"
         val completedMissionNumbers = progressRepository.getProgressByChild(profileId).first()
             .asSequence()
             .filter { it.answerCorrect && it.exerciseId.startsWith(idPrefix) }
@@ -393,27 +481,39 @@ class MathViewModel(
     }
 
     fun nextExercise() {
+        AuditLog.record("next_mission_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         if (currentIndex + 1 < exercises.size) {
-            _uiState.update { it.copy(isLoading = true) }
             startExercise(currentIndex + 1)
             return
         }
 
         val operation = generatedOperation
+        val generatedId = generatedSubcategoryId
         val level = generatedLevel
-        if (operation != null && level != null) {
+        if (generatedId != null && level != null) {
             val nextMissionNumber = exercises.lastOrNull()
                 ?.data
                 ?.get("missionNumber")
                 ?.toIntOrNull()
                 ?.plus(1)
                 ?: 1
-            val nextBatch = WrittenCalculationGenerator.generate(
-                operation = operation,
-                level = level,
-                startMissionNumber = nextMissionNumber,
-                count = GENERATED_BATCH_SIZE
-            )
+            val nextBatch = if (operation != null) {
+                WrittenCalculationGenerator.generate(
+                    operation = operation,
+                    level = level,
+                    startMissionNumber = nextMissionNumber,
+                    count = GENERATED_BATCH_SIZE,
+                    hardModeEnabled = latestProfile?.hardModeEnabled == true
+                )
+            } else {
+                GeneratedMathExerciseGenerator.generate(
+                    subcategoryId = generatedId,
+                    level = level,
+                    startMissionNumber = nextMissionNumber,
+                    count = GENERATED_BATCH_SIZE,
+                    hardModeEnabled = latestProfile?.hardModeEnabled == true
+                )
+            }
             if (nextBatch.isNotEmpty()) {
                 val nextIndex = exercises.size
                 exercises = exercises + nextBatch
@@ -424,8 +524,11 @@ class MathViewModel(
         }
 
         exercises = exercises.shuffled()
-        _uiState.update { it.copy(isLoading = true) }
-        startExercise(0)
+        if (exercises.isEmpty()) {
+            _uiState.update { it.copy(currentExercise = null, isLoading = false, isFinished = true) }
+        } else {
+            startExercise(0)
+        }
     }
 
     @Suppress("unused")

@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.puzzle.orbitbuilder
 
+import androidx.compose.foundation.layout.PaddingValues
 import android.content.res.Configuration
 import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -91,6 +92,8 @@ fun OrbitBuilderScreen(
     OrbitBuilderGameContent(
         viewModel = viewModel,
         selectedStars = null,
+        selectedGenerationDifficulty = null,
+        selectedGrade = null,
         onNavigateBack = onNavigateBack,
         onMissionComplete = { _, _ -> },
         showChrome = true,
@@ -100,15 +103,18 @@ fun OrbitBuilderScreen(
 
 @Composable
 fun OrbitBuilderPuzzleGame(
-    initialStars: Int,
+    displayedStars: Int,
+    generationDifficulty: Int,
+    grade: Int,
     onMissionComplete: (levelId: String, stars: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val viewModel = remember { OrbitBuilderViewModel() }
-    LaunchedEffect(initialStars) { viewModel.setDifficultyStars(initialStars) }
     OrbitBuilderGameContent(
         viewModel = viewModel,
-        selectedStars = initialStars,
+        selectedStars = displayedStars,
+        selectedGenerationDifficulty = generationDifficulty,
+        selectedGrade = grade,
         onNavigateBack = {},
         onMissionComplete = onMissionComplete,
         showChrome = false,
@@ -120,6 +126,8 @@ fun OrbitBuilderPuzzleGame(
 private fun OrbitBuilderGameContent(
     viewModel: OrbitBuilderViewModel,
     selectedStars: Int?,
+    selectedGenerationDifficulty: Int?,
+    selectedGrade: Int?,
     onNavigateBack: () -> Unit,
     onMissionComplete: (levelId: String, stars: Int) -> Unit,
     showChrome: Boolean,
@@ -131,7 +139,15 @@ private fun OrbitBuilderGameContent(
     var introStage by remember(state.currentLevel.id) { mutableIntStateOf(0) }
     var reportedCompletions by remember { mutableStateOf(emptySet<String>()) }
 
-    LaunchedEffect(selectedStars) { selectedStars?.let { viewModel.setDifficultyStars(it) } }
+    LaunchedEffect(selectedStars, selectedGenerationDifficulty, selectedGrade) {
+        selectedStars?.let {
+            viewModel.setDifficulty(
+                displayedStars = it,
+                generationDifficulty = selectedGenerationDifficulty ?: it,
+                grade = selectedGrade ?: 1
+            )
+        }
+    }
 
     LaunchedEffect(state.currentLevel.id) {
         introStage = 0
@@ -186,7 +202,6 @@ private fun OrbitBuilderGameContent(
             visible = state.phase == OrbitBuilderPhase.PLANNING && state.drawnPath.isEmpty() && introStage == 0,
             modifier = Modifier.align(Alignment.Center)
         )
-        LaunchValueOverlay(state = state, modifier = Modifier.align(Alignment.Center))
         if (state.phase == OrbitBuilderPhase.SUCCESS || state.phase == OrbitBuilderPhase.FAILURE) {
             OrbitBuilderResultDialog(
                 state = state,
@@ -269,7 +284,7 @@ private fun OrbitLandscapeLayout(
 @Composable
 private fun OrbitChromeRow(state: OrbitBuilderUiState, onNavigateBack: () -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-        Button(onClick = onNavigateBack, colors = ButtonDefaults.buttonColors(containerColor = CockpitGray, contentColor = StarWhite)) { Text("‹") }
+        Button(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = onNavigateBack, colors = ButtonDefaults.buttonColors(containerColor = CockpitGray, contentColor = StarWhite)) { Text("‹") }
         DifficultyStars(stars = state.currentLevel.difficultyStars)
     }
 }
@@ -417,11 +432,10 @@ private fun OrbitCell(state: OrbitBuilderUiState, row: Int, column: Int, targetB
     val isInDrawnPath = position in state.drawnPath
     val isPathEnd = state.drawnPath.lastOrNull() == position
     val isRocketHere = state.rocketPosition == position
-    val blinkTransition = rememberInfiniteTransition(label = "targetBlink")
-    val blinkAlpha by blinkTransition.animateFloat(0.18f, 0.72f, infiniteRepeatable(tween(420), RepeatMode.Reverse), label = "targetBlinkAlpha")
+    val targetAlpha = if (targetBlink) 0.48f else 0.28f
     val backgroundColor = when {
         isRocketHere -> PlanetGold.copy(alpha = 0.16f)
-        fixedTile == OrbitFixedTile.TargetPlanet -> PlanetGold.copy(alpha = if (targetBlink) blinkAlpha else 0.28f)
+        fixedTile == OrbitFixedTile.TargetPlanet -> PlanetGold.copy(alpha = targetAlpha)
         isPathEnd -> PlanetGold.copy(alpha = 0.24f)
         isInDrawnPath -> PlanetBlue.copy(alpha = 0.32f)
         fixedTile is OrbitFixedTile.Gate -> PlanetBlue.copy(alpha = 0.14f)
@@ -430,7 +444,7 @@ private fun OrbitCell(state: OrbitBuilderUiState, row: Int, column: Int, targetB
     }
     Box(
         modifier = modifier.padding(2.dp).aspectRatio(1f).clip(RoundedCornerShape(10.dp)).background(backgroundColor)
-            .border(if (fixedTile == OrbitFixedTile.TargetPlanet) 2.dp else 1.dp, if (fixedTile == OrbitFixedTile.TargetPlanet) PlanetGold.copy(alpha = if (targetBlink) blinkAlpha else 0.82f) else StarWhite.copy(alpha = 0.08f), RoundedCornerShape(10.dp)),
+            .border(if (fixedTile == OrbitFixedTile.TargetPlanet) 2.dp else 1.dp, if (fixedTile == OrbitFixedTile.TargetPlanet) PlanetGold.copy(alpha = if (targetBlink) 1f else 0.82f) else StarWhite.copy(alpha = 0.08f), RoundedCornerShape(10.dp)),
         contentAlignment = Alignment.Center
     ) {
         val label = when {
@@ -475,7 +489,7 @@ private fun OrbitPrimaryButton(state: OrbitBuilderUiState, introStage: Int, onLa
     val label = if (shouldLaunch) stringResource(R.string.orbit_builder_launch) else stringResource(R.string.orbit_builder_reset)
     val container = if (shouldLaunch) PlanetBlue else CockpitGray
     val content = if (shouldLaunch) DeepSpaceBlue else StarWhite
-    Button(onClick = { if (shouldLaunch) onLaunch() else onReset() }, enabled = state.phase == OrbitBuilderPhase.PLANNING && (shouldLaunch || state.drawnPath.isNotEmpty()), modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = container, contentColor = content, disabledContainerColor = container.copy(alpha = 0.25f), disabledContentColor = content.copy(alpha = 0.55f))) {
+    Button(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = { if (shouldLaunch) onLaunch() else onReset() }, enabled = state.phase == OrbitBuilderPhase.PLANNING && (shouldLaunch || state.drawnPath.isNotEmpty()), modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = container, contentColor = content, disabledContainerColor = container.copy(alpha = 0.25f), disabledContentColor = content.copy(alpha = 0.55f))) {
         Text(label, fontWeight = FontWeight.Bold)
     }
 }

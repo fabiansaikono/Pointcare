@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import be.saikono.poincare.model.*
+import be.saikono.poincare.ui.components.AzertyBeKeyboard
 import be.saikono.poincare.ui.components.DifficultyStars
 import be.saikono.poincare.ui.missionCompleteGoBackText
 import be.saikono.poincare.ui.components.TapToTranslateText
@@ -46,6 +47,9 @@ fun ReadingScreen(
         onPlayPrompt = viewModel::playListeningAudio,
         onPlayQuestion = viewModel::playQuestion,
         onOptionSelected = viewModel::onOptionSelected,
+        onTextCharacter = viewModel::onTextCharacterAdded,
+        onTextBackspace = viewModel::onTextBackspace,
+        onTextSubmit = viewModel::submitDictation,
         onNextExercise = viewModel::nextExercise,
         onTranslationUsed = viewModel::onTranslationUsed
     )
@@ -58,6 +62,9 @@ fun ReadingContent(
     onPlayPrompt: () -> Unit,
     onPlayQuestion: () -> Unit,
     onOptionSelected: (String) -> Unit,
+    onTextCharacter: (String) -> Unit,
+    onTextBackspace: () -> Unit,
+    onTextSubmit: () -> Unit,
     onNextExercise: () -> Unit,
     onTranslationUsed: () -> Unit
 ) {
@@ -96,11 +103,9 @@ fun ReadingContent(
             }
 
             if (uiState.isLoading) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator(color = PlanetBlue)
-                }
+                Box(modifier = Modifier.fillMaxSize())
             } else if (exercise != null) {
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(if (exercise.inputMode == InputMode.CUSTOM_TEXT_KEYBOARD) 12.dp else 40.dp))
                 val configuration = LocalConfiguration.current
                 val isLandscape = configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 
@@ -126,7 +131,7 @@ fun ReadingContent(
                             )
                         }
 
-                        if (exercise.inputMode == InputMode.LISTEN_AND_SELECT) {
+                        if (exercise.inputMode == InputMode.LISTEN_AND_SELECT || exercise.inputMode == InputMode.CUSTOM_TEXT_KEYBOARD) {
                             Spacer(modifier = Modifier.height(16.dp))
                             FilledIconButton(
                                 onClick = onPlayPrompt,
@@ -153,6 +158,51 @@ fun ReadingContent(
                             )
                         }
                         InputMode.BUILD_WORD -> Text("Woord Bouwen (Binnenkort)", color = StarWhite)
+                        InputMode.CUSTOM_TEXT_KEYBOARD -> {
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(if (isLandscape) 8.dp else 12.dp)
+                            ) {
+                                Surface(
+                                    color = when {
+                                        uiState.isCorrect == true -> PlanetGold.copy(alpha = .24f)
+                                        uiState.isWrong -> PlanetRed.copy(alpha = .24f)
+                                        else -> Color.White.copy(alpha = .08f)
+                                    },
+                                    shape = RoundedCornerShape(16.dp),
+                                    modifier = Modifier.fillMaxWidth().height(if (isLandscape) 48.dp else 60.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 16.dp)) {
+                                        Text(
+                                            text = uiState.builtWord.ifBlank { "…" },
+                                            color = when {
+                                                uiState.isCorrect == true -> PlanetGold
+                                                uiState.isWrong -> PlanetRed
+                                                else -> StarWhite
+                                            },
+                                            style = MaterialTheme.typography.headlineSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            textAlign = TextAlign.Center,
+                                            modifier = Modifier.fillMaxWidth()
+                                        )
+                                    }
+                                }
+                                AzertyBeKeyboard(
+                                    locale = uiState.exerciseLanguage,
+                                    onCharacter = onTextCharacter,
+                                    onBackspace = onTextBackspace,
+                                    onSubmit = onTextSubmit,
+                                    compact = isLandscape,
+                                    enabled = uiState.isCorrect != true,
+                                    wrongKey = uiState.dictationWrongKey,
+                                    hintKey = uiState.dictationHintKey,
+                                    hintSequence = uiState.dictationHintSequence,
+                                    revealedKeys = uiState.dictationRevealKeys,
+                                    modifier = Modifier.widthIn(max = 760.dp).fillMaxWidth()
+                                )
+                            }
+                        }
                         else -> Text(localizedExerciseText("unknownType", uiState.exerciseLanguage), color = StarWhite)
                     }
                 }
@@ -181,11 +231,13 @@ fun ReadingContent(
                 }
 
                 Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = if (uiState.isFinished) onNavigateBack else onNextExercise,
                     colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp)
+                        .height(45.dp)
                         .semantics { contentDescription = if (uiState.isCorrect == true) localizedExerciseText("nextMissionReady", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage) },
                     enabled = uiState.isCorrect == true || uiState.isFinished
                 ) {
@@ -229,6 +281,9 @@ fun ReadingScreenPreview() {
             onPlayPrompt = {},
             onPlayQuestion = {},
             onOptionSelected = {},
+            onTextCharacter = {},
+            onTextBackspace = {},
+            onTextSubmit = {},
             onNextExercise = {},
             onTranslationUsed = {}
         )
@@ -243,8 +298,9 @@ fun LetterSoundRenderer(
     isLandscape: Boolean,
     onOptionSelected: (String) -> Unit
 ) {
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
     Column(
-        modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+        modifier = Modifier.widthIn(max = 760.dp).fillMaxWidth().verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -256,6 +312,7 @@ fun LetterSoundRenderer(
                 if (isLandscape && rowOptions.size == 1) Spacer(modifier = Modifier.weight(1f))
             }
         }
+    }
     }
 }
 

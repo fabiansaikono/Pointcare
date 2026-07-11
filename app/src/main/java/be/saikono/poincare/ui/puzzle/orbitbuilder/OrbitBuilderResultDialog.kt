@@ -1,11 +1,14 @@
 package be.saikono.poincare.ui.puzzle.orbitbuilder
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import be.saikono.poincare.R
 import be.saikono.poincare.ui.theme.DeepSpaceBlue
 import be.saikono.poincare.ui.theme.PlanetGold
@@ -43,6 +46,8 @@ fun OrbitBuilderResultDialog(
         },
         confirmButton = {
             Button(
+                shape = RoundedCornerShape(12.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                 onClick = { if (isSuccess) onNextMission() else onRetry() },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (isSuccess) PlanetGold else PlanetRed,

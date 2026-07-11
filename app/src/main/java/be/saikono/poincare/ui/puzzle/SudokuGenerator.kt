@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 object SudokuGenerator {
     fun generate(stars: Int, seed: Int = Random.nextInt()): SudokuPuzzle {
-        val size = when (stars.coerceIn(1, 3)) {
+        val size = when (stars.coerceIn(1, 4)) {
             1 -> 4
             2 -> 6
             else -> 9
@@ -21,10 +21,11 @@ object SudokuGenerator {
         }
         val digitMap = (1..size).shuffled(random).withIndex().associate { (index, value) -> index + 1 to value }
         val solution = base.map { row -> row.map { digitMap.getValue(it) } }
-        val fixedRatio = when (stars.coerceIn(1, 3)) {
+        val fixedRatio = when (stars.coerceIn(1, 4)) {
             1 -> 0.58f
             2 -> 0.42f
-            else -> 0.32f
+            3 -> 0.32f
+            else -> 0.23f
         }
         val allCells = buildList {
             for (row in 0 until size) for (col in 0 until size) add(row to col)

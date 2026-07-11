@@ -3,15 +3,19 @@ package be.saikono.poincare.ui.writing
 import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import be.saikono.poincare.data.audit.AuditLog
 import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.data.sync.SyncManager
 import be.saikono.poincare.model.*
 import be.saikono.poincare.repository.ContentRepository
 import be.saikono.poincare.repository.ProfileRepository
 import be.saikono.poincare.repository.ProgressRepository
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.UUID
+import kotlin.random.Random
 
 data class WritingUiState(
     val currentExercise: ExerciseContent? = null,
@@ -24,7 +28,18 @@ data class WritingUiState(
     val userInput: String = "",
     val isCorrect: Boolean? = null,
     val isWrong: Boolean = false,
-    val showFeedback: Boolean = false
+    val showFeedback: Boolean = false,
+    val showLetterChooser: Boolean = false,
+    val letterChoices: List<LetterChoice> = emptyList(),
+    val randomPracticeUnlocked: Boolean = false
+)
+
+data class LetterChoice(
+    val exerciseId: String,
+    val letter: String,
+    val uppercase: Boolean,
+    val completed: Boolean,
+    val enabled: Boolean
 )
 
 @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
@@ -47,11 +62,14 @@ class WritingViewModel(
     private var selectedDifficultyStars: Int? = null
     private var latestProfile: ChildProfile? = null
     private var hasContentRequest = false
+    private var contentLoadJob: Job? = null
+    private var contentLoadGeneration = 0L
     // POINCARE_REPAIR_V29: mission-cycle
     private var pendingExerciseIds: MutableSet<String> = mutableSetOf()
     private val retryExercises: MutableList<ExerciseContent> = mutableListOf()
     private var firstAttemptForCurrent = true
     private var missionCycleId: String = UUID.randomUUID().toString()
+    private var allLetterTracingExercises: List<ExerciseContent> = emptyList()
 
     init {
         observeProfile()
@@ -82,47 +100,79 @@ class WritingViewModel(
     }
 
     private fun loadContentForProfile(profile: ChildProfile) {
-        viewModelScope.launch {
+        val requestGeneration = ++contentLoadGeneration
+        contentLoadJob?.cancel()
+        contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            val level = profile.writingLevel
-            val loadedExercises = level.toGrade()?.let { grade ->
-                val domainExercises = contentRepository.getExercises(LearningDomain.WRITING, level)
-                selectedSubcategoryId?.let { subcategoryId ->
-                    val subcategoryExercises = contentRepository.getExercises(
-                        subcategoryId = subcategoryId,
-                        grade = grade,
-                        difficultyStars = selectedDifficultyStars
-                    )
-                    if (profile.showUnassignedExercises) {
-                        (subcategoryExercises + domainExercises.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
-                    } else {
-                        subcategoryExercises
-                    }
-                } ?: if (profile.showUnassignedExercises) {
-                    domainExercises
+            try {
+                val level = profile.writingLevel
+                val isLetterTracing = selectedSubcategoryId == LETTER_TRACING_SUBCATEGORY
+                val loadedExercises = if (isLetterTracing) {
+                    buildLetterTracingExercises(level, profile.id)
                 } else {
-                    domainExercises.filter { !it.isUnassignedExercise() }
+                    level.toGrade()?.let { grade ->
+                        val domainExercises = contentRepository.getExercises(LearningDomain.WRITING, level)
+                        selectedSubcategoryId?.let { subcategoryId ->
+                            val subcategoryExercises = contentRepository.getExercises(
+                                mainCategory = "writing",
+                                subcategoryId = subcategoryId,
+                                grade = grade,
+                                difficultyStars = selectedDifficultyStars
+                            )
+                            val supplemental = LanguageCurriculumExerciseFactory.build(
+                                domain = LearningDomain.WRITING,
+                                subcategoryId = subcategoryId,
+                                level = level,
+                                selectedDifficulty = selectedDifficultyStars
+                            )
+                            if (profile.showUnassignedExercises) {
+                                (subcategoryExercises + supplemental + domainExercises.unassignedForDifficulty(selectedDifficultyStars)).distinctBy { it.id }
+                            } else {
+                                (subcategoryExercises + supplemental).distinctBy { it.id }
+                            }
+                        } ?: if (profile.showUnassignedExercises) {
+                            domainExercises
+                        } else {
+                            domainExercises.filter { !it.isUnassignedExercise() }
+                        }
+                    }.orEmpty()
                 }
-            }.orEmpty()
-            exercises = loadedExercises.shuffled()
-            pendingExerciseIds = exercises.map { it.id }.toMutableSet()
-            retryExercises.clear()
-            missionCycleId = UUID.randomUUID().toString()
-            if (exercises.isNotEmpty()) {
-                startExercise(0)
-            } else {
-                _uiState.update {
-                    it.copy(
-                        currentExercise = null,
-                        userPath = emptyList(),
-                        userInput = "",
-                        isCorrect = null,
-                        isWrong = false,
-                        showFeedback = false,
-                        isComplete = false,
-                        isFinished = false,
-                        isLoading = false
-                    )
+
+                if (requestGeneration != contentLoadGeneration) return@launch
+                if (isLetterTracing) {
+                    allLetterTracingExercises = loadedExercises
+                    showLetterChooser(profile.id)
+                    return@launch
+                }
+
+                exercises = loadedExercises.shuffled()
+                pendingExerciseIds = exercises.map { it.id }.toMutableSet()
+                retryExercises.clear()
+                missionCycleId = UUID.randomUUID().toString()
+                if (exercises.isNotEmpty()) {
+                    startExercise(0)
+                } else {
+                    _uiState.update {
+                        it.copy(
+                            currentExercise = null,
+                            userPath = emptyList(),
+                            userInput = "",
+                            isCorrect = null,
+                            isWrong = false,
+                            showFeedback = false,
+                            showLetterChooser = false,
+                            isComplete = false,
+                            isFinished = false,
+                            isLoading = false
+                        )
+                    }
+                }
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (error: Throwable) {
+                if (requestGeneration == contentLoadGeneration) {
+                    exercises = emptyList()
+                    _uiState.update { it.copy(currentExercise = null, showLetterChooser = false, isLoading = false) }
                 }
             }
         }
@@ -151,30 +201,38 @@ class WritingViewModel(
     }
 
     private fun startExercise(index: Int) {
+        val exercise = exercises.getOrNull(index) ?: run {
+            _uiState.update { it.copy(currentExercise = null, isLoading = false) }
+            return
+        }
         currentIndex = index
         startTime = System.currentTimeMillis()
         firstAttemptForCurrent = true
         _uiState.update {
             it.copy(
-                currentExercise = exercises[index],
+                currentExercise = exercise,
                 userPath = emptyList(),
                 userInput = "",
                 isCorrect = null,
                 isWrong = false,
                 showFeedback = false,
+                showLetterChooser = false,
                 isComplete = false,
                 isFinished = false,
                 isLoading = false
             )
         }
+        AuditLog.record("mission_started", _uiState.value.currentProfileId, exercise.domain.name, exercise.data["subcategoryId"], exercise.id)
     }
 
     fun onTextInputChanged(value: String) {
+        AuditLog.record("writing_text_changed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         if (_uiState.value.isCorrect == true) return
         _uiState.update { it.copy(userInput = value, isCorrect = null, isWrong = false, showFeedback = false) }
     }
 
     fun onChoiceSelected(value: String) {
+        AuditLog.record("writing_choice_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
         if (_uiState.value.isCorrect == true) return
         val state = _uiState.value
         val exercise = state.currentExercise ?: return
@@ -236,7 +294,7 @@ class WritingViewModel(
     }
 
     private fun SkillLevel.toGrade(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
-    private fun String.isWholeInteger(): Boolean = trim().matches(Regex("-?\\d+"))
+    private fun String.isWholeInteger(): Boolean = trim().replace(" ", "").replace(".", "").matches(Regex("-?\\d+"))
     private fun ExerciseContent.optionSpeechLocale(defaultLocale: String): String = data["audioTargetLocale"] ?: defaultLocale
     private fun ExerciseContent.isUnassignedExercise(): Boolean = data["subcategoryId"].isNullOrBlank()
 
@@ -246,13 +304,80 @@ class WritingViewModel(
                 (difficultyStars == null || exercise.data["difficultyStars"]?.toIntOrNull() == difficultyStars)
         }
 
-    private suspend fun orderUnfinishedFirst(candidates: List<ExerciseContent>, profileId: String): List<ExerciseContent> {
+    private suspend fun showLetterChooser(profileId: String) {
         val completedIds = progressRepository.getProgressByChild(profileId).first()
             .filter { it.answerCorrect }
             .map { it.exerciseId }
             .toSet()
-        val unfinished = candidates.filter { it.id !in completedIds }
-        return (unfinished.ifEmpty { candidates }).shuffled()
+        val alphabetExercises = allLetterTracingExercises.filter { it.data["tracePhase"] != "random" }
+        val firstIncompleteIndex = alphabetExercises.indexOfFirst { it.id !in completedIds }
+        val allCompleted = firstIncompleteIndex == -1
+        val choices = alphabetExercises.mapIndexed { index, exercise ->
+            val completed = exercise.id in completedIds
+            LetterChoice(
+                exerciseId = exercise.id,
+                letter = exercise.data["letter"].orEmpty(),
+                uppercase = exercise.data["letterCase"] == "uppercase",
+                completed = completed,
+                enabled = completed || allCompleted || index == firstIncompleteIndex
+            )
+        }
+        _uiState.update {
+            it.copy(
+                currentExercise = null,
+                userPath = emptyList(),
+                userInput = "",
+                isCorrect = null,
+                isWrong = false,
+                showFeedback = false,
+                isComplete = false,
+                isFinished = false,
+                isLoading = false,
+                showLetterChooser = true,
+                letterChoices = choices,
+                randomPracticeUnlocked = allCompleted
+            )
+        }
+    }
+
+    fun selectTracingLetter(exerciseId: String) {
+        val choice = _uiState.value.letterChoices.firstOrNull { it.exerciseId == exerciseId } ?: return
+        if (!choice.enabled) return
+        val exercise = allLetterTracingExercises.firstOrNull { it.id == exerciseId } ?: return
+        exercises = listOf(exercise)
+        pendingExerciseIds = mutableSetOf(exercise.id)
+        retryExercises.clear()
+        missionCycleId = UUID.randomUUID().toString()
+        _uiState.update { it.copy(showLetterChooser = false) }
+        startExercise(0)
+    }
+
+    fun selectRandomTracingLetter() {
+        if (!_uiState.value.randomPracticeUnlocked) return
+        val randomExercises = allLetterTracingExercises.filter { it.data["tracePhase"] == "random" }
+        val exercise = randomExercises.randomOrNull() ?: return
+        exercises = listOf(exercise)
+        pendingExerciseIds = mutableSetOf(exercise.id)
+        retryExercises.clear()
+        missionCycleId = UUID.randomUUID().toString()
+        _uiState.update { it.copy(showLetterChooser = false) }
+        startExercise(0)
+    }
+
+    private fun markTracingChoiceCompleted(exerciseId: String) {
+        val updated = _uiState.value.letterChoices.map { choice ->
+            if (choice.exerciseId == exerciseId) choice.copy(completed = true) else choice
+        }
+        val firstIncompleteIndex = updated.indexOfFirst { !it.completed }
+        val allCompleted = firstIncompleteIndex == -1
+        _uiState.update { state ->
+            state.copy(
+                letterChoices = updated.mapIndexed { index, choice ->
+                    choice.copy(enabled = choice.completed || allCompleted || index == firstIncompleteIndex)
+                },
+                randomPracticeUnlocked = allCompleted
+            )
+        }
     }
 
     fun onPathUpdate(path: List<Offset>) {
@@ -262,11 +387,15 @@ class WritingViewModel(
 
     fun onTraceComplete() {
         if (_uiState.value.isComplete) return
+        // LetterTracingComponent only calls this after every ordered stroke matched its guide.
         val state = _uiState.value
         val exercise = state.currentExercise ?: return
         val duration = System.currentTimeMillis() - startTime
         _uiState.update { it.copy(isComplete = true) }
         pendingExerciseIds.remove(exercise.id)
+        if (selectedSubcategoryId == LETTER_TRACING_SUBCATEGORY) {
+            markTracingChoiceCompleted(exercise.id)
+        }
         audioService.playSuccess()
         saveProgress(exercise, duration, countsForProgress = true, attemptCorrect = true)
     }
@@ -308,6 +437,19 @@ class WritingViewModel(
     }
 
     fun nextExercise() {
+        AuditLog.record("next_mission_pressed", _uiState.value.currentProfileId, exerciseId = _uiState.value.currentExercise?.id)
+        if (selectedSubcategoryId == LETTER_TRACING_SUBCATEGORY) {
+            _uiState.update {
+                it.copy(
+                    currentExercise = null,
+                    userPath = emptyList(),
+                    isComplete = false,
+                    isFinished = false,
+                    showLetterChooser = true
+                )
+            }
+            return
+        }
         if (pendingExerciseIds.isEmpty()) {
             _uiState.update { it.copy(isFinished = true, isLoading = false) }
             return
@@ -331,5 +473,61 @@ class WritingViewModel(
             _uiState.update { it.copy(isLoading = true) }
             startExercise(0)
         }
+    }
+
+    private fun buildLetterTracingExercises(
+        level: SkillLevel,
+        profileId: String
+    ): List<ExerciseContent> {
+        val lowerCase = ('a'..'z').map { it.toString() }
+        val upperCase = ('A'..'Z').map { it.toString() }
+        val randomMixed = (lowerCase + upperCase)
+            .shuffled(Random(profileId.hashCode() xor LETTER_RANDOM_SEED))
+            .take(RANDOM_LETTER_COUNT)
+
+        val ordered = buildList {
+            lowerCase.forEachIndexed { index, letter -> add(Triple("lowercase", index, letter)) }
+            upperCase.forEachIndexed { index, letter -> add(Triple("uppercase", index, letter)) }
+            randomMixed.forEachIndexed { index, letter -> add(Triple("random", index, letter)) }
+        }
+
+        return ordered.mapIndexed { sequenceIndex, (phase, phaseIndex, letter) ->
+            ExerciseContent(
+                id = "letter-tracing-$phase-${phaseIndex + 1}-${letter.lowercase()}",
+                domain = LearningDomain.WRITING,
+                skill = "letter_tracing",
+                section = ExerciseSection.PRACTICE,
+                level = level,
+                inputMode = InputMode.TRACE_LETTER,
+                prompt = LocalizedText(
+                    nl = "Trek de letter $letter over.",
+                    en = "Trace the letter $letter.",
+                    fr = "Repasse la lettre $letter."
+                ),
+                data = mapOf(
+                    "letter" to letter,
+                    "letterCase" to if (letter.first().isUpperCase()) "uppercase" else "lowercase",
+                    "tracePhase" to phase,
+                    "sequenceIndex" to sequenceIndex.toString(),
+                    "subcategoryId" to LETTER_TRACING_SUBCATEGORY,
+                    "mainCategory" to "writing",
+                    "grade" to (level.toGrade()?.toString() ?: "1"),
+                    "difficultyStars" to "1",
+                    "topic" to "Letters schrijven",
+                    "topic_en-US" to "Writing letters",
+                    "topic_fr-BE" to "Ecriture des lettres",
+                    "progressKey" to "letter-tracing-$phase-${phaseIndex + 1}",
+                    "writingStyle" to "flemish-looped-school-hand"
+                ),
+                answer = "success",
+                rewardMetadata = RewardMetadata(stamps = 1)
+            )
+        }
+    }
+
+    companion object {
+        private const val LETTER_TRACING_SUBCATEGORY = "letter_tracing"
+        private const val RANDOM_LETTER_COUNT = 52
+        private const val LETTER_RANDOM_SEED = 0x504F494E
     }
 }

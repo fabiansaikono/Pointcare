@@ -1,7 +1,7 @@
 package be.saikono.poincare.ui.puzzle
 
+import androidx.compose.foundation.layout.PaddingValues
 import android.content.res.Configuration
-import android.speech.tts.TextToSpeech
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,14 +32,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import be.saikono.poincare.model.formatVisibleNumbers
 import be.saikono.poincare.ui.theme.CockpitGray
 import be.saikono.poincare.ui.theme.DeepSpaceBlue
 import be.saikono.poincare.ui.theme.NebulaPurple
@@ -48,7 +46,6 @@ import be.saikono.poincare.ui.theme.PlanetBlue
 import be.saikono.poincare.ui.theme.PlanetGold
 import be.saikono.poincare.ui.theme.PlanetRed
 import be.saikono.poincare.ui.theme.StarWhite
-import java.util.Locale
 
 @Composable
 fun CalculatorPuzzleGame(
@@ -56,6 +53,7 @@ fun CalculatorPuzzleGame(
     difficultyStars: Int,
     exerciseLanguage: String,
     onAttemptSubmitted: (CalculatorPuzzleAttempt) -> Unit,
+    onSpeakQuestion: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val copy = remember(exerciseLanguage) { calculatorPuzzleCopy(exerciseLanguage) }
@@ -66,26 +64,6 @@ fun CalculatorPuzzleGame(
     var feedbackIsCorrect by remember { mutableStateOf<Boolean?>(null) }
     var tipCount by remember { mutableStateOf(0) }
     var answerCount by remember { mutableStateOf(0) }
-
-    val context = LocalContext.current
-    val inPreview = LocalInspectionMode.current
-    var ttsReady by remember { mutableStateOf(false) }
-    val tts: TextToSpeech? = remember(context, inPreview) {
-        if (inPreview) {
-            null
-        } else {
-            TextToSpeech(context) { status ->
-                ttsReady = status == TextToSpeech.SUCCESS
-            }
-        }
-    }
-
-    DisposableEffect(tts) {
-        onDispose {
-            tts?.stop()
-            tts?.shutdown()
-        }
-    }
 
     LaunchedEffect(mathGrade, difficultyStars) {
         challenge = null
@@ -119,11 +97,7 @@ fun CalculatorPuzzleGame(
 
     fun speakQuestion() {
         val activeChallenge = challenge ?: return
-        val engine = tts ?: return
-        if (!ttsReady) return
-        val text = calculatorPuzzleQuestionText(copy, activeChallenge.expression)
-        engine.language = Locale.forLanguageTag(exerciseLanguage.replace('_', '-'))
-        engine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "calculator-question-${activeChallenge.id}")
+        onSpeakQuestion(calculatorPuzzleQuestionText(copy, activeChallenge.expression))
     }
 
     fun submitDisplay() {
@@ -389,6 +363,7 @@ private fun CalculatorTopActions(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Button(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             onClick = onRandomExercise,
             modifier = Modifier
                 .weight(1f)
@@ -409,6 +384,7 @@ private fun CalculatorTopActions(
         }
 
         Button(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             onClick = secondaryAction,
             modifier = Modifier
                 .weight(1f)
@@ -451,7 +427,7 @@ private fun ChallengeCard(
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            text = questionText,
+            text = formatVisibleNumbers(questionText),
             color = PlanetGold,
             fontSize = if (hasQuestion) {
                 if (compact) 18.sp else 26.sp
@@ -487,7 +463,7 @@ private fun TipCard(
             val visibleAlternatives = currentChallenge.alternatives.take(tipCount.coerceAtMost(3))
             visibleAlternatives.forEachIndexed { index, alternative ->
                 Text(
-                    text = "${copy.tip} ${index + 1}: $alternative",
+                    text = formatVisibleNumbers("${copy.tip} ${index + 1}: $alternative"),
                     color = DeepSpaceBlue,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp
@@ -524,7 +500,7 @@ private fun CalculatorDisplay(display: String, compact: Boolean) {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            text = display,
+            text = formatVisibleNumbers(display),
             modifier = Modifier.padding(if (compact) 8.dp else 18.dp),
             textAlign = TextAlign.End,
             fontSize = if (compact) 22.sp else 30.sp,
@@ -697,6 +673,7 @@ private fun CalculatorPuzzleGamePreview() {
         mathGrade = 4,
         difficultyStars = 2,
         exerciseLanguage = "nl-BE",
-        onAttemptSubmitted = {}
+        onAttemptSubmitted = {},
+        onSpeakQuestion = {}
     )
 }

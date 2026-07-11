@@ -8,6 +8,7 @@ import be.saikono.poincare.data.content.PoincareAudioSource
 import be.saikono.poincare.data.content.PoincareExercise
 import be.saikono.poincare.data.content.PoincareExerciseTranslation
 import be.saikono.poincare.data.content.PoincareSubcategory
+import be.saikono.poincare.model.ChildProfile
 import be.saikono.poincare.model.ExerciseContent
 import be.saikono.poincare.model.ExerciseSection
 import be.saikono.poincare.model.formatVisibleNumbers
@@ -16,7 +17,10 @@ import be.saikono.poincare.model.LearningDomain
 import be.saikono.poincare.model.LocalizedText
 import be.saikono.poincare.model.RewardMetadata
 import be.saikono.poincare.model.SkillLevel
+import be.saikono.poincare.model.SubcategoryCatalog
+import java.io.FilterInputStream
 import java.io.IOException
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -33,26 +37,30 @@ interface ContentRepository {
         difficultyStars: Int? = null,
         locale: String? = null
     ): List<ExerciseContent>
+    suspend fun preloadForProfile(profile: ChildProfile, onProgress: (Int) -> Unit = {}) {
+        onProgress(100)
+    }
 }
 
 class AssetContentRepository(private val context: Context) : ContentRepository {
     private val xmlParser = PoincareContentParser()
     private val contentLoadMutex = Mutex()
-    private val xmlExercisesCache = mutableMapOf<LearningDomain, List<ExerciseContent>>()
+    private data class CacheKey(val domain: LearningDomain, val level: SkillLevel?)
+    private val xmlExercisesCache = mutableMapOf<CacheKey, List<ExerciseContent>>()
     private var loadedManifestSignature: String? = null
 
     override suspend fun getExercises(domain: LearningDomain, level: SkillLevel): List<ExerciseContent> = withContext(Dispatchers.IO) {
         if (level == SkillLevel.NOT_APPLICABLE) {
             emptyList()
         } else {
-            loadXmlExercises(domain).filter { it.level == level }.also { exercises ->
+            loadXmlExercises(domain, level).also { exercises ->
                 Log.i(TAG, "Query domain=$domain level=$level returned ${exercises.size} exercises")
             }
         }
     }
 
     override suspend fun getExerciseById(id: String): ExerciseContent? = withContext(Dispatchers.IO) {
-        xmlExercisesCache.values.flatten().firstOrNull { it.id == id } 
+        xmlExercisesCache.values.asSequence().flatten().firstOrNull { it.id == id }
             ?: loadXmlExercises().firstOrNull { it.id == id }
     }
 
@@ -63,11 +71,12 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         difficultyStars: Int?,
         locale: String?
     ): List<ExerciseContent> = withContext(Dispatchers.IO) {
-        val domain = mainCategory?.toLearningDomain()
-        val baseExercises = if (domain != null) loadXmlExercises(domain) else loadXmlExercises()
-        
+        val domain = mainCategory?.toLearningDomain() ?: subcategoryId?.toLearningDomainBySubcategory()
+        val level = grade?.toSkillLevel()
+        val baseExercises = if (domain != null) loadXmlExercises(domain, level) else loadXmlExercises()
+
         baseExercises.filter { exercise ->
-            (mainCategory == null || exercise.data["mainCategory"] == mainCategory) &&
+            (mainCategory == null || exercise.data["mainCategory"] == mainCategory || domain == exercise.domain) &&
                 (subcategoryId == null || exercise.data["subcategoryId"] == subcategoryId) &&
                 (grade == null || exercise.data["grade"]?.toIntOrNull() == grade) &&
                 (difficultyStars == null || exercise.data["difficultyStars"]?.toIntOrNull() == difficultyStars) &&
@@ -77,9 +86,67 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         }
     }
 
-    private suspend fun loadXmlExercises(domain: LearningDomain? = null): List<ExerciseContent> = contentLoadMutex.withLock {
+    override suspend fun preloadForProfile(profile: ChildProfile, onProgress: (Int) -> Unit) = withContext(Dispatchers.IO) {
+        contentLoadMutex.withLock {
+            invalidateCacheIfContentChanged()
+            val targets = buildList {
+                add(LearningDomain.MATH to profile.mathLevel)
+                add(LearningDomain.READING to profile.readingLevel)
+                add(LearningDomain.WRITING to profile.writingLevel)
+                // Puzzles derive their grade from the related Reading or Math category.
+                add(LearningDomain.PUZZLE to profile.mathLevel)
+                add(LearningDomain.PUZZLE to profile.readingLevel)
+                // World Knowledge is selected per topic in the child flow, so preload all levels once.
+                SkillLevel.entries.filter { it != SkillLevel.NOT_APPLICABLE }.forEach { level ->
+                    add(LearningDomain.WORLD_KNOWLEDGE to level)
+                }
+                add(LearningDomain.GEOMETRY to profile.geometryLevel)
+            }.filter { (_, level) -> level != SkillLevel.NOT_APPLICABLE }.distinct()
+
+            val missingTargets = targets.filter { (domain, level) -> CacheKey(domain, level) !in xmlExercisesCache }
+            if (missingTargets.isEmpty()) {
+                onProgress(100)
+                return@withLock
+            }
+
+            onProgress(0)
+            val targetsByFile = linkedMapOf<String, MutableList<Pair<LearningDomain, SkillLevel>>>()
+            missingTargets.forEach { target ->
+                target.first.toFileNames().forEach { fileName ->
+                    targetsByFile.getOrPut(fileName) { mutableListOf() }.add(target)
+                }
+            }
+            val fileSizes = targetsByFile.keys.associateWith(::assetSize)
+            val totalBytes = fileSizes.values.sum().coerceAtLeast(1L)
+            var completedBytes = 0L
+            var convertedTargets = 0
+
+            targetsByFile.forEach { (fileName, fileTargets) ->
+                val fileSize = fileSizes.getValue(fileName)
+                val pack = loadPack(fileName) { readBytes ->
+                    val readProgress = (((completedBytes + readBytes.coerceAtMost(fileSize)) * 85L) / totalBytes).toInt()
+                    onProgress(readProgress.coerceIn(0, 85))
+                }
+                completedBytes += fileSize
+
+                fileTargets.distinct().forEach { (domain, level) ->
+                    val converted = pack?.let { convertPack(it, domain, level) }.orEmpty()
+                    xmlExercisesCache[CacheKey(domain, level)] = converted
+                    convertedTargets += 1
+                    val conversionProgress = 85 + (convertedTargets * 15 / missingTargets.size.coerceAtLeast(1))
+                    onProgress(conversionProgress.coerceIn(85, 100))
+                }
+            }
+            onProgress(100)
+        }
+    }
+
+    private suspend fun loadXmlExercises(
+        domain: LearningDomain? = null,
+        level: SkillLevel? = null
+    ): List<ExerciseContent> = contentLoadMutex.withLock {
         invalidateCacheIfContentChanged()
-        loadXmlExercisesLocked(domain)
+        loadXmlExercisesLocked(domain, level)
     }
 
     private fun invalidateCacheIfContentChanged() {
@@ -94,32 +161,94 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         }
     }
 
-    private suspend fun loadXmlExercisesLocked(domain: LearningDomain? = null): List<ExerciseContent> {
+    private fun loadXmlExercisesLocked(
+        domain: LearningDomain? = null,
+        level: SkillLevel? = null
+    ): List<ExerciseContent> {
         if (domain != null) {
-            xmlExercisesCache[domain]?.let { return it }
-            val packs = loadPacksForDomain(domain)
-            val parsed = packs.flatMap { pack ->
-                pack.exercises.mapNotNull { it.toExerciseContent(pack) }
-            }.filter { it.domain == domain }.distinctBy { it.id }
-            Log.i(TAG, "Converted ${parsed.size} XML exercises for domain $domain")
-            xmlExercisesCache[domain] = parsed
+            val key = CacheKey(domain, level)
+            xmlExercisesCache[key]?.let { return it }
+            val parsed = domain.toFileNames()
+                .mapNotNull(::loadPack)
+                .flatMap { pack -> convertPack(pack, domain, level) }
+                .distinctBy { it.id }
+            Log.i(TAG, "Converted ${parsed.size} XML exercises for domain $domain level=$level")
+            xmlExercisesCache[key] = parsed
             return parsed
-        } else {
-            val allDomains = LearningDomain.entries
-            return allDomains.flatMap { loadXmlExercisesLocked(it) }.distinctBy { it.id }
+        }
+
+        return LearningDomain.entries
+            .flatMap { loadXmlExercisesLocked(it, level = null) }
+            .distinctBy { it.id }
+    }
+
+    private fun convertPack(
+        pack: PoincareContentPack,
+        domain: LearningDomain,
+        level: SkillLevel?
+    ): List<ExerciseContent> = pack.exercises.mapNotNull { source ->
+        if (level != null && source.grade?.toSkillLevel() != level) return@mapNotNull null
+        try {
+            source.toExerciseContent(pack)
+        } catch (cancelled: CancellationException) {
+            throw cancelled
+        } catch (error: Throwable) {
+            Log.e(TAG, "Skipping malformed XML exercise id=${source.id}", error)
+            null
+        }
+    }.filter { it.domain == domain }
+
+    private fun loadPack(fileName: String): PoincareContentPack? = loadPack(fileName, null)
+
+    private fun loadPack(fileName: String, onBytesRead: ((Long) -> Unit)?): PoincareContentPack? {
+        val path = "poincare/content/$fileName"
+        return try {
+            context.assets.open(path).use { raw ->
+                val monitored = if (onBytesRead == null) raw else ProgressInputStream(raw, onBytesRead)
+                xmlParser.parse(monitored)
+            }
+        } catch (cancelled: CancellationException) {
+            throw cancelled
+        } catch (error: Throwable) {
+            Log.e(TAG, "Failed to parse content pack asset: $path", error)
+            null
         }
     }
 
-    private fun loadPacksForDomain(domain: LearningDomain): List<PoincareContentPack> {
-        val fileNames = domain.toFileNames()
-        return fileNames.mapNotNull { fileName ->
-            val path = "poincare/content/$fileName"
-            try {
-                context.assets.open(path).use(xmlParser::parse)
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to parse content pack asset: $path", e)
-                null
+    private fun assetSize(fileName: String): Long = runCatching {
+        context.assets.open("poincare/content/$fileName").use { it.available().toLong().coerceAtLeast(1L) }
+    }.getOrDefault(1L)
+
+    private class ProgressInputStream(
+        input: java.io.InputStream,
+        private val onBytesRead: (Long) -> Unit
+    ) : FilterInputStream(input) {
+        private var totalRead = 0L
+        private var lastReported = 0L
+
+        override fun read(): Int {
+            val value = super.read()
+            if (value >= 0) report(1)
+            return value
+        }
+
+        override fun read(buffer: ByteArray, offset: Int, length: Int): Int {
+            val count = super.read(buffer, offset, length)
+            if (count > 0) report(count)
+            return count
+        }
+
+        private fun report(count: Int) {
+            totalRead += count
+            if (totalRead - lastReported >= 64 * 1024 || count == 0) {
+                lastReported = totalRead
+                onBytesRead(totalRead)
             }
+        }
+
+        override fun close() {
+            onBytesRead(totalRead)
+            super.close()
         }
     }
 
@@ -134,11 +263,34 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
 
     private fun String.toLearningDomain(): LearningDomain? = when (this.lowercase()) {
         "wiskunde", "math", "mathematics" -> LearningDomain.MATH
-        "language", "lezen", "reading" -> LearningDomain.READING
-        "schrijven", "writing" -> LearningDomain.WRITING
+        "language", "lezen", "reading", "lezen & luisteren", "reading & listening", "lecture et écoute" -> LearningDomain.READING
+        "schrijven", "writing", "spelling & grammatica", "spelling & grammar", "orthographe et grammaire" -> LearningDomain.WRITING
         "puzzel", "puzzels", "puzzle", "logic-puzzles" -> LearningDomain.PUZZLE
         "world-themes", "world-knowledge", "world_knowledge" -> LearningDomain.WORLD_KNOWLEDGE
-        "geometry" -> LearningDomain.GEOMETRY
+        "geometry", "meetkunde", "meten & meetkunde", "measurement & geometry", "mesures et géométrie" -> LearningDomain.GEOMETRY
+        else -> null
+    }
+
+    private fun String.toLearningDomainBySubcategory(): LearningDomain? {
+        val base = SubcategoryCatalog.baseId(this)
+        return when (base) {
+            in SubcategoryCatalog.mathIds -> LearningDomain.MATH
+            in SubcategoryCatalog.readingIds -> LearningDomain.READING
+            in SubcategoryCatalog.writingBaseIds -> LearningDomain.WRITING
+            in SubcategoryCatalog.puzzleIds -> LearningDomain.PUZZLE
+            in SubcategoryCatalog.worldThemeIds -> LearningDomain.WORLD_KNOWLEDGE
+            in SubcategoryCatalog.geometryIds -> LearningDomain.GEOMETRY
+            else -> null
+        }
+    }
+
+    private fun Int.toSkillLevel(): SkillLevel? = when (this) {
+        1 -> SkillLevel.FIRST_GRADE
+        2 -> SkillLevel.SECOND_GRADE
+        3 -> SkillLevel.THIRD_GRADE
+        4 -> SkillLevel.FOURTH_GRADE
+        5 -> SkillLevel.FIFTH_GRADE
+        6 -> SkillLevel.SIXTH_GRADE
         else -> null
     }
 
@@ -147,7 +299,7 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         val subcategory = pack.subcategories.firstOrNull { it.id == subcategoryId }
         val domain = when (category ?: subject?.lowercase()) {
             "wiskunde", "math", "mathematics" -> LearningDomain.MATH
-            "language" -> if (subcategoryId in WRITING_SUBCATEGORIES) LearningDomain.WRITING else LearningDomain.READING
+            "language" -> if (SubcategoryCatalog.baseId(subcategoryId) in SubcategoryCatalog.writingBaseIds) LearningDomain.WRITING else LearningDomain.READING
             "lezen", "reading" -> LearningDomain.READING
             "schrijven", "writing" -> LearningDomain.WRITING
             "puzzel", "puzzels", "puzzle" -> LearningDomain.PUZZLE
@@ -181,7 +333,7 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         val xmlType = type ?: "open_numeric"
         val inputMode = when (xmlType) {
             "audio_choice", "audio_translation_choice" -> InputMode.LISTEN_AND_SELECT
-            "multiple_choice", "shape_choice" -> if (subcategoryId == "listening") InputMode.LISTEN_AND_SELECT else InputMode.TAP_CHOICE
+            "multiple_choice", "shape_choice" -> if (SubcategoryCatalog.baseId(subcategoryId) == "listening") InputMode.LISTEN_AND_SELECT else InputMode.TAP_CHOICE
             "open_numeric" -> InputMode.CUSTOM_NUMBER_PAD
             "puzzle" -> when (subcategoryId) {
                 "sudoku" -> InputMode.SUDOKU_GRID
@@ -292,8 +444,17 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
     }
 
     private fun PoincareExercise.putPromptTtsData(locale: String, translation: PoincareExerciseTranslation, data: MutableMap<String, String>) {
-        val promptTts = translation.questionTts ?: promptTtsTexts[normalizeLocale(locale)]
-        if (!promptTts.isNullOrBlank()) data["promptTts_${normalizeLocale(locale)}"] = formatVisibleNumbers(promptTts)
+        val normalizedLocale = normalizeLocale(locale)
+        val promptTts = when {
+            type == "missing_letter_choice" &&
+                normalizedLocale == "nl-BE" &&
+                !missingTtsFullWord.isNullOrBlank() ->
+                "Welke letter ontbreekt? Het woord is ${missingTtsFullWord.orEmpty().trim()}."
+            else -> translation.questionTts ?: promptTtsTexts[normalizedLocale]
+        }
+        if (!promptTts.isNullOrBlank()) {
+            data["promptTts_$normalizedLocale"] = formatVisibleNumbers(promptTts)
+        }
     }
 
     private fun PoincareExercise.translationFor(locale: String): PoincareExerciseTranslation {
@@ -412,7 +573,12 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
     companion object {
         private const val TAG = "PoincareContent"
 
-        private val WRITING_SUBCATEGORIES = setOf("writing", "dictation", "spelling", "sentence-structure", "sentence_order", "grammar")
+        private val MATH_SUBCATEGORIES = setOf("addition", "subtraction", "multiplication", "division", "mixed_arithmetic", "number_sequences", "fractions", "money")
+        private val READING_SUBCATEGORIES = setOf("reading", "listening", "dictation", "vocabulary", "translation_nl_to_en", "translation_nl_to_fr", "translation_en_to_nl", "translation_en_to_fr", "translation_fr_to_nl", "translation_fr_to_en")
+        private val WRITING_SUBCATEGORIES = SubcategoryCatalog.writingBaseIds
+        private val PUZZLE_SUBCATEGORIES = setOf("sudoku", "math-crosswords", "word-seeker", "mothership-dock", "galaxycon", "calculator-puzzle", "constellations", "orbit-builder")
+        private val WORLD_SUBCATEGORIES = SubcategoryCatalog.worldThemeIds
+        private val GEOMETRY_SUBCATEGORIES = SubcategoryCatalog.geometryIds
 
         private val ANSWER_LABELS_NL = mapOf(
             "a" to "een", "an" to "een", "the" to "de", "is" to "is", "am" to "ben", "are" to "zijn", "be" to "zijn", "many" to "veel",

@@ -4,6 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -11,8 +14,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -25,10 +30,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import be.saikono.poincare.model.*
 import be.saikono.poincare.ui.components.DifficultyStars
 import be.saikono.poincare.ui.missionCompleteGoBackText
 import be.saikono.poincare.ui.components.LetterTracingComponent
+import be.saikono.poincare.ui.components.SchoolLetterPreview
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.localizedExerciseText
 import be.saikono.poincare.ui.spaceMap.SpaceBackground
@@ -50,7 +57,9 @@ fun WritingScreen(
         onChoiceSelected = viewModel::onChoiceSelected,
         onConfirmClick = viewModel::onConfirmClick,
         onQuestionClick = viewModel::playCurrentQuestion,
-        onNextExercise = { viewModel.nextExercise() }
+        onNextExercise = { viewModel.nextExercise() },
+        onLetterSelected = viewModel::selectTracingLetter,
+        onRandomSelected = viewModel::selectRandomTracingLetter
     )
 }
 
@@ -64,7 +73,9 @@ fun WritingContent(
     onChoiceSelected: (String) -> Unit,
     onConfirmClick: () -> Unit,
     onQuestionClick: () -> Unit,
-    onNextExercise: () -> Unit
+    onNextExercise: () -> Unit,
+    onLetterSelected: (String) -> Unit,
+    onRandomSelected: () -> Unit
 ) {
     val exercise = uiState.currentExercise
 
@@ -106,9 +117,7 @@ fun WritingContent(
             }
 
             if (uiState.isLoading) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator(color = PlanetGold)
-                }
+                Box(modifier = Modifier.fillMaxSize())
             } else if (exercise != null) {
                 Spacer(modifier = Modifier.height(40.dp))
                 val isLandscape = LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
@@ -162,12 +171,14 @@ fun WritingContent(
 
                 val buttonText = if (uiState.isFinished) missionCompleteGoBackText(uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage)
                 Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = if (uiState.isFinished) onNavigateBack else onNextExercise,
                     enabled = uiState.isComplete || uiState.isFinished,
                     colors = ButtonDefaults.buttonColors(containerColor = if (uiState.isComplete || uiState.isFinished) PlanetGold else Color.Gray.copy(alpha = 0.5f)),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp)
+                        .height(45.dp)
                         .semantics { contentDescription = localizedExerciseText("nextMissionReady", uiState.exerciseLanguage) }
                 ) {
                     Text(buttonText, color = if (uiState.isComplete || uiState.isFinished) DeepSpaceBlue else StarWhite, fontWeight = FontWeight.Medium)
@@ -178,7 +189,123 @@ fun WritingContent(
                 }
             }
         }
+
+        if (uiState.showLetterChooser) {
+            LetterChooserDialog(
+                choices = uiState.letterChoices,
+                randomUnlocked = uiState.randomPracticeUnlocked,
+                locale = uiState.exerciseLanguage,
+                onLetterSelected = onLetterSelected,
+                onRandomSelected = onRandomSelected,
+                onClose = onNavigateBack
+            )
+        }
     }
+}
+
+@Composable
+private fun LetterChooserDialog(
+    choices: List<LetterChoice>,
+    randomUnlocked: Boolean,
+    locale: String,
+    onLetterSelected: (String) -> Unit,
+    onRandomSelected: () -> Unit,
+    onClose: () -> Unit
+) {
+    var showUppercase by rememberSaveable { mutableStateOf(false) }
+    val language = locale.substringBefore('-').substringBefore('_').lowercase()
+    val title = when (language) {
+        "fr" -> "Choisis une lettre"
+        "en" -> "Choose a letter"
+        else -> "Kies een letter"
+    }
+    val lowerLabel = when (language) { "fr" -> "Minuscules"; "en" -> "Lowercase"; else -> "Kleine letters" }
+    val upperLabel = when (language) { "fr" -> "Majuscules"; "en" -> "Uppercase"; else -> "Hoofdletters" }
+    val randomLabel = when (language) { "fr" -> "Aléatoire"; "en" -> "Random practice"; else -> "Willekeurig oefenen" }
+    val visibleChoices = choices.filter { it.uppercase == showUppercase }
+
+    Dialog(onDismissRequest = onClose) {
+        Surface(
+            color = DeepSpaceBlue,
+            shape = RoundedCornerShape(24.dp),
+            tonalElevation = 8.dp,
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(.88f)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize().padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                Text(title, color = StarWhite, style = MaterialTheme.typography.headlineSmall)
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    LetterCaseButton(lowerLabel, selected = !showUppercase, Modifier.weight(1f)) { showUppercase = false }
+                    LetterCaseButton(upperLabel, selected = showUppercase, Modifier.weight(1f)) { showUppercase = true }
+                }
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(6),
+                    modifier = Modifier.weight(1f).fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(visibleChoices, key = { it.exerciseId }) { choice ->
+                        val background = when {
+                            choice.completed -> PlanetBlue
+                            choice.enabled -> PlanetGold
+                            else -> Color.Gray.copy(alpha = .28f)
+                        }
+                        val foreground = when {
+                            choice.completed || choice.enabled -> DeepSpaceBlue
+                            else -> StarWhite.copy(alpha = .35f)
+                        }
+                        Box(
+                            modifier = Modifier
+                                .aspectRatio(1f)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(background)
+                                .clickable(enabled = choice.enabled) { onLetterSelected(choice.exerciseId) },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            SchoolLetterPreview(
+                                letter = choice.letter,
+                                color = foreground,
+                                modifier = Modifier.fillMaxSize(.82f)
+                            )
+                        }
+                    }
+                }
+                Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                    onClick = onRandomSelected,
+                    enabled = randomUnlocked,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = PlanetBlue,
+                        contentColor = DeepSpaceBlue,
+                        disabledContainerColor = Color.Gray.copy(alpha = .28f),
+                        disabledContentColor = StarWhite.copy(alpha = .35f)
+                    ),
+                    modifier = Modifier.fillMaxWidth().height(52.dp)
+                ) { Text(randomLabel, fontWeight = FontWeight.Bold) }
+                TextButton(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = onClose) {
+                    Text(localizedExerciseText("backToMap", locale), color = StarWhite.copy(alpha = .75f))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun LetterCaseButton(label: String, selected: Boolean, modifier: Modifier, onClick: () -> Unit) {
+    Button(
+        shape = RoundedCornerShape(12.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+        onClick = onClick,
+        modifier = modifier.height(46.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if (selected) PlanetGold else Color.White.copy(alpha = .10f),
+            contentColor = if (selected) DeepSpaceBlue else StarWhite
+        )
+    ) { Text(label, fontWeight = FontWeight.Bold) }
 }
 
 @Composable
@@ -242,7 +369,8 @@ private fun WritingAnswerArea(
     // POINCARE_REPAIR_V29: stable-answer-shuffle
     val options = remember(exercise.id, locale) { exercise.localizedOptions(locale).shuffled() }
     if (options.isNotEmpty()) {
-        Column(modifier = modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+        Column(modifier = Modifier.widthIn(max = 760.dp).fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             options.chunked(if (isLandscape) 2 else 1).forEach { rowOptions ->
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
                     rowOptions.forEach { option ->
@@ -257,8 +385,10 @@ private fun WritingAnswerArea(
                 }
             }
         }
+        }
     } else {
-        Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+        Column(modifier = Modifier.widthIn(max = 760.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             OutlinedTextField(
                 value = input,
                 onValueChange = onTextInputChanged,
@@ -268,9 +398,10 @@ private fun WritingAnswerArea(
                 keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Text),
                 colors = OutlinedTextFieldDefaults.colors(focusedTextColor = StarWhite, unfocusedTextColor = StarWhite)
             )
-            Button(onClick = onConfirmClick, enabled = input.isNotBlank(), modifier = Modifier.fillMaxWidth().height(56.dp)) {
+            Button(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = onConfirmClick, enabled = input.isNotBlank(), modifier = Modifier.fillMaxWidth().height(45.dp)) {
                 Text(localizedExerciseText("check", locale))
             }
+        }
         }
     }
 }
@@ -320,7 +451,9 @@ fun WritingScreenPreview() {
             onChoiceSelected = {},
             onConfirmClick = {},
             onQuestionClick = {},
-            onNextExercise = {}
+            onNextExercise = {},
+            onLetterSelected = {},
+            onRandomSelected = {}
         )
     }
 }

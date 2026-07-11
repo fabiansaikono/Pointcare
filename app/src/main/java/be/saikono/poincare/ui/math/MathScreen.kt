@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.math
 
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -11,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,17 +34,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import be.saikono.poincare.model.*
 import be.saikono.poincare.ui.animations.CorrectAnswerPulse
 import be.saikono.poincare.ui.animations.IncorrectAnswerShake
 import be.saikono.poincare.ui.animations.MissionTransition
-import be.saikono.poincare.ui.components.CustomNumberPad
 import be.saikono.poincare.ui.components.DifficultyStars
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.localizedExerciseText
 import be.saikono.poincare.ui.spaceMap.SpaceBackground
 import be.saikono.poincare.ui.theme.*
 import kotlin.math.roundToInt
+import kotlinx.coroutines.delay
 
 @Composable
 fun MathScreen(
@@ -62,7 +65,8 @@ fun MathScreen(
         onCalculationCellClicked = viewModel::onCalculationCellClicked,
         onConfirmClick = viewModel::onConfirmClick,
         onQuestionClick = viewModel::playCurrentQuestion,
-        onNextExercise = viewModel::nextExercise
+        onNextExercise = viewModel::nextExercise,
+        onResetExercise = viewModel::resetExercise
     )
 }
 
@@ -79,7 +83,8 @@ fun MathContent(
     onCalculationCellClicked: (String) -> Unit,
     onConfirmClick: () -> Unit,
     onQuestionClick: () -> Unit,
-    onNextExercise: () -> Unit
+    onNextExercise: () -> Unit,
+    onResetExercise: () -> Unit
 ) {
     val exercise = uiState.currentExercise
 
@@ -125,9 +130,7 @@ fun MathContent(
 
             when {
                 uiState.isLoading -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator(color = PlanetGold)
-                    }
+                    Box(modifier = Modifier.fillMaxSize())
                 }
 
                 exercise != null -> {
@@ -150,7 +153,8 @@ fun MathContent(
                                 onSymbolDropped = onCalculationSymbolDropped,
                                 onCellClicked = onCalculationCellClicked,
                                 onConfirmClick = onConfirmClick,
-                                onNextExercise = onNextExercise
+                                onNextExercise = onNextExercise,
+                                onResetExercise = onResetExercise
                             )
                         } else {
                             LegacyMathMission(
@@ -163,6 +167,7 @@ fun MathContent(
                                 onConfirmClick = onConfirmClick,
                                 onQuestionClick = onQuestionClick,
                                 onNextExercise = onNextExercise,
+                                onResetExercise = onResetExercise,
                                 onNavigateBack = onNavigateBack
                             )
                         }
@@ -196,10 +201,23 @@ private fun WrittenCalculationMission(
     onSymbolDropped: (String, String) -> Unit,
     onCellClicked: (String) -> Unit,
     onConfirmClick: () -> Unit,
-    onNextExercise: () -> Unit
+    onNextExercise: () -> Unit,
+    onResetExercise: () -> Unit
 ) {
     val isLandscape = LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+    val landscapeControlsWidth = 230.dp
     var cellCenters by remember(calculation.missionId) { mutableStateOf<Map<String, Offset>>(emptyMap()) }
+    val helperHintAlpha = remember(calculation.missionId) { Animatable(0.03f) }
+    LaunchedEffect(calculation.missionId, entries, isCorrect) {
+        helperHintAlpha.snapTo(0.03f)
+        delay(5_000)
+        if (isCorrect != true) {
+            repeat(3) {
+                helperHintAlpha.animateTo(0.10f, animationSpec = tween(1_200))
+                helperHintAlpha.animateTo(0.03f, animationSpec = tween(1_200))
+            }
+        }
+    }
 
     val dropSymbol: (String, Offset) -> Unit = { symbol, dropPosition ->
         val target = cellCenters
@@ -216,7 +234,7 @@ private fun WrittenCalculationMission(
     ) {
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = exercise.prompt.get(locale),
+            text = formatVisibleNumbers(exercise.prompt.get(locale)),
             style = MaterialTheme.typography.titleMedium,
             color = StarWhite,
             textAlign = TextAlign.Center,
@@ -224,7 +242,7 @@ private fun WrittenCalculationMission(
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp)
                 .clickable { onQuestionClick() }
-                .semantics { contentDescription = "Vraag: ${exercise.prompt.get(locale)}" }
+                .semantics { contentDescription = "Vraag: ${formatVisibleNumbers(exercise.prompt.get(locale))}" }
         )
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -237,6 +255,7 @@ private fun WrittenCalculationMission(
                         showFeedback = showFeedback,
                         isCorrect = isCorrect,
                         locale = locale,
+                        helperHintAlpha = helperHintAlpha.value,
                         onCellPositioned = { id, center -> cellCenters = cellCenters + (id to center) },
                         onCellClicked = onCellClicked,
                         modifier = modifier.then(pulseModifier).then(shakeModifier)
@@ -258,26 +277,10 @@ private fun WrittenCalculationMission(
                     textAlign = TextAlign.Center
                 )
                 MathSymbolBank(
-                    symbols = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "−"),
+                    symbols = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0"),
                     isLandscape = isLandscape,
                     onSymbolDropped = dropSymbol
                 )
-                Button(
-                    onClick = onConfirmClick,
-                    enabled = calculation.isAnswerComplete(entries) && isCorrect != true,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isWrong) PlanetRed else PlanetBlue,
-                        contentColor = DeepSpaceBlue,
-                        disabledContainerColor = Color.Gray.copy(alpha = 0.35f),
-                        disabledContentColor = StarWhite.copy(alpha = 0.45f)
-                    ),
-                    modifier = Modifier.fillMaxWidth().height(52.dp)
-                ) {
-                    Text(
-                        text = localizedExerciseText("check", locale),
-                        fontWeight = FontWeight.Bold
-                    )
-                }
             }
         }
 
@@ -287,8 +290,8 @@ private fun WrittenCalculationMission(
                 horizontalArrangement = Arrangement.spacedBy(18.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                board(Modifier.weight(1f).fillMaxHeight())
-                controls(Modifier.widthIn(min = 180.dp, max = 230.dp))
+                board(Modifier.weight(1f).fillMaxHeight().heightIn(min = 310.dp))
+                controls(Modifier.width(landscapeControlsWidth))
             }
         } else {
             Column(
@@ -302,13 +305,33 @@ private fun WrittenCalculationMission(
             }
         }
 
-        NextMissionButton(
-            isFinished = false,
-            isCorrect = isCorrect,
-            isWrong = isWrong,
-            locale = locale,
-            onClick = onNextExercise
-        )
+        if (isLandscape) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(18.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BottomMissionButton(
+                    isFinished = false,
+                    isCorrect = isCorrect,
+                    isWrong = isWrong,
+                    locale = locale,
+                    onNextExercise = onNextExercise,
+                    onResetExercise = onResetExercise,
+                    modifier = Modifier.weight(1f)
+                )
+                Spacer(modifier = Modifier.width(landscapeControlsWidth))
+            }
+        } else {
+            BottomMissionButton(
+                isFinished = false,
+                isCorrect = isCorrect,
+                isWrong = isWrong,
+                locale = locale,
+                onNextExercise = onNextExercise,
+                onResetExercise = onResetExercise
+            )
+        }
     }
 }
 
@@ -319,6 +342,7 @@ private fun CalculationBoard(
     showFeedback: Boolean,
     isCorrect: Boolean?,
     locale: String,
+    helperHintAlpha: Float,
     onCellPositioned: (String, Offset) -> Unit,
     onCellClicked: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -333,33 +357,52 @@ private fun CalculationBoard(
             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
             contentAlignment = Alignment.Center
         ) {
-            val cellSize = when {
-                maxWidth < 340.dp -> 34.dp
-                maxWidth < 500.dp -> 40.dp
-                else -> 48.dp
+            val preferredCellSize = when {
+                maxWidth < 340.dp -> 42f
+                maxWidth < 500.dp -> 50f
+                else -> 58f
             }
+            val logicalColumns = when (calculation.operation) {
+                WrittenOperation.DIVISION -> calculation.columnCount +
+                    maxOf(calculation.resultCellIds.size, calculation.second.toString().length) + 2
+                else -> calculation.columnCount + 1
+            }.coerceAtLeast(1)
+            val logicalRows = when (calculation.operation) {
+                WrittenOperation.ADDITION, WrittenOperation.SUBTRACTION -> 4
+                WrittenOperation.MULTIPLICATION -> 4 + calculation.partialProductRows
+                WrittenOperation.DIVISION -> calculation.divisionScratchRows + 2
+            }.coerceAtLeast(1)
+            val widthSpacing = 3f * (logicalColumns - 1)
+            val fittedToWidth = ((maxWidth.value - 24f - widthSpacing) / logicalColumns)
+                .coerceAtLeast(18f)
+            val fittedToHeight = if (maxHeight.value.isFinite()) {
+                val heightSpacing = 4f * (logicalRows - 1)
+                ((maxHeight.value - 24f - heightSpacing) / logicalRows).coerceAtLeast(18f)
+            } else {
+                preferredCellSize
+            }
+            val cellSize = minOf(preferredCellSize, fittedToWidth, fittedToHeight).dp
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
                     .padding(horizontal = 12.dp),
                 contentAlignment = Alignment.Center
             ) {
                 when (calculation.operation) {
                     WrittenOperation.ADDITION -> AdditionBoard(
-                        calculation, entries, showFeedback, isCorrect, locale,
+                        calculation, entries, showFeedback, isCorrect, locale, helperHintAlpha,
                         cellSize, onCellPositioned, onCellClicked
                     )
                     WrittenOperation.SUBTRACTION -> SubtractionBoard(
-                        calculation, entries, showFeedback, isCorrect, locale,
+                        calculation, entries, showFeedback, isCorrect, locale, helperHintAlpha,
                         cellSize, onCellPositioned, onCellClicked
                     )
                     WrittenOperation.MULTIPLICATION -> MultiplicationBoard(
-                        calculation, entries, showFeedback, isCorrect, locale,
+                        calculation, entries, showFeedback, isCorrect, locale, helperHintAlpha,
                         cellSize, onCellPositioned, onCellClicked
                     )
                     WrittenOperation.DIVISION -> DivisionBoard(
-                        calculation, entries, showFeedback, isCorrect, locale,
+                        calculation, entries, showFeedback, isCorrect, locale, helperHintAlpha,
                         cellSize, onCellPositioned, onCellClicked
                     )
                 }
@@ -375,14 +418,13 @@ private fun AdditionBoard(
     showFeedback: Boolean,
     isCorrect: Boolean?,
     locale: String,
+    helperHintAlpha: Float,
     cellSize: Dp,
     onCellPositioned: (String, Offset) -> Unit,
     onCellClicked: (String) -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(3.dp)) {
-        PlaceValueHeader(calculation.columnCount, locale, cellSize, includePrefix = true)
-        SupportCaption(writtenText("carry", locale))
-        EditableGridRow(calculation.supportCellIds, entries, cellSize, true, null, onCellPositioned, onCellClicked)
+        EditableGridRow(calculation.supportCellIds, entries, cellSize, true, null, calculation, helperHintAlpha, onCellPositioned, onCellClicked)
         FixedGridRow("", calculation.fixedDigits(calculation.first), cellSize)
         FixedGridRow(calculation.operation.symbol, calculation.fixedDigits(calculation.second), cellSize)
         GridDivider(calculation.columnCount + 1, cellSize)
@@ -397,6 +439,7 @@ private fun SubtractionBoard(
     showFeedback: Boolean,
     isCorrect: Boolean?,
     locale: String,
+    helperHintAlpha: Float,
     cellSize: Dp,
     onCellPositioned: (String, Offset) -> Unit,
     onCellClicked: (String) -> Unit
@@ -405,9 +448,7 @@ private fun SubtractionBoard(
         index.takeIf { entries[id].orEmpty().isNotBlank() }
     }.toSet()
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(3.dp)) {
-        PlaceValueHeader(calculation.columnCount, locale, cellSize, includePrefix = true)
-        SupportCaption(writtenText("borrow", locale))
-        EditableGridRow(calculation.supportCellIds, entries, cellSize, true, null, onCellPositioned, onCellClicked)
+        EditableGridRow(calculation.supportCellIds, entries, cellSize, true, null, calculation, helperHintAlpha, onCellPositioned, onCellClicked)
         FixedGridRow("", calculation.fixedDigits(calculation.first), cellSize, crossedOutColumns)
         FixedGridRow(calculation.operation.symbol, calculation.fixedDigits(calculation.second), cellSize)
         GridDivider(calculation.columnCount + 1, cellSize)
@@ -422,14 +463,13 @@ private fun MultiplicationBoard(
     showFeedback: Boolean,
     isCorrect: Boolean?,
     locale: String,
+    helperHintAlpha: Float,
     cellSize: Dp,
     onCellPositioned: (String, Offset) -> Unit,
     onCellClicked: (String) -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(3.dp)) {
-        PlaceValueHeader(calculation.columnCount, locale, cellSize, includePrefix = true)
-        SupportCaption(writtenText("carry", locale))
-        EditableGridRow(calculation.supportCellIds, entries, cellSize, true, null, onCellPositioned, onCellClicked)
+        EditableGridRow(calculation.supportCellIds, entries, cellSize, true, null, calculation, helperHintAlpha, onCellPositioned, onCellClicked)
         FixedGridRow("", calculation.fixedDigits(calculation.first), cellSize)
         FixedGridRow(calculation.operation.symbol, calculation.fixedDigits(calculation.second), cellSize)
         GridDivider(calculation.columnCount + 1, cellSize)
@@ -441,7 +481,9 @@ private fun MultiplicationBoard(
                     entries = entries,
                     cellSize = cellSize,
                     support = true,
-                    prefix = (row + 1).toString(),
+                    prefix = null,
+                    calculation = calculation,
+                    helperHintAlpha = helperHintAlpha,
                     onCellPositioned = onCellPositioned,
                     onCellClicked = onCellClicked
                 )
@@ -459,20 +501,19 @@ private fun DivisionBoard(
     showFeedback: Boolean,
     isCorrect: Boolean?,
     locale: String,
+    helperHintAlpha: Float,
     cellSize: Dp,
     onCellPositioned: (String, Offset) -> Unit,
     onCellClicked: (String) -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        SupportCaption(writtenText("longDivision", locale))
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                PlaceValueHeader(calculation.columnCount, locale, cellSize, includePrefix = false)
                 FixedGridRowWithoutPrefix(calculation.fixedDigits(calculation.first), cellSize)
                 GridDivider(calculation.columnCount, cellSize)
                 repeat(calculation.divisionScratchRows) { row ->
                     val ids = (0 until calculation.columnCount).map { col -> "scratch_${row}_$col" }
-                    EditableGridRowWithoutPrefix(ids, entries, cellSize, onCellPositioned, onCellClicked)
+                    EditableGridRowWithoutPrefix(ids, entries, cellSize, calculation, helperHintAlpha, onCellPositioned, onCellClicked)
                     if (row < calculation.divisionScratchRows - 1 && row % 2 == 1) {
                         GridDivider(calculation.columnCount, cellSize)
                     }
@@ -585,6 +626,8 @@ private fun EditableGridRow(
     cellSize: Dp,
     support: Boolean,
     prefix: String?,
+    calculation: WrittenCalculation,
+    helperHintAlpha: Float,
     onCellPositioned: (String, Offset) -> Unit,
     onCellClicked: (String) -> Unit
 ) {
@@ -597,6 +640,8 @@ private fun EditableGridRow(
                 cellSize = cellSize,
                 editable = true,
                 support = support,
+                helperHintAlpha = helperHintAlpha,
+                helperCorrect = calculation.isHelperEntryCorrect(id, entries[id].orEmpty()),
                 onCellPositioned = onCellPositioned,
                 onCellClicked = onCellClicked
             )
@@ -609,6 +654,8 @@ private fun EditableGridRowWithoutPrefix(
     ids: List<String>,
     entries: Map<String, String>,
     cellSize: Dp,
+    calculation: WrittenCalculation,
+    helperHintAlpha: Float,
     onCellPositioned: (String, Offset) -> Unit,
     onCellClicked: (String) -> Unit
 ) {
@@ -620,6 +667,8 @@ private fun EditableGridRowWithoutPrefix(
                 cellSize = cellSize,
                 editable = true,
                 support = true,
+                helperHintAlpha = helperHintAlpha,
+                helperCorrect = calculation.isHelperEntryCorrect(id, entries[id].orEmpty()),
                 onCellPositioned = onCellPositioned,
                 onCellClicked = onCellClicked
             )
@@ -640,14 +689,11 @@ private fun ResultGridRow(
     val feedback = feedbackValue(showFeedback, isCorrect)
     Row(horizontalArrangement = Arrangement.spacedBy(3.dp), verticalAlignment = Alignment.CenterVertically) {
         MathGridCell(
-            id = calculation.resultSignCellId,
-            text = entries[calculation.resultSignCellId].orEmpty(),
+            text = if (calculation.result < 0) "−" else "",
             cellSize = cellSize,
-            editable = true,
+            editable = false,
             support = false,
-            feedback = feedback,
-            onCellPositioned = onCellPositioned,
-            onCellClicked = onCellClicked
+            feedback = feedback
         )
         calculation.resultCellIds.forEach { id ->
             MathGridCell(
@@ -672,29 +718,42 @@ private fun MathGridCell(
     id: String? = null,
     support: Boolean = false,
     feedback: Boolean? = null,
+    helperHintAlpha: Float = 0.03f,
+    helperCorrect: Boolean? = null,
     crossedOut: Boolean = false,
     onCellPositioned: (String, Offset) -> Unit = { _, _ -> },
     onCellClicked: (String) -> Unit = {}
 ) {
+    val wrongTextAlpha = remember(id, text) { Animatable(1f) }
+    LaunchedEffect(helperCorrect, text, id) {
+        wrongTextAlpha.snapTo(1f)
+        if (helperCorrect == false && text.isNotBlank()) {
+            repeat(3) {
+                wrongTextAlpha.animateTo(0.35f, animationSpec = tween(1_200))
+                wrongTextAlpha.animateTo(1f, animationSpec = tween(1_200))
+            }
+        }
+    }
     val background = when {
         feedback == true -> PlanetBlue.copy(alpha = 0.32f)
         feedback == false -> PlanetRed.copy(alpha = 0.34f)
-        editable && support -> PlanetBlue.copy(alpha = 0.10f)
+        editable && support && helperCorrect == false -> PlanetRed.copy(alpha = 0.12f)
+        editable && support -> PlanetBlue.copy(alpha = helperHintAlpha.coerceIn(0.03f, 0.10f))
         editable -> Color.White.copy(alpha = 0.12f)
         else -> Color.Transparent
     }
     val borderColor = when {
         feedback == true -> PlanetBlue
         feedback == false -> PlanetRed
-        editable && support -> PlanetBlue.copy(alpha = 0.42f)
         editable -> StarWhite.copy(alpha = 0.38f)
         else -> Color.Transparent
     }
     val textColor = when {
-        editable && support -> PlanetGold
-        feedback == false -> StarWhite
+        editable && support && helperCorrect == false -> PlanetRed.copy(alpha = wrongTextAlpha.value)
+        editable && support -> PlanetBlue
         else -> StarWhite
     }
+    val fittedFontSize = (cellSize.value * 0.58f).coerceIn(14f, 34f).sp
 
     Box(
         modifier = Modifier
@@ -702,10 +761,10 @@ private fun MathGridCell(
             .clip(RoundedCornerShape(if (support) 7.dp else 9.dp))
             .background(background)
             .then(
-                if (editable) Modifier.border(
+                if (editable && !support) Modifier.border(
                     width = if (feedback != null) 2.dp else 1.dp,
                     color = borderColor,
-                    shape = RoundedCornerShape(if (support) 7.dp else 9.dp)
+                    shape = RoundedCornerShape(9.dp)
                 ) else Modifier
             )
             .then(
@@ -726,10 +785,14 @@ private fun MathGridCell(
         Text(
             text = text,
             color = textColor,
-            style = if (cellSize >= 44.dp) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.headlineMedium.copy(
+                fontSize = fittedFontSize,
+                lineHeight = fittedFontSize
+            ),
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            textDecoration = if (crossedOut) TextDecoration.LineThrough else TextDecoration.None
+            textDecoration = if (crossedOut) TextDecoration.LineThrough else TextDecoration.None,
+            maxLines = 1
         )
     }
 }
@@ -861,6 +924,7 @@ private fun LegacyMathMission(
     onConfirmClick: () -> Unit,
     onQuestionClick: () -> Unit,
     onNextExercise: () -> Unit,
+    onResetExercise: () -> Unit,
     onNavigateBack: () -> Unit
 ) {
     val isLandscape = LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
@@ -868,20 +932,20 @@ private fun LegacyMathMission(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         val promptAndAnswer: @Composable ColumnScope.() -> Unit = {
             Text(
-                text = exercise.prompt.get(uiState.exerciseLanguage),
+                text = formatVisibleNumbers(exercise.prompt.get(uiState.exerciseLanguage)),
                 style = MaterialTheme.typography.headlineSmall,
                 color = StarWhite,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .clickable { onQuestionClick() }
-                    .semantics { contentDescription = "Vraag: ${exercise.prompt.get(uiState.exerciseLanguage)}" }
+                    .semantics { contentDescription = "Vraag: ${formatVisibleNumbers(exercise.prompt.get(uiState.exerciseLanguage))}" }
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             CorrectAnswerPulse(trigger = uiState.isCorrect == true, reducedMotion = uiState.reducedMotion) { pulseModifier ->
                 IncorrectAnswerShake(trigger = uiState.isCorrect == false, reducedMotion = uiState.reducedMotion) { shakeModifier ->
                     Box(modifier = pulseModifier.then(shakeModifier)) {
@@ -911,73 +975,110 @@ private fun LegacyMathMission(
             )
         }
 
-        if (isLandscape) {
-            Column(
-                modifier = Modifier.weight(1f).fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally, content = promptAndAnswer)
-                Spacer(modifier = Modifier.height(18.dp))
-                Column(modifier = Modifier.fillMaxWidth(), content = inputArea)
-                Spacer(modifier = Modifier.weight(1f))
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+            if (isLandscape) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(24.dp),
+                    verticalAlignment = Alignment.Top
+                ) {
+                    Column(
+                        modifier = Modifier.widthIn(min = 240.dp, max = 340.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        content = promptAndAnswer
+                    )
+                    Column(
+                        modifier = Modifier.widthIn(min = 320.dp, max = 420.dp),
+                        content = inputArea
+                    )
+                }
+            } else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally, content = promptAndAnswer)
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Column(content = inputArea)
+                }
             }
-        } else {
-            Column(horizontalAlignment = Alignment.CenterHorizontally, content = promptAndAnswer)
-            Spacer(modifier = Modifier.weight(1f))
-            Column(content = inputArea)
         }
 
-        NextMissionButton(
+        BottomMissionButton(
             isFinished = uiState.isFinished,
             isCorrect = uiState.isCorrect,
             isWrong = uiState.isWrong,
             locale = uiState.exerciseLanguage,
-            onClick = if (uiState.isFinished) onNavigateBack else onNextExercise
+            onNextExercise = if (uiState.isFinished) onNavigateBack else onNextExercise,
+            onResetExercise = onResetExercise
         )
     }
 }
 
 @Composable
-private fun NextMissionButton(
+private fun BottomMissionButton(
     isFinished: Boolean,
     isCorrect: Boolean?,
     isWrong: Boolean,
     locale: String,
-    onClick: () -> Unit
+    onNextExercise: () -> Unit,
+    onResetExercise: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    val buttonText = if (isFinished) {
-        localizedExerciseText("backToMap", locale)
-    } else {
-        localizedExerciseText("nextMission", locale)
+    val solved = isCorrect == true || isFinished
+    val buttonText = when {
+        isFinished -> localizedExerciseText("backToMap", locale)
+        isCorrect == true -> localizedExerciseText("nextMission", locale)
+        else -> resetExerciseText(locale)
     }
     val buttonColor = when {
         isFinished -> PlanetGold
         isCorrect == true -> PlanetGold
         isWrong -> PlanetRed
-        else -> Color.Gray.copy(alpha = 0.5f)
+        else -> PlanetBlue
     }
 
     Button(
-        onClick = onClick,
+        shape = RoundedCornerShape(12.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+        onClick = if (solved) onNextExercise else onResetExercise,
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .height(56.dp)
+            .height(45.dp)
             .semantics {
-                contentDescription = if (isCorrect == true) {
-                    localizedExerciseText("nextMissionReady", locale)
-                } else {
-                    localizedExerciseText("nextMission", locale)
+                contentDescription = when {
+                    isCorrect == true -> localizedExerciseText("nextMissionReady", locale)
+                    solved -> localizedExerciseText("backToMap", locale)
+                    else -> resetExerciseText(locale)
                 }
             },
-        enabled = isCorrect == true || isFinished
+        enabled = true
     ) {
+        if (!solved) {
+            Icon(Icons.Default.Delete, contentDescription = null, tint = if (isWrong) StarWhite else DeepSpaceBlue)
+            Spacer(modifier = Modifier.width(8.dp))
+        }
         Text(
             text = buttonText,
-            color = if (isCorrect == true || isFinished) CockpitGray else StarWhite,
+            color = if (isWrong && !solved) StarWhite else DeepSpaceBlue,
             fontWeight = FontWeight.Bold
         )
     }
+}
+
+private fun resetExerciseText(locale: String): String = when {
+    locale.startsWith("fr") -> "Réinitialiser l'exercice"
+    locale.startsWith("en") -> "Reset exercise"
+    else -> "Reset oefening"
 }
 
 @Composable
@@ -998,8 +1099,9 @@ fun ExerciseInputArea(
     val options = exercise.localizedOptions(locale)
     when {
         exercise.inputMode == InputMode.TAP_CHOICE && options.isNotEmpty() -> {
+            Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Column(
-                modifier = modifier.verticalScroll(rememberScrollState()),
+                modifier = Modifier.widthIn(max = 760.dp).fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 options.chunked(if (isLandscape) 2 else 1).forEach { rowOptions ->
@@ -1008,13 +1110,14 @@ fun ExerciseInputArea(
                             OptionSurface(
                                 option = option,
                                 selected = input == option,
-                                modifier = Modifier.weight(1f).heightIn(min = 56.dp),
+                                modifier = Modifier.weight(1f).heightIn(min = if (isLandscape) 48.dp else 56.dp, max = if (isLandscape) 96.dp else 140.dp),
                                 onClick = { onChoiceSelected(option) }
                             )
                         }
                         if (isLandscape && rowOptions.size == 1) Spacer(modifier = Modifier.weight(1f))
                     }
                 }
+            }
             }
         }
 
@@ -1033,9 +1136,11 @@ fun ExerciseInputArea(
                     )
                 )
                 Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = onConfirmClick,
                     enabled = input.isNotBlank(),
-                    modifier = Modifier.fillMaxWidth().height(56.dp)
+                    modifier = Modifier.fillMaxWidth().height(45.dp)
                 ) {
                     Text(localizedExerciseText("check", locale))
                 }
@@ -1043,14 +1148,68 @@ fun ExerciseInputArea(
         }
 
         else -> {
-            CustomNumberPad(
+            MathAnswerPad(
                 onNumberClick = onNumberClick,
-                onDeleteClick = onDeleteClick,
                 onConfirmClick = onConfirmClick,
                 hapticEnabled = hapticEnabled,
+                isLandscape = isLandscape,
                 modifier = modifier
             )
         }
+    }
+}
+
+@Composable
+private fun MathAnswerPad(
+    onNumberClick: (String) -> Unit,
+    onConfirmClick: () -> Unit,
+    hapticEnabled: Boolean,
+    isLandscape: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val haptic = androidx.compose.ui.platform.LocalHapticFeedback.current
+    val rows = listOf(
+        listOf("1", "2", "3"),
+        listOf("4", "5", "6"),
+        listOf("7", "8", "9"),
+        listOf(".", "0", "OK")
+    )
+    Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+    Column(
+        modifier = Modifier.widthIn(max = if (isLandscape) 440.dp else 560.dp).fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(if (isLandscape) 8.dp else 12.dp)
+    ) {
+        rows.forEach { row ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(if (isLandscape) 8.dp else 12.dp)
+            ) {
+                row.forEach { item ->
+                    val isAction = item == "OK"
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(if (isLandscape) 56.dp else 72.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(if (isAction) PlanetGold else PlanetGold.copy(alpha = 0.95f))
+                            .clickable {
+                                if (hapticEnabled) {
+                                    haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.TextHandleMove)
+                                }
+                                if (item == "OK") onConfirmClick() else onNumberClick(item)
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (isAction) {
+                            Text("✓", style = MaterialTheme.typography.headlineSmall, color = DeepSpaceBlue, fontWeight = FontWeight.Bold)
+                        } else {
+                            Text(item, style = if (isLandscape) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.headlineMedium, color = DeepSpaceBlue, fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
+            }
+        }
+    }
     }
 }
 
@@ -1067,7 +1226,7 @@ private fun OptionSurface(option: String, selected: Boolean, modifier: Modifier,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             Text(
-                text = option,
+                text = formatVisibleNumbers(option),
                 style = if (isDisplayNumber(option)) {
                     MaterialTheme.typography.headlineSmall
                 } else {
@@ -1110,7 +1269,7 @@ fun AnswerDisplay(
             )
             .padding(2.dp)
             .semantics {
-                contentDescription = "${localizedExerciseText("yourAnswer", "nl-BE")}: ${if (input.isEmpty()) localizedExerciseText("empty", "nl-BE") else input}"
+                contentDescription = "${localizedExerciseText("yourAnswer", "nl-BE")}: ${if (input.isEmpty()) localizedExerciseText("empty", "nl-BE") else formatVisibleNumbers(input)}"
             },
         contentAlignment = Alignment.Center
     ) {
@@ -1122,7 +1281,7 @@ fun AnswerDisplay(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = input.ifEmpty { "?" },
+                text = if (input.isEmpty()) "?" else formatVisibleNumbers(input),
                 style = MaterialTheme.typography.displayMedium,
                 color = if (input.isEmpty()) StarWhite.copy(alpha = 0.3f) else StarWhite
             )
@@ -1169,7 +1328,8 @@ fun MathScreenPreview() {
             onCalculationCellClicked = {},
             onConfirmClick = {},
             onQuestionClick = {},
-            onNextExercise = {}
+            onNextExercise = {},
+            onResetExercise = {}
         )
     }
 }

@@ -52,6 +52,7 @@ fun PuzzleScreen(
         onGeneratedPuzzleComplete = viewModel::onGeneratedPuzzleComplete, onOrbitBuilderComplete = viewModel::onOrbitBuilderComplete,
         onGalaxyconComplete = viewModel::onGalaxyconComplete, onMothershipDockComplete = viewModel::onMothershipDockComplete,
         onCalculatorPuzzleAttempt = viewModel::onCalculatorPuzzleAttempt,
+        onSpeakText = viewModel::speakText,
         onNextPuzzle = viewModel::nextPuzzle
     )
 }
@@ -65,6 +66,7 @@ fun PuzzleContent(
     onGeneratedPuzzleComplete: () -> Unit, onOrbitBuilderComplete: (String, Int) -> Unit,
     onGalaxyconComplete: (GalaxyconRunResult) -> Unit, onMothershipDockComplete: (MothershipDockRunResult) -> Unit,
     onCalculatorPuzzleAttempt: (CalculatorPuzzleAttempt) -> Unit,
+    onSpeakText: (String) -> Unit,
     onNextPuzzle: () -> Unit
 ) {
     val puzzle = uiState.currentExercise
@@ -121,70 +123,85 @@ fun PuzzleContent(
             }
 
             if (uiState.isLoading) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator(color = PlanetRed)
-                }
+                Box(modifier = Modifier.fillMaxSize())
             } else if (puzzle != null) {
                 Spacer(modifier = Modifier.height(12.dp))
 
+                val displayedStars = puzzle.data["difficultyStars"]
+                    ?.toIntOrNull()
+                    ?.coerceIn(1, 3)
+                    ?: 1
+                val generationDifficulty = puzzle.data["generationDifficulty"]
+                    ?.toIntOrNull()
+                    ?.coerceIn(1, 4)
+                    ?: displayedStars
+                val grade = puzzle.data["grade"]?.toIntOrNull() ?: 1
                 val subcategoryId = puzzle.data["subcategoryId"]
+
                 if (subcategoryId == "sudoku") {
                     SudokuGame(
-                        initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        initialStars = generationDifficulty,
                         onComplete = onGeneratedPuzzleComplete,
                         modifier = Modifier.weight(1f)
                     )
                 } else if (subcategoryId == "word-seeker") {
- WordSeekerGame(
- initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
- exerciseLanguage = uiState.exerciseLanguage,
- onComplete = onGeneratedPuzzleComplete,
- modifier = Modifier.weight(1f)
- )
- } else if (subcategoryId == "math-crosswords") {
+                    WordSeekerGame(
+                        initialStars = generationDifficulty,
+                        exerciseLanguage = uiState.exerciseLanguage,
+                        grade = grade,
+                        onComplete = onGeneratedPuzzleComplete,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else if (subcategoryId == "math-crosswords") {
                     MathCrosswordGame(
-                        initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        initialStars = generationDifficulty,
                         onComplete = onGeneratedPuzzleComplete,
                         modifier = Modifier.weight(1f)
                     )
                 } else if (subcategoryId == "calculator-puzzle") {
                     CalculatorPuzzleGame(
-                        mathGrade = puzzle.data["mathGrade"]?.toIntOrNull()
-                            ?: puzzle.data["grade"]?.toIntOrNull()
-                            ?: 1,
-                        difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        mathGrade = puzzle.data["mathGrade"]?.toIntOrNull() ?: grade,
+                        difficultyStars = generationDifficulty,
                         exerciseLanguage = uiState.exerciseLanguage,
                         onAttemptSubmitted = onCalculatorPuzzleAttempt,
+                        onSpeakQuestion = onSpeakText,
                         modifier = Modifier.weight(1f)
                     )
                 } else if (subcategoryId == "constellations") {
                     ConstellationsPuzzleGame(
-                        grade = puzzle.data["grade"]?.toIntOrNull() ?: 1,
-                        difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        grade = grade,
+                        difficultyStars = generationDifficulty,
                         exerciseLanguage = uiState.exerciseLanguage,
                         onComplete = onGeneratedPuzzleComplete,
                         modifier = Modifier.weight(1f)
                     )
                 } else if (subcategoryId == "orbit-builder") {
                     be.saikono.poincare.ui.puzzle.orbitbuilder.OrbitBuilderPuzzleGame(
-                        initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
+                        displayedStars = displayedStars,
+                        generationDifficulty = generationDifficulty,
+                        grade = grade,
                         onMissionComplete = onOrbitBuilderComplete,
                         modifier = Modifier.weight(1f)
-                    )         } else if (subcategoryId == MOTHERSHIP_DOCK_SUBCATEGORY_ID) {
-            MothershipDockGame(
-                readingGrade = puzzle.data["readingGrade"]?.toIntOrNull()
-                    ?: puzzle.data["grade"]?.toIntOrNull()
-                    ?: 1,
-                mathGrade = puzzle.data["mathGrade"]?.toIntOrNull()
-                    ?: puzzle.data["grade"]?.toIntOrNull()
-                    ?: 1,
-                difficultyStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1,
-                exerciseLanguage = uiState.exerciseLanguage,
-                onComplete = onMothershipDockComplete,
-                modifier = Modifier.weight(1f)
-            )
-        } else if (subcategoryId == GALAXYCON_SUBCATEGORY_ID) { GalaxyconGame( language = uiState.exerciseLanguage, level = puzzle.level, initialStars = puzzle.data["difficultyStars"]?.toIntOrNull() ?: 1, onComplete = onGalaxyconComplete,
-                            onLetterProgressChanged = { galaxyconLetterProgress = it }, modifier = Modifier.weight(1f) ) } else {
+                    )
+                } else if (subcategoryId == MOTHERSHIP_DOCK_SUBCATEGORY_ID) {
+                    MothershipDockGame(
+                        readingGrade = puzzle.data["readingGrade"]?.toIntOrNull() ?: grade,
+                        mathGrade = puzzle.data["mathGrade"]?.toIntOrNull() ?: grade,
+                        difficultyStars = generationDifficulty,
+                        exerciseLanguage = uiState.exerciseLanguage,
+                        onComplete = onMothershipDockComplete,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else if (subcategoryId == GALAXYCON_SUBCATEGORY_ID) {
+                    GalaxyconGame(
+                        language = uiState.exerciseLanguage,
+                        level = puzzle.level,
+                        initialStars = generationDifficulty,
+                        onComplete = onGalaxyconComplete,
+                        onLetterProgressChanged = { galaxyconLetterProgress = it },
+                        modifier = Modifier.weight(1f)
+                    )
+                } else {
                     Text(
                         text = puzzle.prompt.get(uiState.exerciseLanguage),
                         style = MaterialTheme.typography.headlineSmall,
@@ -228,11 +245,13 @@ fun PuzzleContent(
                     val buttonColor = PlanetGold
 
                     Button(
+                        shape = RoundedCornerShape(12.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                         onClick = if (uiState.isFinished) onNavigateBack else onNextPuzzle,
                         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
                         modifier = Modifier
                             .then(if (isLandscape) Modifier.fillMaxWidth(0.5f).align(Alignment.Start) else Modifier.fillMaxWidth())
-                            .height(56.dp)
+                            .height(45.dp)
                             .semantics { contentDescription = if (uiState.isSolved) localizedExerciseText("nextMissionReady", uiState.exerciseLanguage) else localizedExerciseText("nextMission", uiState.exerciseLanguage) }
                     ) {
                         Text(buttonText, color = DeepSpaceBlue, fontWeight = FontWeight.Medium)
@@ -257,38 +276,48 @@ fun PuzzleChoiceArea(
     isLandscape: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        options.withIndex().chunked(if (isLandscape) 2 else 1).forEach { rowOptions ->
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                rowOptions.forEach { indexed ->
-                    val index = indexed.index
-                    val option = indexed.value
-                    val selected = selectedIndices.contains(index)
-                    Surface(
-                        color = when {
-                            isSolved && selected -> PlanetGreen.copy(alpha = 0.75f)
-                            pendingChoiceIndex == index -> PlanetBlue.copy(alpha = 0.75f)
-                            selected -> PlanetRed.copy(alpha = 0.75f)
-                            else -> Color.White.copy(alpha = 0.5f)
-                        },
-                        contentColor = StarWhite,
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier
-                            .weight(1f)
-                            .heightIn(min = 56.dp)
-                            .clickable(enabled = !isSolved) { onChoiceSelected(index) }
-                    ) {
-                        Box(contentAlignment = Alignment.CenterStart, modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
-                            Text(
-                                text = option,
-                                style = if (isDisplayNumber(option)) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.bodyLarge,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.fillMaxWidth()
-                            )
+    Box(
+        modifier = modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .widthIn(max = 760.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            options.withIndex().chunked(if (isLandscape) 2 else 1).forEach { rowOptions ->
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                    rowOptions.forEach { indexed ->
+                        val index = indexed.index
+                        val option = indexed.value
+                        val selected = selectedIndices.contains(index)
+                        Surface(
+                            color = when {
+                                isSolved && selected -> PlanetGreen.copy(alpha = 0.75f)
+                                pendingChoiceIndex == index -> PlanetBlue.copy(alpha = 0.75f)
+                                selected -> PlanetRed.copy(alpha = 0.75f)
+                                else -> Color.White.copy(alpha = 0.5f)
+                            },
+                            contentColor = StarWhite,
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .weight(1f)
+                                .heightIn(min = 56.dp)
+                                .clickable(enabled = !isSolved) { onChoiceSelected(index) }
+                        ) {
+                            Box(contentAlignment = Alignment.CenterStart, modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+                                Text(
+                                    text = option,
+                                    style = if (isDisplayNumber(option)) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.bodyLarge,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            }
                         }
                     }
+                    if (isLandscape && rowOptions.size == 1) Spacer(modifier = Modifier.weight(1f))
                 }
-                if (isLandscape && rowOptions.size == 1) Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
@@ -343,7 +372,7 @@ fun PuzzleBoard(
                         }
                     } else {
                         Text(
-                            text = part,
+                            text = formatVisibleNumbers(part),
                             style = if (compact) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.displaySmall,
                             color = StarWhite
                         )
@@ -427,7 +456,7 @@ fun DraggableDigit(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = digit,
+            text = formatVisibleNumbers(digit),
             style = MaterialTheme.typography.displaySmall,
             color = StarWhite
         )
@@ -461,6 +490,7 @@ fun PuzzleScreenPreview() {
         onOrbitBuilderComplete = { _, _ -> },
         onGalaxyconComplete = {}, onMothershipDockComplete = {},
             onCalculatorPuzzleAttempt = {},
+            onSpeakText = {},
             onNextPuzzle = {}
         )
     }

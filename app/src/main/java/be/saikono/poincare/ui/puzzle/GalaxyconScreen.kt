@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.puzzle
 
+import androidx.compose.foundation.layout.PaddingValues
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
@@ -861,6 +862,8 @@ private fun GalaxyconResultCard(
                 )
             }
             Button(
+                shape = RoundedCornerShape(12.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                 onClick = onReplay,
                 colors = ButtonDefaults.buttonColors(containerColor = DeepSpaceBlue, contentColor = PlanetGold)
             ) {

@@ -2,6 +2,7 @@ package be.saikono.poincare.ui.parent
 
 // POINCARE_REPAIR_V29: parent-localization
 
+import androidx.compose.foundation.layout.PaddingValues
 import android.speech.tts.Voice
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -243,6 +244,7 @@ fun ProfileSettingsSection(
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     var nameText by remember(profile.id) { mutableStateOf(profile.name) }
     var birthYearText by remember(profile.id) { mutableStateOf(profile.birthYear.toString()) }
+    val hardModeDescription = parentText("hardModeDescription")
 
     if (showDeleteConfirmation) {
         AlertDialog(
@@ -258,6 +260,8 @@ fun ProfileSettingsSection(
             },
             confirmButton = {
                 Button(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = {
                         showDeleteConfirmation = false
                         onDeleteProfile()
@@ -272,6 +276,8 @@ fun ProfileSettingsSection(
             },
             dismissButton = {
                 TextButton(
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = { showDeleteConfirmation = false },
                     colors = ButtonDefaults.textButtonColors(contentColor = DeepSpaceBlue)
                 ) {
@@ -312,8 +318,6 @@ fun ProfileSettingsSection(
         DomainLevelSelector(parentText("writing"), LearningDomain.WRITING, profile.levelFor(LearningDomain.WRITING), onUpdateLevel)
         DomainLevelSelector(parentText("math"), LearningDomain.MATH, profile.levelFor(LearningDomain.MATH), onUpdateLevel)
         DomainLevelSelector(parentText("geometry"), LearningDomain.GEOMETRY, profile.levelFor(LearningDomain.GEOMETRY), onUpdateLevel)
-        DomainLevelSelector(parentText("worldKnowledge"), LearningDomain.WORLD_KNOWLEDGE, profile.levelFor(LearningDomain.WORLD_KNOWLEDGE), onUpdateLevel)
-        DomainLevelSelector(parentText("puzzles"), LearningDomain.PUZZLE, profile.levelFor(LearningDomain.PUZZLE), onUpdateLevel)
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -369,7 +373,7 @@ fun ProfileSettingsSection(
                     checkedThumbColor = StarWhite
                 ),
                 modifier = Modifier.semantics {
-                    contentDescription = "Schakel Gifted Mode in voor meer uitdagende puzzels"
+                    contentDescription = hardModeDescription
                 }
             )
         }
@@ -377,6 +381,8 @@ fun ProfileSettingsSection(
         Spacer(modifier = Modifier.height(24.dp))
 
         OutlinedButton(
+            shape = RoundedCornerShape(12.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             onClick = { showDeleteConfirmation = true },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.outlinedButtonColors(contentColor = PlanetRed)
@@ -662,6 +668,7 @@ fun VoiceSettingsSection(
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf("nl-BE", "fr-BE", "fr-FR", "en").forEach { locale ->
                 FilterChip(
+                    shape = RoundedCornerShape(12.dp),
                     selected = selectedLocale == locale,
                     onClick = { selectedLocale = locale },
                     label = { Text(locale) },
@@ -723,6 +730,8 @@ fun VoiceSettingsSection(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
+            shape = RoundedCornerShape(12.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             onClick = {
                 onTestVoice("Hallo, ik ben de stem van Poincaré.", selectedLocale, settings)
             },

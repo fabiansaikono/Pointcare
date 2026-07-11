@@ -1,5 +1,6 @@
 package be.saikono.poincare.repository
 
+import be.saikono.poincare.data.audit.AuditLog
 import be.saikono.poincare.data.local.ProgressDao
 import be.saikono.poincare.data.local.ProgressEntity
 import be.saikono.poincare.model.ProgressEvent
@@ -21,8 +22,10 @@ class LocalProgressRepository(private val progressDao: ProgressDao) : ProgressRe
             entities.map { it.toModel() }
         }
 
-    override suspend fun addProgress(event: ProgressEvent) =
+    override suspend fun addProgress(event: ProgressEvent) {
         progressDao.insertProgress(event.toEntity())
+        AuditLog.recordProgress(event)
+    }
 
     override suspend fun getPendingProgress(): List<ProgressEvent> =
         progressDao.getPendingProgress().map { it.toModel() }

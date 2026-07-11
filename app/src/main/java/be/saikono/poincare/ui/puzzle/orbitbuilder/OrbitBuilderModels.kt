@@ -44,6 +44,7 @@ data class OrbitBuilderLevel(
     val id: String,
     val grade: Int,
     val difficultyStars: Int,
+    val generationDifficulty: Int = difficultyStars,
     val title: String,
     val instruction: String,
     val rows: Int = 8,
@@ -123,7 +124,7 @@ enum class OrbitBuilderPhase {
 }
 
 data class OrbitBuilderUiState(
-    val levels: List<OrbitBuilderLevel> = OrbitBuilderLevels.all,
+    val levels: List<OrbitBuilderLevel> = listOf(OrbitBuilderLevels.random(1, 1, 1)),
     val levelIndex: Int = 0,
     val selectedArrow: OrbitDirection = OrbitDirection.RIGHT,
     val placedArrows: Map<OrbitPosition, OrbitDirection> = emptyMap(),
@@ -143,7 +144,7 @@ data class OrbitBuilderUiState(
     val pathCellsUsed: Int = drawnPath.size
     val arrowsUsed: Int = pathCellsUsed
     val canLaunch: Boolean = drawnPath.size > 1 && drawnPath.firstOrNull() == currentLevel.startPosition && phase == OrbitBuilderPhase.PLANNING
-    val hasNextLevel: Boolean = levels.size > 1
+    val hasNextLevel: Boolean = true
     val hasTouchedTarget: Boolean = drawnPath.lastOrNull() == currentLevel.targetPosition
     val estimatedPathSteps: Int = (drawnPath.size - 1).coerceAtLeast(0)
 }

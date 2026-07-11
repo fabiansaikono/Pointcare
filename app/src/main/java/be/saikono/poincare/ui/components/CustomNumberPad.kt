@@ -37,8 +37,11 @@ fun CustomNumberPad(
 ) {
     val haptic = LocalHapticFeedback.current
 
+    Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
     Column(
-        modifier = modifier
+        modifier = Modifier
+            .widthIn(max = if (compact) 440.dp else 560.dp)
+            .fillMaxWidth()
             .background(CockpitGray, shape = RoundedCornerShape(24.dp))
             .padding(if (compact) 10.dp else 16.dp)
             .semantics { contentDescription = "Getallen toetsenbord" },
@@ -75,6 +78,7 @@ fun CustomNumberPad(
                 }
             }
         }
+    }
     }
 }
 

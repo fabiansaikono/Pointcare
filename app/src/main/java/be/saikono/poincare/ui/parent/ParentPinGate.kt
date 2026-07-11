@@ -1,5 +1,6 @@
 package be.saikono.poincare.ui.parent
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -162,7 +163,7 @@ private fun ParentPinHeader(
             }
         }
 
-        TextButton(onClick = onCancel) {
+        TextButton(shape = RoundedCornerShape(12.dp), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp), onClick = onCancel) {
             Text(parentPinText("cancel", appLanguage), color = StarWhite.copy(alpha = 0.72f))
         }
     }
