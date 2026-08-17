@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Season cycle</title>
+  <desc id="desc">Four connected seasonal symbols: sprout, sun, leaf, and snowflake.</desc>
+  <g fill="none" stroke="#FFD700" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 48A208 208 0 0 1 464 256M464 256A208 208 0 0 1 256 464M256 464A208 208 0 0 1 48 256M48 256A208 208 0 0 1 256 48"/>
+    <path d="M438 218l26 38-38 26M294 438l-38 26-26-38M74 294l-26-38 38-26M218 74l38-26 26 38"/>
+  </g>
+  <g stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none">
+      <path d="M256 154v68"/>
+      <path d="M256 190c-38 0-58-18-58-50 38 0 58 18 58 50Z" fill="#FFD700"/>
+      <path d="M256 178c34 0 52-16 52-44-34 0-52 16-52 44Z" fill="#FFD700"/>
+    </g>
+    <g fill="none">
+      <circle cx="366" cy="256" r="34" fill="#FFD700"/>
+      <path d="M366 194v-20M366 338v-20M304 256h-20M448 256h-20M322 212l-14-14M424 314l-14-14M410 212l14-14M308 314l14-14"/>
+    </g>
+    <path d="M256 346c-50-46-82-20-78 32 44 10 70-2 78-32Zm0 0-44 30" fill="#FFD700"/>
+    <g fill="none">
+      <path d="M146 220v72M110 241l72 30M110 271l72-30"/>
+      <path d="M146 220l-12 14M146 220l12 14M146 292l-12-14M146 292l12-14M110 241l18 2M110 241l8 16M182 271l-18-2M182 271l-8-16"/>
+    </g>
+  </g>
+</svg>

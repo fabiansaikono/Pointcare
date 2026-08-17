@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M302 202 H350 M302 302 H350 M302 402 H350" stroke="#FFD700" stroke-width="8"/>
+<path d="M338 190 L352 202 L338 214 M338 290 L352 302 L338 314 M338 390 L352 402 L338 414" stroke="#FFD700" stroke-width="8"/>
+<rect x="360" y="146" width="560" height="340" rx="34" stroke="#4FC3F7" stroke-width="8"/>
+<rect x="40" y="160" width="262" height="84" rx="28" stroke="#FFFFFF" stroke-width="6"/>
+<rect x="40" y="260" width="262" height="84" rx="28" stroke="#FFFFFF" stroke-width="6"/>
+<rect x="40" y="360" width="262" height="84" rx="28" stroke="#FFFFFF" stroke-width="6"/>
+</g>
+<text x="40" y="54" fill="#FFD700" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="600"><tspan x="40" dy="0">Lange klinkers en tweetekenklanken</tspan></text>
+<text x="66" y="212" fill="#4FC3F7" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="600"><tspan x="66" dy="0">1. lange klinker</tspan></text>
+<text x="66" y="312" fill="#4FC3F7" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="600"><tspan x="66" dy="0">2. tweetekenklank</tspan></text>
+<text x="66" y="412" fill="#4FC3F7" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="600"><tspan x="66" dy="0">3. lettergroep</tspan></text>
+<text x="395" y="194" fill="#FFD700" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="600"><tspan x="395" dy="0">Zo werkt het</tspan></text>
+<text x="395" y="235" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="400"><tspan x="395" dy="0">Dezelfde klank kan door één of twee</tspan><tspan x="395" dy="31">letters worden weergegeven;</tspan><tspan x="395" dy="31">lettergroepen moeten als één klank…</tspan></text>
+<text x="395" y="356" fill="#4FC3F7" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="600"><tspan x="395" dy="0">Voorbeeld</tspan></text>
+<text x="395" y="394" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="400"><tspan x="395" dy="0">Je benoemt het kernbegrip en toont het</tspan><tspan x="395" dy="30">met een passend voorbeeld.</tspan></text>
+</svg>

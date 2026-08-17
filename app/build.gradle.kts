@@ -14,8 +14,8 @@ android {
         applicationId = "be.saikono.poincare"
         minSdk = 29
         targetSdk = 35
-        versionCode = 33
-        versionName = "1.3.3"
+        versionCode = 40
+        versionName = "1.3.10"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -44,6 +44,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    sourceSets.getByName("androidTest").assets.directories.add("$projectDir/schemas")
+}
+
+ksp {
+    arg("room.schemaLocation", file("$projectDir/schemas").path)
 }
 
 dependencies {
@@ -75,11 +80,11 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.compose)
 
-    // WorkManager
-    implementation(libs.androidx.work.runtime.ktx)
-
     // Serialization
     implementation(libs.kotlinx.serialization.json)
+
+    // Fully local neural TTS runtime. Pinned for reproducible JNI/Kotlin APIs.
+    implementation("com.github.k2-fsa:sherpa-onnx:v1.13.3")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

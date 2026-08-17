@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title description">
+  <title id="title">Nederlandse en Engelse woordparen</title>
+  <desc id="description">Drie eenvoudige kaarten tonen kat en cat, hond en dog, boek en book.</desc>
+  <g fill="none" stroke="#4FC3F7" stroke-width="8" stroke-linejoin="round">
+    <rect x="90" y="90" width="330" height="100" rx="28"/>
+    <rect x="540" y="90" width="330" height="100" rx="28"/>
+    <rect x="90" y="220" width="330" height="100" rx="28"/>
+    <rect x="540" y="220" width="330" height="100" rx="28"/>
+    <rect x="90" y="350" width="330" height="100" rx="28"/>
+    <rect x="540" y="350" width="330" height="100" rx="28"/>
+  </g>
+  <g stroke="#FFD700" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M445 140h70"/>
+    <path d="m495 120 20 20-20 20" fill="none"/>
+    <path d="M445 270h70"/>
+    <path d="m495 250 20 20-20 20" fill="none"/>
+    <path d="M445 400h70"/>
+    <path d="m495 380 20 20-20 20" fill="none"/>
+  </g>
+  <g fill="#FFFFFF" font-family="Arial, sans-serif" font-size="48" text-anchor="middle">
+    <text x="255" y="156">kat</text>
+    <text x="705" y="156">cat</text>
+    <text x="255" y="286">hond</text>
+    <text x="705" y="286">dog</text>
+    <text x="255" y="416">boek</text>
+    <text x="705" y="416">book</text>
+  </g>
+</svg>

@@ -1,0 +1,1000 @@
+{
+  "generatedAtUtc": "2026-08-03T16:34:50.429Z",
+  "sourceCurriculum": "poincare-vlaanderen-primary-g1-g6-v1",
+  "grade": 2,
+  "sourceUnits": 65,
+  "sourcePhaseRecords": 195,
+  "generatedLessons": 107,
+  "retainedCorePilots": 1,
+  "exerciseSets": 535,
+  "questions": 3210,
+  "answerOptions": 12840,
+  "lessonsBySubject": {
+    "nl": 22,
+    "math": 29,
+    "science_tech": 12,
+    "geo": 6,
+    "history": 6,
+    "arts": 7,
+    "pe": 10,
+    "ict": 6,
+    "attitudes": 6,
+    "fr": 3
+  },
+  "publicationStatus": "DRAFT_REVIEW_REQUIRED",
+  "translationReview": {
+    "nl-BE": "DEFAULT",
+    "fr-BE": "NEEDS_REVIEW",
+    "en-US": "NEEDS_REVIEW"
+  },
+  "generator": {
+    "id": "generator.g2.atomic-curriculum",
+    "implementationVersion": 1,
+    "contractVersion": "v2"
+  },
+  "lessons": [
+    {
+      "lessonId": "lesson.g2.nl.technical-reading.meerlettergrepige-woorden-ontsleutelen.meerlettergrepige-woorden-ontsleutelen",
+      "unitId": "unit.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.technical_reading",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.technical-reading.woordfamilies-voor-en-achtervoegsels.woordfamilies-en-stammen",
+      "unitId": "unit.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.technical_reading",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.technical-reading.woordfamilies-voor-en-achtervoegsels.voor-en-achtervoegsels",
+      "unitId": "unit.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.technical_reading",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.technical-reading.vlot-lezen-met-tempo-en-intonatie.vlot-lezen-met-tempo-en-intonatie",
+      "unitId": "unit.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.technical_reading",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.technical-reading.complexe-klinker-en-medeklinkerpatronen.complexe-klinkerpatronen",
+      "unitId": "unit.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.technical_reading",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.technical-reading.complexe-klinker-en-medeklinkerpatronen.medeklinkerclusters",
+      "unitId": "unit.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.technical_reading",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.expliciete-informatie-lokaliseren",
+      "unitId": "unit.g2.nl.comprehension.expliciete-informatie-lokaliseren",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.reading_comprehension",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.eenvoudige-gevolgtrekkingen-maken",
+      "unitId": "unit.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.reading_comprehension",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.tekststructuur-en-volgorde",
+      "unitId": "unit.g2.nl.comprehension.tekststructuur-en-volgorde",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.reading_comprehension",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.letters-verbinden",
+      "unitId": "unit.g2.nl.handwriting.verbinden-ritme-en-spatiering",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.writing_expression",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.spatiering-en-regelmaat",
+      "unitId": "unit.g2.nl.handwriting.verbinden-ritme-en-spatiering",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.writing_expression",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.open-en-gesloten-lettergrepen",
+      "unitId": "unit.g2.nl.spelling.open-en-gesloten-lettergrepen",
+      "categoryId": "spelling_grammar",
+      "subcategoryId": "spelling.rules_word_patterns",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.eindklanken-en-verlengproef",
+      "unitId": "unit.g2.nl.spelling.eindklanken-ng-nk-en-ch-g",
+      "categoryId": "spelling_grammar",
+      "subcategoryId": "spelling.rules_word_patterns",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.ng-nk-ch-g",
+      "unitId": "unit.g2.nl.spelling.eindklanken-ng-nk-en-ch-g",
+      "categoryId": "spelling_grammar",
+      "subcategoryId": "spelling.rules_word_patterns",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.meervouden",
+      "unitId": "unit.g2.nl.spelling.meervouden-en-verkleinwoorden",
+      "categoryId": "spelling_grammar",
+      "subcategoryId": "spelling.rules_word_patterns",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.verkleinwoorden",
+      "unitId": "unit.g2.nl.spelling.meervouden-en-verkleinwoorden",
+      "categoryId": "spelling_grammar",
+      "subcategoryId": "spelling.rules_word_patterns",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.zinnen-uitbreiden",
+      "unitId": "unit.g2.nl.composition.zinnen-uitbreiden-en-verbinden",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.writing_expression",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.zinnen-verbinden",
+      "unitId": "unit.g2.nl.composition.zinnen-uitbreiden-en-verbinden",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.writing_expression",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.gericht-luisteren",
+      "unitId": "unit.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.listening_comprehension",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.mondeling-ordenen",
+      "unitId": "unit.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.speaking_interaction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.literature.personages-sfeer-en-taalspel.personages-en-sfeer",
+      "unitId": "unit.g2.nl.literature.personages-sfeer-en-taalspel",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.literature_experience",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.nl.literature.personages-sfeer-en-taalspel.rijm-herhaling-humor",
+      "unitId": "unit.g2.nl.literature.personages-sfeer-en-taalspel",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.literature_experience",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.tientallen-en-eenheden",
+      "unitId": "unit.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.number_place_value",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.plaatswaarde-en-cijferwaarde",
+      "unitId": "unit.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.number_place_value",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.tellen-in-sprongen",
+      "unitId": "unit.g2.math.numbers.tellen-in-sprongen-en-getalpatronen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.number_place_value",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.getalpatronen",
+      "unitId": "unit.g2.math.numbers.tellen-in-sprongen-en-getalpatronen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.number_place_value",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.optellen-zonder-brug",
+      "unitId": "unit.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.addition_subtraction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.aftrekken-zonder-brug",
+      "unitId": "unit.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.addition_subtraction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.optellen-met-brug",
+      "unitId": "unit.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.addition_subtraction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.aftrekken-met-brug",
+      "unitId": "unit.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.addition_subtraction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.rekenfeiten-tot-20-automatiseren",
+      "unitId": "unit.g2.math.operations.rekenfeiten-tot-20-automatiseren",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.addition_subtraction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.vermenigvuldigen-als-gelijke-groepen",
+      "unitId": "unit.g2.math.operations.vermenigvuldigen-als-gelijke-groepen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.multiplication_division",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.eerlijk-verdelen",
+      "unitId": "unit.g2.math.operations.delen-als-verdelen-en-groeperen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.multiplication_division",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.groepjes-maken",
+      "unitId": "unit.g2.math.operations.delen-als-verdelen-en-groeperen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.multiplication_division",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.fractions.helften-kwarten-en-derden.helften-kwarten-en-derden",
+      "unitId": "unit.g2.math.fractions.helften-kwarten-en-derden",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.fractions",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.lengte-cm-m",
+      "unitId": "unit.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.length_perimeter_scale",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.massa-g-kg",
+      "unitId": "unit.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.mass_weight",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.inhoud-liter",
+      "unitId": "unit.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.capacity_volume",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.klok-duur-en-kalender.kloklezen",
+      "unitId": "unit.g2.math.measurement.klok-duur-en-kalender",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.time_calendar",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.klok-duur-en-kalender.tijdsduur",
+      "unitId": "unit.g2.math.measurement.klok-duur-en-kalender",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.time_calendar",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.klok-duur-en-kalender.kalender",
+      "unitId": "unit.g2.math.measurement.klok-duur-en-kalender",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.time_calendar",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.bedragen-samenstellen",
+      "unitId": "unit.g2.math.measurement.geld-rekenen-tot-100-euro",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.money_financial_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.betalen-en-wisselgeld",
+      "unitId": "unit.g2.math.measurement.geld-rekenen-tot-100-euro",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.money_financial_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.vlakke-figuren",
+      "unitId": "unit.g2.math.geometry.eigenschappen-van-figuren-en-lichamen",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.shapes_lines_angles",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.ruimtefiguren",
+      "unitId": "unit.g2.math.geometry.eigenschappen-van-figuren-en-lichamen",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.shapes_lines_angles",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.geometry.routes-rooster-en-spiegeling.routes-op-een-rooster",
+      "unitId": "unit.g2.math.geometry.routes-rooster-en-spiegeling",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.spatial_orientation_coordinates",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.geometry.routes-rooster-en-spiegeling.spiegeling",
+      "unitId": "unit.g2.math.geometry.routes-rooster-en-spiegeling",
+      "categoryId": "measurement_geometry",
+      "subcategoryId": "geometry.symmetry_patterns_transformations",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.data.tabellen-en-staafdiagrammen.tabellen-lezen",
+      "unitId": "unit.g2.math.data.tabellen-en-staafdiagrammen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.tables_graphs_statistics",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.data.tabellen-en-staafdiagrammen.staafdiagrammen-lezen",
+      "unitId": "unit.g2.math.data.tabellen-en-staafdiagrammen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.tables_graphs_statistics",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.problem-solving.een-en-tweestapsproblemen.eenstapsproblemen",
+      "unitId": "unit.g2.math.problem_solving.een-en-tweestapsproblemen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.problem_solving",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.math.problem-solving.een-en-tweestapsproblemen.tweestapsproblemen",
+      "unitId": "unit.g2.math.problem_solving.een-en-tweestapsproblemen",
+      "categoryId": "number_sense",
+      "subcategoryId": "math.problem_solving",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-plant",
+      "unitId": "unit.g2.science_tech.organisms.levenscycli-van-plant-en-dier",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.nature_living_world",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-dier",
+      "unitId": "unit.g2.science_tech.organisms.levenscycli-van-plant-en-dier",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.nature_living_world",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.organisms.voeding-en-eenvoudige-voedselrelaties.voeding-en-eenvoudige-voedselrelaties",
+      "unitId": "unit.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.nature_living_world",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.human-body.gezond-groeien-en-bewegen.gezonde-routines",
+      "unitId": "unit.g2.science_tech.human_body.gezond-groeien-en-bewegen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.human-body.gezond-groeien-en-bewegen.bewegen-en-herstellen",
+      "unitId": "unit.g2.science_tech.human_body.gezond-groeien-en-bewegen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.matter.water-en-toestandsveranderingen.water-en-toestandsveranderingen",
+      "unitId": "unit.g2.science_tech.matter.water-en-toestandsveranderingen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.science_inquiry",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.licht-en-schaduw",
+      "unitId": "unit.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.science_inquiry",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.geluid-en-trilling",
+      "unitId": "unit.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.science_inquiry",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.beweging-en-wrijving",
+      "unitId": "unit.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.science_inquiry",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.forces-energy.veilige-elektriciteit.veilige-elektriciteit",
+      "unitId": "unit.g2.science_tech.forces_energy.veilige-elektriciteit",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.science_inquiry",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.inquiry-design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.eerlijk-onderzoek",
+      "unitId": "unit.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.science_inquiry",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.science-tech.inquiry-design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.ontwerpen-en-verbeteren",
+      "unitId": "unit.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.science_inquiry",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.plattegrond-legenda-en-windrichtingen",
+      "unitId": "unit.g2.geo.maps.plattegrond-legenda-en-windrichtingen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.geography_space",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.landschappen-stad-dorp-en-platteland",
+      "unitId": "unit.g2.geo.physical.landschappen-stad-dorp-en-platteland",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.geography_space",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.geo.human.verkeer-en-voorzieningen.verkeer-en-veilige-route",
+      "unitId": "unit.g2.geo.human.verkeer-en-voorzieningen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.traffic_mobility_safety",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.geo.human.verkeer-en-voorzieningen.voorzieningen-in-de-buurt",
+      "unitId": "unit.g2.geo.human.verkeer-en-voorzieningen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.traffic_mobility_safety",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.geo.environment.water-in-de-omgeving.water-in-de-omgeving",
+      "unitId": "unit.g2.geo.environment.water-in-de-omgeving",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.environment_sustainability",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.geo.fieldwork.buurtkaart-maken.buurtkaart-maken",
+      "unitId": "unit.g2.geo.fieldwork.buurtkaart-maken",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.geography_space",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.history.chronology.generaties-en-eeuwen.generaties",
+      "unitId": "unit.g2.history.chronology.generaties-en-eeuwen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.history_time",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.history.chronology.generaties-en-eeuwen.jaartallen-en-eeuwen",
+      "unitId": "unit.g2.history.chronology.generaties-en-eeuwen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.history_time",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.history.sources.bronnen-vergelijken.bronnen-vergelijken",
+      "unitId": "unit.g2.history.sources.bronnen-vergelijken",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.history_time",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.wonen-werken-en-reizen-vroeger",
+      "unitId": "unit.g2.history.society.wonen-werken-en-reizen-vroeger",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.history_time",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.lokale-geschiedenis-op-een-tijdlijn",
+      "unitId": "unit.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.history_time",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.musea-archieven-en-mondelinge-geschiedenis",
+      "unitId": "unit.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.history_time",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.kleurmenging",
+      "unitId": "unit.g2.arts.visual.kleurmenging-patroon-en-ruimte",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.daily_life_self_reliance",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.patronen-maken",
+      "unitId": "unit.g2.arts.visual.kleurmenging-patroon-en-ruimte",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.daily_life_self_reliance",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.ruimte-en-overlap",
+      "unitId": "unit.g2.arts.visual.kleurmenging-patroon-en-ruimte",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.daily_life_self_reliance",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.arts.music.maat-ritme-en-melodische-richting.maat-en-ritme",
+      "unitId": "unit.g2.arts.music.maat-ritme-en-melodische-richting",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.daily_life_self_reliance",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.arts.music.maat-ritme-en-melodische-richting.melodische-richting",
+      "unitId": "unit.g2.arts.music.maat-ritme-en-melodische-richting",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.daily_life_self_reliance",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.arts.drama.personage-probleem-en-oplossing.personage-probleem-en-oplossing",
+      "unitId": "unit.g2.arts.drama.personage-probleem-en-oplossing",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.daily_life_self_reliance",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.ritme-ruimte-en-bewegingskwaliteit",
+      "unitId": "unit.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.daily_life_self_reliance",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.bewegingscombinaties",
+      "unitId": "unit.g2.pe.movement.combinaties-ritme-en-evenwicht",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.evenwicht-op-niveaus",
+      "unitId": "unit.g2.pe.movement.combinaties-ritme-en-evenwicht",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.veilig-klimmen",
+      "unitId": "unit.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.zwaaien",
+      "unitId": "unit.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.omkeren",
+      "unitId": "unit.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.ball-games.dribbelen-passen-en-ontvangen.dribbelen",
+      "unitId": "unit.g2.pe.ball_games.dribbelen-passen-en-ontvangen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.ball-games.dribbelen-passen-en-ontvangen.passen-en-ontvangen",
+      "unitId": "unit.g2.pe.ball_games.dribbelen-passen-en-ontvangen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.dance.dansfrases-en-samenwerking.dansfrases-en-samenwerking",
+      "unitId": "unit.g2.pe.dance.dansfrases-en-samenwerking",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.watergewenning-en-ademen",
+      "unitId": "unit.g2.pe.swimming.watergewenning-en-zelfredzaamheid",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.drijven-en-veilig-uitstappen",
+      "unitId": "unit.g2.pe.swimming.watergewenning-en-zelfredzaamheid",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.body_health",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.ict.devices-data.bestanden-mappen-en-eenvoudige-data.bestanden-en-mappen",
+      "unitId": "unit.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.digital_media_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.ict.devices-data.bestanden-mappen-en-eenvoudige-data.eenvoudige-data",
+      "unitId": "unit.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.digital_media_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.herhaling-en-lussen",
+      "unitId": "unit.g2.ict.coding.patronen-herhaling-en-debuggen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.digital_media_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.debuggen",
+      "unitId": "unit.g2.ict.coding.patronen-herhaling-en-debuggen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.digital_media_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.ict.create-communicate.digitale-boodschap-voor-een-publiek.digitale-boodschap-voor-een-publiek",
+      "unitId": "unit.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.digital_media_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.ict.info-media.zoeken-met-een-duidelijke-vraag.zoeken-met-een-duidelijke-vraag",
+      "unitId": "unit.g2.ict.info_media.zoeken-met-een-duidelijke-vraag",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.digital_media_literacy",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.werkgeheugen-ontlasten",
+      "unitId": "unit.g2.attitudes.learning.werkgeheugen-en-handige-routines",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.citizenship_social",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.focus-en-herhalen",
+      "unitId": "unit.g2.attitudes.learning.werkgeheugen-en-handige-routines",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.citizenship_social",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.attitudes.self-regulation.fouten-als-informatie.fouten-als-informatie",
+      "unitId": "unit.g2.attitudes.self_regulation.fouten-als-informatie",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.citizenship_social",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.attitudes.social-emotional.impuls-keuze-en-gevolg.impuls-keuze-en-gevolg",
+      "unitId": "unit.g2.attitudes.social_emotional.impuls-keuze-en-gevolg",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.citizenship_social",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.rollen-en-eerlijk-bijdragen",
+      "unitId": "unit.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.citizenship_social",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.attitudes.citizenship-safety.verschillen-inclusie-en-hulp.verschillen-inclusie-en-hulp",
+      "unitId": "unit.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp",
+      "categoryId": "world_orientation",
+      "subcategoryId": "world.citizenship_social",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.klaswoorden-en-eenvoudige-opdrachten",
+      "unitId": "unit.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.listening_comprehension",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.naam-en-gevoel",
+      "unitId": "unit.g2.fr.speaking.naam-gevoel-en-voorkeur",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.speaking_interaction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    },
+    {
+      "lessonId": "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.voorkeur-zeggen",
+      "unitId": "unit.g2.fr.speaking.naam-gevoel-en-voorkeur",
+      "categoryId": "language_skills",
+      "subcategoryId": "language.speaking_interaction",
+      "stageCount": 4,
+      "setCount": 5,
+      "questionCount": 30
+    }
+  ]
+}

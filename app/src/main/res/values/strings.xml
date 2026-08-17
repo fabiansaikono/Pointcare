@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">Poincare</string>
+    <string name="app_name" translatable="false">Poincare</string>
+    <string name="galaxy_open_interface">Open orb navigation</string>
+    <string name="galaxy_open_tiles">Open tile navigation</string>
+    <string name="galaxy_player_orb">Your place in the learning universe</string>
+    <string name="galaxy_category_description">%1$s, %2$d percent complete</string>
+    <string name="galaxy_back_to_universe">Back to the universe</string>
+    <string name="galaxy_reset_view">Centre view</string>
+    <string name="galaxy_no_lessons">This world uses the existing mission navigation.</string>
+    <string name="galaxy_open_missions">Open missions</string>
+    <string name="galaxy_lesson_description">%1$s. %2$s. Grade %3$d. %4$s. %5$d percent.</string>
+    <string name="galaxy_lesson_path">%1$s &gt; %2$s</string>
+    <string name="galaxy_progress">Progress %1$d%%</string>
+    <string name="galaxy_grade_section">Grade %1$d</string>
+    <string name="galaxy_continue">Continue</string>
+    <string name="galaxy_start">Start lesson</string>
+    <string name="galaxy_locked_action">Complete the prerequisite lesson first</string>
+    <string name="galaxy_prerequisites">Complete first: %1$s</string>
+    <string name="galaxy_view_lesson_details">View lesson details</string>
+    <string name="galaxy_theory">Theory</string>
+    <string name="galaxy_exercises">Exercises</string>
+    <string name="galaxy_exercise">Exercises %1$d</string>
+    <string name="galaxy_test">Test</string>
+    <string name="galaxy_current">Current</string>
+    <string name="galaxy_state_locked">Locked</string>
+    <string name="galaxy_state_available">Available</string>
+    <string name="galaxy_state_recommended">Recommended</string>
+    <string name="galaxy_state_in_progress">In progress</string>
+    <string name="galaxy_state_completed">Completed</string>
+    <string name="galaxy_state_mastered">Mastered</string>
+    <string name="galaxy_next_lessons">Next lesson(s)</string>
 </resources>

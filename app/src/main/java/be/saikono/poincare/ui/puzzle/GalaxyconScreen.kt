@@ -387,8 +387,8 @@ BoxWithConstraints(
         feedbackText?.let { message ->
             Surface(
                 modifier = Modifier.align(Alignment.Center),
-                color = PlanetGold.copy(alpha = 0.92f),
-                contentColor = DeepSpaceBlue,
+                color = DeepSpaceBlue.copy(alpha = 0.88f),
+                contentColor = PlanetGold,
                 shape = RoundedCornerShape(18.dp)
             ) {
                 Text(
@@ -811,7 +811,7 @@ private fun GalaxyconResultCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = PlanetGold.copy(alpha = 0.96f)),
+        colors = CardDefaults.cardColors(containerColor = DeepSpaceBlue.copy(alpha = 0.90f)),
         shape = RoundedCornerShape(24.dp),
         modifier = modifier
             .fillMaxWidth(0.88f)
@@ -824,38 +824,38 @@ private fun GalaxyconResultCard(
         ) {
             Text(
                 text = if (result.planetReached) localizedGalaxyconText("planetReached", locale) else localizedGalaxyconText("tryAgain", locale),
-                color = DeepSpaceBlue,
+                color = PlanetGold,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
             Text(
                 text = result.displayScore,
-                color = DeepSpaceBlue,
+                color = PlanetGold,
                 style = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "${localizedGalaxyconText("points", locale)}: ${result.points}",
-                color = DeepSpaceBlue,
+                color = PlanetGold,
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
                 text = "${localizedGalaxyconText("words", locale)}: ${result.wordsCompleted}/${result.totalWords} · ${localizedGalaxyconText("collisions", locale)}: ${result.collisions}",
-                color = DeepSpaceBlue,
+                color = PlanetGold,
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center
             )
             if (result.stickersEarned.isNotEmpty()) {
                 Text(
                     text = localizedGalaxyconText("stickers", locale),
-                    color = DeepSpaceBlue,
+                    color = PlanetGold,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = result.stickersEarned.joinToString(" · "),
-                    color = DeepSpaceBlue,
+                    color = PlanetGold,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center

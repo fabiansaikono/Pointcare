@@ -1,0 +1,107 @@
+{
+    "generatedAtUtc":  "2026-07-30T21:26:47.8063745+00:00",
+    "totalXmlAssets":  14,
+    "totalExercises":  25554,
+    "convertedToV2Catalog":  0,
+    "parityStatement":  "Legacy XML remains available behind the compatibility adapter; the Grade 1 generated catalogue introduces no direct XML dependency.",
+    "files":  [
+                  {
+                      "path":  "app/src/main/assets/poincare/content/articles/poincare-original-math-l4-articles-001.xml",
+                      "bytes":  66734,
+                      "sha256":  "ae162a527a35958fc7901ca66092c9a30386136ef3fe66625ee54a757bb5c276",
+                      "exerciseCount":  70,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/exercises/poincare-minimal-import-test.xml",
+                      "bytes":  1481,
+                      "sha256":  "dbf85bb75f300525a4807a235980bd66279b425a59c91164ed391a5baad9f6d9",
+                      "exerciseCount":  2,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/exercises/poincare-original-math-l4-starter-001.xml",
+                      "bytes":  62311,
+                      "sha256":  "0cd7626e77f2b8376510eb1acef061584a9f4c105e5440144dc83239c818dca5",
+                      "exerciseCount":  70,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/exercises/poincare-original-math-l4-starter-001-with-icons.xml",
+                      "bytes":  66734,
+                      "sha256":  "ae162a527a35958fc7901ca66092c9a30386136ef3fe66625ee54a757bb5c276",
+                      "exerciseCount":  70,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-exercises-geometry.xml",
+                      "bytes":  9858962,
+                      "sha256":  "707dbda21376679c9fd7941e52a5d79af8b8f935fa9f2939b8511eb7500eba56",
+                      "exerciseCount":  4800,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-exercises-index.xml",
+                      "bytes":  69540,
+                      "sha256":  "8d465ad555f99e5253ceb3647f364511af766a1e9fdb00a8ad34830739bcf7fe",
+                      "exerciseCount":  0,
+                      "role":  "SUPPORT_OR_SAMPLE"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-exercises-language.xml",
+                      "bytes":  23885155,
+                      "sha256":  "2c80bab52ffcdf398715c00671cf58101d51c378a8535a86adbbf2074f4fb797",
+                      "exerciseCount":  7800,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-exercises-logic-puzzles.xml",
+                      "bytes":  9752568,
+                      "sha256":  "efc9ba5abb6f84b5f5ffa8cb7bde66ff21022ea98bf9114d4bf6a6cdd7d1a556",
+                      "exerciseCount":  4200,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-exercises-math.xml",
+                      "bytes":  8976205,
+                      "sha256":  "93ee255b124dac04978a41a287075cc634a5c5a82ee21bafedd4bf74d420ee49",
+                      "exerciseCount":  4800,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-exercises-world-knowledge.xml",
+                      "bytes":  7085400,
+                      "sha256":  "e492c4dfb93d4cb49a8da81420fc029a7f01a0ed06ba7c531c18def0644f701d",
+                      "exerciseCount":  3600,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-minimal-import-test.xml",
+                      "bytes":  1481,
+                      "sha256":  "dbf85bb75f300525a4807a235980bd66279b425a59c91164ed391a5baad9f6d9",
+                      "exerciseCount":  2,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/poincare-original-math-l4-starter-001-with-icons.xml",
+                      "bytes":  66734,
+                      "sha256":  "ae162a527a35958fc7901ca66092c9a30386136ef3fe66625ee54a757bb5c276",
+                      "exerciseCount":  70,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/content/worksheets/poincare-original-math-l4-worksheets-001.xml",
+                      "bytes":  66734,
+                      "sha256":  "ae162a527a35958fc7901ca66092c9a30386136ef3fe66625ee54a757bb5c276",
+                      "exerciseCount":  70,
+                      "role":  "LEGACY_CURATED_CONTENT"
+                  },
+                  {
+                      "path":  "app/src/main/assets/poincare/icons/poincare-icons-final-complete-pack-v1.xml",
+                      "bytes":  25295,
+                      "sha256":  "a5658571da1761d2fa314b5b080344ff1f737389c72b60a2808f7157a3e825c1",
+                      "exerciseCount":  0,
+                      "role":  "SUPPORT_OR_SAMPLE"
+                  }
+              ]
+}

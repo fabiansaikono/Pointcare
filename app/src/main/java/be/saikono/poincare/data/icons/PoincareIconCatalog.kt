@@ -13,7 +13,7 @@ class PoincareIconCatalog private constructor(
     private val bySkill = icons.mapNotNull { icon -> icon.skillRef?.let { normalizeKey(it) to icon } }.toMap()
     private val byUiKey = icons.filter { it.section == "uiIcons" }.mapNotNull { icon -> icon.key?.let { normalizeKey(it) to icon } }.toMap()
     private val byRewardKey = icons.filter { it.section == "rewardIcons" }.flatMap { icon ->
-        listOfNotNull(icon.key, icon.rewardType, icon.id.removePrefix("reward-")).map { normalizeKey(it) to icon }
+        listOfNotNull(icon.key, icon.rewardType, icon.label, icon.id.removePrefix("reward-")).map { normalizeKey(it) to icon }
     }.toMap()
     private val byContentType = icons.filter { it.section == "contentTypeIcons" }.flatMap { icon ->
         listOfNotNull(icon.key, icon.contentType, icon.id.removePrefix("content-")).map { normalizeKey(it) to icon }

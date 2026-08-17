@@ -525,8 +525,8 @@ private fun ConstellationsBottomControls(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             onClick = if (isComplete) onNewMission else onResetPath,
             colors = ButtonDefaults.buttonColors(
-                containerColor = PlanetGold,
-                contentColor = DeepSpaceBlue
+                containerColor = DeepSpaceBlue.copy(alpha = .88f),
+                contentColor = PlanetGold
             ),
             shape = RoundedCornerShape(999.dp),
             modifier = Modifier

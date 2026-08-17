@@ -1,0 +1,32 @@
+{
+    "scope":  "GRADE1_V2_WITH_CONTROLLED_PUBLICATION",
+    "grade1CoreLessons":  67,
+    "grade1LibraryLessonsIncludingStories":  91,
+    "grade2Lessons":  11,
+    "grade2ExerciseSets":  55,
+    "grade2Questions":  328,
+    "activeValidatedPilots":  3,
+    "draftReviewRequired":  64,
+    "grade2DraftReviewRequired":  11,
+    "translations":  {
+                         "nl-BE":  {
+                                       "DEFAULT":  107,
+                                       "COMPLETE":  0,
+                                       "NEEDS_REVIEW":  0,
+                                       "MISSING":  0
+                                   },
+                         "fr-BE":  {
+                                       "DEFAULT":  0,
+                                       "COMPLETE":  35,
+                                       "NEEDS_REVIEW":  72,
+                                       "MISSING":  0
+                                   },
+                         "en-US":  {
+                                       "DEFAULT":  0,
+                                       "COMPLETE":  35,
+                                       "NEEDS_REVIEW":  72,
+                                       "MISSING":  0
+                                   }
+                     },
+    "note":  "Conceptlessen blijven uit de kindnavigatie tot expliciete inhoudelijke en redactionele goedkeuring."
+}

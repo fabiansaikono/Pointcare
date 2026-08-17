@@ -1,25 +1,16 @@
 package be.saikono.poincare.data.sync
 
 import android.content.Context
-import androidx.work.*
-import java.util.concurrent.TimeUnit
 
-class SyncManager(private val context: Context) {
-    
+/**
+ * Compatibility boundary for lesson runtimes that persist progress locally.
+ *
+ * Remote sync is deliberately disabled: presenting a simulated upload as a
+ * successful sync risks data loss. This method can become a real enqueue call
+ * only after an authenticated, idempotent server contract is available.
+ */
+class SyncManager(@Suppress("UNUSED_PARAMETER") context: Context) {
     fun scheduleSync() {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val syncRequest = OneTimeWorkRequestBuilder<SyncWorker>()
-            .setConstraints(constraints)
-            .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 1, TimeUnit.MINUTES)
-            .build()
-
-        WorkManager.getInstance(context).enqueueUniqueWork(
-            "progress_sync",
-            ExistingWorkPolicy.APPEND_OR_REPLACE,
-            syncRequest
-        )
+        // Progress has already been committed to Room by the caller.
     }
 }

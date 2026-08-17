@@ -838,8 +838,8 @@ private fun DraggableMathSymbol(
     var dragging by remember { mutableStateOf(false) }
 
     Surface(
-        color = PlanetGold.copy(alpha = 0.85f),
-        contentColor = DeepSpaceBlue,
+        color = DeepSpaceBlue.copy(alpha = 0.88f),
+        contentColor = PlanetGold,
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .onGloballyPositioned {
@@ -1191,7 +1191,8 @@ private fun MathAnswerPad(
                             .weight(1f)
                             .height(if (isLandscape) 56.dp else 72.dp)
                             .clip(RoundedCornerShape(16.dp))
-                            .background(if (isAction) PlanetGold else PlanetGold.copy(alpha = 0.95f))
+                            .background(DeepSpaceBlue.copy(alpha = if (isAction) .94f else .86f))
+                            .border(1.dp, PlanetGold.copy(alpha = if (isAction) .58f else .28f), RoundedCornerShape(16.dp))
                             .clickable {
                                 if (hapticEnabled) {
                                     haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.TextHandleMove)
@@ -1201,9 +1202,9 @@ private fun MathAnswerPad(
                         contentAlignment = Alignment.Center
                     ) {
                         if (isAction) {
-                            Text("✓", style = MaterialTheme.typography.headlineSmall, color = DeepSpaceBlue, fontWeight = FontWeight.Bold)
+                            Text("✓", style = MaterialTheme.typography.headlineSmall, color = PlanetGold, fontWeight = FontWeight.Bold)
                         } else {
-                            Text(item, style = if (isLandscape) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.headlineMedium, color = DeepSpaceBlue, fontWeight = FontWeight.Bold)
+                            Text(item, style = if (isLandscape) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.headlineMedium, color = PlanetGold, fontWeight = FontWeight.Bold)
                         }
                     }
                 }

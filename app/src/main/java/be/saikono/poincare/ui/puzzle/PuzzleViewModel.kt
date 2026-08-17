@@ -48,6 +48,7 @@ class PuzzleViewModel(
     private var startTime = 0L
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
+    private var selectedGrade: Int? = null
     private var latestProfile: ChildProfile? = null
     private var hasContentRequest = false
     private var contentLoadJob: Job? = null
@@ -87,11 +88,18 @@ class PuzzleViewModel(
         contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             try {
-                val level = profile.levelForPuzzle(selectedSubcategoryId)
-                val mathLevel = profile.mathLevel
+                val sourceDomain = puzzleGradeSourceDomain(selectedSubcategoryId)
+                val level = selectedGrade?.let(::skillLevelForGrade)
+                    ?: skillLevelForGrade(profile.selectedGradesFor(sourceDomain).firstOrNull() ?: 1)
+                val mathLevel = if (sourceDomain == LearningDomain.MATH) level else {
+                    skillLevelForGrade(profile.selectedGradesFor(LearningDomain.MATH).firstOrNull() ?: 1)
+                }
+                val worldKnowledgeLevel = if (sourceDomain == LearningDomain.WORLD_KNOWLEDGE) level else {
+                    skillLevelForGrade(profile.selectedGradesFor(LearningDomain.WORLD_KNOWLEDGE).firstOrNull() ?: 1)
+                }
                 val loadedPuzzles = level.toGrade()?.let { grade ->
                     selectedSubcategoryId?.let { subcategoryId ->
-                        generatedPuzzleExercise(subcategoryId, level, mathLevel, profile.readingLevel, selectedDifficultyStars, profile.hardModeEnabled)?.let { generatedPuzzle ->
+                        generatedPuzzleExercise(subcategoryId, level, mathLevel, worldKnowledgeLevel, selectedDifficultyStars, profile.hardModeEnabled)?.let { generatedPuzzle ->
                             listOf(generatedPuzzle)
                         } ?: run {
                             val domainPuzzles = contentRepository.getExercises(LearningDomain.PUZZLE, level)
@@ -173,11 +181,15 @@ class PuzzleViewModel(
         selectedDifficultyStars = stars?.coerceIn(1, 3)
     }
 
+    fun setSelectedGrade(grade: Int?) {
+        selectedGrade = grade?.coerceIn(1, 6)
+    }
+
     private fun generatedPuzzleExercise(
         subcategoryId: String,
         level: SkillLevel,
         mathLevel: SkillLevel,
-        readingLevel: SkillLevel,
+        worldKnowledgeLevel: SkillLevel,
         difficultyStars: Int?,
         hardModeEnabled: Boolean
     ): ExerciseContent? {
@@ -312,7 +324,7 @@ class PuzzleViewModel(
                     "mainCategory" to "logic_puzzles",
                     "subcategoryId" to MOTHERSHIP_DOCK_SUBCATEGORY_ID,
                     "grade" to (level.toGrade()?.toString() ?: "1"),
-                    "readingGrade" to (readingLevel.toGrade()?.toString() ?: (level.toGrade()?.toString() ?: "1")),
+                    "worldKnowledgeGrade" to (worldKnowledgeLevel.toGrade()?.toString() ?: (level.toGrade()?.toString() ?: "1")),
                     "mathGrade" to mathGrade.toString(),
                     "difficultyStars" to stars.toString(),
                     "generationDifficulty" to generationDifficulty.toString(),
@@ -604,7 +616,12 @@ class PuzzleViewModel(
                 answerCorrect = result.planetReached,
                 responseTimeMs = durationMs,
                 retryCount = if (result.planetReached) 0 else 1,
-                rewardStampsEarned = (missionPointsFor(exercise, result.planetReached) + result.stickersEarned.size).coerceAtMost(50),
+                rewardStampsEarned = if (result.planetReached) {
+                    (missionPointsFor(exercise, true) + result.stickersEarned.size)
+                        .coerceAtMost(MAX_LEVEL_POINTS_PER_ANSWER)
+                } else {
+                    0
+                },
                 metadata = mapOf(
                     "answer" to if (result.planetReached) "planet_reached" else "run_finished",
                     "progressKey" to (exercise.data["progressKey"] ?: exercise.id),
@@ -702,9 +719,4 @@ class PuzzleViewModel(
             startPuzzle(0)
         }
     }
-    private fun ChildProfile.levelForPuzzle(subcategoryId: String?): SkillLevel = when (subcategoryId) {
-        "word-seeker", "mothership-dock" -> readingLevel
-        else -> mathLevel
-    }
-
 }

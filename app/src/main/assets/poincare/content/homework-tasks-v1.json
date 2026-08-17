@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "tasks": [
+    {
+      "id": "demo-getallenlijn-tot-20",
+      "teacherId": "DEMO-POINCARE",
+      "order": 1,
+      "translations": {
+        "nl-BE": {
+          "title": "Oefen de getallenlijn tot 20",
+          "description": "Open Rekenen & getalbegrip en oefen de getallenlijn tot 20.",
+          "dueLabel": "Voorbeeldtaak"
+        },
+        "fr-BE": {
+          "title": "Exerce-toi sur la ligne numérique jusqu’à 20",
+          "description": "Ouvre Nombres et calcul et exerce-toi sur la ligne numérique jusqu’à 20.",
+          "dueLabel": "Tâche d’exemple"
+        },
+        "en-US": {
+          "title": "Practise the number line to 20",
+          "description": "Open Number sense and practise the number line to 20.",
+          "dueLabel": "Example task"
+        }
+      }
+    },
+    {
+      "id": "demo-lees-een-verhaal",
+      "teacherId": "DEMO-POINCARE",
+      "order": 2,
+      "translations": {
+        "nl-BE": {
+          "title": "Lees een verhaal",
+          "description": "Kies in Verhalen een thema en lees één verhaal.",
+          "dueLabel": "Voorbeeldtaak"
+        },
+        "fr-BE": {
+          "title": "Lis une histoire",
+          "description": "Choisis un thème dans Histoires et lis une histoire.",
+          "dueLabel": "Tâche d’exemple"
+        },
+        "en-US": {
+          "title": "Read a story",
+          "description": "Choose a theme in Stories and read one story.",
+          "dueLabel": "Example task"
+        }
+      }
+    }
+  ]
+}

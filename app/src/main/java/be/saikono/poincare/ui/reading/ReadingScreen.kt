@@ -157,13 +157,22 @@ fun ReadingContent(
                                 onOptionSelected = onOptionSelected
                             )
                         }
-                        InputMode.BUILD_WORD -> Text("Woord Bouwen (Binnenkort)", color = StarWhite)
+                        InputMode.BUILD_WORD -> Text("Deze oefenvorm is niet gepubliceerd.", color = PlanetRed)
                         InputMode.CUSTOM_TEXT_KEYBOARD -> {
                             Column(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.spacedBy(if (isLandscape) 8.dp else 12.dp)
                             ) {
+                                exercise.localizedData("maskedText", uiState.exerciseLanguage)?.takeIf { it.isNotBlank() }?.let { maskedText ->
+                                    Text(
+                                        text = maskedText.replace("_", "＿"),
+                                        color = StarWhite,
+                                        style = MaterialTheme.typography.headlineSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = 3.sp
+                                    )
+                                }
                                 Surface(
                                     color = when {
                                         uiState.isCorrect == true -> PlanetGold.copy(alpha = .24f)

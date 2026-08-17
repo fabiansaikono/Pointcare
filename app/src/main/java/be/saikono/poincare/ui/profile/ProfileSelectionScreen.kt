@@ -30,78 +30,6 @@ fun ProfileSelectionScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val appLanguage = LocalAppLanguage.current
-    var showPinDialog by remember { mutableStateOf(false) }
-    var pinValue by remember { mutableStateOf("") }
-    var pinError by remember { mutableStateOf(false) }
-
-    if (showPinDialog) {
-        AlertDialog(
-            onDismissRequest = { 
-                showPinDialog = false
-                pinValue = ""
-            },
-            containerColor = PlanetGold.copy(alpha = 0.85f),
-            titleContentColor = DeepSpaceBlue,
-            textContentColor = DeepSpaceBlue,
-            title = { Text("Ouderzone: Voer PIN in") },
-            text = {
-                Column {
-                    Text("Voer de pincode in om een nieuwe astronaut toe te voegen.")
-                    OutlinedTextField(
-                        value = pinValue,
-                        onValueChange = {
-                            if (it.length <= 4) {
-                                pinValue = it
-                                pinError = false
-                            }
-                        },
-                        label = { Text("PIN") },
-                        isError = pinError,
-                        supportingText = {
-                            if (pinError) Text("Deze pincode klopt niet.")
-                        },
-                        modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
-                        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
-                            keyboardType = androidx.compose.ui.text.input.KeyboardType.NumberPassword
-                        ),
-                        visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation()
-                    )
-                }
-            },
-            confirmButton = {
-                Button(
-                    shape = RoundedCornerShape(12.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                    onClick = {
-                        if (viewModel.isParentPinCorrect(pinValue)) {
-                            showPinDialog = false
-                            pinValue = ""
-                            pinError = false
-                            onCreateProfile()
-                        } else {
-                            pinError = true
-                            pinValue = ""
-                        }
-                    },
-                    enabled = pinValue.length == 4,
-                    colors = ButtonDefaults.buttonColors(containerColor = DeepSpaceBlue, contentColor = PlanetGold)
-                ) {
-                    Text("Bevestig")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    shape = RoundedCornerShape(12.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),onClick = { 
-                    showPinDialog = false
-                    pinValue = ""
-                    pinError = false
-                }, colors = ButtonDefaults.textButtonColors(contentColor = DeepSpaceBlue)) {
-                    Text("Annuleer")
-                }
-            }
-        )
-    }
 
     Box(
         modifier = Modifier
@@ -138,7 +66,7 @@ fun ProfileSelectionScreen(
                 }
 
                 item {
-                    AddProfileItem(onClick = { showPinDialog = true })
+                    AddProfileItem(onClick = onCreateProfile)
                 }
             }
         }
@@ -151,7 +79,7 @@ fun ProfileSelectionScreen(
                     CircularProgressIndicator(
                         progress = { uiState.loadingProgress.coerceIn(0, 100) / 100f },
                         modifier = Modifier.fillMaxSize(),
-                        color = PlanetBlue,
+                        color = PlanetGold,
                         trackColor = StarWhite.copy(alpha = 0.14f),
                         strokeWidth = 10.dp
                     )

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img">
+<title>Een steen leeft niet</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="18">
+<path d="M250 415 L325 210 L465 135 L635 195 L720 415 Z" stroke="#FFD700"/>
+<path d="M325 210 L455 275 L635 195 M455 275 L500 415" stroke="#FFFFFF"/>
+<path d="M180 455 H790" stroke="#FFFFFF"/>
+<path d="M200 90 L240 130 M240 90 L200 130 M750 90 L790 130 M790 90 L750 130" stroke="#FFFFFF"/>
+</g>
+</svg>

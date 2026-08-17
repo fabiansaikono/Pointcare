@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-08-03T20:28:03.490Z",
+  "scope": {
+    "grades": [
+      1,
+      2
+    ],
+    "ageRanges": {
+      "1": "6-7",
+      "2": "7-8"
+    }
+  },
+  "lessonsRewritten": 175,
+  "grade1Lessons": 67,
+  "grade2Lessons": 108,
+  "parentExplanationBlocks": 175,
+  "exerciseSetsDutchOnly": 875,
+  "grade2EditorialQuestionsRewritten": 3210,
+  "hierarchyLocales": [
+    "nl-BE"
+  ],
+  "exerciseLocales": [
+    "nl-BE"
+  ],
+  "supportContentLocales": [
+    "nl-BE",
+    "fr-BE",
+    "en-US"
+  ],
+  "supportTranslationsStatus": {
+    "nl-BE": "DEFAULT",
+    "fr-BE": "MISSING",
+    "en-US": "MISSING"
+  },
+  "stableIdsPreserved": true,
+  "explicitlyRetiredHierarchyContentFields": 2451,
+  "grade1MasteryGeneratorMigrations": 67
+}

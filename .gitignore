@@ -28,5 +28,22 @@ captures/
 .externalNativeBuild/
 .cxx/
 
+# Local task/runtime caches (not project source)
+/.cache/
+/.tmp/
+/.tmp.driveupload/
+/.tmp.drivedownload/
+/.kotlin/
+**/__pycache__/
+**/node_modules/
+
+# Local generated/recovery artifacts kept outside version control
+/outputs/
+/.poincare_repair_backups/
+/tts-repair-build.log
+
+# Separate local curriculum checkout (has its own Git metadata)
+/curriculum-library/
+
 # POINCARE_REPAIR_V31: local neural TTS development files
 .poincare_tools/

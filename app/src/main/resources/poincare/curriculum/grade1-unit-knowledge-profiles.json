@@ -1,0 +1,632 @@
+[
+  {
+    "unitId": "unit.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+    "title": ["Helft, dubbel en kwart", "Moitié, double et quart", "Half, double, and quarter"],
+    "terms": [["helft", "moitié", "half"], ["dubbel", "double", "double"], ["kwart", "quart", "quarter"]],
+    "facts": [
+      ["Een helft is één van twee gelijke delen.", "Une moitié est l'une de deux parts égales.", "A half is one of two equal parts."],
+      ["Acht fiches in twee gelijke groepen geeft vier per groep.", "Huit jetons en deux groupes égaux donnent quatre par groupe.", "Eight counters in two equal groups gives four in each group."],
+      ["Het dubbele van drie is zes, want drie plus drie is zes.", "Le double de trois est six, car trois plus trois font six.", "Double three is six because three plus three is six."],
+      ["Een kwart is één van vier gelijke delen.", "Un quart est l'une de quatre parts égales.", "A quarter is one of four equal parts."],
+      ["Twee helften vormen samen één geheel.", "Deux moitiés forment ensemble un tout.", "Two halves together make one whole."],
+      ["Vier kwarten vormen samen één geheel.", "Quatre quarts forment ensemble un tout.", "Four quarters together make one whole."],
+      ["Je controleert een helft door de twee delen te vergelijken.", "Tu vérifies une moitié en comparant les deux parts.", "You check a half by comparing the two parts."],
+      ["Zes appels eerlijk delen met twee kinderen geeft elk drie appels.", "Partager équitablement six pommes entre deux enfants donne trois pommes chacun.", "Sharing six apples equally between two children gives three apples each."],
+      ["Een blad twee keer gelijk vouwen kan vier gelijke kwarten tonen.", "Plier une feuille deux fois également peut montrer quatre quarts égaux.", "Folding a sheet equally twice can show four equal quarters."],
+      ["Met fiches kun je een aantal leggen en het dubbele ernaast bouwen.", "Avec des jetons, tu peux former une quantité et construire son double à côté.", "With counters, you can make an amount and build its double beside it."]
+    ],
+    "warning": ["Ongelijke delen zijn geen helften of kwarten.", "Des parts inégales ne sont pas des moitiés ni des quarts.", "Unequal parts are not halves or quarters."]
+  },
+  {
+    "unitId": "unit.g1.math.geometry.orientatie-patronen-en-symmetrie",
+    "title": ["Oriëntatie, patronen en symmetrie", "Orientation, régularités et symétrie", "Orientation, patterns, and symmetry"],
+    "terms": [["links", "gauche", "left"], ["patroon", "régularité", "pattern"], ["symmetrie", "symétrie", "symmetry"]],
+    "facts": [
+      ["Links en rechts hangen af van de richting waarin je kijkt.", "La gauche et la droite dépendent de la direction dans laquelle tu regardes.", "Left and right depend on the direction you are facing."],
+      ["Een route kun je stap voor stap beschrijven met richtingwoorden.", "Tu peux décrire un trajet étape par étape avec des mots de direction.", "You can describe a route step by step with direction words."],
+      ["In een patroon herhaalt dezelfde regel zich.", "Dans une régularité, la même règle se répète.", "In a pattern, the same rule repeats."],
+      ["Na rood-blauw-rood-blauw komt opnieuw rood.", "Après rouge-bleu-rouge-bleu vient encore rouge.", "After red-blue-red-blue comes red again."],
+      ["Een symmetrielijn verdeelt een figuur in twee spiegelhelften.", "Un axe de symétrie partage une figure en deux moitiés en miroir.", "A line of symmetry divides a shape into two mirror halves."],
+      ["Bij spiegelen staat elk punt even ver van de symmetrielijn.", "Dans un reflet, chaque point est à la même distance de l'axe de symétrie.", "In a reflection, each point is the same distance from the line of symmetry."],
+      ["Boven, onder, voor en achter beschrijven waar iets ligt.", "Dessus, dessous, devant et derrière décrivent où se trouve quelque chose.", "Above, below, in front, and behind describe where something is."],
+      ["Je controleert een patroon door de herhalende eenheid aan te wijzen.", "Tu vérifies une régularité en montrant l'unité qui se répète.", "You check a pattern by pointing to the repeating unit."],
+      ["Een halve tekening kun je langs de lijn gespiegeld afmaken.", "Tu peux compléter une demi-image en la reflétant le long de l'axe.", "You can complete half a picture by reflecting it across the line."],
+      ["Pijlen kunnen tonen of je vooruit, links of rechts moet gaan.", "Des flèches peuvent montrer s'il faut avancer, aller à gauche ou à droite.", "Arrows can show whether to move forward, left, or right."]
+    ],
+    "warning": ["Een rij zonder herhalende regel is geen patroon.", "Une suite sans règle répétée n'est pas une régularité.", "A row without a repeating rule is not a pattern."]
+  },
+  {
+    "unitId": "unit.g1.math.data.gegevens-verzamelen-en-voorstellen",
+    "title": ["Gegevens verzamelen en voorstellen", "Recueillir et représenter des données", "Collecting and showing data"],
+    "terms": [["gegevens", "données", "data"], ["turven", "bâtonnets", "tally"], ["diagram", "diagramme", "chart"]],
+    "facts": [
+      ["Gegevens zijn antwoorden of waarnemingen die je verzamelt.", "Les données sont des réponses ou des observations que tu recueilles.", "Data are answers or observations that you collect."],
+      ["Eén turfstreep staat voor één geteld antwoord.", "Un bâtonnet représente une réponse comptée.", "One tally mark stands for one counted answer."],
+      ["In een beeldgrafiek moet elk symbool evenveel voorstellen.", "Dans un pictogramme, chaque symbole doit représenter la même quantité.", "In a picture graph, every symbol must represent the same amount."],
+      ["Een titel vertelt waarover het diagram gaat.", "Un titre indique de quoi parle le diagramme.", "A title tells what the chart is about."],
+      ["Je vindt de grootste groep door de aantallen te vergelijken.", "Tu trouves le plus grand groupe en comparant les nombres.", "You find the largest group by comparing the numbers."],
+      ["Je vindt het verschil door het kleinste aantal van het grootste af te trekken.", "Tu trouves la différence en retirant le plus petit nombre du plus grand.", "You find the difference by subtracting the smaller number from the larger."],
+      ["Dezelfde vraag moet aan iedereen op dezelfde manier worden gesteld.", "La même question doit être posée de la même façon à tout le monde.", "The same question should be asked in the same way to everyone."],
+      ["Na het turven tel je elke categorie nog eens na.", "Après le comptage, tu recomptes chaque catégorie.", "After tallying, you count each category again."],
+      ["Nul betekent dat er geen antwoord in die categorie zit.", "Zéro signifie qu'il n'y a aucune réponse dans cette catégorie.", "Zero means there are no answers in that category."],
+      ["Een duidelijke tabel zet elk antwoord in de juiste rij of kolom.", "Un tableau clair place chaque réponse dans la bonne ligne ou colonne.", "A clear table puts each answer in the correct row or column."]
+    ],
+    "warning": ["Symbolen met verschillende waarden maken een diagram misleidend.", "Des symboles de valeurs différentes rendent un diagramme trompeur.", "Symbols with different values make a chart misleading."]
+  },
+  {
+    "unitId": "unit.g1.fr.listening.franse-klanken-en-begroetingen",
+    "title": ["Franse klanken en begroetingen", "Sons français et salutations", "French sounds and greetings"],
+    "terms": [["bonjour", "bonjour", "hello"], ["au revoir", "au revoir", "goodbye"], ["merci", "merci", "thank you"]],
+    "facts": [
+      ["Je zegt bonjour wanneer je iemand vriendelijk begroet.", "Tu dis bonjour pour saluer quelqu'un gentiment.", "You say bonjour when you greet someone politely."],
+      ["Je zegt au revoir wanneer je afscheid neemt.", "Tu dis au revoir quand tu prends congé.", "You say au revoir when you say goodbye."],
+      ["Merci betekent dank je wel.", "Merci signifie que tu remercies quelqu'un.", "Merci means thank you."],
+      ["S'il vous plaît gebruik je wanneer je iets beleefd vraagt.", "Tu utilises s'il vous plaît pour demander quelque chose poliment.", "You use s'il vous plaît when asking for something politely."],
+      ["Bij comment ça va luister je naar hoe het met iemand gaat.", "Avec comment ça va, tu demandes comment va quelqu'un.", "With comment ça va, you ask how someone is doing."],
+      ["Luister eerst naar het hele Franse woord en zeg het daarna na.", "Écoute d'abord le mot français entier, puis répète-le.", "First listen to the whole French word, then repeat it."],
+      ["Kijk naar de mond van de spreker om een nieuwe klank na te doen.", "Regarde la bouche de la personne pour imiter un nouveau son.", "Watch the speaker's mouth to copy a new sound."],
+      ["Bonjour en bonsoir passen bij verschillende momenten van de dag.", "Bonjour et bonsoir conviennent à différents moments de la journée.", "Bonjour and bonsoir suit different times of day."],
+      ["Je antwoordt ça va wanneer je zegt dat het goed gaat.", "Tu réponds ça va pour dire que tu vas bien.", "You answer ça va to say that you are well."],
+      ["Een Franse klank herken je door aandachtig te luisteren, niet door te raden.", "Tu reconnais un son français en écoutant attentivement, pas en devinant.", "You recognize a French sound by listening carefully, not by guessing."]
+    ],
+    "warning": ["Lees Franse woorden niet automatisch alsof het Nederlandse woorden zijn.", "Ne lis pas automatiquement les mots français comme des mots néerlandais.", "Do not automatically read French words as if they were Dutch words."]
+  },
+  {
+    "unitId": "unit.g1.fr.culture.liedjes-tellen-en-kleuren",
+    "title": ["Franse liedjes, tellen en kleuren", "Chansons, nombres et couleurs en français", "French songs, counting, and colours"],
+    "terms": [["un, deux, trois", "un, deux, trois", "one, two, three"], ["rouge", "rouge", "red"], ["bleu", "bleu", "blue"]],
+    "facts": [
+      ["Un, deux, trois zijn de Franse woorden voor één, twee, drie.", "Un, deux, trois sont les mots français pour les nombres 1, 2 et 3.", "Un, deux, trois are the French words for one, two, three."],
+      ["Rouge is het Franse woord voor rood.", "Rouge est le mot français pour la couleur rouge.", "Rouge is the French word for red."],
+      ["Bleu is het Franse woord voor blauw.", "Bleu est le mot français pour la couleur bleue.", "Bleu is the French word for blue."],
+      ["Jaune is het Franse woord voor geel.", "Jaune est le mot français pour la couleur jaune.", "Jaune is the French word for yellow."],
+      ["Vert is het Franse woord voor groen.", "Vert est le mot français pour la couleur verte.", "Vert is the French word for green."],
+      ["Een refrein is het deel van een lied dat terugkomt.", "Un refrain est la partie d'une chanson qui revient.", "A chorus is the part of a song that returns."],
+      ["Je kunt de puls van een lied zacht meetikken.", "Tu peux marquer doucement la pulsation d'une chanson.", "You can tap the beat of a song softly."],
+      ["Meedoen met gebaren helpt om nieuwe Franse woorden te onthouden.", "Faire les gestes aide à retenir de nouveaux mots français.", "Joining in with gestures helps you remember new French words."],
+      ["Je luistert eerst naar de telrij en spreekt daarna mee.", "Tu écoutes d'abord la suite des nombres, puis tu la répètes.", "You first listen to the number sequence and then join in."],
+      ["Liedjes kunnen woorden en gebruiken uit een andere taal laten horen.", "Les chansons peuvent faire découvrir des mots et des habitudes d'une autre langue.", "Songs can introduce words and customs from another language."]
+    ],
+    "warning": ["Roep niet sneller dan het lied; luister naar de puls en de uitspraak.", "Ne parle pas plus vite que la chanson ; écoute la pulsation et la prononciation.", "Do not call out faster than the song; listen to the beat and pronunciation."]
+  },
+  {
+    "unitId": "unit.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+    "title": ["Lijn, kleur, vorm en textuur", "Ligne, couleur, forme et texture", "Line, colour, shape, and texture"],
+    "terms": [["lijn", "ligne", "line"], ["vorm", "forme", "shape"], ["textuur", "texture", "texture"]],
+    "facts": [
+      ["Een lijn kan recht, gebogen, dik of dun zijn.", "Une ligne peut être droite, courbe, épaisse ou fine.", "A line can be straight, curved, thick, or thin."],
+      ["Warme kleuren zoals rood en geel kunnen opvallen.", "Les couleurs chaudes comme le rouge et le jaune peuvent attirer l'attention.", "Warm colours such as red and yellow can stand out."],
+      ["Een vorm heeft een herkenbare omtrek.", "Une forme possède un contour reconnaissable.", "A shape has a recognizable outline."],
+      ["Textuur beschrijft hoe een oppervlak eruitziet of aanvoelt.", "La texture décrit l'aspect ou le toucher d'une surface.", "Texture describes how a surface looks or feels."],
+      ["Je kunt met lijnen beweging in een tekening suggereren.", "Tu peux suggérer le mouvement dans un dessin avec des lignes.", "You can suggest movement in a drawing with lines."],
+      ["Grote en kleine vormen maken een compositie afwisselend.", "De grandes et petites formes rendent une composition variée.", "Large and small shapes make a composition varied."],
+      ["Een materiaalproef toont welk spoor krijt, verf of potlood maakt.", "Un essai de matériau montre la trace de la craie, de la peinture ou du crayon.", "A material test shows the mark made by chalk, paint, or pencil."],
+      ["Je kiest kleuren die passen bij de sfeer die je wilt tonen.", "Tu choisis des couleurs adaptées à l'ambiance que tu veux montrer.", "You choose colours that fit the mood you want to show."],
+      ["Na het maken vertel je welke beeldkeuze het belangrijkst was.", "Après la création, tu expliques quel choix visuel était le plus important.", "After making, you explain which visual choice mattered most."],
+      ["Veilig werken betekent materiaal gebruiken zoals afgesproken.", "Travailler en sécurité signifie utiliser le matériel comme convenu.", "Working safely means using materials as agreed."]
+    ],
+    "warning": ["Alleen netjes kleuren toont nog niet waarom je een beeldkeuze maakte.", "Colorier proprement ne montre pas encore pourquoi tu as fait un choix visuel.", "Neat colouring alone does not show why you made a visual choice."]
+  },
+  {
+    "unitId": "unit.g1.arts.music.stem-puls-en-klankkleur",
+    "title": ["Stem, puls en klankkleur", "Voix, pulsation et timbre", "Voice, beat, and timbre"],
+    "terms": [["puls", "pulsation", "beat"], ["ritme", "rythme", "rhythm"], ["klankkleur", "timbre", "timbre"]],
+    "facts": [
+      ["De puls is de regelmatige tik die onder de muziek doorgaat.", "La pulsation est le battement régulier qui continue sous la musique.", "The beat is the steady pulse that continues under the music."],
+      ["Een ritme bestaat uit lange en korte klanken en stiltes.", "Un rythme est composé de sons longs, de sons courts et de silences.", "A rhythm is made of long and short sounds and silences."],
+      ["Een hoge toon klinkt anders dan een lage toon.", "Un son aigu est différent d'un son grave.", "A high note sounds different from a low note."],
+      ["Dynamiek vertelt of muziek sterk of zacht klinkt.", "La dynamique indique si la musique sonne fort ou doucement.", "Dynamics tell whether music sounds loud or soft."],
+      ["Klankkleur helpt je een stem of instrument herkennen.", "Le timbre t'aide à reconnaître une voix ou un instrument.", "Timbre helps you recognize a voice or instrument."],
+      ["Je houdt de puls door regelmatig te stappen of te tikken.", "Tu gardes la pulsation en marchant ou en tapant régulièrement.", "You keep the beat by stepping or tapping steadily."],
+      ["Bij een muzikale echo herhaal je hetzelfde ritme.", "Dans un écho musical, tu répètes le même rythme.", "In a musical echo, you repeat the same rhythm."],
+      ["Zingen begint met luisteren naar de inzet en de toonhoogte.", "Chanter commence par écouter le départ et la hauteur du son.", "Singing starts by listening for the entry and pitch."],
+      ["Een stilte hoort bij het ritme en duurt een afgesproken tijd.", "Un silence fait partie du rythme et dure un temps convenu.", "A rest belongs to the rhythm and lasts for an agreed time."],
+      ["Na het spelen luister je of iedereen samen op de puls bleef.", "Après avoir joué, tu écoutes si tout le monde est resté ensemble sur la pulsation.", "After playing, you listen whether everyone stayed together on the beat."]
+    ],
+    "warning": ["Sneller spelen is niet hetzelfde als de puls gelijk houden.", "Jouer plus vite n'est pas la même chose que garder une pulsation régulière.", "Playing faster is not the same as keeping a steady beat."]
+  },
+  {
+    "unitId": "unit.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+    "title": ["Doen alsof en een verhaal spelen", "Faire semblant et jouer une histoire", "Pretending and acting a story"],
+    "terms": [["rol", "rôle", "role"], ["gebaar", "geste", "gesture"], ["scène", "scène", "scene"]],
+    "facts": [
+      ["Een rol is het personage dat je tijdens het spel uitbeeldt.", "Un rôle est le personnage que tu représentes pendant le jeu.", "A role is the character you portray during the play."],
+      ["Houding en gebaren tonen hoe een personage zich voelt.", "La posture et les gestes montrent ce que ressent un personnage.", "Posture and gestures show how a character feels."],
+      ["Een duidelijke stem helpt het publiek het verhaal volgen.", "Une voix claire aide le public à suivre l'histoire.", "A clear voice helps the audience follow the story."],
+      ["Een scène heeft een plaats, personages en een gebeurtenis.", "Une scène a un lieu, des personnages et un événement.", "A scene has a place, characters, and an event."],
+      ["Je reageert in je rol op wat een medespeler zegt of doet.", "Dans ton rôle, tu réagis à ce que dit ou fait un partenaire.", "In role, you respond to what another player says or does."],
+      ["Een stilstaand beeld kan één belangrijk moment tonen.", "Une image fixe peut montrer un moment important.", "A freeze-frame can show one important moment."],
+      ["Voor het spelen spreek je af waar de scène begint en eindigt.", "Avant de jouer, vous convenez du début et de la fin de la scène.", "Before acting, you agree where the scene starts and ends."],
+      ["Een denkbeeldig voorwerp gebruik je telkens op dezelfde manier.", "Tu utilises un objet imaginaire toujours de la même manière.", "You use an imaginary object consistently each time."],
+      ["Na de scène vertel je welk gebaar de rol duidelijk maakte.", "Après la scène, tu expliques quel geste a rendu le rôle clair.", "After the scene, you explain which gesture made the role clear."],
+      ["Veilig spelen betekent ruimte houden en afgesproken bewegingen gebruiken.", "Jouer en sécurité signifie garder de l'espace et utiliser les mouvements convenus.", "Acting safely means keeping space and using agreed movements."]
+    ],
+    "warning": ["Zomaar roepen zonder op medespelers te reageren maakt het verhaal onduidelijk.", "Crier sans réagir aux partenaires rend l'histoire peu claire.", "Calling out without responding to others makes the story unclear."]
+  },
+  {
+    "unitId": "unit.g1.arts.media.kijken-bewegen-en-presenteren",
+    "title": ["Kijken, bewegen en presenteren", "Observer, bouger et présenter", "Looking, moving, and presenting"],
+    "terms": [["kader", "cadre", "frame"], ["standpunt", "point de vue", "viewpoint"], ["presenteren", "présenter", "present"]],
+    "facts": [
+      ["Een kader bepaalt wat je wel en niet in beeld ziet.", "Un cadre détermine ce que tu vois ou non dans l'image.", "A frame determines what you do and do not see in an image."],
+      ["Van dichtbij zie je andere details dan van veraf.", "De près, tu vois d'autres détails que de loin.", "Up close, you see different details than from far away."],
+      ["Een standpunt is de plaats vanwaar je kijkt.", "Un point de vue est l'endroit depuis lequel tu regardes.", "A viewpoint is the place from which you look."],
+      ["Beelden in een vaste volgorde kunnen een verhaal tonen.", "Des images dans un ordre fixe peuvent raconter une histoire.", "Images in a set order can tell a story."],
+      ["Een pictogram geeft informatie met een eenvoudig beeld.", "Un pictogramme donne une information avec une image simple.", "A pictogram gives information with a simple image."],
+      ["Bij presenteren kijk je naar het publiek en spreek je duidelijk.", "Quand tu présentes, tu regardes le public et tu parles clairement.", "When presenting, you look at the audience and speak clearly."],
+      ["Je vraagt toestemming voordat je iemand herkenbaar in beeld brengt.", "Tu demandes la permission avant de montrer quelqu'un de façon reconnaissable.", "You ask permission before showing someone recognizably in an image."],
+      ["Een bewegingsreeks heeft een afgesproken begin, midden en einde.", "Une suite de mouvements a un début, un milieu et une fin convenus.", "A movement sequence has an agreed beginning, middle, and end."],
+      ["Na de presentatie vertel je welke beeldkeuze de boodschap hielp.", "Après la présentation, tu expliques quel choix d'image a aidé le message.", "After presenting, you explain which image choice helped the message."],
+      ["Je draagt een toestel met twee handen en legt het veilig neer.", "Tu portes un appareil à deux mains et tu le poses en sécurité.", "You carry a device with two hands and put it down safely."]
+    ],
+    "warning": ["Een beeld delen zonder toestemming kan iemands privacy schenden.", "Partager une image sans permission peut porter atteinte à la vie privée.", "Sharing an image without permission can harm someone's privacy."]
+  },
+  {
+    "unitId": "unit.g1.geo.maps.mijn-plaats-in-klas-en-school",
+    "title": ["Mijn plaats in klas en school", "Ma place dans la classe et l'école", "My place in class and school"],
+    "terms": [["plattegrond", "plan", "map"], ["route", "itinéraire", "route"], ["legenda", "légende", "key"]],
+    "facts": [
+      ["Een plattegrond toont een plaats alsof je van boven kijkt.", "Un plan montre un lieu comme si tu le regardais d'en haut.", "A map shows a place as if you were looking from above."],
+      ["Een symbool op de kaart stelt een echte plaats of voorwerp voor.", "Un symbole sur le plan représente un lieu ou un objet réel.", "A symbol on the map represents a real place or object."],
+      ["De legenda legt uit wat de symbolen betekenen.", "La légende explique la signification des symboles.", "The key explains what the symbols mean."],
+      ["Een route is de weg van een beginpunt naar een eindpunt.", "Un itinéraire est le chemin d'un point de départ à un point d'arrivée.", "A route is the path from a starting point to an end point."],
+      ["Pijlen kunnen de looprichting op een route tonen.", "Des flèches peuvent montrer la direction d'un itinéraire.", "Arrows can show the direction of travel on a route."],
+      ["Je vergelijkt de kaart met herkenbare plaatsen in de klas.", "Tu compares le plan avec des endroits reconnaissables dans la classe.", "You compare the map with recognizable places in the classroom."],
+      ["Dichtbij en veraf beschrijven de afstand tussen twee plaatsen.", "Près et loin décrivent la distance entre deux endroits.", "Near and far describe the distance between two places."],
+      ["Links en rechts op de kaart volg je vanuit dezelfde kijkrichting.", "Sur le plan, tu suis la gauche et la droite depuis la même direction.", "On a map, you follow left and right from the same facing direction."],
+      ["Je controleert een route door elke stap in de echte ruimte te volgen.", "Tu vérifies un itinéraire en suivant chaque étape dans l'espace réel.", "You check a route by following each step in the real space."],
+      ["Een duidelijke kaart heeft een titel, symbolen en een legenda.", "Un plan clair possède un titre, des symboles et une légende.", "A clear map has a title, symbols, and a key."]
+    ],
+    "warning": ["Een kaart zonder legenda maakt onbekende symbolen moeilijk te begrijpen.", "Un plan sans légende rend les symboles inconnus difficiles à comprendre.", "A map without a key makes unfamiliar symbols hard to understand."]
+  },
+  {
+    "unitId": "unit.g1.geo.human.wonen-school-en-buurt",
+    "title": ["Wonen, school en buurt", "Habiter, l'école et le quartier", "Home, school, and neighbourhood"],
+    "terms": [["buurt", "quartier", "neighbourhood"], ["functie", "fonction", "purpose"], ["voorziening", "service", "facility"]],
+    "facts": [
+      ["Een buurt bestaat uit woningen, straten, mensen en voorzieningen.", "Un quartier comprend des logements, des rues, des personnes et des services.", "A neighbourhood includes homes, streets, people, and services."],
+      ["Een school is een plaats waar kinderen samen leren.", "Une école est un lieu où les enfants apprennent ensemble.", "A school is a place where children learn together."],
+      ["Een woning geeft mensen een plek om te leven en te rusten.", "Un logement donne aux personnes un lieu pour vivre et se reposer.", "A home gives people a place to live and rest."],
+      ["Een winkel, park en bibliotheek hebben elk een andere functie.", "Un magasin, un parc et une bibliothèque ont chacun une fonction différente.", "A shop, park, and library each have a different purpose."],
+      ["Een stoep is bedoeld voor voetgangers.", "Un trottoir est destiné aux piétons.", "A pavement is intended for pedestrians."],
+      ["Mensen kunnen op verschillende manieren wonen en naar school gaan.", "Les personnes peuvent habiter et aller à l'école de différentes façons.", "People can live and travel to school in different ways."],
+      ["Een herkenningspunt helpt je weten waar je bent.", "Un point de repère t'aide à savoir où tu te trouves.", "A landmark helps you know where you are."],
+      ["Je beschrijft een plaats met wat je ziet, hoort en doet.", "Tu décris un lieu avec ce que tu vois, entends et fais.", "You describe a place using what you see, hear, and do."],
+      ["In een buurt delen mensen ruimte en volgen ze afspraken.", "Dans un quartier, les personnes partagent l'espace et respectent des règles.", "In a neighbourhood, people share space and follow agreements."],
+      ["Je vergelijkt twee plaatsen door gelijkenissen en verschillen te noemen.", "Tu compares deux lieux en nommant des ressemblances et des différences.", "You compare two places by naming similarities and differences."]
+    ],
+    "warning": ["Niet elke buurt heeft dezelfde gebouwen, mensen of voorzieningen.", "Tous les quartiers n'ont pas les mêmes bâtiments, personnes ou services.", "Not every neighbourhood has the same buildings, people, or services."]
+  },
+  {
+    "unitId": "unit.g1.history.chronology.dag-week-jaar-en-levenslijn",
+    "title": ["Dag, week, jaar en levenslijn", "Jour, semaine, année et ligne de vie", "Day, week, year, and timeline"],
+    "terms": [["vroeger", "autrefois", "past"], ["nu", "maintenant", "now"], ["levenslijn", "ligne de vie", "timeline"]],
+    "facts": [
+      ["Een dag heeft een ochtend, middag, avond en nacht.", "Une journée comprend un matin, un après-midi, un soir et une nuit.", "A day has a morning, afternoon, evening, and night."],
+      ["Een week telt zeven dagen in een vaste volgorde.", "Une semaine compte sept jours dans un ordre fixe.", "A week has seven days in a fixed order."],
+      ["Twaalf maanden vormen samen één jaar.", "Douze mois forment ensemble une année.", "Twelve months together make one year."],
+      ["Vroeger gebeurde vóór nu; later gebeurt na nu.", "Autrefois est avant maintenant ; plus tard est après maintenant.", "The past happened before now; later happens after now."],
+      ["Een levenslijn zet gebeurtenissen van oud naar nieuw.", "Une ligne de vie place les événements du plus ancien au plus récent.", "A timeline puts events from oldest to newest."],
+      ["Een geboortedatum komt vóór de eerste schooldag.", "Une date de naissance vient avant le premier jour d'école.", "A birth date comes before the first day of school."],
+      ["Kalenders helpen dagen, maanden en bijzondere momenten ordenen.", "Les calendriers aident à organiser les jours, les mois et les moments particuliers.", "Calendars help order days, months, and special moments."],
+      ["Foto's kunnen tonen hoe iemand of een plaats veranderde.", "Des photos peuvent montrer comment une personne ou un lieu a changé.", "Photos can show how a person or place changed."],
+      ["Je controleert een volgorde door te vragen wat eerst en daarna gebeurde.", "Tu vérifies un ordre en demandant ce qui s'est passé d'abord puis ensuite.", "You check an order by asking what happened first and next."],
+      ["Een verjaardag keert elk jaar rond dezelfde datum terug.", "Un anniversaire revient chaque année autour de la même date.", "A birthday returns each year around the same date."]
+    ],
+    "warning": ["Gebeurtenissen willekeurig neerzetten vormt geen juiste tijdsvolgorde.", "Placer des événements au hasard ne forme pas un ordre chronologique correct.", "Placing events randomly does not make a correct time order."]
+  },
+  {
+    "unitId": "unit.g1.history.sources.wat-vertelt-een-bron",
+    "title": ["Wat vertelt een bron?", "Que raconte une source ?", "What does a source tell us?"],
+    "terms": [["bron", "source", "source"], ["spoor", "trace", "trace"], ["getuigenis", "témoignage", "testimony"]],
+    "facts": [
+      ["Een bron is iets dat informatie over vroeger geeft.", "Une source est quelque chose qui donne des informations sur le passé.", "A source is something that gives information about the past."],
+      ["Een oude foto kan kleding, mensen en plaatsen tonen.", "Une ancienne photo peut montrer des vêtements, des personnes et des lieux.", "An old photograph can show clothing, people, and places."],
+      ["Een voorwerp kan vertellen waarvoor mensen het gebruikten.", "Un objet peut indiquer comment les personnes l'utilisaient.", "An object can show what people used it for."],
+      ["Een verhaal van een persoon is een mondelinge bron.", "Le récit d'une personne est une source orale.", "A person's story is an oral source."],
+      ["Je kijkt eerst goed wat je werkelijk in de bron ziet.", "Tu observes d'abord attentivement ce que tu vois réellement dans la source.", "You first look carefully at what you can actually see in the source."],
+      ["Daarna stel je vragen over wie, wat, waar en wanneer.", "Ensuite, tu poses des questions sur qui, quoi, où et quand.", "Then you ask questions about who, what, where, and when."],
+      ["Twee bronnen kunnen verschillende delen van hetzelfde verhaal tonen.", "Deux sources peuvent montrer différentes parties de la même histoire.", "Two sources can show different parts of the same story."],
+      ["Je zegt duidelijk wat je weet en wat je alleen vermoedt.", "Tu distingues clairement ce que tu sais de ce que tu supposes.", "You clearly separate what you know from what you only suppose."],
+      ["Een datum of naam kan helpen een bron te plaatsen.", "Une date ou un nom peut aider à situer une source.", "A date or name can help place a source."],
+      ["Je behandelt oude bronnen voorzichtig zodat ze bewaard blijven.", "Tu manipules les anciennes sources avec soin pour les conserver.", "You handle old sources carefully so they are preserved."]
+    ],
+    "warning": ["Eén detail is niet genoeg om het hele verleden zeker te kennen.", "Un seul détail ne suffit pas pour connaître tout le passé avec certitude.", "One detail is not enough to know the whole past for certain."]
+  },
+  {
+    "unitId": "unit.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+    "title": ["Gezin, school en buurt vroeger en nu", "Famille, école et quartier autrefois et aujourd'hui", "Family, school, and neighbourhood then and now"],
+    "terms": [["verandering", "changement", "change"], ["gelijkenis", "ressemblance", "similarity"], ["verschil", "différence", "difference"]],
+    "facts": [
+      ["Foto's van vroeger kunnen andere kleding en gebruiksvoorwerpen tonen.", "Des photos anciennes peuvent montrer d'autres vêtements et objets usuels.", "Old photographs can show different clothing and everyday objects."],
+      ["Sommige gezinsgewoonten veranderen en andere blijven bestaan.", "Certaines habitudes familiales changent et d'autres restent.", "Some family customs change and others remain."],
+      ["Schoolmateriaal van vroeger kan verschillen van materiaal van nu.", "Le matériel scolaire d'autrefois peut différer de celui d'aujourd'hui.", "School materials from the past can differ from those used now."],
+      ["Gebouwen kunnen een nieuwe functie krijgen terwijl ze blijven staan.", "Des bâtiments peuvent recevoir une nouvelle fonction tout en restant debout.", "Buildings can get a new purpose while remaining in place."],
+      ["Een buurt verandert wanneer wegen, huizen of winkels erbij komen.", "Un quartier change lorsque des routes, maisons ou magasins sont ajoutés.", "A neighbourhood changes when roads, homes, or shops are added."],
+      ["Je vergelijkt vroeger en nu met hetzelfde kenmerk.", "Tu compares autrefois et aujourd'hui avec la même caractéristique.", "You compare then and now using the same feature."],
+      ["Een grootouder kan vertellen hoe school vroeger verliep.", "Un grand-parent peut raconter comment se passait l'école autrefois.", "A grandparent can describe what school was like in the past."],
+      ["Oude en nieuwe foto's samen maken veranderingen zichtbaar.", "Des photos anciennes et récentes rendent les changements visibles.", "Old and new photographs together make changes visible."],
+      ["Niet iedereen leefde vroeger op precies dezelfde manier.", "Tout le monde ne vivait pas exactement de la même manière autrefois.", "Not everyone lived in exactly the same way in the past."],
+      ["Je noemt bij een vergelijking minstens één gelijkenis en één verschil.", "Dans une comparaison, tu nommes au moins une ressemblance et une différence.", "In a comparison, you name at least one similarity and one difference."]
+    ],
+    "warning": ["Vroeger was niet alles slechter en nu is niet alles beter.", "Autrefois, tout n'était pas pire et aujourd'hui, tout n'est pas meilleur.", "Not everything was worse in the past, and not everything is better now."]
+  },
+  {
+    "unitId": "unit.g1.history.eras.feesten-en-tradities-door-de-tijd",
+    "title": ["Feesten en tradities door de tijd", "Fêtes et traditions au fil du temps", "Celebrations and traditions over time"],
+    "terms": [["feest", "fête", "celebration"], ["traditie", "tradition", "tradition"], ["herdenken", "commémorer", "commemorate"]],
+    "facts": [
+      ["Een traditie is een gewoonte die mensen doorgeven.", "Une tradition est une habitude que les personnes transmettent.", "A tradition is a custom that people pass on."],
+      ["Feesten kunnen bij een seizoen, geloof of gebeurtenis horen.", "Les fêtes peuvent être liées à une saison, une croyance ou un événement.", "Celebrations can belong to a season, belief, or event."],
+      ["Mensen vieren dezelfde dag soms op verschillende manieren.", "Les personnes célèbrent parfois le même jour de différentes façons.", "People sometimes celebrate the same day in different ways."],
+      ["Muziek, eten, kleding en verhalen kunnen deel zijn van een feest.", "La musique, la nourriture, les vêtements et les récits peuvent faire partie d'une fête.", "Music, food, clothing, and stories can be part of a celebration."],
+      ["Een kalender toont wanneer een jaarlijks feest terugkomt.", "Un calendrier montre quand une fête annuelle revient.", "A calendar shows when an annual celebration returns."],
+      ["Tradities kunnen veranderen terwijl hun betekenis blijft bestaan.", "Les traditions peuvent changer tout en gardant leur signification.", "Traditions can change while their meaning remains."],
+      ["Je vraagt respectvol wat een feest voor iemand betekent.", "Tu demandes respectueusement ce qu'une fête signifie pour quelqu'un.", "You respectfully ask what a celebration means to someone."],
+      ["Voorwerpen en foto's kunnen tonen hoe een feest vroeger verliep.", "Des objets et des photos peuvent montrer comment une fête se déroulait autrefois.", "Objects and photographs can show how a celebration happened in the past."],
+      ["Herdenken betekent bewust stilstaan bij een persoon of gebeurtenis.", "Commémorer signifie se souvenir consciemment d'une personne ou d'un événement.", "To commemorate means to intentionally remember a person or event."],
+      ["Je vergelijkt feesten zonder één gewoonte als de enige juiste te noemen.", "Tu compares les fêtes sans présenter une coutume comme la seule correcte.", "You compare celebrations without calling one custom the only correct one."]
+    ],
+    "warning": ["Niet elk gezin viert dezelfde feesten of volgt dezelfde tradities.", "Toutes les familles ne célèbrent pas les mêmes fêtes ni les mêmes traditions.", "Not every family celebrates the same events or follows the same traditions."]
+  },
+  {
+    "unitId": "unit.g1.history.heritage.erfgoed-in-mijn-omgeving",
+    "title": ["Erfgoed in mijn omgeving", "Le patrimoine près de chez moi", "Heritage in my surroundings"],
+    "terms": [["erfgoed", "patrimoine", "heritage"], ["bewaren", "conserver", "preserve"], ["monument", "monument", "monument"]],
+    "facts": [
+      ["Erfgoed is iets uit het verleden dat mensen waardevol vinden.", "Le patrimoine est quelque chose du passé que les personnes trouvent précieux.", "Heritage is something from the past that people value."],
+      ["Een oud gebouw kan erfgoed zijn door zijn verhaal of gebruik.", "Un ancien bâtiment peut être patrimonial par son histoire ou son usage.", "An old building can be heritage because of its story or use."],
+      ["Ook liedjes, verhalen en gebruiken kunnen erfgoed zijn.", "Les chansons, les récits et les coutumes peuvent aussi être du patrimoine.", "Songs, stories, and customs can also be heritage."],
+      ["Een monument herinnert aan een persoon, plaats of gebeurtenis.", "Un monument rappelle une personne, un lieu ou un événement.", "A monument remembers a person, place, or event."],
+      ["Een museum bewaart en onderzoekt voorwerpen en verhalen.", "Un musée conserve et étudie des objets et des récits.", "A museum preserves and studies objects and stories."],
+      ["Je kijkt zorgvuldig naar vorm, materiaal, ouderdom en functie.", "Tu observes soigneusement la forme, le matériau, l'âge et la fonction.", "You carefully observe shape, material, age, and purpose."],
+      ["Een bordje bij erfgoed kan uitleg geven over de geschiedenis.", "Un panneau près du patrimoine peut expliquer son histoire.", "A sign near heritage can explain its history."],
+      ["Mensen beschermen erfgoed zodat lateren het ook kunnen leren kennen.", "Les personnes protègent le patrimoine pour que d'autres puissent le connaître plus tard.", "People protect heritage so others can learn about it later."],
+      ["Je raakt kwetsbare oude voorwerpen alleen aan met toestemming.", "Tu touches les objets anciens fragiles uniquement avec permission.", "You touch fragile old objects only with permission."],
+      ["Een erfgoedwandeling verbindt plaatsen met hun verhalen.", "Une promenade patrimoniale relie des lieux à leurs histoires.", "A heritage walk connects places with their stories."]
+    ],
+    "warning": ["Oud betekent niet automatisch waardeloos of klaar om weg te gooien.", "Ancien ne signifie pas automatiquement sans valeur ou prêt à jeter.", "Old does not automatically mean worthless or ready to discard."]
+  },
+  {
+    "unitId": "unit.g1.ict.devices_data.toestellen-en-basisbediening",
+    "title": ["Toestellen en basisbediening", "Appareils et commandes de base", "Devices and basic controls"],
+    "terms": [["toestel", "appareil", "device"], ["pictogram", "icône", "icon"], ["bestand", "fichier", "file"]],
+    "facts": [
+      ["Een toestel start je met de afgesproken aan-uitknop.", "Tu démarres un appareil avec le bouton marche-arrêt convenu.", "You start a device with the agreed power button."],
+      ["Een pictogram is een klein beeld dat een functie toont.", "Une icône est une petite image qui montre une fonction.", "An icon is a small image that shows a function."],
+      ["Je tikt één keer rustig op de knop die je nodig hebt.", "Tu appuies calmement une fois sur le bouton dont tu as besoin.", "You calmly tap once on the button you need."],
+      ["Met terugkeren ga je naar het vorige scherm.", "La commande retour te ramène à l'écran précédent.", "The back control returns you to the previous screen."],
+      ["Een bestand krijgt een herkenbare naam voordat je het bewaart.", "Un fichier reçoit un nom reconnaissable avant d'être enregistré.", "A file gets a recognizable name before you save it."],
+      ["Je bewaart je werk op de afgesproken plaats.", "Tu enregistres ton travail à l'endroit convenu.", "You save your work in the agreed location."],
+      ["Je draagt een tablet met twee handen.", "Tu portes une tablette à deux mains.", "You carry a tablet with two hands."],
+      ["Eten en drinken blijven uit de buurt van toestellen.", "La nourriture et les boissons restent loin des appareils.", "Food and drink stay away from devices."],
+      ["Als iets vastloopt, stop je en vraag je een volwassene om hulp.", "Si quelque chose se bloque, tu t'arrêtes et demandes de l'aide à un adulte.", "If something freezes, you stop and ask an adult for help."],
+      ["Na gebruik sluit je het werk en leg je het toestel veilig weg.", "Après utilisation, tu fermes le travail et ranges l'appareil en sécurité.", "After use, you close the work and put the device away safely."]
+    ],
+    "warning": ["Hard of herhaald tikken herstelt een vastgelopen toestel niet.", "Appuyer fort ou plusieurs fois ne répare pas un appareil bloqué.", "Tapping hard or repeatedly does not fix a frozen device."]
+  },
+  {
+    "unitId": "unit.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+    "title": ["Volgorde en algoritmen zonder scherm", "Ordre et algorithmes sans écran", "Sequences and unplugged algorithms"],
+    "terms": [["stap", "étape", "step"], ["volgorde", "ordre", "order"], ["algoritme", "algorithme", "algorithm"]],
+    "facts": [
+      ["Een algoritme is een reeks duidelijke stappen in een vaste volgorde.", "Un algorithme est une suite d'étapes claires dans un ordre fixe.", "An algorithm is a sequence of clear steps in a fixed order."],
+      ["Elke stap vertelt precies één handeling.", "Chaque étape indique exactement une action.", "Each step tells exactly one action."],
+      ["Pijlen kunnen vooruit, links en rechts voorstellen.", "Des flèches peuvent représenter avancer, gauche et droite.", "Arrows can represent forward, left, and right."],
+      ["Je start op de afgesproken plaats en volgt de stappen één voor één.", "Tu pars de l'endroit convenu et suis les étapes une par une.", "You start at the agreed place and follow the steps one by one."],
+      ["Een fout spoor je op door de stappen opnieuw uit te voeren.", "Tu repères une erreur en exécutant à nouveau les étapes.", "You find an error by carrying out the steps again."],
+      ["Bij een verkeerde uitkomst verander je alleen de foutieve stap.", "En cas de mauvais résultat, tu modifies seulement l'étape incorrecte.", "For a wrong result, you change only the incorrect step."],
+      ["Twee dezelfde opdrachten moeten dezelfde uitkomst geven.", "Deux mêmes instructions doivent donner le même résultat.", "Two identical sets of instructions should give the same result."],
+      ["Een herhaling laat dezelfde stap meerdere keren uitvoeren.", "Une répétition fait exécuter la même étape plusieurs fois.", "A repeat carries out the same step several times."],
+      ["Je test een route met een fiche voordat iemand ze echt loopt.", "Tu testes un trajet avec un pion avant que quelqu'un le parcoure réellement.", "You test a route with a counter before someone walks it for real."],
+      ["Een goede instructie gebruikt woorden of symbolen die iedereen begrijpt.", "Une bonne instruction utilise des mots ou symboles compris par tous.", "A good instruction uses words or symbols everyone understands."]
+    ],
+    "warning": ["Stappen overslaan of verwisselen kan een andere uitkomst geven.", "Sauter ou inverser des étapes peut donner un autre résultat.", "Skipping or swapping steps can produce a different result."]
+  },
+  {
+    "unitId": "unit.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+    "title": ["Tekenen, typen en delen met begeleiding", "Dessiner, taper et partager avec accompagnement", "Drawing, typing, and sharing with guidance"],
+    "terms": [["typen", "taper", "type"], ["opslaan", "enregistrer", "save"], ["delen", "partager", "share"]],
+    "facts": [
+      ["Je kiest een teken- of tekstgereedschap dat bij de opdracht past.", "Tu choisis un outil de dessin ou de texte adapté à la tâche.", "You choose a drawing or text tool that fits the task."],
+      ["Met de spatiebalk maak je ruimte tussen woorden.", "La barre d'espace crée un espace entre les mots.", "The space bar makes a space between words."],
+      ["Met terug wissen verwijder je het teken vóór de cursor.", "La touche retour efface le caractère avant le curseur.", "Backspace removes the character before the cursor."],
+      ["Je geeft je werk een korte herkenbare bestandsnaam.", "Tu donnes à ton travail un nom de fichier court et reconnaissable.", "You give your work a short recognizable file name."],
+      ["Je slaat tussendoor op zodat je werk bewaard blijft.", "Tu enregistres pendant le travail pour ne pas le perdre.", "You save during the task so your work is kept."],
+      ["Voor het delen controleer je of naam en afbeelding mogen worden getoond.", "Avant de partager, tu vérifies si le nom et l'image peuvent être montrés.", "Before sharing, you check whether the name and image may be shown."],
+      ["Je deelt alleen via de afgesproken knop en met begeleiding.", "Tu partages uniquement avec le bouton convenu et sous accompagnement.", "You share only with the agreed button and with guidance."],
+      ["Een eenvoudige titel vertelt waarover je werk gaat.", "Un titre simple indique le sujet de ton travail.", "A simple title tells what your work is about."],
+      ["Je bekijkt het resultaat en herstelt één fout voordat je klaar bent.", "Tu regardes le résultat et corriges une erreur avant de terminer.", "You review the result and fix one error before finishing."],
+      ["Na afloop sluit je het programma op de afgesproken manier.", "À la fin, tu fermes le programme de la manière convenue.", "At the end, you close the program in the agreed way."]
+    ],
+    "warning": ["Deel geen werk of foto zonder toestemming van een volwassene.", "Ne partage pas un travail ou une photo sans l'autorisation d'un adulte.", "Do not share work or a photograph without an adult's permission."]
+  },
+  {
+    "unitId": "unit.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+    "title": ["Privacy en hulp vragen", "Vie privée et demander de l'aide", "Privacy and asking for help"],
+    "terms": [["privacy", "vie privée", "privacy"], ["persoonlijk", "personnel", "personal"], ["vertrouwd", "de confiance", "trusted"]],
+    "facts": [
+      ["Je volledige naam en adres zijn persoonlijke gegevens.", "Ton nom complet et ton adresse sont des données personnelles.", "Your full name and address are personal information."],
+      ["Een wachtwoord houd je geheim voor andere kinderen.", "Tu gardes ton mot de passe secret pour les autres enfants.", "You keep your password secret from other children."],
+      ["Een vertrouwde volwassene mag helpen wanneer iets online vreemd voelt.", "Un adulte de confiance peut aider quand quelque chose en ligne semble étrange.", "A trusted adult can help when something online feels strange."],
+      ["Je stopt en vraagt hulp voordat je op een onbekende knop tikt.", "Tu t'arrêtes et demandes de l'aide avant d'appuyer sur un bouton inconnu.", "You stop and ask for help before tapping an unfamiliar button."],
+      ["Je vraagt toestemming voordat je een foto van iemand maakt of deelt.", "Tu demandes la permission avant de prendre ou partager la photo de quelqu'un.", "You ask permission before taking or sharing someone's photograph."],
+      ["Een bericht van een onbekende beantwoord je niet alleen.", "Tu ne réponds pas seul à un message d'une personne inconnue.", "You do not answer a message from a stranger by yourself."],
+      ["Je vertelt het als een beeld of bericht je bang of verdrietig maakt.", "Tu le dis si une image ou un message te fait peur ou te rend triste.", "You tell someone if an image or message scares or upsets you."],
+      ["Je gebruikt vriendelijke woorden wanneer je digitaal communiceert.", "Tu utilises des mots gentils quand tu communiques en ligne.", "You use kind words when communicating digitally."],
+      ["Je controleert samen met een volwassene wie iets kan zien.", "Tu vérifies avec un adulte qui peut voir quelque chose.", "You check with an adult who can see something."],
+      ["Na gebruik meld je je af op een gedeeld toestel.", "Après utilisation, tu te déconnectes d'un appareil partagé.", "After use, you sign out on a shared device."]
+    ],
+    "warning": ["Persoonlijke gegevens deel je niet zomaar met mensen of apps.", "Tu ne partages pas tes données personnelles au hasard avec des personnes ou applications.", "You do not casually share personal information with people or apps."]
+  },
+  {
+    "unitId": "unit.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+    "title": ["Basisbewegingen en lichaamsbesef", "Mouvements de base et conscience du corps", "Basic movements and body awareness"],
+    "terms": [["evenwicht", "équilibre", "balance"], ["richting", "direction", "direction"], ["lichaamsdeel", "partie du corps", "body part"]],
+    "facts": [
+      ["Je buigt je knieën zacht wanneer je na een sprong landt.", "Tu plies doucement les genoux quand tu atterris après un saut.", "You bend your knees softly when landing after a jump."],
+      ["Je kijkt vooruit om tijdens het lopen ruimte te zien.", "Tu regardes devant toi pour voir l'espace en courant.", "You look ahead to see the space while running."],
+      ["Evenwicht betekent dat je je lichaam gecontroleerd stil of bewegend houdt.", "L'équilibre signifie garder ton corps contrôlé, immobile ou en mouvement.", "Balance means keeping your body controlled while still or moving."],
+      ["Armen kunnen helpen om evenwicht te bewaren.", "Les bras peuvent aider à garder l'équilibre.", "Arms can help you keep your balance."],
+      ["Je beweegt sneller of trager volgens het afgesproken signaal.", "Tu bouges plus vite ou plus lentement selon le signal convenu.", "You move faster or slower according to the agreed signal."],
+      ["Je houdt voldoende afstand van andere kinderen.", "Tu gardes une distance suffisante avec les autres enfants.", "You keep enough distance from other children."],
+      ["Kruipen, stappen, lopen, springen en draaien zijn basisbewegingen.", "Ramper, marcher, courir, sauter et tourner sont des mouvements de base.", "Crawling, walking, running, jumping, and turning are basic movements."],
+      ["Je kunt benoemen welk lichaamsdeel de beweging leidt.", "Tu peux nommer la partie du corps qui dirige le mouvement.", "You can name which body part leads the movement."],
+      ["Een stopteken betekent dat je veilig tot stilstand komt.", "Un signal d'arrêt signifie que tu t'immobilises en sécurité.", "A stop signal means you come to a safe stop."],
+      ["Na inspanning voel je dat ademhaling en hartslag sneller worden.", "Après l'effort, tu sens que la respiration et le cœur accélèrent.", "After activity, you feel breathing and heartbeat become faster."]
+    ],
+    "warning": ["Duwen, botsen of bewegen zonder uit te kijken is onveilig.", "Pousser, heurter ou bouger sans regarder est dangereux.", "Pushing, bumping, or moving without looking is unsafe."]
+  },
+  {
+    "unitId": "unit.g1.pe.gymnastics.steunen-hangen-en-rollen",
+    "title": ["Steunen, hangen en rollen", "Appuis, suspensions et roulades", "Supporting, hanging, and rolling"],
+    "terms": [["steunen", "prendre appui", "support"], ["hangen", "se suspendre", "hang"], ["rollen", "rouler", "roll"]],
+    "facts": [
+      ["Bij steunen duwen handen of voeten stevig tegen de ondergrond.", "Dans un appui, les mains ou les pieds poussent fermement contre le sol.", "When supporting, hands or feet press firmly against the surface."],
+      ["Bij hangen houd je het toestel vast met gesloten handen.", "En suspension, tu tiens l'appareil avec les mains fermées.", "When hanging, you hold the apparatus with closed hands."],
+      ["Je wacht op toestemming voordat je aan een toestel begint.", "Tu attends la permission avant de commencer à un appareil.", "You wait for permission before starting on apparatus."],
+      ["Een rol begint met een ronde rug en de kin naar de borst.", "Une roulade commence avec le dos rond et le menton vers la poitrine.", "A roll begins with a rounded back and chin toward the chest."],
+      ["Je rolt op een mat in de afgesproken richting.", "Tu roules sur un tapis dans la direction convenue.", "You roll on a mat in the agreed direction."],
+      ["Na de beweging kom je gecontroleerd tot stilstand.", "Après le mouvement, tu t'arrêtes de manière contrôlée.", "After the movement, you come to a controlled stop."],
+      ["Je houdt afstand tot het kind dat voor je bezig is.", "Tu gardes tes distances avec l'enfant qui passe avant toi.", "You keep distance from the child moving before you."],
+      ["Een helper staat alleen op de afgesproken plaats.", "Un aide se place uniquement à l'endroit convenu.", "A helper stands only in the agreed place."],
+      ["Je controleert of de mat vlak en vrij ligt.", "Tu vérifies que le tapis est plat et dégagé.", "You check that the mat lies flat and clear."],
+      ["Je stopt onmiddellijk wanneer het veiligheidssignaal klinkt.", "Tu t'arrêtes immédiatement au signal de sécurité.", "You stop immediately when the safety signal sounds."]
+    ],
+    "warning": ["Een moeilijke rol uitvoeren zonder mat of begeleiding is onveilig.", "Faire une roulade difficile sans tapis ni accompagnement est dangereux.", "Doing a difficult roll without a mat or guidance is unsafe."]
+  },
+  {
+    "unitId": "unit.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+    "title": ["Gooien, vangen, rollen en mikken", "Lancer, attraper, rouler et viser", "Throwing, catching, rolling, and aiming"],
+    "terms": [["mikken", "viser", "aim"], ["vangen", "attraper", "catch"], ["rollen", "faire rouler", "roll"]],
+    "facts": [
+      ["Je kijkt naar het doel voordat je de bal gooit.", "Tu regardes la cible avant de lancer la balle.", "You look at the target before throwing the ball."],
+      ["Bij rollen blijft de bal over de grond bewegen.", "Quand tu la fais rouler, la balle reste au sol.", "When rolling, the ball keeps moving along the ground."],
+      ["Je vangt met twee open handen voor je lichaam.", "Tu attrapes avec deux mains ouvertes devant ton corps.", "You catch with two open hands in front of your body."],
+      ["Je buigt je armen mee wanneer de bal in je handen komt.", "Tu fléchis les bras quand la balle arrive dans tes mains.", "You bend your arms as the ball reaches your hands."],
+      ["Een rustige onderhandse worp is geschikt voor een partner dichtbij.", "Un lancer doux par dessous convient à un partenaire proche.", "A gentle underarm throw suits a nearby partner."],
+      ["Je wacht tot je partner klaarstaat en kijkt.", "Tu attends que ton partenaire soit prêt et regarde.", "You wait until your partner is ready and watching."],
+      ["Bij mikken wijzen je ogen en lichaam naar het doel.", "Quand tu vises, tes yeux et ton corps sont dirigés vers la cible.", "When aiming, your eyes and body face the target."],
+      ["Je haalt ballen pas op na het afgesproken signaal.", "Tu récupères les balles seulement après le signal convenu.", "You collect balls only after the agreed signal."],
+      ["Je past de kracht aan de afstand tot het doel aan.", "Tu adaptes la force à la distance de la cible.", "You adjust the force to the distance from the target."],
+      ["Na elke poging kijk je waar de bal terechtkwam.", "Après chaque essai, tu regardes où la balle est arrivée.", "After each attempt, you look where the ball landed."]
+    ],
+    "warning": ["Een bal hard gooien naar iemand die niet kijkt is onveilig.", "Lancer fort vers quelqu'un qui ne regarde pas est dangereux.", "Throwing hard at someone who is not looking is unsafe."]
+  },
+  {
+    "unitId": "unit.g1.pe.dance.bewegen-op-puls-en-signaal",
+    "title": ["Bewegen op puls en signaal", "Bouger sur la pulsation et le signal", "Moving to a beat and signal"],
+    "terms": [["puls", "pulsation", "beat"], ["signaal", "signal", "signal"], ["bewegingsreeks", "suite de mouvements", "movement sequence"]],
+    "facts": [
+      ["De puls is de regelmatige tik waarop je kunt bewegen.", "La pulsation est le battement régulier sur lequel tu peux bouger.", "The beat is the steady pulse you can move to."],
+      ["Je begint en stopt op het afgesproken geluidssignaal.", "Tu commences et t'arrêtes au signal sonore convenu.", "You start and stop on the agreed sound signal."],
+      ["Een bewegingsreeks heeft bewegingen in een vaste volgorde.", "Une suite de mouvements contient des mouvements dans un ordre fixe.", "A movement sequence has movements in a fixed order."],
+      ["Je herhaalt dezelfde reeks wanneer het muziekdeel terugkomt.", "Tu répètes la même suite quand la partie musicale revient.", "You repeat the same sequence when the music section returns."],
+      ["Grote en kleine bewegingen kunnen elkaar afwisselen.", "De grands et petits mouvements peuvent alterner.", "Large and small movements can alternate."],
+      ["Je gebruikt verschillende hoogtes door te strekken en te buigen.", "Tu utilises différentes hauteurs en t'étirant et en te pliant.", "You use different levels by stretching and bending."],
+      ["Je beweegt in je eigen ruimte zonder anderen te raken.", "Tu bouges dans ton espace sans toucher les autres.", "You move in your own space without touching others."],
+      ["Je kijkt naar de leider om een verandering te volgen.", "Tu regardes le meneur pour suivre un changement.", "You watch the leader to follow a change."],
+      ["Na de dans kun je de volgorde van de bewegingen vertellen.", "Après la danse, tu peux raconter l'ordre des mouvements.", "After the dance, you can describe the order of movements."],
+      ["Rustig ademen helpt je na de beweging herstellen.", "Respirer calmement t'aide à récupérer après le mouvement.", "Calm breathing helps you recover after movement."]
+    ],
+    "warning": ["Zonder afstand of stopteken bewegen kan botsingen veroorzaken.", "Bouger sans distance ni signal d'arrêt peut provoquer des collisions.", "Moving without spacing or a stop signal can cause collisions."]
+  },
+  {
+    "unitId": "unit.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+    "title": ["Spelafspraken, veiligheid en inspanning", "Règles de jeu, sécurité et effort", "Game rules, safety, and effort"],
+    "terms": [["spelregel", "règle du jeu", "game rule"], ["veiligheid", "sécurité", "safety"], ["inspanning", "effort", "effort"]],
+    "facts": [
+      ["Spelregels zorgen dat iedereen weet wat mag en moet.", "Les règles du jeu permettent à chacun de savoir ce qui est permis et demandé.", "Game rules make sure everyone knows what is allowed and expected."],
+      ["Je wacht op het startsignaal voordat je begint.", "Tu attends le signal de départ avant de commencer.", "You wait for the start signal before beginning."],
+      ["Bij het stopsignaal kom je veilig tot stilstand.", "Au signal d'arrêt, tu t'immobilises en sécurité.", "At the stop signal, you come to a safe stop."],
+      ["Je gebruikt materiaal alleen op de afgesproken manier.", "Tu utilises le matériel uniquement de la manière convenue.", "You use equipment only in the agreed way."],
+      ["Je zegt het wanneer je pijn voelt of je onveilig voelt.", "Tu le dis si tu as mal ou si tu ne te sens pas en sécurité.", "You tell someone if you feel pain or unsafe."],
+      ["Na inspanning worden ademhaling en hartslag sneller.", "Après l'effort, la respiration et le rythme cardiaque accélèrent.", "After effort, breathing and heartbeat become faster."],
+      ["Water drinken en rustig uitwandelen helpen bij herstel.", "Boire de l'eau et marcher calmement aident à récupérer.", "Drinking water and walking calmly help recovery."],
+      ["Je moedigt anderen aan zonder uit te lachen.", "Tu encourages les autres sans te moquer.", "You encourage others without making fun of them."],
+      ["Je geeft eerlijk aan wanneer de bal uit of een beurt voorbij is.", "Tu indiques honnêtement quand la balle est sortie ou qu'un tour est fini.", "You honestly say when the ball is out or a turn is over."],
+      ["Je ruimt materiaal samen op nadat het spel is afgelopen.", "Tu ranges le matériel avec les autres après le jeu.", "You put equipment away together after the game." ]
+    ],
+    "warning": ["Een regel negeren om te winnen maakt het spel onveilig en oneerlijk.", "Ignorer une règle pour gagner rend le jeu dangereux et injuste.", "Ignoring a rule to win makes the game unsafe and unfair."]
+  },
+  {
+    "unitId": "unit.g1.geo.physical.weer-en-seizoenen-dichtbij",
+    "title": ["Weer en seizoenen dichtbij", "La météo et les saisons près de nous", "Local weather and seasons"],
+    "terms": [["weer", "météo", "weather"], ["seizoen", "saison", "season"], ["temperatuur", "température", "temperature"]],
+    "facts": [
+      ["Het weer vertelt wat er nu buiten in de lucht gebeurt.", "La météo décrit ce qui se passe maintenant dans l'air dehors.", "Weather describes what is happening in the air outside now."],
+      ["Een thermometer meet hoe warm of koud het is.", "Un thermomètre mesure la chaleur ou le froid.", "A thermometer measures how warm or cold it is."],
+      ["Donkere wolken kunnen regen brengen.", "Des nuages sombres peuvent apporter de la pluie.", "Dark clouds can bring rain."],
+      ["Wind kun je waarnemen aan bewegende bladeren of een vlag.", "Tu peux observer le vent grâce aux feuilles ou à un drapeau qui bougent.", "You can observe wind through moving leaves or a flag."],
+      ["In de lente worden dagen langer en groeien veel planten opnieuw.", "Au printemps, les jours s'allongent et beaucoup de plantes repoussent.", "In spring, days become longer and many plants grow again."],
+      ["In de zomer staat de zon meestal langer boven de horizon.", "En été, le soleil reste généralement plus longtemps au-dessus de l'horizon.", "In summer, the sun usually stays above the horizon longer."],
+      ["In de herfst verkleuren en vallen veel bladeren.", "En automne, beaucoup de feuilles changent de couleur et tombent.", "In autumn, many leaves change colour and fall."],
+      ["In de winter zijn de dagen korter en kan het vriezen.", "En hiver, les jours sont plus courts et il peut geler.", "In winter, days are shorter and it can freeze."],
+      ["Je kiest kleding op basis van regen, wind en temperatuur.", "Tu choisis tes vêtements selon la pluie, le vent et la température.", "You choose clothing based on rain, wind, and temperature."],
+      ["Een weerkalender vergelijkt waarnemingen van verschillende dagen.", "Un calendrier météo compare les observations de plusieurs jours.", "A weather calendar compares observations from different days."]
+    ],
+    "warning": ["Eén warme dag betekent niet dat het seizoen meteen verandert.", "Une journée chaude ne signifie pas que la saison change immédiatement.", "One warm day does not mean the season changes immediately."]
+  },
+  {
+    "unitId": "unit.g1.geo.environment.zorg-voor-de-leefomgeving",
+    "title": ["Zorg voor de leefomgeving", "Prendre soin du milieu de vie", "Caring for the environment"],
+    "terms": [["afval", "déchet", "waste"], ["hergebruiken", "réutiliser", "reuse"], ["leefomgeving", "milieu de vie", "environment"]],
+    "facts": [
+      ["Afval hoort in de juiste vuilnisbak en niet op straat.", "Les déchets vont dans la bonne poubelle et non dans la rue.", "Waste belongs in the correct bin, not on the street."],
+      ["Papier, glas en sommige verpakkingen kunnen apart worden ingezameld.", "Le papier, le verre et certains emballages peuvent être collectés séparément.", "Paper, glass, and some packaging can be collected separately."],
+      ["Een drinkfles hergebruiken voorkomt wegwerpafval.", "Réutiliser une gourde évite des déchets jetables.", "Reusing a drinking bottle prevents disposable waste."],
+      ["Je spaart water door de kraan dicht te draaien.", "Tu économises l'eau en fermant le robinet.", "You save water by turning off the tap."],
+      ["Je spaart energie door onnodige lampen uit te doen.", "Tu économises l'énergie en éteignant les lampes inutiles.", "You save energy by switching off unnecessary lights."],
+      ["Planten en dieren hebben een schone leefomgeving nodig.", "Les plantes et les animaux ont besoin d'un milieu propre.", "Plants and animals need a clean environment."],
+      ["Je blijft op een pad waar kwetsbare planten groeien.", "Tu restes sur le chemin près des plantes fragiles.", "You stay on a path near fragile plants."],
+      ["Een opruimactie gebeurt veilig met handschoenen en begeleiding.", "Une action de nettoyage se fait avec des gants et un accompagnement.", "A clean-up activity is done safely with gloves and guidance."],
+      ["Je herstelt of hergebruikt iets voordat je het weggooit.", "Tu répares ou réutilises un objet avant de le jeter.", "You repair or reuse something before throwing it away."],
+      ["Samen afspraken volgen houdt klas, buurt en natuur verzorgd.", "Respecter ensemble les règles garde la classe, le quartier et la nature propres.", "Following agreements together keeps the class, neighbourhood, and nature cared for."]
+    ],
+    "warning": ["Onbekend of scherp afval raap je niet met blote handen op.", "Tu ne ramasses pas un déchet inconnu ou coupant à mains nues.", "You do not pick up unknown or sharp waste with bare hands."]
+  },
+  {
+    "unitId": "unit.g1.geo.fieldwork.kijken-als-een-geograaf",
+    "title": ["Kijken als een geograaf", "Observer comme un géographe", "Looking like a geographer"],
+    "terms": [["waarnemen", "observer", "observe"], ["plaats", "lieu", "place"], ["kenmerk", "caractéristique", "feature"]],
+    "facts": [
+      ["Een geograaf onderzoekt plaatsen en hoe mensen ze gebruiken.", "Un géographe étudie les lieux et la façon dont les personnes les utilisent.", "A geographer studies places and how people use them."],
+      ["Je beschrijft eerst wat je echt ziet, hoort of ruikt.", "Tu décris d'abord ce que tu vois, entends ou sens réellement.", "You first describe what you truly see, hear, or smell."],
+      ["Een observatieblad helpt kenmerken op dezelfde manier noteren.", "Une fiche d'observation aide à noter les caractéristiques de la même façon.", "An observation sheet helps record features in the same way."],
+      ["Je kunt natuurlijke en door mensen gemaakte kenmerken onderscheiden.", "Tu peux distinguer les éléments naturels de ceux créés par les humains.", "You can distinguish natural features from human-made ones."],
+      ["Een foto legt vast wat op één plaats en moment zichtbaar was.", "Une photo conserve ce qui était visible à un lieu et un moment.", "A photograph records what was visible at one place and time."],
+      ["Een eenvoudige schets toont de ligging van belangrijke kenmerken.", "Un croquis simple montre la position des éléments importants.", "A simple sketch shows the position of important features."],
+      ["Je vergelijkt twee plaatsen met dezelfde onderzoeksvraag.", "Tu compares deux lieux avec la même question de recherche.", "You compare two places using the same enquiry question."],
+      ["Turfstrepen helpen tellen hoeveel keer je iets waarneemt.", "Des bâtonnets aident à compter combien de fois tu observes quelque chose.", "Tally marks help count how often you observe something."],
+      ["Je blijft bij de groep en volgt de veiligheidsafspraken buiten.", "Tu restes avec le groupe et respectes les règles de sécurité dehors.", "You stay with the group and follow outdoor safety agreements."],
+      ["Na het onderzoek vertel je wat de waarnemingen samen tonen.", "Après l'enquête, tu expliques ce que montrent les observations ensemble.", "After the enquiry, you explain what the observations show together."]
+    ],
+    "warning": ["Een mening is niet hetzelfde als een controleerbare waarneming.", "Une opinion n'est pas la même chose qu'une observation vérifiable.", "An opinion is not the same as a checkable observation."]
+  },
+  {
+    "unitId": "unit.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+    "title": ["Levend, niet-levend en ooit levend", "Vivant, non vivant et autrefois vivant", "Living, non-living, and once living"],
+    "terms": [["levend", "vivant", "living"], ["niet-levend", "non vivant", "non-living"], ["ooit levend", "autrefois vivant", "once living"]],
+    "facts": [
+      ["Levende dingen groeien en hebben water of voedsel nodig.", "Les êtres vivants grandissent et ont besoin d'eau ou de nourriture.", "Living things grow and need water or food."],
+      ["Een jonge plant is levend omdat ze groeit.", "Une jeune plante est vivante parce qu'elle grandit.", "A young plant is living because it grows."],
+      ["Een steen is niet-levend en heeft nooit geleefd.", "Une pierre est non vivante et n'a jamais vécu.", "A stone is non-living and has never lived."],
+      ["Een houten tak was ooit deel van een levende boom.", "Une branche en bois faisait autrefois partie d'un arbre vivant.", "A wooden branch was once part of a living tree."],
+      ["Een gevallen blad was ooit levend aan de plant.", "Une feuille tombée était autrefois vivante sur la plante.", "A fallen leaf was once living on the plant."],
+      ["Een plastic lepel is gemaakt en heeft nooit geleefd.", "Une cuillère en plastique est fabriquée et n'a jamais vécu.", "A plastic spoon is made and has never lived."],
+      ["Dieren reageren op hun omgeving en hebben voedsel nodig.", "Les animaux réagissent à leur environnement et ont besoin de nourriture.", "Animals respond to their environment and need food."],
+      ["Niet alles wat beweegt leeft; een speelgoedauto kan worden geduwd.", "Tout ce qui bouge n'est pas vivant ; une voiture jouet peut être poussée.", "Not everything that moves is alive; a toy car can be pushed."],
+      ["Je kijkt naar meerdere levenskenmerken voordat je beslist.", "Tu observes plusieurs caractéristiques du vivant avant de décider.", "You look for several life features before deciding."],
+      ["Je sorteert voorwerpen met redenen, niet alleen op uiterlijk.", "Tu classes les objets avec des raisons, pas seulement selon leur apparence.", "You sort objects using reasons, not appearance alone."]
+    ],
+    "warning": ["Bewegen alleen bewijst niet dat iets levend is.", "Bouger seul ne prouve pas que quelque chose est vivant.", "Movement alone does not prove something is living."]
+  },
+  {
+    "unitId": "unit.g1.science_tech.organisms.planten-rondom-ons",
+    "title": ["Planten rondom ons", "Les plantes autour de nous", "Plants around us"],
+    "terms": [["wortel", "racine", "root"], ["stengel", "tige", "stem"], ["blad", "feuille", "leaf"]],
+    "facts": [
+      ["Wortels nemen water op en houden de plant vast.", "Les racines absorbent l'eau et maintiennent la plante.", "Roots take in water and hold the plant in place."],
+      ["De stengel draagt bladeren en bloemen.", "La tige porte les feuilles et les fleurs.", "The stem supports leaves and flowers."],
+      ["Bladeren gebruiken licht om de plant te helpen groeien.", "Les feuilles utilisent la lumière pour aider la plante à grandir.", "Leaves use light to help the plant grow."],
+      ["Veel bloemen kunnen later zaden vormen.", "Beaucoup de fleurs peuvent ensuite former des graines.", "Many flowers can later form seeds."],
+      ["Een zaad kan kiemen wanneer het water en geschikte warmte krijgt.", "Une graine peut germer avec de l'eau et une chaleur adaptée.", "A seed can germinate when it gets water and suitable warmth."],
+      ["Een plant heeft ruimte nodig om wortels en bladeren te laten groeien.", "Une plante a besoin d'espace pour développer ses racines et ses feuilles.", "A plant needs space to grow roots and leaves."],
+      ["Te veel water kan even schadelijk zijn als te weinig water.", "Trop d'eau peut être aussi nuisible que trop peu d'eau.", "Too much water can be as harmful as too little water."],
+      ["Je vergelijkt planten aan hun bladeren, stengels, bloemen en grootte.", "Tu compares les plantes par leurs feuilles, tiges, fleurs et taille.", "You compare plants by leaves, stems, flowers, and size."],
+      ["Een groeikalender toont veranderingen over meerdere dagen.", "Un calendrier de croissance montre les changements sur plusieurs jours.", "A growth calendar shows changes over several days."],
+      ["Je plukt geen onbekende plant zonder toestemming.", "Tu ne cueilles pas une plante inconnue sans permission.", "You do not pick an unfamiliar plant without permission."]
+    ],
+    "warning": ["Een plant groeit niet gezond zonder passend licht en water.", "Une plante ne pousse pas sainement sans lumière et eau adaptées.", "A plant does not grow healthily without suitable light and water."]
+  },
+  {
+    "unitId": "unit.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+    "title": ["Dieren en hun leefomgeving", "Les animaux et leur habitat", "Animals and their habitats"],
+    "terms": [["leefomgeving", "habitat", "habitat"], ["beschutting", "abri", "shelter"], ["voedsel", "nourriture", "food"]],
+    "facts": [
+      ["Een leefomgeving geeft een dier voedsel, water en beschutting.", "Un habitat fournit à un animal nourriture, eau et abri.", "A habitat provides an animal with food, water, and shelter."],
+      ["Een vis heeft schoon water met voldoende zuurstof nodig.", "Un poisson a besoin d'eau propre contenant assez d'oxygène.", "A fish needs clean water with enough oxygen."],
+      ["Een regenworm leeft goed in vochtige aarde.", "Un ver de terre vit bien dans un sol humide.", "An earthworm lives well in moist soil."],
+      ["Vogels gebruiken nesten om eieren en jongen te beschermen.", "Les oiseaux utilisent des nids pour protéger leurs œufs et petits.", "Birds use nests to protect eggs and young."],
+      ["Verschillende dieren eten verschillende soorten voedsel.", "Différents animaux mangent différents types de nourriture.", "Different animals eat different kinds of food."],
+      ["Lichaamskenmerken kunnen passen bij bewegen en eten in een leefomgeving.", "Les caractéristiques du corps peuvent convenir au déplacement et à l'alimentation dans un habitat.", "Body features can suit movement and feeding in a habitat."],
+      ["Je observeert wilde dieren rustig vanop afstand.", "Tu observes calmement les animaux sauvages à distance.", "You observe wild animals calmly from a distance."],
+      ["Je zet een gevonden dier niet zomaar in een doos.", "Tu ne mets pas simplement un animal trouvé dans une boîte.", "You do not simply put a found animal in a box."],
+      ["Seizoenen kunnen veranderen welk voedsel en welke beschutting beschikbaar zijn.", "Les saisons peuvent changer la nourriture et les abris disponibles.", "Seasons can change what food and shelter are available."],
+      ["Je vergelijkt dieren met zichtbare kenmerken en hun leefomgeving.", "Tu compares les animaux par leurs caractéristiques visibles et leur habitat.", "You compare animals using visible features and habitat." ]
+    ],
+    "warning": ["Een dier meenemen kan het uit zijn passende leefomgeving halen.", "Emporter un animal peut l'éloigner de son habitat adapté.", "Taking an animal can remove it from its suitable habitat."]
+  },
+  {
+    "unitId": "unit.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+    "title": ["Mijn lichaam en zintuigen", "Mon corps et mes sens", "My body and senses"],
+    "terms": [["zintuig", "sens", "sense"], ["waarnemen", "percevoir", "perceive"], ["beschermen", "protéger", "protect"]],
+    "facts": [
+      ["Met je ogen neem je licht, kleur en vorm waar.", "Avec tes yeux, tu perçois la lumière, la couleur et la forme.", "With your eyes, you perceive light, colour, and shape."],
+      ["Met je oren hoor je klanken en hun richting.", "Avec tes oreilles, tu entends les sons et leur direction.", "With your ears, you hear sounds and their direction."],
+      ["Met je neus ruik je geuren in de lucht.", "Avec ton nez, tu sens les odeurs dans l'air.", "With your nose, you smell scents in the air."],
+      ["Met je tong proef je smaken zoals zoet en zuur.", "Avec ta langue, tu goûtes des saveurs comme le sucré et l'acide.", "With your tongue, you taste flavours such as sweet and sour."],
+      ["Met je huid voel je druk, warmte, koude en textuur.", "Avec ta peau, tu sens la pression, la chaleur, le froid et la texture.", "With your skin, you feel pressure, warmth, cold, and texture."],
+      ["Zintuigen werken samen wanneer je een voorwerp onderzoekt.", "Les sens travaillent ensemble quand tu explores un objet.", "Senses work together when you investigate an object."],
+      ["Je beschermt je gehoor tegen zeer harde geluiden.", "Tu protèges ton ouïe contre les sons très forts.", "You protect your hearing from very loud sounds."],
+      ["Je kijkt nooit rechtstreeks in de felle zon.", "Tu ne regardes jamais directement le soleil intense.", "You never look directly at the bright sun."],
+      ["Je proeft onbekende stoffen alleen met toestemming van een volwassene.", "Tu goûtes des substances inconnues uniquement avec la permission d'un adulte.", "You taste unfamiliar substances only with an adult's permission."],
+      ["Je beschrijft een waarneming met het zintuig dat je gebruikte.", "Tu décris une observation avec le sens que tu as utilisé.", "You describe an observation using the sense you used."]
+    ],
+    "warning": ["Proeven is geen veilige manier om een onbekende stof te onderzoeken.", "Goûter n'est pas une manière sûre d'examiner une substance inconnue.", "Tasting is not a safe way to investigate an unknown substance."]
+  },
+  {
+    "unitId": "unit.g1.science_tech.matter.materialen-en-eigenschappen",
+    "title": ["Materialen en eigenschappen", "Matériaux et propriétés", "Materials and properties"],
+    "terms": [["materiaal", "matériau", "material"], ["eigenschap", "propriété", "property"], ["doorzichtig", "transparent", "transparent"]],
+    "facts": [
+      ["Een materiaal is de stof waarvan een voorwerp gemaakt is.", "Un matériau est la matière dont un objet est fabriqué.", "A material is the substance an object is made from."],
+      ["Hout is meestal stevig en niet doorzichtig.", "Le bois est généralement solide et opaque.", "Wood is usually strong and not transparent."],
+      ["Door schoon glas kun je meestal heen kijken.", "On peut généralement voir à travers du verre propre.", "You can usually see through clean glass."],
+      ["Een spons neemt gemakkelijk water op.", "Une éponge absorbe facilement l'eau.", "A sponge absorbs water easily."],
+      ["Metaal kan hard, sterk en glanzend zijn.", "Le métal peut être dur, solide et brillant.", "Metal can be hard, strong, and shiny."],
+      ["Rubber kan buigen en terugveren.", "Le caoutchouc peut se plier et reprendre sa forme.", "Rubber can bend and spring back."],
+      ["Je kiest een materiaal op basis van de functie van het voorwerp.", "Tu choisis un matériau selon la fonction de l'objet.", "You choose a material based on the object's purpose."],
+      ["Een paraplu heeft een materiaal nodig dat weinig water doorlaat.", "Un parapluie a besoin d'un matériau qui laisse passer peu d'eau.", "An umbrella needs a material that lets little water through."],
+      ["Je vergelijkt materialen met dezelfde eenvoudige test.", "Tu compares les matériaux avec le même test simple.", "You compare materials using the same simple test."],
+      ["Na een test noteer je wat je werkelijk zag gebeuren.", "Après un test, tu notes ce que tu as réellement observé.", "After a test, you record what you actually saw happen."]
+    ],
+    "warning": ["Eén materiaal is niet voor elke functie de beste keuze.", "Un seul matériau n'est pas le meilleur choix pour chaque fonction.", "One material is not the best choice for every purpose."]
+  },
+  {
+    "unitId": "unit.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+    "title": ["Duwen, trekken, rollen en vallen", "Pousser, tirer, rouler et tomber", "Pushing, pulling, rolling, and falling"],
+    "terms": [["duwen", "pousser", "push"], ["trekken", "tirer", "pull"], ["kracht", "force", "force"]],
+    "facts": [
+      ["Een duw is een kracht die iets van je af kan bewegen.", "Une poussée est une force qui peut éloigner un objet de toi.", "A push is a force that can move something away from you."],
+      ["Een trek is een kracht die iets naar je toe kan bewegen.", "Une traction est une force qui peut rapprocher un objet de toi.", "A pull is a force that can move something toward you."],
+      ["Een sterkere duw kan een kar sneller laten vertrekken.", "Une poussée plus forte peut faire démarrer un chariot plus vite.", "A stronger push can make a cart start faster."],
+      ["De richting van de kracht helpt bepalen waar een voorwerp heen gaat.", "La direction de la force aide à déterminer où va un objet.", "The direction of a force helps determine where an object goes."],
+      ["Ronde voorwerpen kunnen over een vlakke ondergrond rollen.", "Les objets ronds peuvent rouler sur une surface plane.", "Round objects can roll across a flat surface."],
+      ["Een helling kan een bal sneller naar beneden laten rollen.", "Une pente peut faire rouler une balle plus vite vers le bas.", "A slope can make a ball roll downhill faster."],
+      ["Wrijving kan een rollend voorwerp vertragen.", "Le frottement peut ralentir un objet qui roule.", "Friction can slow a rolling object."],
+      ["Wanneer je iets loslaat, kan het door zwaartekracht vallen.", "Quand tu lâches un objet, il peut tomber à cause de la gravité.", "When you release something, gravity can make it fall."],
+      ["Je verandert één ding tegelijk wanneer je duwen of rollen onderzoekt.", "Tu changes une seule chose à la fois quand tu étudies pousser ou rouler.", "You change one thing at a time when investigating pushing or rolling."],
+      ["Je houdt handen en voeten uit de baan van rollende voorwerpen.", "Tu gardes les mains et les pieds hors du trajet des objets roulants.", "You keep hands and feet out of the path of rolling objects."]
+    ],
+    "warning": ["Een vallend of rollend voorwerp test je nooit boven mensen.", "Tu ne testes jamais un objet qui tombe ou roule au-dessus des personnes.", "You never test a falling or rolling object above people."]
+  },
+  {
+    "unitId": "unit.g1.science_tech.technology.maken-voor-een-doel",
+    "title": ["Maken voor een doel", "Fabriquer pour un but", "Making for a purpose"],
+    "terms": [["doel", "but", "purpose"], ["ontwerp", "conception", "design"], ["testen", "tester", "test"]],
+    "facts": [
+      ["Een ontwerp begint met een duidelijk doel of probleem.", "Une conception commence par un but ou problème clair.", "A design begins with a clear purpose or problem."],
+      ["Je tekent eerst een eenvoudig plan van wat je wilt maken.", "Tu dessines d'abord un plan simple de ce que tu veux fabriquer.", "You first draw a simple plan of what you want to make."],
+      ["Je kiest materialen waarvan de eigenschappen bij het doel passen.", "Tu choisis des matériaux dont les propriétés conviennent au but.", "You choose materials whose properties fit the purpose."],
+      ["Een brede voet kan een bouwwerk stabieler maken.", "Une base large peut rendre une construction plus stable.", "A wide base can make a construction more stable."],
+      ["Verbindingen houden onderdelen samen.", "Les assemblages maintiennent les pièces ensemble.", "Connections hold parts together."],
+      ["Je maakt veilig met afgesproken gereedschap en begeleiding.", "Tu fabriques en sécurité avec les outils convenus et un accompagnement.", "You make safely with agreed tools and guidance."],
+      ["Na het maken test je of het ontwerp zijn doel bereikt.", "Après la fabrication, tu testes si la conception atteint son but.", "After making, you test whether the design meets its purpose."],
+      ["Een test toont welk onderdeel goed werkt en wat nog moet veranderen.", "Un test montre ce qui fonctionne et ce qui doit encore changer.", "A test shows what works and what still needs changing."],
+      ["Je verbetert één onderdeel en test daarna opnieuw.", "Tu améliores une partie puis tu testes à nouveau.", "You improve one part and then test again."],
+      ["Je legt uit hoe materiaal, vorm en verbinding het doel helpen.", "Tu expliques comment le matériau, la forme et l'assemblage servent le but.", "You explain how material, shape, and connection support the purpose."]
+    ],
+    "warning": ["Mooi alleen is niet genoeg wanneer het ontwerp zijn doel niet bereikt.", "Être joli ne suffit pas si la conception n'atteint pas son but.", "Looking good alone is not enough when the design does not meet its purpose."]
+  }
+]

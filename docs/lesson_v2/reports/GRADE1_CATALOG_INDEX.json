@@ -1,0 +1,1215 @@
+{
+    "generatedAtUtc":  "2026-08-02T20:01:48.0652180+00:00",
+    "sourceCurriculum":  "poincare-vlaanderen-primary-g1-g6-v1",
+    "sourceUnitCount":  65,
+    "sourceLessonFicheCount":  195,
+    "generatedGrade1Lessons":  67,
+    "retainedGrade2Pilots":  1,
+    "totalRuntimeExerciseItems":  2016,
+    "sourceMinutes":  6150,
+    "runtimeMinutes":  4466,
+    "lessons":  [
+                    {
+                        "lessonId":  "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+                        "unitId":  "unit.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.acquire",
+                                                "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.practice",
+                                                "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.transfer"
+                                            ],
+                        "subjectId":  "arts",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "arts_culture",
+                        "title":  "Lijn, kleur, vorm en textuur",
+                        "visualKey":  "arts.visual.lijn-kleur-vorm-en-textuur",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.arts.music.stem-puls-en-klankkleur",
+                        "unitId":  "unit.g1.arts.music.stem-puls-en-klankkleur",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.arts.music.stem-puls-en-klankkleur.acquire",
+                                                "lesson.g1.arts.music.stem-puls-en-klankkleur.practice",
+                                                "lesson.g1.arts.music.stem-puls-en-klankkleur.transfer"
+                                            ],
+                        "subjectId":  "arts",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "arts_culture",
+                        "title":  "Stem, puls en klankkleur",
+                        "visualKey":  "arts.music.stem-puls-en-klankkleur",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+                        "unitId":  "unit.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.acquire",
+                                                "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.practice",
+                                                "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.transfer"
+                                            ],
+                        "subjectId":  "arts",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "arts_culture",
+                        "title":  "Doen alsof en verhaal spelen",
+                        "visualKey":  "arts.drama.doen-alsof-en-verhaal-spelen",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.arts.media.kijken-bewegen-en-presenteren",
+                        "unitId":  "unit.g1.arts.media.kijken-bewegen-en-presenteren",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.arts.media.kijken-bewegen-en-presenteren.acquire",
+                                                "lesson.g1.arts.media.kijken-bewegen-en-presenteren.practice",
+                                                "lesson.g1.arts.media.kijken-bewegen-en-presenteren.transfer"
+                                            ],
+                        "subjectId":  "arts",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "arts_culture",
+                        "title":  "Kijken, bewegen en presenteren",
+                        "visualKey":  "arts.media.kijken-bewegen-en-presenteren",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding",
+                        "unitId":  "unit.g1.attitudes.learning.aandacht-instructie-en-leerhouding",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.acquire",
+                                                "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.practice",
+                                                "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.transfer"
+                                            ],
+                        "subjectId":  "attitudes",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "citizenship_society",
+                        "title":  "Aandacht, instructie en leerhouding",
+                        "visualKey":  "attitudes.learning.aandacht-instructie-en-leerhouding",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang",
+                        "unitId":  "unit.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.acquire",
+                                                "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.practice",
+                                                "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.transfer"
+                                            ],
+                        "subjectId":  "attitudes",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "citizenship_society",
+                        "title":  "Doel, stap en trots op vooruitgang",
+                        "visualKey":  "attitudes.self-regulation.doel-stap-en-trots-op-vooruitgang",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen",
+                        "unitId":  "unit.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.acquire",
+                                                "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.practice",
+                                                "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.transfer"
+                                            ],
+                        "subjectId":  "attitudes",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "citizenship_society",
+                        "title":  "Gevoelens herkennen en regelen",
+                        "visualKey":  "attitudes.social-emotional.gevoelens-herkennen-en-regelen",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.attitudes.collaboration.samen-spelen-en-werken",
+                        "unitId":  "unit.g1.attitudes.collaboration.samen-spelen-en-werken",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.acquire",
+                                                "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.practice",
+                                                "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.transfer"
+                                            ],
+                        "subjectId":  "attitudes",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "citizenship_society",
+                        "title":  "Samen spelen en werken",
+                        "visualKey":  "attitudes.collaboration.samen-spelen-en-werken",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid",
+                        "unitId":  "unit.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.acquire",
+                                                "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.practice",
+                                                "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.transfer"
+                                            ],
+                        "subjectId":  "attitudes",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "traffic_safety",
+                        "title":  "Regels, zorg en veiligheid",
+                        "visualKey":  "attitudes.citizenship-safety.regels-zorg-en-veiligheid",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.fr.listening.franse-klanken-en-begroetingen",
+                        "unitId":  "unit.g1.fr.listening.franse-klanken-en-begroetingen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.fr.listening.franse-klanken-en-begroetingen.acquire",
+                                                "lesson.g1.fr.listening.franse-klanken-en-begroetingen.practice",
+                                                "lesson.g1.fr.listening.franse-klanken-en-begroetingen.transfer"
+                                            ],
+                        "subjectId":  "fr",
+                        "domain":  "READING",
+                        "subcategoryId":  "vocabulary",
+                        "title":  "Franse klanken en begroetingen",
+                        "visualKey":  "fr.listening.franse-klanken-en-begroetingen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.fr.culture.liedjes-tellen-en-kleuren",
+                        "unitId":  "unit.g1.fr.culture.liedjes-tellen-en-kleuren",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.acquire",
+                                                "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.practice",
+                                                "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.transfer"
+                                            ],
+                        "subjectId":  "fr",
+                        "domain":  "READING",
+                        "subcategoryId":  "vocabulary",
+                        "title":  "Liedjes, tellen en kleuren",
+                        "visualKey":  "fr.culture.liedjes-tellen-en-kleuren",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school",
+                        "unitId":  "unit.g1.geo.maps.mijn-plaats-in-klas-en-school",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.acquire",
+                                                "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.practice",
+                                                "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.transfer"
+                                            ],
+                        "subjectId":  "geo",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "geography",
+                        "title":  "Mijn plaats in klas en school",
+                        "visualKey":  "geo.maps.mijn-plaats-in-klas-en-school",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij",
+                        "unitId":  "unit.g1.geo.physical.weer-en-seizoenen-dichtbij",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.acquire",
+                                                "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.practice",
+                                                "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.transfer"
+                                            ],
+                        "subjectId":  "geo",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "weather_climate",
+                        "title":  "Weer en seizoenen dichtbij",
+                        "visualKey":  "geo.physical.weer-en-seizoenen-dichtbij",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.geo.human.wonen-school-en-buurt",
+                        "unitId":  "unit.g1.geo.human.wonen-school-en-buurt",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.geo.human.wonen-school-en-buurt.acquire",
+                                                "lesson.g1.geo.human.wonen-school-en-buurt.practice",
+                                                "lesson.g1.geo.human.wonen-school-en-buurt.transfer"
+                                            ],
+                        "subjectId":  "geo",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "geography",
+                        "title":  "Wonen, school en buurt",
+                        "visualKey":  "geo.human.wonen-school-en-buurt",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.geo.environment.zorg-voor-de-leefomgeving",
+                        "unitId":  "unit.g1.geo.environment.zorg-voor-de-leefomgeving",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.acquire",
+                                                "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.practice",
+                                                "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.transfer"
+                                            ],
+                        "subjectId":  "geo",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "environment_sustainability",
+                        "title":  "Zorg voor de leefomgeving",
+                        "visualKey":  "geo.environment.zorg-voor-de-leefomgeving",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.geo.fieldwork.kijken-als-een-geograaf",
+                        "unitId":  "unit.g1.geo.fieldwork.kijken-als-een-geograaf",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.acquire",
+                                                "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.practice",
+                                                "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.transfer"
+                                            ],
+                        "subjectId":  "geo",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "geography",
+                        "title":  "Kijken als een geograaf",
+                        "visualKey":  "geo.fieldwork.kijken-als-een-geograaf",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn",
+                        "unitId":  "unit.g1.history.chronology.dag-week-jaar-en-levenslijn",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.acquire",
+                                                "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.practice",
+                                                "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.transfer"
+                                            ],
+                        "subjectId":  "history",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "history",
+                        "title":  "Dag, week, jaar en levenslijn",
+                        "visualKey":  "history.chronology.dag-week-jaar-en-levenslijn",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.history.sources.wat-vertelt-een-bron",
+                        "unitId":  "unit.g1.history.sources.wat-vertelt-een-bron",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.history.sources.wat-vertelt-een-bron.acquire",
+                                                "lesson.g1.history.sources.wat-vertelt-een-bron.practice",
+                                                "lesson.g1.history.sources.wat-vertelt-een-bron.transfer"
+                                            ],
+                        "subjectId":  "history",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "history",
+                        "title":  "Wat vertelt een bron?",
+                        "visualKey":  "history.sources.wat-vertelt-een-bron",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+                        "unitId":  "unit.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.acquire",
+                                                "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.practice",
+                                                "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.transfer"
+                                            ],
+                        "subjectId":  "history",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "history",
+                        "title":  "Gezin, school en buurt vroeger en nu",
+                        "visualKey":  "history.society.gezin-school-en-buurt-vroeger-en-nu",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd",
+                        "unitId":  "unit.g1.history.eras.feesten-en-tradities-door-de-tijd",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.acquire",
+                                                "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.practice",
+                                                "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.transfer"
+                                            ],
+                        "subjectId":  "history",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "history",
+                        "title":  "Feesten en tradities door de tijd",
+                        "visualKey":  "history.eras.feesten-en-tradities-door-de-tijd",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving",
+                        "unitId":  "unit.g1.history.heritage.erfgoed-in-mijn-omgeving",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.acquire",
+                                                "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.practice",
+                                                "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.transfer"
+                                            ],
+                        "subjectId":  "history",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "history",
+                        "title":  "Erfgoed in mijn omgeving",
+                        "visualKey":  "history.heritage.erfgoed-in-mijn-omgeving",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.ict.devices_data.toestellen-en-basisbediening",
+                        "unitId":  "unit.g1.ict.devices_data.toestellen-en-basisbediening",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.ict.devices_data.toestellen-en-basisbediening.acquire",
+                                                "lesson.g1.ict.devices_data.toestellen-en-basisbediening.practice",
+                                                "lesson.g1.ict.devices_data.toestellen-en-basisbediening.transfer"
+                                            ],
+                        "subjectId":  "ict",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "technology",
+                        "title":  "Toestellen en basisbediening",
+                        "visualKey":  "ict.devices-data.toestellen-en-basisbediening",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+                        "unitId":  "unit.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.acquire",
+                                                "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.practice",
+                                                "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.transfer"
+                                            ],
+                        "subjectId":  "ict",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "technology",
+                        "title":  "Volgorde en algoritmen zonder scherm",
+                        "visualKey":  "ict.coding.volgorde-en-algoritmen-zonder-scherm",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+                        "unitId":  "unit.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.acquire",
+                                                "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.practice",
+                                                "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.transfer"
+                                            ],
+                        "subjectId":  "ict",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "technology",
+                        "title":  "Tekenen, typen en delen met begeleiding",
+                        "visualKey":  "ict.create-communicate.tekenen-typen-en-delen-met-begeleiding",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+                        "unitId":  "unit.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.acquire",
+                                                "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.practice",
+                                                "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.transfer"
+                                            ],
+                        "subjectId":  "ict",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "technology",
+                        "title":  "Privacy en hulp vragen",
+                        "visualKey":  "ict.safety-ethics.privacy-en-hulp-vragen",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+                        "unitId":  "unit.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.acquire",
+                                                "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.practice",
+                                                "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "mixed_arithmetic",
+                        "title":  "Hoeveelheden tellen en structureren tot 20",
+                        "visualKey":  "math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20",
+                        "unitId":  "unit.g1.math.numbers.getallenlijn-en-volgorde-tot-20",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.acquire",
+                                                "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.practice",
+                                                "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "number_sequences",
+                        "title":  "Getallenlijn en volgorde tot 20",
+                        "visualKey":  "math.numbers.getallenlijn-en-volgorde-tot-20",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+                        "unitId":  "unit.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.acquire",
+                                                "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.practice",
+                                                "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "mixed_arithmetic",
+                        "title":  "Samenstellen en splitsen tot 10 en 20",
+                        "visualKey":  "math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.addition.within10.meaning-and-model",
+                        "unitId":  "unit.g1.math.operations.optellen-tot-10-en-20",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.operations.optellen-tot-10-en-20.acquire",
+                                                "lesson.g1.math.operations.optellen-tot-10-en-20.practice",
+                                                "lesson.g1.math.operations.optellen-tot-10-en-20.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "addition",
+                        "title":  "Optellen tot 10 en 20",
+                        "visualKey":  "math.operations.optellen-tot-10-en-20",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.operations.aftrekken-tot-10-en-20",
+                        "unitId":  "unit.g1.math.operations.aftrekken-tot-10-en-20",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.operations.aftrekken-tot-10-en-20.acquire",
+                                                "lesson.g1.math.operations.aftrekken-tot-10-en-20.practice",
+                                                "lesson.g1.math.operations.aftrekken-tot-10-en-20.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "subtraction",
+                        "title":  "Aftrekken tot 10 en 20",
+                        "visualKey":  "math.operations.aftrekken-tot-10-en-20",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen",
+                        "unitId":  "unit.g1.math.operations.rekenfeiten-en-handige-strategieen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.acquire",
+                                                "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.practice",
+                                                "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "mixed_arithmetic",
+                        "title":  "Rekenfeiten en handige strategieën",
+                        "visualKey":  "math.operations.rekenfeiten-en-handige-strategieen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+                        "unitId":  "unit.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.acquire",
+                                                "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.practice",
+                                                "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "fractions",
+                        "title":  "Helft, dubbel en kwart in concrete situaties",
+                        "visualKey":  "math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.geometry.length.compare-and-order",
+                        "unitId":  "unit.g1.math.measurement.lengte-massa-en-inhoud-vergelijken",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.measurement.lengte-massa-en-inhoud-vergelijken.acquire",
+                                                "lesson.g1.math.measurement.lengte-massa-en-inhoud-vergelijken.practice",
+                                                "lesson.g1.math.measurement.lengte-massa-en-inhoud-vergelijken.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "GEOMETRY",
+                        "subcategoryId":  "measurement",
+                        "title":  "Lengte, massa en inhoud vergelijken",
+                        "visualKey":  "math.measurement.lengte-massa-en-inhoud-vergelijken",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.measurement.tijd-kalender-en-klok",
+                        "unitId":  "unit.g1.math.measurement.tijd-kalender-en-klok",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.measurement.tijd-kalender-en-klok.acquire",
+                                                "lesson.g1.math.measurement.tijd-kalender-en-klok.practice",
+                                                "lesson.g1.math.measurement.tijd-kalender-en-klok.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "GEOMETRY",
+                        "subcategoryId":  "time",
+                        "title":  "Tijd, kalender en klok",
+                        "visualKey":  "math.measurement.tijd-kalender-en-klok",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.measurement.geld-tot-20-euro",
+                        "unitId":  "unit.g1.math.measurement.geld-tot-20-euro",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.measurement.geld-tot-20-euro.acquire",
+                                                "lesson.g1.math.measurement.geld-tot-20-euro.practice",
+                                                "lesson.g1.math.measurement.geld-tot-20-euro.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "money",
+                        "title":  "Geld tot 20 euro",
+                        "visualKey":  "math.measurement.geld-tot-20-euro",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren",
+                        "unitId":  "unit.g1.math.geometry.vlakke-figuren-en-ruimtefiguren",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.acquire",
+                                                "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.practice",
+                                                "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "GEOMETRY",
+                        "subcategoryId":  "geometry_shapes",
+                        "title":  "Vlakke figuren en ruimtefiguren",
+                        "visualKey":  "math.geometry.vlakke-figuren-en-ruimtefiguren",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie",
+                        "unitId":  "unit.g1.math.geometry.orientatie-patronen-en-symmetrie",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.acquire",
+                                                "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.practice",
+                                                "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "GEOMETRY",
+                        "subcategoryId":  "geometry_shapes",
+                        "title":  "Oriëntatie, patronen en symmetrie",
+                        "visualKey":  "math.geometry.orientatie-patronen-en-symmetrie",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen",
+                        "unitId":  "unit.g1.math.data.gegevens-verzamelen-en-voorstellen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.acquire",
+                                                "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.practice",
+                                                "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "statistics",
+                        "title":  "Gegevens verzamelen en voorstellen",
+                        "visualKey":  "math.data.gegevens-verzamelen-en-voorstellen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren",
+                        "unitId":  "unit.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.acquire",
+                                                "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.practice",
+                                                "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.transfer"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "mixed_arithmetic",
+                        "title":  "Rekenverhalen modelleren en controleren",
+                        "visualKey":  "math.problem-solving.rekenverhalen-modelleren-en-controleren",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.reading.initial-sound.identify-and-compare",
+                        "unitId":  "unit.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden.acquire",
+                                                "lesson.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden.practice",
+                                                "lesson.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "Luisteren naar klanken in woorden",
+                        "visualKey":  "nl.technical-reading.luisteren-naar-klanken-in-woorden",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters",
+                        "unitId":  "unit.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.acquire",
+                                                "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.practice",
+                                                "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "Klank-tekenkoppeling van de basisletters",
+                        "visualKey":  "nl.technical-reading.klank-tekenkoppeling-van-de-basisletters",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren",
+                        "unitId":  "unit.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.acquire",
+                                                "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.practice",
+                                                "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "MKM-woorden synthetiseren en analyseren",
+                        "visualKey":  "nl.technical-reading.mkm-woorden-synthetiseren-en-analyseren",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken",
+                        "unitId":  "unit.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.acquire",
+                                                "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.practice",
+                                                "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "Lange klinkers en tweetekenklanken",
+                        "visualKey":  "nl.technical-reading.lange-klinkers-en-tweetekenklanken",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+                        "unitId":  "unit.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.acquire",
+                                                "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.practice",
+                                                "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "Medeklinkerclusters en langere eenlettergrepige woorden",
+                        "visualKey":  "nl.technical-reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden",
+                        "unitId":  "unit.g1.nl.technical_reading.automatiseren-van-frequente-woorden",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.acquire",
+                                                "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.practice",
+                                                "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "review",
+                        "title":  "Automatiseren van frequente woorden",
+                        "visualKey":  "nl.technical-reading.automatiseren-van-frequente-woorden",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+                        "unitId":  "unit.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.acquire",
+                                                "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.practice",
+                                                "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "Zinnen en korte teksten begrijpen",
+                        "visualKey":  "nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen",
+                        "unitId":  "unit.g1.nl.comprehension.voorspellen-verbinden-en-navertellen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.acquire",
+                                                "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.practice",
+                                                "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "Voorspellen, verbinden en navertellen",
+                        "visualKey":  "nl.comprehension.voorspellen-verbinden-en-navertellen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen",
+                        "unitId":  "unit.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen.acquire",
+                                                "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen.practice",
+                                                "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "WRITING",
+                        "subcategoryId":  "letter_tracing",
+                        "title":  "Schrijfhouding, pengreep en basisbewegingen",
+                        "visualKey":  "nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen",
+                        "unitId":  "unit.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen.acquire",
+                                                "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen.practice",
+                                                "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "WRITING",
+                        "subcategoryId":  "letter_tracing",
+                        "title":  "Kleine letters, hoofdletters en cijfers vormen",
+                        "visualKey":  "nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  36
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+                        "unitId":  "unit.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.acquire",
+                                                "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.practice",
+                                                "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "WRITING",
+                        "subcategoryId":  "spelling",
+                        "title":  "Klankzuivere woorden en eerste dictee",
+                        "visualKey":  "nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.composition.van-woord-naar-correcte-zin",
+                        "unitId":  "unit.g1.nl.composition.van-woord-naar-correcte-zin",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.composition.van-woord-naar-correcte-zin.acquire",
+                                                "lesson.g1.nl.composition.van-woord-naar-correcte-zin.practice",
+                                                "lesson.g1.nl.composition.van-woord-naar-correcte-zin.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "WRITING",
+                        "subcategoryId":  "sentence_order",
+                        "title":  "Van woord naar correcte zin",
+                        "visualKey":  "nl.composition.van-woord-naar-correcte-zin",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen",
+                        "unitId":  "unit.g1.nl.oral.luisteren-vertellen-en-instructies-volgen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.acquire",
+                                                "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.practice",
+                                                "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "listening",
+                        "title":  "Luisteren, vertellen en instructies volgen",
+                        "visualKey":  "nl.oral.luisteren-vertellen-en-instructies-volgen",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+                        "unitId":  "unit.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.acquire",
+                                                "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.practice",
+                                                "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.transfer"
+                                            ],
+                        "subjectId":  "nl",
+                        "domain":  "READING",
+                        "subcategoryId":  "reading",
+                        "title":  "Leesplezier en kennismaken met tekstsoorten",
+                        "visualKey":  "nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+                        "unitId":  "unit.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.acquire",
+                                                "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.practice",
+                                                "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.transfer"
+                                            ],
+                        "subjectId":  "pe",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "everyday_life",
+                        "title":  "Basisbewegingen en lichaamsbesef",
+                        "visualKey":  "pe.movement.basisbewegingen-en-lichaamsbesef",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  150,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen",
+                        "unitId":  "unit.g1.pe.gymnastics.steunen-hangen-en-rollen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.acquire",
+                                                "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.practice",
+                                                "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.transfer"
+                                            ],
+                        "subjectId":  "pe",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "everyday_life",
+                        "title":  "Steunen, hangen en rollen",
+                        "visualKey":  "pe.gymnastics.steunen-hangen-en-rollen",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  150,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+                        "unitId":  "unit.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.acquire",
+                                                "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.practice",
+                                                "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.transfer"
+                                            ],
+                        "subjectId":  "pe",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "everyday_life",
+                        "title":  "Gooien, vangen, rollen en mikken",
+                        "visualKey":  "pe.ball-games.gooien-vangen-rollen-en-mikken",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  150,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.pe.dance.bewegen-op-puls-en-signaal",
+                        "unitId":  "unit.g1.pe.dance.bewegen-op-puls-en-signaal",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.acquire",
+                                                "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.practice",
+                                                "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.transfer"
+                                            ],
+                        "subjectId":  "pe",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "everyday_life",
+                        "title":  "Bewegen op puls en signaal",
+                        "visualKey":  "pe.dance.bewegen-op-puls-en-signaal",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  150,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+                        "unitId":  "unit.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.acquire",
+                                                "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.practice",
+                                                "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.transfer"
+                                            ],
+                        "subjectId":  "pe",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "everyday_life",
+                        "title":  "Spelafspraken, veiligheid en inspanning",
+                        "visualKey":  "pe.health-safety.spelafspraken-veiligheid-en-inspanning",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  150,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+                        "unitId":  "unit.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.acquire",
+                                                "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.practice",
+                                                "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.transfer"
+                                            ],
+                        "subjectId":  "science_tech",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "nature",
+                        "title":  "Levend, niet-levend en ooit levend",
+                        "visualKey":  "science-tech.organisms.levend-niet-levend-en-ooit-levend",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.science_tech.organisms.planten-rondom-ons",
+                        "unitId":  "unit.g1.science_tech.organisms.planten-rondom-ons",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.science_tech.organisms.planten-rondom-ons.acquire",
+                                                "lesson.g1.science_tech.organisms.planten-rondom-ons.practice",
+                                                "lesson.g1.science_tech.organisms.planten-rondom-ons.transfer"
+                                            ],
+                        "subjectId":  "science_tech",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "plants",
+                        "title":  "Planten rondom ons",
+                        "visualKey":  "science-tech.organisms.planten-rondom-ons",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+                        "unitId":  "unit.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.acquire",
+                                                "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.practice",
+                                                "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.transfer"
+                                            ],
+                        "subjectId":  "science_tech",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "animals",
+                        "title":  "Dieren en hun leefomgeving",
+                        "visualKey":  "science-tech.organisms.dieren-en-hun-leefomgeving",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+                        "unitId":  "unit.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.acquire",
+                                                "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.practice",
+                                                "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.transfer"
+                                            ],
+                        "subjectId":  "science_tech",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "human_body",
+                        "title":  "Mijn lichaam en zintuigen",
+                        "visualKey":  "science-tech.human-body.mijn-lichaam-en-zintuigen",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.science_tech.matter.materialen-en-eigenschappen",
+                        "unitId":  "unit.g1.science_tech.matter.materialen-en-eigenschappen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.science_tech.matter.materialen-en-eigenschappen.acquire",
+                                                "lesson.g1.science_tech.matter.materialen-en-eigenschappen.practice",
+                                                "lesson.g1.science_tech.matter.materialen-en-eigenschappen.transfer"
+                                            ],
+                        "subjectId":  "science_tech",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "science",
+                        "title":  "Materialen en eigenschappen",
+                        "visualKey":  "science-tech.matter.materialen-en-eigenschappen",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+                        "unitId":  "unit.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.acquire",
+                                                "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.practice",
+                                                "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.transfer"
+                                            ],
+                        "subjectId":  "science_tech",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "science",
+                        "title":  "Duwen, trekken, rollen en vallen",
+                        "visualKey":  "science-tech.forces-energy.duwen-trekken-rollen-en-vallen",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.science_tech.technology.maken-voor-een-doel",
+                        "unitId":  "unit.g1.science_tech.technology.maken-voor-een-doel",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.science_tech.technology.maken-voor-een-doel.acquire",
+                                                "lesson.g1.science_tech.technology.maken-voor-een-doel.practice",
+                                                "lesson.g1.science_tech.technology.maken-voor-een-doel.transfer"
+                                            ],
+                        "subjectId":  "science_tech",
+                        "domain":  "WORLD_KNOWLEDGE",
+                        "subcategoryId":  "technology",
+                        "title":  "Maken voor een doel",
+                        "visualKey":  "science-tech.technology.maken-voor-een-doel",
+                        "palette":  "PLANET_GOLD_WHITE_ONLY",
+                        "sourceMinutes":  90,
+                        "runtimeMinutes":  68,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.addition.within5.foundations",
+                        "unitId":  "unit.g1.math.operations.optellen-tot-5",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.addition.within10.meaning-and-model"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "addition",
+                        "title":  "Optellen tot 5",
+                        "visualKey":  "math.addition.within5",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  0,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    },
+                    {
+                        "lessonId":  "lesson.g1.math.subtraction.within5.foundations",
+                        "unitId":  "unit.g1.math.operations.aftrekken-tot-5",
+                        "sourceLessonIds":  [
+                                                "lesson.g1.math.operations.aftrekken-tot-10-en-20"
+                                            ],
+                        "subjectId":  "math",
+                        "domain":  "MATH",
+                        "subcategoryId":  "subtraction",
+                        "title":  "Aftrekken tot 5",
+                        "visualKey":  "math.subtraction.within5",
+                        "palette":  "POINCARE_TRICOLOUR",
+                        "sourceMinutes":  0,
+                        "runtimeMinutes":  65,
+                        "exerciseItems":  30
+                    }
+                ]
+}

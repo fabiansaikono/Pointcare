@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "sourceLocale": "nl-BE",
+  "scope": {
+    "grades": [1, 2],
+    "ages": ["6-7", "7-8"]
+  },
+  "sources": [
+    {
+      "id": "vlaanderen.minimumdoelen.2026",
+      "title": "Nieuwe minimumdoelen in het basisonderwijs",
+      "publisher": "Vlaamse overheid",
+      "url": "https://www.vlaanderen.be/onderwijs-en-vorming/leerstof/onderwijsdoelen/nieuwe-minimumdoelen-in-het-basisonderwijs",
+      "usedFor": ["curriculum alignment", "knowledge-rich progression", "age-appropriate practice"]
+    },
+    {
+      "id": "onderwijsdoelen.vlaanderen",
+      "title": "Onderwijsdoelen",
+      "publisher": "Vlaamse overheid",
+      "url": "https://onderwijsdoelen.be/",
+      "usedFor": ["official goal context"]
+    },
+    {
+      "id": "slo.nederlands.groep3-4",
+      "title": "Nederlands groep 3-4",
+      "publisher": "SLO",
+      "url": "https://www.slo.nl/thema/meer/tule/nederlands/kerndoel-1/?mode=groepen-34-leerling",
+      "usedFor": ["reading", "writing", "oral language"]
+    },
+    {
+      "id": "slo.rekenen.groep3-4",
+      "title": "Rekenen-wiskunde groep 3-4",
+      "publisher": "SLO",
+      "url": "https://www.slo.nl/thema/meer/tule/rekenen-wiskunde/kerndoel-28/?mode=groepen-34-leerling",
+      "usedFor": ["number sense", "operations", "measurement", "geometry"]
+    },
+    {
+      "id": "slo.orientatie.groep3-4",
+      "title": "Oriëntatie op jezelf en de wereld groep 3-4",
+      "publisher": "SLO",
+      "url": "https://www.slo.nl/thema/meer/tule/orientatie-jezelf-wereld/kerndoel-42/?mode=groepen-34-leerling",
+      "usedFor": ["science", "technology", "geography", "history", "citizenship"]
+    },
+    {
+      "id": "slo.kunstzinnige-orientatie",
+      "title": "Kunstzinnige oriëntatie groep 3-4",
+      "publisher": "SLO",
+      "url": "https://www.slo.nl/thema/meer/tule/kunstzinnige-orientatie/kerndoel-54/beeldende-vorming/?mode=groepen-34-leerling",
+      "usedFor": ["visual arts", "music", "drama"]
+    },
+    {
+      "id": "slo.digitale-geletterdheid",
+      "title": "Inhoudslijnen digitale geletterdheid",
+      "publisher": "SLO",
+      "url": "https://www.slo.nl/sectoren/po/digitale-geletterdheid-po/digitale-geletterdheid-po/inhoudslijnen/",
+      "usedFor": ["digital literacy", "media safety", "information skills"]
+    },
+    {
+      "id": "leerpunt.explicit-feedback",
+      "title": "Feedback",
+      "publisher": "Leerpunt",
+      "url": "https://leerpunt.be/leidraden/feedback",
+      "usedFor": ["worked examples", "checks", "feedback"]
+    },
+    {
+      "id": "leerpunt.begrijpend-lezen",
+      "title": "Strategieën voor begrijpend lezen",
+      "publisher": "Leerpunt",
+      "url": "https://leerpunt.be/aan-de-slag/toolkit-leren-lesgeven/strategieen-voor-begrijpend-lezen",
+      "usedFor": ["reading comprehension", "prediction", "retelling"]
+    }
+  ]
+}

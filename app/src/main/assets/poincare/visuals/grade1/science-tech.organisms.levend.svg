@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img">
+<title>Een plant leeft en groeit</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="18">
+<path d="M480 460 V270" stroke="#FFFFFF"/>
+<path d="M480 330 C390 320 335 270 330 190 C415 195 465 240 480 330 Z" stroke="#FFD700"/>
+<path d="M480 285 C550 275 610 230 625 155 C545 155 500 205 480 285 Z" stroke="#FFD700"/>
+<path d="M330 465 C390 415 570 415 630 465" stroke="#FFFFFF"/>
+<path d="M220 160 C220 120 270 95 270 55 C270 95 320 120 320 160 C320 215 220 215 220 160 Z" stroke="#FFD700"/>
+<circle cx="740" cy="125" r="58" stroke="#FFFFFF"/>
+<path d="M740 35 V10 M740 240 V215 M650 125 H625 M855 125 H830 M675 60 L655 40 M825 210 L805 190 M805 60 L825 40 M655 210 L675 190" stroke="#FFFFFF"/>
+</g>
+</svg>

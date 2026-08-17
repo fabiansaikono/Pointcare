@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-09T22:17:03.416Z",
+  "result": "PASSED",
+  "counts": {
+    "lessons": 181,
+    "exerciseSets": 1991,
+    "grade2EditorialQuestions": 10283,
+    "feedbackRows": 550,
+    "v1Items": 25200,
+    "v1MappedItems": 3919,
+    "coverageRows": 181,
+    "mathLessons": 29,
+    "frenchThemeLessons": 11,
+    "firstSignatureChecks": 181,
+    "adjacentSetChecks": 1267,
+    "optionVariationChecks": 181,
+    "practiceTestIsolationChecks": 181,
+    "issues": 0
+  },
+  "validators": {
+    "firstExerciseSignatureUniqueWithinLesson": true,
+    "noGenericDistractorSet": true,
+    "noPracticeTestOverlapNormalized": true,
+    "noRepeatedStimulusAcrossAdjacentSets": true,
+    "answerOptionsVaryWhenRetryPolicyChanges": true
+  },
+  "issues": []
+}

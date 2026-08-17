@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<text x="42" y="56" fill="#FFD700" font-family="Segoe UI, Arial, sans-serif" font-size="37" font-weight="600"><tspan x="42" dy="0">Verschillen, inclusie en hulp</tspan></text>
+<circle cx="100" cy="180" r="62" fill="none" stroke="#FFD700" stroke-width="8"/>
+<text x="26" y="274" fill="#FFD700" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="600"><tspan x="26" dy="0">verschil</tspan></text>
+<path d="M163 180 C200 180, 200 300, 237 300" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+<circle cx="300" cy="300" r="62" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+<text x="226" y="394" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="600"><tspan x="226" dy="0">inclusie</tspan></text>
+<path d="M363 300 C400 300, 400 180, 437 180" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+<circle cx="500" cy="180" r="62" fill="none" stroke="#FFD700" stroke-width="8"/>
+<text x="426" y="274" fill="#FFD700" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="600"><tspan x="426" dy="0">uitsluiten</tspan></text>
+<path d="M563 180 C600 180, 600 300, 637 300" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+<circle cx="700" cy="300" r="62" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+<text x="626" y="394" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="600"><tspan x="626" dy="0">omstander</tspan></text>
+<rect x="82" y="410" width="796" height="92" rx="28" fill="none" stroke="#FFFFFF" stroke-width="7"/>
+<text x="112" y="446" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="400"><tspan x="112" dy="0">Bij verschillen, inclusie en hulp gebruik je eerst het</tspan><tspan x="112" dy="30">kernmodel en benoem je wat je waarneemt.</tspan></text>
+</svg>

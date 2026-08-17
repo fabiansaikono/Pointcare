@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 1,
+  "migrationId": "migration.grade1.v2.mastery-reviewed-pool.2026-08-03",
+  "reason": "De toets gebruikt een lesgebonden, redactioneel controleerbare nl-BE-vragenbank met voldoende ongeziene items; oefen- en toepassingsdelen behouden hun gespecialiseerde runtime.",
+  "stableIdsChanged": false,
+  "migrations": [
+    {
+      "lessonId": "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+      "exerciseSetId": "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.arts.music.stem-puls-en-klankkleur",
+      "exerciseSetId": "lesson.g1.arts.music.stem-puls-en-klankkleur.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+      "exerciseSetId": "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.arts.media.kijken-bewegen-en-presenteren",
+      "exerciseSetId": "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding",
+      "exerciseSetId": "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang",
+      "exerciseSetId": "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen",
+      "exerciseSetId": "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.attitudes.collaboration.samen-spelen-en-werken",
+      "exerciseSetId": "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid",
+      "exerciseSetId": "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.fr.listening.franse-klanken-en-begroetingen",
+      "exerciseSetId": "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.fr.culture.liedjes-tellen-en-kleuren",
+      "exerciseSetId": "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school",
+      "exerciseSetId": "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij",
+      "exerciseSetId": "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.geo.human.wonen-school-en-buurt",
+      "exerciseSetId": "lesson.g1.geo.human.wonen-school-en-buurt.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.geo.environment.zorg-voor-de-leefomgeving",
+      "exerciseSetId": "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.geo.fieldwork.kijken-als-een-geograaf",
+      "exerciseSetId": "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn",
+      "exerciseSetId": "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.history.sources.wat-vertelt-een-bron",
+      "exerciseSetId": "lesson.g1.history.sources.wat-vertelt-een-bron.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+      "exerciseSetId": "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd",
+      "exerciseSetId": "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving",
+      "exerciseSetId": "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.ict.devices_data.toestellen-en-basisbediening",
+      "exerciseSetId": "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+      "exerciseSetId": "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+      "exerciseSetId": "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+      "exerciseSetId": "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+      "exerciseSetId": "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20",
+      "exerciseSetId": "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+      "exerciseSetId": "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.addition.within10.meaning-and-model",
+      "exerciseSetId": "lesson.g1.math.addition.within10.meaning-and-model.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.operations.aftrekken-tot-10-en-20",
+      "exerciseSetId": "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen",
+      "exerciseSetId": "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+      "exerciseSetId": "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.geometry.length.compare-and-order",
+      "exerciseSetId": "lesson.g1.geometry.length.compare-and-order.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.measurement.tijd-kalender-en-klok",
+      "exerciseSetId": "lesson.g1.math.measurement.tijd-kalender-en-klok.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.measurement.geld-tot-20-euro",
+      "exerciseSetId": "lesson.g1.math.measurement.geld-tot-20-euro.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren",
+      "exerciseSetId": "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie",
+      "exerciseSetId": "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen",
+      "exerciseSetId": "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren",
+      "exerciseSetId": "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.reading.initial-sound.identify-and-compare",
+      "exerciseSetId": "lesson.g1.reading.initial-sound.identify-and-compare.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters",
+      "exerciseSetId": "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren",
+      "exerciseSetId": "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken",
+      "exerciseSetId": "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+      "exerciseSetId": "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden",
+      "exerciseSetId": "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+      "exerciseSetId": "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen",
+      "exerciseSetId": "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen",
+      "exerciseSetId": "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen",
+      "exerciseSetId": "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+      "exerciseSetId": "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.composition.van-woord-naar-correcte-zin",
+      "exerciseSetId": "lesson.g1.nl.composition.van-woord-naar-correcte-zin.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen",
+      "exerciseSetId": "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+      "exerciseSetId": "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+      "exerciseSetId": "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen",
+      "exerciseSetId": "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+      "exerciseSetId": "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.pe.dance.bewegen-op-puls-en-signaal",
+      "exerciseSetId": "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+      "exerciseSetId": "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+      "exerciseSetId": "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.science_tech.organisms.planten-rondom-ons",
+      "exerciseSetId": "lesson.g1.science_tech.organisms.planten-rondom-ons.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+      "exerciseSetId": "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+      "exerciseSetId": "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.science_tech.matter.materialen-en-eigenschappen",
+      "exerciseSetId": "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+      "exerciseSetId": "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.science_tech.technology.maken-voor-een-doel",
+      "exerciseSetId": "lesson.g1.science_tech.technology.maken-voor-een-doel.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.addition.within5.foundations",
+      "exerciseSetId": "lesson.g1.math.addition.within5.foundations.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    },
+    {
+      "lessonId": "lesson.g1.math.subtraction.within5.foundations",
+      "exerciseSetId": "lesson.g1.math.subtraction.within5.foundations.set.test",
+      "previousGeneratorId": "generator.g1.curriculum.catalog",
+      "generatorId": "generator.g1.curriculum.catalog",
+      "stableIdsPreserved": true
+    }
+  ]
+}

@@ -78,6 +78,7 @@ data class PoincareAudioSources(
     val visibleText: Boolean,
     val playButtonOnly: Boolean,
     val ttsRequired: Boolean,
+    val ttsShouldUsePhoneticText: Boolean = false,
     val kind: String?,
     val sourceLocale: String?,
     val targetLocale: String?,

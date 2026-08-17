@@ -1,0 +1,57 @@
+{
+    "generatedAtUtc":  "2026-08-03T06:49:19.3656573+00:00",
+    "result":  "PASS",
+    "totals":  {
+                   "checks":  8,
+                   "passed":  8,
+                   "failed":  0
+               },
+    "checks":  [
+                   {
+                       "id":  "library.required-fields",
+                       "status":  "PASS",
+                       "details":  "Alle verplichte V2-lesvelden zijn gecontroleerd."
+                   },
+                   {
+                       "id":  "library.stable-ids",
+                       "status":  "PASS",
+                       "details":  "160270 unieke stabiele ID\u0027s; geen duplicaten."
+                   },
+                   {
+                       "id":  "library.relations",
+                       "status":  "PASS",
+                       "details":  "Les-, deel-, pagina-, reeks-, vraag- en antwoordrelaties zijn gecontroleerd."
+                   },
+                   {
+                       "id":  "library.v1-v2",
+                       "status":  "PASS",
+                       "details":  "25200 vaste V1-vragen behouden; nieuwe reeksen expliciet V2."
+                   },
+                   {
+                       "id":  "library.translations",
+                       "status":  "PASS",
+                       "details":  "nl-BE standaard; FR/EN-statussen expliciet."
+                   },
+                   {
+                       "id":  "library.publication",
+                       "status":  "PASS",
+                       "details":  "3 actieve piloten; 64 conceptlessen."
+                   },
+                   {
+                       "id":  "library.stories",
+                       "status":  "PASS",
+                       "details":  "Alle verhalen blijven aan boek en hoofdstuk gekoppeld."
+                   },
+                   {
+                       "id":  "library.questions",
+                       "status":  "PASS",
+                       "details":  "Leerjaar 1: 363 reeksen en 2072 vragen. Leerjaar 2: 66 reeksen en 351 vragen."
+                   }
+               ],
+    "errors":  [
+
+               ],
+    "warnings":  [
+
+                 ]
+}

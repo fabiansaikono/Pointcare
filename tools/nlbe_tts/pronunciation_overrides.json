@@ -1,0 +1,1302 @@
+{
+  "version": 5,
+  "locale": "nl-BE",
+  "notes": "Raw phonemes use Piper 1.3+ [[ ... ]] syntax. Keys are normalized visible/runtime speech strings.",
+  "entries": {
+    "a": {
+      "synthesisText": "[[ ɑː ]]",
+      "example": "Klank: a",
+      "lengthScale": 1.55
+    },
+    "aa": {
+      "synthesisText": "[[ aː ]]",
+      "example": "Klank: aa",
+      "lengthScale": 1.55
+    },
+    "e": {
+      "synthesisText": "[[ ɛː ]]",
+      "example": "Klank: e",
+      "lengthScale": 1.55
+    },
+    "ee": {
+      "synthesisText": "[[ eː ]]",
+      "example": "Klank: ee",
+      "lengthScale": 1.55
+    },
+    "i": {
+      "synthesisText": "[[ ɪː ]]",
+      "example": "Klank: i",
+      "lengthScale": 1.55
+    },
+    "ie": {
+      "synthesisText": "[[ iː ]]",
+      "example": "Klank: ie",
+      "lengthScale": 1.55
+    },
+    "o": {
+      "synthesisText": "[[ ɔː ]]",
+      "example": "Klank: o",
+      "lengthScale": 1.55
+    },
+    "oo": {
+      "synthesisText": "[[ oː ]]",
+      "example": "Klank: oo",
+      "lengthScale": 1.55
+    },
+    "u": {
+      "synthesisText": "[[ ʏː ]]",
+      "example": "Klank: u",
+      "lengthScale": 1.55
+    },
+    "uu": {
+      "synthesisText": "[[ yː ]]",
+      "example": "Klank: uu",
+      "lengthScale": 1.55
+    },
+    "oe": {
+      "synthesisText": "[[ uː ]]",
+      "example": "Klank: oe",
+      "lengthScale": 1.55
+    },
+    "eu": {
+      "synthesisText": "[[ 2: ]]",
+      "example": "Klank eu",
+      "lengthScale": 1.35
+    },
+    "ui": {
+      "synthesisText": "[[ œyː ]]",
+      "example": "Klank: ui",
+      "lengthScale": 1.55
+    },
+    "ei": {
+      "synthesisText": "[[ ɛiː ]]",
+      "example": "Klank: ei",
+      "lengthScale": 1.55
+    },
+    "ij": {
+      "synthesisText": "[[ ɛiː ]]",
+      "example": "Klank: ij",
+      "lengthScale": 1.55
+    },
+    "au": {
+      "synthesisText": "[[ ɑuː ]]",
+      "example": "Klank: au",
+      "lengthScale": 1.55
+    },
+    "ou": {
+      "synthesisText": "[[ ɑuː ]]",
+      "example": "Klank: ou",
+      "lengthScale": 1.55
+    },
+    "ng": {
+      "synthesisText": "[[ ŋ ]]",
+      "example": "lang"
+    },
+    "ch": {
+      "synthesisText": "[[ x ]]",
+      "example": "lach"
+    },
+    "sch": {
+      "synthesisText": "[[ s x ]]",
+      "example": "school"
+    },
+    "watermeloen": {
+      "synthesisText": "watermeloen",
+      "example": "Basiswoord"
+    },
+    "appel": {
+      "synthesisText": "appel",
+      "example": "Basiswoord"
+    },
+    "banaan": {
+      "synthesisText": "banaan",
+      "example": "Basiswoord"
+    },
+    "peer": {
+      "synthesisText": "peer",
+      "example": "Basiswoord"
+    },
+    "aardbei": {
+      "synthesisText": "aardbei",
+      "example": "Basiswoord"
+    },
+    "druif": {
+      "synthesisText": "druif",
+      "example": "Basiswoord"
+    },
+    "sinaasappel": {
+      "synthesisText": "sinaasappel",
+      "example": "Basiswoord"
+    },
+    "citroen": {
+      "synthesisText": "citroen",
+      "example": "Basiswoord"
+    },
+    "ananas": {
+      "synthesisText": "ananas",
+      "example": "Basiswoord"
+    },
+    "kiwi": {
+      "synthesisText": "kiwi",
+      "example": "Basiswoord"
+    },
+    "kers": {
+      "synthesisText": "kers",
+      "example": "Basiswoord"
+    },
+    "perzik": {
+      "synthesisText": "perzik",
+      "example": "Basiswoord"
+    },
+    "pruim": {
+      "synthesisText": "pruim",
+      "example": "Basiswoord"
+    },
+    "framboos": {
+      "synthesisText": "framboos",
+      "example": "Basiswoord"
+    },
+    "bosbes": {
+      "synthesisText": "bosbes",
+      "example": "Basiswoord"
+    },
+    "meloen": {
+      "synthesisText": "meloen",
+      "example": "Basiswoord"
+    },
+    "komkommer": {
+      "synthesisText": "komkommer",
+      "example": "Basiswoord"
+    },
+    "tomaat": {
+      "synthesisText": "tomaat",
+      "example": "Basiswoord"
+    },
+    "wortel": {
+      "synthesisText": "wortel",
+      "example": "Basiswoord"
+    },
+    "aardappel": {
+      "synthesisText": "aardappel",
+      "example": "Basiswoord"
+    },
+    "brood": {
+      "synthesisText": "brood",
+      "example": "Basiswoord"
+    },
+    "melk": {
+      "synthesisText": "melk",
+      "example": "Basiswoord"
+    },
+    "water": {
+      "synthesisText": "water",
+      "example": "Basiswoord"
+    },
+    "kaas": {
+      "synthesisText": "kaas",
+      "example": "Basiswoord"
+    },
+    "vis": {
+      "synthesisText": "vis",
+      "example": "Basiswoord"
+    },
+    "vlees": {
+      "synthesisText": "vlees",
+      "example": "Basiswoord"
+    },
+    "rijst": {
+      "synthesisText": "rijst",
+      "example": "Basiswoord"
+    },
+    "pasta": {
+      "synthesisText": "pasta",
+      "example": "Basiswoord"
+    },
+    "soep": {
+      "synthesisText": "soep",
+      "example": "Basiswoord"
+    },
+    "koek": {
+      "synthesisText": "koek",
+      "example": "Basiswoord"
+    },
+    "taart": {
+      "synthesisText": "taart",
+      "example": "Basiswoord"
+    },
+    "school": {
+      "synthesisText": "school",
+      "example": "Basiswoord"
+    },
+    "klas": {
+      "synthesisText": "klas",
+      "example": "Basiswoord"
+    },
+    "juf": {
+      "synthesisText": "juf",
+      "example": "Basiswoord"
+    },
+    "meester": {
+      "synthesisText": "meester",
+      "example": "Basiswoord"
+    },
+    "boek": {
+      "synthesisText": "boek",
+      "example": "Basiswoord"
+    },
+    "schrift": {
+      "synthesisText": "schrift",
+      "example": "Basiswoord"
+    },
+    "potlood": {
+      "synthesisText": "potlood",
+      "example": "Basiswoord"
+    },
+    "pen": {
+      "synthesisText": "pen",
+      "example": "Basiswoord"
+    },
+    "gom": {
+      "synthesisText": "gom",
+      "example": "Basiswoord"
+    },
+    "lat": {
+      "synthesisText": "lat",
+      "example": "Basiswoord"
+    },
+    "letter": {
+      "synthesisText": "letter",
+      "example": "Basiswoord"
+    },
+    "woord": {
+      "synthesisText": "woord",
+      "example": "Basiswoord"
+    },
+    "zin": {
+      "synthesisText": "zin",
+      "example": "Basiswoord"
+    },
+    "tekst": {
+      "synthesisText": "tekst",
+      "example": "Basiswoord"
+    },
+    "verhaal": {
+      "synthesisText": "verhaal",
+      "example": "Basiswoord"
+    },
+    "vraag": {
+      "synthesisText": "vraag",
+      "example": "Basiswoord"
+    },
+    "antwoord": {
+      "synthesisText": "antwoord",
+      "example": "Basiswoord"
+    },
+    "lezen": {
+      "synthesisText": "lezen",
+      "example": "Basiswoord"
+    },
+    "schrijven": {
+      "synthesisText": "schrijven",
+      "example": "Basiswoord"
+    },
+    "luisteren": {
+      "synthesisText": "luisteren",
+      "example": "Basiswoord"
+    },
+    "spreken": {
+      "synthesisText": "spreken",
+      "example": "Basiswoord"
+    },
+    "kijken": {
+      "synthesisText": "kijken",
+      "example": "Basiswoord"
+    },
+    "kiezen": {
+      "synthesisText": "kiezen",
+      "example": "Basiswoord"
+    },
+    "slepen": {
+      "synthesisText": "slepen",
+      "example": "Basiswoord"
+    },
+    "tellen": {
+      "synthesisText": "tellen",
+      "example": "Basiswoord"
+    },
+    "rekenen": {
+      "synthesisText": "rekenen",
+      "example": "Basiswoord"
+    },
+    "oefening": {
+      "synthesisText": "oefening",
+      "example": "Basiswoord"
+    },
+    "juist": {
+      "synthesisText": "juist",
+      "example": "Basiswoord"
+    },
+    "fout": {
+      "synthesisText": "fout",
+      "example": "Basiswoord"
+    },
+    "opnieuw": {
+      "synthesisText": "opnieuw",
+      "example": "Basiswoord"
+    },
+    "volgende": {
+      "synthesisText": "volgende",
+      "example": "Basiswoord"
+    },
+    "klaar": {
+      "synthesisText": "klaar",
+      "example": "Basiswoord"
+    },
+    "goed gedaan": {
+      "synthesisText": "goed gedaan",
+      "example": "Basiswoord"
+    },
+    "huis": {
+      "synthesisText": "huis",
+      "example": "Basiswoord"
+    },
+    "kamer": {
+      "synthesisText": "kamer",
+      "example": "Basiswoord"
+    },
+    "deur": {
+      "synthesisText": "deur",
+      "example": "Basiswoord"
+    },
+    "raam": {
+      "synthesisText": "raam",
+      "example": "Basiswoord"
+    },
+    "tafel": {
+      "synthesisText": "tafel",
+      "example": "Basiswoord"
+    },
+    "stoel": {
+      "synthesisText": "stoel",
+      "example": "Basiswoord"
+    },
+    "bed": {
+      "synthesisText": "bed",
+      "example": "Basiswoord"
+    },
+    "keuken": {
+      "synthesisText": "keuken",
+      "example": "Basiswoord"
+    },
+    "tuin": {
+      "synthesisText": "tuin",
+      "example": "Basiswoord"
+    },
+    "boom": {
+      "synthesisText": "boom",
+      "example": "Basiswoord"
+    },
+    "bloem": {
+      "synthesisText": "bloem",
+      "example": "Basiswoord"
+    },
+    "gras": {
+      "synthesisText": "gras",
+      "example": "Basiswoord"
+    },
+    "bos": {
+      "synthesisText": "bos",
+      "example": "Basiswoord"
+    },
+    "zee": {
+      "synthesisText": "zee",
+      "example": "Basiswoord"
+    },
+    "rivier": {
+      "synthesisText": "rivier",
+      "example": "Basiswoord"
+    },
+    "regen": {
+      "synthesisText": "regen",
+      "example": "Basiswoord"
+    },
+    "zon": {
+      "synthesisText": "zon",
+      "example": "Basiswoord"
+    },
+    "maan": {
+      "synthesisText": "maan",
+      "example": "Basiswoord"
+    },
+    "ster": {
+      "synthesisText": "ster",
+      "example": "Basiswoord"
+    },
+    "planeet": {
+      "synthesisText": "planeet",
+      "example": "Basiswoord"
+    },
+    "ruimte": {
+      "synthesisText": "ruimte",
+      "example": "Basiswoord"
+    },
+    "raket": {
+      "synthesisText": "raket",
+      "example": "Basiswoord"
+    },
+    "schip": {
+      "synthesisText": "schip",
+      "example": "Basiswoord"
+    },
+    "hond": {
+      "synthesisText": "hond",
+      "example": "Basiswoord"
+    },
+    "kat": {
+      "synthesisText": "kat",
+      "example": "Basiswoord"
+    },
+    "muis": {
+      "synthesisText": "muis",
+      "example": "Basiswoord"
+    },
+    "paard": {
+      "synthesisText": "paard",
+      "example": "Basiswoord"
+    },
+    "koe": {
+      "synthesisText": "koe",
+      "example": "Basiswoord"
+    },
+    "schaap": {
+      "synthesisText": "schaap",
+      "example": "Basiswoord"
+    },
+    "geit": {
+      "synthesisText": "geit",
+      "example": "Basiswoord"
+    },
+    "varken": {
+      "synthesisText": "varken",
+      "example": "Basiswoord"
+    },
+    "kip": {
+      "synthesisText": "kip",
+      "example": "Basiswoord"
+    },
+    "haan": {
+      "synthesisText": "haan",
+      "example": "Basiswoord"
+    },
+    "eend": {
+      "synthesisText": "eend",
+      "example": "Basiswoord"
+    },
+    "gans": {
+      "synthesisText": "gans",
+      "example": "Basiswoord"
+    },
+    "vogel": {
+      "synthesisText": "vogel",
+      "example": "Basiswoord"
+    },
+    "uil": {
+      "synthesisText": "uil",
+      "example": "Basiswoord"
+    },
+    "kikker": {
+      "synthesisText": "kikker",
+      "example": "Basiswoord"
+    },
+    "konijn": {
+      "synthesisText": "konijn",
+      "example": "Basiswoord"
+    },
+    "leeuw": {
+      "synthesisText": "leeuw",
+      "example": "Basiswoord"
+    },
+    "tijger": {
+      "synthesisText": "tijger",
+      "example": "Basiswoord"
+    },
+    "olifant": {
+      "synthesisText": "olifant",
+      "example": "Basiswoord"
+    },
+    "aap": {
+      "synthesisText": "aap",
+      "example": "Basiswoord"
+    },
+    "beer": {
+      "synthesisText": "beer",
+      "example": "Basiswoord"
+    },
+    "vos": {
+      "synthesisText": "vos",
+      "example": "Basiswoord"
+    },
+    "hoofd": {
+      "synthesisText": "hoofd",
+      "example": "Basiswoord"
+    },
+    "haar": {
+      "synthesisText": "haar",
+      "example": "Basiswoord"
+    },
+    "oog": {
+      "synthesisText": "oog",
+      "example": "Basiswoord"
+    },
+    "oor": {
+      "synthesisText": "oor",
+      "example": "Basiswoord"
+    },
+    "neus": {
+      "synthesisText": "neus",
+      "example": "Basiswoord"
+    },
+    "mond": {
+      "synthesisText": "mond",
+      "example": "Basiswoord"
+    },
+    "tand": {
+      "synthesisText": "tand",
+      "example": "Basiswoord"
+    },
+    "hand": {
+      "synthesisText": "hand",
+      "example": "Basiswoord"
+    },
+    "vinger": {
+      "synthesisText": "vinger",
+      "example": "Basiswoord"
+    },
+    "arm": {
+      "synthesisText": "arm",
+      "example": "Basiswoord"
+    },
+    "been": {
+      "synthesisText": "been",
+      "example": "Basiswoord"
+    },
+    "voet": {
+      "synthesisText": "voet",
+      "example": "Basiswoord"
+    },
+    "buik": {
+      "synthesisText": "buik",
+      "example": "Basiswoord"
+    },
+    "rug": {
+      "synthesisText": "rug",
+      "example": "Basiswoord"
+    },
+    "mama": {
+      "synthesisText": "mama",
+      "example": "Basiswoord"
+    },
+    "papa": {
+      "synthesisText": "papa",
+      "example": "Basiswoord"
+    },
+    "broer": {
+      "synthesisText": "broer",
+      "example": "Basiswoord"
+    },
+    "zus": {
+      "synthesisText": "zus",
+      "example": "Basiswoord"
+    },
+    "kind": {
+      "synthesisText": "kind",
+      "example": "Basiswoord"
+    },
+    "jongen": {
+      "synthesisText": "jongen",
+      "example": "Basiswoord"
+    },
+    "meisje": {
+      "synthesisText": "meisje",
+      "example": "Basiswoord"
+    },
+    "vriend": {
+      "synthesisText": "vriend",
+      "example": "Basiswoord"
+    },
+    "familie": {
+      "synthesisText": "familie",
+      "example": "Basiswoord"
+    },
+    "rood": {
+      "synthesisText": "rood",
+      "example": "Basiswoord"
+    },
+    "blauw": {
+      "synthesisText": "blauw",
+      "example": "Basiswoord"
+    },
+    "geel": {
+      "synthesisText": "geel",
+      "example": "Basiswoord"
+    },
+    "groen": {
+      "synthesisText": "groen",
+      "example": "Basiswoord"
+    },
+    "oranje": {
+      "synthesisText": "oranje",
+      "example": "Basiswoord"
+    },
+    "paars": {
+      "synthesisText": "paars",
+      "example": "Basiswoord"
+    },
+    "roze": {
+      "synthesisText": "roze",
+      "example": "Basiswoord"
+    },
+    "bruin": {
+      "synthesisText": "bruin",
+      "example": "Basiswoord"
+    },
+    "zwart": {
+      "synthesisText": "zwart",
+      "example": "Basiswoord"
+    },
+    "wit": {
+      "synthesisText": "wit",
+      "example": "Basiswoord"
+    },
+    "grijs": {
+      "synthesisText": "grijs",
+      "example": "Basiswoord"
+    },
+    "cirkel": {
+      "synthesisText": "cirkel",
+      "example": "Basiswoord"
+    },
+    "vierkant": {
+      "synthesisText": "vierkant",
+      "example": "Basiswoord"
+    },
+    "driehoek": {
+      "synthesisText": "driehoek",
+      "example": "Basiswoord"
+    },
+    "rechthoek": {
+      "synthesisText": "rechthoek",
+      "example": "Basiswoord"
+    },
+    "links": {
+      "synthesisText": "links",
+      "example": "Basiswoord"
+    },
+    "rechts": {
+      "synthesisText": "rechts",
+      "example": "Basiswoord"
+    },
+    "boven": {
+      "synthesisText": "boven",
+      "example": "Basiswoord"
+    },
+    "onder": {
+      "synthesisText": "onder",
+      "example": "Basiswoord"
+    },
+    "voor": {
+      "synthesisText": "voor",
+      "example": "Basiswoord"
+    },
+    "achter": {
+      "synthesisText": "achter",
+      "example": "Basiswoord"
+    },
+    "groot": {
+      "synthesisText": "groot",
+      "example": "Basiswoord"
+    },
+    "klein": {
+      "synthesisText": "klein",
+      "example": "Basiswoord"
+    },
+    "lang": {
+      "synthesisText": "lang",
+      "example": "Basiswoord"
+    },
+    "kort": {
+      "synthesisText": "kort",
+      "example": "Basiswoord"
+    },
+    "meer": {
+      "synthesisText": "meer",
+      "example": "Basiswoord"
+    },
+    "minder": {
+      "synthesisText": "minder",
+      "example": "Basiswoord"
+    },
+    "evenveel": {
+      "synthesisText": "evenveel",
+      "example": "Basiswoord"
+    },
+    "vandaag": {
+      "synthesisText": "vandaag",
+      "example": "Basiswoord"
+    },
+    "morgen": {
+      "synthesisText": "morgen",
+      "example": "Basiswoord"
+    },
+    "gisteren": {
+      "synthesisText": "gisteren",
+      "example": "Basiswoord"
+    },
+    "dag": {
+      "synthesisText": "dag",
+      "example": "Basiswoord"
+    },
+    "nacht": {
+      "synthesisText": "nacht",
+      "example": "Basiswoord"
+    },
+    "ochtend": {
+      "synthesisText": "ochtend",
+      "example": "Basiswoord"
+    },
+    "middag": {
+      "synthesisText": "middag",
+      "example": "Basiswoord"
+    },
+    "avond": {
+      "synthesisText": "avond",
+      "example": "Basiswoord"
+    },
+    "uur": {
+      "synthesisText": "uur",
+      "example": "Basiswoord"
+    },
+    "minuut": {
+      "synthesisText": "minuut",
+      "example": "Basiswoord"
+    },
+    "seconde": {
+      "synthesisText": "seconde",
+      "example": "Basiswoord"
+    },
+    "start": {
+      "synthesisText": "start",
+      "example": "Basiswoord"
+    },
+    "stop": {
+      "synthesisText": "stop",
+      "example": "Basiswoord"
+    },
+    "wacht": {
+      "synthesisText": "wacht",
+      "example": "Basiswoord"
+    },
+    "open": {
+      "synthesisText": "open",
+      "example": "Basiswoord"
+    },
+    "sluit": {
+      "synthesisText": "sluit",
+      "example": "Basiswoord"
+    },
+    "ga": {
+      "synthesisText": "ga",
+      "example": "Basiswoord"
+    },
+    "kom": {
+      "synthesisText": "kom",
+      "example": "Basiswoord"
+    },
+    "spring": {
+      "synthesisText": "spring",
+      "example": "Basiswoord"
+    },
+    "loop": {
+      "synthesisText": "loop",
+      "example": "Basiswoord"
+    },
+    "draai": {
+      "synthesisText": "draai",
+      "example": "Basiswoord"
+    },
+    "zoek": {
+      "synthesisText": "zoek",
+      "example": "Basiswoord"
+    },
+    "0": {
+      "synthesisText": "0",
+      "example": "Getal"
+    },
+    "1": {
+      "synthesisText": "1",
+      "example": "Getal"
+    },
+    "2": {
+      "synthesisText": "2",
+      "example": "Getal"
+    },
+    "3": {
+      "synthesisText": "3",
+      "example": "Getal"
+    },
+    "4": {
+      "synthesisText": "4",
+      "example": "Getal"
+    },
+    "5": {
+      "synthesisText": "5",
+      "example": "Getal"
+    },
+    "6": {
+      "synthesisText": "6",
+      "example": "Getal"
+    },
+    "7": {
+      "synthesisText": "7",
+      "example": "Getal"
+    },
+    "8": {
+      "synthesisText": "8",
+      "example": "Getal"
+    },
+    "9": {
+      "synthesisText": "9",
+      "example": "Getal"
+    },
+    "10": {
+      "synthesisText": "10",
+      "example": "Getal"
+    },
+    "11": {
+      "synthesisText": "11",
+      "example": "Getal"
+    },
+    "12": {
+      "synthesisText": "12",
+      "example": "Getal"
+    },
+    "13": {
+      "synthesisText": "13",
+      "example": "Getal"
+    },
+    "14": {
+      "synthesisText": "14",
+      "example": "Getal"
+    },
+    "15": {
+      "synthesisText": "15",
+      "example": "Getal"
+    },
+    "16": {
+      "synthesisText": "16",
+      "example": "Getal"
+    },
+    "17": {
+      "synthesisText": "17",
+      "example": "Getal"
+    },
+    "18": {
+      "synthesisText": "18",
+      "example": "Getal"
+    },
+    "19": {
+      "synthesisText": "19",
+      "example": "Getal"
+    },
+    "20": {
+      "synthesisText": "20",
+      "example": "Getal"
+    },
+    "21": {
+      "synthesisText": "21",
+      "example": "Getal"
+    },
+    "22": {
+      "synthesisText": "22",
+      "example": "Getal"
+    },
+    "23": {
+      "synthesisText": "23",
+      "example": "Getal"
+    },
+    "24": {
+      "synthesisText": "24",
+      "example": "Getal"
+    },
+    "25": {
+      "synthesisText": "25",
+      "example": "Getal"
+    },
+    "26": {
+      "synthesisText": "26",
+      "example": "Getal"
+    },
+    "27": {
+      "synthesisText": "27",
+      "example": "Getal"
+    },
+    "28": {
+      "synthesisText": "28",
+      "example": "Getal"
+    },
+    "29": {
+      "synthesisText": "29",
+      "example": "Getal"
+    },
+    "30": {
+      "synthesisText": "30",
+      "example": "Getal"
+    },
+    "31": {
+      "synthesisText": "31",
+      "example": "Getal"
+    },
+    "32": {
+      "synthesisText": "32",
+      "example": "Getal"
+    },
+    "33": {
+      "synthesisText": "33",
+      "example": "Getal"
+    },
+    "34": {
+      "synthesisText": "34",
+      "example": "Getal"
+    },
+    "35": {
+      "synthesisText": "35",
+      "example": "Getal"
+    },
+    "36": {
+      "synthesisText": "36",
+      "example": "Getal"
+    },
+    "37": {
+      "synthesisText": "37",
+      "example": "Getal"
+    },
+    "38": {
+      "synthesisText": "38",
+      "example": "Getal"
+    },
+    "39": {
+      "synthesisText": "39",
+      "example": "Getal"
+    },
+    "40": {
+      "synthesisText": "40",
+      "example": "Getal"
+    },
+    "41": {
+      "synthesisText": "41",
+      "example": "Getal"
+    },
+    "42": {
+      "synthesisText": "42",
+      "example": "Getal"
+    },
+    "43": {
+      "synthesisText": "43",
+      "example": "Getal"
+    },
+    "44": {
+      "synthesisText": "44",
+      "example": "Getal"
+    },
+    "45": {
+      "synthesisText": "45",
+      "example": "Getal"
+    },
+    "46": {
+      "synthesisText": "46",
+      "example": "Getal"
+    },
+    "47": {
+      "synthesisText": "47",
+      "example": "Getal"
+    },
+    "48": {
+      "synthesisText": "48",
+      "example": "Getal"
+    },
+    "49": {
+      "synthesisText": "49",
+      "example": "Getal"
+    },
+    "50": {
+      "synthesisText": "50",
+      "example": "Getal"
+    },
+    "51": {
+      "synthesisText": "51",
+      "example": "Getal"
+    },
+    "52": {
+      "synthesisText": "52",
+      "example": "Getal"
+    },
+    "53": {
+      "synthesisText": "53",
+      "example": "Getal"
+    },
+    "54": {
+      "synthesisText": "54",
+      "example": "Getal"
+    },
+    "55": {
+      "synthesisText": "55",
+      "example": "Getal"
+    },
+    "56": {
+      "synthesisText": "56",
+      "example": "Getal"
+    },
+    "57": {
+      "synthesisText": "57",
+      "example": "Getal"
+    },
+    "58": {
+      "synthesisText": "58",
+      "example": "Getal"
+    },
+    "59": {
+      "synthesisText": "59",
+      "example": "Getal"
+    },
+    "60": {
+      "synthesisText": "60",
+      "example": "Getal"
+    },
+    "61": {
+      "synthesisText": "61",
+      "example": "Getal"
+    },
+    "62": {
+      "synthesisText": "62",
+      "example": "Getal"
+    },
+    "63": {
+      "synthesisText": "63",
+      "example": "Getal"
+    },
+    "64": {
+      "synthesisText": "64",
+      "example": "Getal"
+    },
+    "65": {
+      "synthesisText": "65",
+      "example": "Getal"
+    },
+    "66": {
+      "synthesisText": "66",
+      "example": "Getal"
+    },
+    "67": {
+      "synthesisText": "67",
+      "example": "Getal"
+    },
+    "68": {
+      "synthesisText": "68",
+      "example": "Getal"
+    },
+    "69": {
+      "synthesisText": "69",
+      "example": "Getal"
+    },
+    "70": {
+      "synthesisText": "70",
+      "example": "Getal"
+    },
+    "71": {
+      "synthesisText": "71",
+      "example": "Getal"
+    },
+    "72": {
+      "synthesisText": "72",
+      "example": "Getal"
+    },
+    "73": {
+      "synthesisText": "73",
+      "example": "Getal"
+    },
+    "74": {
+      "synthesisText": "74",
+      "example": "Getal"
+    },
+    "75": {
+      "synthesisText": "75",
+      "example": "Getal"
+    },
+    "76": {
+      "synthesisText": "76",
+      "example": "Getal"
+    },
+    "77": {
+      "synthesisText": "77",
+      "example": "Getal"
+    },
+    "78": {
+      "synthesisText": "78",
+      "example": "Getal"
+    },
+    "79": {
+      "synthesisText": "79",
+      "example": "Getal"
+    },
+    "80": {
+      "synthesisText": "80",
+      "example": "Getal"
+    },
+    "81": {
+      "synthesisText": "81",
+      "example": "Getal"
+    },
+    "82": {
+      "synthesisText": "82",
+      "example": "Getal"
+    },
+    "83": {
+      "synthesisText": "83",
+      "example": "Getal"
+    },
+    "84": {
+      "synthesisText": "84",
+      "example": "Getal"
+    },
+    "85": {
+      "synthesisText": "85",
+      "example": "Getal"
+    },
+    "86": {
+      "synthesisText": "86",
+      "example": "Getal"
+    },
+    "87": {
+      "synthesisText": "87",
+      "example": "Getal"
+    },
+    "88": {
+      "synthesisText": "88",
+      "example": "Getal"
+    },
+    "89": {
+      "synthesisText": "89",
+      "example": "Getal"
+    },
+    "90": {
+      "synthesisText": "90",
+      "example": "Getal"
+    },
+    "91": {
+      "synthesisText": "91",
+      "example": "Getal"
+    },
+    "92": {
+      "synthesisText": "92",
+      "example": "Getal"
+    },
+    "93": {
+      "synthesisText": "93",
+      "example": "Getal"
+    },
+    "94": {
+      "synthesisText": "94",
+      "example": "Getal"
+    },
+    "95": {
+      "synthesisText": "95",
+      "example": "Getal"
+    },
+    "96": {
+      "synthesisText": "96",
+      "example": "Getal"
+    },
+    "97": {
+      "synthesisText": "97",
+      "example": "Getal"
+    },
+    "98": {
+      "synthesisText": "98",
+      "example": "Getal"
+    },
+    "99": {
+      "synthesisText": "99",
+      "example": "Getal"
+    },
+    "100": {
+      "synthesisText": "100",
+      "example": "Getal"
+    },
+    "200": {
+      "synthesisText": "200",
+      "example": "Getal"
+    },
+    "300": {
+      "synthesisText": "300",
+      "example": "Getal"
+    },
+    "400": {
+      "synthesisText": "400",
+      "example": "Getal"
+    },
+    "500": {
+      "synthesisText": "500",
+      "example": "Getal"
+    },
+    "600": {
+      "synthesisText": "600",
+      "example": "Getal"
+    },
+    "700": {
+      "synthesisText": "700",
+      "example": "Getal"
+    },
+    "800": {
+      "synthesisText": "800",
+      "example": "Getal"
+    },
+    "900": {
+      "synthesisText": "900",
+      "example": "Getal"
+    },
+    "1000": {
+      "synthesisText": "1000",
+      "example": "Getal"
+    },
+    "de klank eu": {
+      "synthesisText": "de klank [[ 2: ]]",
+      "example": "Luisteroefening",
+      "lengthScale": 1.12
+    },
+    "jeuk": {
+      "synthesisText": "[[ j 2: k ]]",
+      "example": "Het woord jeuk",
+      "lengthScale": 1.22
+    },
+    "welke letter ontbreekt? het woord is jeuk.": {
+      "synthesisText": "Welke letter ontbreekt? Het woord is [[ j 2: k ]].",
+      "example": "Schrijven zonder het woord te spellen",
+      "lengthScale": 1.18
+    },
+    "honden": {
+      "synthesisText": "honden",
+      "example": "Meervoud van hond",
+      "lengthScale": 1.18
+    },
+    "gemengde bewerkingen": {
+      "synthesisText": "gemengde bewerkingen",
+      "example": "Wiskundecategorie",
+      "lengthScale": 1.18
+    },
+    "gemengde berekeningen": {
+      "synthesisText": "gemengde berekeningen",
+      "example": "Wiskundecategorie",
+      "lengthScale": 1.18
+    }
+  }
+}

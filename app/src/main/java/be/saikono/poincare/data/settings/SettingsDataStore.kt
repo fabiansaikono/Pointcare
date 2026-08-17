@@ -4,13 +4,37 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import be.saikono.poincare.data.story.StoryProgress
+import be.saikono.poincare.data.story.normalizedStoryLocale
 import be.saikono.poincare.model.AnimationSettings
+import be.saikono.poincare.model.LearningDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+const val DEFAULT_LESSON_MASTERY_THRESHOLD_PERCENT = 75
+private const val MAX_TEACHER_ID_LENGTH = 64
+
+internal fun normalizedTeacherId(value: String): String =
+    value.trim().take(MAX_TEACHER_ID_LENGTH)
+
+internal fun normalizedLessonMasteryThresholdPercent(value: Int): Int =
+    (((value.coerceIn(50, 100) + 2) / 5) * 5).coerceIn(50, 100)
+
+data class LessonMasteryThresholdSettings(
+    val defaultPercent: Int = DEFAULT_LESSON_MASTERY_THRESHOLD_PERCENT,
+    val overrides: Map<LearningDomain, Int> = emptyMap()
+) {
+    fun effectivePercent(domain: LearningDomain): Int = overrides[domain] ?: defaultPercent
+}
+
 class SettingsDataStore(private val context: Context) {
+    private val json = Json { ignoreUnknownKeys = false }
+
     private object Keys {
         val SELECTED_PROFILE_ID = stringPreferencesKey("selected_profile_id")
         val PARENT_PIN = stringPreferencesKey("parent_pin")
@@ -27,6 +51,13 @@ class SettingsDataStore(private val context: Context) {
         fun voiceIdKey(profileId: String, locale: String) = stringPreferencesKey("voice_id_${profileId}_$locale")
         fun pitchKey(profileId: String, locale: String) = floatPreferencesKey("pitch_${profileId}_$locale")
         fun rateKey(profileId: String, locale: String) = floatPreferencesKey("rate_${profileId}_$locale")
+        fun storyProgressKey(profileId: String, storyId: String, locale: String) =
+            stringPreferencesKey("story_progress_${profileId}_${storyId}_${locale.normalizedStoryLocale()}")
+        fun lessonMasteryThresholdKey(profileId: String) =
+            intPreferencesKey("lesson_mastery_threshold_percent_$profileId")
+        fun lessonMasteryThresholdOverrideKey(profileId: String, domain: LearningDomain) =
+            intPreferencesKey("lesson_mastery_threshold_percent_${profileId}_${domain.name.lowercase()}")
+        fun teacherIdKey(profileId: String) = stringPreferencesKey("teacher_id_$profileId")
     }
 
     val appLanguage: Flow<String?> = context.dataStore.data.map { preferences ->
@@ -102,6 +133,84 @@ class SettingsDataStore(private val context: Context) {
             else preferences[Keys.voiceIdKey(profileId, locale)] = settings.voiceId
             preferences[Keys.pitchKey(profileId, locale)] = settings.pitch
             preferences[Keys.rateKey(profileId, locale)] = settings.rate
+        }
+    }
+
+    fun getTeacherId(profileId: String): Flow<String> = context.dataStore.data.map { preferences ->
+        preferences[Keys.teacherIdKey(profileId)].orEmpty()
+    }
+
+    suspend fun setTeacherId(profileId: String, teacherId: String) {
+        val normalized = normalizedTeacherId(teacherId)
+        context.dataStore.edit { preferences ->
+            val key = Keys.teacherIdKey(profileId)
+            if (normalized.isBlank()) preferences.remove(key)
+            else preferences[key] = normalized
+        }
+    }
+
+    fun getStoryProgress(profileId: String, storyId: String, locale: String): Flow<StoryProgress> {
+        val normalizedLocale = locale.normalizedStoryLocale()
+        val key = Keys.storyProgressKey(profileId, storyId, normalizedLocale)
+        return context.dataStore.data.map { preferences ->
+            preferences[key]?.let { encoded ->
+                runCatching { json.decodeFromString<StoryProgress>(encoded) }.getOrNull()
+            } ?: StoryProgress(profileId = profileId, storyId = storyId, locale = normalizedLocale)
+        }
+    }
+
+    suspend fun setStoryProgress(progress: StoryProgress) {
+        val normalized = progress.copy(locale = progress.locale.normalizedStoryLocale())
+        context.dataStore.edit { preferences ->
+            preferences[Keys.storyProgressKey(normalized.profileId, normalized.storyId, normalized.locale)] =
+                json.encodeToString(normalized)
+        }
+    }
+
+    fun getLessonMasteryThresholdPercent(profileId: String): Flow<Int> =
+        getLessonMasteryThresholdSettings(profileId).map { it.defaultPercent }
+
+    fun getLessonMasteryThresholdSettings(profileId: String): Flow<LessonMasteryThresholdSettings> =
+        context.dataStore.data.map { preferences ->
+            val defaultPercent = normalizedLessonMasteryThresholdPercent(
+                preferences[Keys.lessonMasteryThresholdKey(profileId)]
+                    ?: DEFAULT_LESSON_MASTERY_THRESHOLD_PERCENT
+            )
+            val overrides = LearningDomain.entries.mapNotNull { domain ->
+                preferences[Keys.lessonMasteryThresholdOverrideKey(profileId, domain)]?.let { value ->
+                    domain to normalizedLessonMasteryThresholdPercent(value)
+                }
+            }.toMap()
+            LessonMasteryThresholdSettings(
+                defaultPercent = defaultPercent,
+                overrides = overrides
+            )
+        }
+
+    fun getEffectiveLessonMasteryThresholdPercent(
+        profileId: String,
+        domain: LearningDomain
+    ): Flow<Int> = getLessonMasteryThresholdSettings(profileId).map { it.effectivePercent(domain) }
+
+    suspend fun setLessonMasteryThresholdPercent(profileId: String, percent: Int) {
+        context.dataStore.edit { preferences ->
+            preferences[Keys.lessonMasteryThresholdKey(profileId)] =
+                normalizedLessonMasteryThresholdPercent(percent)
+        }
+    }
+
+    suspend fun setLessonMasteryThresholdOverride(
+        profileId: String,
+        domain: LearningDomain,
+        percent: Int?
+    ) {
+        context.dataStore.edit { preferences ->
+            val key = Keys.lessonMasteryThresholdOverrideKey(profileId, domain)
+            if (percent == null) {
+                preferences.remove(key)
+            } else {
+                preferences[key] = normalizedLessonMasteryThresholdPercent(percent)
+            }
         }
     }
 }

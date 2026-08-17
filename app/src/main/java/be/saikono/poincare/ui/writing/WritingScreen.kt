@@ -214,15 +214,19 @@ private fun LetterChooserDialog(
 ) {
     var showUppercase by rememberSaveable { mutableStateOf(false) }
     val language = locale.substringBefore('-').substringBefore('_').lowercase()
-    val title = when (language) {
-        "fr" -> "Choisis une lettre"
-        "en" -> "Choose a letter"
+    val basicStrokes = choices.any { choice -> choice.letter.length != 1 || !choice.letter.single().isLetter() }
+    val title = when {
+        basicStrokes && language == "fr" -> "Choisis un tracé"
+        basicStrokes && language == "en" -> "Choose a stroke"
+        basicStrokes -> "Kies een lijn of vorm"
+        language == "fr" -> "Choisis une lettre"
+        language == "en" -> "Choose a letter"
         else -> "Kies een letter"
     }
     val lowerLabel = when (language) { "fr" -> "Minuscules"; "en" -> "Lowercase"; else -> "Kleine letters" }
     val upperLabel = when (language) { "fr" -> "Majuscules"; "en" -> "Uppercase"; else -> "Hoofdletters" }
     val randomLabel = when (language) { "fr" -> "Aléatoire"; "en" -> "Random practice"; else -> "Willekeurig oefenen" }
-    val visibleChoices = choices.filter { it.uppercase == showUppercase }
+    val visibleChoices = if (basicStrokes) choices else choices.filter { it.uppercase == showUppercase }
 
     Dialog(onDismissRequest = onClose) {
         Surface(
@@ -237,9 +241,11 @@ private fun LetterChooserDialog(
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 Text(title, color = StarWhite, style = MaterialTheme.typography.headlineSmall)
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    LetterCaseButton(lowerLabel, selected = !showUppercase, Modifier.weight(1f)) { showUppercase = false }
-                    LetterCaseButton(upperLabel, selected = showUppercase, Modifier.weight(1f)) { showUppercase = true }
+                if (!basicStrokes && choices.any(LetterChoice::uppercase) && choices.any { !it.uppercase }) {
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        LetterCaseButton(lowerLabel, selected = !showUppercase, Modifier.weight(1f)) { showUppercase = false }
+                        LetterCaseButton(upperLabel, selected = showUppercase, Modifier.weight(1f)) { showUppercase = true }
+                    }
                 }
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(6),
@@ -273,7 +279,7 @@ private fun LetterChooserDialog(
                         }
                     }
                 }
-                Button(
+                if (!basicStrokes && choices.size >= 52) Button(
                     shape = RoundedCornerShape(12.dp),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = onRandomSelected,

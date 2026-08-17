@@ -1,0 +1,2949 @@
+{
+  "schemaVersion": 1,
+  "grade": 2,
+  "sourceUnitCount": 65,
+  "sourcePhaseRecordCount": 195,
+  "newAtomicLessonCount": 107,
+  "policy": "One canonical source unit maps to one or more atomic V2 lessons; acquire/practice/transfer are source phases, not separate V2 lessons.",
+  "publicationStatus": "DRAFT_REVIEW_REQUIRED",
+  "retiredLessonAliases": {
+    "lesson.g2.language.technical_reading.fluency": [
+      "lesson.g2.nl.technical-reading.meerlettergrepige-woorden-ontsleutelen.meerlettergrepige-woorden-ontsleutelen"
+    ],
+    "lesson.g2.spelling.rules.punctuation_syllables_plural": [
+      "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.open-en-gesloten-lettergrepen"
+    ],
+    "lesson.g2.language.writing.short_texts": [
+      "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.zinnen-uitbreiden",
+      "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.zinnen-verbinden"
+    ],
+    "lesson.g2.language.listening.extended_instructions": [
+      "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.gericht-luisteren",
+      "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.mondeling-ordenen"
+    ],
+    "lesson.g2.math.operations.expansion": [
+      "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.tientallen-en-eenheden",
+      "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.plaatswaarde-en-cijferwaarde"
+    ],
+    "lesson.g2.geometry.measurement_context": [
+      "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.lengte-cm-m",
+      "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.massa-g-kg",
+      "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.inhoud-liter"
+    ],
+    "lesson.g2.math.statistics.introduction": [
+      "lesson.g2.math.data.tabellen-en-staafdiagrammen.tabellen-lezen",
+      "lesson.g2.math.data.tabellen-en-staafdiagrammen.staafdiagrammen-lezen"
+    ],
+    "lesson.g2.world.integrated_foundations": [
+      "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-plant",
+      "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-dier"
+    ],
+    "lesson.g2.world.digital.media_safety": [
+      "lesson.g2.ict.devices-data.bestanden-mappen-en-eenvoudige-data.bestanden-en-mappen",
+      "lesson.g2.ict.devices-data.bestanden-mappen-en-eenvoudige-data.eenvoudige-data"
+    ],
+    "lesson.g2.world.citizenship.emotions_conflicts": [
+      "lesson.g2.attitudes.social-emotional.impuls-keuze-en-gevolg.impuls-keuze-en-gevolg"
+    ]
+  },
+  "retainedPilotMigration": {
+    "lessonId": "lesson.g2.world.nature.seasons.order-and-signs",
+    "preservedStageIds": true,
+    "preservedExerciseSetIds": true,
+    "change": "Moved the independent set into PRACTISE and converted the third stage to APPLY_DEMONSTRATE; gate ratio is 0.8."
+  },
+  "units": [
+    {
+      "sourceUnitId": "unit.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "sourceSequence": 1,
+      "sourceTitle": "Meerlettergrepige woorden ontsleutelen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen.acquire",
+        "lesson.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen.practice",
+        "lesson.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.technical-reading.meerlettergrepige-woorden-ontsleutelen.meerlettergrepige-woorden-ontsleutelen",
+          "title": "Meerlettergrepige woorden ontsleutelen",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.technical_reading",
+          "grade": 2,
+          "sequence": 1,
+          "coveredGoals": [
+            "MD-NL-1.1-vlot-vloeiend-lezen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen.acquire",
+            "lesson.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen.practice",
+            "lesson.g2.nl.technical_reading.meerlettergrepige-woorden-ontsleutelen.transfer",
+            "lesson.g2.language.technical_reading.fluency"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "sourceSequence": 2,
+      "sourceTitle": "Woordfamilies, voor- en achtervoegsels",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels.acquire",
+        "lesson.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels.practice",
+        "lesson.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.technical-reading.woordfamilies-voor-en-achtervoegsels.woordfamilies-en-stammen",
+          "title": "Woordfamilies en stammen",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.technical_reading",
+          "grade": 2,
+          "sequence": 2,
+          "coveredGoals": [
+            "MD-NL-1.1-vlot-vloeiend-lezen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels.acquire",
+            "lesson.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels.practice",
+            "lesson.g2.nl.technical_reading.woordfamilies-voor-en-achtervoegsels.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.technical-reading.meerlettergrepige-woorden-ontsleutelen.meerlettergrepige-woorden-ontsleutelen"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.nl.technical-reading.woordfamilies-voor-en-achtervoegsels.voor-en-achtervoegsels",
+          "title": "Voor- en achtervoegsels",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.technical_reading",
+          "grade": 2,
+          "sequence": 3,
+          "coveredGoals": [
+            "MD-NL-1.1-vlot-vloeiend-lezen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.technical-reading.woordfamilies-voor-en-achtervoegsels.woordfamilies-en-stammen",
+            "lesson.g2.nl.technical-reading.meerlettergrepige-woorden-ontsleutelen.meerlettergrepige-woorden-ontsleutelen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "sourceSequence": 3,
+      "sourceTitle": "Vlot lezen met tempo en intonatie",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie.acquire",
+        "lesson.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie.practice",
+        "lesson.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.technical-reading.vlot-lezen-met-tempo-en-intonatie.vlot-lezen-met-tempo-en-intonatie",
+          "title": "Vlot lezen met tempo en intonatie",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.technical_reading",
+          "grade": 2,
+          "sequence": 4,
+          "coveredGoals": [
+            "MD-NL-1.1-vlot-vloeiend-lezen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie.acquire",
+            "lesson.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie.practice",
+            "lesson.g2.nl.technical_reading.vlot-lezen-met-tempo-en-intonatie.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.technical-reading.woordfamilies-voor-en-achtervoegsels.voor-en-achtervoegsels"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "sourceSequence": 4,
+      "sourceTitle": "Complexe klinker- en medeklinkerpatronen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen.acquire",
+        "lesson.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen.practice",
+        "lesson.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.technical-reading.complexe-klinker-en-medeklinkerpatronen.complexe-klinkerpatronen",
+          "title": "Klinkerpatronen aai, ooi, oei, eeuw en ieuw",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.technical_reading",
+          "grade": 2,
+          "sequence": 5,
+          "coveredGoals": [
+            "MD-NL-1.1-vlot-vloeiend-lezen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen.acquire",
+            "lesson.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen.practice",
+            "lesson.g2.nl.technical_reading.complexe-klinker-en-medeklinkerpatronen.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.technical-reading.vlot-lezen-met-tempo-en-intonatie.vlot-lezen-met-tempo-en-intonatie"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.nl.technical-reading.complexe-klinker-en-medeklinkerpatronen.medeklinkerclusters",
+          "title": "Moeilijke medeklinkerclusters",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.technical_reading",
+          "grade": 2,
+          "sequence": 6,
+          "coveredGoals": [
+            "MD-NL-1.1-vlot-vloeiend-lezen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.technical-reading.complexe-klinker-en-medeklinkerpatronen.complexe-klinkerpatronen",
+            "lesson.g2.nl.technical-reading.vlot-lezen-met-tempo-en-intonatie.vlot-lezen-met-tempo-en-intonatie"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.comprehension.expliciete-informatie-lokaliseren",
+      "subjectId": "nl",
+      "domainId": "comprehension",
+      "sourceSequence": 5,
+      "sourceTitle": "Expliciete informatie lokaliseren",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.acquire",
+        "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.practice",
+        "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.expliciete-informatie-lokaliseren",
+          "title": "Expliciete informatie lokaliseren",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.reading_comprehension",
+          "grade": 2,
+          "sequence": 7,
+          "coveredGoals": [
+            "MD-NL-1.1-tekstbegrip"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.acquire",
+            "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.practice",
+            "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.1-tekstbegrip"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken",
+      "subjectId": "nl",
+      "domainId": "comprehension",
+      "sourceSequence": 6,
+      "sourceTitle": "Eenvoudige gevolgtrekkingen maken",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.acquire",
+        "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.practice",
+        "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.eenvoudige-gevolgtrekkingen-maken",
+          "title": "Eenvoudige gevolgtrekkingen maken",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.reading_comprehension",
+          "grade": 2,
+          "sequence": 8,
+          "coveredGoals": [
+            "MD-NL-1.1-tekstbegrip"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.acquire",
+            "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.practice",
+            "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.comprehension.expliciete-informatie-lokaliseren.expliciete-informatie-lokaliseren"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.1-tekstbegrip"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.comprehension.tekststructuur-en-volgorde",
+      "subjectId": "nl",
+      "domainId": "comprehension",
+      "sourceSequence": 7,
+      "sourceTitle": "Tekststructuur en volgorde",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.acquire",
+        "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.practice",
+        "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.tekststructuur-en-volgorde",
+          "title": "Tekststructuur en volgorde",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.reading_comprehension",
+          "grade": 2,
+          "sequence": 9,
+          "coveredGoals": [
+            "MD-NL-1.1-tekstbegrip"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.acquire",
+            "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.practice",
+            "lesson.g2.nl.comprehension.tekststructuur-en-volgorde.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.comprehension.eenvoudige-gevolgtrekkingen-maken.eenvoudige-gevolgtrekkingen-maken"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.1-tekstbegrip"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.handwriting.verbinden-ritme-en-spatiering",
+      "subjectId": "nl",
+      "domainId": "handwriting",
+      "sourceSequence": 8,
+      "sourceTitle": "Verbinden, ritme en spatiëring",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.acquire",
+        "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.practice",
+        "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.letters-verbinden",
+          "title": "Letters vloeiend verbinden",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.writing_expression",
+          "grade": 2,
+          "sequence": 10,
+          "coveredGoals": [
+            "MD-NL-1.2-handschrift-digitaal"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.acquire",
+            "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.practice",
+            "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.spatiering-en-regelmaat",
+          "title": "Spaties en regelmaat",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.writing_expression",
+          "grade": 2,
+          "sequence": 11,
+          "coveredGoals": [
+            "MD-NL-1.2-handschrift-digitaal"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.handwriting.verbinden-ritme-en-spatiering.letters-verbinden"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.2-handschrift-digitaal"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.spelling.open-en-gesloten-lettergrepen",
+      "subjectId": "nl",
+      "domainId": "spelling",
+      "sourceSequence": 9,
+      "sourceTitle": "Open en gesloten lettergrepen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.acquire",
+        "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.practice",
+        "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.open-en-gesloten-lettergrepen",
+          "title": "Open en gesloten lettergrepen",
+          "categoryId": "spelling_grammar",
+          "subcategoryId": "spelling.rules_word_patterns",
+          "grade": 2,
+          "sequence": 12,
+          "coveredGoals": [
+            "MD-NL-1.2-correct-schrijven"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.acquire",
+            "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.practice",
+            "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.transfer",
+            "lesson.g2.spelling.rules.punctuation_syllables_plural"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.2-correct-schrijven"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.spelling.eindklanken-ng-nk-en-ch-g",
+      "subjectId": "nl",
+      "domainId": "spelling",
+      "sourceSequence": 10,
+      "sourceTitle": "Eindklanken, ng/nk en ch/g",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.acquire",
+        "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.practice",
+        "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.eindklanken-en-verlengproef",
+          "title": "Eindklanken controleren met de verlengproef",
+          "categoryId": "spelling_grammar",
+          "subcategoryId": "spelling.rules_word_patterns",
+          "grade": 2,
+          "sequence": 13,
+          "coveredGoals": [
+            "MD-NL-1.2-correct-schrijven"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.acquire",
+            "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.practice",
+            "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.open-en-gesloten-lettergrepen"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.ng-nk-ch-g",
+          "title": "ng, nk, ch en g schrijven",
+          "categoryId": "spelling_grammar",
+          "subcategoryId": "spelling.rules_word_patterns",
+          "grade": 2,
+          "sequence": 14,
+          "coveredGoals": [
+            "MD-NL-1.2-correct-schrijven"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.eindklanken-en-verlengproef",
+            "lesson.g2.nl.spelling.open-en-gesloten-lettergrepen.open-en-gesloten-lettergrepen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.2-correct-schrijven"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.spelling.meervouden-en-verkleinwoorden",
+      "subjectId": "nl",
+      "domainId": "spelling",
+      "sourceSequence": 11,
+      "sourceTitle": "Meervouden en verkleinwoorden",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.acquire",
+        "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.practice",
+        "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.meervouden",
+          "title": "Meervouden met -en en -s",
+          "categoryId": "spelling_grammar",
+          "subcategoryId": "spelling.rules_word_patterns",
+          "grade": 2,
+          "sequence": 15,
+          "coveredGoals": [
+            "MD-NL-1.2-correct-schrijven"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.acquire",
+            "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.practice",
+            "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.ng-nk-ch-g"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.verkleinwoorden",
+          "title": "Verkleinwoorden met -je en -tje",
+          "categoryId": "spelling_grammar",
+          "subcategoryId": "spelling.rules_word_patterns",
+          "grade": 2,
+          "sequence": 16,
+          "coveredGoals": [
+            "MD-NL-1.2-correct-schrijven"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.spelling.meervouden-en-verkleinwoorden.meervouden",
+            "lesson.g2.nl.spelling.eindklanken-ng-nk-en-ch-g.ng-nk-ch-g"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.2-correct-schrijven"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.composition.zinnen-uitbreiden-en-verbinden",
+      "subjectId": "nl",
+      "domainId": "composition",
+      "sourceSequence": 12,
+      "sourceTitle": "Zinnen uitbreiden en verbinden",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.acquire",
+        "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.practice",
+        "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.zinnen-uitbreiden",
+          "title": "Zinnen uitbreiden",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.writing_expression",
+          "grade": 2,
+          "sequence": 17,
+          "coveredGoals": [
+            "MD-NL-1.2-schrijven-leren-delen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.acquire",
+            "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.practice",
+            "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.transfer",
+            "lesson.g2.language.writing.short_texts"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.zinnen-verbinden",
+          "title": "Zinnen verbinden",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.writing_expression",
+          "grade": 2,
+          "sequence": 18,
+          "coveredGoals": [
+            "MD-NL-1.2-schrijven-leren-delen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.composition.zinnen-uitbreiden-en-verbinden.zinnen-uitbreiden"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.2-schrijven-leren-delen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen",
+      "subjectId": "nl",
+      "domainId": "oral",
+      "sourceSequence": 13,
+      "sourceTitle": "Gericht luisteren en mondeling ordenen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.acquire",
+        "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.practice",
+        "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.gericht-luisteren",
+          "title": "Gericht luisteren",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.listening_comprehension",
+          "grade": 2,
+          "sequence": 19,
+          "coveredGoals": [
+            "MD-NL-1.3-mondeling-taalgebruik"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.acquire",
+            "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.practice",
+            "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.transfer",
+            "lesson.g2.language.listening.extended_instructions"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.mondeling-ordenen",
+          "title": "Mondeling geordend vertellen",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.speaking_interaction",
+          "grade": 2,
+          "sequence": 20,
+          "coveredGoals": [
+            "MD-NL-1.3-mondeling-taalgebruik"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.oral.gericht-luisteren-en-mondeling-ordenen.gericht-luisteren"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-1.3-mondeling-taalgebruik"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.nl.literature.personages-sfeer-en-taalspel",
+      "subjectId": "nl",
+      "domainId": "literature",
+      "sourceSequence": 14,
+      "sourceTitle": "Personages, sfeer en taalspel",
+      "oldPhaseLessonIds": [
+        "lesson.g2.nl.literature.personages-sfeer-en-taalspel.acquire",
+        "lesson.g2.nl.literature.personages-sfeer-en-taalspel.practice",
+        "lesson.g2.nl.literature.personages-sfeer-en-taalspel.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.nl.literature.personages-sfeer-en-taalspel.personages-en-sfeer",
+          "title": "Personages en sfeer",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.literature_experience",
+          "grade": 2,
+          "sequence": 21,
+          "coveredGoals": [
+            "MD-NL-literatuur"
+          ],
+          "legacyAliases": [
+            "lesson.g2.nl.literature.personages-sfeer-en-taalspel.acquire",
+            "lesson.g2.nl.literature.personages-sfeer-en-taalspel.practice",
+            "lesson.g2.nl.literature.personages-sfeer-en-taalspel.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.nl.literature.personages-sfeer-en-taalspel.rijm-herhaling-humor",
+          "title": "Rijm, herhaling en humor",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.literature_experience",
+          "grade": 2,
+          "sequence": 22,
+          "coveredGoals": [
+            "MD-NL-literatuur"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.nl.literature.personages-sfeer-en-taalspel.personages-en-sfeer"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-NL-literatuur"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100",
+      "subjectId": "math",
+      "domainId": "numbers",
+      "sourceSequence": 1,
+      "sourceTitle": "Getalbegrip en plaatswaarde tot 100",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.acquire",
+        "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.practice",
+        "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.tientallen-en-eenheden",
+          "title": "Tientallen en eenheden tot 100",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.number_place_value",
+          "grade": 2,
+          "sequence": 23,
+          "coveredGoals": [
+            "MD-WIS-2.1-getallenkennis"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.acquire",
+            "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.practice",
+            "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.transfer",
+            "lesson.g2.math.operations.expansion"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.plaatswaarde-en-cijferwaarde",
+          "title": "Plaatswaarde en cijferwaarde",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.number_place_value",
+          "grade": 2,
+          "sequence": 24,
+          "coveredGoals": [
+            "MD-WIS-2.1-getallenkennis"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.tientallen-en-eenheden"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.1-getallenkennis"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.numbers.tellen-in-sprongen-en-getalpatronen",
+      "subjectId": "math",
+      "domainId": "numbers",
+      "sourceSequence": 2,
+      "sourceTitle": "Tellen in sprongen en getalpatronen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.acquire",
+        "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.practice",
+        "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.tellen-in-sprongen",
+          "title": "Tellen in sprongen van 2, 5 en 10",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.number_place_value",
+          "grade": 2,
+          "sequence": 25,
+          "coveredGoals": [
+            "MD-WIS-2.1-getallenkennis"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.acquire",
+            "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.practice",
+            "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.plaatswaarde-en-cijferwaarde"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.getalpatronen",
+          "title": "Getalpatronen aanvullen",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.number_place_value",
+          "grade": 2,
+          "sequence": 26,
+          "coveredGoals": [
+            "MD-WIS-2.1-getallenkennis"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.numbers.tellen-in-sprongen-en-getalpatronen.tellen-in-sprongen",
+            "lesson.g2.math.numbers.getalbegrip-en-plaatswaarde-tot-100.plaatswaarde-en-cijferwaarde"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.1-getallenkennis"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug",
+      "subjectId": "math",
+      "domainId": "operations",
+      "sourceSequence": 3,
+      "sourceTitle": "Optellen en aftrekken tot 100 zonder en met brug",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.acquire",
+        "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.practice",
+        "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.optellen-zonder-brug",
+          "title": "Optellen tot 100 zonder brug",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.addition_subtraction",
+          "grade": 2,
+          "sequence": 27,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.acquire",
+            "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.practice",
+            "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.aftrekken-zonder-brug",
+          "title": "Aftrekken tot 100 zonder brug",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.addition_subtraction",
+          "grade": 2,
+          "sequence": 28,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.optellen-zonder-brug"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.optellen-met-brug",
+          "title": "Optellen tot 100 met brug",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.addition_subtraction",
+          "grade": 2,
+          "sequence": 29,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.aftrekken-zonder-brug"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.aftrekken-met-brug",
+          "title": "Aftrekken tot 100 met brug",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.addition_subtraction",
+          "grade": 2,
+          "sequence": 30,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.optellen-met-brug"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.2-bewerkingen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.operations.rekenfeiten-tot-20-automatiseren",
+      "subjectId": "math",
+      "domainId": "operations",
+      "sourceSequence": 4,
+      "sourceTitle": "Rekenfeiten tot 20 automatiseren",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.acquire",
+        "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.practice",
+        "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.rekenfeiten-tot-20-automatiseren",
+          "title": "Rekenfeiten tot 20 automatiseren",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.addition_subtraction",
+          "grade": 2,
+          "sequence": 31,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.acquire",
+            "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.practice",
+            "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.operations.optellen-en-aftrekken-tot-100-zonder-en-met-brug.aftrekken-met-brug"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.2-bewerkingen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.operations.vermenigvuldigen-als-gelijke-groepen",
+      "subjectId": "math",
+      "domainId": "operations",
+      "sourceSequence": 5,
+      "sourceTitle": "Vermenigvuldigen als gelijke groepen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.acquire",
+        "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.practice",
+        "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.vermenigvuldigen-als-gelijke-groepen",
+          "title": "Vermenigvuldigen als gelijke groepen",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.multiplication_division",
+          "grade": 2,
+          "sequence": 32,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.acquire",
+            "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.practice",
+            "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.operations.rekenfeiten-tot-20-automatiseren.rekenfeiten-tot-20-automatiseren"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.2-bewerkingen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.operations.delen-als-verdelen-en-groeperen",
+      "subjectId": "math",
+      "domainId": "operations",
+      "sourceSequence": 6,
+      "sourceTitle": "Delen als verdelen en groeperen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.acquire",
+        "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.practice",
+        "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.eerlijk-verdelen",
+          "title": "Delen als eerlijk verdelen",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.multiplication_division",
+          "grade": 2,
+          "sequence": 33,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.acquire",
+            "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.practice",
+            "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.vermenigvuldigen-als-gelijke-groepen"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.groepjes-maken",
+          "title": "Delen door groepjes te maken",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.multiplication_division",
+          "grade": 2,
+          "sequence": 34,
+          "coveredGoals": [
+            "MD-WIS-2.2-bewerkingen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.operations.delen-als-verdelen-en-groeperen.eerlijk-verdelen",
+            "lesson.g2.math.operations.vermenigvuldigen-als-gelijke-groepen.vermenigvuldigen-als-gelijke-groepen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.2-bewerkingen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.fractions.helften-kwarten-en-derden",
+      "subjectId": "math",
+      "domainId": "fractions",
+      "sourceSequence": 7,
+      "sourceTitle": "Helften, kwarten en derden",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.fractions.helften-kwarten-en-derden.acquire",
+        "lesson.g2.math.fractions.helften-kwarten-en-derden.practice",
+        "lesson.g2.math.fractions.helften-kwarten-en-derden.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.fractions.helften-kwarten-en-derden.helften-kwarten-en-derden",
+          "title": "Helften, kwarten en derden",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.fractions",
+          "grade": 2,
+          "sequence": 35,
+          "coveredGoals": [
+            "MD-WIS-2.1-2.2-breuken-decimalen-procenten"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.fractions.helften-kwarten-en-derden.acquire",
+            "lesson.g2.math.fractions.helften-kwarten-en-derden.practice",
+            "lesson.g2.math.fractions.helften-kwarten-en-derden.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.1-2.2-breuken-decimalen-procenten"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud",
+      "subjectId": "math",
+      "domainId": "measurement",
+      "sourceSequence": 8,
+      "sourceTitle": "Standaardmaten voor lengte, massa en inhoud",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.acquire",
+        "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.practice",
+        "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.lengte-cm-m",
+          "title": "Lengte meten in centimeter en meter",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.length_perimeter_scale",
+          "grade": 2,
+          "sequence": 36,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.acquire",
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.practice",
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.transfer",
+            "lesson.g2.geometry.measurement_context"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.massa-g-kg",
+          "title": "Massa meten in gram en kilogram",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.mass_weight",
+          "grade": 2,
+          "sequence": 37,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.lengte-cm-m"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.inhoud-liter",
+          "title": "Inhoud meten in liter",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.capacity_volume",
+          "grade": 2,
+          "sequence": 38,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.massa-g-kg"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.3-meten-metend-rekenen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.measurement.klok-duur-en-kalender",
+      "subjectId": "math",
+      "domainId": "measurement",
+      "sourceSequence": 9,
+      "sourceTitle": "Klok, duur en kalender",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.measurement.klok-duur-en-kalender.acquire",
+        "lesson.g2.math.measurement.klok-duur-en-kalender.practice",
+        "lesson.g2.math.measurement.klok-duur-en-kalender.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.measurement.klok-duur-en-kalender.kloklezen",
+          "title": "Kloklezen tot op een kwartier",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.time_calendar",
+          "grade": 2,
+          "sequence": 39,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.measurement.klok-duur-en-kalender.acquire",
+            "lesson.g2.math.measurement.klok-duur-en-kalender.practice",
+            "lesson.g2.math.measurement.klok-duur-en-kalender.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.inhoud-liter"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.measurement.klok-duur-en-kalender.tijdsduur",
+          "title": "Begintijd, eindtijd en duur",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.time_calendar",
+          "grade": 2,
+          "sequence": 40,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.measurement.klok-duur-en-kalender.kloklezen",
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.inhoud-liter"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.measurement.klok-duur-en-kalender.kalender",
+          "title": "Rekenen met de kalender",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.time_calendar",
+          "grade": 2,
+          "sequence": 41,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.measurement.klok-duur-en-kalender.tijdsduur",
+            "lesson.g2.math.measurement.standaardmaten-voor-lengte-massa-en-inhoud.inhoud-liter"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.3-meten-metend-rekenen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.measurement.geld-rekenen-tot-100-euro",
+      "subjectId": "math",
+      "domainId": "measurement",
+      "sourceSequence": 10,
+      "sourceTitle": "Geld rekenen tot 100 euro",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.acquire",
+        "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.practice",
+        "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.bedragen-samenstellen",
+          "title": "Bedragen tot 100 euro samenstellen",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.money_financial_literacy",
+          "grade": 2,
+          "sequence": 42,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.acquire",
+            "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.practice",
+            "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.measurement.klok-duur-en-kalender.kalender"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.betalen-en-wisselgeld",
+          "title": "Betalen en wisselgeld",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.money_financial_literacy",
+          "grade": 2,
+          "sequence": 43,
+          "coveredGoals": [
+            "MD-WIS-2.3-meten-metend-rekenen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.measurement.geld-rekenen-tot-100-euro.bedragen-samenstellen",
+            "lesson.g2.math.measurement.klok-duur-en-kalender.kalender"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.3-meten-metend-rekenen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.geometry.eigenschappen-van-figuren-en-lichamen",
+      "subjectId": "math",
+      "domainId": "geometry",
+      "sourceSequence": 11,
+      "sourceTitle": "Eigenschappen van figuren en lichamen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.acquire",
+        "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.practice",
+        "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.vlakke-figuren",
+          "title": "Eigenschappen van vlakke figuren",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.shapes_lines_angles",
+          "grade": 2,
+          "sequence": 44,
+          "coveredGoals": [
+            "MD-WIS-2.4-meetkunde"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.acquire",
+            "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.practice",
+            "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.ruimtefiguren",
+          "title": "Eigenschappen van ruimtefiguren",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.shapes_lines_angles",
+          "grade": 2,
+          "sequence": 45,
+          "coveredGoals": [
+            "MD-WIS-2.4-meetkunde"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.vlakke-figuren"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.4-meetkunde"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.geometry.routes-rooster-en-spiegeling",
+      "subjectId": "math",
+      "domainId": "geometry",
+      "sourceSequence": 12,
+      "sourceTitle": "Routes, rooster en spiegeling",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.geometry.routes-rooster-en-spiegeling.acquire",
+        "lesson.g2.math.geometry.routes-rooster-en-spiegeling.practice",
+        "lesson.g2.math.geometry.routes-rooster-en-spiegeling.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.geometry.routes-rooster-en-spiegeling.routes-op-een-rooster",
+          "title": "Routes op een rooster",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.spatial_orientation_coordinates",
+          "grade": 2,
+          "sequence": 46,
+          "coveredGoals": [
+            "MD-WIS-2.4-meetkunde"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.geometry.routes-rooster-en-spiegeling.acquire",
+            "lesson.g2.math.geometry.routes-rooster-en-spiegeling.practice",
+            "lesson.g2.math.geometry.routes-rooster-en-spiegeling.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.ruimtefiguren"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.math.geometry.routes-rooster-en-spiegeling.spiegeling",
+          "title": "Spiegelen rond een spiegelas",
+          "categoryId": "measurement_geometry",
+          "subcategoryId": "geometry.symmetry_patterns_transformations",
+          "grade": 2,
+          "sequence": 47,
+          "coveredGoals": [
+            "MD-WIS-2.4-meetkunde"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.geometry.routes-rooster-en-spiegeling.routes-op-een-rooster",
+            "lesson.g2.math.geometry.eigenschappen-van-figuren-en-lichamen.ruimtefiguren"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.4-meetkunde"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.data.tabellen-en-staafdiagrammen",
+      "subjectId": "math",
+      "domainId": "data",
+      "sourceSequence": 13,
+      "sourceTitle": "Tabellen en staafdiagrammen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.data.tabellen-en-staafdiagrammen.acquire",
+        "lesson.g2.math.data.tabellen-en-staafdiagrammen.practice",
+        "lesson.g2.math.data.tabellen-en-staafdiagrammen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.data.tabellen-en-staafdiagrammen.tabellen-lezen",
+          "title": "Tabellen lezen",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.tables_graphs_statistics",
+          "grade": 2,
+          "sequence": 48,
+          "coveredGoals": [
+            "MD-WIS-2.5-data-kans"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.data.tabellen-en-staafdiagrammen.acquire",
+            "lesson.g2.math.data.tabellen-en-staafdiagrammen.practice",
+            "lesson.g2.math.data.tabellen-en-staafdiagrammen.transfer",
+            "lesson.g2.math.statistics.introduction"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.math.data.tabellen-en-staafdiagrammen.staafdiagrammen-lezen",
+          "title": "Staafdiagrammen lezen",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.tables_graphs_statistics",
+          "grade": 2,
+          "sequence": 49,
+          "coveredGoals": [
+            "MD-WIS-2.5-data-kans"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.data.tabellen-en-staafdiagrammen.tabellen-lezen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-2.5-data-kans"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.math.problem_solving.een-en-tweestapsproblemen",
+      "subjectId": "math",
+      "domainId": "problem_solving",
+      "sourceSequence": 14,
+      "sourceTitle": "Eén- en tweestapsproblemen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.math.problem_solving.een-en-tweestapsproblemen.acquire",
+        "lesson.g2.math.problem_solving.een-en-tweestapsproblemen.practice",
+        "lesson.g2.math.problem_solving.een-en-tweestapsproblemen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.math.problem-solving.een-en-tweestapsproblemen.eenstapsproblemen",
+          "title": "Rekenverhalen in één stap",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.problem_solving",
+          "grade": 2,
+          "sequence": 50,
+          "coveredGoals": [
+            "MD-WIS-wiskundig-redeneren-probleemoplossen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.math.problem_solving.een-en-tweestapsproblemen.acquire",
+            "lesson.g2.math.problem_solving.een-en-tweestapsproblemen.practice",
+            "lesson.g2.math.problem_solving.een-en-tweestapsproblemen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.math.problem-solving.een-en-tweestapsproblemen.tweestapsproblemen",
+          "title": "Rekenverhalen in twee stappen",
+          "categoryId": "number_sense",
+          "subcategoryId": "math.problem_solving",
+          "grade": 2,
+          "sequence": 51,
+          "coveredGoals": [
+            "MD-WIS-wiskundig-redeneren-probleemoplossen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.math.problem-solving.een-en-tweestapsproblemen.eenstapsproblemen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WIS-wiskundig-redeneren-probleemoplossen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.science_tech.organisms.levenscycli-van-plant-en-dier",
+      "subjectId": "science_tech",
+      "domainId": "organisms",
+      "sourceSequence": 1,
+      "sourceTitle": "Levenscycli van plant en dier",
+      "oldPhaseLessonIds": [
+        "lesson.g2.science_tech.organisms.levenscycli-van-plant-en-dier.acquire",
+        "lesson.g2.science_tech.organisms.levenscycli-van-plant-en-dier.practice",
+        "lesson.g2.science_tech.organisms.levenscycli-van-plant-en-dier.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-plant",
+          "title": "De levenscyclus van een plant",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.nature_living_world",
+          "grade": 2,
+          "sequence": 52,
+          "coveredGoals": [
+            "MD-WT-organismen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.science_tech.organisms.levenscycli-van-plant-en-dier.acquire",
+            "lesson.g2.science_tech.organisms.levenscycli-van-plant-en-dier.practice",
+            "lesson.g2.science_tech.organisms.levenscycli-van-plant-en-dier.transfer",
+            "lesson.g2.world.integrated_foundations"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-dier",
+          "title": "De levenscyclus van een dier",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.nature_living_world",
+          "grade": 2,
+          "sequence": 53,
+          "coveredGoals": [
+            "MD-WT-organismen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-plant"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WT-organismen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties",
+      "subjectId": "science_tech",
+      "domainId": "organisms",
+      "sourceSequence": 2,
+      "sourceTitle": "Voeding en eenvoudige voedselrelaties",
+      "oldPhaseLessonIds": [
+        "lesson.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties.acquire",
+        "lesson.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties.practice",
+        "lesson.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.science-tech.organisms.voeding-en-eenvoudige-voedselrelaties.voeding-en-eenvoudige-voedselrelaties",
+          "title": "Voeding en eenvoudige voedselrelaties",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.nature_living_world",
+          "grade": 2,
+          "sequence": 54,
+          "coveredGoals": [
+            "MD-WT-organismen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties.acquire",
+            "lesson.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties.practice",
+            "lesson.g2.science_tech.organisms.voeding-en-eenvoudige-voedselrelaties.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.science-tech.organisms.levenscycli-van-plant-en-dier.levenscyclus-dier"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WT-organismen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.science_tech.human_body.gezond-groeien-en-bewegen",
+      "subjectId": "science_tech",
+      "domainId": "human_body",
+      "sourceSequence": 3,
+      "sourceTitle": "Gezond groeien en bewegen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.science_tech.human_body.gezond-groeien-en-bewegen.acquire",
+        "lesson.g2.science_tech.human_body.gezond-groeien-en-bewegen.practice",
+        "lesson.g2.science_tech.human_body.gezond-groeien-en-bewegen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.science-tech.human-body.gezond-groeien-en-bewegen.gezonde-routines",
+          "title": "Gezond groeien met goede routines",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 55,
+          "coveredGoals": [
+            "MD-WT-mens-lichaam-gezondheid"
+          ],
+          "legacyAliases": [
+            "lesson.g2.science_tech.human_body.gezond-groeien-en-bewegen.acquire",
+            "lesson.g2.science_tech.human_body.gezond-groeien-en-bewegen.practice",
+            "lesson.g2.science_tech.human_body.gezond-groeien-en-bewegen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.science-tech.human-body.gezond-groeien-en-bewegen.bewegen-en-herstellen",
+          "title": "Bewegen, inspannen en herstellen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 56,
+          "coveredGoals": [
+            "MD-WT-mens-lichaam-gezondheid"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.science-tech.human-body.gezond-groeien-en-bewegen.gezonde-routines"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WT-mens-lichaam-gezondheid"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.science_tech.matter.water-en-toestandsveranderingen",
+      "subjectId": "science_tech",
+      "domainId": "matter",
+      "sourceSequence": 4,
+      "sourceTitle": "Water en toestandsveranderingen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.science_tech.matter.water-en-toestandsveranderingen.acquire",
+        "lesson.g2.science_tech.matter.water-en-toestandsveranderingen.practice",
+        "lesson.g2.science_tech.matter.water-en-toestandsveranderingen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.science-tech.matter.water-en-toestandsveranderingen.water-en-toestandsveranderingen",
+          "title": "Water en toestandsveranderingen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.science_inquiry",
+          "grade": 2,
+          "sequence": 57,
+          "coveredGoals": [
+            "MD-WT-materie"
+          ],
+          "legacyAliases": [
+            "lesson.g2.science_tech.matter.water-en-toestandsveranderingen.acquire",
+            "lesson.g2.science_tech.matter.water-en-toestandsveranderingen.practice",
+            "lesson.g2.science_tech.matter.water-en-toestandsveranderingen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-WT-materie"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging",
+      "subjectId": "science_tech",
+      "domainId": "forces_energy",
+      "sourceSequence": 5,
+      "sourceTitle": "Licht, geluid en eenvoudige beweging",
+      "oldPhaseLessonIds": [
+        "lesson.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging.acquire",
+        "lesson.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging.practice",
+        "lesson.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.licht-en-schaduw",
+          "title": "Licht en schaduw",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.science_inquiry",
+          "grade": 2,
+          "sequence": 58,
+          "coveredGoals": [
+            "MD-WT-kracht-energie-licht-geluid"
+          ],
+          "legacyAliases": [
+            "lesson.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging.acquire",
+            "lesson.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging.practice",
+            "lesson.g2.science_tech.forces_energy.licht-geluid-en-eenvoudige-beweging.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.geluid-en-trilling",
+          "title": "Geluid en trilling",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.science_inquiry",
+          "grade": 2,
+          "sequence": 59,
+          "coveredGoals": [
+            "MD-WT-kracht-energie-licht-geluid"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.licht-en-schaduw"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.beweging-en-wrijving",
+          "title": "Beweging en wrijving",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.science_inquiry",
+          "grade": 2,
+          "sequence": 60,
+          "coveredGoals": [
+            "MD-WT-kracht-energie-licht-geluid"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.geluid-en-trilling"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WT-kracht-energie-licht-geluid"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.science_tech.forces_energy.veilige-elektriciteit",
+      "subjectId": "science_tech",
+      "domainId": "forces_energy",
+      "sourceSequence": 6,
+      "sourceTitle": "Veilige elektriciteit",
+      "oldPhaseLessonIds": [
+        "lesson.g2.science_tech.forces_energy.veilige-elektriciteit.acquire",
+        "lesson.g2.science_tech.forces_energy.veilige-elektriciteit.practice",
+        "lesson.g2.science_tech.forces_energy.veilige-elektriciteit.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.science-tech.forces-energy.veilige-elektriciteit.veilige-elektriciteit",
+          "title": "Veilige elektriciteit",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.science_inquiry",
+          "grade": 2,
+          "sequence": 61,
+          "coveredGoals": [
+            "MD-WT-kracht-energie-licht-geluid"
+          ],
+          "legacyAliases": [
+            "lesson.g2.science_tech.forces_energy.veilige-elektriciteit.acquire",
+            "lesson.g2.science_tech.forces_energy.veilige-elektriciteit.practice",
+            "lesson.g2.science_tech.forces_energy.veilige-elektriciteit.transfer"
+          ],
+          "prerequisiteLessonIds": [
+            "lesson.g2.science-tech.forces-energy.licht-geluid-en-eenvoudige-beweging.beweging-en-wrijving"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WT-kracht-energie-licht-geluid"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking",
+      "subjectId": "science_tech",
+      "domainId": "inquiry_design",
+      "sourceSequence": 7,
+      "sourceTitle": "Onderzoeken en ontwerpen met een eerlijke vergelijking",
+      "oldPhaseLessonIds": [
+        "lesson.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.acquire",
+        "lesson.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.practice",
+        "lesson.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.science-tech.inquiry-design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.eerlijk-onderzoek",
+          "title": "Een eerlijke vergelijking onderzoeken",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.science_inquiry",
+          "grade": 2,
+          "sequence": 62,
+          "coveredGoals": [
+            "MD-WT-onderzoeken-ontwerpen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.acquire",
+            "lesson.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.practice",
+            "lesson.g2.science_tech.inquiry_design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.science-tech.inquiry-design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.ontwerpen-en-verbeteren",
+          "title": "Ontwerpen, testen en verbeteren",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.science_inquiry",
+          "grade": 2,
+          "sequence": 63,
+          "coveredGoals": [
+            "MD-WT-onderzoeken-ontwerpen"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.science-tech.inquiry-design.onderzoeken-en-ontwerpen-met-een-eerlijke-vergelijking.eerlijk-onderzoek"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-WT-onderzoeken-ontwerpen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.geo.maps.plattegrond-legenda-en-windrichtingen",
+      "subjectId": "geo",
+      "domainId": "maps",
+      "sourceSequence": 1,
+      "sourceTitle": "Plattegrond, legenda en windrichtingen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.acquire",
+        "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.practice",
+        "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.plattegrond-legenda-en-windrichtingen",
+          "title": "Plattegrond, legenda en windrichtingen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.geography_space",
+          "grade": 2,
+          "sequence": 64,
+          "coveredGoals": [
+            "MD-AAR-topografie-kaart"
+          ],
+          "legacyAliases": [
+            "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.acquire",
+            "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.practice",
+            "lesson.g2.geo.maps.plattegrond-legenda-en-windrichtingen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-AAR-topografie-kaart"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.geo.physical.landschappen-stad-dorp-en-platteland",
+      "subjectId": "geo",
+      "domainId": "physical",
+      "sourceSequence": 2,
+      "sourceTitle": "Landschappen: stad, dorp en platteland",
+      "oldPhaseLessonIds": [
+        "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.acquire",
+        "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.practice",
+        "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.landschappen-stad-dorp-en-platteland",
+          "title": "Landschappen: stad, dorp en platteland",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.geography_space",
+          "grade": 2,
+          "sequence": 65,
+          "coveredGoals": [
+            "MD-AAR-fysische-aardrijkskunde"
+          ],
+          "legacyAliases": [
+            "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.acquire",
+            "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.practice",
+            "lesson.g2.geo.physical.landschappen-stad-dorp-en-platteland.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-AAR-fysische-aardrijkskunde"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.geo.human.verkeer-en-voorzieningen",
+      "subjectId": "geo",
+      "domainId": "human",
+      "sourceSequence": 3,
+      "sourceTitle": "Verkeer en voorzieningen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.geo.human.verkeer-en-voorzieningen.acquire",
+        "lesson.g2.geo.human.verkeer-en-voorzieningen.practice",
+        "lesson.g2.geo.human.verkeer-en-voorzieningen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.geo.human.verkeer-en-voorzieningen.verkeer-en-veilige-route",
+          "title": "Verkeer en een veilige route",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.traffic_mobility_safety",
+          "grade": 2,
+          "sequence": 66,
+          "coveredGoals": [
+            "MD-AAR-menselijke-aardrijkskunde"
+          ],
+          "legacyAliases": [
+            "lesson.g2.geo.human.verkeer-en-voorzieningen.acquire",
+            "lesson.g2.geo.human.verkeer-en-voorzieningen.practice",
+            "lesson.g2.geo.human.verkeer-en-voorzieningen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.geo.human.verkeer-en-voorzieningen.voorzieningen-in-de-buurt",
+          "title": "Voorzieningen in de buurt",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.traffic_mobility_safety",
+          "grade": 2,
+          "sequence": 67,
+          "coveredGoals": [
+            "MD-AAR-menselijke-aardrijkskunde"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.geo.human.verkeer-en-voorzieningen.verkeer-en-veilige-route"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-AAR-menselijke-aardrijkskunde"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.geo.environment.water-in-de-omgeving",
+      "subjectId": "geo",
+      "domainId": "environment",
+      "sourceSequence": 4,
+      "sourceTitle": "Water in de omgeving",
+      "oldPhaseLessonIds": [
+        "lesson.g2.geo.environment.water-in-de-omgeving.acquire",
+        "lesson.g2.geo.environment.water-in-de-omgeving.practice",
+        "lesson.g2.geo.environment.water-in-de-omgeving.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.geo.environment.water-in-de-omgeving.water-in-de-omgeving",
+          "title": "Water in de omgeving",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.environment_sustainability",
+          "grade": 2,
+          "sequence": 68,
+          "coveredGoals": [
+            "MD-AAR-mens-milieu"
+          ],
+          "legacyAliases": [
+            "lesson.g2.geo.environment.water-in-de-omgeving.acquire",
+            "lesson.g2.geo.environment.water-in-de-omgeving.practice",
+            "lesson.g2.geo.environment.water-in-de-omgeving.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-AAR-mens-milieu"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.geo.fieldwork.buurtkaart-maken",
+      "subjectId": "geo",
+      "domainId": "fieldwork",
+      "sourceSequence": 5,
+      "sourceTitle": "Buurtkaart maken",
+      "oldPhaseLessonIds": [
+        "lesson.g2.geo.fieldwork.buurtkaart-maken.acquire",
+        "lesson.g2.geo.fieldwork.buurtkaart-maken.practice",
+        "lesson.g2.geo.fieldwork.buurtkaart-maken.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.geo.fieldwork.buurtkaart-maken.buurtkaart-maken",
+          "title": "Buurtkaart maken",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.geography_space",
+          "grade": 2,
+          "sequence": 69,
+          "coveredGoals": [
+            "MD-AAR-geografische-werkwijzen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.geo.fieldwork.buurtkaart-maken.acquire",
+            "lesson.g2.geo.fieldwork.buurtkaart-maken.practice",
+            "lesson.g2.geo.fieldwork.buurtkaart-maken.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-AAR-geografische-werkwijzen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.history.chronology.generaties-en-eeuwen",
+      "subjectId": "history",
+      "domainId": "chronology",
+      "sourceSequence": 1,
+      "sourceTitle": "Generaties en eeuwen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.history.chronology.generaties-en-eeuwen.acquire",
+        "lesson.g2.history.chronology.generaties-en-eeuwen.practice",
+        "lesson.g2.history.chronology.generaties-en-eeuwen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.history.chronology.generaties-en-eeuwen.generaties",
+          "title": "Generaties ordenen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.history_time",
+          "grade": 2,
+          "sequence": 70,
+          "coveredGoals": [
+            "MD-GES-chronologie"
+          ],
+          "legacyAliases": [
+            "lesson.g2.history.chronology.generaties-en-eeuwen.acquire",
+            "lesson.g2.history.chronology.generaties-en-eeuwen.practice",
+            "lesson.g2.history.chronology.generaties-en-eeuwen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.history.chronology.generaties-en-eeuwen.jaartallen-en-eeuwen",
+          "title": "Jaartallen en eeuwen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.history_time",
+          "grade": 2,
+          "sequence": 71,
+          "coveredGoals": [
+            "MD-GES-chronologie"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.history.chronology.generaties-en-eeuwen.generaties"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-GES-chronologie"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.history.sources.bronnen-vergelijken",
+      "subjectId": "history",
+      "domainId": "sources",
+      "sourceSequence": 2,
+      "sourceTitle": "Bronnen vergelijken",
+      "oldPhaseLessonIds": [
+        "lesson.g2.history.sources.bronnen-vergelijken.acquire",
+        "lesson.g2.history.sources.bronnen-vergelijken.practice",
+        "lesson.g2.history.sources.bronnen-vergelijken.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.history.sources.bronnen-vergelijken.bronnen-vergelijken",
+          "title": "Bronnen vergelijken",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.history_time",
+          "grade": 2,
+          "sequence": 72,
+          "coveredGoals": [
+            "MD-GES-bronnen"
+          ],
+          "legacyAliases": [
+            "lesson.g2.history.sources.bronnen-vergelijken.acquire",
+            "lesson.g2.history.sources.bronnen-vergelijken.practice",
+            "lesson.g2.history.sources.bronnen-vergelijken.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-GES-bronnen"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.history.society.wonen-werken-en-reizen-vroeger",
+      "subjectId": "history",
+      "domainId": "society",
+      "sourceSequence": 3,
+      "sourceTitle": "Wonen, werken en reizen vroeger",
+      "oldPhaseLessonIds": [
+        "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.acquire",
+        "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.practice",
+        "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.wonen-werken-en-reizen-vroeger",
+          "title": "Wonen, werken en reizen vroeger",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.history_time",
+          "grade": 2,
+          "sequence": 73,
+          "coveredGoals": [
+            "MD-GES-historisch-redeneren"
+          ],
+          "legacyAliases": [
+            "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.acquire",
+            "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.practice",
+            "lesson.g2.history.society.wonen-werken-en-reizen-vroeger.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-GES-historisch-redeneren"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn",
+      "subjectId": "history",
+      "domainId": "eras",
+      "sourceSequence": 4,
+      "sourceTitle": "Lokale geschiedenis op een tijdlijn",
+      "oldPhaseLessonIds": [
+        "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.acquire",
+        "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.practice",
+        "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.lokale-geschiedenis-op-een-tijdlijn",
+          "title": "Lokale geschiedenis op een tijdlijn",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.history_time",
+          "grade": 2,
+          "sequence": 74,
+          "coveredGoals": [
+            "MD-GES-kennis-verleden"
+          ],
+          "legacyAliases": [
+            "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.acquire",
+            "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.practice",
+            "lesson.g2.history.eras.lokale-geschiedenis-op-een-tijdlijn.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-GES-kennis-verleden"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis",
+      "subjectId": "history",
+      "domainId": "heritage",
+      "sourceSequence": 5,
+      "sourceTitle": "Musea, archieven en mondelinge geschiedenis",
+      "oldPhaseLessonIds": [
+        "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.acquire",
+        "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.practice",
+        "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.musea-archieven-en-mondelinge-geschiedenis",
+          "title": "Musea, archieven en mondelinge geschiedenis",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.history_time",
+          "grade": 2,
+          "sequence": 75,
+          "coveredGoals": [
+            "MD-GES-erfgoed"
+          ],
+          "legacyAliases": [
+            "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.acquire",
+            "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.practice",
+            "lesson.g2.history.heritage.musea-archieven-en-mondelinge-geschiedenis.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-GES-erfgoed"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.arts.visual.kleurmenging-patroon-en-ruimte",
+      "subjectId": "arts",
+      "domainId": "visual",
+      "sourceSequence": 1,
+      "sourceTitle": "Kleurmenging, patroon en ruimte",
+      "oldPhaseLessonIds": [
+        "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.acquire",
+        "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.practice",
+        "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.kleurmenging",
+          "title": "Kleuren mengen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.daily_life_self_reliance",
+          "grade": 2,
+          "sequence": 76,
+          "coveredGoals": [
+            "MD-MUZ-beeld"
+          ],
+          "legacyAliases": [
+            "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.acquire",
+            "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.practice",
+            "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.patronen-maken",
+          "title": "Visuele patronen maken",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.daily_life_self_reliance",
+          "grade": 2,
+          "sequence": 77,
+          "coveredGoals": [
+            "MD-MUZ-beeld"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.kleurmenging"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.ruimte-en-overlap",
+          "title": "Ruimte tonen met overlap",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.daily_life_self_reliance",
+          "grade": 2,
+          "sequence": 78,
+          "coveredGoals": [
+            "MD-MUZ-beeld"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.arts.visual.kleurmenging-patroon-en-ruimte.patronen-maken"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-MUZ-beeld"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.arts.music.maat-ritme-en-melodische-richting",
+      "subjectId": "arts",
+      "domainId": "music",
+      "sourceSequence": 2,
+      "sourceTitle": "Maat, ritme en melodische richting",
+      "oldPhaseLessonIds": [
+        "lesson.g2.arts.music.maat-ritme-en-melodische-richting.acquire",
+        "lesson.g2.arts.music.maat-ritme-en-melodische-richting.practice",
+        "lesson.g2.arts.music.maat-ritme-en-melodische-richting.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.arts.music.maat-ritme-en-melodische-richting.maat-en-ritme",
+          "title": "Maat en ritme",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.daily_life_self_reliance",
+          "grade": 2,
+          "sequence": 79,
+          "coveredGoals": [
+            "MD-MUZ-muziek"
+          ],
+          "legacyAliases": [
+            "lesson.g2.arts.music.maat-ritme-en-melodische-richting.acquire",
+            "lesson.g2.arts.music.maat-ritme-en-melodische-richting.practice",
+            "lesson.g2.arts.music.maat-ritme-en-melodische-richting.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.arts.music.maat-ritme-en-melodische-richting.melodische-richting",
+          "title": "Melodieën die stijgen en dalen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.daily_life_self_reliance",
+          "grade": 2,
+          "sequence": 80,
+          "coveredGoals": [
+            "MD-MUZ-muziek"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.arts.music.maat-ritme-en-melodische-richting.maat-en-ritme"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-MUZ-muziek"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.arts.drama.personage-probleem-en-oplossing",
+      "subjectId": "arts",
+      "domainId": "drama",
+      "sourceSequence": 3,
+      "sourceTitle": "Personage, probleem en oplossing",
+      "oldPhaseLessonIds": [
+        "lesson.g2.arts.drama.personage-probleem-en-oplossing.acquire",
+        "lesson.g2.arts.drama.personage-probleem-en-oplossing.practice",
+        "lesson.g2.arts.drama.personage-probleem-en-oplossing.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.arts.drama.personage-probleem-en-oplossing.personage-probleem-en-oplossing",
+          "title": "Personage, probleem en oplossing",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.daily_life_self_reliance",
+          "grade": 2,
+          "sequence": 81,
+          "coveredGoals": [
+            "MD-MUZ-drama"
+          ],
+          "legacyAliases": [
+            "lesson.g2.arts.drama.personage-probleem-en-oplossing.acquire",
+            "lesson.g2.arts.drama.personage-probleem-en-oplossing.practice",
+            "lesson.g2.arts.drama.personage-probleem-en-oplossing.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-MUZ-drama"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit",
+      "subjectId": "arts",
+      "domainId": "dance",
+      "sourceSequence": 4,
+      "sourceTitle": "Ritme, ruimte en bewegingskwaliteit",
+      "oldPhaseLessonIds": [
+        "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.acquire",
+        "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.practice",
+        "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.ritme-ruimte-en-bewegingskwaliteit",
+          "title": "Ritme, ruimte en bewegingskwaliteit",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.daily_life_self_reliance",
+          "grade": 2,
+          "sequence": 82,
+          "coveredGoals": [
+            "MD-MUZ-dans"
+          ],
+          "legacyAliases": [
+            "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.acquire",
+            "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.practice",
+            "lesson.g2.arts.dance.ritme-ruimte-en-bewegingskwaliteit.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-MUZ-dans"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.pe.movement.combinaties-ritme-en-evenwicht",
+      "subjectId": "pe",
+      "domainId": "movement",
+      "sourceSequence": 1,
+      "sourceTitle": "Combinaties, ritme en evenwicht",
+      "oldPhaseLessonIds": [
+        "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.acquire",
+        "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.practice",
+        "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.bewegingscombinaties",
+          "title": "Bewegingscombinaties",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 83,
+          "coveredGoals": [
+            "MD-LO-grootmotorisch"
+          ],
+          "legacyAliases": [
+            "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.acquire",
+            "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.practice",
+            "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.evenwicht-op-niveaus",
+          "title": "Evenwicht op verschillende niveaus",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 84,
+          "coveredGoals": [
+            "MD-LO-grootmotorisch"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.pe.movement.combinaties-ritme-en-evenwicht.bewegingscombinaties"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-LO-grootmotorisch"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren",
+      "subjectId": "pe",
+      "domainId": "gymnastics",
+      "sourceSequence": 2,
+      "sourceTitle": "Klimmen, zwaaien en omkeren",
+      "oldPhaseLessonIds": [
+        "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.acquire",
+        "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.practice",
+        "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.veilig-klimmen",
+          "title": "Veilig klimmen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 85,
+          "coveredGoals": [
+            "MD-LO-gymnastiek"
+          ],
+          "legacyAliases": [
+            "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.acquire",
+            "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.practice",
+            "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.zwaaien",
+          "title": "Gecontroleerd zwaaien",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 86,
+          "coveredGoals": [
+            "MD-LO-gymnastiek"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.veilig-klimmen"
+          ]
+        },
+        {
+          "lessonId": "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.omkeren",
+          "title": "Veilig omkeren",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 87,
+          "coveredGoals": [
+            "MD-LO-gymnastiek"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.pe.gymnastics.klimmen-zwaaien-en-omkeren.zwaaien"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-LO-gymnastiek"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.pe.ball_games.dribbelen-passen-en-ontvangen",
+      "subjectId": "pe",
+      "domainId": "ball_games",
+      "sourceSequence": 3,
+      "sourceTitle": "Dribbelen, passen en ontvangen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.pe.ball_games.dribbelen-passen-en-ontvangen.acquire",
+        "lesson.g2.pe.ball_games.dribbelen-passen-en-ontvangen.practice",
+        "lesson.g2.pe.ball_games.dribbelen-passen-en-ontvangen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.pe.ball-games.dribbelen-passen-en-ontvangen.dribbelen",
+          "title": "Een bal dribbelen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 88,
+          "coveredGoals": [
+            "MD-LO-spel-sport"
+          ],
+          "legacyAliases": [
+            "lesson.g2.pe.ball_games.dribbelen-passen-en-ontvangen.acquire",
+            "lesson.g2.pe.ball_games.dribbelen-passen-en-ontvangen.practice",
+            "lesson.g2.pe.ball_games.dribbelen-passen-en-ontvangen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.pe.ball-games.dribbelen-passen-en-ontvangen.passen-en-ontvangen",
+          "title": "Passen, vrijlopen en ontvangen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 89,
+          "coveredGoals": [
+            "MD-LO-spel-sport"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.pe.ball-games.dribbelen-passen-en-ontvangen.dribbelen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-LO-spel-sport"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.pe.dance.dansfrases-en-samenwerking",
+      "subjectId": "pe",
+      "domainId": "dance",
+      "sourceSequence": 4,
+      "sourceTitle": "Dansfrases en samenwerking",
+      "oldPhaseLessonIds": [
+        "lesson.g2.pe.dance.dansfrases-en-samenwerking.acquire",
+        "lesson.g2.pe.dance.dansfrases-en-samenwerking.practice",
+        "lesson.g2.pe.dance.dansfrases-en-samenwerking.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.pe.dance.dansfrases-en-samenwerking.dansfrases-en-samenwerking",
+          "title": "Dansfrases en samenwerking",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 90,
+          "coveredGoals": [
+            "MD-LO-ritmisch-expressief"
+          ],
+          "legacyAliases": [
+            "lesson.g2.pe.dance.dansfrases-en-samenwerking.acquire",
+            "lesson.g2.pe.dance.dansfrases-en-samenwerking.practice",
+            "lesson.g2.pe.dance.dansfrases-en-samenwerking.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-LO-ritmisch-expressief"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.pe.swimming.watergewenning-en-zelfredzaamheid",
+      "subjectId": "pe",
+      "domainId": "swimming",
+      "sourceSequence": 5,
+      "sourceTitle": "Watergewenning en zelfredzaamheid",
+      "oldPhaseLessonIds": [
+        "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.acquire",
+        "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.practice",
+        "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.watergewenning-en-ademen",
+          "title": "Watergewenning en ademen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 91,
+          "coveredGoals": [
+            "MD-LO-zwemmen-waterveiligheid"
+          ],
+          "legacyAliases": [
+            "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.acquire",
+            "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.practice",
+            "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.drijven-en-veilig-uitstappen",
+          "title": "Drijven en veilig uitstappen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.body_health",
+          "grade": 2,
+          "sequence": 92,
+          "coveredGoals": [
+            "MD-LO-zwemmen-waterveiligheid"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.pe.swimming.watergewenning-en-zelfredzaamheid.watergewenning-en-ademen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-LO-zwemmen-waterveiligheid"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data",
+      "subjectId": "ict",
+      "domainId": "devices_data",
+      "sourceSequence": 1,
+      "sourceTitle": "Bestanden, mappen en eenvoudige data",
+      "oldPhaseLessonIds": [
+        "lesson.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data.acquire",
+        "lesson.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data.practice",
+        "lesson.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.ict.devices-data.bestanden-mappen-en-eenvoudige-data.bestanden-en-mappen",
+          "title": "Bestanden benoemen, bewaren en terugvinden",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.digital_media_literacy",
+          "grade": 2,
+          "sequence": 93,
+          "coveredGoals": [
+            "MD-ICT-digitale-systemen-data"
+          ],
+          "legacyAliases": [
+            "lesson.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data.acquire",
+            "lesson.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data.practice",
+            "lesson.g2.ict.devices_data.bestanden-mappen-en-eenvoudige-data.transfer",
+            "lesson.g2.world.digital.media_safety"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.ict.devices-data.bestanden-mappen-en-eenvoudige-data.eenvoudige-data",
+          "title": "Eenvoudige gegevens ordenen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.digital_media_literacy",
+          "grade": 2,
+          "sequence": 94,
+          "coveredGoals": [
+            "MD-ICT-digitale-systemen-data"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.ict.devices-data.bestanden-mappen-en-eenvoudige-data.bestanden-en-mappen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-ICT-digitale-systemen-data"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.ict.coding.patronen-herhaling-en-debuggen",
+      "subjectId": "ict",
+      "domainId": "coding",
+      "sourceSequence": 2,
+      "sourceTitle": "Patronen, herhaling en debuggen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.acquire",
+        "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.practice",
+        "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.herhaling-en-lussen",
+          "title": "Herhaling en lussen in code",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.digital_media_literacy",
+          "grade": 2,
+          "sequence": 95,
+          "coveredGoals": [
+            "MD-ICT-computationeel-denken"
+          ],
+          "legacyAliases": [
+            "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.acquire",
+            "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.practice",
+            "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.debuggen",
+          "title": "Fouten in code opsporen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.digital_media_literacy",
+          "grade": 2,
+          "sequence": 96,
+          "coveredGoals": [
+            "MD-ICT-computationeel-denken"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.ict.coding.patronen-herhaling-en-debuggen.herhaling-en-lussen"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-ICT-computationeel-denken"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek",
+      "subjectId": "ict",
+      "domainId": "create_communicate",
+      "sourceSequence": 3,
+      "sourceTitle": "Digitale boodschap voor een publiek",
+      "oldPhaseLessonIds": [
+        "lesson.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek.acquire",
+        "lesson.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek.practice",
+        "lesson.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.ict.create-communicate.digitale-boodschap-voor-een-publiek.digitale-boodschap-voor-een-publiek",
+          "title": "Digitale boodschap voor een publiek",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.digital_media_literacy",
+          "grade": 2,
+          "sequence": 97,
+          "coveredGoals": [
+            "MD-ICT-creeren-communiceren"
+          ],
+          "legacyAliases": [
+            "lesson.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek.acquire",
+            "lesson.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek.practice",
+            "lesson.g2.ict.create_communicate.digitale-boodschap-voor-een-publiek.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-ICT-creeren-communiceren"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.ict.info_media.zoeken-met-een-duidelijke-vraag",
+      "subjectId": "ict",
+      "domainId": "info_media",
+      "sourceSequence": 4,
+      "sourceTitle": "Zoeken met een duidelijke vraag",
+      "oldPhaseLessonIds": [
+        "lesson.g2.ict.info_media.zoeken-met-een-duidelijke-vraag.acquire",
+        "lesson.g2.ict.info_media.zoeken-met-een-duidelijke-vraag.practice",
+        "lesson.g2.ict.info_media.zoeken-met-een-duidelijke-vraag.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.ict.info-media.zoeken-met-een-duidelijke-vraag.zoeken-met-een-duidelijke-vraag",
+          "title": "Zoeken met een duidelijke vraag",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.digital_media_literacy",
+          "grade": 2,
+          "sequence": 98,
+          "coveredGoals": [
+            "MD-ICT-informatie-mediageletterdheid"
+          ],
+          "legacyAliases": [
+            "lesson.g2.ict.info_media.zoeken-met-een-duidelijke-vraag.acquire",
+            "lesson.g2.ict.info_media.zoeken-met-een-duidelijke-vraag.practice",
+            "lesson.g2.ict.info_media.zoeken-met-een-duidelijke-vraag.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-ICT-informatie-mediageletterdheid"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.attitudes.learning.werkgeheugen-en-handige-routines",
+      "subjectId": "attitudes",
+      "domainId": "learning",
+      "sourceSequence": 1,
+      "sourceTitle": "Werkgeheugen en handige routines",
+      "oldPhaseLessonIds": [
+        "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.acquire",
+        "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.practice",
+        "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.werkgeheugen-ontlasten",
+          "title": "Je werkgeheugen helpen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.citizenship_social",
+          "grade": 2,
+          "sequence": 99,
+          "coveredGoals": [
+            "MD-ATT-leren-leren"
+          ],
+          "legacyAliases": [
+            "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.acquire",
+            "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.practice",
+            "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.focus-en-herhalen",
+          "title": "Focus en handige herhaalroutines",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.citizenship_social",
+          "grade": 2,
+          "sequence": 100,
+          "coveredGoals": [
+            "MD-ATT-leren-leren"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.attitudes.learning.werkgeheugen-en-handige-routines.werkgeheugen-ontlasten"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-ATT-leren-leren"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.attitudes.self_regulation.fouten-als-informatie",
+      "subjectId": "attitudes",
+      "domainId": "self_regulation",
+      "sourceSequence": 2,
+      "sourceTitle": "Fouten als informatie",
+      "oldPhaseLessonIds": [
+        "lesson.g2.attitudes.self_regulation.fouten-als-informatie.acquire",
+        "lesson.g2.attitudes.self_regulation.fouten-als-informatie.practice",
+        "lesson.g2.attitudes.self_regulation.fouten-als-informatie.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.attitudes.self-regulation.fouten-als-informatie.fouten-als-informatie",
+          "title": "Fouten als informatie",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.citizenship_social",
+          "grade": 2,
+          "sequence": 101,
+          "coveredGoals": [
+            "MD-ATT-leerondersteunend"
+          ],
+          "legacyAliases": [
+            "lesson.g2.attitudes.self_regulation.fouten-als-informatie.acquire",
+            "lesson.g2.attitudes.self_regulation.fouten-als-informatie.practice",
+            "lesson.g2.attitudes.self_regulation.fouten-als-informatie.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-ATT-leerondersteunend"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.attitudes.social_emotional.impuls-keuze-en-gevolg",
+      "subjectId": "attitudes",
+      "domainId": "social_emotional",
+      "sourceSequence": 3,
+      "sourceTitle": "Impuls, keuze en gevolg",
+      "oldPhaseLessonIds": [
+        "lesson.g2.attitudes.social_emotional.impuls-keuze-en-gevolg.acquire",
+        "lesson.g2.attitudes.social_emotional.impuls-keuze-en-gevolg.practice",
+        "lesson.g2.attitudes.social_emotional.impuls-keuze-en-gevolg.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.attitudes.social-emotional.impuls-keuze-en-gevolg.impuls-keuze-en-gevolg",
+          "title": "Impuls, keuze en gevolg",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.citizenship_social",
+          "grade": 2,
+          "sequence": 102,
+          "coveredGoals": [
+            "MD-ATT-persoonsvormend"
+          ],
+          "legacyAliases": [
+            "lesson.g2.attitudes.social_emotional.impuls-keuze-en-gevolg.acquire",
+            "lesson.g2.attitudes.social_emotional.impuls-keuze-en-gevolg.practice",
+            "lesson.g2.attitudes.social_emotional.impuls-keuze-en-gevolg.transfer",
+            "lesson.g2.world.citizenship.emotions_conflicts"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-ATT-persoonsvormend"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen",
+      "subjectId": "attitudes",
+      "domainId": "collaboration",
+      "sourceSequence": 4,
+      "sourceTitle": "Rollen en eerlijk bijdragen",
+      "oldPhaseLessonIds": [
+        "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.acquire",
+        "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.practice",
+        "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.rollen-en-eerlijk-bijdragen",
+          "title": "Rollen en eerlijk bijdragen",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.citizenship_social",
+          "grade": 2,
+          "sequence": 103,
+          "coveredGoals": [
+            "MD-ATT-socialiserend"
+          ],
+          "legacyAliases": [
+            "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.acquire",
+            "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.practice",
+            "lesson.g2.attitudes.collaboration.rollen-en-eerlijk-bijdragen.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-ATT-socialiserend"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp",
+      "subjectId": "attitudes",
+      "domainId": "citizenship_safety",
+      "sourceSequence": 5,
+      "sourceTitle": "Verschillen, inclusie en hulp",
+      "oldPhaseLessonIds": [
+        "lesson.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp.acquire",
+        "lesson.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp.practice",
+        "lesson.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.attitudes.citizenship-safety.verschillen-inclusie-en-hulp.verschillen-inclusie-en-hulp",
+          "title": "Verschillen, inclusie en hulp",
+          "categoryId": "world_orientation",
+          "subcategoryId": "world.citizenship_social",
+          "grade": 2,
+          "sequence": 104,
+          "coveredGoals": [
+            "MD-ATT-burgerschap-gezondheid-verkeer"
+          ],
+          "legacyAliases": [
+            "lesson.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp.acquire",
+            "lesson.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp.practice",
+            "lesson.g2.attitudes.citizenship_safety.verschillen-inclusie-en-hulp.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-ATT-burgerschap-gezondheid-verkeer"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten",
+      "subjectId": "fr",
+      "domainId": "listening",
+      "sourceSequence": 1,
+      "sourceTitle": "Klaswoorden en eenvoudige opdrachten",
+      "oldPhaseLessonIds": [
+        "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.acquire",
+        "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.practice",
+        "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.klaswoorden-en-eenvoudige-opdrachten",
+          "title": "Klaswoorden en eenvoudige opdrachten",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.listening_comprehension",
+          "grade": 2,
+          "sequence": 105,
+          "coveredGoals": [
+            "MD-FR-10.1-luisteren"
+          ],
+          "legacyAliases": [
+            "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.acquire",
+            "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.practice",
+            "lesson.g2.fr.listening.klaswoorden-en-eenvoudige-opdrachten.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        }
+      ],
+      "coveredGoals": [
+        "MD-FR-10.1-luisteren"
+      ]
+    },
+    {
+      "sourceUnitId": "unit.g2.fr.speaking.naam-gevoel-en-voorkeur",
+      "subjectId": "fr",
+      "domainId": "speaking",
+      "sourceSequence": 2,
+      "sourceTitle": "Naam, gevoel en voorkeur",
+      "oldPhaseLessonIds": [
+        "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.acquire",
+        "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.practice",
+        "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.transfer"
+      ],
+      "newAtomicLessons": [
+        {
+          "lessonId": "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.naam-en-gevoel",
+          "title": "Je naam en gevoel zeggen in het Frans",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.speaking_interaction",
+          "grade": 2,
+          "sequence": 106,
+          "coveredGoals": [
+            "MD-FR-spreken"
+          ],
+          "legacyAliases": [
+            "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.acquire",
+            "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.practice",
+            "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.transfer"
+          ],
+          "prerequisiteLessonIds": []
+        },
+        {
+          "lessonId": "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.voorkeur-zeggen",
+          "title": "Een voorkeur zeggen in het Frans",
+          "categoryId": "language_skills",
+          "subcategoryId": "language.speaking_interaction",
+          "grade": 2,
+          "sequence": 107,
+          "coveredGoals": [
+            "MD-FR-spreken"
+          ],
+          "legacyAliases": [],
+          "prerequisiteLessonIds": [
+            "lesson.g2.fr.speaking.naam-gevoel-en-voorkeur.naam-en-gevoel"
+          ]
+        }
+      ],
+      "coveredGoals": [
+        "MD-FR-spreken"
+      ]
+    }
+  ]
+}

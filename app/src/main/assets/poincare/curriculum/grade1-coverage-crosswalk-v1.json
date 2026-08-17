@@ -1,0 +1,3901 @@
+{
+  "schemaVersion": 1,
+  "id": "poincare.grade1.coverage-crosswalk.v1",
+  "grade": 1,
+  "referenceSource": "Poincare_curriculum_vlaanderen/data/units.json",
+  "allowedCoverageStatuses": [
+    "IMPLEMENTED",
+    "PARTIAL",
+    "MISSING",
+    "EXCLUDED",
+    "ADULT_MEDIATED"
+  ],
+  "summary": {
+    "referenceUnitCount": 65,
+    "mappedLessonCount": 65,
+    "implementedCount": 36,
+    "adultMediatedCount": 29,
+    "partialCount": 0,
+    "missingCount": 0,
+    "excludedCount": 0
+  },
+  "units": [
+    {
+      "referenceUnitId": "unit.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+      "subjectId": "arts",
+      "domainId": "visual",
+      "title": "Lijn, kleur, vorm en textuur",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.acquire",
+        "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.practice",
+        "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-MUZ-beeld"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.theory",
+        "exerciseStageIds": [
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.practise",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.apply",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.exercises-independent-b",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.test",
+        "exerciseSetIds": [
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.theory.set.follow-up",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.guided",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.fading",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.independent",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.repetition",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.independent-b",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.v1.curated.practice-1",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.cumulative-review",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.plus-variation",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.test",
+          "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.arts.visual.knowledge",
+          "g1.arts.visual.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.arts.visual.lijn-kleur-vorm-en-textuur"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.arts.music.stem-puls-en-klankkleur",
+      "subjectId": "arts",
+      "domainId": "music",
+      "title": "Stem, puls en klankkleur",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.arts.music.stem-puls-en-klankkleur.acquire",
+        "lesson.g1.arts.music.stem-puls-en-klankkleur.practice",
+        "lesson.g1.arts.music.stem-puls-en-klankkleur.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-MUZ-muziek"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.arts.music.stem-puls-en-klankkleur",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.arts.music.stem-puls-en-klankkleur.theory",
+        "exerciseStageIds": [
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.practise",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.apply",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.exercises-independent-b",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.arts.music.stem-puls-en-klankkleur.test",
+        "exerciseSetIds": [
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.theory.set.follow-up",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.guided",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.fading",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.independent",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.repetition",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.independent-b",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.v1.curated.practice-1",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.cumulative-review",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.plus-variation",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.test",
+          "lesson.g1.arts.music.stem-puls-en-klankkleur.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.arts.music.knowledge",
+          "g1.arts.music.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.arts.music.stem-puls-en-klankkleur"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+      "subjectId": "arts",
+      "domainId": "drama",
+      "title": "Doen alsof en verhaal spelen",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.acquire",
+        "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.practice",
+        "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-MUZ-drama"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.practise",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.apply",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.exercises-independent-b",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.test",
+        "exerciseSetIds": [
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.theory.set.follow-up",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.guided",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.fading",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.independent",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.repetition",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.independent-b",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.v1.curated.practice-1",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.cumulative-review",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.plus-variation",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.test",
+          "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.arts.drama.knowledge",
+          "g1.arts.drama.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.arts.drama.doen-alsof-en-verhaal-spelen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.arts.media.kijken-bewegen-en-presenteren",
+      "subjectId": "arts",
+      "domainId": "media",
+      "title": "Kijken, bewegen en presenteren",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.arts.media.kijken-bewegen-en-presenteren.acquire",
+        "lesson.g1.arts.media.kijken-bewegen-en-presenteren.practice",
+        "lesson.g1.arts.media.kijken-bewegen-en-presenteren.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-MUZ-media-kunstbeschouwing"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.arts.media.kijken-bewegen-en-presenteren",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.arts.media.kijken-bewegen-en-presenteren.theory",
+        "exerciseStageIds": [
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.practise",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.apply",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.exercises-independent-b",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.arts.media.kijken-bewegen-en-presenteren.test",
+        "exerciseSetIds": [
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.theory.set.follow-up",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.guided",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.fading",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.independent",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.repetition",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.independent-b",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.v1.curated.practice-1",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.cumulative-review",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.plus-variation",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.test",
+          "lesson.g1.arts.media.kijken-bewegen-en-presenteren.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.arts.media.knowledge",
+          "g1.arts.media.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.arts.media.kijken-bewegen-en-presenteren"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.attitudes.learning.aandacht-instructie-en-leerhouding",
+      "subjectId": "attitudes",
+      "domainId": "learning",
+      "title": "Aandacht, instructie en leerhouding",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.acquire",
+        "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.practice",
+        "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ATT-leren-leren"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_KNOWLEDGE_AND_REAL_WORLD_BEHAVIOUR",
+      "adultEvidenceRequirement": "adult verifies the social or self-regulation behaviour in a real interaction",
+      "lessonId": "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.theory",
+        "exerciseStageIds": [
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.practise",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.apply",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.exercises-independent-b",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.test",
+        "exerciseSetIds": [
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.theory.set.follow-up",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.guided",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.fading",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.independent",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.repetition",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.independent-b",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.v1.curated.practice-1",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.cumulative-review",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.plus-variation",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.test",
+          "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.citizenship.cooperation",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.attitudes.learning.knowledge",
+          "g1.attitudes.learning.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.attitudes.learning.aandacht-instructie-en-leerhouding"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang",
+      "subjectId": "attitudes",
+      "domainId": "self_regulation",
+      "title": "Doel, stap en trots op vooruitgang",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.acquire",
+        "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.practice",
+        "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ATT-leerondersteunend"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_KNOWLEDGE_AND_REAL_WORLD_BEHAVIOUR",
+      "adultEvidenceRequirement": "adult verifies the social or self-regulation behaviour in a real interaction",
+      "lessonId": "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.theory",
+        "exerciseStageIds": [
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.practise",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.apply",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.exercises-independent-b",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.test",
+        "exerciseSetIds": [
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.theory.set.follow-up",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.guided",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.fading",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.independent",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.repetition",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.independent-b",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.v1.curated.practice-1",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.cumulative-review",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.plus-variation",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.test",
+          "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.citizenship.cooperation",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.attitudes.self_regulation.knowledge",
+          "g1.attitudes.self_regulation.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.attitudes.self-regulation.doel-stap-en-trots-op-vooruitgang"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen",
+      "subjectId": "attitudes",
+      "domainId": "social_emotional",
+      "title": "Gevoelens herkennen en regelen",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.acquire",
+        "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.practice",
+        "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ATT-persoonsvormend"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_KNOWLEDGE_AND_REAL_WORLD_BEHAVIOUR",
+      "adultEvidenceRequirement": "adult verifies the social or self-regulation behaviour in a real interaction",
+      "lessonId": "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.practise",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.apply",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.exercises-independent-b",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.test",
+        "exerciseSetIds": [
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.theory.set.follow-up",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.guided",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.fading",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.independent",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.repetition",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.independent-b",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.v1.curated.practice-1",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.cumulative-review",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.plus-variation",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.test",
+          "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.citizenship.cooperation",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.attitudes.social_emotional.knowledge",
+          "g1.attitudes.social_emotional.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.attitudes.social-emotional.gevoelens-herkennen-en-regelen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.attitudes.collaboration.samen-spelen-en-werken",
+      "subjectId": "attitudes",
+      "domainId": "collaboration",
+      "title": "Samen spelen en werken",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.acquire",
+        "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.practice",
+        "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ATT-socialiserend"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_KNOWLEDGE_AND_REAL_WORLD_BEHAVIOUR",
+      "adultEvidenceRequirement": "adult verifies the social or self-regulation behaviour in a real interaction",
+      "lessonId": "lesson.g1.attitudes.collaboration.samen-spelen-en-werken",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.theory",
+        "exerciseStageIds": [
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.practise",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.apply",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.exercises-independent-b",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.test",
+        "exerciseSetIds": [
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.theory.set.follow-up",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.guided",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.fading",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.independent",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.repetition",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.independent-b",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.v1.curated.practice-1",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.cumulative-review",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.plus-variation",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.test",
+          "lesson.g1.attitudes.collaboration.samen-spelen-en-werken.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.citizenship.cooperation",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.attitudes.collaboration.knowledge",
+          "g1.attitudes.collaboration.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.attitudes.collaboration.samen-spelen-en-werken"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid",
+      "subjectId": "attitudes",
+      "domainId": "citizenship_safety",
+      "title": "Regels, zorg en veiligheid",
+      "sequence": 5,
+      "sourceLessonIds": [
+        "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.acquire",
+        "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.practice",
+        "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ATT-burgerschap-gezondheid-verkeer"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_KNOWLEDGE_AND_REAL_WORLD_BEHAVIOUR",
+      "adultEvidenceRequirement": "adult verifies stopping at the edge, looking both ways, listening, safe crossing and visibility",
+      "lessonId": "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.theory",
+        "exerciseStageIds": [
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.practise",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.apply",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.exercises-independent-b",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.test",
+        "exerciseSetIds": [
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.theory.set.follow-up",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.guided",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.fading",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.independent",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.repetition",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.independent-b",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.v1.curated.practice-1",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.cumulative-review",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.plus-variation",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.test",
+          "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.traffic.pedestrian_safety",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.attitudes.citizenship_safety.knowledge",
+          "g1.attitudes.citizenship_safety.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.attitudes.citizenship-safety.regels-zorg-en-veiligheid"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.fr.listening.franse-klanken-en-begroetingen",
+      "subjectId": "fr",
+      "domainId": "listening",
+      "title": "Franse klanken en begroetingen",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.fr.listening.franse-klanken-en-begroetingen.acquire",
+        "lesson.g1.fr.listening.franse-klanken-en-begroetingen.practice",
+        "lesson.g1.fr.listening.franse-klanken-en-begroetingen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-FR-10.1-luisteren"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.fr.listening.franse-klanken-en-begroetingen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.fr.listening.franse-klanken-en-begroetingen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.practise",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.apply",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.exercises-independent-b",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.fr.listening.franse-klanken-en-begroetingen.test",
+        "exerciseSetIds": [
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.theory.set.follow-up",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.guided",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.fading",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.independent",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.repetition",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.independent-b",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.v1.curated.practice-1",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.cumulative-review",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.plus-variation",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.test",
+          "lesson.g1.fr.listening.franse-klanken-en-begroetingen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.language.french_basics",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.fr.listening.knowledge",
+          "g1.fr.listening.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.fr.listening.franse-klanken-en-begroetingen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.fr.culture.liedjes-tellen-en-kleuren",
+      "subjectId": "fr",
+      "domainId": "culture",
+      "title": "Liedjes, tellen en kleuren",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.acquire",
+        "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.practice",
+        "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-FR-taalcultuur"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.fr.culture.liedjes-tellen-en-kleuren",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.theory",
+        "exerciseStageIds": [
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.practise",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.apply",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.exercises-independent-b",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.test",
+        "exerciseSetIds": [
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.theory.set.follow-up",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.guided",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.fading",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.independent",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.repetition",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.independent-b",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.v1.curated.practice-1",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.cumulative-review",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.plus-variation",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.test",
+          "lesson.g1.fr.culture.liedjes-tellen-en-kleuren.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.language.french_basics",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.fr.culture.knowledge",
+          "g1.fr.culture.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.fr.culture.liedjes-tellen-en-kleuren"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.geo.maps.mijn-plaats-in-klas-en-school",
+      "subjectId": "geo",
+      "domainId": "maps",
+      "title": "Mijn plaats in klas en school",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.acquire",
+        "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.practice",
+        "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-AAR-topografie-kaart"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.theory",
+        "exerciseStageIds": [
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.practise",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.apply",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.exercises-independent-b",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.test",
+        "exerciseSetIds": [
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.theory.set.follow-up",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.guided",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.fading",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.independent",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.repetition",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.independent-b",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.v1.curated.practice-1",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.cumulative-review",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.plus-variation",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.test",
+          "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.geo.maps.knowledge",
+          "g1.geo.maps.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.geo.maps.mijn-plaats-in-klas-en-school"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.geo.physical.weer-en-seizoenen-dichtbij",
+      "subjectId": "geo",
+      "domainId": "physical",
+      "title": "Weer en seizoenen dichtbij",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.acquire",
+        "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.practice",
+        "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-AAR-fysische-aardrijkskunde"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.theory",
+        "exerciseStageIds": [
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.practise",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.apply",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.exercises-independent-b",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.test",
+        "exerciseSetIds": [
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.theory.set.follow-up",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.guided",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.fading",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.independent",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.repetition",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.independent-b",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.v1.curated.practice-1",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.cumulative-review",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.plus-variation",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.test",
+          "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.geo.physical.knowledge",
+          "g1.geo.physical.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.geo.physical.weer-en-seizoenen-dichtbij"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.geo.human.wonen-school-en-buurt",
+      "subjectId": "geo",
+      "domainId": "human",
+      "title": "Wonen, school en buurt",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.geo.human.wonen-school-en-buurt.acquire",
+        "lesson.g1.geo.human.wonen-school-en-buurt.practice",
+        "lesson.g1.geo.human.wonen-school-en-buurt.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-AAR-menselijke-aardrijkskunde"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.geo.human.wonen-school-en-buurt",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.geo.human.wonen-school-en-buurt.theory",
+        "exerciseStageIds": [
+          "lesson.g1.geo.human.wonen-school-en-buurt.practise",
+          "lesson.g1.geo.human.wonen-school-en-buurt.apply",
+          "lesson.g1.geo.human.wonen-school-en-buurt.exercises-independent-b",
+          "lesson.g1.geo.human.wonen-school-en-buurt.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.geo.human.wonen-school-en-buurt.test",
+        "exerciseSetIds": [
+          "lesson.g1.geo.human.wonen-school-en-buurt.theory.set.follow-up",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.guided",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.fading",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.independent",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.repetition",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.independent-b",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.v1.curated.practice-1",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.cumulative-review",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.plus-variation",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.test",
+          "lesson.g1.geo.human.wonen-school-en-buurt.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.geo.human.knowledge",
+          "g1.geo.human.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.geo.human.wonen-school-en-buurt"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.geo.environment.zorg-voor-de-leefomgeving",
+      "subjectId": "geo",
+      "domainId": "environment",
+      "title": "Zorg voor de leefomgeving",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.acquire",
+        "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.practice",
+        "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-AAR-mens-milieu"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.geo.environment.zorg-voor-de-leefomgeving",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.theory",
+        "exerciseStageIds": [
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.practise",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.apply",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.exercises-independent-b",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.test",
+        "exerciseSetIds": [
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.theory.set.follow-up",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.guided",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.fading",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.independent",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.repetition",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.independent-b",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.v1.curated.practice-1",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.cumulative-review",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.plus-variation",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.test",
+          "lesson.g1.geo.environment.zorg-voor-de-leefomgeving.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.geo.environment.knowledge",
+          "g1.geo.environment.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.geo.environment.zorg-voor-de-leefomgeving"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.geo.fieldwork.kijken-als-een-geograaf",
+      "subjectId": "geo",
+      "domainId": "fieldwork",
+      "title": "Kijken als een geograaf",
+      "sequence": 5,
+      "sourceLessonIds": [
+        "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.acquire",
+        "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.practice",
+        "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-AAR-geografische-werkwijzen"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.geo.fieldwork.kijken-als-een-geograaf",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.theory",
+        "exerciseStageIds": [
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.practise",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.apply",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.exercises-independent-b",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.test",
+        "exerciseSetIds": [
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.theory.set.follow-up",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.guided",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.fading",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.independent",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.repetition",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.independent-b",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.v1.curated.practice-1",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.cumulative-review",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.plus-variation",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.test",
+          "lesson.g1.geo.fieldwork.kijken-als-een-geograaf.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.geo.fieldwork.knowledge",
+          "g1.geo.fieldwork.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.geo.fieldwork.kijken-als-een-geograaf"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.history.chronology.dag-week-jaar-en-levenslijn",
+      "subjectId": "history",
+      "domainId": "chronology",
+      "title": "Dag, week, jaar en levenslijn",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.acquire",
+        "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.practice",
+        "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-GES-chronologie"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.theory",
+        "exerciseStageIds": [
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.practise",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.apply",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.exercises-independent-b",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.test",
+        "exerciseSetIds": [
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.theory.set.follow-up",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.guided",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.fading",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.independent",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.repetition",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.independent-b",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.v1.curated.practice-1",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.cumulative-review",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.plus-variation",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.test",
+          "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.history.chronology.knowledge",
+          "g1.history.chronology.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.history.chronology.dag-week-jaar-en-levenslijn"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.history.sources.wat-vertelt-een-bron",
+      "subjectId": "history",
+      "domainId": "sources",
+      "title": "Wat vertelt een bron?",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.history.sources.wat-vertelt-een-bron.acquire",
+        "lesson.g1.history.sources.wat-vertelt-een-bron.practice",
+        "lesson.g1.history.sources.wat-vertelt-een-bron.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-GES-bronnen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.history.sources.wat-vertelt-een-bron",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.history.sources.wat-vertelt-een-bron.theory",
+        "exerciseStageIds": [
+          "lesson.g1.history.sources.wat-vertelt-een-bron.practise",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.apply",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.exercises-independent-b",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.history.sources.wat-vertelt-een-bron.test",
+        "exerciseSetIds": [
+          "lesson.g1.history.sources.wat-vertelt-een-bron.theory.set.follow-up",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.guided",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.fading",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.independent",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.repetition",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.independent-b",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.v1.curated.practice-1",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.cumulative-review",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.plus-variation",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.test",
+          "lesson.g1.history.sources.wat-vertelt-een-bron.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.history.sources.knowledge",
+          "g1.history.sources.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.history.sources.wat-vertelt-een-bron"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+      "subjectId": "history",
+      "domainId": "society",
+      "title": "Gezin, school en buurt vroeger en nu",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.acquire",
+        "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.practice",
+        "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-GES-historisch-redeneren"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.theory",
+        "exerciseStageIds": [
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.practise",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.apply",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.exercises-independent-b",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.test",
+        "exerciseSetIds": [
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.theory.set.follow-up",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.guided",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.fading",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.independent",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.repetition",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.independent-b",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.v1.curated.practice-1",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.cumulative-review",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.plus-variation",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.test",
+          "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.history.society.knowledge",
+          "g1.history.society.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.history.society.gezin-school-en-buurt-vroeger-en-nu"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.history.eras.feesten-en-tradities-door-de-tijd",
+      "subjectId": "history",
+      "domainId": "eras",
+      "title": "Feesten en tradities door de tijd",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.acquire",
+        "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.practice",
+        "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-GES-kennis-verleden"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.theory",
+        "exerciseStageIds": [
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.practise",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.apply",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.exercises-independent-b",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.test",
+        "exerciseSetIds": [
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.theory.set.follow-up",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.guided",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.fading",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.independent",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.repetition",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.independent-b",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.v1.curated.practice-1",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.cumulative-review",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.plus-variation",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.test",
+          "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.history.eras.knowledge",
+          "g1.history.eras.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.history.eras.feesten-en-tradities-door-de-tijd"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.history.heritage.erfgoed-in-mijn-omgeving",
+      "subjectId": "history",
+      "domainId": "heritage",
+      "title": "Erfgoed in mijn omgeving",
+      "sequence": 5,
+      "sourceLessonIds": [
+        "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.acquire",
+        "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.practice",
+        "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-GES-erfgoed"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.theory",
+        "exerciseStageIds": [
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.practise",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.apply",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.exercises-independent-b",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.test",
+        "exerciseSetIds": [
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.theory.set.follow-up",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.guided",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.fading",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.independent",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.repetition",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.independent-b",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.v1.curated.practice-1",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.cumulative-review",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.plus-variation",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.test",
+          "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.history.heritage.knowledge",
+          "g1.history.heritage.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.history.heritage.erfgoed-in-mijn-omgeving"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.ict.devices_data.toestellen-en-basisbediening",
+      "subjectId": "ict",
+      "domainId": "devices_data",
+      "title": "Toestellen en basisbediening",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.ict.devices_data.toestellen-en-basisbediening.acquire",
+        "lesson.g1.ict.devices_data.toestellen-en-basisbediening.practice",
+        "lesson.g1.ict.devices_data.toestellen-en-basisbediening.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ICT-digitale-systemen-data"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.ict.devices_data.toestellen-en-basisbediening",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.ict.devices_data.toestellen-en-basisbediening.theory",
+        "exerciseStageIds": [
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.practise",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.apply",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.exercises-independent-b",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.ict.devices_data.toestellen-en-basisbediening.test",
+        "exerciseSetIds": [
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.theory.set.follow-up",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.guided",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.fading",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.independent",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.repetition",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.independent-b",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.v1.curated.practice-1",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.cumulative-review",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.plus-variation",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.test",
+          "lesson.g1.ict.devices_data.toestellen-en-basisbediening.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.ict.devices_data.knowledge",
+          "g1.ict.devices_data.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.ict.devices-data.toestellen-en-basisbediening"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+      "subjectId": "ict",
+      "domainId": "coding",
+      "title": "Volgorde en algoritmen zonder scherm",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.acquire",
+        "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.practice",
+        "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ICT-computationeel-denken"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.theory",
+        "exerciseStageIds": [
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.practise",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.apply",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.exercises-independent-b",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.test",
+        "exerciseSetIds": [
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.theory.set.follow-up",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.guided",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.fading",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.independent",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.repetition",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.independent-b",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.v1.curated.practice-1",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.cumulative-review",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.plus-variation",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.test",
+          "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.ict.coding.knowledge",
+          "g1.ict.coding.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+      "subjectId": "ict",
+      "domainId": "create_communicate",
+      "title": "Tekenen, typen en delen met begeleiding",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.acquire",
+        "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.practice",
+        "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ICT-creeren-communiceren"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_KNOWLEDGE_AND_DEVICE_TASK",
+      "adultEvidenceRequirement": "adult verifies the guided creation and sharing task on the device",
+      "lessonId": "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.theory",
+        "exerciseStageIds": [
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.practise",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.apply",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.exercises-independent-b",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.test",
+        "exerciseSetIds": [
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.theory.set.follow-up",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.guided",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.fading",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.independent",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.repetition",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.independent-b",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.v1.curated.practice-1",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.cumulative-review",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.plus-variation",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.test",
+          "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.ict.create_communicate.knowledge",
+          "g1.ict.create_communicate.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.ict.create-communicate.tekenen-typen-en-delen-met-begeleiding"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+      "subjectId": "ict",
+      "domainId": "safety_ethics",
+      "title": "Privacy en hulp vragen",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.acquire",
+        "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.practice",
+        "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-ICT-veilig-ethisch"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.practise",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.apply",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.exercises-independent-b",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.test",
+        "exerciseSetIds": [
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.theory.set.follow-up",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.guided",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.fading",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.independent",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.repetition",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.independent-b",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.v1.curated.practice-1",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.cumulative-review",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.plus-variation",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.test",
+          "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.ict.safety_ethics.knowledge",
+          "g1.ict.safety_ethics.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.ict.safety-ethics.privacy-en-hulp-vragen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+      "subjectId": "math",
+      "domainId": "numbers",
+      "title": "Hoeveelheden tellen en structureren tot 20",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.acquire",
+        "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.practice",
+        "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.1-getallenkennis"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.practise",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.apply",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.exercises-independent-b",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.theory.set.follow-up",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.guided",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.fading",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.independent",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.repetition",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.independent-b",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.v1.curated.practice-1",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.cumulative-review",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.plus-variation",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.test",
+          "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.math.number_sense.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.numbers.knowledge",
+          "g1.math.numbers.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.numbers.getallenlijn-en-volgorde-tot-20",
+      "subjectId": "math",
+      "domainId": "numbers",
+      "title": "Getallenlijn en volgorde tot 20",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.acquire",
+        "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.practice",
+        "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.1-getallenkennis"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.practise",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.apply",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.exercises-independent-b",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.theory.set.follow-up",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.guided",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.fading",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.independent",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.repetition",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.independent-b",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.v1.curated.practice-1",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.cumulative-review",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.plus-variation",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.test",
+          "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.math.number_sense.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.numbers.knowledge",
+          "g1.math.numbers.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.numbers.getallenlijn-en-volgorde-tot-20"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+      "subjectId": "math",
+      "domainId": "numbers",
+      "title": "Samenstellen en splitsen tot 10 en 20",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.acquire",
+        "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.practice",
+        "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.1-getallenkennis"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.practise",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.apply",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.exercises-independent-b",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.theory.set.follow-up",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.guided",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.fading",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.independent",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.repetition",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.independent-b",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.v1.curated.practice-1",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.cumulative-review",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.plus-variation",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.test",
+          "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.math.number_sense.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.numbers.knowledge",
+          "g1.math.numbers.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.operations.optellen-tot-10-en-20",
+      "subjectId": "math",
+      "domainId": "operations",
+      "title": "Optellen tot 10 en 20",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.math.operations.optellen-tot-10-en-20.acquire",
+        "lesson.g1.math.operations.optellen-tot-10-en-20.practice",
+        "lesson.g1.math.operations.optellen-tot-10-en-20.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.2-bewerkingen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.addition.within10.meaning-and-model",
+      "validationStatus": "PILOT_ACTIVE",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.addition.within10.meaning-and-model.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.addition.within10.meaning-and-model.practise",
+          "lesson.g1.math.addition.within10.meaning-and-model.apply",
+          "lesson.g1.math.addition.within10.meaning-and-model.exercises-independent-b",
+          "lesson.g1.math.addition.within10.meaning-and-model.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.addition.within10.meaning-and-model.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.addition.within10.meaning-and-model.theory.set.follow-up",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.guided",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.fading",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.independent",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.repetition",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.independent-b",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.v1.curated.practice-1",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.cumulative-review",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.plus-variation",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.test",
+          "lesson.g1.math.addition.within10.meaning-and-model.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.math.addition_subtraction.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.operations.knowledge",
+          "g1.math.operations.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.addition.within10.example1",
+          "visual.g1.math.addition.within10.example2"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.operations.aftrekken-tot-10-en-20",
+      "subjectId": "math",
+      "domainId": "operations",
+      "title": "Aftrekken tot 10 en 20",
+      "sequence": 5,
+      "sourceLessonIds": [
+        "lesson.g1.math.operations.aftrekken-tot-10-en-20.acquire",
+        "lesson.g1.math.operations.aftrekken-tot-10-en-20.practice",
+        "lesson.g1.math.operations.aftrekken-tot-10-en-20.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.2-bewerkingen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.operations.aftrekken-tot-10-en-20",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.operations.aftrekken-tot-10-en-20.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.practise",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.apply",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.exercises-independent-b",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.operations.aftrekken-tot-10-en-20.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.theory.set.follow-up",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.guided",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.fading",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.independent",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.repetition",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.independent-b",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.v1.curated.practice-1",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.cumulative-review",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.plus-variation",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.test",
+          "lesson.g1.math.operations.aftrekken-tot-10-en-20.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.math.addition_subtraction.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.operations.knowledge",
+          "g1.math.operations.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.operations.aftrekken-tot-10-en-20"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.operations.rekenfeiten-en-handige-strategieen",
+      "subjectId": "math",
+      "domainId": "operations",
+      "title": "Rekenfeiten en handige strategieën",
+      "sequence": 6,
+      "sourceLessonIds": [
+        "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.acquire",
+        "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.practice",
+        "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.2-bewerkingen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.practise",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.apply",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.exercises-independent-b",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.theory.set.follow-up",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.guided",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.fading",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.independent",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.repetition",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.independent-b",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.v1.curated.practice-1",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.cumulative-review",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.plus-variation",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.test",
+          "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.math.addition_subtraction.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.operations.knowledge",
+          "g1.math.operations.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.operations.rekenfeiten-en-handige-strategieen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+      "subjectId": "math",
+      "domainId": "fractions",
+      "title": "Helft, dubbel en kwart in concrete situaties",
+      "sequence": 7,
+      "sourceLessonIds": [
+        "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.acquire",
+        "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.practice",
+        "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.1-2.2-breuken-decimalen-procenten"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.practise",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.apply",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.exercises-independent-b",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.theory.set.follow-up",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.guided",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.fading",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.independent",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.repetition",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.independent-b",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.v1.curated.practice-1",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.cumulative-review",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.plus-variation",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.test",
+          "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.math.concepts",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.fractions.knowledge",
+          "g1.math.fractions.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.measurement.lengte-massa-en-inhoud-vergelijken",
+      "subjectId": "math",
+      "domainId": "measurement",
+      "title": "Lengte, massa en inhoud vergelijken",
+      "sequence": 8,
+      "sourceLessonIds": [
+        "lesson.g1.math.measurement.lengte-massa-en-inhoud-vergelijken.acquire",
+        "lesson.g1.math.measurement.lengte-massa-en-inhoud-vergelijken.practice",
+        "lesson.g1.math.measurement.lengte-massa-en-inhoud-vergelijken.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.3-meten-metend-rekenen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.geometry.length.compare-and-order",
+      "validationStatus": "PILOT_ACTIVE",
+      "evidence": {
+        "theoryStageId": "lesson.g1.geometry.length.compare-and-order.theory",
+        "exerciseStageIds": [
+          "lesson.g1.geometry.length.compare-and-order.practise",
+          "lesson.g1.geometry.length.compare-and-order.apply",
+          "lesson.g1.geometry.length.compare-and-order.exercises-independent-b",
+          "lesson.g1.geometry.length.compare-and-order.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.geometry.length.compare-and-order.test",
+        "exerciseSetIds": [
+          "lesson.g1.geometry.length.compare-and-order.theory.set.follow-up",
+          "lesson.g1.geometry.length.compare-and-order.set.guided",
+          "lesson.g1.geometry.length.compare-and-order.set.fading",
+          "lesson.g1.geometry.length.compare-and-order.set.independent",
+          "lesson.g1.geometry.length.compare-and-order.set.repetition",
+          "lesson.g1.geometry.length.compare-and-order.set.independent-b",
+          "lesson.g1.geometry.length.compare-and-order.set.v1.curated.practice-1",
+          "lesson.g1.geometry.length.compare-and-order.set.cumulative-review",
+          "lesson.g1.geometry.length.compare-and-order.set.plus-variation",
+          "lesson.g1.geometry.length.compare-and-order.set.test",
+          "lesson.g1.geometry.length.compare-and-order.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.geometry.measurement_shapes.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.measurement.knowledge",
+          "g1.math.measurement.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.geometry.length.compare"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.measurement.tijd-kalender-en-klok",
+      "subjectId": "math",
+      "domainId": "measurement",
+      "title": "Tijd, kalender en klok",
+      "sequence": 9,
+      "sourceLessonIds": [
+        "lesson.g1.math.measurement.tijd-kalender-en-klok.acquire",
+        "lesson.g1.math.measurement.tijd-kalender-en-klok.practice",
+        "lesson.g1.math.measurement.tijd-kalender-en-klok.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.3-meten-metend-rekenen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.measurement.tijd-kalender-en-klok",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.measurement.tijd-kalender-en-klok.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.practise",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.apply",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.exercises-independent-b",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.measurement.tijd-kalender-en-klok.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.theory.set.follow-up",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.guided",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.fading",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.independent",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.repetition",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.independent-b",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.v1.curated.practice-1",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.cumulative-review",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.plus-variation",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.test",
+          "lesson.g1.math.measurement.tijd-kalender-en-klok.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.geometry.measurement_shapes.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.measurement.knowledge",
+          "g1.math.measurement.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.measurement.tijd-kalender-en-klok"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.measurement.geld-tot-20-euro",
+      "subjectId": "math",
+      "domainId": "measurement",
+      "title": "Geld tot 20 euro",
+      "sequence": 10,
+      "sourceLessonIds": [
+        "lesson.g1.math.measurement.geld-tot-20-euro.acquire",
+        "lesson.g1.math.measurement.geld-tot-20-euro.practice",
+        "lesson.g1.math.measurement.geld-tot-20-euro.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.3-meten-metend-rekenen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.measurement.geld-tot-20-euro",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.measurement.geld-tot-20-euro.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.measurement.geld-tot-20-euro.practise",
+          "lesson.g1.math.measurement.geld-tot-20-euro.apply",
+          "lesson.g1.math.measurement.geld-tot-20-euro.exercises-independent-b",
+          "lesson.g1.math.measurement.geld-tot-20-euro.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.measurement.geld-tot-20-euro.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.measurement.geld-tot-20-euro.theory.set.follow-up",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.guided",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.fading",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.independent",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.repetition",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.independent-b",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.v1.curated.practice-1",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.cumulative-review",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.plus-variation",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.test",
+          "lesson.g1.math.measurement.geld-tot-20-euro.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.geometry.measurement_shapes.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.measurement.knowledge",
+          "g1.math.measurement.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.measurement.geld-tot-20-euro"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.geometry.vlakke-figuren-en-ruimtefiguren",
+      "subjectId": "math",
+      "domainId": "geometry",
+      "title": "Vlakke figuren en ruimtefiguren",
+      "sequence": 11,
+      "sourceLessonIds": [
+        "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.acquire",
+        "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.practice",
+        "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.4-meetkunde"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.practise",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.apply",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.exercises-independent-b",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.theory.set.follow-up",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.guided",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.fading",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.independent",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.repetition",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.independent-b",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.v1.curated.practice-1",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.cumulative-review",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.plus-variation",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.test",
+          "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.geometry.measurement_shapes.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.geometry.knowledge",
+          "g1.math.geometry.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.geometry.vlakke-figuren-en-ruimtefiguren"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.geometry.orientatie-patronen-en-symmetrie",
+      "subjectId": "math",
+      "domainId": "geometry",
+      "title": "Oriëntatie, patronen en symmetrie",
+      "sequence": 12,
+      "sourceLessonIds": [
+        "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.acquire",
+        "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.practice",
+        "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.4-meetkunde"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.practise",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.apply",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.exercises-independent-b",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.theory.set.follow-up",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.guided",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.fading",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.independent",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.repetition",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.independent-b",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.v1.curated.practice-1",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.cumulative-review",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.plus-variation",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.test",
+          "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.math.concepts",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.geometry.knowledge",
+          "g1.math.geometry.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.geometry.orientatie-patronen-en-symmetrie"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.data.gegevens-verzamelen-en-voorstellen",
+      "subjectId": "math",
+      "domainId": "data",
+      "title": "Gegevens verzamelen en voorstellen",
+      "sequence": 13,
+      "sourceLessonIds": [
+        "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.acquire",
+        "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.practice",
+        "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-2.5-data-kans"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.practise",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.apply",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.exercises-independent-b",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.theory.set.follow-up",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.guided",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.fading",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.independent",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.repetition",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.independent-b",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.v1.curated.practice-1",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.cumulative-review",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.plus-variation",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.test",
+          "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.math.concepts",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.data.knowledge",
+          "g1.math.data.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.data.gegevens-verzamelen-en-voorstellen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren",
+      "subjectId": "math",
+      "domainId": "problem_solving",
+      "title": "Rekenverhalen modelleren en controleren",
+      "sequence": 14,
+      "sourceLessonIds": [
+        "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.acquire",
+        "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.practice",
+        "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WIS-wiskundig-redeneren-probleemoplossen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.theory",
+        "exerciseStageIds": [
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.practise",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.apply",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.exercises-independent-b",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.test",
+        "exerciseSetIds": [
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.theory.set.follow-up",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.guided",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.fading",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.independent",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.repetition",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.independent-b",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.v1.curated.practice-1",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.cumulative-review",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.plus-variation",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.test",
+          "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.math.addition_subtraction.foundations",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.math.problem_solving.knowledge",
+          "g1.math.problem_solving.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.math.problem-solving.rekenverhalen-modelleren-en-controleren"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "title": "Luisteren naar klanken in woorden",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden.acquire",
+        "lesson.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden.practice",
+        "lesson.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.reading.initial-sound.identify-and-compare",
+      "validationStatus": "PILOT_ACTIVE",
+      "evidence": {
+        "theoryStageId": "lesson.g1.reading.initial-sound.identify-and-compare.theory",
+        "exerciseStageIds": [
+          "lesson.g1.reading.initial-sound.identify-and-compare.practise",
+          "lesson.g1.reading.initial-sound.identify-and-compare.apply",
+          "lesson.g1.reading.initial-sound.identify-and-compare.exercises-independent-b",
+          "lesson.g1.reading.initial-sound.identify-and-compare.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.reading.initial-sound.identify-and-compare.test",
+        "exerciseSetIds": [
+          "lesson.g1.reading.initial-sound.identify-and-compare.theory.set.follow-up",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.guided",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.fading",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.independent",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.repetition",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.independent-b",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.v1.curated.practice-1",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.cumulative-review",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.plus-variation",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.test",
+          "lesson.g1.reading.initial-sound.identify-and-compare.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.spelling.phonology.sound_letter",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.technical_reading.knowledge",
+          "g1.nl.technical_reading.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.reading.initial-sound.listen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "title": "Klank-tekenkoppeling van de basisletters",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.acquire",
+        "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.practice",
+        "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.practise",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.apply",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.exercises-independent-b",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.theory.set.follow-up",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.guided",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.fading",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.independent",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.repetition",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.independent-b",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.v1.curated.practice-1",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.cumulative-review",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.plus-variation",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.test",
+          "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.spelling.phonology.sound_letter",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.technical_reading.knowledge",
+          "g1.nl.technical_reading.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.technical-reading.klank-tekenkoppeling-van-de-basisletters"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "title": "MKM-woorden synthetiseren en analyseren",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.acquire",
+        "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.practice",
+        "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.practise",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.apply",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.exercises-independent-b",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.theory.set.follow-up",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.guided",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.fading",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.independent",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.repetition",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.independent-b",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.v1.curated.practice-1",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.cumulative-review",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.plus-variation",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.test",
+          "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.technical_reading.decoding",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.technical_reading.knowledge",
+          "g1.nl.technical_reading.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.technical-reading.mkm-woorden-synthetiseren-en-analyseren"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "title": "Lange klinkers en tweetekenklanken",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.acquire",
+        "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.practice",
+        "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.practise",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.apply",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.exercises-independent-b",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.theory.set.follow-up",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.guided",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.fading",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.independent",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.repetition",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.independent-b",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.v1.curated.practice-1",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.cumulative-review",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.plus-variation",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.test",
+          "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.technical_reading.decoding",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.technical_reading.knowledge",
+          "g1.nl.technical_reading.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.technical-reading.lange-klinkers-en-tweetekenklanken"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "title": "Medeklinkerclusters en langere eenlettergrepige woorden",
+      "sequence": 5,
+      "sourceLessonIds": [
+        "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.acquire",
+        "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.practice",
+        "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.practise",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.apply",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.exercises-independent-b",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.theory.set.follow-up",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.guided",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.fading",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.independent",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.repetition",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.independent-b",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.v1.curated.practice-1",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.cumulative-review",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.plus-variation",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.test",
+          "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.technical_reading.decoding",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.technical_reading.knowledge",
+          "g1.nl.technical_reading.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.technical-reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.technical_reading.automatiseren-van-frequente-woorden",
+      "subjectId": "nl",
+      "domainId": "technical_reading",
+      "title": "Automatiseren van frequente woorden",
+      "sequence": 6,
+      "sourceLessonIds": [
+        "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.acquire",
+        "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.practice",
+        "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-vlot-vloeiend-lezen"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.practise",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.apply",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.exercises-independent-b",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.theory.set.follow-up",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.guided",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.fading",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.independent",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.repetition",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.independent-b",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.v1.curated.practice-1",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.cumulative-review",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.plus-variation",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.test",
+          "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.technical_reading.decoding",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.technical_reading.knowledge",
+          "g1.nl.technical_reading.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.technical-reading.automatiseren-van-frequente-woorden"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+      "subjectId": "nl",
+      "domainId": "comprehension",
+      "title": "Zinnen en korte teksten begrijpen",
+      "sequence": 7,
+      "sourceLessonIds": [
+        "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.acquire",
+        "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.practice",
+        "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-tekstbegrip"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.practise",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.apply",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.exercises-independent-b",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.theory.set.follow-up",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.guided",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.fading",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.independent",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.repetition",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.independent-b",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.v1.curated.practice-1",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.cumulative-review",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.plus-variation",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.test",
+          "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.early_literacy.story_awareness",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.comprehension.knowledge",
+          "g1.nl.comprehension.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.comprehension.voorspellen-verbinden-en-navertellen",
+      "subjectId": "nl",
+      "domainId": "comprehension",
+      "title": "Voorspellen, verbinden en navertellen",
+      "sequence": 8,
+      "sourceLessonIds": [
+        "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.acquire",
+        "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.practice",
+        "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.1-tekstbegrip"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.practise",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.apply",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.exercises-independent-b",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.theory.set.follow-up",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.guided",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.fading",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.independent",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.repetition",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.independent-b",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.v1.curated.practice-1",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.cumulative-review",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.plus-variation",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.test",
+          "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.early_literacy.story_awareness",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.comprehension.knowledge",
+          "g1.nl.comprehension.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.comprehension.voorspellen-verbinden-en-navertellen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen",
+      "subjectId": "nl",
+      "domainId": "handwriting",
+      "title": "Schrijfhouding, pengreep en basisbewegingen",
+      "sequence": 9,
+      "sourceLessonIds": [
+        "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen.acquire",
+        "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen.practice",
+        "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.2-handschrift-digitaal"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_PRODUCTIVE_WRITING_ADULT_VERIFIED",
+      "adultEvidenceRequirement": "adult verifies letter formation, spacing, readability and independent written production",
+      "lessonId": "lesson.g1.writing.letter_tracing.basislijnen-en-vormen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.exercises.1",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.exercises.3",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.exercises.5",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.exercises.8"
+        ],
+        "masteryTestStageId": "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.test",
+        "exerciseSetIds": [
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.theory",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-1",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-2",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-3",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-4",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-5",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-6",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-7",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.practice-8",
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.set.test"
+        ],
+        "generatorIds": [
+          "generator.g1.writing.letter_tracing.core"
+        ],
+        "masteryTags": [
+          "writing.letter_tracing.grade1"
+        ],
+        "visualAssetIds": [
+          "lesson.g1.writing.letter_tracing.basislijnen-en-vormen.visual"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen",
+      "subjectId": "nl",
+      "domainId": "handwriting",
+      "title": "Kleine letters, hoofdletters en cijfers vormen",
+      "sequence": 10,
+      "sourceLessonIds": [
+        "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen.acquire",
+        "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen.practice",
+        "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.2-handschrift-digitaal"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_PRODUCTIVE_WRITING_ADULT_VERIFIED",
+      "adultEvidenceRequirement": "adult verifies letter formation, spacing, readability and independent written production",
+      "lessonId": "lesson.g1.writing.letter_tracing.alle-letters-oefenen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.writing.letter_tracing.alle-letters-oefenen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.exercises.1",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.exercises.3",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.exercises.5",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.exercises.8"
+        ],
+        "masteryTestStageId": "lesson.g1.writing.letter_tracing.alle-letters-oefenen.test",
+        "exerciseSetIds": [
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.theory",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-1",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-2",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-3",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-4",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-5",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-6",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-7",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.practice-8",
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.set.test"
+        ],
+        "generatorIds": [
+          "generator.g1.writing.letter_tracing.core"
+        ],
+        "masteryTags": [
+          "writing.letter_tracing.grade1"
+        ],
+        "visualAssetIds": [
+          "lesson.g1.writing.letter_tracing.alle-letters-oefenen.visual"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+      "subjectId": "nl",
+      "domainId": "spelling",
+      "title": "Klankzuivere woorden en eerste dictee",
+      "sequence": 11,
+      "sourceLessonIds": [
+        "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.acquire",
+        "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.practice",
+        "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.2-correct-schrijven"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.practise",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.apply",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.exercises-independent-b",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.theory.set.follow-up",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.guided",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.fading",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.independent",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.repetition",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.independent-b",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.v1.curated.practice-1",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.cumulative-review",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.plus-variation",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.test",
+          "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.spelling.phonology.sound_letter",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.spelling.knowledge",
+          "g1.nl.spelling.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.composition.van-woord-naar-correcte-zin",
+      "subjectId": "nl",
+      "domainId": "composition",
+      "title": "Van woord naar correcte zin",
+      "sequence": 12,
+      "sourceLessonIds": [
+        "lesson.g1.nl.composition.van-woord-naar-correcte-zin.acquire",
+        "lesson.g1.nl.composition.van-woord-naar-correcte-zin.practice",
+        "lesson.g1.nl.composition.van-woord-naar-correcte-zin.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.2-schrijven-leren-delen"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_PRODUCTIVE_WRITING_ADULT_VERIFIED",
+      "adultEvidenceRequirement": "adult verifies letter formation, spacing, readability and independent written production",
+      "lessonId": "lesson.g1.nl.writing.een-zin-maken",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.writing.een-zin-maken.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.writing.een-zin-maken.exercises.1",
+          "lesson.g1.nl.writing.een-zin-maken.exercises.3",
+          "lesson.g1.nl.writing.een-zin-maken.exercises.5",
+          "lesson.g1.nl.writing.een-zin-maken.exercises.8"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.writing.een-zin-maken.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.writing.een-zin-maken.set.theory-check",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-1",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-2",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-3",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-4",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-5",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-6",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-7",
+          "lesson.g1.nl.writing.een-zin-maken.set.practice-8",
+          "lesson.g1.nl.writing.een-zin-maken.set.test"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool"
+        ],
+        "masteryTags": [
+          "language.writing.grade1.een-zin-maken"
+        ],
+        "visualAssetIds": [
+          "lesson.g1.nl.writing.een-zin-maken.visual"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.oral.luisteren-vertellen-en-instructies-volgen",
+      "subjectId": "nl",
+      "domainId": "oral",
+      "title": "Luisteren, vertellen en instructies volgen",
+      "sequence": 13,
+      "sourceLessonIds": [
+        "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.acquire",
+        "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.practice",
+        "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-1.3-mondeling-taalgebruik"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_LISTENING_SPEAKING_ADULT_VERIFIED",
+      "adultEvidenceRequirement": "adult verifies audible voice, relevant utterance, turn-taking and response to a partner",
+      "lessonId": "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.practise",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.apply",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.exercises-independent-b",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.theory.set.follow-up",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.guided",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.fading",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.independent",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.repetition",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.independent-b",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.v1.curated.practice-1",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.cumulative-review",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.plus-variation",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.test",
+          "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.listening.instructions_stories",
+          "generator.g1.language.speaking.basic_interaction",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.oral.knowledge",
+          "g1.nl.oral.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.oral.luisteren-vertellen-en-instructies-volgen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+      "subjectId": "nl",
+      "domainId": "literature",
+      "title": "Leesplezier en kennismaken met tekstsoorten",
+      "sequence": 14,
+      "sourceLessonIds": [
+        "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.acquire",
+        "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.practice",
+        "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-NL-literatuur"
+      ],
+      "coverageStatus": "IMPLEMENTED",
+      "deliveryMode": "DIGITAL_THEORY_PRACTICE_TRANSFER_AND_MASTERY_TEST",
+      "adultEvidenceRequirement": "",
+      "lessonId": "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.theory",
+        "exerciseStageIds": [
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.practise",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.apply",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.exercises-independent-b",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.test",
+        "exerciseSetIds": [
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.theory.set.follow-up",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.guided",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.fading",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.independent",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.repetition",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.independent-b",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.v1.curated.practice-1",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.cumulative-review",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.plus-variation",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.test",
+          "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.language.early_literacy.story_awareness",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.nl.literature.knowledge",
+          "g1.nl.literature.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+      "subjectId": "pe",
+      "domainId": "movement",
+      "title": "Basisbewegingen en lichaamsbesef",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.acquire",
+        "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.practice",
+        "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-LO-grootmotorisch"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.theory",
+        "exerciseStageIds": [
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.practise",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.apply",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.exercises-independent-b",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.test",
+        "exerciseSetIds": [
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.theory.set.follow-up",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.guided",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.fading",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.independent",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.repetition",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.independent-b",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.v1.curated.practice-1",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.cumulative-review",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.plus-variation",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.test",
+          "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.pe.movement.knowledge",
+          "g1.pe.movement.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.pe.movement.basisbewegingen-en-lichaamsbesef"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.pe.gymnastics.steunen-hangen-en-rollen",
+      "subjectId": "pe",
+      "domainId": "gymnastics",
+      "title": "Steunen, hangen en rollen",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.acquire",
+        "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.practice",
+        "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-LO-gymnastiek"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.practise",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.apply",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.exercises-independent-b",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.test",
+        "exerciseSetIds": [
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.theory.set.follow-up",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.guided",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.fading",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.independent",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.repetition",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.independent-b",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.v1.curated.practice-1",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.cumulative-review",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.plus-variation",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.test",
+          "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.pe.gymnastics.knowledge",
+          "g1.pe.gymnastics.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.pe.gymnastics.steunen-hangen-en-rollen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+      "subjectId": "pe",
+      "domainId": "ball_games",
+      "title": "Gooien, vangen, rollen en mikken",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.acquire",
+        "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.practice",
+        "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-LO-spel-sport"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.theory",
+        "exerciseStageIds": [
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.practise",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.apply",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.exercises-independent-b",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.test",
+        "exerciseSetIds": [
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.theory.set.follow-up",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.guided",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.fading",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.independent",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.repetition",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.independent-b",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.v1.curated.practice-1",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.cumulative-review",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.plus-variation",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.test",
+          "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.pe.ball_games.knowledge",
+          "g1.pe.ball_games.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.pe.ball-games.gooien-vangen-rollen-en-mikken"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.pe.dance.bewegen-op-puls-en-signaal",
+      "subjectId": "pe",
+      "domainId": "dance",
+      "title": "Bewegen op puls en signaal",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.acquire",
+        "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.practice",
+        "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-LO-ritmisch-expressief"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.pe.dance.bewegen-op-puls-en-signaal",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.theory",
+        "exerciseStageIds": [
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.practise",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.apply",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.exercises-independent-b",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.test",
+        "exerciseSetIds": [
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.theory.set.follow-up",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.guided",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.fading",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.independent",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.repetition",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.independent-b",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.v1.curated.practice-1",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.cumulative-review",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.plus-variation",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.test",
+          "lesson.g1.pe.dance.bewegen-op-puls-en-signaal.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.pe.dance.knowledge",
+          "g1.pe.dance.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.pe.dance.bewegen-op-puls-en-signaal"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+      "subjectId": "pe",
+      "domainId": "health_safety",
+      "title": "Spelafspraken, veiligheid en inspanning",
+      "sequence": 5,
+      "sourceLessonIds": [
+        "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.acquire",
+        "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.practice",
+        "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-LO-fitheid-veiligheid"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "ADULT_PRACTICE_WITH_DIGITAL_KNOWLEDGE_COMPONENT",
+      "adultEvidenceRequirement": "adult verifies the creative or physical performance using the lesson criteria",
+      "lessonId": "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.theory",
+        "exerciseStageIds": [
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.practise",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.apply",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.exercises-independent-b",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.test",
+        "exerciseSetIds": [
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.theory.set.follow-up",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.guided",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.fading",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.independent",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.repetition",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.independent-b",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.v1.curated.practice-1",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.cumulative-review",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.plus-variation",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.test",
+          "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.g1.applied_domains",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.pe.health_safety.knowledge",
+          "g1.pe.health_safety.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.pe.health-safety.spelafspraken-veiligheid-en-inspanning"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+      "subjectId": "science_tech",
+      "domainId": "organisms",
+      "title": "Levend, niet-levend en ooit levend",
+      "sequence": 1,
+      "sourceLessonIds": [
+        "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.acquire",
+        "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.practice",
+        "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WT-organismen"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.theory",
+        "exerciseStageIds": [
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.practise",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.apply",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.exercises-independent-b",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.test",
+        "exerciseSetIds": [
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.theory.set.follow-up",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.guided",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.fading",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.independent",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.repetition",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.independent-b",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.v1.curated.practice-1",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.cumulative-review",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.plus-variation",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.test",
+          "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.science_tech.organisms.knowledge",
+          "g1.science_tech.organisms.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.science-tech.organisms.levend-niet-levend-en-ooit-levend"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.science_tech.organisms.planten-rondom-ons",
+      "subjectId": "science_tech",
+      "domainId": "organisms",
+      "title": "Planten rondom ons",
+      "sequence": 2,
+      "sourceLessonIds": [
+        "lesson.g1.science_tech.organisms.planten-rondom-ons.acquire",
+        "lesson.g1.science_tech.organisms.planten-rondom-ons.practice",
+        "lesson.g1.science_tech.organisms.planten-rondom-ons.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WT-organismen"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.science_tech.organisms.planten-rondom-ons",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.science_tech.organisms.planten-rondom-ons.theory",
+        "exerciseStageIds": [
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.practise",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.apply",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.exercises-independent-b",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.science_tech.organisms.planten-rondom-ons.test",
+        "exerciseSetIds": [
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.theory.set.follow-up",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.guided",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.fading",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.independent",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.repetition",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.independent-b",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.v1.curated.practice-1",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.cumulative-review",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.plus-variation",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.test",
+          "lesson.g1.science_tech.organisms.planten-rondom-ons.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.science_tech.organisms.knowledge",
+          "g1.science_tech.organisms.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.science-tech.organisms.planten-rondom-ons"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+      "subjectId": "science_tech",
+      "domainId": "organisms",
+      "title": "Dieren en hun leefomgeving",
+      "sequence": 3,
+      "sourceLessonIds": [
+        "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.acquire",
+        "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.practice",
+        "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WT-organismen"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.theory",
+        "exerciseStageIds": [
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.practise",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.apply",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.exercises-independent-b",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.test",
+        "exerciseSetIds": [
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.theory.set.follow-up",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.guided",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.fading",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.independent",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.repetition",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.independent-b",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.v1.curated.practice-1",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.cumulative-review",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.plus-variation",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.test",
+          "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.science_tech.organisms.knowledge",
+          "g1.science_tech.organisms.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.science-tech.organisms.dieren-en-hun-leefomgeving"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+      "subjectId": "science_tech",
+      "domainId": "human_body",
+      "title": "Mijn lichaam en zintuigen",
+      "sequence": 4,
+      "sourceLessonIds": [
+        "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.acquire",
+        "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.practice",
+        "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WT-mens-lichaam-gezondheid"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.practise",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.apply",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.exercises-independent-b",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.test",
+        "exerciseSetIds": [
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.theory.set.follow-up",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.guided",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.fading",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.independent",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.repetition",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.independent-b",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.v1.curated.practice-1",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.cumulative-review",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.plus-variation",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.test",
+          "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.science_tech.human_body.knowledge",
+          "g1.science_tech.human_body.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.science-tech.human-body.mijn-lichaam-en-zintuigen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.science_tech.matter.materialen-en-eigenschappen",
+      "subjectId": "science_tech",
+      "domainId": "matter",
+      "title": "Materialen en eigenschappen",
+      "sequence": 5,
+      "sourceLessonIds": [
+        "lesson.g1.science_tech.matter.materialen-en-eigenschappen.acquire",
+        "lesson.g1.science_tech.matter.materialen-en-eigenschappen.practice",
+        "lesson.g1.science_tech.matter.materialen-en-eigenschappen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WT-materie"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.science_tech.matter.materialen-en-eigenschappen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.science_tech.matter.materialen-en-eigenschappen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.practise",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.apply",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.exercises-independent-b",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.science_tech.matter.materialen-en-eigenschappen.test",
+        "exerciseSetIds": [
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.theory.set.follow-up",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.guided",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.fading",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.independent",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.repetition",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.independent-b",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.v1.curated.practice-1",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.cumulative-review",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.plus-variation",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.test",
+          "lesson.g1.science_tech.matter.materialen-en-eigenschappen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.science_tech.matter.knowledge",
+          "g1.science_tech.matter.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.science-tech.matter.materialen-en-eigenschappen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+      "subjectId": "science_tech",
+      "domainId": "forces_energy",
+      "title": "Duwen, trekken, rollen en vallen",
+      "sequence": 6,
+      "sourceLessonIds": [
+        "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.acquire",
+        "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.practice",
+        "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WT-kracht-energie-licht-geluid"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.theory",
+        "exerciseStageIds": [
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.practise",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.apply",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.exercises-independent-b",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.test",
+        "exerciseSetIds": [
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.theory.set.follow-up",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.guided",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.fading",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.independent",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.repetition",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.independent-b",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.v1.curated.practice-1",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.cumulative-review",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.plus-variation",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.test",
+          "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.science_tech.forces_energy.knowledge",
+          "g1.science_tech.forces_energy.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.science-tech.forces-energy.duwen-trekken-rollen-en-vallen"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    },
+    {
+      "referenceUnitId": "unit.g1.science_tech.technology.maken-voor-een-doel",
+      "subjectId": "science_tech",
+      "domainId": "technology",
+      "title": "Maken voor een doel",
+      "sequence": 7,
+      "sourceLessonIds": [
+        "lesson.g1.science_tech.technology.maken-voor-een-doel.acquire",
+        "lesson.g1.science_tech.technology.maken-voor-een-doel.practice",
+        "lesson.g1.science_tech.technology.maken-voor-een-doel.transfer"
+      ],
+      "sourceCrosswalkTags": [
+        "MD-WT-technische-systemen"
+      ],
+      "coverageStatus": "ADULT_MEDIATED",
+      "deliveryMode": "HYBRID_DIGITAL_CONCEPT_AND_ADULT_OBSERVATION",
+      "adultEvidenceRequirement": "adult verifies the observation, experiment or safe real-world application",
+      "lessonId": "lesson.g1.science_tech.technology.maken-voor-een-doel",
+      "validationStatus": "VALIDATION_REQUIRED",
+      "evidence": {
+        "theoryStageId": "lesson.g1.science_tech.technology.maken-voor-een-doel.theory",
+        "exerciseStageIds": [
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.practise",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.apply",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.exercises-independent-b",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.exercises-plus"
+        ],
+        "masteryTestStageId": "lesson.g1.science_tech.technology.maken-voor-een-doel.test",
+        "exerciseSetIds": [
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.theory.set.follow-up",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.guided",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.fading",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.independent",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.repetition",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.independent-b",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.v1.curated.practice-1",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.cumulative-review",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.plus-variation",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.test",
+          "lesson.g1.science_tech.technology.maken-voor-een-doel.set.retest-b"
+        ],
+        "generatorIds": [
+          "generator.reviewed.question-pool",
+          "generator.g1.world.environment_science",
+          "generator.g1.curriculum.catalog"
+        ],
+        "masteryTags": [
+          "g1.science_tech.technology.knowledge",
+          "g1.science_tech.technology.skill"
+        ],
+        "visualAssetIds": [
+          "visual.g1.science-tech.technology.maken-voor-een-doel"
+        ],
+        "requiredLocales": [
+          "nl-BE",
+          "fr-BE",
+          "en-US"
+        ]
+      }
+    }
+  ],
+  "extraCatalogLessons": [
+    {
+      "lessonId": "lesson.g1.math.addition.within5.foundations",
+      "unitId": "unit.g1.math.operations.optellen-tot-5",
+      "reason": "Product extension added after the 65-unit reference package."
+    },
+    {
+      "lessonId": "lesson.g1.math.subtraction.within5.foundations",
+      "unitId": "unit.g1.math.operations.aftrekken-tot-5",
+      "reason": "Product extension added after the 65-unit reference package."
+    }
+  ]
+}

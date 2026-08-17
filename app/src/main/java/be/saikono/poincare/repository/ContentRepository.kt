@@ -18,6 +18,8 @@ import be.saikono.poincare.model.LocalizedText
 import be.saikono.poincare.model.RewardMetadata
 import be.saikono.poincare.model.SkillLevel
 import be.saikono.poincare.model.SubcategoryCatalog
+import be.saikono.poincare.model.selectedGradesFor
+import be.saikono.poincare.model.skillLevelForGrade
 import java.io.FilterInputStream
 import java.io.IOException
 import kotlinx.coroutines.CancellationException
@@ -39,6 +41,18 @@ interface ContentRepository {
     ): List<ExerciseContent>
     suspend fun preloadForProfile(profile: ChildProfile, onProgress: (Int) -> Unit = {}) {
         onProgress(100)
+    }
+}
+
+internal class MonotonicProgressReporter(private val onProgress: (Int) -> Unit) {
+    private var lastReported = -1
+
+    fun report(value: Int) {
+        val monotonicValue = value.coerceIn(0, 100).coerceAtLeast(lastReported)
+        if (monotonicValue != lastReported) {
+            lastReported = monotonicValue
+            onProgress(monotonicValue)
+        }
     }
 }
 
@@ -88,28 +102,19 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
 
     override suspend fun preloadForProfile(profile: ChildProfile, onProgress: (Int) -> Unit) = withContext(Dispatchers.IO) {
         contentLoadMutex.withLock {
+            val progressReporter = MonotonicProgressReporter(onProgress)
             invalidateCacheIfContentChanged()
-            val targets = buildList {
-                add(LearningDomain.MATH to profile.mathLevel)
-                add(LearningDomain.READING to profile.readingLevel)
-                add(LearningDomain.WRITING to profile.writingLevel)
-                // Puzzles derive their grade from the related Reading or Math category.
-                add(LearningDomain.PUZZLE to profile.mathLevel)
-                add(LearningDomain.PUZZLE to profile.readingLevel)
-                // World Knowledge is selected per topic in the child flow, so preload all levels once.
-                SkillLevel.entries.filter { it != SkillLevel.NOT_APPLICABLE }.forEach { level ->
-                    add(LearningDomain.WORLD_KNOWLEDGE to level)
-                }
-                add(LearningDomain.GEOMETRY to profile.geometryLevel)
+            val targets = LearningDomain.entries.flatMap { domain ->
+                profile.selectedGradesFor(domain).map { grade -> domain to skillLevelForGrade(grade) }
             }.filter { (_, level) -> level != SkillLevel.NOT_APPLICABLE }.distinct()
 
             val missingTargets = targets.filter { (domain, level) -> CacheKey(domain, level) !in xmlExercisesCache }
             if (missingTargets.isEmpty()) {
-                onProgress(100)
+                progressReporter.report(100)
                 return@withLock
             }
 
-            onProgress(0)
+            progressReporter.report(0)
             val targetsByFile = linkedMapOf<String, MutableList<Pair<LearningDomain, SkillLevel>>>()
             missingTargets.forEach { target ->
                 target.first.toFileNames().forEach { fileName ->
@@ -119,25 +124,33 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
             val fileSizes = targetsByFile.keys.associateWith(::assetSize)
             val totalBytes = fileSizes.values.sum().coerceAtLeast(1L)
             var completedBytes = 0L
-            var convertedTargets = 0
+            val loadedPacks = linkedMapOf<String, PoincareContentPack?>()
 
-            targetsByFile.forEach { (fileName, fileTargets) ->
+            // Read every required content file first so the 0..85 phase is one
+            // continuous operation instead of restarting after each conversion.
+            targetsByFile.forEach { (fileName, _) ->
                 val fileSize = fileSizes.getValue(fileName)
                 val pack = loadPack(fileName) { readBytes ->
                     val readProgress = (((completedBytes + readBytes.coerceAtMost(fileSize)) * 85L) / totalBytes).toInt()
-                    onProgress(readProgress.coerceIn(0, 85))
+                    progressReporter.report(readProgress.coerceIn(0, 85))
                 }
+                loadedPacks[fileName] = pack
                 completedBytes += fileSize
+                progressReporter.report(((completedBytes * 85L) / totalBytes).toInt().coerceIn(0, 85))
+            }
 
+            var convertedTargets = 0
+            targetsByFile.forEach { (fileName, fileTargets) ->
+                val pack = loadedPacks[fileName]
                 fileTargets.distinct().forEach { (domain, level) ->
                     val converted = pack?.let { convertPack(it, domain, level) }.orEmpty()
                     xmlExercisesCache[CacheKey(domain, level)] = converted
                     convertedTargets += 1
                     val conversionProgress = 85 + (convertedTargets * 15 / missingTargets.size.coerceAtLeast(1))
-                    onProgress(conversionProgress.coerceIn(85, 100))
+                    progressReporter.report(conversionProgress.coerceIn(85, 100))
                 }
             }
-            onProgress(100)
+            progressReporter.report(100)
         }
     }
 
@@ -345,6 +358,7 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         val audioNl = audioFor("nl-BE")
         val audioEn = audioFor("en-US")
         val audioFr = audioFor("fr-BE")
+        val preferPhoneticAudio = audioSources?.ttsShouldUsePhoneticText == true
         val visualNl = visualFor("nl-BE")
         val visualEn = visualFor("en-US")
         val visualFr = visualFor("fr-BE")
@@ -361,9 +375,9 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
             prompt = LocalizedText(nl = formatVisibleNumbers(nlPrompt), en = formatVisibleNumbers(enPrompt), fr = formatVisibleNumbers(frPrompt)),
             speechText = if (inputMode == InputMode.LISTEN_AND_SELECT) {
                 LocalizedText(
-                    nl = formatVisibleNumbers(audioNl?.speechText() ?: nlCorrectAnswer),
-                    en = formatVisibleNumbers(audioEn?.speechText() ?: audioNl?.speechText() ?: enCorrectAnswer),
-                    fr = formatVisibleNumbers(audioFr?.speechText() ?: audioNl?.speechText() ?: frCorrectAnswer)
+                    nl = formatVisibleNumbers(audioNl?.speechText(preferPhoneticAudio) ?: nlCorrectAnswer),
+                    en = formatVisibleNumbers(audioEn?.speechText(preferPhoneticAudio) ?: audioNl?.speechText(preferPhoneticAudio) ?: enCorrectAnswer),
+                    fr = formatVisibleNumbers(audioFr?.speechText(preferPhoneticAudio) ?: audioNl?.speechText(preferPhoneticAudio) ?: frCorrectAnswer)
                 )
             } else null,
             data = buildMap {
@@ -384,13 +398,14 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
                 audioSources?.let { sources ->
                     put("audioVisibleText", sources.visibleText.toString())
                     put("audioPlayButtonOnly", sources.playButtonOnly.toString())
+                    put("audioUsesPhoneticText", sources.ttsShouldUsePhoneticText.toString())
                     sources.kind?.let { put("audioKind", it) }
                     sources.sourceLocale?.let { put("audioSourceLocale", it) }
                     sources.targetLocale?.let { put("audioTargetLocale", it) }
                 }
-                putAudioData("nl-BE", audioNl)
-                putAudioData("en-US", audioEn)
-                putAudioData("fr-BE", audioFr)
+                putAudioData("nl-BE", audioNl, preferPhoneticAudio)
+                putAudioData("en-US", audioEn, preferPhoneticAudio)
+                putAudioData("fr-BE", audioFr, preferPhoneticAudio)
                 putVisualData("nl-BE", visualNl)
                 putVisualData("en-US", visualEn)
                 putVisualData("fr-BE", visualFr)
@@ -420,14 +435,19 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
             ?: audioSources?.audio?.firstOrNull()
     }
 
-    private fun MutableMap<String, String>.putAudioData(locale: String, audio: PoincareAudioSource?) {
+    private fun MutableMap<String, String>.putAudioData(
+        locale: String,
+        audio: PoincareAudioSource?,
+        preferPhonetic: Boolean
+    ) {
         if (audio == null) return
-        put("audioText_$locale", formatVisibleNumbers(audio.speechText()))
+        put("audioText_$locale", formatVisibleNumbers(audio.speechText(preferPhonetic)))
         put("audioTtsLanguage_$locale", normalizeLocale(audio.ttsLanguage))
         put("audioId_$locale", audio.audioId)
     }
 
-    private fun PoincareAudioSource.speechText(): String = ttsText ?: phoneticText ?: text
+    private fun PoincareAudioSource.speechText(preferPhonetic: Boolean): String =
+        if (preferPhonetic) phoneticText ?: ttsText ?: text else ttsText ?: phoneticText ?: text
 
     private fun PoincareExercise.visualFor(locale: String): be.saikono.poincare.data.content.PoincareVisualSource? {
         val normalized = normalizeLocale(locale)
@@ -574,7 +594,7 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         private const val TAG = "PoincareContent"
 
         private val MATH_SUBCATEGORIES = setOf("addition", "subtraction", "multiplication", "division", "mixed_arithmetic", "number_sequences", "fractions", "money")
-        private val READING_SUBCATEGORIES = setOf("reading", "listening", "dictation", "vocabulary", "translation_nl_to_en", "translation_nl_to_fr", "translation_en_to_nl", "translation_en_to_fr", "translation_fr_to_nl", "translation_fr_to_en")
+        private val READING_SUBCATEGORIES = setOf("reading", "listening", "dictation", "vocabulary", "vocabulary_en", "translation_nl_to_en", "translation_nl_to_fr", "translation_en_to_nl", "translation_en_to_fr", "translation_fr_to_nl", "translation_fr_to_en")
         private val WRITING_SUBCATEGORIES = SubcategoryCatalog.writingBaseIds
         private val PUZZLE_SUBCATEGORIES = setOf("sudoku", "math-crosswords", "word-seeker", "mothership-dock", "galaxycon", "calculator-puzzle", "constellations", "orbit-builder")
         private val WORLD_SUBCATEGORIES = SubcategoryCatalog.worldThemeIds

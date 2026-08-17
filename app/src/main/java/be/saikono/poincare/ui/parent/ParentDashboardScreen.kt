@@ -4,6 +4,7 @@ package be.saikono.poincare.ui.parent
 
 import androidx.compose.foundation.layout.PaddingValues
 import android.speech.tts.Voice
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,8 +26,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -40,6 +41,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -63,18 +65,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.saikono.poincare.data.settings.VoiceSettings
+import be.saikono.poincare.domain.curriculum.manifest.CurriculumManifest
 import be.saikono.poincare.model.AnimationSettings
 import be.saikono.poincare.model.ChildProfile
 import be.saikono.poincare.model.LearningDomain
 import be.saikono.poincare.model.SkillLevel
 import be.saikono.poincare.model.isMainCategoryEnabled
 import be.saikono.poincare.model.isSubcategoryEnabled
+import be.saikono.poincare.model.selectedGradesFor
+import be.saikono.poincare.model.withSelectedGrades
+import be.saikono.poincare.ui.components.GradeMultiSelector
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.home.getSubCategoriesForDomain
 import be.saikono.poincare.ui.spaceMap.SpaceBackground
+import be.saikono.poincare.ui.spaceMap.mainCategoryLabel
 import be.saikono.poincare.ui.theme.CockpitGray
 import be.saikono.poincare.ui.theme.DeepSpaceBlue
 import be.saikono.poincare.ui.theme.PlanetBlue
@@ -86,12 +96,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOf
+import kotlin.math.roundToInt
 
 @Composable
 fun ParentDashboardScreen(
     viewModel: ParentViewModel,
     onNavigateBack: () -> Unit,
-    onProfileDeleted: () -> Unit
+    onProfileDeleted: () -> Unit,
+    curriculumManifest: CurriculumManifest? = null
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val availableVoices by viewModel.availableVoices.collectAsState()
@@ -103,16 +115,22 @@ fun ParentDashboardScreen(
         onUpdateVoiceSettings = viewModel::updateVoiceSettings,
         onTestVoice = viewModel::testVoice,
         onNavigateBack = onNavigateBack,
+        onSaveChanges = viewModel::saveDashboard,
         onUpdateName = viewModel::updateProfileName,
         onUpdateBirthYear = viewModel::updateBirthYear,
-        onUpdateLevel = viewModel::updateSkillLevel,
+        onUpdateGrades = viewModel::updateSelectedGrades,
         onUpdateMainCategoryEnabled = viewModel::updateMainCategoryEnabled,
         onUpdateSubcategoryEnabled = viewModel::updateSubcategoryEnabled,
         onUpdateGiftedMode = viewModel::updateGiftedMode,
         onUpdateShowUnassignedExercises = viewModel::updateShowUnassignedExercises,
         onUpdateAnimationSettings = viewModel::updateAnimationSettings,
+        onUpdateLessonMasteryThreshold = viewModel::updateLessonMasteryThreshold,
+        onUpdateLessonMasteryThresholdOverrideEnabled = viewModel::updateLessonMasteryThresholdOverrideEnabled,
+        onUpdateLessonMasteryThresholdForDomain = viewModel::updateLessonMasteryThresholdForDomain,
         onUpdateLanguage = viewModel::updateLanguage,
-        onDeleteProfile = { viewModel.deleteCurrentProfile(onProfileDeleted) }
+        onValidateParentPin = viewModel::isParentPinCorrect,
+        onDeleteProfile = { viewModel.deleteCurrentProfile(onProfileDeleted) },
+        curriculumManifest = curriculumManifest
     )
 }
 
@@ -124,17 +142,80 @@ fun ParentDashboardContent(
     onUpdateVoiceSettings: (String, VoiceSettings) -> Unit,
     onTestVoice: (String, String, VoiceSettings) -> Unit,
     onNavigateBack: () -> Unit,
+    onSaveChanges: (ParentDashboardDraft, (Boolean) -> Unit) -> Unit,
     onUpdateName: (String) -> Unit,
     onUpdateBirthYear: (Int) -> Unit,
-    onUpdateLevel: (LearningDomain, SkillLevel) -> Unit,
+    onUpdateGrades: (LearningDomain, Set<Int>) -> Unit,
     onUpdateMainCategoryEnabled: (LearningDomain, Boolean) -> Unit,
     onUpdateSubcategoryEnabled: (String, Boolean) -> Unit,
     onUpdateGiftedMode: (Boolean) -> Unit,
     onUpdateShowUnassignedExercises: (Boolean) -> Unit,
     onUpdateAnimationSettings: (AnimationSettings) -> Unit,
+    onUpdateLessonMasteryThreshold: (Int) -> Unit,
+    onUpdateLessonMasteryThresholdOverrideEnabled: (LearningDomain, Boolean) -> Unit,
+    onUpdateLessonMasteryThresholdForDomain: (LearningDomain, Int) -> Unit,
     onUpdateLanguage: (LanguageLayer, String) -> Unit,
-    onDeleteProfile: () -> Unit
+    onValidateParentPin: (String) -> Boolean,
+    onDeleteProfile: () -> Unit,
+    curriculumManifest: CurriculumManifest? = null
 ) {
+    val sourceDraft = uiState.toDraft()
+    var draft by remember(uiState.currentProfile?.id) { mutableStateOf(sourceDraft) }
+    var savedDraft by remember(uiState.currentProfile?.id) { mutableStateOf(sourceDraft) }
+    var showUnsavedChangesDialog by remember { mutableStateOf(false) }
+    var isSaving by remember { mutableStateOf(false) }
+    val hasUnsavedChanges = draft != null && draft != savedDraft
+
+    fun saveCurrentDraft(navigateAfterSave: Boolean) {
+        val currentDraft = draft ?: return
+        if (!currentDraft.isValid || isSaving) return
+        isSaving = true
+        onSaveChanges(currentDraft) { success ->
+            isSaving = false
+            if (success) {
+                val persisted = currentDraft.persistedProfile() ?: currentDraft.profile
+                val normalized = currentDraft.copy(
+                    profile = persisted,
+                    profileName = persisted.name,
+                    birthYearText = persisted.birthYear.toString(),
+                    teacherIdText = currentDraft.persistedTeacherId()
+                )
+                draft = normalized
+                savedDraft = normalized
+                showUnsavedChangesDialog = false
+                if (navigateAfterSave) onNavigateBack()
+            }
+        }
+    }
+
+    fun requestNavigateBack() {
+        if (hasUnsavedChanges) showUnsavedChangesDialog = true else onNavigateBack()
+    }
+
+    BackHandler(onBack = ::requestNavigateBack)
+
+    if (showUnsavedChangesDialog) {
+        AlertDialog(
+            onDismissRequest = { showUnsavedChangesDialog = false },
+            containerColor = DeepSpaceBlue.copy(alpha = 0.96f),
+            title = { Text(parentText("unsavedChangesTitle"), color = PlanetGold) },
+            text = { Text(parentText("unsavedChangesMessage"), color = StarWhite) },
+            confirmButton = {
+                Button(
+                    onClick = { saveCurrentDraft(navigateAfterSave = true) },
+                    enabled = draft?.isValid == true && !isSaving
+                ) { Text(parentText("save")) }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    draft = savedDraft
+                    showUnsavedChangesDialog = false
+                    onNavigateBack()
+                }) { Text(parentText("discardChanges")) }
+            }
+        )
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -156,7 +237,7 @@ fun ParentDashboardContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
-                    onClick = onNavigateBack,
+                    onClick = ::requestNavigateBack,
                     modifier = Modifier.size(48.dp)
                 ) {
                     Icon(
@@ -171,6 +252,25 @@ fun ParentDashboardContent(
                     style = MaterialTheme.typography.titleLarge,
                     color = StarWhite
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                Button(
+                    onClick = { saveCurrentDraft(navigateAfterSave = false) },
+                    enabled = hasUnsavedChanges && draft?.isValid == true && !isSaving,
+                    shape = RoundedCornerShape(999.dp),
+                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp)
+                ) {
+                    if (isSaving) {
+                        CircularProgressIndicator(
+                            color = StarWhite,
+                            strokeWidth = 2.dp,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    } else {
+                        Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(18.dp))
+                    }
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(parentText("save"))
+                }
             }
 
             if (uiState.isLoading) {
@@ -187,21 +287,91 @@ fun ParentDashboardContent(
                         .verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(24.dp)
                 ) {
+                    val currentDraft = draft
                     ProfileSettingsSection(
-                        profile = uiState.currentProfile,
-                        onUpdateName = onUpdateName,
-                        onUpdateBirthYear = onUpdateBirthYear,
-                        onUpdateLevel = onUpdateLevel,
-                        onUpdateMainCategoryEnabled = onUpdateMainCategoryEnabled,
-                        onUpdateSubcategoryEnabled = onUpdateSubcategoryEnabled,
-                        onUpdateGiftedMode = onUpdateGiftedMode,
-                        onUpdateShowUnassignedExercises = onUpdateShowUnassignedExercises,
-                        onDeleteProfile = onDeleteProfile
+                        profile = currentDraft?.profile,
+                        nameText = currentDraft?.profileName.orEmpty(),
+                        birthYearText = currentDraft?.birthYearText.orEmpty(),
+                        teacherIdText = currentDraft?.teacherIdText.orEmpty(),
+                        onUpdateName = { value -> draft = draft?.copy(profileName = value) },
+                        onUpdateBirthYearText = { value -> draft = draft?.copy(birthYearText = value) },
+                        onUpdateTeacherIdText = { value -> draft = draft?.copy(teacherIdText = value.take(64)) },
+                        onUpdateGrades = { domain, grades ->
+                            draft = draft?.let { it.copy(profile = it.profile.withSelectedGrades(domain, grades)) }
+                        },
+                        onUpdateMainCategoryEnabled = { domain, enabled ->
+                            draft = draft?.let { current ->
+                                val profile = current.profile
+                                val hidden = if (enabled) profile.hiddenMainCategories - domain.name
+                                else (profile.hiddenMainCategories + domain.name).distinct()
+                                current.copy(profile = profile.copy(hiddenMainCategories = hidden))
+                            }
+                        },
+                        onUpdateSubcategoryEnabled = { id, enabled ->
+                            draft = draft?.let { current ->
+                                val profile = current.profile
+                                val hidden = if (enabled) profile.hiddenSubcategories - id
+                                else (profile.hiddenSubcategories + id).distinct()
+                                current.copy(profile = profile.copy(hiddenSubcategories = hidden))
+                            }
+                        },
+                        onUpdateGiftedMode = { enabled ->
+                            draft = draft?.let { it.copy(profile = it.profile.copy(giftedModeEnabled = enabled)) }
+                        },
+                        onUpdateShowUnassignedExercises = { enabled ->
+                            draft = draft?.let { it.copy(profile = it.profile.copy(showUnassignedExercises = enabled)) }
+                        },
+                        onValidateParentPin = onValidateParentPin,
+                        onDeleteProfile = onDeleteProfile,
+                        curriculumManifest = curriculumManifest
                     )
 
                     LanguageSettingsSection(
-                        profile = uiState.currentProfile,
-                        onUpdateLanguage = onUpdateLanguage
+                        profile = currentDraft?.profile,
+                        onUpdateLanguage = { type, languageCode ->
+                            draft = draft?.let { current ->
+                                val profile = current.profile
+                                val updated = when (type) {
+                                    LanguageLayer.APP -> profile.copy(appLanguage = languageCode)
+                                    LanguageLayer.EXERCISE -> profile.copy(exerciseLanguage = languageCode)
+                                    LanguageLayer.SUPPORT -> profile.copy(supportLanguage = languageCode)
+                                    LanguageLayer.SPEECH -> profile.copy(speechLanguage = languageCode)
+                                    LanguageLayer.ALL -> profile.copy(
+                                        appLanguage = languageCode,
+                                        exerciseLanguage = languageCode,
+                                        supportLanguage = languageCode,
+                                        speechLanguage = languageCode
+                                    )
+                                }
+                                current.copy(profile = updated)
+                            }
+                        }
+                    )
+
+                    LessonSettingsSection(
+                        masteryThresholdPercent = currentDraft?.lessonMasteryThresholdPercent
+                            ?: uiState.lessonMasteryThresholdPercent,
+                        masteryThresholdOverrides = currentDraft?.lessonMasteryThresholdOverrides.orEmpty(),
+                        onUpdateMasteryThreshold = { percent ->
+                            draft = draft?.copy(lessonMasteryThresholdPercent = percent)
+                        },
+                        onUpdateOverrideEnabled = { domain, enabled ->
+                            draft = draft?.let { current ->
+                                val overrides = if (enabled) {
+                                    current.lessonMasteryThresholdOverrides +
+                                        (domain to current.lessonMasteryThresholdPercent)
+                                } else current.lessonMasteryThresholdOverrides - domain
+                                current.copy(lessonMasteryThresholdOverrides = overrides)
+                            }
+                        },
+                        onUpdateDomainThreshold = { domain, percent ->
+                            draft = draft?.let { current ->
+                                current.copy(
+                                    lessonMasteryThresholdOverrides =
+                                        current.lessonMasteryThresholdOverrides + (domain to percent)
+                                )
+                            }
+                        }
                     )
 
                     /* Voice settings hidden as requested.
@@ -214,11 +384,11 @@ fun ParentDashboardContent(
                     */
 
                     AnimationSettingsSection(
-                        settings = uiState.animationSettings,
-                        onUpdateSettings = onUpdateAnimationSettings
+                        settings = currentDraft?.animationSettings ?: uiState.animationSettings,
+                        onUpdateSettings = { settings -> draft = draft?.copy(animationSettings = settings) }
                     )
 
-                    SyncStatusSection(pendingCount = uiState.pendingSyncCount)
+                    LocalStorageStatusSection()
 
                     Spacer(modifier = Modifier.height(40.dp))
                 }
@@ -230,41 +400,82 @@ fun ParentDashboardContent(
 @Composable
 fun ProfileSettingsSection(
     profile: ChildProfile?,
+    nameText: String,
+    birthYearText: String,
+    teacherIdText: String,
     onUpdateName: (String) -> Unit,
-    onUpdateBirthYear: (Int) -> Unit,
-    onUpdateLevel: (LearningDomain, SkillLevel) -> Unit,
+    onUpdateBirthYearText: (String) -> Unit,
+    onUpdateTeacherIdText: (String) -> Unit,
+    onUpdateGrades: (LearningDomain, Set<Int>) -> Unit,
     onUpdateMainCategoryEnabled: (LearningDomain, Boolean) -> Unit,
     onUpdateSubcategoryEnabled: (String, Boolean) -> Unit,
     onUpdateGiftedMode: (Boolean) -> Unit,
     onUpdateShowUnassignedExercises: (Boolean) -> Unit,
-    onDeleteProfile: () -> Unit
+    onValidateParentPin: (String) -> Boolean,
+    onDeleteProfile: () -> Unit,
+    curriculumManifest: CurriculumManifest? = null
 ) {
     if (profile == null) return
 
     var showDeleteConfirmation by remember { mutableStateOf(false) }
-    var nameText by remember(profile.id) { mutableStateOf(profile.name) }
-    var birthYearText by remember(profile.id) { mutableStateOf(profile.birthYear.toString()) }
+    var deletePin by remember { mutableStateOf("") }
+    var deletePinError by remember { mutableStateOf(false) }
     val hardModeDescription = parentText("hardModeDescription")
 
     if (showDeleteConfirmation) {
         AlertDialog(
-            onDismissRequest = { showDeleteConfirmation = false },
-            containerColor = PlanetGold.copy(alpha = 0.85f),
-            titleContentColor = DeepSpaceBlue,
-            textContentColor = DeepSpaceBlue,
+            onDismissRequest = {
+                showDeleteConfirmation = false
+                deletePin = ""
+                deletePinError = false
+            },
+            containerColor = DeepSpaceBlue.copy(alpha = 0.92f),
+            titleContentColor = PlanetGold,
+            textContentColor = PlanetGold,
             title = { Text(parentText("deleteProfileTitle")) },
             text = {
-                Text(
-                    parentDeleteConfirmation(profile.name)
-                )
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(parentDeleteConfirmation(profile.name))
+                    OutlinedTextField(
+                        value = deletePin,
+                        onValueChange = {
+                            deletePin = it.filter(Char::isDigit).take(8)
+                            deletePinError = false
+                        },
+                        label = { Text(parentText("confirmParentPin")) },
+                        singleLine = true,
+                        isError = deletePinError,
+                        supportingText = if (deletePinError) {
+                            { Text(parentText("incorrectPin"), color = PlanetRed) }
+                        } else null,
+                        visualTransformation = PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedTextColor = StarWhite,
+                            unfocusedTextColor = StarWhite,
+                            focusedBorderColor = PlanetGold,
+                            unfocusedBorderColor = PlanetGold.copy(alpha = .55f),
+                            focusedLabelColor = PlanetGold,
+                            unfocusedLabelColor = PlanetGold.copy(alpha = .72f),
+                            cursorColor = PlanetGold
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             },
             confirmButton = {
                 Button(
                     shape = RoundedCornerShape(12.dp),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = {
-                        showDeleteConfirmation = false
-                        onDeleteProfile()
+                        if (onValidateParentPin(deletePin)) {
+                            showDeleteConfirmation = false
+                            deletePin = ""
+                            deletePinError = false
+                            onDeleteProfile()
+                        } else {
+                            deletePinError = true
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = DeepSpaceBlue,
@@ -278,8 +489,12 @@ fun ProfileSettingsSection(
                 TextButton(
                     shape = RoundedCornerShape(12.dp),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                    onClick = { showDeleteConfirmation = false },
-                    colors = ButtonDefaults.textButtonColors(contentColor = DeepSpaceBlue)
+                    onClick = {
+                        showDeleteConfirmation = false
+                        deletePin = ""
+                        deletePinError = false
+                    },
+                    colors = ButtonDefaults.textButtonColors(contentColor = PlanetGold)
                 ) {
                     Text(parentText("cancel"))
                 }
@@ -290,8 +505,7 @@ fun ProfileSettingsSection(
     DashboardCard(title = parentText("profileSettings")) {
         EditableSettingTextField(
             value = nameText,
-            onValueChange = { nameText = it },
-            onSave = { if (nameText.isNotBlank()) onUpdateName(nameText.trim()) },
+            onValueChange = onUpdateName,
             label = parentText("astronautName"),
             contentDescription = "Naam van de kind-astronaut"
         )
@@ -300,24 +514,41 @@ fun ProfileSettingsSection(
 
         EditableSettingTextField(
             value = birthYearText,
-            onValueChange = { value -> birthYearText = value.filter { it.isDigit() }.take(4) },
-            onSave = { birthYearText.toIntOrNull()?.let(onUpdateBirthYear) },
+            onValueChange = { value -> onUpdateBirthYearText(value.filter { it.isDigit() }.take(4)) },
             label = parentText("birthYear"),
             contentDescription = "Geboortejaar van de astronaut"
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        EditableSettingTextField(
+            value = teacherIdText,
+            onValueChange = onUpdateTeacherIdText,
+            label = parentText("teacherId"),
+            contentDescription = parentText("teacherIdDescription")
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
             text = parentText("educationLevels"),
-            style = MaterialTheme.typography.titleSmall,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
             color = StarWhite
         )
 
-        DomainLevelSelector(parentText("reading"), LearningDomain.READING, profile.levelFor(LearningDomain.READING), onUpdateLevel)
-        DomainLevelSelector(parentText("writing"), LearningDomain.WRITING, profile.levelFor(LearningDomain.WRITING), onUpdateLevel)
-        DomainLevelSelector(parentText("math"), LearningDomain.MATH, profile.levelFor(LearningDomain.MATH), onUpdateLevel)
-        DomainLevelSelector(parentText("geometry"), LearningDomain.GEOMETRY, profile.levelFor(LearningDomain.GEOMETRY), onUpdateLevel)
+        val gradeHint = parentText("gradeSelectionHint")
+        Text(
+            text = gradeHint,
+            style = MaterialTheme.typography.bodySmall,
+            color = StarWhite.copy(alpha = 0.65f),
+            modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 4.dp)
+        )
+        GradeMultiSelector(mainCategoryLabel(LearningDomain.READING, profile.appLanguage, curriculumManifest), profile.selectedGradesFor(LearningDomain.READING).toSet(), { onUpdateGrades(LearningDomain.READING, it) })
+        GradeMultiSelector(mainCategoryLabel(LearningDomain.WRITING, profile.appLanguage, curriculumManifest), profile.selectedGradesFor(LearningDomain.WRITING).toSet(), { onUpdateGrades(LearningDomain.WRITING, it) })
+        GradeMultiSelector(mainCategoryLabel(LearningDomain.MATH, profile.appLanguage, curriculumManifest), profile.selectedGradesFor(LearningDomain.MATH).toSet(), { onUpdateGrades(LearningDomain.MATH, it) })
+        GradeMultiSelector(mainCategoryLabel(LearningDomain.GEOMETRY, profile.appLanguage, curriculumManifest), profile.selectedGradesFor(LearningDomain.GEOMETRY).toSet(), { onUpdateGrades(LearningDomain.GEOMETRY, it) })
+        GradeMultiSelector(mainCategoryLabel(LearningDomain.WORLD_KNOWLEDGE, profile.appLanguage, curriculumManifest), profile.selectedGradesFor(LearningDomain.WORLD_KNOWLEDGE).toSet(), { onUpdateGrades(LearningDomain.WORLD_KNOWLEDGE, it) })
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -353,7 +584,8 @@ fun ProfileSettingsSection(
         CategoryAccessSection(
             profile = profile,
             onUpdateMainCategoryEnabled = onUpdateMainCategoryEnabled,
-            onUpdateSubcategoryEnabled = onUpdateSubcategoryEnabled
+            onUpdateSubcategoryEnabled = onUpdateSubcategoryEnabled,
+            curriculumManifest = curriculumManifest
         )
 
         Row(
@@ -383,7 +615,11 @@ fun ProfileSettingsSection(
         OutlinedButton(
             shape = RoundedCornerShape(12.dp),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-            onClick = { showDeleteConfirmation = true },
+            onClick = {
+                deletePin = ""
+                deletePinError = false
+                showDeleteConfirmation = true
+            },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.outlinedButtonColors(contentColor = PlanetRed)
         ) {
@@ -398,7 +634,8 @@ fun ProfileSettingsSection(
 fun CategoryAccessSection(
     profile: ChildProfile,
     onUpdateMainCategoryEnabled: (LearningDomain, Boolean) -> Unit,
-    onUpdateSubcategoryEnabled: (String, Boolean) -> Unit
+    onUpdateSubcategoryEnabled: (String, Boolean) -> Unit,
+    curriculumManifest: CurriculumManifest? = null
 ) {
     Text(
         text = parentText("categories"),
@@ -407,14 +644,9 @@ fun CategoryAccessSection(
     )
     Spacer(modifier = Modifier.height(8.dp))
 
-    val categories: List<Pair<LearningDomain, String>> = listOf(
-        LearningDomain.READING to parentText("communication"),
-        LearningDomain.WRITING to parentText("writing"),
-        LearningDomain.MATH to parentText("numbers"),
-        LearningDomain.GEOMETRY to parentText("geometry"),
-        LearningDomain.WORLD_KNOWLEDGE to parentText("worldKnowledge"),
-        LearningDomain.PUZZLE to parentText("puzzles")
-    )
+    val categories: List<Pair<LearningDomain, String>> = LearningDomain.entries.map { domain ->
+        domain to mainCategoryLabel(domain, profile.appLanguage, curriculumManifest)
+    }
 
     categories.forEach { (domain, label) ->
         val domainEnabled = profile.isMainCategoryEnabled(domain)
@@ -461,7 +693,12 @@ fun CategoryAccessSection(
             }
 
             if (domainEnabled && expanded) {
-                getSubCategoriesForDomain(domain.name).forEach { subcategory ->
+                getSubCategoriesForDomain(
+                    domain.name,
+                    curriculumManifest,
+                    profile.appLanguage,
+                    profile.selectedGradesFor(domain)
+                ).forEach { subcategory ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -494,103 +731,26 @@ fun CategoryAccessSection(
 }
 
 @Composable
-fun DomainLevelSelector(
-    label: String,
-    domain: LearningDomain,
-    currentLevel: SkillLevel,
-    onUpdateLevel: (LearningDomain, SkillLevel) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-    ) {
-        Text(
-            text = label,
-            color = StarWhite.copy(alpha = 0.7f),
-            style = MaterialTheme.typography.labelMedium
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 4.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            SkillLevel.entries
-                .filterNot { level -> level == SkillLevel.NOT_APPLICABLE }
-                .forEach { level ->
-                    val isSelected = level == currentLevel
-                    Surface(
-                        onClick = { onUpdateLevel(domain, level) },
-                        shape = RoundedCornerShape(8.dp),
-                        color = if (isSelected) PlanetBlue else Color.White.copy(alpha = 0.05f),
-                        contentColor = if (isSelected) StarWhite else StarWhite,
-                        modifier = Modifier
-                            .heightIn(min = 40.dp)
-                            .weight(1f)
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Text(
-                                text = level.displayLabel(),
-                                style = MaterialTheme.typography.labelLarge,
-                                fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
-                            )
-                        }
-                    }
-                }
-        }
-    }
-}
-
-private fun SkillLevel.displayLabel(): String = (ordinal + 1).toString()
-
-private fun ChildProfile.levelFor(domain: LearningDomain): SkillLevel = when (domain) {
-    LearningDomain.READING -> readingLevel
-    LearningDomain.WRITING -> writingLevel
-    LearningDomain.MATH -> mathLevel
-    LearningDomain.PUZZLE -> puzzleLevel
-    LearningDomain.GEOMETRY -> geometryLevel
-    LearningDomain.WORLD_KNOWLEDGE -> worldKnowledgeLevel
-}
-
-@Composable
 fun EditableSettingTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    onSave: () -> Unit,
     label: String,
     contentDescription: String,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            label = { Text(label) },
-            singleLine = true,
-            modifier = Modifier
-                .weight(1f)
-                .semantics { this.contentDescription = contentDescription },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = StarWhite,
-                unfocusedTextColor = StarWhite
-            )
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        singleLine = true,
+        modifier = modifier
+            .fillMaxWidth()
+            .semantics { this.contentDescription = contentDescription },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = StarWhite,
+            unfocusedTextColor = StarWhite
         )
-        IconButton(
-            onClick = onSave,
-            modifier = Modifier.size(48.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Check,
-                contentDescription = "$label opslaan",
-                tint = PlanetGold
-            )
-        }
-    }
+    )
 }
 
 @Composable
@@ -768,6 +928,127 @@ fun SliderWithLabel(
 }
 
 @Composable
+fun LessonSettingsSection(
+    masteryThresholdPercent: Int,
+    masteryThresholdOverrides: Map<LearningDomain, Int>,
+    onUpdateMasteryThreshold: (Int) -> Unit,
+    onUpdateOverrideEnabled: (LearningDomain, Boolean) -> Unit,
+    onUpdateDomainThreshold: (LearningDomain, Int) -> Unit
+) {
+    DashboardCard(title = parentText("lessonSettings")) {
+        Text(
+            text = parentText("masteryThresholdDescription"),
+            color = StarWhite.copy(alpha = 0.75f),
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = "${parentText("generalMasteryThreshold")}: $masteryThresholdPercent%",
+            color = StarWhite,
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.SemiBold
+        )
+        Slider(
+            value = masteryThresholdPercent.toFloat(),
+            onValueChange = { value ->
+                val rounded = (value / 5f).roundToInt() * 5
+                if (rounded != masteryThresholdPercent) onUpdateMasteryThreshold(rounded)
+            },
+            valueRange = 50f..100f,
+            steps = 9,
+            colors = SliderDefaults.colors(
+                thumbColor = PlanetGold,
+                activeTrackColor = PlanetGold
+            )
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = parentText("categoryThresholds"),
+            color = PlanetGold,
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(6.dp))
+
+        val categories = listOf(
+            LearningDomain.READING to parentText("communication"),
+            LearningDomain.WRITING to parentText("writing"),
+            LearningDomain.MATH to parentText("numbers"),
+            LearningDomain.GEOMETRY to parentText("geometry"),
+            LearningDomain.WORLD_KNOWLEDGE to parentText("worldKnowledge"),
+            LearningDomain.PUZZLE to parentText("puzzles")
+        )
+        categories.forEachIndexed { index, (domain, label) ->
+            val overridePercent = masteryThresholdOverrides[domain]
+            val overrideEnabled = overridePercent != null
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp)
+            ) {
+                Text(
+                    text = label,
+                    color = StarWhite,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = parentText("differentThreshold"),
+                        color = StarWhite.copy(alpha = .82f),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Switch(
+                        checked = overrideEnabled,
+                        onCheckedChange = { onUpdateOverrideEnabled(domain, it) },
+                        colors = SwitchDefaults.colors(
+                            checkedTrackColor = PlanetBlue,
+                            checkedThumbColor = StarWhite
+                        )
+                    )
+                }
+                if (overrideEnabled) {
+                    Text(
+                        text = "${parentText("masteryThreshold")}: $overridePercent%",
+                        color = PlanetGold,
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Slider(
+                        value = overridePercent.toFloat(),
+                        onValueChange = { value ->
+                            val rounded = (value / 5f).roundToInt() * 5
+                            if (rounded != overridePercent) onUpdateDomainThreshold(domain, rounded)
+                        },
+                        valueRange = 50f..100f,
+                        steps = 9,
+                        colors = SliderDefaults.colors(
+                            thumbColor = PlanetGold,
+                            activeTrackColor = PlanetGold
+                        )
+                    )
+                } else {
+                    Text(
+                        text = "${parentText("usesGeneralThreshold")} ($masteryThresholdPercent%)",
+                        color = StarWhite.copy(alpha = .60f),
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
+            }
+            if (index < categories.lastIndex) {
+                HorizontalDivider(color = Color.White.copy(alpha = .10f))
+            }
+        }
+    }
+}
+
+@Composable
 fun AnimationSettingsSection(
     settings: AnimationSettings,
     onUpdateSettings: (AnimationSettings) -> Unit
@@ -824,7 +1105,8 @@ fun SettingsToggle(
 }
 
 @Composable
-fun SyncStatusSection(pendingCount: Int) {
+fun LocalStorageStatusSection() {
+    val localStorageDescription = parentText("localStorageDescription")
     DashboardCard(title = parentText("systemStatus")) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -833,13 +1115,13 @@ fun SyncStatusSection(pendingCount: Int) {
                 .fillMaxWidth()
                 .heightIn(min = 48.dp)
         ) {
-            Text(text = parentText("unsyncedMissions"), color = StarWhite)
+            Text(text = parentText("progressStorage"), color = StarWhite)
             Text(
-                text = pendingCount.toString(),
-                color = if (pendingCount > 0) PlanetRed else Color.Green,
+                text = parentText("localOnly"),
+                color = Color.Green,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.semantics {
-                    contentDescription = "Er zijn $pendingCount missies die nog gesynchroniseerd moeten worden"
+                    contentDescription = localStorageDescription
                 }
             )
         }
@@ -895,15 +1177,20 @@ fun ParentDashboardPreview() {
             onUpdateVoiceSettings = { _, _ -> },
             onTestVoice = { _, _, _ -> },
             onNavigateBack = {},
+            onSaveChanges = { _, onComplete -> onComplete(true) },
             onUpdateName = {},
             onUpdateBirthYear = {},
-            onUpdateLevel = { _, _ -> },
+            onUpdateGrades = { _, _ -> },
             onUpdateMainCategoryEnabled = { _, _ -> },
             onUpdateSubcategoryEnabled = { _, _ -> },
             onUpdateGiftedMode = {},
             onUpdateShowUnassignedExercises = {},
             onUpdateAnimationSettings = {},
+            onUpdateLessonMasteryThreshold = {},
+            onUpdateLessonMasteryThresholdOverrideEnabled = { _, _ -> },
+            onUpdateLessonMasteryThresholdForDomain = { _, _ -> },
             onUpdateLanguage = { _, _ -> },
+            onValidateParentPin = { it == "1234" },
             onDeleteProfile = {}
         )
     }

@@ -1,0 +1,621 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://poincare.local/schema/lesson-catalog-v2.schema.json",
+  "title": "Poincare lesson catalogue v2 proposal",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "definitionVersion",
+    "lessons"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "definitionVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "lessons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/lesson"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "localizedText": {
+      "type": "object",
+      "required": [
+        "nl-BE",
+        "fr-BE",
+        "en-US"
+      ],
+      "properties": {
+        "nl-BE": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fr-BE": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en-US": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "lessonText": {
+      "type": "object",
+      "required": [
+        "visible"
+      ],
+      "properties": {
+        "visible": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "spoken": {
+          "$ref": "#/$defs/localizedText"
+        }
+      },
+      "additionalProperties": false
+    },
+    "legacyRouting": {
+      "type": "object",
+      "required": [
+        "domain",
+        "subcategoryId"
+      ],
+      "properties": {
+        "domain": {
+          "enum": [
+            "MATH",
+            "GEOMETRY",
+            "READING",
+            "WRITING",
+            "WORLD_KNOWLEDGE",
+            "PUZZLE"
+          ]
+        },
+        "subcategoryId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legacyLessonIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "visual": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "altText"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]+$"
+        },
+        "kind": {
+          "enum": [
+            "MATH_REPRESENTATION",
+            "GEOMETRY_DIAGRAM",
+            "MEASUREMENT_DIAGRAM",
+            "WORLD_BICOLOR_ILLUSTRATION",
+            "PHONICS_DIAGRAM",
+            "THEORY_ICON",
+            "GENERIC_DIAGRAM"
+          ]
+        },
+        "representationId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assetPathSvg": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assetPathPng": {
+          "type": "string",
+          "minLength": 1
+        },
+        "palettePolicy": {
+          "enum": [
+            "THEME",
+            "PLANET_GOLD_WHITE_ONLY",
+            "POINCARE_TRICOLOUR"
+          ]
+        },
+        "transparentBackground": {
+          "type": "boolean"
+        },
+        "altText": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lessonText"
+          }
+        },
+        "licenseId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "contentBlock": {
+      "type": "object",
+      "required": [
+        "id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]+$"
+        },
+        "type": {
+          "enum": [
+            "LEARNING_INTENT",
+            "VOCABULARY",
+            "CHILD_FRIENDLY_DEFINITION",
+            "HOW_IT_WORKS",
+            "CORRECT_RESULT_RULE",
+            "WORKED_EXAMPLE",
+            "NON_EXAMPLE",
+            "VISUAL_MODEL",
+            "SELF_CHECK",
+            "SUMMARY",
+            "PRACTICAL_INSTRUCTION",
+            "RUBRIC"
+          ]
+        },
+        "title": {
+          "$ref": "#/$defs/lessonText"
+        },
+        "body": {
+          "$ref": "#/$defs/lessonText"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "term",
+              "definition"
+            ],
+            "properties": {
+              "term": {
+                "$ref": "#/$defs/lessonText"
+              },
+              "definition": {
+                "$ref": "#/$defs/lessonText"
+              },
+              "example": {
+                "$ref": "#/$defs/lessonText"
+              },
+              "nonExample": {
+                "$ref": "#/$defs/lessonText"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "visualIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "exerciseSet": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceMode",
+        "purpose",
+        "itemCount",
+        "masteryTags"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]+$"
+        },
+        "sourceMode": {
+          "enum": [
+            "CURATED",
+            "GENERATED"
+          ]
+        },
+        "purpose": {
+          "enum": [
+            "GUIDED",
+            "FADING_SUPPORT",
+            "INDEPENDENT_PRACTICE",
+            "NEAR_TRANSFER",
+            "FAR_TRANSFER",
+            "ERROR_REVIEW",
+            "MASTERY_TEST"
+          ]
+        },
+        "itemCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "curatedExerciseIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "generatorId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generatorVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "seedPolicy": {
+          "enum": [
+            "STABLE_PER_PROFILE_LESSON",
+            "STABLE_PER_PROFILE_ATTEMPT"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        },
+        "masteryTags": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "representationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "hintPolicy": {
+          "enum": [
+            "FULL",
+            "FADING",
+            "NONE"
+          ]
+        },
+        "feedbackPolicy": {
+          "enum": [
+            "IMMEDIATE_EXPLANATORY",
+            "IMMEDIATE_MINIMAL",
+            "AFTER_SET",
+            "AFTER_TEST"
+          ]
+        },
+        "injectErrorMemory": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sourceMode": {
+                "const": "CURATED"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "curatedExerciseIds"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceMode": {
+                "const": "GENERATED"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "generatorId",
+              "generatorVersion",
+              "seedPolicy"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "stage": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "sequence",
+        "required",
+        "contentBlocks",
+        "exerciseSets"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]+$"
+        },
+        "type": {
+          "enum": [
+            "ACQUIRE_UNDERSTAND",
+            "PRACTISE",
+            "APPLY_DEMONSTRATE",
+            "MASTERY_TEST"
+          ]
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sectionId": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]+$"
+        },
+        "sectionTitle": {
+          "$ref": "#/$defs/lessonText"
+        },
+        "title": {
+          "$ref": "#/$defs/lessonText"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "estimatedMinutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "contentBlocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/contentBlock"
+          }
+        },
+        "exerciseSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/exerciseSet"
+          }
+        },
+        "completionPolicy": {
+          "enum": [
+            "VIEWED_REQUIRED_BLOCKS",
+            "COMPLETED_REQUIRED_SETS",
+            "ASSESSMENT_RESULT"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "gatePolicy": {
+      "type": "object",
+      "required": [
+        "evidenceSource",
+        "minimumCorrectRatio",
+        "minimumIndependentItems",
+        "maximumHints",
+        "unlockOnPass"
+      ],
+      "properties": {
+        "evidenceSource": {
+          "const": "MASTERY_TEST_ONLY"
+        },
+        "minimumCorrectRatio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minimumIndependentItems": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximumHints": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requiredMasteryTags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "criticalTagMinimumCorrect": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unlockOnPass": {
+          "type": "boolean"
+        },
+        "retentionCheckRequiredForMastered": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "errorRepetitionPolicy": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "repeatConceptNotExactItem",
+        "maxInjectedShare",
+        "reviewIntervalsDays"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "repeatConceptNotExactItem": {
+          "type": "boolean"
+        },
+        "maxInjectedShare": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "reviewIntervalsDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 1
+        },
+        "resolveAfterConsecutiveCorrect": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "lesson": {
+      "type": "object",
+      "required": [
+        "id",
+        "unitId",
+        "grade",
+        "sequence",
+        "title",
+        "summary",
+        "legacyRouting",
+        "learningGoalIds",
+        "masteryTags",
+        "visuals",
+        "stages",
+        "gatePolicy",
+        "errorRepetitionPolicy"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^lesson\\.[a-z0-9._-]+$"
+        },
+        "unitId": {
+          "type": "string",
+          "pattern": "^unit\\.[a-z0-9._-]+$"
+        },
+        "grade": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "$ref": "#/$defs/lessonText"
+        },
+        "summary": {
+          "$ref": "#/$defs/lessonText"
+        },
+        "legacyRouting": {
+          "$ref": "#/$defs/legacyRouting"
+        },
+        "learningGoalIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "masteryTags": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "prerequisiteLessonIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "visuals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/visual"
+          }
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "$ref": "#/$defs/stage"
+          }
+        },
+        "gatePolicy": {
+          "$ref": "#/$defs/gatePolicy"
+        },
+        "errorRepetitionPolicy": {
+          "$ref": "#/$defs/errorRepetitionPolicy"
+        },
+        "definitionVersion": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

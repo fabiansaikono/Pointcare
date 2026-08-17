@@ -695,7 +695,7 @@ private fun DockOutcomePanel(
                     shape = RoundedCornerShape(12.dp),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                     onClick = onRetry,
-                    colors = ButtonDefaults.buttonColors(containerColor = PlanetGold, contentColor = DeepSpaceBlue)
+                    colors = ButtonDefaults.buttonColors(containerColor = DeepSpaceBlue.copy(alpha = .88f), contentColor = PlanetGold)
                 ) {
                     Text(localizedDockText("retry", locale), fontWeight = FontWeight.Bold)
                 }

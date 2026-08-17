@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import be.saikono.poincare.data.settings.SettingsDataStore
 import be.saikono.poincare.model.ChildProfile
-import be.saikono.poincare.model.SkillLevel
+import be.saikono.poincare.model.LearningDomain
+import be.saikono.poincare.model.withSelectedGrades
 import be.saikono.poincare.repository.ContentRepository
 import be.saikono.poincare.repository.ProfileRepository
 import kotlinx.coroutines.CancellationException
@@ -26,6 +27,8 @@ data class ProfileUiState(
     val loadingProfileId: String? = null,
     val loadingError: String? = null
 )
+
+internal const val DEFAULT_PARENT_PIN = "1234"
 
 class ProfileViewModel(
     private val profileRepository: ProfileRepository,
@@ -57,6 +60,12 @@ class ProfileViewModel(
     }
 
     fun isParentPinCorrect(pin: String): Boolean = pin == (_uiState.value.parentPin ?: DEFAULT_PARENT_PIN)
+
+    fun setAppLanguage(languageCode: String) {
+        viewModelScope.launch {
+            settingsDataStore.setAppLanguage(languageCode)
+        }
+    }
 
     fun selectProfile(profileId: String, onReady: () -> Unit) {
         if (_uiState.value.isLoading) return
@@ -96,17 +105,14 @@ class ProfileViewModel(
     fun createProfile(
         name: String,
         birthYear: Int,
-        readingLevel: SkillLevel,
-        writingLevel: SkillLevel,
-        mathLevel: SkillLevel,
-        puzzleLevel: SkillLevel,
+        selectedGrades: Map<LearningDomain, Set<Int>>,
         showUnassignedExercises: Boolean,
         giftedMode: Boolean,
         onComplete: () -> Unit
     ) {
         viewModelScope.launch {
             val defaultLang = settingsDataStore.appLanguage.first() ?: "nl"
-            val profile = ChildProfile(
+            val baseProfile = ChildProfile(
                 id = UUID.randomUUID().toString(),
                 name = name,
                 avatarId = "default_avatar",
@@ -116,20 +122,16 @@ class ProfileViewModel(
                 exerciseLanguage = defaultLang,
                 supportLanguage = defaultLang,
                 speechLanguage = defaultLang,
-                readingLevel = readingLevel,
-                writingLevel = writingLevel,
-                mathLevel = mathLevel,
-                puzzleLevel = puzzleLevel,
                 showUnassignedExercises = showUnassignedExercises,
                 giftedModeEnabled = giftedMode
             )
+            val profile = LearningDomain.entries.fold(baseProfile) { current, domain ->
+                current.withSelectedGrades(domain, selectedGrades[domain].orEmpty())
+            }
             profileRepository.saveProfile(profile)
             settingsDataStore.setSelectedProfileId(profile.id)
             onComplete()
         }
     }
 
-    private companion object {
-        const val DEFAULT_PARENT_PIN = "1234"
-    }
 }

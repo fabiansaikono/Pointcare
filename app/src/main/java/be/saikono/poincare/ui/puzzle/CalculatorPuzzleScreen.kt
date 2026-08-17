@@ -390,8 +390,8 @@ private fun CalculatorTopActions(
                 .weight(1f)
                 .height(actionHeight),
             colors = ButtonDefaults.buttonColors(
-                containerColor = PlanetGold,
-                contentColor = DeepSpaceBlue
+                containerColor = DeepSpaceBlue.copy(alpha = .88f),
+                contentColor = PlanetGold
             ),
             shape = RoundedCornerShape(999.dp)
         ) {
@@ -452,7 +452,7 @@ private fun TipCard(
 ) {
     val currentChallenge = challenge ?: return
     Card(
-        colors = CardDefaults.cardColors(containerColor = PlanetGold.copy(alpha = 0.9f)),
+        colors = CardDefaults.cardColors(containerColor = DeepSpaceBlue.copy(alpha = 0.88f)),
         shape = RoundedCornerShape(18.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -464,7 +464,7 @@ private fun TipCard(
             visibleAlternatives.forEachIndexed { index, alternative ->
                 Text(
                     text = formatVisibleNumbers("${copy.tip} ${index + 1}: $alternative"),
-                    color = DeepSpaceBlue,
+                    color = PlanetGold,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp
                 )

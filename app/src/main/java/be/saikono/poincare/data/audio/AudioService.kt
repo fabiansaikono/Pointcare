@@ -9,10 +9,11 @@ import be.saikono.poincare.data.settings.VoiceSettings
 import be.saikono.poincare.repository.ProfileRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class AudioService(
@@ -20,13 +21,12 @@ class AudioService(
     private val settingsDataStore: SettingsDataStore,
     private val profileRepository: ProfileRepository? = null
 ) {
-    private val ttsVoiceService = SystemTtsVoiceService(context)
-    private val neuralSpeechAssets = NeuralSpeechAssetStore(context)
+    private val systemTts = SystemTtsVoiceService(context)
+    private val offlineDutchTts = OfflineDutchTtsEngine(context)
     private var mediaPlayer: MediaPlayer? = null
-    private var bundledPlayers: List<MediaPlayer> = emptyList()
     private var playbackGeneration = 0L
     private var playbackJob: Job? = null
-    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+    private val scope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
 
     fun playExerciseAudio(exerciseId: String, textFallback: String, locale: String) {
         val requestGeneration = beginPlaybackRequest()
@@ -79,148 +79,148 @@ class AudioService(
                 if (mediaPlayer === completed) mediaPlayer = null
             }
             player.start()
-        } catch (error: Exception) {
+        } catch (_: Exception) {
             if (requestGeneration == playbackGeneration) speak(textFallback, locale)
         }
     }
 
     /**
-     * Belgian Dutch always uses bundled Nathalie speech. Static utterances are
-     * played as one clip; generated prompts are composed from compact Nathalie
-     * fragments. Android system TTS remains a fallback only for other locales.
+     * Speaks a complete utterance. Belgian Dutch is synthesized locally with
+     * the bundled Nathalie model. Other locales use the installed Android TTS
+     * voice until equivalent bundled models have passed their acceptance tests.
      */
     fun speak(text: String, locale: String) {
         val requestGeneration = beginPlaybackRequest()
         playbackJob = scope.launch {
-            val normalizedText = normalizeSpeechText(text)
-            try {
-                val profileId = settingsDataStore.selectedProfileId.first()
-                val profile = profileId?.let { profileRepository?.getProfileById(it)?.first() }
-                val selectedLocale = locale.ifBlank {
-                    profile?.speechLanguage ?: profile?.exerciseLanguage ?: profile?.appLanguage ?: "nl-BE"
-                }
-                if (profileId != null) {
-                    val settings = settingsDataStore.getVoiceSettings(profileId, selectedLocale).first()
-                    applyVoiceSettings(settings, selectedLocale)
-                } else {
-                    ttsVoiceService.clearVoiceSelection()
-                    ttsVoiceService.setPitch(1.0f)
-                    ttsVoiceService.setSpeechRate(1.0f)
-                }
-                val volume = settingsDataStore.animationSettings.first().voiceVolume.coerceIn(0f, 1f)
-                if (requestGeneration != playbackGeneration) return@launch
-                val playedByNathalie = playNeuralSpeechIfAvailable(normalizedText, selectedLocale, volume)
-                if (!playedByNathalie && !NeuralSpeechAssetStore.isBelgianDutch(selectedLocale)) {
-                    releaseCurrentMediaOnly()
-                    ttsVoiceService.speak(normalizedText, selectedLocale, volume)
-                }
-            } catch (error: Exception) {
-                val safeLocale = locale.ifBlank { "nl-BE" }
-                ttsVoiceService.clearVoiceSelection()
-                ttsVoiceService.setPitch(1.0f)
-                ttsVoiceService.setSpeechRate(1.0f)
-                if (requestGeneration != playbackGeneration) return@launch
-                val playedByNathalie = playNeuralSpeechIfAvailable(normalizedText, safeLocale, 1.0f)
-                if (!playedByNathalie && !NeuralSpeechAssetStore.isBelgianDutch(safeLocale)) {
-                    releaseCurrentMediaOnly()
-                    ttsVoiceService.speak(normalizedText, safeLocale)
-                }
-            }
-        }
-    }
-
-    private fun playNeuralSpeechIfAvailable(text: String, locale: String, volume: Float): Boolean {
-        val assetPaths = neuralSpeechAssets.findAssets(locale, text) ?: return false
-        return playBundledAssets(assetPaths, volume)
-    }
-
-    private fun playBundledAssets(assetPaths: List<String>, volume: Float): Boolean {
-        if (assetPaths.isEmpty()) return false
-        ttsVoiceService.stop()
-        releaseCurrentMediaOnly()
-        return runCatching {
-            val players = assetPaths.map { path -> createBundledPlayer(path, volume) }
-            players.zipWithNext().forEach { (current, next) -> current.setNextMediaPlayer(next) }
-            val last = players.last()
-            last.setOnCompletionListener {
-                if (bundledPlayers === players) {
-                    players.forEach { player -> player.release() }
-                    bundledPlayers = emptyList()
-                    mediaPlayer = null
-                }
-            }
-            bundledPlayers = players
-            mediaPlayer = players.first()
-            players.first().start()
-            true
-        }.getOrElse {
-            bundledPlayers.forEach { player -> player.release() }
-            bundledPlayers = emptyList()
-            mediaPlayer = null
-            false
-        }
-    }
-
-    private fun createBundledPlayer(assetPath: String, volume: Float): MediaPlayer {
-        val player = MediaPlayer()
-        val descriptor = runCatching { context.assets.openFd(assetPath) }.getOrNull()
-        if (descriptor != null) {
-            descriptor.use {
-                player.setDataSource(it.fileDescriptor, it.startOffset, it.length)
-            }
-        } else {
-            val extension = assetPath.substringAfterLast('.', "bin")
-            val cacheFile = java.io.File(
-                context.cacheDir,
-                "poincare_tts_${assetPath.hashCode()}.$extension"
+            val runtime = resolveRuntimeSettings(locale)
+            val normalizedText = SpeechTextNormalizer.normalize(text, runtime.locale)
+            val vowelLabelDelayMillis = SpeechTextNormalizer.leadingSilenceMillisFor(
+                normalizedText,
+                runtime.locale
             )
-            if (!cacheFile.exists() || cacheFile.length() == 0L) {
-                context.assets.open(assetPath).use { input ->
-                    cacheFile.outputStream().use { output -> input.copyTo(output) }
+            if (vowelLabelDelayMillis > 0L) {
+                delay(vowelLabelDelayMillis)
+                if (requestGeneration != playbackGeneration) return@launch
+            }
+            if (normalizedText.isBlank() || requestGeneration != playbackGeneration) return@launch
+
+            if (SpeechTextNormalizer.isBelgianDutch(runtime.locale)) {
+                val speed = SpeechTextNormalizer.speedFor(
+                    text = normalizedText,
+                    locale = runtime.locale,
+                    requestedRate = runtime.rate
+                )
+                val playedLocally = runCatching {
+                    offlineDutchTts.speak(
+                        text = normalizedText,
+                        speed = speed,
+                        volume = runtime.volume
+                    ) { requestGeneration == playbackGeneration }
+                }.getOrDefault(false)
+
+                if (!playedLocally && requestGeneration == playbackGeneration) {
+                    systemTts.speak(normalizedText, runtime.locale, runtime.volume)
+                }
+            } else if (requestGeneration == playbackGeneration) {
+                systemTts.speak(normalizedText, runtime.locale, runtime.volume)
+            }
+        }
+    }
+
+    fun speakStory(
+        text: String,
+        locale: String,
+        rateMultiplier: Float = 1f,
+        endingPauseMillis: Long = 0L,
+        onRangeStart: (Int, Int) -> Unit,
+        onRangesUnavailable: () -> Unit,
+        onDone: () -> Unit
+    ) {
+        val requestGeneration = beginPlaybackRequest()
+        playbackJob = scope.launch {
+            val runtime = resolveRuntimeSettings(locale)
+            val normalizedText = SpeechTextNormalizer.normalize(text, runtime.locale)
+            if (normalizedText.isBlank() || requestGeneration != playbackGeneration) return@launch
+
+            if (SpeechTextNormalizer.isBelgianDutch(runtime.locale)) {
+                onRangesUnavailable()
+                val speed = SpeechTextNormalizer.speedFor(
+                    text = normalizedText,
+                    locale = runtime.locale,
+                    requestedRate = runtime.rate * rateMultiplier.coerceIn(0.6f, 1.2f)
+                )
+                val played = runCatching {
+                    offlineDutchTts.speak(
+                        text = normalizedText,
+                        speed = speed,
+                        volume = runtime.volume
+                    ) { requestGeneration == playbackGeneration }
+                }.getOrDefault(false)
+                if (played && requestGeneration == playbackGeneration) {
+                    delay(endingPauseMillis.coerceAtLeast(0L))
+                    if (requestGeneration == playbackGeneration) onDone()
+                }
+            } else {
+                val utteranceId = "story-$requestGeneration-${System.nanoTime()}"
+                val started = systemTts.speakWithRanges(
+                    text = normalizedText,
+                    locale = runtime.locale,
+                    volume = runtime.volume,
+                    utteranceId = utteranceId,
+                    listener = object : SystemTtsVoiceService.RangeListener {
+                        override fun onStart() = Unit
+                        override fun onRangeStart(start: Int, endExclusive: Int) {
+                            if (requestGeneration == playbackGeneration) {
+                                onRangeStart(start, endExclusive)
+                            }
+                        }
+                        override fun onDone() {
+                            if (requestGeneration == playbackGeneration) {
+                                scope.launch {
+                                    delay(endingPauseMillis.coerceAtLeast(0L))
+                                    if (requestGeneration == playbackGeneration) onDone()
+                                }
+                            }
+                        }
+                        override fun onError() = Unit
+                    }
+                )
+                if (!started && requestGeneration == playbackGeneration) {
+                    onRangesUnavailable()
+                    systemTts.speak(normalizedText, runtime.locale, runtime.volume)
                 }
             }
-            player.setDataSource(cacheFile.absolutePath)
         }
-        val safeVolume = volume.coerceIn(0f, 1f)
-        player.setVolume(safeVolume, safeVolume)
-        player.prepare()
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && assetPath !in PAUSE_ASSETS) {
-            player.playbackParams = player.playbackParams.setSpeed(NATHALIE_PLAYBACK_SPEED)
-        }
-        return player
     }
 
-    private fun normalizeSpeechText(text: String): String {
-        var normalized = text.replace('_', ' ')
-            .replace(Regex("\\b(\\d{1,2}):(\\d{2})\\b")) { match ->
-                val hour = match.groupValues[1].toIntOrNull()?.toString() ?: match.groupValues[1]
-                val minutes = match.groupValues[2].toIntOrNull() ?: return@replace match.value
-                if (minutes == 0) hour else "$hour ${minutes.toString().padStart(2, '0')}"
+    private suspend fun resolveRuntimeSettings(requestedLocale: String): RuntimeVoiceSettings {
+        val profileId = settingsDataStore.selectedProfileId.first()
+        val profile = profileId?.let { profileRepository?.getProfileById(it)?.first() }
+        val selectedLocale = SpeechTextNormalizer.normalizeLocale(
+            requestedLocale.ifBlank {
+                profile?.speechLanguage ?: profile?.exerciseLanguage ?: profile?.appLanguage ?: "nl-BE"
             }
-            .replace(Regex("\\b(\\d{1,2})/(\\d{1,2})/(\\d{2,4})\\b")) { match ->
-                "${match.groupValues[1]} ${match.groupValues[2]} ${match.groupValues[3]}"
-            }
-            .replace(Regex("\\b(\\d{1,2})-(\\d{1,2})-(\\d{2,4})\\b")) { match ->
-                "${match.groupValues[1]} ${match.groupValues[2]} ${match.groupValues[3]}"
-            }
-        normalized = EURO_PREFIX.replace(normalized) { match -> "${match.groupValues[1]} euro" }
-        normalized = EURO_SUFFIX.replace(normalized) { match -> "${match.groupValues[1]} euro" }
-        normalized = ARITHMETIC_DASH.replace(normalized, " − ")
-        normalized = NON_NUMERIC_DASH.replace(normalized, " ")
-        return normalized.replace(Regex("[ \\t]+"), " ").trim()
+        )
+        val voiceSettings = profileId?.let {
+            runCatching { settingsDataStore.getVoiceSettings(it, selectedLocale).first() }.getOrNull()
+        }
+        applySystemVoiceSettings(voiceSettings, selectedLocale)
+        val volume = settingsDataStore.animationSettings.first().voiceVolume.coerceIn(0f, 1f)
+        return RuntimeVoiceSettings(
+            locale = selectedLocale,
+            volume = volume,
+            rate = voiceSettings?.rate?.takeIf { it > 0f } ?: 1.0f
+        )
     }
 
-    private fun applyVoiceSettings(settings: VoiceSettings, locale: String) {
-        if (NeuralSpeechAssetStore.isBelgianDutch(locale)) {
-            // Nathalie is fixed for nl-BE; a parent-selected Android voice must not override it.
-            ttsVoiceService.clearVoiceSelection()
-        } else if (settings.voiceId != null) {
-            ttsVoiceService.setVoice(settings.voiceId)
+    private fun applySystemVoiceSettings(settings: VoiceSettings?, locale: String) {
+        if (settings?.voiceId != null && !SpeechTextNormalizer.isBelgianDutch(locale)) {
+            systemTts.setVoice(settings.voiceId)
         } else {
-            ttsVoiceService.clearVoiceSelection()
+            systemTts.clearVoiceSelection()
         }
-        ttsVoiceService.setPitch(settings.pitch.takeIf { it > 0f } ?: 1.0f)
-        ttsVoiceService.setSpeechRate(settings.rate.takeIf { it > 0f } ?: 1.0f)
+        systemTts.setPitch(settings?.pitch?.takeIf { it > 0f } ?: 1.0f)
+        systemTts.setSpeechRate(settings?.rate?.takeIf { it > 0f } ?: 1.0f)
     }
 
     fun playSuccess() {
@@ -245,7 +245,7 @@ class AudioService(
         }
     }
 
-    fun getTtsVoiceService() = ttsVoiceService
+    fun getTtsVoiceService() = systemTts
 
     private fun beginPlaybackRequest(): Long {
         cancelCurrentSpeech()
@@ -254,8 +254,6 @@ class AudioService(
 
     private fun releaseCurrentMediaOnly() {
         mediaPlayer?.runCatching { stop() }
-        bundledPlayers.forEach { player -> player.runCatching { release() } }
-        bundledPlayers = emptyList()
         mediaPlayer?.runCatching { release() }
         mediaPlayer = null
     }
@@ -265,7 +263,8 @@ class AudioService(
         playbackJob?.cancel()
         playbackJob = null
         releaseCurrentMediaOnly()
-        ttsVoiceService.stop()
+        offlineDutchTts.stop()
+        systemTts.stop()
     }
 
     fun stopPlayback() {
@@ -274,17 +273,14 @@ class AudioService(
 
     fun shutdown() {
         cancelCurrentSpeech()
-        ttsVoiceService.shutdown()
-    }
-    private companion object {
-        const val NATHALIE_PLAYBACK_SPEED = 1.12f
-        const val SENTENCE_PAUSE_ASSET = "tts/common/pause_sentence.wav"
-        const val WORD_PAUSE_ASSET = "tts/common/pause_word.wav"
-        val PAUSE_ASSETS = setOf(SENTENCE_PAUSE_ASSET, WORD_PAUSE_ASSET)
-        val EURO_PREFIX = Regex("€\\s*([0-9][0-9 .]*(?:[,.][0-9]+)?)")
-        val EURO_SUFFIX = Regex("([0-9][0-9 .]*(?:[,.][0-9]+)?)\\s*€")
-        val ARITHMETIC_DASH = Regex("(?<=\\d)\\s*[-–—]\\s*(?=\\d)")
-        val NON_NUMERIC_DASH = Regex("[-–—]")
+        offlineDutchTts.shutdown()
+        systemTts.shutdown()
+        scope.cancel()
     }
 
+    private data class RuntimeVoiceSettings(
+        val locale: String,
+        val volume: Float,
+        val rate: Float
+    )
 }

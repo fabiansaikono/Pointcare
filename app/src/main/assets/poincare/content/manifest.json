@@ -1,7 +1,7 @@
 {
-  "version": "3.14",
-  "generatedAt": "2026-07-14T09:52:06+02:00",
-  "totalExerciseCount": 25200,
+  "version": "webcurriculum-2026-08-15-acfda7cf9b57",
+  "generatedAt": "2026-08-15T07:50:29.803Z",
+  "totalExerciseCount": 21000,
   "exercisesPerSubcategoryPerGrade": 100,
   "excludedGeneratedSubcategories": [
     "math_crossword",
@@ -64,5 +64,6 @@
     "Raw letter value a remains visible as a, but all TTS metadata uses phonetic Dutch/Flemish text such as de klank a zoals in kat.",
     "Added do-not-translate metadata to answer displays to prevent a from becoming een.",
     "audio/@text is now also safe phonetic text for these subcategories, with rawValue/targetValue preserving the literal answer value."
-  ]
+  ],
+  "canonicalSource": "Poincaré Curriculum Room"
 }

@@ -1,0 +1,51 @@
+{
+    "generatedAtUtc":  "2026-08-03T06:49:19.4090312+00:00",
+    "result":  "PASS",
+    "curriculumV2":  {
+                         "coreLessons":  78,
+                         "grade1CoreLessons":  67,
+                         "grade1ExerciseSets":  335,
+                         "grade1Questions":  2016,
+                         "grade2CoreLessons":  11,
+                         "grade2ExerciseSets":  55,
+                         "grade2Questions":  328,
+                         "runtimeMinutes":  4466,
+                         "sourceMinutes":  6150
+                     },
+    "fullLibrary":  {
+                        "lessons":  107,
+                        "gradeOneLessons":  91,
+                        "gradeOneExerciseSets":  363,
+                        "gradeOneQuestions":  2072,
+                        "gradeTwoLessons":  14,
+                        "gradeTwoExerciseSets":  66,
+                        "gradeTwoQuestions":  351,
+                        "fixedV1Exercises":  25200,
+                        "stableIds":  160270
+                    },
+    "translations":  {
+                         "nl-BE":  {
+                                       "DEFAULT":  107,
+                                       "COMPLETE":  0,
+                                       "NEEDS_REVIEW":  0,
+                                       "MISSING":  0
+                                   },
+                         "fr-BE":  {
+                                       "DEFAULT":  0,
+                                       "COMPLETE":  35,
+                                       "NEEDS_REVIEW":  72,
+                                       "MISSING":  0
+                                   },
+                         "en-US":  {
+                                       "DEFAULT":  0,
+                                       "COMPLETE":  35,
+                                       "NEEDS_REVIEW":  72,
+                                       "MISSING":  0
+                                   }
+                     },
+    "validation":  {
+                       "checks":  8,
+                       "passed":  8,
+                       "failed":  0
+                   }
+}

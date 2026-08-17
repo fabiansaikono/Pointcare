@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "lesson.section-cycles",
+      "severity": "ERROR",
+      "description": "Every lesson starts with one shared ACQUIRE_UNDERSTAND stage and continues with one or more complete sections in the order PRACTISE, APPLY_DEMONSTRATE, MASTERY_TEST."
+    },
+    {
+      "id": "lesson.atomic-goal",
+      "severity": "ERROR",
+      "description": "A lesson must represent one observable, assessable skill cluster; unrelated goals require separate lessons."
+    },
+    {
+      "id": "gate.test-only",
+      "severity": "ERROR",
+      "description": "Only evidence from MASTERY_TEST can pass the lesson or unlock a prerequisite-dependent lesson."
+    },
+    {
+      "id": "gate.no-hints",
+      "severity": "ERROR",
+      "description": "Every mastery-test exercise set uses hintPolicy NONE and feedbackPolicy AFTER_TEST."
+    },
+    {
+      "id": "test.coverage",
+      "severity": "ERROR",
+      "description": "Every required mastery tag is sampled by the mastery-test blueprint."
+    },
+    {
+      "id": "test.unseen-equivalent",
+      "severity": "ERROR",
+      "description": "A test cannot repeat exact recently shown items; it must use equivalent unseen variants while preserving skill difficulty."
+    },
+    {
+      "id": "errors.persist",
+      "severity": "ERROR",
+      "description": "Wrong answers generate durable mastery/error tags and a future review date."
+    },
+    {
+      "id": "errors.concept-not-item",
+      "severity": "ERROR",
+      "description": "Error review repeats the concept with a varied item rather than immediately repeating the exact same item."
+    },
+    {
+      "id": "practice.variation",
+      "severity": "ERROR",
+      "description": "Practice includes guided, fading-support and independent items with variation across values, contexts, order and distractors where applicable."
+    },
+    {
+      "id": "acquire.child-language",
+      "severity": "ERROR",
+      "description": "The explanation includes child-friendly definitions of all introduced terms, how the concept works, a correct-result rule, a worked example and a non-example."
+    },
+    {
+      "id": "reading.correct-terminology",
+      "severity": "ERROR",
+      "description": "Reading and spelling use correct child-friendly terms for sound, phoneme, letter, syllable, word part and spelling rule; visible text and spoken text remain separate."
+    },
+    {
+      "id": "math.representation-match",
+      "severity": "ERROR",
+      "description": "Every math exercise representationId must be declared by the lesson and must match a representation used in the explanation or worked example."
+    },
+    {
+      "id": "math.no-model-switch",
+      "severity": "ERROR",
+      "description": "A generator may not silently substitute a different calculation model from the model taught in that lesson."
+    },
+    {
+      "id": "geometry.visual-required",
+      "severity": "ERROR",
+      "description": "Every geometry lesson has at least one GEOMETRY_DIAGRAM visual."
+    },
+    {
+      "id": "measurement.visual-required",
+      "severity": "ERROR",
+      "description": "Every measurement lesson has at least one MEASUREMENT_DIAGRAM visual using the same units and scale conventions as the exercises."
+    },
+    {
+      "id": "world.bicolor-required",
+      "severity": "ERROR",
+      "description": "Every world-knowledge lesson has at least one WORLD_BICOLOR_ILLUSTRATION visual with SVG and PNG paths."
+    },
+    {
+      "id": "world.palette",
+      "severity": "ERROR",
+      "description": "World-knowledge illustrations use only PlanetGold, white and transparency; no other fill, stroke, gradient or embedded raster colour is allowed."
+    },
+    {
+      "id": "visual.accessibility",
+      "severity": "ERROR",
+      "description": "Every visual has localized alt text and readable labels where labels are required."
+    },
+    {
+      "id": "source.two-modes",
+      "severity": "ERROR",
+      "description": "Every exercise set is either CURATED or GENERATED; mixed stages contain multiple sets instead of a third hybrid source mode."
+    },
+    {
+      "id": "curated.stable-id",
+      "severity": "ERROR",
+      "description": "Migrated curated exercise IDs remain stable across XML-to-catalog conversion."
+    },
+    {
+      "id": "generated.deterministic",
+      "severity": "ERROR",
+      "description": "Generated exercises are reproducible from profile/lesson/attempt seed, generator ID and generator version."
+    },
+    {
+      "id": "localization.complete",
+      "severity": "ERROR",
+      "description": "All child-visible content and required spoken content exist in nl-BE, fr-BE and en-US or use the explicitly approved fallback policy."
+    },
+    {
+      "id": "progress.legacy-preserved",
+      "severity": "ERROR",
+      "description": "Migration never relocks already completed legacy content and never drops profiles, rewards, sync IDs or queued offline changes."
+    },
+    {
+      "id": "ui.main-tiles-stable",
+      "severity": "ERROR",
+      "description": "Main learning tiles, their routes and saved identifiers remain unchanged."
+    },
+    {
+      "id": "apk.size-reported",
+      "severity": "ERROR",
+      "description": "Every substantial content or visual update reports APK and asset size before and after."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "generatedAtUtc": "2026-08-03T20:28:20.996Z",
+  "result": "PASS",
+  "counts": {
+    "canonicalSourceUnits": 65,
+    "canonicalSourcePhaseRecords": 195,
+    "coreAtomicLessons": 107,
+    "retainedCorePilots": 1,
+    "stories": 3,
+    "exerciseSets": 535,
+    "questions": 3210,
+    "answerOptions": 12840,
+    "stableRuntimeIds": 29649,
+    "sourceUnitsCovered": 65,
+    "sourceGoalsDoubleCovered": 0,
+    "sourceUnitsMissing": 0,
+    "missingSupportTranslations": 5286
+  },
+  "errors": [],
+  "warnings": []
+}

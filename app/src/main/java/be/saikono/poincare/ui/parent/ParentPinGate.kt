@@ -21,7 +21,8 @@ import be.saikono.poincare.ui.theme.StarWhite
 fun ParentPinGate(
     correctPin: String,
     onPinCorrect: () -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit,
+    supportingText: String? = null
 ) {
     var enteredPin by remember { mutableStateOf("") }
     var isError by remember { mutableStateOf(false) }
@@ -70,6 +71,7 @@ fun ParentPinGate(
                     appLanguage = appLanguage,
                     compact = true,
                     onCancel = onCancel,
+                    supportingText = supportingText,
                     modifier = Modifier.weight(0.82f)
                 )
 
@@ -106,7 +108,8 @@ fun ParentPinGate(
                     isError = isError,
                     appLanguage = appLanguage,
                     compact = false,
-                    onCancel = onCancel
+                    onCancel = onCancel,
+                    supportingText = supportingText
                 )
                 CustomNumberPad(
                     onNumberClick = ::addDigit,
@@ -129,6 +132,7 @@ private fun ParentPinHeader(
     appLanguage: String,
     compact: Boolean,
     onCancel: () -> Unit,
+    supportingText: String?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -142,6 +146,15 @@ private fun ParentPinHeader(
             color = StarWhite,
             textAlign = TextAlign.Center
         )
+
+        supportingText?.let { message ->
+            Text(
+                text = message,
+                color = StarWhite.copy(alpha = 0.72f),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center
+            )
+        }
 
         if (isError) {
             Text(

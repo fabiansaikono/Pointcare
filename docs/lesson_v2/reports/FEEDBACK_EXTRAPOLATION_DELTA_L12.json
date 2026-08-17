@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-09T22:16:52.968Z",
+  "task": "Feedback extrapolation L1/L2",
+  "sourceFeedbackRows": 550,
+  "scopeDecision": "The reviewed first exercise is treated as evidence of a generator-wide pattern; every set in every Grade 1 and Grade 2 lesson is covered.",
+  "before": {
+    "lessons": 181,
+    "grade1Lessons": 68,
+    "grade2Lessons": 113,
+    "sets": 1991,
+    "exercisePositions": 16471,
+    "v1CuratedSets": 74,
+    "masteryTestSets": 362
+  },
+  "after": {
+    "lessons": 181,
+    "grade1Lessons": 68,
+    "grade2Lessons": 113,
+    "sets": 1991,
+    "exercisePositions": 16471,
+    "v1CuratedSets": 74,
+    "masteryTestSets": 362
+  },
+  "additions": {
+    "frenchThemeLessons": 6,
+    "exerciseSetsPerLesson": 8,
+    "theoryChecksPerLesson": 1,
+    "testFormsPerLesson": 2,
+    "originalStableIdsPreserved": true
+  },
+  "validatorsRequired": [
+    "firstExerciseSignatureUniqueWithinLesson",
+    "noGenericDistractorSet",
+    "noPracticeTestOverlapNormalized",
+    "noRepeatedStimulusAcrossAdjacentSets",
+    "answerOptionsVaryWhenRetryPolicyChanges"
+  ],
+  "artifacts": [
+    "C:\\AndroidApps\\Poincare\\docs\\lesson_v2\\reports\\V1_TO_V2_CURRICULUM_MAPPING_L12.json",
+    "C:\\AndroidApps\\Poincare\\docs\\lesson_v2\\reports\\FEEDBACK_COVERAGE_MATRIX_L12.json",
+    "C:\\AndroidApps\\Poincare\\docs\\lesson_v2\\reports\\FEEDBACK_COVERAGE_MATRIX_L12.csv",
+    "C:\\AndroidApps\\Poincare\\docs\\lesson_v2\\reports\\GRADE2_EDITORIAL_QUESTION_BANK_V2.json"
+  ]
+}

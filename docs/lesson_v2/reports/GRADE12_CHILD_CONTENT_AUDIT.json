@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-08-09T22:17:22.153Z",
+  "result": "PASSED",
+  "counts": {
+    "lessons": 181,
+    "grade1Lessons": 68,
+    "grade2Lessons": 113,
+    "parentExplanationBlocks": 181,
+    "exerciseSets": 1991,
+    "grade2Questions": 10283,
+    "answerOptions": 41132,
+    "translatableContentFields": 4974,
+    "missingSupportTranslations": 9948,
+    "storiesWithCompleteNlFrEnText": 43,
+    "registeredSources": 9,
+    "retiredHierarchyFields": 2451,
+    "issues": 0
+  },
+  "issues": []
+}

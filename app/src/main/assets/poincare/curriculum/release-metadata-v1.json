@@ -1,0 +1,554 @@
+{
+  "schemaVersion": 1,
+  "releaseVersion": "2026-08-15-acfda7cf9b57",
+  "generatedAt": "2026-08-15T07:50:29.803Z",
+  "canonicalSource": "Poincaré Curriculum Room",
+  "checksum": "acfda7cf9b576bc2706c415868503013c5cc5df599effc3cb4604ee54c6035b6",
+  "lessonCount": 224,
+  "lessonShardCount": 28,
+  "exerciseCount": 21000,
+  "storyCount": 152,
+  "bookCount": 19,
+  "files": [
+    {
+      "file": "curriculum/curriculum-manifest-v1.json",
+      "bytes": 4128122,
+      "sha256": "284d2a06d730c9a1125aa4551c983051eab163d1e6731008e92802851413067c"
+    },
+    {
+      "file": "curriculum/grade1-coverage-crosswalk-v1.json",
+      "bytes": 192126,
+      "sha256": "583fb27ec4f794207c86e0e145ac76d329de2f5085ac6587808a40b362af8f83"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2.json",
+      "bytes": 1980,
+      "sha256": "588f3ad141c7f8c2d2090a9e94c92aa3c69272476118df2bd1666ef2da8acd6e"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-area.svg",
+      "bytes": 435,
+      "sha256": "7bd339cff85c81472403dad30b497c9e0dd4c4fdb1a378ad6b33119188f2df28"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-capacity-volume.svg",
+      "bytes": 425,
+      "sha256": "69fd88a2bdeece8635e26ec7c9d99591a65b2c9865382babefdfe22ee678d485"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-compare-order-estimate.svg",
+      "bytes": 413,
+      "sha256": "b0438a04ac9f7403e0e788432762b2e995db26fc79b8cccd6fced5f9b747592f"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-length-perimeter-scale.svg",
+      "bytes": 463,
+      "sha256": "111f28a3b0064ef926ca8a914d3e3e6ce353587694839a29d9c34f10fc92e3b7"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-mass-weight.svg",
+      "bytes": 386,
+      "sha256": "e4b23a728a68007da63ecc643704cc3e8ea5f1dc70cd762c8421e2f40ec490b4"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-patterns-orientation.svg",
+      "bytes": 420,
+      "sha256": "83f7aa05552f1fa9fe13b3c3084015d577e810de3118bc1f52ab12ea6e5606a8"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-shapes-lines-angles.svg",
+      "bytes": 467,
+      "sha256": "e8e16c983d4608ea5c29e38540893d8ce52f98000ce9b9ac3fc8541dec8b1898"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-spatial-orientation-coordinates.svg",
+      "bytes": 476,
+      "sha256": "d41671a31064e80c34277af6f128342362a6dfe937816b329acd0b0f00ac4d64"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-symmetry-patterns-transformations.svg",
+      "bytes": 528,
+      "sha256": "8d043372e6b52614b504bf2a1cd2a3185dbaabd3aa42639b9d68a48e523cb3fc"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-temperature.svg",
+      "bytes": 415,
+      "sha256": "388bcff44eca967c5056d4706677b3daea9833142fe1389fa28b513128f25fb9"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/geometry-time-calendar.svg",
+      "bytes": 420,
+      "sha256": "51aa30a5214d6e5acd2026ac619d0a9b1e8dc7051bfb8e82a3e392624eee2da7"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-dictation.svg",
+      "bytes": 592,
+      "sha256": "747b7536e244fc5f9985aaf4cde25e36039d0b040fd60bf9a2b3264ccf5790a9"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-early-literacy.svg",
+      "bytes": 580,
+      "sha256": "ddfb24ee161512a3ba967f604800d56bd3bdb656b68eb1a1ced686ab6da982a4"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-listening-comprehension.svg",
+      "bytes": 622,
+      "sha256": "20f2b6f43f07d0ac438326df033083677611121c5acb04c24825fe7e8d8478f0"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-listening-speaking.svg",
+      "bytes": 621,
+      "sha256": "94e5661d512f174a270562368bdd3bbf355081c8e22167b6921f194cf7d7e431"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-literature-experience.svg",
+      "bytes": 535,
+      "sha256": "66f3afb101a2c80e0b8e4d22ca34e84fae5d5645b93c47f453f63a1629055070"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-reading-comprehension.svg",
+      "bytes": 530,
+      "sha256": "edec8e5aeb54d79bd4fbd78de2b3d0d99e4efd0cc5c89ee88b13be44ed43aee6"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-reading-strategies-information.svg",
+      "bytes": 558,
+      "sha256": "ca355287f37d0cfd05167a87e655a11ca52cbe9e5d7753b47f03802efb38ff28"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-skills.svg",
+      "bytes": 607,
+      "sha256": "0e0dce8bb64618e1e46691763df09ad4b78d6a049c2f7054f4f1a0451c2385ce"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-speaking-interaction.svg",
+      "bytes": 433,
+      "sha256": "ba41fb1e2a2df4a10a131d489a53daa1ac91a917eff8e992976fc368a703c632"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-stories.svg",
+      "bytes": 495,
+      "sha256": "de2a3175caac2c46ef1b8666da81aec6917eac23fe049917b60cf4b8b516e287"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-technical-reading.svg",
+      "bytes": 534,
+      "sha256": "be79d1549804d93fbc6e28f784990bfb39c47d20c33340e81009c9b1e23540f9"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-vocabulary-english.svg",
+      "bytes": 530,
+      "sha256": "344a041c6812ed841b904921e13b864d14a2440d4ddddf996432dfee33809696"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-vocabulary-french.svg",
+      "bytes": 502,
+      "sha256": "9296ccf355202cf309ae0a1a9879ea458d7fee49c99a94f2328d2d696dea0f3a"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/language-writing-expression.svg",
+      "bytes": 492,
+      "sha256": "0b4f4c85d55793e8c62dff52642bcf31feaa171815b33ffcbe8fd55174767912"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/letter-tracing.svg",
+      "bytes": 489,
+      "sha256": "338416fa18bb3f09527c748259ef48b61ee60a01e4de148cdd0360b2ff4bbe82"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/logic-puzzles.svg",
+      "bytes": 464,
+      "sha256": "6549a801f3b812afa4bb78ad0f32dd8a550f044cd746ae4b7008ca914fef3b75"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-addition-subtraction.svg",
+      "bytes": 391,
+      "sha256": "d7ac453e46205f5425d39e62bccbbad0ca9c7cad345d47fb34e14b6ded63dfef"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-addition.svg",
+      "bytes": 464,
+      "sha256": "9a42a426b81bea8a4f38623b42bfc7e25ea1a7e3b1f36591623fc0d4303ad98b"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-decimals.svg",
+      "bytes": 464,
+      "sha256": "5116077b5aff5af70b9a01fe1754f67d19d638337caabb593f8ab25c5609dc2e"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-fractions.svg",
+      "bytes": 370,
+      "sha256": "cff141c8d943bc28377047681233d5fd756a4534b406da399f91fc0042b5f114"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-mixed-calculations.svg",
+      "bytes": 405,
+      "sha256": "dbcf49c92c836cc4d10dcb4364a49bb4200ec9cdf0ee4ae5a3e338d56d6975de"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-money-financial-literacy.svg",
+      "bytes": 474,
+      "sha256": "989f6854bbe86d7c64f91d9ec2fd50e063cea221f3c8f5c2154d4889ed72f116"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-multiplication-division.svg",
+      "bytes": 492,
+      "sha256": "38e4ec7402c64d207466d74fbe89df48e1fa1b773ba19ce1c802d5602fd04b4a"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-number-place-value.svg",
+      "bytes": 533,
+      "sha256": "4e45ec318e2a35bc5f4bd793e7c2186cfc80c9795becba562e6199bad0bb6ff5"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-problem-solving.svg",
+      "bytes": 487,
+      "sha256": "fcb7d46d21f46ae689a76c807ca170ea8e11a26f6b2d87c600b6e9dd29c5a29d"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-ratios-percentages.svg",
+      "bytes": 434,
+      "sha256": "f6a996968d42440a625d0f4161bb3e17e3ac4edee37463576ed25e24af0a911e"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-subtraction.svg",
+      "bytes": 456,
+      "sha256": "997c0401e540d275f6c3fc66c1adf171b4fa881e479851b2c31acda41953dc8d"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/math-tables-graphs-statistics.svg",
+      "bytes": 415,
+      "sha256": "44b7b203c230a85f5d8f718b7c83c3e4094377ed40385246c71c5c5c3645dff3"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/measurement-geometry.svg",
+      "bytes": 493,
+      "sha256": "f3fc5f1a69bbbe50eb79c195f8ff0f37272608bb74e6773da57fa57f93b0dc0e"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/number-sense.svg",
+      "bytes": 512,
+      "sha256": "4aec08bccd973781372e23cf23f1695d71dbc2368e98c1d8978df055171dfd1b"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-calculator.svg",
+      "bytes": 519,
+      "sha256": "4d6970be73b0079cacc4326a34f67c9b7785db0fc1654a83439b18f03b9c8b86"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-constellations.svg",
+      "bytes": 619,
+      "sha256": "978658022632e8a04c4ec6632991ac664acde07eb74031c4dd4bc0ea5084d852"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-galaxycon.svg",
+      "bytes": 592,
+      "sha256": "5d36186fb60f285abff1f831722e160fc8b5a95463c912a047d77511421d2b55"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-math-crosswords.svg",
+      "bytes": 511,
+      "sha256": "3a46457d0fdfadc0a518563ad321c7684327cd9f7efa5d1f6ad2aa93943a1350"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-mothership-dock.svg",
+      "bytes": 433,
+      "sha256": "af809c7ac05456fa2443f37c8f2053a5669a98fde5a21dfdf95279bca313b130"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-orbit-builder.svg",
+      "bytes": 532,
+      "sha256": "a7b438847bbeaab86dbed781ca43ce2b4788c11e165cc6d173b9cfc77899e941"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-sudoku.svg",
+      "bytes": 510,
+      "sha256": "ea3d4036c69578ff9d7777b253336e109d4c6bb9a9efb10d9efdccf2e9859016"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/runtime-puzzle-word-seeker.svg",
+      "bytes": 480,
+      "sha256": "e40e78b520aeb5bfbd55aac0345039af311496c7ec5c9085c72452259b0a6719"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-capitals-punctuation.svg",
+      "bytes": 474,
+      "sha256": "94d3a3986e0703733af9ed1b35be42699af29ddad08f3853dfaf7071f17d9890"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-grammar.svg",
+      "bytes": 486,
+      "sha256": "e46775ebe0e68c13b298da0f1f2031c2dc616d436ba603d3a14d7fc16135a41b"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-language-reflection-variation.svg",
+      "bytes": 452,
+      "sha256": "92c66623e9e8fd50d88a140188c51a5345d794963cc3eb1f99749ab8a3bcf44d"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-parts-of-speech.svg",
+      "bytes": 511,
+      "sha256": "da05061e79794d5973316511b240a0b88e270056104d788246cb7555c623b122"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-phonology-letter-sound.svg",
+      "bytes": 496,
+      "sha256": "a0b51727cf639732c7a07791b16a35e0a76a36e54b939b491668ced2c78b0e20"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-rules-word-patterns.svg",
+      "bytes": 475,
+      "sha256": "befd36e84db5fba0a38ed672b6251c7122567ebb5f6161b66c8477444cac30ae"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-sentence-structure.svg",
+      "bytes": 543,
+      "sha256": "5daf16f55c499784f63fbc6a7300b0978fb41e90a0839ce4242bce9539f244bf"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-verbs-tenses.svg",
+      "bytes": 418,
+      "sha256": "58ccf0f380a9d5b14c0bff9d89d2293933d89a945108b3bc8c258ab14f06bbc9"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/spelling-word-formation-vocabulary.svg",
+      "bytes": 543,
+      "sha256": "4d988f31896b5c7dea4bf81ae2528f98c1ec9560fdc9ffab4f50eb2004abe859"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-body-health.svg",
+      "bytes": 487,
+      "sha256": "3bca30dfc07df2918f7f49659564856f3b668c84c9cde1453b25a32473630179"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-citizenship-social.svg",
+      "bytes": 522,
+      "sha256": "098c97546de539cfe13b00ea6edbd4ece9bc401f9eddaa8efe47734d27f1ccc0"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-daily-life-self-reliance.svg",
+      "bytes": 443,
+      "sha256": "c0c1ebe03cf79211d2b299879e09c7b9b5890d87fb80b25269627c3a35744143"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-digital-media-literacy.svg",
+      "bytes": 468,
+      "sha256": "3546d4bec9166654bbfd516beea0b00ee783122c46931c47e6680f47498ba51e"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-environment-sustainability.svg",
+      "bytes": 599,
+      "sha256": "99412426680de8b3b1cc42ff9a53dc683ad366ff083e0513639ec836a215577f"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-geography-space.svg",
+      "bytes": 494,
+      "sha256": "8dcb4e7f946caebaea066af88085dbe3e73f98fbf2406de89c2c003658c6d7a3"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-history-time.svg",
+      "bytes": 443,
+      "sha256": "5499809365b80203aabb0af8535df7baf07ff79da2e2c8722fbe7574b2d56018"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-nature-living-world.svg",
+      "bytes": 481,
+      "sha256": "cc18943314283c75a91ab5bf5b9d10f37659dbd0c1308e65cc37edb2caf686b8"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-orientation.svg",
+      "bytes": 515,
+      "sha256": "1495978170f1e950e1858499345654cbf7ee2bb9b1850a3966d51b260e25633b"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-science-inquiry.svg",
+      "bytes": 513,
+      "sha256": "b14aa3c15597999be3d448628e31b21ba28006cc101db7abfcc81dbc2e92fe1c"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-technology-design.svg",
+      "bytes": 526,
+      "sha256": "9f69432c73b8d23089ec3c8a3c9c9771f243dec2e3bbb8578d2747a22b249b33"
+    },
+    {
+      "file": "curriculum/icons/spacetiles/world-traffic-mobility-safety.svg",
+      "bytes": 472,
+      "sha256": "8bcbf129b23452d36932f4269712d8a73c0cdd1af745090ddf8b807cf57357e7"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-world-knowledge-01.json",
+      "bytes": 1616707,
+      "sha256": "743860adc5b9fe31326e8f703f81e9e08c3ccf8cac8bb7f68a7f9f4ec81b8fc1"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-world-knowledge-02.json",
+      "bytes": 1404240,
+      "sha256": "ef90b40bec26770bfe19b098c704b2d6e159450f0baf0fa8e2d34a7a9b58a0fe"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-world-knowledge-03.json",
+      "bytes": 1647719,
+      "sha256": "b8f6c3b533ded69d5da789fe64c9f39b9f784bea63b24ee64432f1b443c8afde"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-world-knowledge-04.json",
+      "bytes": 1250992,
+      "sha256": "7b7b8fedf83ce34cf579632e0dcbd2f330b481172af0dfabb9dc54a3ad93ad03"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-geometry-05.json",
+      "bytes": 1196321,
+      "sha256": "228dfa6e245bd02ce37499ae0be26ec7a95a8db7d97012e7712b626e2b5fe924"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-reading-06.json",
+      "bytes": 1359701,
+      "sha256": "7fefb79fcc16aebc043b9efcf83a48182e4c3a46f1d2017c89f4b17902e0db33"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-reading-07.json",
+      "bytes": 1534704,
+      "sha256": "43d303510e43e03c9f39b0ae7fc8b2c6074acb311b801224641706f0cffa7e06"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-world-knowledge-08.json",
+      "bytes": 1245262,
+      "sha256": "437e62761c1626e3a9450523662ce8b14ba6a96b78d584f62d2723d571cb15ac"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-09.json",
+      "bytes": 4670990,
+      "sha256": "864572036c6dd8f18a71928534a397688bbca82742322af576772d70cc43d85d"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-reading-10.json",
+      "bytes": 4706025,
+      "sha256": "dcb552eda957ca3aa5e9e3cb3b08d03569b638b778ed8c2a04fbb68b8c26978c"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-reading-11.json",
+      "bytes": 4784185,
+      "sha256": "db6b89eb659e59d47ba34edd8aa44596a5edfaebd8b9bf943cc96423eaac4319"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-math-12.json",
+      "bytes": 4769289,
+      "sha256": "43094189fcf4edc28fed3b1f411e91eb558f7967dc19ea47fb01a0cf9a447bac"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-geometry-13.json",
+      "bytes": 4178340,
+      "sha256": "1726191dbd265f3950aa9a949d273a68260d90634c89c7d2fc5a65d9d663e2fb"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-geometry-14.json",
+      "bytes": 4479196,
+      "sha256": "faf011672a20769656d5d41f800384a9fda3222c5c4be2a6e3dc1422915f0be7"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-15.json",
+      "bytes": 4957943,
+      "sha256": "548fb3621535e799629255de0cd0bffa30b9c4df16000d8ba050f640d1370efb"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-16.json",
+      "bytes": 5266191,
+      "sha256": "00ace5226758a837131f1bec1e4b280ba5831cd58779e9517fc1ae0a43f0b6bb"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-17.json",
+      "bytes": 4986427,
+      "sha256": "97955383ea28f0b116eb090f55ff51c35a0e451715c8d13451589b10e4f03033"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-18.json",
+      "bytes": 4726809,
+      "sha256": "1f761f78463045e9fc95c03ba6ad93932a2a48ede07eca09c1341f2b8798a2b5"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-19.json",
+      "bytes": 4675027,
+      "sha256": "63aea44c0e03c24e25b3792cb33cf40b65c544f80b88d5b79b22b27312609467"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-20.json",
+      "bytes": 4957984,
+      "sha256": "7aa5a5dc18a03cf5db41487418edafd166e12c13a0c8f88411a05a7e3a61e325"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-world-knowledge-21.json",
+      "bytes": 4401316,
+      "sha256": "bc9bc3ac48f6b2cd7a0eca74fed49fd10dcda0e8d031992ff9e8197905d2f6e2"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-reading-22.json",
+      "bytes": 2723334,
+      "sha256": "5f1ad69d04b397b8c1b26922b7a97cc1f3df2b372c190b0269ff2ffcc02b5a55"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-reading-23.json",
+      "bytes": 291614,
+      "sha256": "1c3d260adbefec04bf6b023639bc6ae3735057a6c07e3874c7f1a86652336326"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g3-reading-24.json",
+      "bytes": 504154,
+      "sha256": "a2924344eeb89ff0239ec14fc346dd8cf730d62af4ee24d64c10233a72ae7ac6"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-reading-25.json",
+      "bytes": 669241,
+      "sha256": "be4639f5422424386ace27cfb57d7c2723ba6bd3e93693333a53946535229f6e"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-reading-26.json",
+      "bytes": 655411,
+      "sha256": "fa5fc76d2f215ed225776a1c62eb50837cec7d7f6a877ea567f62ee8c7efc868"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g2-reading-27.json",
+      "bytes": 620996,
+      "sha256": "b43a719093256a9e30efc3299461964a06b1327ee35b3b2074a981fc04af81fa"
+    },
+    {
+      "file": "curriculum/lesson-catalog-v2/g1-writing-28.json",
+      "bytes": 866725,
+      "sha256": "db4386e8edc881b7304049cf8dfa5176b41f5bc6bbc31848d71a0964329ea719"
+    },
+    {
+      "file": "content/poincare-exercises-language.xml",
+      "bytes": 31966884,
+      "sha256": "08bf1ae575b88dda192a90220b1a9350314a77f306d0a399addda74008c3f132"
+    },
+    {
+      "file": "content/poincare-exercises-math.xml",
+      "bytes": 15479552,
+      "sha256": "5f2ec4a3daa2a73198cfdcaf8e5ed92f874a351118c86977c0fe995305e75364"
+    },
+    {
+      "file": "content/poincare-exercises-geometry.xml",
+      "bytes": 18288577,
+      "sha256": "64f61da3987b490e5afa6a4f1c1cf7c92a0f0cc4ea2ef792f0818d9c4db31af0"
+    },
+    {
+      "file": "content/poincare-exercises-world-knowledge.xml",
+      "bytes": 12240872,
+      "sha256": "b21cb7f69c38c031b302118d7e962542ea6b699f17842b1332b39d9c62c5ce49"
+    },
+    {
+      "file": "content/poincare-exercises-logic-puzzles.xml",
+      "bytes": 374,
+      "sha256": "07cc7a9ce2113ff2285d90e152e21800c7c770b021a8e9009b775fd2a0c4de11"
+    },
+    {
+      "file": "content/stories/poincare-stories-v1.json",
+      "bytes": 2663320,
+      "sha256": "a4738d85cdcbf17b57b9e1ca64b179cb7588194d3acbeae7e641368bc9f90f9e"
+    },
+    {
+      "file": "content/stories/poincare-story-books-v1.json",
+      "bytes": 18772,
+      "sha256": "4d3009bdac59fdbbe1aacfdd2e3bfaf63b9db632b47cc9763bf38decf9788a72"
+    }
+  ]
+}

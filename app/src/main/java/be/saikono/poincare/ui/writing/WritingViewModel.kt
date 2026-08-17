@@ -60,6 +60,7 @@ class WritingViewModel(
     private var startTime = 0L
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
+    private var selectedGrade: Int? = null
     private var latestProfile: ChildProfile? = null
     private var hasContentRequest = false
     private var contentLoadJob: Job? = null
@@ -70,6 +71,7 @@ class WritingViewModel(
     private var firstAttemptForCurrent = true
     private var missionCycleId: String = UUID.randomUUID().toString()
     private var allLetterTracingExercises: List<ExerciseContent> = emptyList()
+    private var lessonLetterPracticeActivityId: String? = null
 
     init {
         observeProfile()
@@ -105,7 +107,7 @@ class WritingViewModel(
         contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             try {
-                val level = profile.writingLevel
+                val level = selectedGrade?.let(::skillLevelForGrade) ?: profile.writingLevel
                 val isLetterTracing = selectedSubcategoryId == LETTER_TRACING_SUBCATEGORY
                 val loadedExercises = if (isLetterTracing) {
                     buildLetterTracingExercises(level, profile.id)
@@ -141,8 +143,10 @@ class WritingViewModel(
                 if (requestGeneration != contentLoadGeneration) return@launch
                 if (isLetterTracing) {
                     allLetterTracingExercises = loadedExercises
-                    showLetterChooser(profile.id)
-                    return@launch
+                    if (lessonLetterPracticeSlug() != "woorden_zinnen") {
+                        showLetterChooser(profile.id)
+                        return@launch
+                    }
                 }
 
                 exercises = loadedExercises.shuffled()
@@ -196,8 +200,16 @@ class WritingViewModel(
         }
     }
 
+    fun setLessonLetterPracticeActivity(activityId: String?) {
+        lessonLetterPracticeActivityId = activityId?.takeIf { it.startsWith("writing.letter_tracing.") }
+    }
+
     fun setDifficultyStars(stars: Int?) {
         selectedDifficultyStars = stars?.coerceIn(1, 3)
+    }
+
+    fun setSelectedGrade(grade: Int?) {
+        selectedGrade = grade?.coerceIn(1, 6)
     }
 
     private fun startExercise(index: Int) {
@@ -310,6 +322,7 @@ class WritingViewModel(
             .map { it.exerciseId }
             .toSet()
         val alphabetExercises = allLetterTracingExercises.filter { it.data["tracePhase"] != "random" }
+        val targetedLessonPractice = lessonLetterPracticeActivityId != null
         val firstIncompleteIndex = alphabetExercises.indexOfFirst { it.id !in completedIds }
         val allCompleted = firstIncompleteIndex == -1
         val choices = alphabetExercises.mapIndexed { index, exercise ->
@@ -319,7 +332,7 @@ class WritingViewModel(
                 letter = exercise.data["letter"].orEmpty(),
                 uppercase = exercise.data["letterCase"] == "uppercase",
                 completed = completed,
-                enabled = completed || allCompleted || index == firstIncompleteIndex
+                enabled = targetedLessonPractice || completed || allCompleted || index == firstIncompleteIndex
             )
         }
         _uiState.update {
@@ -335,7 +348,7 @@ class WritingViewModel(
                 isLoading = false,
                 showLetterChooser = true,
                 letterChoices = choices,
-                randomPracticeUnlocked = allCompleted
+                randomPracticeUnlocked = !targetedLessonPractice && allCompleted
             )
         }
     }
@@ -370,12 +383,13 @@ class WritingViewModel(
         }
         val firstIncompleteIndex = updated.indexOfFirst { !it.completed }
         val allCompleted = firstIncompleteIndex == -1
+        val targetedLessonPractice = lessonLetterPracticeActivityId != null
         _uiState.update { state ->
             state.copy(
                 letterChoices = updated.mapIndexed { index, choice ->
-                    choice.copy(enabled = choice.completed || allCompleted || index == firstIncompleteIndex)
+                    choice.copy(enabled = targetedLessonPractice || choice.completed || allCompleted || index == firstIncompleteIndex)
                 },
-                randomPracticeUnlocked = allCompleted
+                randomPracticeUnlocked = !targetedLessonPractice && allCompleted
             )
         }
     }
@@ -479,6 +493,9 @@ class WritingViewModel(
         level: SkillLevel,
         profileId: String
     ): List<ExerciseContent> {
+        val lessonSlug = lessonLetterPracticeSlug()
+        if (lessonSlug == "woorden_zinnen") return buildWordAndSentenceWritingExercises(level)
+        if (lessonSlug == "houding_basislijnen") return buildBasicStrokeExercises(level)
         val lowerCase = ('a'..'z').map { it.toString() }
         val upperCase = ('A'..'Z').map { it.toString() }
         val randomMixed = (lowerCase + upperCase)
@@ -491,7 +508,21 @@ class WritingViewModel(
             randomMixed.forEachIndexed { index, letter -> add(Triple("random", index, letter)) }
         }
 
-        return ordered.mapIndexed { sequenceIndex, (phase, phaseIndex, letter) ->
+        val allowedLetters = when (lessonSlug) {
+            "kleine_letters_recht" -> setOf("i", "l", "t", "j")
+            "kleine_letters_rond" -> setOf("c", "o", "a", "d", "g", "q")
+            "kleine_letters_bogen" -> setOf("n", "m", "r", "u", "h", "b", "p")
+            "kleine_letters_lussen" -> setOf("e", "f", "s", "k", "v", "w", "x", "y", "z")
+            "hoofdletters_a_m" -> ('A'..'M').map(Char::toString).toSet()
+            "hoofdletters_n_z" -> ('N'..'Z').map(Char::toString).toSet()
+            "alle_letters" -> (lowerCase + upperCase).toSet()
+            else -> null
+        }
+        val selected = ordered.filter { (phase, _, letter) ->
+            allowedLetters == null || (phase != "random" && letter in allowedLetters)
+        }
+
+        return selected.mapIndexed { sequenceIndex, (phase, phaseIndex, letter) ->
             ExerciseContent(
                 id = "letter-tracing-$phase-${phaseIndex + 1}-${letter.lowercase()}",
                 domain = LearningDomain.WRITING,
@@ -520,6 +551,69 @@ class WritingViewModel(
                     "writingStyle" to "flemish-looped-school-hand"
                 ),
                 answer = "success",
+                rewardMetadata = RewardMetadata(stamps = 1)
+            )
+        }
+    }
+
+    private fun lessonLetterPracticeSlug(): String? = lessonLetterPracticeActivityId
+        ?.removePrefix("writing.letter_tracing.")
+        ?.substringBeforeLast('.')
+
+    private fun buildBasicStrokeExercises(level: SkillLevel): List<ExerciseContent> {
+        val strokes = listOf(
+            "line-horizontal" to "Trek een horizontale lijn over.",
+            "line-vertical" to "Trek een verticale lijn over.",
+            "line-slanted" to "Trek een schuine lijn over.",
+            "shape-arch" to "Trek de eenvoudige boog over.",
+            "shape-circle" to "Trek de ronde vorm over."
+        )
+        return strokes.mapIndexed { index, (target, prompt) ->
+            ExerciseContent(
+                id = "prewriting-stroke-${index + 1}",
+                domain = LearningDomain.WRITING,
+                skill = "prewriting_strokes",
+                section = ExerciseSection.PRACTICE,
+                level = level,
+                inputMode = InputMode.TRACE_LETTER,
+                prompt = LocalizedText(nl = prompt, en = "Trace the basic stroke.", fr = "Repasse le tracé de base."),
+                data = mapOf(
+                    "letter" to target,
+                    "letterCase" to "shape",
+                    "tracePhase" to "basic-strokes",
+                    "subcategoryId" to LETTER_TRACING_SUBCATEGORY,
+                    "mainCategory" to "writing",
+                    "grade" to "1",
+                    "difficultyStars" to "1",
+                    "topic" to "Houding en basislijnen",
+                    "progressKey" to "prewriting-stroke-${index + 1}"
+                ),
+                answer = "success",
+                rewardMetadata = RewardMetadata(stamps = 1)
+            )
+        }
+    }
+
+    private fun buildWordAndSentenceWritingExercises(level: SkillLevel): List<ExerciseContent> {
+        val targets = listOf("maan", "Rob is los.", "Ik zie de maan.")
+        return targets.mapIndexed { index, target ->
+            ExerciseContent(
+                id = "handwriting-word-sentence-${index + 1}",
+                domain = LearningDomain.WRITING,
+                skill = "word_sentence_writing",
+                section = ExerciseSection.PRACTICE,
+                level = level,
+                inputMode = InputMode.CUSTOM_TEXT_KEYBOARD,
+                prompt = LocalizedText(nl = "Schrijf: $target", en = "Write: $target", fr = "Écris : $target"),
+                data = mapOf(
+                    "subcategoryId" to "writing",
+                    "mainCategory" to "writing",
+                    "grade" to "1",
+                    "difficultyStars" to (index + 1).coerceAtMost(3).toString(),
+                    "topic" to "Woorden en korte zinnen schrijven",
+                    "progressKey" to "handwriting-word-sentence-${index + 1}"
+                ),
+                answer = target,
                 rewardMetadata = RewardMetadata(stamps = 1)
             )
         }

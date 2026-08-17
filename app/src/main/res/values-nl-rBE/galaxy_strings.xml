@@ -1,0 +1,31 @@
+<resources>
+    <string name="galaxy_open_interface">Open orb-navigatie</string>
+    <string name="galaxy_open_tiles">Open tegelnavigatie</string>
+    <string name="galaxy_player_orb">Jouw plek in het leeruniversum</string>
+    <string name="galaxy_category_description">%1$s, %2$d procent voltooid</string>
+    <string name="galaxy_back_to_universe">Terug naar het universum</string>
+    <string name="galaxy_reset_view">Centreer beeld</string>
+    <string name="galaxy_no_lessons">Deze wereld gebruikt de bestaande missienavigatie.</string>
+    <string name="galaxy_open_missions">Open missies</string>
+    <string name="galaxy_lesson_description">%1$s. %2$s. Leerjaar %3$d. %4$s. %5$d procent.</string>
+    <string name="galaxy_lesson_path">%1$s &gt; %2$s</string>
+    <string name="galaxy_progress">Voortgang %1$d%%</string>
+    <string name="galaxy_grade_section">Leerjaar %1$d</string>
+    <string name="galaxy_continue">Ga verder</string>
+    <string name="galaxy_start">Start les</string>
+    <string name="galaxy_locked_action">Voltooi eerst de vereiste les</string>
+    <string name="galaxy_prerequisites">Voltooi eerst: %1$s</string>
+    <string name="galaxy_view_lesson_details">Bekijk lesdetails</string>
+    <string name="galaxy_theory">Theorie</string>
+    <string name="galaxy_exercises">Oefeningen</string>
+    <string name="galaxy_exercise">Oefeningen %1$d</string>
+    <string name="galaxy_test">Toets</string>
+    <string name="galaxy_current">Bezig</string>
+    <string name="galaxy_state_locked">Vergrendeld</string>
+    <string name="galaxy_state_available">Beschikbaar</string>
+    <string name="galaxy_state_recommended">Aanbevolen</string>
+    <string name="galaxy_state_in_progress">Bezig</string>
+    <string name="galaxy_state_completed">Voltooid</string>
+    <string name="galaxy_state_mastered">Beheerst</string>
+    <string name="galaxy_next_lessons">Volgende les(sen)</string>
+</resources>

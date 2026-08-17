@@ -185,7 +185,9 @@ fun PuzzleContent(
                     )
                 } else if (subcategoryId == MOTHERSHIP_DOCK_SUBCATEGORY_ID) {
                     MothershipDockGame(
-                        readingGrade = puzzle.data["readingGrade"]?.toIntOrNull() ?: grade,
+                        readingGrade = puzzle.data["worldKnowledgeGrade"]?.toIntOrNull()
+                            ?: puzzle.data["readingGrade"]?.toIntOrNull()
+                            ?: grade,
                         mathGrade = puzzle.data["mathGrade"]?.toIntOrNull() ?: grade,
                         difficultyStars = generationDifficulty,
                         exerciseLanguage = uiState.exerciseLanguage,

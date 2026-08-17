@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img">
+<title>Hout kwam van een levende boom</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="18">
+<path d="M235 450 V220 M235 245 C175 235 130 190 125 125 C190 125 230 165 235 245 Z M235 205 C295 200 340 155 345 95 C285 95 245 140 235 205 Z" stroke="#FFD700"/>
+<path d="M125 450 C175 410 295 410 345 450" stroke="#FFFFFF"/>
+<path d="M390 270 H540 M505 235 L540 270 L505 305" stroke="#FFFFFF"/>
+<path d="M610 235 H780 V335 H610 Z M635 335 V455 M755 335 V455 M610 285 H545 V390 H610" stroke="#FFD700"/>
+</g>
+</svg>

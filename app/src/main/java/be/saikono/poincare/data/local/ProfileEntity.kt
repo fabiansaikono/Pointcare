@@ -21,6 +21,7 @@ data class ProfileEntity(
     val geometryLevel: SkillLevel,
     val worldKnowledgeLevel: SkillLevel,
     val puzzleLevel: SkillLevel,
+    val selectedGrades: Map<String, List<Int>>,
     val hiddenMainCategories: List<String>,
     val hiddenSubcategories: List<String>,
     val showUnassignedExercises: Boolean,

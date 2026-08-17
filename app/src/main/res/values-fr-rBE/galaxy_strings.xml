@@ -1,0 +1,31 @@
+<resources>
+    <string name="galaxy_open_interface">Ouvrir la navigation par orbes</string>
+    <string name="galaxy_open_tiles">Ouvrir la navigation par tuiles</string>
+    <string name="galaxy_player_orb">Ta place dans l’univers d’apprentissage</string>
+    <string name="galaxy_category_description">%1$s, %2$d pour cent terminé</string>
+    <string name="galaxy_back_to_universe">Retour à l’univers</string>
+    <string name="galaxy_reset_view">Centrer la vue</string>
+    <string name="galaxy_no_lessons">Ce monde utilise la navigation des missions existante.</string>
+    <string name="galaxy_open_missions">Ouvrir les missions</string>
+    <string name="galaxy_lesson_description">%1$s. %2$s. Année %3$d. %4$s. %5$d pour cent.</string>
+    <string name="galaxy_lesson_path">%1$s &gt; %2$s</string>
+    <string name="galaxy_progress">Progression %1$d%%</string>
+    <string name="galaxy_grade_section">Année %1$d</string>
+    <string name="galaxy_continue">Continuer</string>
+    <string name="galaxy_start">Commencer la leçon</string>
+    <string name="galaxy_locked_action">Termine d’abord la leçon requise</string>
+    <string name="galaxy_prerequisites">Termine d’abord : %1$s</string>
+    <string name="galaxy_view_lesson_details">Voir les détails de la leçon</string>
+    <string name="galaxy_theory">Théorie</string>
+    <string name="galaxy_exercises">Exercices</string>
+    <string name="galaxy_exercise">Exercices %1$d</string>
+    <string name="galaxy_test">Test</string>
+    <string name="galaxy_current">En cours</string>
+    <string name="galaxy_state_locked">Verrouillé</string>
+    <string name="galaxy_state_available">Disponible</string>
+    <string name="galaxy_state_recommended">Recommandé</string>
+    <string name="galaxy_state_in_progress">En cours</string>
+    <string name="galaxy_state_completed">Terminé</string>
+    <string name="galaxy_state_mastered">Maîtrisé</string>
+    <string name="galaxy_next_lessons">Leçon(s) suivante(s)</string>
+</resources>

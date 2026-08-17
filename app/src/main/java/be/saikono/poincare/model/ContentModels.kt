@@ -56,7 +56,9 @@ data class ExerciseContent(
     val data: Map<String, String>,
     val answer: String,
     val hints: List<String> = emptyList(),
-    val rewardMetadata: RewardMetadata = RewardMetadata()
+    val rewardMetadata: RewardMetadata = RewardMetadata(),
+    val rendererVersion: Int = 1,
+    val generatorVersion: String? = null
 )
 
 fun normalizeContentLocale(locale: String): String = when (locale) {
@@ -84,7 +86,10 @@ fun ExerciseContent.localizedOptions(locale: String): List<String> =
 fun ExerciseContent.localizedAnswer(locale: String): String =
     formatVisibleNumbers(localizedData("answer", locale) ?: answer)
 fun ExerciseContent.localizedPromptTts(locale: String): String =
-    localizedData("promptTts", locale) ?: prompt.getRaw(locale)
+    localizedData("promptTts", locale)
+        ?: speechText?.get(locale)?.takeIf { it.isNotBlank() }
+        ?: localizedData("question", locale)
+        ?: prompt.getRaw(locale)
 
 fun ExerciseContent.localizedOptionSpeech(option: String, locale: String): String {
     val options = localizedOptions(locale)
@@ -93,7 +98,57 @@ fun ExerciseContent.localizedOptionSpeech(option: String, locale: String): Strin
         ?.map { it.trim() }
         .orEmpty()
     val index = options.indexOf(option)
-    return speeches.getOrNull(index)?.takeIf { it.isNotBlank() } ?: option
+    val explicitSpeech = speeches.getOrNull(index)?.takeIf { it.isNotBlank() }
+    return dutchConsonantSoundCue(option, locale) ?: explicitSpeech ?: option
+}
+
+/**
+ * Dutch beginning- and ending-sound questions must pronounce a consonant as a
+ * short phoneme, never as its alphabet name ("em", "tee", ...). The word
+ * anchor keeps stop consonants intelligible for both online and offline TTS.
+ */
+private fun ExerciseContent.dutchConsonantSoundCue(option: String, locale: String): String? {
+    if (normalizeContentLocale(locale) != "nl-BE") return null
+    val promptText = listOfNotNull(
+        prompt.getRaw(locale),
+        speechText?.getRaw(locale),
+        localizedData("question", locale),
+        localizedData("promptTts", locale),
+        data["promptKind"],
+        data["questionType"]
+    ).joinToString(" ").lowercase()
+    val asksForBoundarySound = listOf(
+        "eerste klank", "laatste klank", "beginklank", "eindklank",
+        "eerste letter", "laatste letter",
+        "first_sound", "last_sound", "initial_sound", "final_sound"
+    ).any(promptText::contains)
+    if (!asksForBoundarySound) return null
+
+    val letter = option.trim().lowercase().singleOrNull() ?: return null
+    return when (letter) {
+        'b' -> "buh, zoals in bal"
+        'c' -> "kuh, zoals in cola"
+        'd' -> "duh, zoals in doos"
+        'f' -> "fff, zoals in fiets"
+        'g' -> "ggg, zoals in geit"
+        'h' -> "huh, zoals in huis"
+        'j' -> "juh, zoals in jas"
+        'k' -> "kuh, zoals in kat"
+        'l' -> "lll, zoals in lamp"
+        'm' -> "mmm, zoals in maan"
+        'n' -> "nnn, zoals in neus"
+        'p' -> "puh, zoals in pen"
+        'q' -> "kuh, zoals in quiz"
+        'r' -> "rrr, zoals in roos"
+        's' -> "sss, zoals in sok"
+        't' -> "tuh, zoals in tak"
+        'v' -> "vvv, zoals in vis"
+        'w' -> "www, zoals in wolk"
+        'x' -> "kss, zoals aan het einde van box"
+        'y' -> "juh, zoals in yoghurt"
+        'z' -> "zzz, zoals in zon"
+        else -> null
+    }
 }
 
 fun ExerciseContent.localizedTopic(locale: String): String =

@@ -56,7 +56,7 @@ class ReadingViewModel(
     private var translationsUsed = 0
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
-    private var selectedWorldLevel: Int? = null
+    private var selectedGrade: Int? = null
     private var dictationInactivityJob: Job? = null
     private var dictationWrongKeyJob: Job? = null
     private var latestProfile: ChildProfile? = null
@@ -104,7 +104,7 @@ class ReadingViewModel(
         contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             try {
-                val level = profile.readingLevel
+                val level = selectedGrade?.let(::skillLevelForGrade) ?: profile.readingLevel
                 val isDictation = selectedSubcategoryId == DICTATION_SUBCATEGORY
                 val isTranslation = TranslationExerciseFactory.supports(selectedSubcategoryId)
                 val isWorldKnowledge = selectedSubcategoryId in WORLD_SUBCATEGORIES
@@ -133,8 +133,8 @@ class ReadingViewModel(
                     )
                 } else if (isTranslation) {
                     val vocabularySources = (
-                        contentRepository.getExercises(LearningDomain.READING, profile.readingLevel) +
-                            contentRepository.getExercises(LearningDomain.WRITING, profile.writingLevel)
+                        contentRepository.getExercises(LearningDomain.READING, level) +
+                            contentRepository.getExercises(LearningDomain.WRITING, level)
                         ).filter { it.data["subcategoryId"] !in TRANSLATION_SUBCATEGORIES }
                     TranslationExerciseFactory.build(
                         subcategoryId = selectedSubcategoryId.orEmpty(),
@@ -143,7 +143,7 @@ class ReadingViewModel(
                         sourceExercises = vocabularySources
                     )
                 } else if (isWorldKnowledge) {
-                    val worldGrade = selectedWorldLevel?.coerceIn(1, 6) ?: 1
+                    val worldGrade = selectedGrade ?: profile.selectedGradesFor(LearningDomain.WORLD_KNOWLEDGE).firstOrNull() ?: 1
                     val themeId = selectedSubcategoryId.orEmpty()
                     val xml = contentRepository.getExercises(
                         mainCategory = "world-knowledge",
@@ -238,8 +238,8 @@ class ReadingViewModel(
         selectedDifficultyStars = stars?.coerceIn(1, 3)
     }
 
-    fun setWorldLevel(level: Int?) {
-        selectedWorldLevel = level?.coerceIn(1, 6)
+    fun setSelectedGrade(grade: Int?) {
+        selectedGrade = grade?.coerceIn(1, 6)
     }
 
     private fun startExercise(index: Int) {
@@ -534,11 +534,6 @@ class ReadingViewModel(
         } else {
             startExercise(0)
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        audioService.shutdown()
     }
 
     companion object {

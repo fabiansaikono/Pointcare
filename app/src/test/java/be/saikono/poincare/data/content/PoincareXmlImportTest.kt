@@ -52,27 +52,34 @@ class PoincareXmlImportTest {
     }
 
     @Test
-    fun `v3 multilingual content pack parses all fixed files`() {
-        val expectedCounts = mapOf(
-            "poincare-exercises-math.xml" to 864,
-            "poincare-exercises-language.xml" to 1080,
-            "poincare-exercises-logic-puzzles.xml" to 720,
-            "poincare-exercises-world-themes.xml" to 1080
+    fun `v3 multilingual content pack parses every canonical exercise file`() {
+        val fileNames = listOf(
+            "poincare-exercises-math.xml",
+            "poincare-exercises-language.xml",
+            "poincare-exercises-logic-puzzles.xml",
+            "poincare-exercises-world-knowledge.xml",
+            "poincare-exercises-geometry.xml"
         )
+        val expectedTotal = canonicalManifestTotal()
         val parser = PoincareContentParser()
-        val packs = expectedCounts.map { (fileName, expectedCount) ->
+        val packs = fileNames.map { fileName ->
             assetFile("src/main/assets/poincare/content/$fileName").inputStream().use { stream ->
                 parser.parse(stream).also { pack ->
-                    assertEquals(expectedCount, pack.exercises.size)
-                    assertEquals("nl-BE", pack.defaultLocale)
-                    assertTrue(pack.subcategories.isNotEmpty())
+                    assertTrue("$fileName must expose a main category", !pack.mainCategory.isNullOrBlank())
+                    if (fileName == "poincare-exercises-logic-puzzles.xml") {
+                        assertTrue("legacy fixed puzzle exercises must stay removed", pack.exercises.isEmpty())
+                        assertTrue("legacy fixed puzzle subcategories must stay removed", pack.subcategories.isEmpty())
+                    } else {
+                        assertTrue("$fileName must contain exercises", pack.exercises.isNotEmpty())
+                        assertTrue(pack.subcategories.isNotEmpty())
+                    }
                 }
             }
         }
 
         val exercises = packs.flatMap { it.exercises }
         val exerciseIds = exercises.map { it.id }
-        assertEquals(3744, exercises.size)
+        assertEquals(expectedTotal, exercises.size)
         assertEquals(exerciseIds.size, exerciseIds.toSet().size)
         assertTrue(exercises.all { it.translations.keys.containsAll(listOf("nl-BE", "en-US", "fr-BE")) })
         assertTrue(exercises.all { it.grade in 1..6 })
@@ -84,14 +91,24 @@ class PoincareXmlImportTest {
     fun `v3 parser ignores unknown tags and preserves translated answers`() {
         assetFile("src/main/assets/poincare/content/poincare-exercises-math.xml").inputStream().use { stream ->
             val pack = PoincareContentParser().parse(stream)
-            val exercise = pack.exercises.first()
+            val exercise = pack.exercises.first { it.id == "addition_d1_g1_seq0001" }
 
             assertEquals("math", pack.mainCategory)
-            assertEquals("numbers-10000", exercise.subcategoryId)
-            assertEquals("Round the number", exercise.translations["en-US"]?.title)
+            assertEquals("addition", exercise.subcategoryId)
+            assertTrue(!exercise.translations["en-US"]?.question.isNullOrBlank())
             assertEquals(4, exercise.translations["fr-BE"]?.answers?.size)
             assertTrue(exercise.translations["nl-BE"]?.answers?.any { it.correct } == true)
         }
+    }
+
+    private fun canonicalManifestTotal(): Int {
+        val manifest = assetFile("src/main/assets/poincare/content/manifest.json").readText()
+        return Regex(""""totalExerciseCount"\s*:\s*(\d+)""")
+            .find(manifest)
+            ?.groupValues
+            ?.get(1)
+            ?.toIntOrNull()
+            ?: error("manifest.json does not contain totalExerciseCount")
     }
 
     private fun assetFile(relativePath: String): File {

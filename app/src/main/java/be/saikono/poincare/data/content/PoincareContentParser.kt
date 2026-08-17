@@ -130,6 +130,8 @@ class PoincareContentParser {
             visibleText = parent.attr("visibleText")?.toBooleanStrictOrNull() ?: true,
             playButtonOnly = parent.attr("playButtonOnly")?.toBooleanStrictOrNull() ?: false,
             ttsRequired = parent.attr("ttsRequired")?.toBooleanStrictOrNull() ?: false,
+            ttsShouldUsePhoneticText =
+                parent.attr("ttsShouldUsePhoneticText")?.toBooleanStrictOrNull() ?: false,
             kind = parent.attr("kind"),
             sourceLocale = parent.attr("sourceLocale"),
             targetLocale = parent.attr("targetLocale"),

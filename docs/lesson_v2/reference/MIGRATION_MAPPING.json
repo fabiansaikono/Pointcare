@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "principles": [
+    "Add v2 readers and persistence before removing v1 code.",
+    "Preserve all existing lesson, exercise, route, profile and sync identifiers wherever content meaning is unchanged.",
+    "Do not infer new mastery from guided-practice scores.",
+    "Do not relock a child who already completed legacy content."
+  ],
+  "modelMapping": [
+    {
+      "current": "LessonDefinition.sections",
+      "target": "LessonDefinitionV2.stages[4..n]",
+      "strategy": "New additive model; generated migration creates one shared acquire stage followed by one or more complete practise/apply/test sections."
+    },
+    {
+      "current": "LessonSectionType.EXPLANATION/REVIEW",
+      "target": "ACQUIRE_UNDERSTAND content blocks",
+      "strategy": "Merge explanation and review content into child-facing theory blocks."
+    },
+    {
+      "current": "LessonSectionType.GUIDED_PRACTICE/INDEPENDENT_PRACTICE",
+      "target": "PRACTISE exercise sets",
+      "strategy": "Separate guided, fading-support and independent sets."
+    },
+    {
+      "current": "CHECKPOINT or transfer-like activities",
+      "target": "APPLY_DEMONSTRATE or MASTERY_TEST",
+      "strategy": "Classify by intent; only an independent assessment becomes MASTERY_TEST."
+    },
+    {
+      "current": "LessonActivitySource.Curated",
+      "target": "ExerciseSet.sourceMode=CURATED",
+      "strategy": "Preserve exercise IDs and move definitions from XML to canonical curated catalog."
+    },
+    {
+      "current": "LessonActivitySource.Generated",
+      "target": "ExerciseSet.sourceMode=GENERATED",
+      "strategy": "Preserve generator ID/version and make representation and mastery tags explicit."
+    },
+    {
+      "current": "LessonActivitySource.Hybrid",
+      "target": "Two adjacent exercise sets",
+      "strategy": "Split into one CURATED set and one GENERATED set; no third runtime source type."
+    },
+    {
+      "current": "LessonProgress COMPLETED",
+      "target": "PASSED_LEGACY compatibility state",
+      "strategy": "Grandfather completion for prerequisite availability; retain a legacy-evidence marker."
+    },
+    {
+      "current": "LessonAttempt overall score",
+      "target": "StageAttempt plus AssessmentAttempt",
+      "strategy": "Practice remains diagnostic; only AssessmentAttempt affects pass/unlock."
+    },
+    {
+      "current": "Answer review metadata",
+      "target": "QuestionAttempt and SkillErrorMemory records",
+      "strategy": "Persist mastery/error tags, recurrence dates and resolution status."
+    }
+  ]
+}

@@ -1,0 +1,629 @@
+{
+    "version":  2,
+    "lessons":  [
+                    {
+                        "v2LessonId":  "lesson.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+                        "sourceUnitId":  "unit.g1.arts.visual.lijn-kleur-vorm-en-textuur",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.arts.music.stem-puls-en-klankkleur",
+                        "sourceUnitId":  "unit.g1.arts.music.stem-puls-en-klankkleur",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+                        "sourceUnitId":  "unit.g1.arts.drama.doen-alsof-en-verhaal-spelen",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.arts.media.kijken-bewegen-en-presenteren",
+                        "sourceUnitId":  "unit.g1.arts.media.kijken-bewegen-en-presenteren",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.attitudes.learning.aandacht-instructie-en-leerhouding",
+                        "sourceUnitId":  "unit.g1.attitudes.learning.aandacht-instructie-en-leerhouding",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.citizenship_social",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang",
+                        "sourceUnitId":  "unit.g1.attitudes.self_regulation.doel-stap-en-trots-op-vooruitgang",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.citizenship_social",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen",
+                        "sourceUnitId":  "unit.g1.attitudes.social_emotional.gevoelens-herkennen-en-regelen",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.citizenship_social",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.attitudes.collaboration.samen-spelen-en-werken",
+                        "sourceUnitId":  "unit.g1.attitudes.collaboration.samen-spelen-en-werken",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.citizenship_social",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid",
+                        "sourceUnitId":  "unit.g1.attitudes.citizenship_safety.regels-zorg-en-veiligheid",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.traffic_mobility_safety",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.fr.listening.franse-klanken-en-begroetingen",
+                        "sourceUnitId":  "unit.g1.fr.listening.franse-klanken-en-begroetingen",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.listening_comprehension",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.fr.culture.liedjes-tellen-en-kleuren",
+                        "sourceUnitId":  "unit.g1.fr.culture.liedjes-tellen-en-kleuren",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.listening_comprehension",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.geo.maps.mijn-plaats-in-klas-en-school",
+                        "sourceUnitId":  "unit.g1.geo.maps.mijn-plaats-in-klas-en-school",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.geography_space",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.geo.physical.weer-en-seizoenen-dichtbij",
+                        "sourceUnitId":  "unit.g1.geo.physical.weer-en-seizoenen-dichtbij",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.geography_space",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.geo.human.wonen-school-en-buurt",
+                        "sourceUnitId":  "unit.g1.geo.human.wonen-school-en-buurt",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.geography_space",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.geo.environment.zorg-voor-de-leefomgeving",
+                        "sourceUnitId":  "unit.g1.geo.environment.zorg-voor-de-leefomgeving",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.environment_sustainability",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.geo.fieldwork.kijken-als-een-geograaf",
+                        "sourceUnitId":  "unit.g1.geo.fieldwork.kijken-als-een-geograaf",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.geography_space",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.history.chronology.dag-week-jaar-en-levenslijn",
+                        "sourceUnitId":  "unit.g1.history.chronology.dag-week-jaar-en-levenslijn",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.history_time",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.history.sources.wat-vertelt-een-bron",
+                        "sourceUnitId":  "unit.g1.history.sources.wat-vertelt-een-bron",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.history_time",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+                        "sourceUnitId":  "unit.g1.history.society.gezin-school-en-buurt-vroeger-en-nu",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.history_time",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.history.eras.feesten-en-tradities-door-de-tijd",
+                        "sourceUnitId":  "unit.g1.history.eras.feesten-en-tradities-door-de-tijd",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.history_time",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.history.heritage.erfgoed-in-mijn-omgeving",
+                        "sourceUnitId":  "unit.g1.history.heritage.erfgoed-in-mijn-omgeving",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.history_time",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.ict.devices_data.toestellen-en-basisbediening",
+                        "sourceUnitId":  "unit.g1.ict.devices_data.toestellen-en-basisbediening",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.digital_media_literacy",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+                        "sourceUnitId":  "unit.g1.ict.coding.volgorde-en-algoritmen-zonder-scherm",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.digital_media_literacy",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+                        "sourceUnitId":  "unit.g1.ict.create_communicate.tekenen-typen-en-delen-met-begeleiding",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.digital_media_literacy",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+                        "sourceUnitId":  "unit.g1.ict.safety_ethics.privacy-en-hulp-vragen",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.digital_media_literacy",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+                        "sourceUnitId":  "unit.g1.math.numbers.hoeveelheden-tellen-en-structureren-tot-20",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.number_place_value",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.numbers.getallenlijn-en-volgorde-tot-20",
+                        "sourceUnitId":  "unit.g1.math.numbers.getallenlijn-en-volgorde-tot-20",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.number_place_value",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+                        "sourceUnitId":  "unit.g1.math.numbers.samenstellen-en-splitsen-tot-10-en-20",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.number_place_value",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.addition.within10.meaning-and-model",
+                        "sourceUnitId":  "unit.g1.math.operations.optellen-tot-10-en-20",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.addition_subtraction",
+                        "publicationStatus":  "ACTIVE"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.operations.aftrekken-tot-10-en-20",
+                        "sourceUnitId":  "unit.g1.math.operations.aftrekken-tot-10-en-20",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.addition_subtraction",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.operations.rekenfeiten-en-handige-strategieen",
+                        "sourceUnitId":  "unit.g1.math.operations.rekenfeiten-en-handige-strategieen",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.addition_subtraction",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+                        "sourceUnitId":  "unit.g1.math.fractions.helft-dubbel-en-kwart-in-concrete-situaties",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.fractions",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.geometry.length.compare-and-order",
+                        "sourceUnitId":  "unit.g1.math.measurement.lengte-massa-en-inhoud-vergelijken",
+                        "grade":  1,
+                        "categoryId":  "measurement_geometry",
+                        "subcategoryId":  "geometry.length_perimeter_scale",
+                        "publicationStatus":  "ACTIVE"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.measurement.tijd-kalender-en-klok",
+                        "sourceUnitId":  "unit.g1.math.measurement.tijd-kalender-en-klok",
+                        "grade":  1,
+                        "categoryId":  "measurement_geometry",
+                        "subcategoryId":  "geometry.time_calendar",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.measurement.geld-tot-20-euro",
+                        "sourceUnitId":  "unit.g1.math.measurement.geld-tot-20-euro",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.money_financial_literacy",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.geometry.vlakke-figuren-en-ruimtefiguren",
+                        "sourceUnitId":  "unit.g1.math.geometry.vlakke-figuren-en-ruimtefiguren",
+                        "grade":  1,
+                        "categoryId":  "measurement_geometry",
+                        "subcategoryId":  "geometry.shapes_lines_angles",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.geometry.orientatie-patronen-en-symmetrie",
+                        "sourceUnitId":  "unit.g1.math.geometry.orientatie-patronen-en-symmetrie",
+                        "grade":  1,
+                        "categoryId":  "measurement_geometry",
+                        "subcategoryId":  "geometry.spatial_orientation_coordinates",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.data.gegevens-verzamelen-en-voorstellen",
+                        "sourceUnitId":  "unit.g1.math.data.gegevens-verzamelen-en-voorstellen",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.tables_graphs_statistics",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren",
+                        "sourceUnitId":  "unit.g1.math.problem_solving.rekenverhalen-modelleren-en-controleren",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.problem_solving",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.reading.initial-sound.identify-and-compare",
+                        "sourceUnitId":  "unit.g1.nl.technical_reading.luisteren-naar-klanken-in-woorden",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.technical_reading",
+                        "publicationStatus":  "ACTIVE"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters",
+                        "sourceUnitId":  "unit.g1.nl.technical_reading.klank-tekenkoppeling-van-de-basisletters",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.technical_reading",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren",
+                        "sourceUnitId":  "unit.g1.nl.technical_reading.mkm-woorden-synthetiseren-en-analyseren",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.technical_reading",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken",
+                        "sourceUnitId":  "unit.g1.nl.technical_reading.lange-klinkers-en-tweetekenklanken",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.technical_reading",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+                        "sourceUnitId":  "unit.g1.nl.technical_reading.medeklinkerclusters-en-langere-eenlettergrepige-woorden",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.technical_reading",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.technical_reading.automatiseren-van-frequente-woorden",
+                        "sourceUnitId":  "unit.g1.nl.technical_reading.automatiseren-van-frequente-woorden",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.technical_reading",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+                        "sourceUnitId":  "unit.g1.nl.comprehension.zinnen-en-korte-teksten-begrijpen",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.reading_comprehension",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.comprehension.voorspellen-verbinden-en-navertellen",
+                        "sourceUnitId":  "unit.g1.nl.comprehension.voorspellen-verbinden-en-navertellen",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.reading_comprehension",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen",
+                        "sourceUnitId":  "unit.g1.nl.handwriting.schrijfhouding-pengreep-en-basisbewegingen",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.writing_expression",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen",
+                        "sourceUnitId":  "unit.g1.nl.handwriting.kleine-letters-hoofdletters-en-cijfers-vormen",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.writing_expression",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+                        "sourceUnitId":  "unit.g1.nl.spelling.klankzuivere-woorden-en-eerste-dictee",
+                        "grade":  1,
+                        "categoryId":  "spelling_grammar",
+                        "subcategoryId":  "spelling.phonology_letter_sound",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.composition.van-woord-naar-correcte-zin",
+                        "sourceUnitId":  "unit.g1.nl.composition.van-woord-naar-correcte-zin",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.writing_expression",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.oral.luisteren-vertellen-en-instructies-volgen",
+                        "sourceUnitId":  "unit.g1.nl.oral.luisteren-vertellen-en-instructies-volgen",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.listening_comprehension",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+                        "sourceUnitId":  "unit.g1.nl.literature.leesplezier-en-kennismaken-met-tekstsoorten",
+                        "grade":  1,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.literature_experience",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+                        "sourceUnitId":  "unit.g1.pe.movement.basisbewegingen-en-lichaamsbesef",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.pe.gymnastics.steunen-hangen-en-rollen",
+                        "sourceUnitId":  "unit.g1.pe.gymnastics.steunen-hangen-en-rollen",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+                        "sourceUnitId":  "unit.g1.pe.ball_games.gooien-vangen-rollen-en-mikken",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.pe.dance.bewegen-op-puls-en-signaal",
+                        "sourceUnitId":  "unit.g1.pe.dance.bewegen-op-puls-en-signaal",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+                        "sourceUnitId":  "unit.g1.pe.health_safety.spelafspraken-veiligheid-en-inspanning",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.body_health",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+                        "sourceUnitId":  "unit.g1.science_tech.organisms.levend-niet-levend-en-ooit-levend",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.nature_living_world",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.science_tech.organisms.planten-rondom-ons",
+                        "sourceUnitId":  "unit.g1.science_tech.organisms.planten-rondom-ons",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.nature_living_world",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+                        "sourceUnitId":  "unit.g1.science_tech.organisms.dieren-en-hun-leefomgeving",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.nature_living_world",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+                        "sourceUnitId":  "unit.g1.science_tech.human_body.mijn-lichaam-en-zintuigen",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.body_health",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.science_tech.matter.materialen-en-eigenschappen",
+                        "sourceUnitId":  "unit.g1.science_tech.matter.materialen-en-eigenschappen",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.science_inquiry",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+                        "sourceUnitId":  "unit.g1.science_tech.forces_energy.duwen-trekken-rollen-en-vallen",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.science_inquiry",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.science_tech.technology.maken-voor-een-doel",
+                        "sourceUnitId":  "unit.g1.science_tech.technology.maken-voor-een-doel",
+                        "grade":  1,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.technology_design",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.addition.within5.foundations",
+                        "sourceUnitId":  "unit.g1.math.operations.optellen-tot-5",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.addition_subtraction",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g1.math.subtraction.within5.foundations",
+                        "sourceUnitId":  "unit.g1.math.operations.aftrekken-tot-5",
+                        "grade":  1,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.addition_subtraction",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.world.nature.seasons.order-and-signs",
+                        "sourceUnitId":  "unit.g2.world.nature.seasons",
+                        "grade":  2,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.nature_living_world",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.language.technical_reading.fluency",
+                        "sourceUnitId":  "unit.g2.language.technical_reading.fluency",
+                        "grade":  2,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.technical_reading",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.spelling.rules.punctuation_syllables_plural",
+                        "sourceUnitId":  "unit.g2.spelling.rules.punctuation_syllables_plural",
+                        "grade":  2,
+                        "categoryId":  "spelling_grammar",
+                        "subcategoryId":  "spelling.rules_word_patterns",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.language.writing.short_texts",
+                        "sourceUnitId":  "unit.g2.language.writing.short_texts",
+                        "grade":  2,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.writing_expression",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.language.listening.extended_instructions",
+                        "sourceUnitId":  "unit.g2.language.listening.extended_instructions",
+                        "grade":  2,
+                        "categoryId":  "language_skills",
+                        "subcategoryId":  "language.listening_comprehension",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.math.operations.expansion",
+                        "sourceUnitId":  "unit.g2.math.operations.expansion",
+                        "grade":  2,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.addition_subtraction",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.geometry.measurement_context",
+                        "sourceUnitId":  "unit.g2.geometry.measurement_context",
+                        "grade":  2,
+                        "categoryId":  "measurement_geometry",
+                        "subcategoryId":  "geometry.compare_order_estimate",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.math.statistics.introduction",
+                        "sourceUnitId":  "unit.g2.math.statistics.introduction",
+                        "grade":  2,
+                        "categoryId":  "number_sense",
+                        "subcategoryId":  "math.tables_graphs_statistics",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.world.integrated_foundations",
+                        "sourceUnitId":  "unit.g2.world.integrated_foundations",
+                        "grade":  2,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.daily_life_self_reliance",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.world.digital.media_safety",
+                        "sourceUnitId":  "unit.g2.world.digital.media_safety",
+                        "grade":  2,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.digital_media_literacy",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    },
+                    {
+                        "v2LessonId":  "lesson.g2.world.citizenship.emotions_conflicts",
+                        "sourceUnitId":  "unit.g2.world.citizenship.emotions_conflicts",
+                        "grade":  2,
+                        "categoryId":  "world_orientation",
+                        "subcategoryId":  "world.citizenship_social",
+                        "publicationStatus":  "DRAFT_REVIEW_REQUIRED"
+                    }
+                ]
+}

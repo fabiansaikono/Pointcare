@@ -3,11 +3,19 @@ package be.saikono.poincare.data.audio
 import android.content.Context
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import android.speech.tts.Voice
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 
-// POINCARE_REPAIR_V31: neutral system fallback settings
 class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
+    interface RangeListener {
+        fun onStart()
+        fun onRangeStart(start: Int, endExclusive: Int)
+        fun onDone()
+        fun onError()
+    }
+
     private var tts: TextToSpeech? = null
     private var isInitialized = false
     private var onReady: (() -> Unit)? = null
@@ -16,10 +24,38 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
     private var explicitVoiceSelected = false
     private var currentPitch: Float = 1.0f
     private var currentSpeechRate: Float = 1.0f
+    private val rangeListeners = ConcurrentHashMap<String, RangeListener>()
 
     init {
         try {
             tts = TextToSpeech(context.applicationContext, this)
+            tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                override fun onStart(utteranceId: String?) {
+                    utteranceId?.let { rangeListeners[it]?.onStart() }
+                }
+
+                override fun onDone(utteranceId: String?) {
+                    utteranceId?.let { id -> rangeListeners.remove(id)?.onDone() }
+                }
+
+                @Deprecated("Deprecated by Android")
+                override fun onError(utteranceId: String?) {
+                    utteranceId?.let { id -> rangeListeners.remove(id)?.onError() }
+                }
+
+                override fun onError(utteranceId: String?, errorCode: Int) {
+                    utteranceId?.let { id -> rangeListeners.remove(id)?.onError() }
+                }
+
+                override fun onRangeStart(
+                    utteranceId: String?,
+                    start: Int,
+                    end: Int,
+                    frame: Int
+                ) {
+                    utteranceId?.let { rangeListeners[it]?.onRangeStart(start, end) }
+                }
+            })
         } catch (e: Exception) {
             // Log or handle initialization failure
         }
@@ -30,7 +66,7 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
             isInitialized = true
             pendingVoiceId?.let(::setVoice)
             tts?.setPitch(currentPitch)
-            tts?.setSpeechRate(0.90f)
+            tts?.setSpeechRate(currentSpeechRate)
             pendingSpeak?.let { (text, locale, volume) -> speak(text, locale, volume) }
             pendingSpeak = null
             onReady?.invoke()
@@ -76,15 +112,15 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
     }
 
     fun setPitch(pitch: Float) {
-        currentPitch = pitch
+        currentPitch = pitch.coerceIn(0.5f, 2.0f)
         if (!isInitialized) return
-        tts?.setPitch(pitch)
+        tts?.setPitch(currentPitch)
     }
 
     fun setSpeechRate(rate: Float) {
-        currentSpeechRate = rate
+        currentSpeechRate = rate.coerceIn(0.5f, 2.0f)
         if (!isInitialized) return
-        tts?.setSpeechRate(0.90f)
+        tts?.setSpeechRate(currentSpeechRate)
     }
 
     fun speak(text: String, locale: String, volume: Float = 1.0f) {
@@ -97,7 +133,7 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
             tts?.language = targetLocale
             if (!explicitVoiceSelected) selectBestVoice(targetLocale)
             tts?.setPitch(currentPitch)
-            tts?.setSpeechRate(0.90f)
+            tts?.setSpeechRate(currentSpeechRate)
             val params = Bundle().apply { putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume.coerceIn(0f, 1f)) }
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, null)
         } catch (e: Exception) {
@@ -105,9 +141,43 @@ class SystemTtsVoiceService(context: Context) : TextToSpeech.OnInitListener {
         }
     }
 
+    fun speakWithRanges(
+        text: String,
+        locale: String,
+        volume: Float,
+        utteranceId: String,
+        listener: RangeListener
+    ): Boolean {
+        if (!isInitialized) return false
+        return try {
+            val targetLocale = locale.toLocale()
+            tts?.language = targetLocale
+            if (!explicitVoiceSelected) selectBestVoice(targetLocale)
+            tts?.setPitch(currentPitch)
+            tts?.setSpeechRate(currentSpeechRate)
+            val params = Bundle().apply {
+                putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume.coerceIn(0f, 1f))
+            }
+            rangeListeners[utteranceId] = listener
+            val result = tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
+            if (result == TextToSpeech.SUCCESS) {
+                true
+            } else {
+                rangeListeners.remove(utteranceId)
+                false
+            }
+        } catch (_: Exception) {
+            rangeListeners.remove(utteranceId)
+            false
+        }
+    }
+
     fun stop() {
         pendingSpeak = null
+        val listeners = rangeListeners.values.toList()
+        rangeListeners.clear()
         runCatching { tts?.stop() }
+        listeners.forEach { it.onError() }
     }
 
     fun shutdown() {

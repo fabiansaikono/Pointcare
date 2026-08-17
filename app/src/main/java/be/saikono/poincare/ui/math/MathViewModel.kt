@@ -53,6 +53,7 @@ class MathViewModel(
     private var startTime = 0L
     private var selectedSubcategoryId: String? = null
     private var selectedDifficultyStars: Int? = null
+    private var selectedGrade: Int? = null
     private var generatedOperation: WrittenOperation? = null
     private var generatedSubcategoryId: String? = null
     private var generatedLevel: SkillLevel? = null
@@ -113,8 +114,8 @@ class MathViewModel(
         contentLoadJob = viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             try {
-                val isGeometry = selectedSubcategoryId in GEOMETRY_SUBCATEGORIES
-                val level = if (isGeometry) profile.geometryLevel else profile.mathLevel
+                val isGeometry = SubcategoryCatalog.baseId(selectedSubcategoryId) in SubcategoryCatalog.geometryIds
+                val level = selectedGrade?.let(::skillLevelForGrade) ?: if (isGeometry) profile.geometryLevel else profile.mathLevel
                 val requestedOperation = WrittenOperation.fromSubcategoryId(selectedSubcategoryId)
                 val requestedGeneratedId = selectedSubcategoryId?.takeIf {
                     requestedOperation != null || GeneratedMathExerciseGenerator.supports(it)
@@ -224,6 +225,10 @@ class MathViewModel(
 
     fun setDifficultyStars(stars: Int?) {
         selectedDifficultyStars = stars?.coerceIn(1, 3)
+    }
+
+    fun setSelectedGrade(grade: Int?) {
+        selectedGrade = grade?.coerceIn(1, 6)
     }
 
     private fun startExercise(index: Int) {

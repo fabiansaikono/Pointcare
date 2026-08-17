@@ -50,6 +50,8 @@ data class ChildProfile(
     val geometryLevel: SkillLevel = SkillLevel.FIRST_GRADE,
     val worldKnowledgeLevel: SkillLevel = SkillLevel.FIRST_GRADE,
     val puzzleLevel: SkillLevel = SkillLevel.FIRST_GRADE,
+    /** Explicit multi-grade selections per domain. Empty entries fall back to the legacy single level. */
+    val selectedGrades: Map<String, List<Int>> = emptyMap(),
     val hiddenMainCategories: List<String> = emptyList(),
     val hiddenSubcategories: List<String> = emptyList(),
     val showUnassignedExercises: Boolean = false,
@@ -58,8 +60,58 @@ data class ChildProfile(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
-fun ChildProfile.isMainCategoryEnabled(domain: LearningDomain): Boolean = domain.name !in hiddenMainCategories
+fun ChildProfile.isMainCategoryEnabled(domain: LearningDomain): Boolean =
+    domain == LearningDomain.PUZZLE || domain.name !in hiddenMainCategories
 fun ChildProfile.isSubcategoryEnabled(subcategoryId: String): Boolean = subcategoryId !in hiddenSubcategories
+
+fun SkillLevel.gradeNumber(): Int? = if (this == SkillLevel.NOT_APPLICABLE) null else ordinal + 1
+
+fun skillLevelForGrade(grade: Int): SkillLevel = SkillLevel.entries
+    .getOrNull(grade.coerceIn(1, 6) - 1)
+    ?: SkillLevel.FIRST_GRADE
+
+private fun ChildProfile.legacyLevelFor(domain: LearningDomain): SkillLevel = when (domain) {
+    LearningDomain.READING -> readingLevel
+    LearningDomain.WRITING -> writingLevel
+    LearningDomain.MATH -> mathLevel
+    LearningDomain.PUZZLE -> puzzleLevel
+    LearningDomain.WORLD_KNOWLEDGE -> worldKnowledgeLevel
+    LearningDomain.GEOMETRY -> geometryLevel
+}
+
+fun ChildProfile.selectedGradesFor(domain: LearningDomain): List<Int> {
+    val explicit = selectedGrades[domain.name]
+        .orEmpty()
+        .filter { it in 1..6 }
+        .distinct()
+        .sorted()
+    if (explicit.isNotEmpty()) return explicit
+    return listOfNotNull(legacyLevelFor(domain).gradeNumber())
+}
+
+fun puzzleGradeSourceDomain(subcategoryId: String?): LearningDomain = when (subcategoryId) {
+    "sudoku", "math-crosswords", "calculator-puzzle" -> LearningDomain.MATH
+    else -> LearningDomain.WORLD_KNOWLEDGE
+}
+
+fun ChildProfile.selectedGradesForPuzzle(subcategoryId: String?): List<Int> =
+    selectedGradesFor(puzzleGradeSourceDomain(subcategoryId))
+
+fun ChildProfile.withSelectedGrades(domain: LearningDomain, grades: Collection<Int>): ChildProfile {
+    val normalized = grades.filter { it in 1..6 }.distinct().sorted().ifEmpty {
+        listOf(legacyLevelFor(domain).gradeNumber() ?: 1)
+    }
+    val updatedSelections = selectedGrades + (domain.name to normalized)
+    val primaryLevel = skillLevelForGrade(normalized.first())
+    return when (domain) {
+        LearningDomain.READING -> copy(selectedGrades = updatedSelections, readingLevel = primaryLevel)
+        LearningDomain.WRITING -> copy(selectedGrades = updatedSelections, writingLevel = primaryLevel)
+        LearningDomain.MATH -> copy(selectedGrades = updatedSelections, mathLevel = primaryLevel)
+        LearningDomain.PUZZLE -> copy(selectedGrades = updatedSelections, puzzleLevel = primaryLevel)
+        LearningDomain.WORLD_KNOWLEDGE -> copy(selectedGrades = updatedSelections, worldKnowledgeLevel = primaryLevel)
+        LearningDomain.GEOMETRY -> copy(selectedGrades = updatedSelections, geometryLevel = primaryLevel)
+    }
+}
 
 /**
  * Hard Mode deliberately keeps the serialized [giftedModeEnabled] field for
@@ -196,23 +248,31 @@ fun levelProgressFor(totalPoints: Int): LevelProgress {
 }
 
 fun missionPointsFor(exercise: ExerciseContent, correct: Boolean): Int {
-    if (!correct) return 1
+    if (!correct) return 0
     val difficulty = exercise.data["difficultyStars"]?.toIntOrNull()?.coerceIn(1, 3) ?: 1
-    val typeBonus = when (exercise.inputMode) {
-        InputMode.MATH_CROSSWORD,
-        InputMode.SUDOKU_GRID,
-        InputMode.CALCULATOR_PUZZLE -> 18
+    val grade = exercise.data["grade"]?.toIntOrNull()
+        ?: exercise.level.gradeNumber()
+        ?: 1
+    val complexity = exercise.data["complexityWeight"]?.toIntOrNull()?.coerceIn(0, 3) ?: when (exercise.inputMode) {
+        InputMode.TAP_CHOICE,
+        InputMode.LISTEN_AND_SELECT -> 0
+        InputMode.CUSTOM_NUMBER_PAD -> 1
         InputMode.DRAG_DROP_DIGITS,
         InputMode.DRAG_DROP_LETTERS,
         InputMode.TRACE_LETTER,
-        InputMode.CUSTOM_TEXT_KEYBOARD -> 10
-        InputMode.CUSTOM_NUMBER_PAD -> 8
-        InputMode.TAP_CHOICE,
-        InputMode.LISTEN_AND_SELECT -> 5
-        else -> 6
+        InputMode.CUSTOM_TEXT_KEYBOARD -> 2
+        InputMode.MATH_CROSSWORD,
+        InputMode.SUDOKU_GRID,
+        InputMode.CALCULATOR_PUZZLE,
+        InputMode.WORD_SEEKER -> 3
+        else -> 1
     }
-    return (difficulty * 10 + typeBonus).coerceIn(1, 50)
+    val gradeBand = ((grade.coerceIn(1, 6) - 1) / 2).coerceIn(0, 2)
+    return (1 + (difficulty - 1) + gradeBand + complexity)
+        .coerceIn(1, MAX_LEVEL_POINTS_PER_ANSWER)
 }
+
+const val MAX_LEVEL_POINTS_PER_ANSWER: Int = 8
 
 @Serializable
 data class ProgressEvent(
@@ -232,6 +292,9 @@ data class ProgressEvent(
     val syncStatus: SyncStatus = SyncStatus.PENDING,
     val metadata: Map<String, String> = emptyMap()
 )
+
+fun ProgressEvent.levelPointsEarned(): Int =
+    if (answerCorrect) rewardStampsEarned.coerceIn(0, MAX_LEVEL_POINTS_PER_ANSWER) else 0
 
 @Serializable
 data class ParentReward(
