@@ -65,12 +65,16 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
@@ -94,6 +98,7 @@ import be.saikono.poincare.domain.curriculum.v2.LessonStageTypeV2
 import be.saikono.poincare.domain.curriculum.v2.isExercises
 import be.saikono.poincare.domain.curriculum.v2.isTheory
 import be.saikono.poincare.model.LearningDomain
+import be.saikono.poincare.ui.components.CurriculumAssetIcon
 import be.saikono.poincare.ui.components.systemNavigationMargin
 import be.saikono.poincare.ui.components.MainCategoryHeader
 import be.saikono.poincare.ui.components.NextLessonOption
@@ -122,9 +127,86 @@ import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
 
 internal const val MIN_GALAXY_SCALE = 0.42f
+internal const val GALAXY_LESSON_CORRIDOR_ALPHA = 0.10f
+internal const val GALAXY_SELECTED_LESSON_CORRIDOR_ALPHA = 0.20f
 
 internal fun galaxyMinimumScale(fittedScale: Float): Float =
     minOf(MIN_GALAXY_SCALE, fittedScale.coerceIn(0.01f, 1f))
+
+internal fun galaxyCenteredContentOffset(
+    viewportWidth: Float,
+    viewportHeight: Float,
+    contentWidth: Float,
+    contentHeight: Float,
+    scale: Float
+): Offset = Offset(
+    x = (viewportWidth - contentWidth * scale) / 2f,
+    y = (viewportHeight - contentHeight * scale) / 2f
+)
+
+internal fun galaxyBoundedContentOffset(
+    candidate: Offset,
+    viewportWidth: Float,
+    viewportHeight: Float,
+    scaledContentWidth: Float,
+    scaledContentHeight: Float,
+    margin: Float
+): Offset {
+    fun boundAxis(value: Float, viewportSize: Float, contentSize: Float): Float {
+        val oppositeEdge = viewportSize - contentSize - margin
+        return value.coerceIn(
+            minimumValue = minOf(margin, oppositeEdge),
+            maximumValue = maxOf(margin, oppositeEdge)
+        )
+    }
+    return Offset(
+        x = boundAxis(candidate.x, viewportWidth, scaledContentWidth),
+        y = boundAxis(candidate.y, viewportHeight, scaledContentHeight)
+    )
+}
+
+internal fun galaxySubcategoryTitlesVisible(scale: Float, minimumScale: Float): Boolean =
+    scale >= minimumScale + 0.06f
+
+internal fun galaxyLessonTitlesVisible(scale: Float, minimumScale: Float): Boolean =
+    scale >= minimumScale + 0.12f
+
+internal fun galaxySphereIndexForPoint(
+    point: GalaxyPoint?,
+    spheres: List<GalaxyTrackSpherePosition>
+): Int? {
+    if (point == null) return null
+    return spheres.indexOfFirst { sphere ->
+        val deltaX = point.x - sphere.centre.x
+        val deltaY = point.y - sphere.centre.y
+        deltaX * deltaX + deltaY * deltaY <= sphere.radius * sphere.radius
+    }.takeIf { index -> index >= 0 }
+}
+
+internal fun galaxyConnectionExitsSphereGroup(
+    connection: GalaxyConnection,
+    positions: Map<String, GalaxyPoint>,
+    spheres: List<GalaxyTrackSpherePosition>
+): Boolean {
+    val fromSphere = galaxySphereIndexForPoint(positions[connection.fromNodeId], spheres)
+    val toSphere = galaxySphereIndexForPoint(positions[connection.toNodeId], spheres)
+    return fromSphere == null || toSphere == null || fromSphere != toSphere
+}
+
+internal fun galaxyConnectionBlockingSphereIndices(
+    connection: GalaxyConnection,
+    positions: Map<String, GalaxyPoint>,
+    spheres: List<GalaxyTrackSpherePosition>
+): Set<Int> {
+    val endpointSphereIndices = buildSet {
+        galaxySphereIndexForPoint(positions[connection.fromNodeId], spheres)?.let(::add)
+        galaxySphereIndexForPoint(positions[connection.toNodeId], spheres)?.let(::add)
+    }
+    return spheres.indices.filterTo(linkedSetOf()) { sphereIndex -> sphereIndex !in endpointSphereIndices }
+}
+
+internal fun galaxyCategoryProgressVisible(domain: LearningDomain): Boolean =
+    domain != LearningDomain.PUZZLE
 
 private const val GALAXY_BITMAP_CACHE_KB = 16 * 1024
 private const val SHOW_GALAXY_RESET_CONTROL = false
@@ -143,7 +225,6 @@ fun LearningGalaxyScreen(
     onSwitchProfile: () -> Unit,
     onOpenLesson: (String, String?) -> Unit,
     onOpenStoryLibrary: () -> Unit,
-    onOpenStoryBook: (String) -> Unit,
     storyBooks: List<StoryBook> = emptyList(),
     onOpenExistingCategory: (LearningDomain) -> Unit
 ) {
@@ -152,7 +233,7 @@ fun LearningGalaxyScreen(
     val profile = spaceMapState.currentProfile
     val locale = profile?.appLanguage ?: "nl-BE"
     val galaxy = remember(spaceMapState.learningGalaxy, storyBooks, locale) {
-        spaceMapState.learningGalaxy.withStoryBooks(storyBooks, locale)
+        spaceMapState.learningGalaxy.withStoryThemes(storyBooks, locale)
     }
     val isLandscape = LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
     var selectedCategoryId by rememberSaveable { mutableStateOf<String?>(null) }
@@ -174,8 +255,6 @@ fun LearningGalaxyScreen(
     val selectGalaxyNode: (GalaxyLessonNodeUi, GalaxyPhaseOrbUi) -> Unit = { lesson, orb ->
         when (lesson.portalDestination) {
             GalaxyPortalDestination.STORY_LIBRARY -> onOpenStoryLibrary()
-            GalaxyPortalDestination.STORY_BOOK ->
-                lesson.portalTargetId?.let(onOpenStoryBook) ?: onOpenStoryLibrary()
             null -> {
                 selectedNodeId = galaxyOrbNodeId(lesson, orb)
                 if (introState.lessonId != lesson.id) lessonViewModel.showLessonIntro(lesson.id)
@@ -190,10 +269,6 @@ fun LearningGalaxyScreen(
         selectedCategoryId = null
         selectedNodeId = null
     }
-    LaunchedEffect(selectedCategoryId) {
-        selectedNodeId = null
-    }
-
     Box(modifier = Modifier.fillMaxSize().background(DeepSpaceBlue)) {
         SpaceBackground()
         Column(
@@ -478,6 +553,7 @@ private fun CategoryOrb(
 ) {
     val context = LocalContext.current
     val accent = galaxyAccentColor(category.domain)
+    val showProgress = galaxyCategoryProgressVisible(category.domain)
     Column(
         modifier = modifier.width(108.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -488,13 +564,17 @@ private fun CategoryOrb(
                 .size(72.dp)
                 .semantics {
                     role = Role.Button
-                    contentDescription = localizedGalaxyString(
-                        context,
-                        R.string.galaxy_category_description,
-                        locale,
-                        category.title,
-                        category.progressPercent
-                    )
+                    contentDescription = if (showProgress) {
+                        localizedGalaxyString(
+                            context,
+                            R.string.galaxy_category_description,
+                            locale,
+                            category.title,
+                            category.progressPercent
+                        )
+                    } else {
+                        category.title
+                    }
                 }
                 .clip(CircleShape)
                 .background(DeepSpaceBlue.copy(alpha = 0.94f))
@@ -502,21 +582,37 @@ private fun CategoryOrb(
                 .clickable(onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
-            Canvas(modifier = Modifier.fillMaxSize()) {
-                drawArc(
-                    color = accent,
-                    startAngle = -90f,
-                    sweepAngle = category.progressPercent * 3.6f,
-                    useCenter = false,
-                    style = Stroke(width = 4.dp.toPx(), cap = StrokeCap.Round)
-                )
+            if (showProgress) {
+                Canvas(modifier = Modifier.fillMaxSize()) {
+                    drawArc(
+                        color = accent,
+                        startAngle = -90f,
+                        sweepAngle = category.progressPercent * 3.6f,
+                        useCenter = false,
+                        style = Stroke(width = 4.dp.toPx(), cap = StrokeCap.Round)
+                    )
+                }
             }
-            Text(
-                text = "${category.progressPercent}%",
-                color = StarWhite,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(1.dp)
+            ) {
+                CurriculumAssetIcon(
+                    assetPath = category.iconAssetPath,
+                    fallbackIconResId = category.iconResId,
+                    contentDescription = null,
+                    modifier = Modifier.size(38.dp),
+                    sizePx = 112
+                )
+                if (showProgress) {
+                    Text(
+                        text = "${category.progressPercent}%",
+                        color = StarWhite,
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
         Text(
             text = category.title,
@@ -612,6 +708,38 @@ private fun CategoryGalaxyCanvas(
             emptySet()
         }
     }
+    val selectedLessonId = remember(selectedNodeId, layout.nodes) {
+        layout.nodes.firstOrNull { node -> node.nodeId == selectedNodeId }?.lessonId
+    }
+    val positions = remember(layout) {
+        buildMap {
+            layout.nodes.forEach { put(it.nodeId, it.point) }
+            layout.checkpointNodes.forEach { put(it.checkpointId, it.point) }
+            put(GALAXY_START_NODE_ID, layout.startPoint)
+        }
+    }
+    val orderedLessonNodeGroups = remember(layout.nodes, selectedLessonId) {
+        layout.nodes
+            .groupBy(GalaxyNodePosition::lessonId)
+            .entries
+            .sortedBy { (lessonId, _) -> lessonId == selectedLessonId }
+    }
+    val connectionLayers = remember(allConnections, positions, layout.trackSpheres) {
+        allConnections.partition { connection ->
+            galaxyConnectionExitsSphereGroup(connection, positions, layout.trackSpheres)
+        }
+    }
+    val exitConnections = remember(connectionLayers.first, lockedDependencyConnections) {
+        connectionLayers.first.sortedBy { it in lockedDependencyConnections }
+    }
+    val internalConnections = remember(connectionLayers.second, lockedDependencyConnections) {
+        connectionLayers.second.sortedBy { it in lockedDependencyConnections }
+    }
+    val blockingSphereIndices = remember(exitConnections, positions, layout.trackSpheres) {
+        exitConnections.associateWith { connection ->
+            galaxyConnectionBlockingSphereIndices(connection, positions, layout.trackSpheres)
+        }
+    }
     BoxWithConstraints(modifier = modifier.clipToBounds().background(DeepSpaceBlue.copy(alpha = 0.36f))) {
         val viewportWidthPx = with(density) { maxWidth.toPx() }
         val viewportHeightPx = with(density) { maxHeight.toPx() }
@@ -622,26 +750,45 @@ private fun CategoryGalaxyCanvas(
             viewportHeightPx / contentHeightPx
         ).coerceAtMost(1f)
         val minimumScale = galaxyMinimumScale(fittedScale)
-        val startPointPx = Offset(
-            with(density) { layout.startPoint.x.dp.toPx() },
-            with(density) { layout.startPoint.y.dp.toPx() }
+        val fittedOffset = galaxyCenteredContentOffset(
+            viewportWidth = viewportWidthPx,
+            viewportHeight = viewportHeightPx,
+            contentWidth = contentWidthPx,
+            contentHeight = contentHeightPx,
+            scale = fittedScale
         )
-        val fittedOffset = Offset(
-            x = viewportWidthPx / 2f - startPointPx.x * fittedScale,
-            y = viewportHeightPx / 2f - startPointPx.y * fittedScale
-        )
-        var scale by remember(category.id) { mutableFloatStateOf(fittedScale) }
-        var panOffset by remember(category.id) { mutableStateOf(fittedOffset) }
+        val viewportWidthKey = viewportWidthPx.toInt()
+        val viewportHeightKey = viewportHeightPx.toInt()
+        // Selecting an orb changes the detail-panel height. Keep the transform keyed
+        // only to the category so that this viewport resize cannot reset the zoom.
+        var scale by rememberSaveable(category.id) {
+            mutableFloatStateOf(fittedScale)
+        }
+        var panOffsetX by rememberSaveable(category.id) {
+            mutableFloatStateOf(fittedOffset.x)
+        }
+        var panOffsetY by rememberSaveable(category.id) {
+            mutableFloatStateOf(fittedOffset.y)
+        }
 
         fun boundedOffset(candidate: Offset, requestedScale: Float): Offset {
             val scaledWidth = contentWidthPx * requestedScale
             val scaledHeight = contentHeightPx * requestedScale
-            val margin = with(density) { 36.dp.toPx() }
-            val minX = minOf(margin, viewportWidthPx - scaledWidth - margin)
-            val maxX = maxOf(-margin, viewportWidthPx - scaledWidth + margin)
-            val minY = minOf(margin, viewportHeightPx - scaledHeight - margin)
-            val maxY = maxOf(-margin, viewportHeightPx - scaledHeight + margin)
-            return Offset(candidate.x.coerceIn(minX, maxX), candidate.y.coerceIn(minY, maxY))
+            val margin = with(density) { 72.dp.toPx() }
+            return galaxyBoundedContentOffset(
+                candidate = candidate,
+                viewportWidth = viewportWidthPx,
+                viewportHeight = viewportHeightPx,
+                scaledContentWidth = scaledWidth,
+                scaledContentHeight = scaledHeight,
+                margin = margin
+            )
+        }
+
+        LaunchedEffect(category.id, viewportWidthKey, viewportHeightKey, contentWidthPx, contentHeightPx) {
+            val bounded = boundedOffset(Offset(panOffsetX, panOffsetY), scale)
+            panOffsetX = bounded.x
+            panOffsetY = bounded.y
         }
 
         Box(
@@ -653,9 +800,11 @@ private fun CategoryGalaxyCanvas(
                         val previousScale = scale
                         val nextScale = (scale * zoom).coerceIn(minimumScale, 2.15f)
                         val zoomRatio = nextScale / previousScale
-                        val zoomedOffset = (panOffset - centroid) * zoomRatio + centroid + pan
+                        val zoomedOffset = (Offset(panOffsetX, panOffsetY) - centroid) * zoomRatio + centroid + pan
+                        val bounded = boundedOffset(zoomedOffset, nextScale)
                         scale = nextScale
-                        panOffset = boundedOffset(zoomedOffset, nextScale)
+                        panOffsetX = bounded.x
+                        panOffsetY = bounded.y
                     }
                 }
         ) {
@@ -663,8 +812,8 @@ private fun CategoryGalaxyCanvas(
                 modifier = Modifier
                     .size(layout.width.dp, layout.height.dp)
                     .graphicsLayer {
-                        translationX = panOffset.x
-                        translationY = panOffset.y
+                        translationX = panOffsetX
+                        translationY = panOffsetY
                         scaleX = scale
                         scaleY = scale
                         transformOrigin = androidx.compose.ui.graphics.TransformOrigin(0f, 0f)
@@ -677,91 +826,212 @@ private fun CategoryGalaxyCanvas(
                             contentDescription = category.tracks.joinToString { it.title }
                         }
                 ) {
-                    val positions = buildMap {
-                        layout.nodes.forEach { put(it.nodeId, it.point) }
-                        layout.checkpointNodes.forEach { put(it.checkpointId, it.point) }
-                        put(GALAXY_START_NODE_ID, layout.startPoint)
-                    }
-                    layout.trackSpheres.forEach { sphere ->
-                        val centre = Offset(sphere.centre.x.dp.toPx(), sphere.centre.y.dp.toPx())
-                        drawCircle(
-                            color = galaxyAccentColor(category.domain).copy(alpha = 0.035f),
-                            radius = sphere.radius.dp.toPx(),
-                            center = centre
-                        )
-                        drawCircle(
-                            color = galaxyAccentColor(category.domain).copy(alpha = 0.13f),
-                            radius = sphere.radius.dp.toPx(),
-                            center = centre,
-                            style = Stroke(width = 1.dp.toPx())
-                        )
-                    }
-                    val accent = galaxyAccentColor(category.domain)
-                    layout.nodes
-                        .groupBy { it.lessonId }
-                        .forEach { (_, lessonNodes) ->
-                            val outline = galaxyLessonGroupOutline(
-                                nodePoints = lessonNodes.map { it.point },
-                                orbPadding = 38f
-                            )
-                            if (outline.size < 3) return@forEach
-                            val groupPath = Path().apply {
-                                val first = outline.first()
-                                moveTo(first.x.dp.toPx(), first.y.dp.toPx())
-                                outline.drop(1).forEach { point ->
-                                    lineTo(point.x.dp.toPx(), point.y.dp.toPx())
-                                }
-                                close()
+                    fun appendConnectionPath(
+                        target: Path,
+                        connection: GalaxyConnection,
+                        moveToStart: Boolean
+                    ): Boolean {
+                        val from = positions[connection.fromNodeId] ?: return false
+                        val to = positions[connection.toNodeId] ?: return false
+                        val start = Offset(from.x.dp.toPx(), from.y.dp.toPx())
+                        val end = Offset(to.x.dp.toPx(), to.y.dp.toPx())
+                        if (moveToStart) target.moveTo(start.x, start.y)
+                        when (val formulaPath = layout.connectionPaths[connection]) {
+                            is GalaxyConnectionPath.Arc -> {
+                                val centreX = formulaPath.centre.x.dp.toPx()
+                                val centreY = formulaPath.centre.y.dp.toPx()
+                                val radius = formulaPath.radius.dp.toPx()
+                                target.arcTo(
+                                    rect = Rect(
+                                        left = centreX - radius,
+                                        top = centreY - radius,
+                                        right = centreX + radius,
+                                        bottom = centreY + radius
+                                    ),
+                                    startAngleDegrees = formulaPath.startAngleDegrees,
+                                    sweepAngleDegrees = formulaPath.sweepAngleDegrees,
+                                    forceMoveTo = false
+                                )
                             }
-                            drawPath(
-                                path = groupPath,
-                                color = accent.copy(alpha = 0.26f),
-                                style = Stroke(width = 1.dp.toPx())
+                            is GalaxyConnectionPath.CubicBezier -> {
+                                target.cubicTo(
+                                    formulaPath.control1.x.dp.toPx(),
+                                    formulaPath.control1.y.dp.toPx(),
+                                    formulaPath.control2.x.dp.toPx(),
+                                    formulaPath.control2.y.dp.toPx(),
+                                    end.x,
+                                    end.y
+                                )
+                            }
+                            null -> {
+                                val delta = end - start
+                                val distance = delta.getDistance().coerceAtLeast(1f)
+                                val normal = Offset(-delta.y / distance, delta.x / distance)
+                                val direction =
+                                    if ((connection.fromNodeId + connection.toNodeId).hashCode() and 1 == 0) 1f else -1f
+                                val bend = minOf(72.dp.toPx(), distance * 0.18f) * direction
+                                target.cubicTo(
+                                    start.x + delta.x * 0.32f + normal.x * bend,
+                                    start.y + delta.y * 0.32f + normal.y * bend,
+                                    start.x + delta.x * 0.68f + normal.x * bend,
+                                    start.y + delta.y * 0.68f + normal.y * bend,
+                                    end.x,
+                                    end.y
+                                )
+                            }
+                        }
+                        return true
+                    }
+                    fun connectionPath(connection: GalaxyConnection): Path? {
+                        val path = Path()
+                        if (!appendConnectionPath(path, connection, moveToStart = true)) return null
+                        return path
+                    }
+                    fun sphereClipPath(sphereIndices: Set<Int>): Path = Path().apply {
+                        sphereIndices.forEach { sphereIndex ->
+                            val sphere = layout.trackSpheres[sphereIndex]
+                            val centreX = sphere.centre.x.dp.toPx()
+                            val centreY = sphere.centre.y.dp.toPx()
+                            val radius = sphere.radius.dp.toPx()
+                            addOval(
+                                Rect(
+                                    left = centreX - radius,
+                                    top = centreY - radius,
+                                    right = centreX + radius,
+                                    bottom = centreY + radius
+                                )
                             )
                         }
+                    }
+                    fun lessonCorridorPath(lessonNodes: List<GalaxyNodePosition>): Path? {
+                        val path = Path()
+                        var appended = false
+                        lessonNodes.zipWithNext { from, to ->
+                            GalaxyConnection(from.nodeId, to.nodeId)
+                        }.forEach { connection ->
+                            if (appendConnectionPath(path, connection, moveToStart = !appended)) {
+                                appended = true
+                            }
+                        }
+                        return path.takeIf { appended }
+                    }
+
                     fun drawConnection(connection: GalaxyConnection) {
-                        val from = positions[connection.fromLessonId] ?: return
-                        val to = positions[connection.toLessonId] ?: return
-                        val destinationState = orbsByNodeId[connection.toLessonId]?.state
-                            ?: checkpointsById[connection.toLessonId]?.state
+                        val destinationState = orbsByNodeId[connection.toNodeId]?.state
+                            ?: checkpointsById[connection.toNodeId]?.state
                             ?: GalaxyNodeState.AVAILABLE
                         val lineColor = when (destinationState) {
                             GalaxyNodeState.COMPLETED, GalaxyNodeState.MASTERED -> PlanetGold.copy(alpha = 0.8f)
                             GalaxyNodeState.AVAILABLE, GalaxyNodeState.RECOMMENDED, GalaxyNodeState.IN_PROGRESS ->
-                                PlanetBlue.copy(alpha = 0.48f)
-                            GalaxyNodeState.LOCKED -> StarWhite.copy(alpha = 0.13f)
+                                PlanetBlue.copy(alpha = 0.64f)
+                            GalaxyNodeState.LOCKED -> StarWhite.copy(alpha = 0.28f)
                         }
-                        val start = Offset(from.x.dp.toPx(), from.y.dp.toPx())
-                        val end = Offset(to.x.dp.toPx(), to.y.dp.toPx())
-                        val delta = end - start
-                        val distance = delta.getDistance().coerceAtLeast(1f)
-                        val normal = Offset(-delta.y / distance, delta.x / distance)
-                        val direction = if ((connection.fromLessonId + connection.toLessonId).hashCode() and 1 == 0) 1f else -1f
-                        val bend = minOf(72.dp.toPx(), distance * 0.18f) * direction
-                        val path = Path().apply {
-                            moveTo(start.x, start.y)
-                            cubicTo(
-                                start.x + delta.x * 0.32f + normal.x * bend,
-                                start.y + delta.y * 0.32f + normal.y * bend,
-                                start.x + delta.x * 0.68f + normal.x * bend,
-                                start.y + delta.y * 0.68f + normal.y * bend,
-                                end.x,
-                                end.y
-                            )
-                        }
+                        val path = connectionPath(connection) ?: return
                         val highlighted = connection in lockedDependencyConnections
                         drawPath(
                             path = path,
                             color = if (highlighted) StarWhite.copy(alpha = 0.96f) else lineColor,
                             style = Stroke(
-                                width = if (highlighted) 5.dp.toPx() else 2.dp.toPx(),
+                                width = if (highlighted) 5.dp.toPx() else 2.25.dp.toPx(),
                                 cap = StrokeCap.Round
                             )
                         )
                     }
-                    allConnections
-                        .sortedBy { it in lockedDependencyConnections }
-                        .forEach(::drawConnection)
+                    // Only the portions crossing unrelated groups belong below those
+                    // groups. Regular-background and endpoint portions are drawn later
+                    // at their normal opacity.
+                    exitConnections.forEach { connection ->
+                        val blockingIndices = blockingSphereIndices.getValue(connection)
+                        if (blockingIndices.isNotEmpty()) {
+                            clipPath(sphereClipPath(blockingIndices)) {
+                                drawConnection(connection)
+                            }
+                        }
+                    }
+
+                    val accent = galaxyAccentColor(category.domain)
+                    layout.trackSpheres.forEach { sphere ->
+                        val centre = Offset(sphere.centre.x.dp.toPx(), sphere.centre.y.dp.toPx())
+                        drawCircle(
+                            color = accent.copy(alpha = 0.07f),
+                            radius = sphere.radius.dp.toPx(),
+                            center = centre
+                        )
+                    }
+
+                    val corridorWidth = galaxyLessonCorridorWidthDp().dp.toPx()
+                    orderedLessonNodeGroups.forEach { (lessonId, lessonNodes) ->
+                            val selected = lessonId == selectedLessonId
+                            val corridorColor = accent.copy(
+                                alpha = if (selected) {
+                                    GALAXY_SELECTED_LESSON_CORRIDOR_ALPHA
+                                } else {
+                                    GALAXY_LESSON_CORRIDOR_ALPHA
+                                }
+                            )
+                            if (lessonNodes.size == 1) {
+                                val point = lessonNodes.single().point
+                                val centre = Offset(point.x.dp.toPx(), point.y.dp.toPx())
+                                if (selected) {
+                                    drawCircle(
+                                        color = accent.copy(alpha = 0.24f),
+                                        radius = corridorWidth / 2f + 4.dp.toPx(),
+                                        center = centre
+                                    )
+                                }
+                                drawCircle(
+                                    color = corridorColor,
+                                    radius = corridorWidth / 2f,
+                                    center = centre
+                                )
+                            } else {
+                                lessonCorridorPath(lessonNodes)?.let { path ->
+                                    // Render the complete lesson in one draw operation so
+                                    // the shared practice orb never receives double alpha.
+                                    if (selected) {
+                                        drawPath(
+                                            path = path,
+                                            color = accent.copy(alpha = 0.24f),
+                                            style = Stroke(
+                                                width = corridorWidth + 8.dp.toPx(),
+                                                cap = StrokeCap.Round,
+                                                join = StrokeJoin.Round
+                                            )
+                                        )
+                                    }
+                                    drawPath(
+                                        path = path,
+                                        color = corridorColor,
+                                        style = Stroke(
+                                            width = corridorWidth,
+                                            cap = StrokeCap.Round,
+                                            join = StrokeJoin.Round
+                                        )
+                                    )
+                                }
+                            }
+                        }
+
+                    layout.trackSpheres.forEach { sphere ->
+                        drawCircle(
+                            color = accent.copy(alpha = 0.25f),
+                            radius = sphere.radius.dp.toPx(),
+                            center = Offset(sphere.centre.x.dp.toPx(), sphere.centre.y.dp.toPx()),
+                            style = Stroke(width = 1.25.dp.toPx())
+                        )
+                    }
+
+                    internalConnections.forEach(::drawConnection)
+                    exitConnections.forEach { connection ->
+                        val blockingIndices = blockingSphereIndices.getValue(connection)
+                        if (blockingIndices.isEmpty()) {
+                            drawConnection(connection)
+                        } else {
+                            clipPath(sphereClipPath(blockingIndices), clipOp = ClipOp.Difference) {
+                                drawConnection(connection)
+                            }
+                        }
+                    }
                 }
                 StartOrb(
                     locale = locale,
@@ -777,7 +1047,7 @@ private fun CategoryGalaxyCanvas(
                         with(density) { nodePosition.point.x.dp.toPx() },
                         with(density) { nodePosition.point.y.dp.toPx() }
                     )
-                    val screenPoint = pointPx * scale + panOffset
+                    val screenPoint = pointPx * scale + Offset(panOffsetX, panOffsetY)
                     val visibilityMargin = with(density) { 96.dp.toPx() }
                     val isNearViewport = screenPoint.x in -visibilityMargin..(viewportWidthPx + visibilityMargin) &&
                         screenPoint.y in -visibilityMargin..(viewportHeightPx + visibilityMargin)
@@ -795,10 +1065,11 @@ private fun CategoryGalaxyCanvas(
                     )
                     val isLessonLabelAnchor = galaxyOrbNodes(lesson).firstOrNull()?.nodeId == nodePosition.nodeId
                     if (
-                        scale >= 1.12f &&
+                        galaxyLessonTitlesVisible(scale, minimumScale) &&
                         isLessonLabelAnchor &&
                         nodePosition.kind in setOf(GalaxyOrbKind.THEORY, GalaxyOrbKind.PORTAL)
                     ) {
+                        val lessonTitleReadableScale = (1f / scale).coerceIn(1f, 1.65f)
                         Text(
                             text = lesson.title,
                             color = StarWhite.copy(alpha = 0.88f),
@@ -812,6 +1083,10 @@ private fun CategoryGalaxyCanvas(
                                     y = (nodePosition.point.y + 42f).dp
                                 )
                                 .width(140.dp)
+                                .graphicsLayer {
+                                    scaleX = lessonTitleReadableScale
+                                    scaleY = lessonTitleReadableScale
+                                }
                                 .background(DeepSpaceBlue.copy(alpha = 0.84f), RoundedCornerShape(8.dp))
                                 .padding(horizontal = 4.dp, vertical = 2.dp)
                         )
@@ -830,27 +1105,46 @@ private fun CategoryGalaxyCanvas(
                 }
                 // Labels are intentionally emitted last so they stay above lines,
                 // orbs and lesson titles while zooming.
-                layout.trackLabels.forEach { labelPosition ->
-                    val track = category.tracks.firstOrNull { it.id == labelPosition.trackId } ?: return@forEach
-                    val readableScale = if (scale < 1f) 1f / scale else 1f
-                    Text(
-                        text = track.title,
-                        color = StarWhite.copy(alpha = 0.75f),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 3,
-                        textAlign = TextAlign.Center,
+                layout.trackSpheres.forEach { sphere ->
+                    val track = category.tracks.firstOrNull { it.id == sphere.trackId } ?: return@forEach
+                    val iconReadableScale = (1f / scale).coerceIn(1f, 1.7f)
+                    CurriculumAssetIcon(
+                        assetPath = track.iconAssetPath,
+                        fallbackIconResId = track.iconResId,
+                        contentDescription = track.title,
                         modifier = Modifier
                             .offset(
-                                x = (labelPosition.point.x - 90f).dp,
-                                y = (labelPosition.point.y - 32f).dp
+                                x = (sphere.centre.x - 22f).dp,
+                                y = (sphere.centre.y - 22f).dp
                             )
-                            .width(180.dp)
+                            .size(44.dp)
                             .graphicsLayer {
-                                scaleX = readableScale
-                                scaleY = readableScale
-                            }
+                                scaleX = iconReadableScale
+                                scaleY = iconReadableScale
+                            },
+                        sizePx = 128
                     )
+                    if (galaxySubcategoryTitlesVisible(scale, minimumScale)) {
+                        val titleReadableScale = (1f / scale).coerceIn(1f, 1.9f)
+                        Text(
+                            text = track.title,
+                            color = StarWhite.copy(alpha = 0.75f),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 3,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .offset(
+                                    x = (sphere.centre.x - 90f).dp,
+                                    y = (sphere.centre.y + 32f).dp
+                                )
+                                .width(180.dp)
+                                .graphicsLayer {
+                                    scaleX = titleReadableScale
+                                    scaleY = titleReadableScale
+                                }
+                        )
+                    }
                 }
             }
         }
@@ -858,7 +1152,8 @@ private fun CategoryGalaxyCanvas(
             IconButton(
                 onClick = {
                     scale = fittedScale
-                    panOffset = fittedOffset
+                    panOffsetX = fittedOffset.x
+                    panOffsetY = fittedOffset.y
                 },
                 modifier = Modifier.align(Alignment.TopEnd).padding(8.dp)
             ) {

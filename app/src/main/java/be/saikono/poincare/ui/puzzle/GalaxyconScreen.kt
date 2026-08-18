@@ -202,7 +202,7 @@ fun GalaxyconGame(
                             feedbackUntilMs = frameMs + 900L
 
                             val word = loopCurrentWord
-                            if (word != null && updatedLetterIndex >= word.text.length) {
+                            if (updatedLetterIndex >= word.text.length) {
                                 val wordBonus = 50 * scoreMultiplier
                                 points += wordBonus
                                 stickersEarned = (stickersEarned + word.text.uppercase()).distinct()

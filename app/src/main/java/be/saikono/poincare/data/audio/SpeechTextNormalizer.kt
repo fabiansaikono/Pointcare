@@ -6,6 +6,7 @@ internal object SpeechTextNormalizer {
     private val time = Regex("\\b(\\d{1,2}):(\\d{2})\\b")
     private val slashDate = Regex("\\b(\\d{1,2})/(\\d{1,2})/(\\d{2,4})\\b")
     private val dashDate = Regex("\\b(\\d{1,2})-(\\d{1,2})-(\\d{2,4})\\b")
+    private val phonemeNotation = Regex("(?<![\\p{L}\\d])/([\\p{L}]{1,3})/(?![\\p{L}\\d])")
     private val compactFraction = Regex("(?<![\\d/])(\\d{1,3})/(\\d{1,3})(?![\\d/])")
     private val missingNumeratorFraction =
         Regex("(?<![\\d/?])\\?\\s*/\\s*(\\d{1,3})(?![\\d/])")
@@ -93,6 +94,7 @@ internal object SpeechTextNormalizer {
             .replace('\r', ' ')
             .replace('\t', ' ')
 
+        value = phonemeNotation.replace(value) { it.groupValues[1] }
         value = time.replace(value) { match ->
             val hour = match.groupValues[1].toIntOrNull()?.toString() ?: match.groupValues[1]
             val minutes = match.groupValues[2].toIntOrNull() ?: return@replace match.value

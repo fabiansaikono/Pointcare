@@ -15,6 +15,7 @@ import be.saikono.poincare.ui.lesson.LESSON_ROW_META_WEIGHT
 import be.saikono.poincare.ui.lesson.LESSON_SCREEN_BOTTOM_PADDING_DP
 import be.saikono.poincare.ui.lesson.LESSON_SCREEN_TOP_PADDING_DP
 import be.saikono.poincare.ui.lesson.defaultPhaseSectionTitle
+import be.saikono.poincare.ui.lesson.lessonOverviewColumnCount
 import be.saikono.poincare.ui.spaceMap.MAIN_MENU_BOTTOM_PADDING_DP
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -28,6 +29,12 @@ class NavigationPolishTest {
         assertEquals("Sectie A", defaultPhaseSectionTitle(0, "nl-BE"))
         assertEquals("Section B", defaultPhaseSectionTitle(1, "fr-BE"))
         assertEquals("Section C", defaultPhaseSectionTitle(2, "en-US"))
+    }
+
+    @Test
+    fun lessonOverviewUsesExactlyTwoColumnsInLandscape() {
+        assertEquals(1, lessonOverviewColumnCount(isLandscape = false))
+        assertEquals(2, lessonOverviewColumnCount(isLandscape = true))
     }
 
     @Test

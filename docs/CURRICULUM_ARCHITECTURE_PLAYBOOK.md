@@ -1,6 +1,6 @@
 # Poincaré curriculumarchitectuur en uitrolhandleiding
 
-Versie: 2026-08-14  
+Versie: 2026-08-18  
 Status: normatief bouwcontract voor Curriculum Room, exports, Android-runtime en volgende leerjaren  
 Eigenaar: curriculumproduct, redactie en engineering gezamenlijk
 
@@ -65,10 +65,13 @@ Curriculum Room en Android moeten dezelfde release-ID en checksum kunnen tonen. 
 
 1. Modellen en validators definiëren het technisch afdwingbare contract.
 2. Dit document definieert het normatieve product- en bouwcontract.
-3. `GENERIC_DESCRIPTION_CURRICULUM.md` definieert brede product- en kwaliteitsprincipes.
-4. Goedgekeurde leerjaarsbronnen definiëren zichtbare labels en sequenties.
-5. Audits en handoffs bewijzen een toestand op een datum.
-6. Legacycode en oude prompts verklaren geschiedenis, maar bepalen geen nieuwe architectuur.
+3. `lesson_v2/SECTIONED_LESSON_ARCHITECTURE.md` definieert de exacte drieledige kernles.
+4. `MOBILE_APP_ARCHITECTURE.md` en `GALAXY_NAVIGATION_ARCHITECTURE.md` definiëren Android-routes en Galaxy-integratie.
+5. `context/GalaxyMap/poincare_galaxy_navigation_prompt.md` definieert uitsluitend de exacte formulegeometrie binnen klassieke sphere groups.
+6. `GENERIC_DESCRIPTION_CURRICULUM.md` definieert brede product- en kwaliteitsprincipes.
+7. Goedgekeurde leerjaarsbronnen definiëren zichtbare labels en sequenties.
+8. Audits en handoffs bewijzen een toestand op een datum.
+9. Legacycode en oudere prompts verklaren geschiedenis, maar bepalen geen nieuwe architectuur.
 
 ## 3. Domeinmodel en stabiele identiteit
 
@@ -178,6 +181,15 @@ Dezelfde methode wordt voor een volgend leerjaar toegepast, maar nooit door leer
 - Een voltooide les blijft voltooid wanneer alleen tekst, visual of volgorde wijzigt.
 - Bij samenvoegen of splitsen bestaat een expliciete voortgangsmapping.
 - Toetsbewijs blijft gekoppeld aan mastery-tags, niet alleen aan een schermpositie.
+
+### 5.5 Checkpoints
+
+Iedere V2-les heeft het expliciete veld `checkpoint`, standaard `false`. `true` betekent dat alle transitieve prerequisites vóór de doelles moeten zijn voltooid. De Galaxy projecteert dit als een zelfstandige checkpoint-orb tussen de laatste Toets-orbs van de directe vereisten en de eerste Theorie-orb van de doelles.
+
+- leerjaar 1 mag nooit `checkpoint=true` hebben;
+- een checkpoint vervangt geen toets en draagt geen parallelle lesinhoud;
+- de validator blokkeert ongeldige leerjaar-1-checkpoints en prerequisitecycli;
+- checkpointstatus en -percentage worden uitsluitend uit de vereiste lesvoortgang afgeleid.
 
 ## 6. Drieledige kernlesarchitectuur
 
@@ -326,6 +338,12 @@ Iedere dicteevraag bevat uitspreekbare inhoud, locale en inputtype. Het aangepas
 - “Afronden” in een hoofdstuk gaat naar het hoofdstukoverzicht.
 - “Afronden” in een boekhoofdstuk mag niet naar het algemene boekenmenu springen.
 - Een kernles kan worden verlaten zonder voortgangscorruptie en hervat op de laatste geldige positie.
+- Galaxy is de standaardhoofdnavigator; de tegelroute blijft via dezelfde hoofdheader beschikbaar.
+- Galaxy en tegels delen dezelfde category-header, leerjaarfilter en `Volgende les`-selectie. Verhaalportalen zijn geen volgende les.
+- Een lesdeel of resultaat keert terug naar de navigatorcontext waaruit de les werd geopend.
+- Orbselectie en het sluiten van het Galaxy-detailpaneel veranderen de bewaarde pan-/zoomcontext niet.
+
+De volledige Android-routearchitectuur staat in `docs/MOBILE_APP_ARCHITECTURE.md`; de dynamische Galaxy-projectie, groupvorming en lijnregels staan in `docs/GALAXY_NAVIGATION_ARCHITECTURE.md`.
 
 ## 9. Gegenereerde en vaste inhoud
 
@@ -431,6 +449,10 @@ Weergave:
 - lange tekst wordt over twee pagina's verdeeld wanneer de volgende pagina geen afbeelding heeft;
 - wanneer iedere pagina een afbeelding heeft, wordt de afbeelding proportioneel kleiner zodat tekst niet uit het frame loopt;
 - Afronden gaat terug naar het hoofdstukoverzicht.
+- De tegelnavigator toont Verhalen als gespecialiseerde route onder Taalvaardigheid.
+- De Galaxy toont alle verhaalwerelden/-reeksen samen in één zelfstandige sphere group met één portal-orb per thema, nooit één orb per boek.
+- De tijdelijke hoofdleerjaarfilter verbergt geen verhaalthema's; alleen de ouderinstelling voor Verhalen bepaalt zichtbaarheid.
+- Verhaalportalen hebben geen start- of lesverbinding en staan nooit in `Volgende les`.
 
 Verhalen worden alleen gewijzigd wanneer de opdracht ze omvat; curriculumexports met `--skip-stories` moeten verhaalhashes behouden.
 
@@ -612,6 +634,16 @@ Snapshot 2026-08-14:
 
 Deze cijfers zijn bewijs van één lokale snapshot en worden bij iedere release vervangen. Een gelijke snapshot en checksum bewijzen dat de data gelijk zijn, maar niet dat de runtime ze correct kan uitvoeren. Pariteit én een volledig groene Android-runtimesuite zijn afzonderlijke releasepoorten.
 
+Android-architectuurstatus 2026-08-18:
+
+- Galaxy is de standaardnavigator naast de behouden tegelinterface;
+- de category-Galaxy projecteert lessen dynamisch naar drie overview-orbs en positioneert sphere groups vanuit de prerequisite-DAG;
+- verhalen verschijnen als zelfstandige thema-portalen en checkpoints als afzonderlijke gate-orbs;
+- gedeelde headers, leerjaarselectie, ouderdraft, leraar-ID en takenroute zijn geïntegreerd;
+- de build gebruikt AGP 9.2.1, Gradle 9.4.1, ingebouwde Kotlin 2.2.10 en KSP 2.3.11 zonder `kotlin-android`-compatibiliteitsopt-outs.
+
+Deze Android-status beschrijft architectuurcapaciteiten en wijzigt de gedateerde curriculumaantallen erboven niet.
+
 ## 21. Open architectuurbeslissingen en risico's
 
 - Leg één technische mapping vast tussen workflowlabels in de Curriculum Room en de V2-publicatiestatus.
@@ -662,6 +694,9 @@ Deze architectuur is geconsolideerd uit:
 
 - de gebruikersfeedback en correctierondes in de Poincaré-taken en eerdere projectgesprekken;
 - `docs/GENERIC_DESCRIPTION_CURRICULUM.md`;
+- `docs/MOBILE_APP_ARCHITECTURE.md`;
+- `docs/GALAXY_NAVIGATION_ARCHITECTURE.md`;
+- `context/GalaxyMap/poincare_galaxy_navigation_prompt.md` voor de exacte formulegeometrie;
 - `docs/CURRICULUM_STRUCTURE_GRADE1_MIGRATION.md`;
 - de gedateerde curriculumaudits en taakhandovers;
 - `LessonV2Models.kt` en `LessonCatalogV2Validator.kt` als actueel technisch contract;

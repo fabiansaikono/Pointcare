@@ -184,7 +184,8 @@ class LessonCatalogV2Test {
         )
 
         val index = assetFile(LessonCatalogV2Loader.ASSET_PATH)
-        val shardRoot = index.parentFile.resolve("lesson-catalog-v2")
+        val shardRoot = requireNotNull(index.parentFile) { "Lesson catalogue index has no parent directory" }
+            .resolve("lesson-catalog-v2")
         val explicitFlagCount = shardRoot.listFiles { file -> file.extension == "json" }.orEmpty()
             .sumOf { shard -> Regex("\\\"checkpoint\\\"\\s*:").findAll(shard.readText(Charsets.UTF_8)).count() }
         assertEquals(catalog.lessons.size, explicitFlagCount)

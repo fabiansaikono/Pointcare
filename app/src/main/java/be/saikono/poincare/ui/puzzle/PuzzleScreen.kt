@@ -8,7 +8,7 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -99,7 +99,7 @@ fun PuzzleContent(
                     onClick = onNavigateBack,
                     modifier = Modifier.size(if (isGeneratedPuzzle && isLandscape) 36.dp else 48.dp)
                 ) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = localizedExerciseText("backToMap", uiState.exerciseLanguage), tint = StarWhite)
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = localizedExerciseText("backToMap", uiState.exerciseLanguage), tint = StarWhite)
                 }
                 Spacer(modifier = Modifier.width(if (isGeneratedPuzzle && isLandscape) 4.dp else 16.dp))
                 Spacer(modifier = Modifier.weight(1f))

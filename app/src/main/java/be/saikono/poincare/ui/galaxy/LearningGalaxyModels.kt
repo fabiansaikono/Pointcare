@@ -1,6 +1,7 @@
 package be.saikono.poincare.ui.galaxy
 
 import androidx.annotation.DrawableRes
+import be.saikono.poincare.R
 import be.saikono.poincare.data.story.StoryBook
 import be.saikono.poincare.domain.curriculum.manifest.CurriculumManifest
 import be.saikono.poincare.domain.curriculum.v2.LessonCatalogV2
@@ -28,16 +29,13 @@ enum class GalaxyNodeState {
 }
 
 enum class GalaxyPortalDestination {
-    STORY_LIBRARY,
-    STORY_BOOK
+    STORY_LIBRARY
 }
 
-internal const val GALAXY_STORIES_PORTAL_ID = "galaxy:portal:stories"
-internal const val GALAXY_STORY_TRACK_PREFIX = "language.stories:"
-internal fun galaxyStoryBookPortalId(bookId: String): String = "galaxy:portal:story-book:$bookId"
+internal const val GALAXY_STORY_TRACK_ID = "language.stories"
 internal fun galaxyStoryThemePortalId(themeId: String): String = "galaxy:portal:story-theme:$themeId"
 internal fun isGalaxyStoryTrack(trackId: String): Boolean =
-    trackId == "language.stories" || trackId.startsWith(GALAXY_STORY_TRACK_PREFIX)
+    trackId == GALAXY_STORY_TRACK_ID
 
 data class GalaxyPhaseOrbUi(
     val kind: GalaxyOrbKind,
@@ -62,7 +60,6 @@ data class GalaxyLessonNodeUi(
     val progressPercent: Int,
     val checkpoint: Boolean = false,
     val portalDestination: GalaxyPortalDestination? = null,
-    val portalTargetId: String? = null,
     val phaseOrbs: List<GalaxyPhaseOrbUi> = emptyList()
 )
 
@@ -81,7 +78,8 @@ data class GalaxyTrackUi(
     val id: String,
     val title: String,
     @param:DrawableRes val iconResId: Int,
-    val lessons: List<GalaxyLessonNodeUi>
+    val lessons: List<GalaxyLessonNodeUi>,
+    val iconAssetPath: String? = null
 )
 
 data class GalaxyCategoryUi(
@@ -90,7 +88,9 @@ data class GalaxyCategoryUi(
     val title: String,
     val progressPercent: Int,
     val tracks: List<GalaxyTrackUi>,
-    val checkpoints: List<GalaxyCheckpointNodeUi> = emptyList()
+    val checkpoints: List<GalaxyCheckpointNodeUi> = emptyList(),
+    @param:DrawableRes val iconResId: Int = R.drawable.icon_08_space_planet,
+    val iconAssetPath: String? = null
 )
 
 data class LearningGalaxyUiState(
@@ -103,6 +103,15 @@ internal fun galaxyPrerequisitesSatisfied(
     passedLessonIds: Set<String>
 ): Boolean = LessonStatusServiceV2.prerequisitesSatisfied(prerequisiteLessonIds) { prerequisiteId ->
     LessonGateStateV2.PASSED.takeIf { prerequisiteId in passedLessonIds }
+}
+
+internal fun galaxyCategoryIconResId(domain: LearningDomain): Int = when (domain) {
+    LearningDomain.READING -> R.drawable.icon_07_language_person
+    LearningDomain.WRITING -> R.drawable.icon_01_abc_pencil
+    LearningDomain.MATH -> R.drawable.icon_02_calculator
+    LearningDomain.GEOMETRY -> R.drawable.icon_04_cube
+    LearningDomain.WORLD_KNOWLEDGE -> R.drawable.icon_08_space_planet
+    LearningDomain.PUZZLE -> R.drawable.icon_06_brain_network
 }
 
 internal fun galaxyCheckpointRequirementIds(
@@ -336,7 +345,8 @@ internal fun buildLearningGalaxyUiState(
                         id = subcategory.id,
                         title = subcategory.nameNl,
                         iconResId = subcategory.iconResId,
-                        lessons = emptyList()
+                        lessons = emptyList(),
+                        iconAssetPath = subcategory.iconAssetPath
                     )
                 }
                 val lessons = activeLessons
@@ -405,7 +415,8 @@ internal fun buildLearningGalaxyUiState(
                         id = subcategory.id,
                         title = subcategory.nameNl,
                         iconResId = subcategory.iconResId,
-                        lessons = it
+                        lessons = it,
+                        iconAssetPath = subcategory.iconAssetPath
                     )
                 }
             }
@@ -463,14 +474,16 @@ internal fun buildLearningGalaxyUiState(
                         } else lesson
                     })
                 },
-                checkpoints = checkpoints
+                checkpoints = checkpoints,
+                iconResId = galaxyCategoryIconResId(category.domain),
+                iconAssetPath = category.iconAssetPath
             )
         }
 
     return LearningGalaxyUiState(categories = categories, isLoading = false)
 }
 
-internal fun LearningGalaxyUiState.withStoryBooks(
+internal fun LearningGalaxyUiState.withStoryThemes(
     books: List<StoryBook>,
     locale: String
 ): LearningGalaxyUiState {
@@ -479,7 +492,7 @@ internal fun LearningGalaxyUiState.withStoryBooks(
             if (category.domain != LearningDomain.READING) return@map category
             category.copy(
                 tracks = category.tracks.flatMap { track ->
-                    if (track.id != "language.stories") return@flatMap listOf(track)
+                    if (track.id != GALAXY_STORY_TRACK_ID) return@flatMap listOf(track)
                     val orderedBooks = books
                         .distinctBy { it.id }
                         .sortedWith(
@@ -518,7 +531,6 @@ internal fun LearningGalaxyUiState.withStoryBooks(
                                 state = GalaxyNodeState.AVAILABLE,
                                 progressPercent = 0,
                                 portalDestination = GalaxyPortalDestination.STORY_LIBRARY,
-                                portalTargetId = null,
                                 phaseOrbs = listOf(
                                     GalaxyPhaseOrbUi(
                                         kind = GalaxyOrbKind.PORTAL,

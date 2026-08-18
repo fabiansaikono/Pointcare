@@ -5,12 +5,10 @@ import java.util.PriorityQueue
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan2
-import kotlin.math.ceil
 import kotlin.math.cos
 import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.sin
-import kotlin.math.sqrt
 
 internal const val GALAXY_START_NODE_ID = "galaxy:start"
 
@@ -111,6 +109,36 @@ internal fun orderGalaxyLessonsForSphere(
     return ordered
 }
 
+/**
+ * Keeps lesson phases together while splitting only when the next complete
+ * lesson would exceed the largest exact formula shape.
+ */
+internal fun <T> splitGalaxyFormulaSegments(
+    items: List<T>,
+    nodeCount: (T) -> Int
+): List<List<T>> {
+    if (items.isEmpty()) return emptyList()
+    val maximumShapeNodes = GALAXY_SHAPES.keys.max()
+    val segments = mutableListOf<List<T>>()
+    var current = mutableListOf<T>()
+    var currentNodeCount = 0
+    items.forEach { item ->
+        val itemNodeCount = nodeCount(item)
+        require(itemNodeCount in 1..maximumShapeNodes) {
+            "A single Galaxy item must expose 1..$maximumShapeNodes nodes, got $itemNodeCount"
+        }
+        if (current.isNotEmpty() && currentNodeCount + itemNodeCount > maximumShapeNodes) {
+            segments += current
+            current = mutableListOf()
+            currentNodeCount = 0
+        }
+        current += item
+        currentNodeCount += itemNodeCount
+    }
+    if (current.isNotEmpty()) segments += current
+    return segments
+}
+
 /** Removes ancestor shortcuts while retaining every immediate branch in a live DAG. */
 private fun reducedGalaxyGraphEdges(
     edges: Set<Pair<String, String>>
@@ -141,107 +169,13 @@ private fun reducedGalaxyGraphEdges(
 
 data class GalaxyPoint(val x: Float, val y: Float)
 
-/**
- * Redistributes the existing ordered route without changing its shape or endpoints.
- * Gaps inside a lesson are only modestly shorter than transitions between lessons,
- * keeping one continuous journey instead of producing visibly isolated clusters.
- */
-internal fun coherentGalaxyLessonOrbPoints(
-    basePoints: List<GalaxyPoint>,
-    lessonIds: List<String>,
-    intraLessonGapWeight: Float = 0.86f
-): List<GalaxyPoint> {
-    if (basePoints.size < 3 || basePoints.size != lessonIds.size) return basePoints
-    val segmentLengths = basePoints.zipWithNext { from, to ->
-        hypot(to.x - from.x, to.y - from.y)
-    }
-    val routeLength = segmentLengths.sum()
-    if (routeLength < 1f) return basePoints
+internal const val GALAXY_LESSON_ORB_DIAMETER_DP = 72f
+internal const val GALAXY_LESSON_CORRIDOR_WIDTH_MULTIPLIER = 1.15f
 
-    val internalWeight = intraLessonGapWeight.coerceIn(0.72f, 0.98f)
-    val gapWeights = lessonIds.zipWithNext { fromLesson, toLesson ->
-        if (fromLesson == toLesson) internalWeight else 1f
-    }
-    val weightedUnit = routeLength / gapWeights.sum()
-    val targetDistances = buildList {
-        add(0f)
-        var distance = 0f
-        gapWeights.forEach { weight ->
-            distance += weightedUnit * weight
-            add(distance)
-        }
-    }
-
-    var segmentIndex = 0
-    var segmentStartDistance = 0f
-    return targetDistances.mapIndexed { index, targetDistance ->
-        when (index) {
-            0 -> basePoints.first()
-            targetDistances.lastIndex -> basePoints.last()
-            else -> {
-                while (
-                    segmentIndex < segmentLengths.lastIndex &&
-                    targetDistance > segmentStartDistance + segmentLengths[segmentIndex]
-                ) {
-                    segmentStartDistance += segmentLengths[segmentIndex]
-                    segmentIndex += 1
-                }
-                val segmentLength = segmentLengths[segmentIndex]
-                if (segmentLength < 0.001f) {
-                    basePoints[segmentIndex + 1]
-                } else {
-                    val progress = ((targetDistance - segmentStartDistance) / segmentLength).coerceIn(0f, 1f)
-                    val from = basePoints[segmentIndex]
-                    val to = basePoints[segmentIndex + 1]
-                    GalaxyPoint(
-                        x = from.x + (to.x - from.x) * progress,
-                        y = from.y + (to.y - from.y) * progress
-                    )
-                }
-            }
-        }
-    }
-}
-
-/** Builds a rounded contour around the actual orb positions of one lesson. */
-internal fun galaxyLessonGroupOutline(
-    nodePoints: List<GalaxyPoint>,
-    orbPadding: Float,
-    samplesPerOrb: Int = 16
-): List<GalaxyPoint> {
-    if (nodePoints.isEmpty()) return emptyList()
-    val sampleCount = samplesPerOrb.coerceAtLeast(8)
-    val sampledPoints = nodePoints.flatMap { point ->
-        List(sampleCount) { sample ->
-            val angle = 2.0 * PI * sample / sampleCount
-            GalaxyPoint(
-                x = point.x + cos(angle).toFloat() * orbPadding,
-                y = point.y + sin(angle).toFloat() * orbPadding
-            )
-        }
-    }.distinct()
-    if (sampledPoints.size <= 2) return sampledPoints
-
-    val sorted = sampledPoints.sortedWith(compareBy<GalaxyPoint>({ it.x }, { it.y }))
-    fun cross(origin: GalaxyPoint, first: GalaxyPoint, second: GalaxyPoint): Float =
-        (first.x - origin.x) * (second.y - origin.y) -
-            (first.y - origin.y) * (second.x - origin.x)
-
-    fun appendHull(points: Iterable<GalaxyPoint>): MutableList<GalaxyPoint> {
-        val hull = mutableListOf<GalaxyPoint>()
-        points.forEach { point ->
-            while (hull.size >= 2 && cross(hull[hull.lastIndex - 1], hull.last(), point) <= 0f) {
-                hull.removeAt(hull.lastIndex)
-            }
-            hull += point
-        }
-        return hull
-    }
-
-    val lower = appendHull(sorted)
-    val upper = appendHull(sorted.asReversed())
-    return lower.dropLast(1) + upper.dropLast(1)
-}
+/** Uniform themed corridor behind one lesson's complete phase route. */
+internal fun galaxyLessonCorridorWidthDp(
+    orbWidthDp: Float = GALAXY_LESSON_ORB_DIAMETER_DP
+): Float = orbWidthDp.coerceAtLeast(0f) * GALAXY_LESSON_CORRIDOR_WIDTH_MULTIPLIER
 
 data class GalaxyNodePosition(
     val nodeId: String,
@@ -249,20 +183,20 @@ data class GalaxyNodePosition(
     val kind: GalaxyOrbKind,
     val trackId: String,
     val grade: Int,
-    val point: GalaxyPoint
-)
-
-data class GalaxyTrackLabelPosition(
-    val trackId: String,
-    val grade: Int,
-    val point: GalaxyPoint
-)
-
-data class GalaxyGradeSectionPosition(
-    val grade: Int,
     val point: GalaxyPoint,
-    val width: Float,
-    val height: Float
+    val formulaPlacement: GalaxyFormulaNodePlacement? = null
+)
+
+data class GalaxyFormulaNodePlacement(
+    val sphereKey: String,
+    val pointId: String,
+    val sequence: Int,
+    val layerCode: String,
+    val connectToPointId: String,
+    val outgoingPath: GalaxyConnectionPath?,
+    val rotationDegrees: Double,
+    val mirrorHorizontal: Boolean,
+    val mirrorVertical: Boolean
 )
 
 data class GalaxyTrackSpherePosition(
@@ -279,16 +213,30 @@ data class GalaxyCheckpointPosition(
 )
 
 data class GalaxyConnection(
-    val fromLessonId: String,
-    val toLessonId: String
+    val fromNodeId: String,
+    val toNodeId: String
 )
+
+sealed interface GalaxyConnectionPath {
+    data class Arc(
+        val centre: GalaxyPoint,
+        val radius: Float,
+        val startAngleDegrees: Float,
+        val sweepAngleDegrees: Float
+    ) : GalaxyConnectionPath
+
+    data class CubicBezier(
+        val control1: GalaxyPoint,
+        val control2: GalaxyPoint
+    ) : GalaxyConnectionPath
+}
 
 /** Returns every incoming edge that the selected node transitively depends on. */
 internal fun galaxyDependencyConnections(
     selectedNodeId: String,
     connections: Collection<GalaxyConnection>
 ): Set<GalaxyConnection> {
-    val incomingByNode = connections.groupBy(GalaxyConnection::toLessonId)
+    val incomingByNode = connections.groupBy(GalaxyConnection::toNodeId)
     val pending = ArrayDeque<String>().apply { addLast(selectedNodeId) }
     val visitedNodes = hashSetOf<String>()
     val dependencyEdges = linkedSetOf<GalaxyConnection>()
@@ -296,10 +244,67 @@ internal fun galaxyDependencyConnections(
         val nodeId = pending.removeFirst()
         if (!visitedNodes.add(nodeId)) continue
         incomingByNode[nodeId].orEmpty().forEach { connection ->
-            if (dependencyEdges.add(connection)) pending.addLast(connection.fromLessonId)
+            if (dependencyEdges.add(connection)) pending.addLast(connection.fromNodeId)
         }
     }
     return dependencyEdges
+}
+
+internal fun galaxyFormulaConnectionPath(
+    source: GalaxyNodePosition,
+    target: GalaxyNodePosition
+): GalaxyConnectionPath? {
+    val from = source.formulaPlacement ?: return null
+    val to = target.formulaPlacement ?: return null
+    if (from.sphereKey != to.sphereKey || to.sequence != from.sequence + 1) return null
+    if (from.connectToPointId != to.pointId) return null
+    return from.outgoingPath
+}
+
+private fun normalizeGalaxyAngle(angle: Double): Double = atan2(sin(angle), cos(angle))
+
+/**
+ * Rotates and, when useful, mirrors one complete deterministic shape so its
+ * entry and exit orbs face the neighbouring sphere groups. Individual formula
+ * points are never redistributed.
+ */
+internal fun orientedGalaxyFormulaGeometry(
+    shapeNumber: Int,
+    incomingAngleRadians: Double,
+    outgoingAngleRadians: Double
+): GalaxyFormulaGeometry {
+    data class Candidate(
+        val geometry: GalaxyFormulaGeometry,
+        val score: Double
+    )
+
+    fun nodeAngle(node: GalaxyNodeGeometry): Double = atan2(
+        node.y - GALAXY_FORMULA_CENTER,
+        node.x - GALAXY_FORMULA_CENTER
+    )
+
+    return listOf(false, true).map { mirrorHorizontal ->
+        val mirrored = GalaxyGeometryGenerator.generate(
+            shapeNumber = shapeNumber,
+            mirrorHorizontal = mirrorHorizontal
+        )
+        val startOffset = normalizeGalaxyAngle(incomingAngleRadians - nodeAngle(mirrored.nodes.first()))
+        val exitOffset = normalizeGalaxyAngle(outgoingAngleRadians - nodeAngle(mirrored.nodes.last()))
+        val rotationRadians = normalizeGalaxyAngle(
+            startOffset + normalizeGalaxyAngle(exitOffset - startOffset) / 2.0
+        )
+        val geometry = GalaxyGeometryGenerator.generate(
+            shapeNumber = shapeNumber,
+            rotationDegrees = Math.toDegrees(rotationRadians),
+            mirrorHorizontal = mirrorHorizontal
+        )
+        val startError = normalizeGalaxyAngle(nodeAngle(geometry.nodes.first()) - incomingAngleRadians)
+        val exitError = normalizeGalaxyAngle(nodeAngle(geometry.nodes.last()) - outgoingAngleRadians)
+        Candidate(
+            geometry = geometry,
+            score = startError * startError + exitError * exitError
+        )
+    }.minWith(compareBy<Candidate>({ it.score }, { it.geometry.transform.mirrorHorizontal })).geometry
 }
 
 data class GalaxyCategoryLayout(
@@ -308,12 +313,11 @@ data class GalaxyCategoryLayout(
     val startPoint: GalaxyPoint,
     val nodes: List<GalaxyNodePosition>,
     val checkpointNodes: List<GalaxyCheckpointPosition>,
-    val trackLabels: List<GalaxyTrackLabelPosition>,
     val trackSpheres: List<GalaxyTrackSpherePosition>,
-    val gradeSections: List<GalaxyGradeSectionPosition>,
     val connections: List<GalaxyConnection>,
     val checkpointConnections: List<GalaxyConnection>,
-    val startConnections: List<GalaxyConnection>
+    val startConnections: List<GalaxyConnection>,
+    val connectionPaths: Map<GalaxyConnection, GalaxyConnectionPath>
 )
 
 data class GalaxyUniverseLayout(
@@ -379,7 +383,9 @@ object GalaxyLayoutEngine {
             val track: GalaxyTrackUi,
             val grade: Int,
             val lessons: List<GalaxyLessonNodeUi>,
-            val radius: Float
+            val radius: Float,
+            val segmentIndex: Int,
+            val formulaGeometry: GalaxyFormulaGeometry?
         )
         data class RawSphere(val instance: TrackInstance, val centre: GalaxyPoint)
 
@@ -389,23 +395,47 @@ object GalaxyLayoutEngine {
             } else {
                 track.lessons.groupBy { it.grade }.toSortedMap().toList()
             }
-            lessonGroups.map { (grade, lessons) ->
+            lessonGroups.flatMap { (grade, lessons) ->
                 val orderedLessons = orderGalaxyLessonsForSphere(lessons)
-                TrackInstance(
-                    track = track,
-                    grade = grade,
-                    lessons = orderedLessons,
-                    radius = sphereRadius(orderedLessons.sumOf { lesson -> galaxyOrbKinds(lesson).size })
-                )
+                val segments = if (isGalaxyStoryTrack(track.id)) {
+                    listOf(orderedLessons)
+                } else {
+                    splitGalaxyFormulaSegments(orderedLessons) { lesson -> galaxyOrbNodes(lesson).size }
+                }
+                segments.mapIndexed { segmentIndex, segmentLessons ->
+                    val orbCount = segmentLessons.sumOf { lesson -> galaxyOrbNodes(lesson).size }
+                    val formulaGeometry = if (isGalaxyStoryTrack(track.id)) {
+                        null
+                    } else {
+                        val shapeNumber = requireNotNull(galaxyFormulaShapeNumber(orbCount)) {
+                            "Lesson sphere ${track.id} grade $grade segment $segmentIndex has " +
+                                "$orbCount nodes; exact Galaxy shapes require 3..60 in steps of 3"
+                        }
+                        GalaxyGeometryGenerator.generate(shapeNumber)
+                    }
+                    TrackInstance(
+                        track = track,
+                        grade = grade,
+                        lessons = segmentLessons,
+                        radius = if (isGalaxyStoryTrack(track.id)) {
+                            storySphereRadius(orbCount)
+                        } else {
+                            requireNotNull(formulaGeometry).shape.containerRadius() + 56f
+                        },
+                        segmentIndex = segmentIndex,
+                        formulaGeometry = formulaGeometry
+                    )
+                }
             }
         }
         if (unorderedInstances.isEmpty()) return emptyCategoryLayout()
 
-        fun instanceKey(instance: TrackInstance): String = "${instance.track.id}:${instance.grade}"
+        fun instanceKey(instance: TrackInstance): String =
+            "${instance.track.id}:${instance.grade}:${instance.segmentIndex}"
         val instanceKeyByLessonId = unorderedInstances.flatMap { instance ->
             instance.lessons.map { lesson -> lesson.id to instanceKey(instance) }
         }.toMap()
-        val dependencyEdges = unorderedInstances.flatMap { target ->
+        val curriculumDependencyEdges = unorderedInstances.flatMap { target ->
             val targetKey = instanceKey(target)
             target.lessons.flatMap { lesson ->
                 lesson.prerequisiteLessonIds.mapNotNull { prerequisiteId ->
@@ -414,6 +444,16 @@ object GalaxyLayoutEngine {
                 }
             }
         }.toSet()
+        val segmentContinuityEdges = unorderedInstances
+            .groupBy { instance -> "${instance.track.id}:${instance.grade}" }
+            .values
+            .flatMap { sameTrackInstances ->
+                sameTrackInstances.sortedBy(TrackInstance::segmentIndex).zipWithNext { source, target ->
+                    instanceKey(source) to instanceKey(target)
+                }
+            }
+            .toSet()
+        val dependencyEdges = curriculumDependencyEdges + segmentContinuityEdges
         val originalIndex = unorderedInstances.withIndex().associate { (index, instance) ->
             instanceKey(instance) to index
         }
@@ -445,49 +485,168 @@ object GalaxyLayoutEngine {
         val rawSpheres = mutableListOf<RawSphere>()
         val rawSphereByInstanceKey = mutableMapOf<String, RawSphere>()
         val predecessorKeys = dependencyEdges.groupBy({ it.second }, { it.first })
-        instances.forEachIndexed { index, instance ->
-            val predecessors = predecessorKeys[instanceKey(instance)].orEmpty()
-                .mapNotNull(rawSphereByInstanceKey::get)
-            val predecessorCentre = predecessors.map { it.centre }
-                .takeIf { it.isNotEmpty() }
-                ?.averagePoint()
-            var radialDistance = 330f + sqrt(index.toFloat()) * 150f +
-                if (isGalaxyStoryTrack(instance.track.id)) STORY_SPHERE_DISTANCE else 0f
-            if (predecessors.isNotEmpty()) {
-                radialDistance = maxOf(
-                    radialDistance,
-                    predecessors.maxOf { predecessor ->
-                        hypot(predecessor.centre.x, predecessor.centre.y) +
-                            predecessor.instance.radius + instance.radius + SPHERE_GAP
-                    }
-                )
+        val successorKeys = dependencyEdges.groupBy({ it.first }, { it.second })
+        val instanceIndexByKey = instances.withIndex().associate { (index, instance) ->
+            instanceKey(instance) to index
+        }
+        val rootKeys = instances
+            .filter { predecessorKeys[instanceKey(it)].isNullOrEmpty() }
+            .map(::instanceKey)
+        val rootIndexByKey = rootKeys.withIndex().associate { (index, key) -> key to index }
+        val angleOffsets = listOf(0.0, 0.16, -0.16, 0.32, -0.32, 0.50, -0.50, 0.70, -0.70)
+        val dependencyDepthByKey = mutableMapOf<String, Int>()
+        instances.forEach { instance ->
+            val key = instanceKey(instance)
+            dependencyDepthByKey[key] = predecessorKeys[key].orEmpty()
+                .mapNotNull(dependencyDepthByKey::get)
+                .maxOrNull()
+                ?.plus(1)
+                ?: 0
+        }
+
+        fun pointToSegmentDistance(
+            point: GalaxyPoint,
+            start: GalaxyPoint,
+            end: GalaxyPoint
+        ): Float {
+            val dx = end.x - start.x
+            val dy = end.y - start.y
+            val lengthSquared = dx * dx + dy * dy
+            if (lengthSquared <= 0.001f) return hypot(point.x - start.x, point.y - start.y)
+            val projection = (
+                (point.x - start.x) * dx + (point.y - start.y) * dy
+                ) / lengthSquared
+            val t = projection.coerceIn(0f, 1f)
+            return hypot(point.x - (start.x + dx * t), point.y - (start.y + dy * t))
+        }
+
+        fun obstructionCount(
+            sources: List<Pair<String?, GalaxyPoint>>,
+            target: GalaxyPoint
+        ): Int = sources.sumOf { (sourceKey, source) ->
+            rawSpheres.count { placed ->
+                instanceKey(placed.instance) != sourceKey &&
+                    pointToSegmentDistance(placed.centre, source, target) < placed.instance.radius + 28f
             }
-            val angle = predecessorCentre?.let { centre ->
-                atan2(centre.y, centre.x).toDouble() + if (index % 2 == 0) 0.58 else -0.58
-            } ?: (-PI / 2.0 + index * GOLDEN_ANGLE)
-            var candidate: GalaxyPoint
-            var attempts = 0
-            do {
-                candidate = GalaxyPoint(
-                    x = cos(angle).toFloat() * radialDistance,
-                    y = sin(angle).toFloat() * radialDistance
-                )
-                radialDistance += 54f
-                attempts += 1
-            } while (
-                attempts < 18 && (
-                    hypot(candidate.x, candidate.y) < instance.radius + START_CLEARANCE ||
-                        rawSpheres.any { placed ->
-                            hypot(
-                                candidate.x - placed.centre.x,
-                                candidate.y - placed.centre.y
-                            ) < instance.radius + placed.instance.radius + SPHERE_GAP
-                        }
+        }
+
+        fun segmentsCross(
+            firstStart: GalaxyPoint,
+            firstEnd: GalaxyPoint,
+            secondStart: GalaxyPoint,
+            secondEnd: GalaxyPoint
+        ): Boolean {
+            fun side(start: GalaxyPoint, end: GalaxyPoint, point: GalaxyPoint): Float =
+                (end.x - start.x) * (point.y - start.y) -
+                    (end.y - start.y) * (point.x - start.x)
+            val firstA = side(firstStart, firstEnd, secondStart)
+            val firstB = side(firstStart, firstEnd, secondEnd)
+            val secondA = side(secondStart, secondEnd, firstStart)
+            val secondB = side(secondStart, secondEnd, firstEnd)
+            return firstA * firstB < -0.001f && secondA * secondB < -0.001f
+        }
+
+        fun crossingCount(
+            sources: List<Pair<String?, GalaxyPoint>>,
+            targetKey: String,
+            target: GalaxyPoint
+        ): Int {
+            val placedEdges = dependencyEdges.mapNotNull { (sourceKey, existingTargetKey) ->
+                val source = rawSphereByInstanceKey[sourceKey] ?: return@mapNotNull null
+                val existingTarget = rawSphereByInstanceKey[existingTargetKey] ?: return@mapNotNull null
+                Triple(sourceKey to existingTargetKey, source.centre, existingTarget.centre)
+            }
+            return sources.sumOf { (sourceKey, source) ->
+                placedEdges.count { (edgeKeys, edgeStart, edgeEnd) ->
+                    sourceKey != null &&
+                        sourceKey != edgeKeys.first &&
+                        sourceKey != edgeKeys.second &&
+                        targetKey != edgeKeys.first &&
+                        targetKey != edgeKeys.second &&
+                        segmentsCross(source, target, edgeStart, edgeEnd)
+                }
+            }
+        }
+
+        instances.forEachIndexed { index, instance ->
+            val key = instanceKey(instance)
+            val predecessorKeyList = predecessorKeys[key].orEmpty()
+            val predecessors = predecessorKeyList
+                .mapNotNull(rawSphereByInstanceKey::get)
+            val isRoot = predecessors.isEmpty()
+            val anchor = predecessors.map(RawSphere::centre).takeIf { it.isNotEmpty() }
+                ?.averagePoint() ?: GalaxyPoint(0f, 0f)
+            val baseAngle = if (isRoot) {
+                val rootIndex = rootIndexByKey[key] ?: index
+                val rootCount = rootKeys.size.coerceAtLeast(1)
+                val rootSpacing = minOf(0.60, PI / (rootCount + 1.0))
+                -PI / 2.0 + (rootIndex - (rootCount - 1) / 2.0) * rootSpacing
+            } else {
+                val outwardAngle = atan2(anchor.y, anchor.x).toDouble()
+                val branchOffsets = predecessorKeyList.mapNotNull { predecessorKey ->
+                    val siblings = successorKeys[predecessorKey].orEmpty()
+                        .sortedBy { successorKey -> instanceIndexByKey[successorKey] ?: Int.MAX_VALUE }
+                    val siblingIndex = siblings.indexOf(key).takeIf { it >= 0 } ?: return@mapNotNull null
+                    (siblingIndex - (siblings.size - 1) / 2.0) * 0.44
+                }
+                val branchOffset = branchOffsets.average().takeIf { it.isFinite() } ?: 0.0
+                val followsSinglePath = predecessorKeyList.size == 1 &&
+                    successorKeys[predecessorKeyList.single()].orEmpty().size == 1
+                val organicTurn = if (followsSinglePath) {
+                    val turns = listOf(0.36, -0.30, -0.38, 0.34)
+                    val depth = dependencyDepthByKey[key] ?: 1
+                    turns[(depth - 1).coerceAtLeast(0) % turns.size]
+                } else {
+                    0.0
+                }
+                outwardAngle + branchOffset + organicTurn
+            }
+            val baseDistance = if (isRoot) {
+                instance.radius + START_CLEARANCE + 180f +
+                    if (isGalaxyStoryTrack(instance.track.id)) STORY_SPHERE_DISTANCE else 0f
+            } else {
+                predecessors.maxOf { it.instance.radius } + instance.radius + SPHERE_GAP + 110f
+            }
+            val routeSources = predecessors
+                .map { predecessor -> instanceKey(predecessor.instance) to predecessor.centre }
+                .ifEmpty { listOf(null to GalaxyPoint(0f, 0f)) }
+            var candidate: GalaxyPoint? = null
+            var candidateScore = Double.POSITIVE_INFINITY
+            for (distanceStep in 0 until 28) {
+                val distance = baseDistance + distanceStep * 82f
+                angleOffsets.forEach { angleOffset ->
+                    val angle = baseAngle + angleOffset
+                    val proposed = GalaxyPoint(
+                        x = anchor.x + cos(angle).toFloat() * distance,
+                        y = anchor.y + sin(angle).toFloat() * distance
                     )
-            )
-            RawSphere(instance, candidate).also { sphere ->
+                    val overlapsStart = hypot(proposed.x, proposed.y) < instance.radius + START_CLEARANCE
+                    val overlapsSphere = rawSpheres.any { placed ->
+                        hypot(
+                            proposed.x - placed.centre.x,
+                            proposed.y - placed.centre.y
+                        ) < instance.radius + placed.instance.radius + SPHERE_GAP
+                    }
+                    if (!overlapsStart && !overlapsSphere) {
+                        val obstructions = obstructionCount(routeSources, proposed)
+                        val crossings = crossingCount(routeSources, key, proposed)
+                        val score = obstructions * 10_000.0 +
+                            crossings * 5_000.0 +
+                            abs(angleOffset) * 500.0 +
+                            distanceStep * 18.0
+                        if (score < candidateScore) {
+                            candidate = proposed
+                            candidateScore = score
+                        }
+                    }
+                }
+            }
+            val resolvedCandidate = requireNotNull(candidate) {
+                "Unable to place Galaxy sphere $key without overlapping another sphere"
+            }
+            RawSphere(instance, resolvedCandidate).also { sphere ->
                 rawSpheres += sphere
-                rawSphereByInstanceKey[instanceKey(instance)] = sphere
+                rawSphereByInstanceKey[key] = sphere
             }
         }
 
@@ -498,21 +657,15 @@ object GalaxyLayoutEngine {
             val lessonOrbs = sphere.instance.lessons.flatMap { lesson ->
                 galaxyOrbNodes(lesson).map { node -> lesson to node }
             }
-            val rootLesson = sphere.instance.lessons.first()
-            val incomingCentres = rootLesson.prerequisiteLessonIds
-                .mapNotNull(rawSphereByLessonId::get)
-                .filterNot { it === sphere }
-                .map { it.centre }
+            val sphereKey = instanceKey(sphere.instance)
+            val incomingCentres = predecessorKeys[sphereKey].orEmpty()
+                .mapNotNull(rawSphereByInstanceKey::get)
+                .map(RawSphere::centre)
             val incomingPoint = incomingCentres.takeIf { it.isNotEmpty() }?.averagePoint()
                 ?: GalaxyPoint(0f, 0f)
-            val outgoingCentres = rawSpheres
-                .filterNot { it === sphere }
-                .filter { candidate ->
-                    candidate.instance.lessons.first().prerequisiteLessonIds.any { prerequisiteId ->
-                        rawSphereByLessonId[prerequisiteId] === sphere
-                    }
-                }
-                .map { it.centre }
+            val outgoingCentres = successorKeys[sphereKey].orEmpty()
+                .mapNotNull(rawSphereByInstanceKey::get)
+                .map(RawSphere::centre)
             val outgoingPoint = outgoingCentres.takeIf { it.isNotEmpty() }?.averagePoint()
                 ?: GalaxyPoint(sphere.centre.x * 2f, sphere.centre.y * 2f)
             val entryAngle = atan2(
@@ -523,17 +676,58 @@ object GalaxyLayoutEngine {
                 outgoingPoint.y - sphere.centre.y,
                 outgoingPoint.x - sphere.centre.x
             ).toDouble()
-            val baseOrbPoints = zigZagOrbPoints(
-                centre = sphere.centre,
-                orbCount = lessonOrbs.size,
-                sphereRadius = sphere.instance.radius,
-                entryAngle = entryAngle,
-                exitAngle = exitAngle
-            )
-            val orbPoints = coherentGalaxyLessonOrbPoints(
-                basePoints = baseOrbPoints,
-                lessonIds = lessonOrbs.map { (lesson, _) -> lesson.id }
-            )
+            val formulaGeometry = sphere.instance.formulaGeometry
+                ?.takeIf { geometry -> geometry.nodes.size == lessonOrbs.size }
+                ?.let { geometry ->
+                    orientedGalaxyFormulaGeometry(
+                        shapeNumber = geometry.shape.number,
+                        incomingAngleRadians = entryAngle,
+                        outgoingAngleRadians = exitAngle
+                    )
+                }
+            val positionedOrbs = if (isGalaxyStoryTrack(sphere.instance.track.id)) {
+                storyThemePolygonPoints(
+                    centre = sphere.centre,
+                    themeCount = lessonOrbs.size,
+                    sphereRadius = sphere.instance.radius,
+                    entryAngle = entryAngle
+                ).map { point -> point to null }
+            } else {
+                requireNotNull(formulaGeometry) {
+                    "Formula geometry is required for non-story sphere $sphereKey"
+                }
+                val formulaConnections = formulaGeometry.connections.associateBy { it.fromPointId }
+                fun GalaxyFormulaPoint.inSphere() = GalaxyPoint(
+                    x = sphere.centre.x + (x - GALAXY_FORMULA_CENTER).toFloat(),
+                    y = sphere.centre.y + (y - GALAXY_FORMULA_CENTER).toFloat()
+                )
+                formulaGeometry.nodes.map { geometryNode ->
+                    val outgoingPath = when (val connection = formulaConnections[geometryNode.pointId]) {
+                        is GalaxyFormulaConnection.Arc -> GalaxyConnectionPath.Arc(
+                            centre = connection.centre.inSphere(),
+                            radius = connection.radius.toFloat(),
+                            startAngleDegrees = connection.startAngleDegrees.toFloat(),
+                            sweepAngleDegrees = connection.sweepAngleDegrees.toFloat()
+                        )
+                        is GalaxyFormulaConnection.CubicBezier -> GalaxyConnectionPath.CubicBezier(
+                            control1 = connection.control1.inSphere(),
+                            control2 = connection.control2.inSphere()
+                        )
+                        null -> null
+                    }
+                    GalaxyFormulaPoint(geometryNode.x, geometryNode.y).inSphere() to GalaxyFormulaNodePlacement(
+                        sphereKey = instanceKey(sphere.instance),
+                        pointId = geometryNode.pointId,
+                        sequence = geometryNode.sequence,
+                        layerCode = geometryNode.layer.code,
+                        connectToPointId = geometryNode.connectToId,
+                        outgoingPath = outgoingPath,
+                        rotationDegrees = formulaGeometry.transform.rotationDegrees,
+                        mirrorHorizontal = formulaGeometry.transform.mirrorHorizontal,
+                        mirrorVertical = formulaGeometry.transform.mirrorVertical
+                    )
+                }
+            }
             lessonOrbs.mapIndexed { orbIndex, (lesson, node) ->
                 GalaxyNodePosition(
                     nodeId = node.nodeId,
@@ -541,7 +735,8 @@ object GalaxyLayoutEngine {
                     kind = node.orb.kind,
                     trackId = sphere.instance.track.id,
                     grade = lesson.grade,
-                    point = orbPoints[orbIndex]
+                    point = positionedOrbs[orbIndex].first,
+                    formulaPlacement = positionedOrbs[orbIndex].second
                 )
             }
         }
@@ -620,8 +815,22 @@ object GalaxyLayoutEngine {
         val shiftX = CONTENT_MARGIN - minimumX
         val shiftY = CONTENT_MARGIN - minimumY
         fun GalaxyPoint.shifted() = GalaxyPoint(x + shiftX, y + shiftY)
+        fun GalaxyConnectionPath.shifted(): GalaxyConnectionPath = when (this) {
+            is GalaxyConnectionPath.Arc -> copy(centre = centre.shifted())
+            is GalaxyConnectionPath.CubicBezier -> copy(
+                control1 = control1.shifted(),
+                control2 = control2.shifted()
+            )
+        }
 
-        val nodes = rawNodes.map { it.copy(point = it.point.shifted()) }
+        val nodes = rawNodes.map { node ->
+            node.copy(
+                point = node.point.shifted(),
+                formulaPlacement = node.formulaPlacement?.let { placement ->
+                    placement.copy(outgoingPath = placement.outgoingPath?.shifted())
+                }
+            )
+        }
         val checkpointNodes = rawCheckpointNodes.map { it.copy(point = it.point.shifted()) }
         val trackSpheres = rawSpheres.map { sphere ->
             GalaxyTrackSpherePosition(
@@ -631,39 +840,17 @@ object GalaxyLayoutEngine {
                 radius = sphere.instance.radius
             )
         }
-        val trackLabels = rawSpheres.map { sphere ->
-            GalaxyTrackLabelPosition(
-                trackId = sphere.instance.track.id,
-                grade = sphere.instance.grade,
-                point = sphere.centre.shifted()
-            )
-        }
-        val gradeSections = instances.map { it.grade }.distinct().sorted().map { grade ->
-            val gradeSpheres = trackSpheres.filter { it.grade == grade }
-            val left = gradeSpheres.minOf { it.centre.x - it.radius }
-            val right = gradeSpheres.maxOf { it.centre.x + it.radius }
-            val top = gradeSpheres.minOf { it.centre.y - it.radius }
-            val bottom = gradeSpheres.maxOf { it.centre.y + it.radius }
-            GalaxyGradeSectionPosition(
-                grade = grade,
-                point = GalaxyPoint(left, top),
-                width = right - left,
-                height = bottom - top
-            )
-        }
-
         val visibleLessonIds = nodes.mapTo(linkedSetOf()) { it.lessonId }
         val checkpointByTargetId = checkpoints.associateBy { it.targetLessonId }
         val checkpointNodeIds = checkpointNodes.mapTo(linkedSetOf()) { it.checkpointId }
         val lessons = rawSpheres.flatMap { it.instance.lessons }
-        fun sphereKey(lessonId: String): String? = rawSphereByLessonId[lessonId]?.let { sphere ->
-            "${sphere.instance.track.id}:${sphere.instance.grade}"
-        }
+        fun sphereKey(lessonId: String): String? =
+            rawSphereByLessonId[lessonId]?.let { sphere -> instanceKey(sphere.instance) }
         val firstLessonIdBySphere = rawSpheres.associate { sphere ->
-            "${sphere.instance.track.id}:${sphere.instance.grade}" to sphere.instance.lessons.first().id
+            instanceKey(sphere.instance) to sphere.instance.lessons.first().id
         }
         val lastLessonIdBySphere = rawSpheres.associate { sphere ->
-            "${sphere.instance.track.id}:${sphere.instance.grade}" to sphere.instance.lessons.last().id
+            instanceKey(sphere.instance) to sphere.instance.lessons.last().id
         }
         val phaseConnections = lessons.flatMap { lesson ->
             galaxyOrbNodes(lesson).zipWithNext { from, to ->
@@ -687,8 +874,8 @@ object GalaxyLayoutEngine {
                 GalaxyConnection(fromNodeId, toNodeId)
             }
         }
-        val rawSphereEdges = rawSpheres.flatMap { targetSphere ->
-            val targetGroup = "${targetSphere.instance.track.id}:${targetSphere.instance.grade}"
+        val rawSphereEdges = (rawSpheres.flatMap { targetSphere ->
+            val targetGroup = instanceKey(targetSphere.instance)
             val targetLesson = targetSphere.instance.lessons.first()
             if (targetLesson.id in checkpointByTargetId || targetLesson.portalDestination != null) {
                 emptyList()
@@ -699,7 +886,7 @@ object GalaxyLayoutEngine {
                     (sourceGroup to targetGroup).takeIf { sourceGroup != targetGroup }
                 }
             }
-        }.toSet()
+        } + segmentContinuityEdges).toSet()
         val sphereBoundaryConnections = reducedGalaxyGraphEdges(rawSphereEdges).mapNotNull { (sourceGroup, targetGroup) ->
             val sourceLessonId = lastLessonIdBySphere[sourceGroup] ?: return@mapNotNull null
             val targetLessonId = firstLessonIdBySphere[targetGroup] ?: return@mapNotNull null
@@ -726,6 +913,7 @@ object GalaxyLayoutEngine {
                 val isGraphRoot = rootLesson.prerequisiteLessonIds.none { it in sphereLessonIds }
                 val hasNoPrerequisites = rootLesson.prerequisiteLessonIds.isEmpty()
                 if (isGraphRoot &&
+                    sphere.instance.segmentIndex == 0 &&
                     rootLesson.id !in checkpointByTargetId &&
                     rootLesson.portalDestination == null &&
                     hasNoPrerequisites
@@ -738,6 +926,12 @@ object GalaxyLayoutEngine {
             checkpoints.filter { it.prerequisiteLessonIds.isEmpty() && it.id in checkpointNodeIds }
                 .forEach { checkpoint -> add(GalaxyConnection(GALAXY_START_NODE_ID, checkpoint.id)) }
         }.distinct()
+        val nodesById = nodes.associateBy(GalaxyNodePosition::nodeId)
+        val connectionPaths = connections.mapNotNull { connection ->
+            val source = nodesById[connection.fromNodeId] ?: return@mapNotNull null
+            val target = nodesById[connection.toNodeId] ?: return@mapNotNull null
+            galaxyFormulaConnectionPath(source, target)?.let { path -> connection to path }
+        }.toMap()
 
         return GalaxyCategoryLayout(
             width = max(420f, maximumX - minimumX + CONTENT_MARGIN * 2f),
@@ -745,12 +939,11 @@ object GalaxyLayoutEngine {
             startPoint = GalaxyPoint(shiftX, shiftY),
             nodes = nodes,
             checkpointNodes = checkpointNodes,
-            trackLabels = trackLabels,
             trackSpheres = trackSpheres,
-            gradeSections = gradeSections,
             connections = connections,
             checkpointConnections = checkpointConnections,
-            startConnections = startConnections
+            startConnections = startConnections,
+            connectionPaths = connectionPaths
         )
     }
 
@@ -760,78 +953,44 @@ object GalaxyLayoutEngine {
         startPoint = GalaxyPoint(210f, 160f),
         nodes = emptyList(),
         checkpointNodes = emptyList(),
-        trackLabels = emptyList(),
         trackSpheres = emptyList(),
-        gradeSections = emptyList(),
         connections = emptyList(),
         checkpointConnections = emptyList(),
-        startConnections = emptyList()
+        startConnections = emptyList(),
+        connectionPaths = emptyMap()
     )
 
-    private fun sphereRadius(orbCount: Int): Float {
-        val interiorCount = (orbCount - 2).coerceAtLeast(1)
-        val columns = ceil(sqrt(interiorCount.toDouble())).toInt().coerceAtLeast(1)
-        val rows = ceil(interiorCount.toDouble() / columns).toInt().coerceAtLeast(1)
-        val halfWidth = (columns - 1) * 40f
-        val halfHeight = (rows - 1) * 40f
-        return max(158f, hypot(halfWidth, halfHeight) + 92f)
+    private fun storySphereRadius(themeCount: Int): Float {
+        if (themeCount <= 0) return 158f
+        val minimumPolygonRadius = 110f
+        val minimumThemeGap = GALAXY_LESSON_ORB_DIAMETER_DP * 1.35f
+        val polygonRadius = when (themeCount) {
+            1 -> 0f
+            2 -> minimumPolygonRadius
+            else -> max(
+                minimumPolygonRadius,
+                (minimumThemeGap / (2f * sin(PI / themeCount).toFloat()))
+            )
+        }
+        return max(158f, polygonRadius + 56f)
     }
 
-    /**
-     * Builds a deterministic serpentine route through the middle of a sphere.
-     * The entry and exit stay on the outer range; intermediate orbs zigzag over
-     * bounded chords instead of expanding in concentric rings.
-     */
-    private fun zigZagOrbPoints(
+    private fun storyThemePolygonPoints(
         centre: GalaxyPoint,
-        orbCount: Int,
+        themeCount: Int,
         sphereRadius: Float,
-        entryAngle: Double,
-        exitAngle: Double
+        entryAngle: Double
     ): List<GalaxyPoint> {
-        if (orbCount <= 0) return emptyList()
-        val outerRadius = (sphereRadius - 50f).coerceAtLeast(84f)
-        fun pointAt(angle: Double, radius: Float) = GalaxyPoint(
-            x = centre.x + cos(angle).toFloat() * radius,
-            y = centre.y + sin(angle).toFloat() * radius
-        )
-        if (orbCount == 1) return listOf(pointAt(entryAngle, outerRadius))
-
-        val points = MutableList(orbCount) { centre }
-        points[0] = pointAt(entryAngle, outerRadius)
-        points[orbCount - 1] = pointAt(exitAngle, outerRadius)
-        val interiorCount = orbCount - 2
-        if (interiorCount == 0) return points
-
-        val columns = ceil(sqrt(interiorCount.toDouble())).toInt().coerceAtLeast(1)
-        val rows = ceil(interiorCount.toDouble() / columns).toInt().coerceAtLeast(1)
-        val interiorRadius = (outerRadius - 42f).coerceAtLeast(42f)
-        val rotation = entryAngle - PI
-        var placed = 0
-        for (row in 0 until rows) {
-            val itemsOnRow = minOf(columns, interiorCount - placed)
-            val yFraction = if (rows == 1) 0f else -0.72f + 1.44f * row / (rows - 1)
-            val localY = yFraction * interiorRadius
-            val chordHalf = sqrt(
-                (interiorRadius * interiorRadius - localY * localY).coerceAtLeast(0f)
-            ) * 0.78f
-            val rowXs = List(itemsOnRow) { column ->
-                if (itemsOnRow == 1) 0f
-                else -chordHalf + 2f * chordHalf * column / (itemsOnRow - 1)
-            }.let { xs -> if (row % 2 == 0) xs else xs.reversed() }
-            rowXs.forEach { localX ->
-                val jitteredY = localY + sin((placed + 1) * GOLDEN_ANGLE).toFloat() * 7f
-                val distance = hypot(localX, jitteredY)
-                val scale = if (distance > interiorRadius) interiorRadius / distance else 1f
-                val boundedX = localX * scale
-                val boundedY = jitteredY * scale
-                val rotatedX = boundedX * cos(rotation).toFloat() - boundedY * sin(rotation).toFloat()
-                val rotatedY = boundedX * sin(rotation).toFloat() + boundedY * cos(rotation).toFloat()
-                points[placed + 1] = GalaxyPoint(centre.x + rotatedX, centre.y + rotatedY)
-                placed += 1
-            }
+        if (themeCount <= 0) return emptyList()
+        if (themeCount == 1) return listOf(centre)
+        val polygonRadius = (sphereRadius - 56f).coerceAtLeast(72f)
+        return List(themeCount) { index ->
+            val angle = entryAngle + 2.0 * PI * index / themeCount
+            GalaxyPoint(
+                x = centre.x + cos(angle).toFloat() * polygonRadius,
+                y = centre.y + sin(angle).toFloat() * polygonRadius
+            )
         }
-        return points
     }
 
     private fun List<GalaxyPoint>.averagePoint(): GalaxyPoint = GalaxyPoint(

@@ -21,6 +21,7 @@ import be.saikono.poincare.ui.home.getSubCategoriesForDomain
 import be.saikono.poincare.ui.home.localizedSubcategoryName
 import java.io.File
 import java.time.Instant
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -35,6 +36,7 @@ import org.junit.Test
  * every sample row because the possible generated variants are intentionally unbounded.
  */
 class QuestionCatalogueExportTest {
+    @OptIn(ExperimentalSerializationApi::class)
     private val json = Json {
         encodeDefaults = true
         explicitNulls = false

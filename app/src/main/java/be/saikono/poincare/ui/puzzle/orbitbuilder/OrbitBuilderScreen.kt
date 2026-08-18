@@ -502,10 +502,8 @@ private fun IntroStartValueOverlay(state: OrbitBuilderUiState, visible: Boolean,
 
 @Composable
 private fun LaunchValueOverlay(state: OrbitBuilderUiState, modifier: Modifier = Modifier) {
-    val currentStep = state.simulationResult?.path?.getOrNull(state.launchStepIndex)
-    val gateTile = currentStep?.tile as? OrbitFixedTile.Gate
-    val visible = state.phase == OrbitBuilderPhase.LAUNCHING && gateTile != null
-    if (!visible || currentStep == null) return
+    val currentStep = state.simulationResult?.path?.getOrNull(state.launchStepIndex) ?: return
+    if (state.phase != OrbitBuilderPhase.LAUNCHING || currentStep.tile !is OrbitFixedTile.Gate) return
     WhiteValueCircle(value = formatOrbitNumber(currentStep.value), modifier = modifier, circleSize = 224, fontSize = 92)
 }
 

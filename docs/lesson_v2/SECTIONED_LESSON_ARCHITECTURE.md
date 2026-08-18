@@ -1,7 +1,7 @@
 # Three-part lesson architecture v2
 
 Status: normatief runtime- en datacontract  
-Versie: 2026-08-14
+Versie: 2026-08-18
 
 ## Doel
 
@@ -84,7 +84,9 @@ De eindtoets:
 - Theorie → eerste oefenreeks.
 - Reeks n → reeks n+1.
 - Laatste reeks → toets.
-- Toetsresultaat → les/lessenoverzicht volgens het schermcontract.
+- Toetsresultaat → de navigatorcontext waaruit de les werd geopend: de geselecteerde Galaxy-les met het juiste detaildeel, of het juiste tegel-/lesoverzicht.
+- Galaxy projecteert alle fasen van dezelfde soort naar één overview-orb voor Theorie, Oefeningen en Toets. Dit verandert de onderliggende pagina-, reeks- en toetsvolgorde niet.
+- Een Galaxy-orb opent het bijbehorende stabiele `stageId`; een vergrendelde orb mag wel worden bekeken maar niet worden gestart.
 - Hervatten gebruikt stabiele les-, fase-, reeks- en poging-ID's.
 
 ## Compatibiliteit
@@ -113,4 +115,4 @@ De validator blokkeert minimaal:
 - single-choice zonder exact één inhoudelijk juist antwoord;
 - toets zonder volledige mastery-dekking.
 
-Zie `docs/CURRICULUM_ARCHITECTURE_PLAYBOOK.md` voor het volledige redactionele, UI-, release- en leerjaarcontract.
+Zie `docs/CURRICULUM_ARCHITECTURE_PLAYBOOK.md` voor het volledige redactionele, release- en leerjaarcontract, `docs/MOBILE_APP_ARCHITECTURE.md` voor routes en `docs/GALAXY_NAVIGATION_ARCHITECTURE.md` voor de Galaxy-projectie.

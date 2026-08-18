@@ -26,7 +26,7 @@ object Grade1UnitKnowledgeProfiles {
             "Missing Grade 1 unit-knowledge resource: $RESOURCE"
         }
         val raw = stream.bufferedReader(Charsets.UTF_8).use { reader ->
-            Json { ignoreUnknownKeys = false }.decodeFromString<List<RawProfile>>(reader.readText())
+            Json.decodeFromString<List<RawProfile>>(reader.readText())
         }
         raw.associate { profile ->
             require(profile.title.size == 3) { "${profile.unitId} needs a three-language title" }

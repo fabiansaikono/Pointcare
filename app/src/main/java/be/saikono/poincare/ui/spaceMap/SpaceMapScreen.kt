@@ -349,7 +349,7 @@ fun ProfileHeader(
                     style = MaterialTheme.typography.titleLarge
                 )
             }
-            GradeSelectorPill(
+            GradeSelectorText(
                 grades = availableGrades,
                 selectedGrade = selectedGrade,
                 locale = locale,
@@ -417,7 +417,7 @@ fun ProfileHeader(
 }
 
 @Composable
-private fun GradeSelectorPill(
+private fun GradeSelectorText(
     grades: List<Int>,
     selectedGrade: Int?,
     locale: String,
@@ -430,13 +430,8 @@ private fun GradeSelectorPill(
     val description = menuText("chooseGrade", locale)
 
     Box {
-        Surface(
-            shape = RoundedCornerShape(999.dp),
-            color = PlanetBlue.copy(alpha = 0.16f),
-            contentColor = StarWhite,
-            border = androidx.compose.foundation.BorderStroke(1.dp, PlanetBlue.copy(alpha = 0.72f)),
+        Row(
             modifier = Modifier
-                .heightIn(min = 40.dp)
                 .then(
                     if (normalizedGrades.size > 1) {
                         Modifier.clickable(onClickLabel = description) { expanded = true }
@@ -445,16 +440,22 @@ private fun GradeSelectorPill(
                     }
                 )
                 .semantics { contentDescription = "$description: L$activeGrade" }
+                .padding(horizontal = 4.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(1.dp)
         ) {
-            Row(
-                modifier = Modifier.padding(start = 14.dp, end = if (normalizedGrades.size > 1) 6.dp else 14.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(2.dp)
-            ) {
-                Text("L$activeGrade", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
-                if (normalizedGrades.size > 1) {
-                    Icon(Icons.Default.ArrowDropDown, contentDescription = null)
-                }
+            Text(
+                text = "L$activeGrade",
+                color = StarWhite,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            if (normalizedGrades.size > 1) {
+                Icon(
+                    Icons.Default.ArrowDropDown,
+                    contentDescription = null,
+                    tint = StarWhite.copy(alpha = 0.72f)
+                )
             }
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {

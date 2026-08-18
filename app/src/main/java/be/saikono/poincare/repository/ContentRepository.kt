@@ -271,7 +271,6 @@ class AssetContentRepository(private val context: Context) : ContentRepository {
         LearningDomain.PUZZLE -> listOf("poincare-exercises-logic-puzzles.xml")
         LearningDomain.WORLD_KNOWLEDGE -> listOf("poincare-exercises-world-knowledge.xml")
         LearningDomain.GEOMETRY -> listOf("poincare-exercises-geometry.xml")
-        else -> emptyList()
     }
 
     private fun String.toLearningDomain(): LearningDomain? = when (this.lowercase()) {

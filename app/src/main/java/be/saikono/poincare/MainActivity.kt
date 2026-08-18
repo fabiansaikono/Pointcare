@@ -231,14 +231,17 @@ fun PoincareApp(
                 ProfileSelectionScreen(
                     viewModel = profileViewModel,
                     onCreateProfile = { navController.navigate(Screen.CreateProfile.route) },
-                    onProfileSelected = { AuditLog.record("profile_selected"); navController.navigate(Screen.SpaceMap.route) }
+                    onProfileSelected = {
+                        AuditLog.record("profile_selected")
+                        navController.navigate(Screen.LearningGalaxy.route)
+                    }
                 )
             }
 
             composable(Screen.CreateProfile.route) {
                 CreateProfileScreen(
                     viewModel = profileViewModel,
-                    onProfileCreated = { navController.navigate(Screen.SpaceMap.route) },
+                    onProfileCreated = { navController.navigate(Screen.LearningGalaxy.route) },
                     onCancel = { navController.popBackStack() }
                 )
             }
@@ -257,7 +260,10 @@ fun PoincareApp(
                     onSwitchProfile = { navController.navigate(Screen.ProfileSelection.route) },
                     onSwitchInterface = {
                         AuditLog.record("learning_galaxy_opened")
-                        navController.navigate(Screen.LearningGalaxy.route)
+                        navController.navigate(Screen.LearningGalaxy.route) {
+                            popUpTo(Screen.SpaceMap.route) { inclusive = true }
+                            launchSingleTop = true
+                        }
                     }
                 )
             }
@@ -268,7 +274,12 @@ fun PoincareApp(
                 LearningGalaxyScreen(
                     spaceMapViewModel = spaceMapViewModel,
                     lessonViewModel = lessonViewModel,
-                    onSwitchToTiles = { navController.popBackStack() },
+                    onSwitchToTiles = {
+                        navController.navigate(Screen.SpaceMap.route) {
+                            popUpTo(Screen.LearningGalaxy.route) { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    },
                     onNavigateToParent = {
                         AuditLog.record("parent_dashboard_opened")
                         navController.navigate(Screen.ParentDashboard.route)
@@ -300,15 +311,6 @@ fun PoincareApp(
                             details = mapOf("subcategoryId" to "language.stories")
                         )
                         navController.navigate(Screen.StoryLibrary.route)
-                    },
-                    onOpenStoryBook = { bookId ->
-                        AuditLog.record(
-                            action = "story_book_opened_from_galaxy",
-                            profileId = spaceMapViewModel.uiState.value.currentProfile?.id,
-                            domain = LearningDomain.READING.name,
-                            details = mapOf("bookId" to bookId, "subcategoryId" to "language.stories")
-                        )
-                        navController.navigate(Screen.StoryBook.createRoute(bookId))
                     },
                     storyBooks = storyUiState.books.map { it.book },
                     onOpenExistingCategory = { domain ->

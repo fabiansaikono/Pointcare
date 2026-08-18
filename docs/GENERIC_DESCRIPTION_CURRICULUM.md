@@ -1,6 +1,6 @@
 # Generic Description Curriculum
 
-Versie: 2026-08-14  
+Versie: 2026-08-18  
 Status: levend masterdocument voor ontwerp, redactie, ontwikkeling, audit en release  
 Normatief detailcontract: `docs/CURRICULUM_ARCHITECTURE_PLAYBOOK.md`
 
@@ -20,10 +20,13 @@ Bij tegenstrijdigheid geldt deze volgorde:
 
 1. het actuele, gevalideerde dataschema en de bijbehorende validator;
 2. `docs/CURRICULUM_ARCHITECTURE_PLAYBOOK.md` voor het normatieve bouw- en uitrolcontract;
-3. dit masterdocument voor productprincipes en kwaliteitsregels;
-4. leerjaarspecifieke migratiedocumenten en goedgekeurde bronbestanden voor namen en sequenties;
-5. audits en handoffs als gedateerd bewijs, niet als permanente productspecificatie;
-6. oudere prompts en implementatienotities als historische context.
+3. `docs/lesson_v2/SECTIONED_LESSON_ARCHITECTURE.md` voor het drieledige lescontract;
+4. `docs/MOBILE_APP_ARCHITECTURE.md` en `docs/GALAXY_NAVIGATION_ARCHITECTURE.md` voor de Android-app en Galaxy-integratie;
+5. `context/GalaxyMap/poincare_galaxy_navigation_prompt.md` uitsluitend voor de exacte formulegeometrie binnen een klassieke sphere group;
+6. dit masterdocument voor productprincipes en kwaliteitsregels;
+7. leerjaarspecifieke migratiedocumenten en goedgekeurde bronbestanden voor namen en sequenties;
+8. audits en handoffs als gedateerd bewijs, niet als permanente productspecificatie;
+9. oudere prompts en implementatienotities als historische context.
 
 Een gedateerd aantal, release-ID of auditresultaat is een **statusmeting**. Een regel met woorden als “moet”, “exact” of “nooit” is een **normatieve eis**. Een legacyveld is alleen een **compatibiliteitsmechanisme** en mag geen zichtbare curriculumstructuur bepalen.
 
@@ -77,6 +80,12 @@ Android is een uitvoerdoel, geen tweede redactionele bron. Een correctie aan les
 Leerlingprofielen, lesvoortgang, pogingen, resultaten, story progress en instellingen worden lokaal opgeslagen met Room en DataStore. Pogingen hebben stabiele poging- en synchronisatie-ID’s, zodat een toekomstige idempotente synchronisatie mogelijk blijft.
 
 Online synchronisatie van leerlingvoortgang is momenteel bewust uitgeschakeld. De app mag geen gesimuleerde upload als geslaagde synchronisatie voorstellen. Remote sync wordt pas geactiveerd wanneer er een geauthenticeerd, idempotent en getest servercontract bestaat.
+
+### Android-navigatie en build
+
+De Galaxy is de standaardnavigator na profielselectie of -creatie; de tegelinterface blijft via de gedeelde hoofdheader beschikbaar. Beide navigators lezen hetzelfde manifest, dezelfde leerjaarfilter, dezelfde voortgang en dezelfde category-header. `docs/MOBILE_APP_ARCHITECTURE.md` beschrijft de route- en profielcontracten; `docs/GALAXY_NAVIGATION_ARCHITECTURE.md` beschrijft de dynamische kaart.
+
+De build gebruikt AGP 9 met ingebouwde Kotlin. `kotlin-android` en de oude AGP-opt-outs worden niet opnieuw toegevoegd. Compose Compiler en Kotlin Serialization volgen Kotlin 2.2.10; KSP 2.3.11 verzorgt Room-codegeneratie.
 
 ## 1.2 Canonieke gegevensstroom
 
@@ -272,6 +281,8 @@ Elke hoofdcategorie bevat subcategorieën/tegels. Een tegel kan leiden naar:
 - een gespecialiseerde oefenroute, alleen wanneer daar een expliciet curriculumcontract voor bestaat.
 
 Een tegel zonder inhoud voor de geselecteerde leerjaren is grijs en niet klikbaar. Een percentage verschijnt alleen als er echte lessen zijn; puzzels tonen XP in plaats van lesvoortgang.
+
+De hoofdleerjaarfilter selecteert één actieve jaargang uit de per-categorie ouderinstellingen. Verhalen zijn de uitzondering: alle beschikbare verhaalthema's blijven zichtbaar ongeacht die tijdelijke hoofdfilter, zolang Verhalen in het ouderdashboard is ingeschakeld.
 
 ## 3.2 Verplichte hiërarchie voor lessen
 
@@ -541,6 +552,11 @@ Een oefentype kan `ACTIVE`, `EXPERIMENTAL` of `UNSUPPORTED` zijn. Alleen actieve
 
 ## 3.8 Scherm- en interactiecontract
 
+- Galaxy is de standaardnavigator; de tegelnavigator blijft met één headeractie bereikbaar.
+- Beide navigators gebruiken dezelfde category-header met categorietitel links en `Volgende les` plus voortgang rechts.
+- `Volgende les` bevat geen verhaalportalen.
+- Een Galaxy-selectie verandert zoom of pan niet; een tik op lege kaartinhoud sluit alleen het detailpaneel.
+- Na een lesdeel of resultaat keert de leerling terug naar de navigatorcontext van waaruit de les werd geopend.
 - In een lesintroductie ziet de gebruiker thema, lesnaam, doel, duur, delen en beschikbaarheid.
 - In de inhoud verdwijnen overbodige bovenste faseknoppen.
 - Theorie ondersteunt **Vorige** en **Verder**.
@@ -592,6 +608,8 @@ Vertaalstatus is expliciet. Niet-beoordeelde vertaling wordt als `MISSING` met g
 ### Presentatie en navigatie
 
 - Verhalen hebben een afzonderlijke gespecialiseerde tegel binnen Taalvaardigheid.
+- In de Galaxy staan alle verhaalthema's samen in één zelfstandige sphere group, met één portal-orb per thema en zonder start- of lesverbindingen. Boeken verschijnen daar niet afzonderlijk.
+- Verhaalportalen worden niet opgenomen in `Volgende les` en worden niet door de tijdelijke hoofdleerjaarfilter verborgen.
 - Het wereldoverzicht bevat een submenu per wereld.
 - Hoofdstukafbeeldingen worden 1:1 getoond.
 - Wanneer tekst te groot is en de volgende pagina geen afbeelding heeft, wordt de tekst logisch over twee pagina’s verdeeld.
@@ -728,6 +746,14 @@ Een curriculumtaak is pas klaar wanneer:
 - De Android-unit-/runtimestatus is 341/341. De generatorfasen, vraagpoolcapaciteit, toets-poortconsistentie en assertions volgen nu hetzelfde actuele contract. De snapshot is in deze taak niet gepubliceerd en niet op een toestel geïnstalleerd.
 
 Deze aantallen zijn een gedateerde statusmeting, geen vast productmaximum. Nieuwe releases actualiseren de aantallen en checksums.
+
+### Android-architectuuruitbreiding per 2026-08-18
+
+- Galaxy is de standaardhoofdnavigatie, naast de behouden tegelroute.
+- Hoofd- en category-headers, leerjaarfilter, takenroute en ouderdashboard gebruiken gedeelde contracten.
+- De Galaxy projecteert iedere klassieke les naar Theorie-, Oefeningen- en Toets-orbs, bouwt sphere groups en verbindingen uit live prerequisites en toont verhalen als thema-portalen.
+- De deterministische formulegeometrie, groupplaatsing, lijnlagen, pan/zoom en selectie zijn als afzonderlijk contract vastgelegd in `docs/GALAXY_NAVIGATION_ARCHITECTURE.md`.
+- De Android-build is gemigreerd naar AGP 9.2.1, Gradle 9.4.1, ingebouwde Kotlin 2.2.10 en KSP 2.3.11; de verouderde Compose-aanroepen die daarbij waarschuwden zijn opgeschoond.
 
 ## 5.2 Bekende resterende aandachtspunten
 

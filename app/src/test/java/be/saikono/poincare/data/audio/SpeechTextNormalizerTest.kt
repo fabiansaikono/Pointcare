@@ -43,6 +43,18 @@ class SpeechTextNormalizerTest {
     }
 
     @Test
+    fun `phoneme slashes are not spoken aloud`() {
+        assertEquals(
+            "Maan en muis beginnen met m.",
+            SpeechTextNormalizer.normalize("Maan en muis beginnen met /m/.", "nl-BE")
+        )
+        assertEquals(
+            "De klank oe zit in boek.",
+            SpeechTextNormalizer.normalize("De klank /oe/ zit in boek.", "nl-BE")
+        )
+    }
+
+    @Test
     fun `time is not misread as division`() {
         assertEquals("Het is 9 05.", SpeechTextNormalizer.normalize("Het is 09:05.", "nl-BE"))
     }

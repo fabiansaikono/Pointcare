@@ -1249,10 +1249,6 @@ private fun Rect.containsPoint(point: Offset): Boolean {
     return point.x >= left && point.x <= right && point.y >= top && point.y <= bottom
 }
 
-private fun Rect.overlaps(other: Rect): Boolean {
-    return left < other.right && right > other.left && top < other.bottom && bottom > other.top
-}
-
 private fun distanceBetween(a: Offset, b: Offset): Float {
     return sqrt((a.x - b.x).pow(2) + (a.y - b.y).pow(2))
 }

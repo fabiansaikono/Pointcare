@@ -10,11 +10,11 @@ import org.junit.Test
 class StoryContentValidationTest {
     private val catalogue: StoryCatalogue by lazy {
         val asset = File("src/main/assets/poincare/content/stories/poincare-stories-v1.json")
-        Json { ignoreUnknownKeys = false }.decodeFromString(asset.readText(Charsets.UTF_8))
+        Json.decodeFromString(asset.readText(Charsets.UTF_8))
     }
     private val bookCatalogue: StoryBookCatalogue by lazy {
         val asset = File("src/main/assets/poincare/content/stories/poincare-story-books-v1.json")
-        Json { ignoreUnknownKeys = false }.decodeFromString(asset.readText(Charsets.UTF_8))
+        Json.decodeFromString(asset.readText(Charsets.UTF_8))
     }
 
     @Test

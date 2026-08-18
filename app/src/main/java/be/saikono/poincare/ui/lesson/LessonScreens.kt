@@ -25,6 +25,9 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -64,6 +67,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.AnnotatedString
@@ -106,6 +110,8 @@ internal const val LESSON_HUB_BOTTOM_PADDING_DP = 16
 internal const val LESSON_EXERCISE_FIRST_ROW_TOP_PADDING_DP = 12
 internal const val LESSON_ROW_ICON_WEIGHT = .14f
 internal const val LESSON_ROW_META_WEIGHT = .18f
+
+internal fun lessonOverviewColumnCount(isLandscape: Boolean): Int = if (isLandscape) 2 else 1
 
 internal fun lessonExerciseRequiresAudio(exercise: ExerciseContent): Boolean =
     exercise.data["audioRequired"]?.equals("true", ignoreCase = true) == true ||
@@ -421,6 +427,8 @@ fun LessonIntroScreen(
     onNavigateBack: () -> Unit
 ) {
     val state by viewModel.introState.collectAsState()
+    val isLandscape = LocalConfiguration.current.orientation ==
+        android.content.res.Configuration.ORIENTATION_LANDSCAPE
     LaunchedEffect(lessonId) { viewModel.showLessonIntro(lessonId) }
 
     Box(modifier = Modifier.fillMaxSize().background(DeepSpaceBlue)) {
@@ -460,12 +468,17 @@ fun LessonIntroScreen(
                 }
                 state.error != null -> LessonError(state.error.orEmpty(), state.appLocale, onNavigateBack)
                 else -> {
-                    LazyColumn(
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(lessonOverviewColumnCount(isLandscape)),
                         modifier = Modifier.weight(1f).fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(14.dp),
+                        horizontalArrangement = Arrangement.spacedBy(18.dp),
                         contentPadding = PaddingValues(top = 18.dp, bottom = 18.dp)
                     ) {
-                        item(key = "lesson-summary") {
+                        item(
+                            key = "lesson-summary",
+                            span = { GridItemSpan(maxLineSpan) }
+                        ) {
                             Surface(
                                 color = Color.White.copy(alpha = .08f),
                                 shape = RoundedCornerShape(20.dp),
@@ -493,23 +506,26 @@ fun LessonIntroScreen(
                         }
 
                         lessonPartGroups(state.phases, state.appLocale).forEach { part ->
-                            item(key = "part-${part.number}") {
-                                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                    Text(
-                                        part.title,
-                                        color = PlanetGold,
-                                        style = MaterialTheme.typography.titleMedium,
-                                        fontWeight = FontWeight.Bold,
-                                        modifier = Modifier.padding(horizontal = 4.dp, vertical = 10.dp)
+                            item(
+                                key = "part-${part.number}",
+                                span = { GridItemSpan(maxLineSpan) }
+                            ) {
+                                Text(
+                                    part.title,
+                                    color = PlanetGold,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    modifier = Modifier.padding(horizontal = 4.dp, vertical = 10.dp)
+                                )
+                            }
+                            part.phases.forEachIndexed { index, phase ->
+                                item(key = "phase-${phase.id}") {
+                                    PhasePreviewRow(
+                                        phase = phase,
+                                        locale = state.appLocale,
+                                        displayTitle = lessonSeriesLabel(phase.seriesIndex ?: index, state.appLocale),
+                                        onClick = { onStartLesson(phase.id) }
                                     )
-                                    part.phases.forEachIndexed { index, phase ->
-                                        PhasePreviewRow(
-                                            phase = phase,
-                                            locale = state.appLocale,
-                                            displayTitle = lessonSeriesLabel(phase.seriesIndex ?: index, state.appLocale),
-                                            onClick = { onStartLesson(phase.id) }
-                                        )
-                                    }
                                 }
                             }
                         }
