@@ -1,0 +1,31 @@
+{
+  "schema": "POINCARE_R4_ISSUER_RUNTIME_ROLES_V1",
+  "roles": {
+    "r4-issuer-gate": {
+      "kind": "service",
+      "command": ["/usr/local/bin/node"],
+      "args": ["/opt/r4-issuer/runtime/gate.mjs"]
+    },
+    "r4-issuer-transport": {
+      "kind": "service",
+      "command": ["/usr/local/bin/node"],
+      "args": ["/opt/r4-issuer/runtime/transport.mjs"]
+    },
+    "r4-issuer-writer": {
+      "kind": "job",
+      "command": ["/usr/local/bin/node"],
+      "args": ["/opt/r4-issuer/runtime/writer-job.mjs"],
+      "taskCount": 1,
+      "parallelism": 1,
+      "maxRetries": 0
+    },
+    "r4-issuer-stop": {
+      "kind": "job",
+      "command": ["/usr/local/bin/node"],
+      "args": ["/opt/r4-issuer/runtime/stop-job.mjs"],
+      "taskCount": 1,
+      "parallelism": 1,
+      "maxRetries": 0
+    }
+  }
+}
